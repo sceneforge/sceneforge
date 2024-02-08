@@ -1,0 +1,11 @@
+{
+  "name": "scene-forge",
+  "version": "0.0.1",
+  "description": "Web Application for 3D objects handling",
+  "main": "dist/index.js",
+  "repository": "https://github.com/phinpho/scene-forge.git",
+  "author": "Rodolfo Pereira <rodolfo.pereira@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "packageManager": "yarn@4.1.0"
+}
