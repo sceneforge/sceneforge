@@ -15,12 +15,12 @@ const config: Configuration = {
   mode: isProd ? "production" : "development",
   entry: resolve(sourceDir, "index.tsx"),
   output: {
-    filename: "[name].bundle.js",
+    filename: isProd ? "[name].[contenthash].bundle.js" : "[name].bundle.js",
     asyncChunks: true,
     chunkLoading: "async-node",
     clean: true,
     chunkFormat: "commonjs",
-    chunkFilename: "[id].chunk.js",
+    chunkFilename: isProd ? "[id].[contenthash].chunk.js" : "[id].chunk.js",
     path: buildDir,
   },
   resolve: {
@@ -39,7 +39,21 @@ const config: Configuration = {
         test: /\.css$/i,
         use: [
           isProd ? MiniCssExtractPlugin.loader : "style-loader",
-          "css-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,
+            },
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: ["postcss-preset-env"],
+              },
+            },
+          },
         ],
       },
     ],
@@ -54,7 +68,7 @@ const config: Configuration = {
       filename: "index.html",
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].min.css",
+      filename: isProd ? "[name].[contenthash].css" : "[name].css",
     }),
   ],
 };

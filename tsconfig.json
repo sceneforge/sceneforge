@@ -16,7 +16,8 @@
     "allowJs": true,
     "resolveJsonModule": true,
     "incremental": true,
-    "typeRoots": ["./typings"]
+    "typeRoots": ["./typings"],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "./dist", "./build"]

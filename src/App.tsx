@@ -1,7 +1,9 @@
+import { Page } from "./components/Page";
+
 export const App = () => {
   return (
-    <div>
-      <h1>Hello, World!</h1>
-    </div>
+    <Page title="Hello, World!">
+      <p>Welcome to my app!</p>
+    </Page>
   );
 }
