@@ -2,10 +2,59 @@
   "name": "scene-forge",
   "version": "0.0.1",
   "description": "Web Application for 3D objects handling",
-  "main": "dist/index.js",
-  "repository": "https://github.com/phinpho/scene-forge.git",
-  "author": "Rodolfo Pereira <rodolfo.pereira@gmail.com>",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phinpho/scene-forge"
+  },
+  "author": {
+    "name": "Rodolfo Pereira",
+    "email": "phinpho@gmail.com"
+  },
   "license": "MIT",
   "private": true,
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.1.0",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack serve --config ./webpack.config.ts",
+    "build": "NODE_ENV=production webpack --config ./webpack.config.ts",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx -c .eslintrc.json"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^1.6.0",
+    "@types/html-webpack-plugin": "^3.2.9",
+    "@types/mini-css-extract-plugin": "^2.5.1",
+    "@types/node": "^20.11.16",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@types/webpack": "^5.28.5",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "css-loader": "^6.10.0",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.8.0",
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "engines": {
+    "node": ">=20.8.0",
+    "yarn": ">=4.1.0"
+  }
 }
