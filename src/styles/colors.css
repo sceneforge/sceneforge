@@ -1,0 +1,8 @@
+:root {
+  --color-default-background: rgb(255, 255, 255);
+  --color-default-foreground: rgb(0, 0, 0);
+  --color-divider: rgba(0, 0, 0, 0.12);
+  --color-text-primary: rgb(10, 10, 10);
+  --color-background: rgb(255, 200, 255);
+  --color-background-accent: rgb(233, 127, 255);
+}

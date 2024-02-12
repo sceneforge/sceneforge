@@ -1,0 +1,6 @@
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: color-mix(in srgb, var(--color-background) 75%, var(--color-default-background));
+  color: var(--color-text-primary);
+}

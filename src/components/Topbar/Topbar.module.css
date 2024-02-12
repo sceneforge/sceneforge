@@ -1,0 +1,35 @@
+.wrapper {
+  position: fixed;
+  height: 5rem;
+  width: 100%;
+
+  .bar {
+    border-radius: var(--border-radius-pill);
+    position: absolute;
+    width: calc(100% - 4rem);
+    box-shadow: inset var(--color-default-background) 0 0.25rem 1rem, color-mix(in srgb, var(--color-default-foreground) 25%, transparent) 0 0.5rem 1.5rem;
+    background-color: var(--color-background-accent);
+    color: var(--color-text-primary);
+    border-block-start: solid 1px color-mix(in srgb, var(--color-default-background) 50%, var(--color-background-accent));
+    border-block-end: solid 1px color-mix(in srgb, var(--color-default-foreground) 50%, var(--color-background-accent));
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: stretch;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    inset-inline-start: 2rem;
+    inset-block-start: 2rem;
+    height: 4rem;
+
+    h1 {
+      font-size: 1.25rem;
+
+      small {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--color-text-secondary);
+      }
+    }
+  }
+}

@@ -1,9 +1,5 @@
 .wrapper {
+  flex-grow: 1;
   display: block;
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  overflow: hidden;
+  overflow: auto;
 }

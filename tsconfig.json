@@ -19,6 +19,6 @@
     "typeRoots": ["./typings"],
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*"],
   "exclude": ["node_modules", "./dist", "./build"]
 }
