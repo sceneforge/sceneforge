@@ -1,4 +1,4 @@
-import { forwardRef, type CanvasHTMLAttributes, type DetailedHTMLProps, type ForwardedRef } from 'react';
+import { ForwardedRef, forwardRef, type CanvasHTMLAttributes, type DetailedHTMLProps } from 'react';
 import styles from './Canvas.module.css';
 
 export type CanvasProps = Omit<DetailedHTMLProps<CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement>, 'className'>;

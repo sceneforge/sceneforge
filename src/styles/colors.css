@@ -1,8 +1,10 @@
 :root {
+  --color-reference: #ff00ff;
   --color-default-background: rgb(255, 255, 255);
   --color-default-foreground: rgb(0, 0, 0);
-  --color-divider: rgba(0, 0, 0, 0.12);
-  --color-text-primary: rgb(10, 10, 10);
-  --color-background: rgb(255, 200, 255);
-  --color-background-accent: rgb(233, 127, 255);
+  --color-background-accent: color-mix(in srgb, var(--color-default-background) 25%, var(--color-reference));
+  --color-divider: color-mix(in srgb, var(--color-default-foreground) 30%, var(--color-background-accent));
+  --color-text-primary: color-mix(in srgb, var(--color-default-foreground) 85%, var(--color-default-background));
+  --color-background: color-mix(in srgb, var(--color-background-accent) 65%, var(--color-default-background));
+  --color-background-base: color-mix(in srgb, var(--color-background) 75%, var(--color-default-background));
 }

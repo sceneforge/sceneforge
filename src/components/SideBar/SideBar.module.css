@@ -10,8 +10,9 @@
   padding-block-end: 0;
   height: calc(100vh - 5rem);
   max-height: calc(100vh - 5rem);
-  transition: max-height 0.3s ease-in-out;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
   border-radius: var(--border-radius-pill);
+  opacity: 1;
 
   .content {
     display: block;
@@ -25,6 +26,7 @@
 
   &[data-size][aria-hidden="true"] {
     pointer-events: none;
+    opacity: 0;
     /* width: 0 !important; */
     border: none;
     padding-block-start: 0;

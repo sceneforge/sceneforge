@@ -30,6 +30,9 @@ dist/
 .DS_Store
 Thumbs.db
 
+# Test Report Files
+coverage/
+
 # Temporary Files
 tmp/
 temp/
