@@ -7,4 +7,24 @@
   --color-text-primary: color-mix(in srgb, var(--color-default-foreground) 85%, var(--color-default-background));
   --color-background: color-mix(in srgb, var(--color-background-accent) 65%, var(--color-default-background));
   --color-background-base: color-mix(in srgb, var(--color-background) 75%, var(--color-default-background));
+
+  --color-default-background-opacity-10: color-mix(in srgb, var(--color-default-background) 10%, transparent);
+  --color-default-background-opacity-20: color-mix(in srgb, var(--color-default-background) 20%, transparent);
+  --color-default-background-opacity-30: color-mix(in srgb, var(--color-default-background) 30%, transparent);
+  --color-default-background-opacity-40: color-mix(in srgb, var(--color-default-background) 40%, transparent);
+  --color-default-background-opacity-50: color-mix(in srgb, var(--color-default-background) 50%, transparent);
+  --color-default-background-opacity-60: color-mix(in srgb, var(--color-default-background) 60%, transparent);
+  --color-default-background-opacity-70: color-mix(in srgb, var(--color-default-background) 70%, transparent);
+  --color-default-background-opacity-80: color-mix(in srgb, var(--color-default-background) 80%, transparent);
+  --color-default-background-opacity-90: color-mix(in srgb, var(--color-default-background) 90%, transparent);
+
+  --color-default-foreground-opacity-10: color-mix(in srgb, var(--color-default-foreground) 10%, transparent);
+  --color-default-foreground-opacity-20: color-mix(in srgb, var(--color-default-foreground) 20%, transparent);
+  --color-default-foreground-opacity-30: color-mix(in srgb, var(--color-default-foreground) 30%, transparent);
+  --color-default-foreground-opacity-40: color-mix(in srgb, var(--color-default-foreground) 40%, transparent);
+  --color-default-foreground-opacity-50: color-mix(in srgb, var(--color-default-foreground) 50%, transparent);
+  --color-default-foreground-opacity-60: color-mix(in srgb, var(--color-default-foreground) 60%, transparent);
+  --color-default-foreground-opacity-70: color-mix(in srgb, var(--color-default-foreground) 70%, transparent);
+  --color-default-foreground-opacity-80: color-mix(in srgb, var(--color-default-foreground) 80%, transparent);
+  --color-default-foreground-opacity-90: color-mix(in srgb, var(--color-default-foreground) 90%, transparent);
 }

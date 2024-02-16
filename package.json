@@ -64,6 +64,8 @@
     "@babylonjs/core": "^6.42.0",
     "@babylonjs/loaders": "^6.42.0",
     "@babylonjs/materials": "^6.42.0",
+    "babylonjs-gltf2interface": "^6.43.0",
+    "browser-fs-access": "^0.35.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

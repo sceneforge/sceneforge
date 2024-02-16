@@ -1,0 +1,17 @@
+.wrapper {
+  display: block;
+  background-color: var(--color-background);
+  border-radius: var(--border-radius-pill);
+
+  .title {
+    display: block;
+    font-size: 0.75rem;
+    padding-block: 0.5rem;
+    padding-inline: 2rem;
+  }
+
+  .content {
+    display: block;
+    margin-block-end: 2rem;
+  }
+}

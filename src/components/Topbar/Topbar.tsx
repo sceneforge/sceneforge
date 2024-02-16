@@ -1,6 +1,6 @@
 import { useCallback, type PropsWithChildren } from "react";
-import { ButtonMenu } from "../Button";
 
+import { IconButton } from "../IconButton/IconButton";
 import { usePanel } from "../Panel/PanelProvider";
 import { SideBar } from "../SideBar";
 import { SidePanel } from "../SidePanel/SidePanel";
@@ -22,14 +22,14 @@ export const Topbar = ({ title, subtitle, children }: TopbarProps) => {
 
   return (
     
-    <div className={styles.wrapper}>
+    <header className={styles.wrapper}>
       <SideBar menuOpen={menuShow}>{children}</SideBar>
       <SidePanel show={sidePanelShow} />
       <div className={styles.bar}>
-        <ButtonMenu onClick={toggleMenu} menuOpen={menuShow} />
+        <IconButton icon="menu" open={menuShow} onClick={toggleMenu} />
         <h1>{title}{subtitle && (<small>{subtitle}</small>)}</h1>
       </div>
-    </div>
+    </header>
     
   )
 };

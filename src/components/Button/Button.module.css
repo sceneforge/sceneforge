@@ -1,0 +1,41 @@
+.wrapper {
+  cursor: pointer;
+  box-sizing: content-box;
+
+  &:active,
+  &:focus {
+    &[data-clear="true"] {
+      background-color: var(--color-default-background-opacity-20)
+    }
+  }
+
+  &[data-clear="true"] {
+    background-color: transparent;
+    margin: 0;
+    border: none;
+  }
+
+  &[data-size="xs"] {
+    width: 1rem;
+  }
+
+  &[data-size="sm"] {
+    width: 2rem;
+  }
+
+  &[data-size="md"] {
+    width: 3rem;
+  }
+
+  &[data-size="lg"] {
+    width: 4rem;
+  }
+
+  &[data-size="xl"] {
+    width: 6rem;
+  }
+
+  &:not([data-size]) {
+    width: 100%;
+  }
+}

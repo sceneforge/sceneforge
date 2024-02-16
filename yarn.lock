@@ -2765,6 +2765,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babylonjs-gltf2interface@npm:^6.43.0":
+  version: 6.43.0
+  resolution: "babylonjs-gltf2interface@npm:6.43.0"
+  checksum: 10c0/18bb5c2375e1be72bcbb29235018725f5ffdca1bf37fa0f85ff366bd5246c8dd27e0616c3faa448d49ca5466f36cdefd6dad883acc76a2058f2230b58bafebeb
+  languageName: node
+  linkType: hard
+
 "balanced-match@npm:^1.0.0":
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
@@ -2848,6 +2855,13 @@ __metadata:
   dependencies:
     fill-range: "npm:^7.0.1"
   checksum: 10c0/321b4d675791479293264019156ca322163f02dc06e3c4cab33bb15cd43d80b51efef69b0930cfde3acd63d126ebca24cd0544fa6f261e093a0fb41ab9dda381
+  languageName: node
+  linkType: hard
+
+"browser-fs-access@npm:^0.35.0":
+  version: 0.35.0
+  resolution: "browser-fs-access@npm:0.35.0"
+  checksum: 10c0/9d309e27809e9cc419be4ed71d4cecdad7bf0915cb6e87c706031f51fb1b9d5e35ef7092b4e044adc3b68319baa31ae7ed0d2b8ffeac6e0430abdadbd22dfa36
   languageName: node
   linkType: hard
 
@@ -8211,6 +8225,8 @@ __metadata:
     "@types/webpack": "npm:^5.28.5"
     "@typescript-eslint/eslint-plugin": "npm:^6.21.0"
     "@typescript-eslint/parser": "npm:^6.21.0"
+    babylonjs-gltf2interface: "npm:^6.43.0"
+    browser-fs-access: "npm:^0.35.0"
     css-loader: "npm:^6.10.0"
     eslint: "npm:^8.56.0"
     eslint-config-airbnb: "npm:^19.0.4"

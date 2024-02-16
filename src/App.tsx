@@ -1,5 +1,4 @@
 import { useCallback, useState, type ReactNode } from "react";
-import { Layout } from "./components/Layout";
 import { NavList, NavListItem } from "./components/NavList";
 import { PanelProvider } from "./components/Panel/PanelProvider";
 import { Topbar } from "./components/Topbar";
@@ -13,14 +12,14 @@ export const App = () => {
 
   return (
     <PanelProvider>
-      <Layout>
-        <Topbar title="SceneForge" subtitle="Create Easy 3D Structure for Web">
-          <NavList>
-            <NavListItem onClick={openHome}>Home</NavListItem>
-          </NavList>
-        </Topbar>
+      <main>
         {CurrentPage}
-      </Layout>
+      </main>
+      <Topbar title="SceneForge" subtitle="Create Easy 3D Structure for Web">
+        <NavList>
+          <NavListItem onClick={openHome}>Home</NavListItem>
+        </NavList>
+      </Topbar>
     </PanelProvider>
   );
 }
