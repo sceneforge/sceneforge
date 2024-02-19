@@ -5,6 +5,26 @@
     grid-template-columns: repeat(1, 1fr);
   }
 
+  &[data-gap="xs"] {
+    gap: 0.25rem;
+  }
+
+  &[data-gap="sm"] {
+    gap: 0.5rem;
+  }
+
+  &[data-gap="md"] {
+    gap: 1rem;
+  }
+
+  &[data-gap="lg"] {
+    gap: 2rem;
+  }
+
+  &[data-gap="xl"] {
+    gap: 4rem;
+  }
+
   &[data-cols="2"] {
     grid-template-columns: repeat(2, 1fr);
   }

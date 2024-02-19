@@ -6,7 +6,7 @@ export type ButtonProps = Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButton
   size?: "xs" | "sm" | "md" | "lg" | "xl";
 };
 
-export const Button = ({ clear, size = "sm", children, ...props}: ButtonProps) => {
+export const Button = ({ clear, size, children, ...props}: ButtonProps) => {
   return (
     <button type="button" className={styles.wrapper} data-clear={clear ? "true" : "false"} data-size={size} {...props}>
       {children}

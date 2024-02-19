@@ -27,7 +27,7 @@
         height: 50%;
         inset-inline-end: 20%;
         inset-block-end: 80%;
-        background-color: var(--color-background-accent);
+        background-color: var(--color-foreground-accent-20);
         transform: rotate(-45deg);
         -webkit-transform: rotate(-45deg);
       }

@@ -2,6 +2,7 @@
   display: block;
   background-color: var(--color-background);
   border-radius: var(--border-radius-pill);
+  width: 100%;
 
   .title {
     display: block;
@@ -12,6 +13,7 @@
 
   .content {
     display: block;
+    width: 100%;
     margin-block-end: 2rem;
   }
 }

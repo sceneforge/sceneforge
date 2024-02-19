@@ -20,7 +20,14 @@ export const PanelProvider = ({children}: PropsWithChildren) => {
   const [sidePanelContent, setSidePanelContent] = useState<ReactNode>();
 
   return (
-    <PanelContext.Provider value={{ menuShow, sidePanelShow, setMenuShow, setSidePanelShow, sidePanelContent, setSidePanelContent }}>
+    <PanelContext.Provider value={{
+      menuShow,
+      sidePanelShow,
+      setMenuShow,
+      setSidePanelShow,
+      sidePanelContent,
+      setSidePanelContent,
+    }}>
       {children}
     </PanelContext.Provider>
   )

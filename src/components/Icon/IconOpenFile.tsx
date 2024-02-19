@@ -1,10 +1,15 @@
+import { BaseIcon } from './BaseIcon';
 import styles from './IconOpenFile.module.css';
 
-export const IconOpenFile = () => {
+export interface IconOpenFileProps {
+  inverted?: boolean;
+}
+
+export const IconOpenFile = ({ inverted }: IconOpenFileProps) => {
   return (
-    <span aria-hidden="true" className={styles.wrapper}>
+    <BaseIcon className={styles.wrapper} inverted={inverted}>
       <span aria-hidden="true" className={styles.back}></span>
       <span aria-hidden="true" className={styles.front}></span>
-    </span>
+    </BaseIcon>
   )
 }
