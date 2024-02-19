@@ -1,13 +1,15 @@
+import CopyWebpackPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { resolve } from "node:path";
-import type { Configuration } from "webpack";
+import { type Configuration } from "webpack";
 
 import "webpack-dev-server";
 
 const sourceDir = resolve(__dirname, "src");
 const buildDir = resolve(__dirname, "dist");
 const templatesDir = resolve(__dirname, "templates");
+const publicPath = resolve(__dirname, "public");
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -69,6 +71,18 @@ const config: Configuration = {
     }),
     new MiniCssExtractPlugin({
       filename: isProd ? "[name].[contenthash].css" : "[name].css",
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: `${publicPath}/app.webmanifest`,
+          to: `${buildDir}/app.webmanifest`,
+        },
+        {
+          from: `${publicPath}/icons`,
+          to: `${buildDir}/icons`,
+        },
+      ],
     }),
   ],
 };
