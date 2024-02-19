@@ -10,7 +10,7 @@ export const TabPanel = () => {
 
   return (
     <main className={styles.wrapper}>
-      <TabList />      
+      <TabList />
       <div role="tabpanel">
         <Suspense fallback={<div>Loading...</div>}>
           <TabComponent />
