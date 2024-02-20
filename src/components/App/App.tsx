@@ -5,8 +5,6 @@ import { TabPanelProvider } from '../TabPanel/TabPanelProvider';
 import { AppNav } from './AppNav';
 
 export const App = () => {
-
-
   return (
     <PanelProvider>
       <TabPanelProvider defaultTab={HomePage}>

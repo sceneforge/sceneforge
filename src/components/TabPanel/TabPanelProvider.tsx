@@ -44,7 +44,7 @@ export const useTabPanel = () => {
           t.component === tab.component &&
           t.createdAt === tab.createdAt
       })));
-      document.title = tab.title + " - SceneForge";
+      document.title = tab.title;
     }
   }, [setTabs]);
 

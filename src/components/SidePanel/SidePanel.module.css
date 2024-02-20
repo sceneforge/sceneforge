@@ -13,6 +13,13 @@
   transition: max-height 0.3s ease-in-out;
   border-radius: var(--border-radius-pill);
 
+  [data-window-controls-overlay="visible"] & {
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    padding-block-start: 0rem;
+    border-radius: 0;
+  }
+
   .content {
     display: block;
     overflow: auto;

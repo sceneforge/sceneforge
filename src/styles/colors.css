@@ -1,5 +1,5 @@
 :root {
-  --color-reference: #ff00ff;
+  --color-reference: rgb(200, 58, 162);
   --color-default-background: rgb(255, 255, 255);
   --color-default-foreground: rgb(0, 0, 0);
   --color-background-accent: color-mix(in srgb, var(--color-default-background) 25%, var(--color-reference));

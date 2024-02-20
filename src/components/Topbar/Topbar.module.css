@@ -4,6 +4,45 @@
   position: fixed;
   height: 5rem;
   width: 100%;
+  transition: inset-inline-start 0.25s 0.25s, inset-block-start 0.25s 0.25s, width 0.25s 0.25s, height 0.25s 0.25s, box-shadow 0.25s 0s;
+
+  [data-window-controls-overlay="visible"] & {
+    inset-inline-start: -1rem;
+    inset-block-start: 0;
+    width: calc(100% + 2rem);
+    height: env(titlebar-area-height, 5rem);
+    -webkit-app-region: drag;
+    area-region: drag;
+    box-shadow: 0 0.25rem 0.75rem var(--color-foreground-accent-60);
+    transition: inset-inline-start 0.25s, inset-block-start 0.25s, width 0.25s, height 0.25s, box-shadow 0.25s 0.25s;
+
+    .bar {
+      width: env(titlebar-area-width, 100%);
+      inset-inline-start: calc(env(titlebar-area-x, 0) + 1rem);
+      inset-block-start: env(titlebar-area-y, 0);
+      height: 100%;
+      box-shadow: none;
+      border-radius: 0;
+      border: none;
+      position: relative;
+
+      background-color: var(--color-reference);
+
+      h1 {
+        font-size: 0.75rem;
+
+        small {
+          display: none;
+        }
+      }
+
+      button {
+        width: 1rem;
+        -webkit-app-region: no-drag;
+        area-region: no-drag;
+      }
+    }
+  }
 
   .bar {
     border-radius: var(--border-radius-pill);
@@ -23,6 +62,8 @@
     inset-inline-start: 2rem;
     inset-block-start: 2rem;
     height: 4rem;
+    transition-property: inset-inline-start, inset-block-start, width, height, padding, box-shadow, border-radius;
+    transition-duration: 0.25s;
 
     h1 {
       font-size: 1.25rem;
