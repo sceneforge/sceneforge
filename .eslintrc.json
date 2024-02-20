@@ -7,7 +7,9 @@
     "plugin:@typescript-eslint/stylistic-type-checked",
     "plugin:react-hooks/recommended",
     "plugin:react/recommended",
-    "plugin:react/jsx-runtime"
+    "plugin:react/jsx-runtime",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
   ],
   "ignorePatterns": ["dist", ".eslintrc.cjs"],
   "parser": "@typescript-eslint/parser",
@@ -16,9 +18,68 @@
     "sourceType": "module",
     "project": ["./tsconfig.json"]
   },
-  "plugins": ["@stylistic/eslint-plugin", "react"],
+  "plugins": ["@stylistic/eslint-plugin", "react", "react-hooks", "import"],
   "rules": {
-    "@stylistic/indent": ["error", 2]
+    "@stylistic/linebreak-style": ["error", "unix"],
+    "@stylistic/indent": ["error", 2],
+    "@stylistic/max-len": [
+      "error",
+      {
+        "code": 100,
+        "tabWidth": 2,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "@stylistic/max-statements-per-line": ["error", { "max": 1 }],
+    "@stylistic/quotes": ["error", "double"],
+    "@stylistic/semi": ["error", "always"],
+    "@stylistic/semi-style": ["error", "last"],
+    "@stylistic/no-extra-semi": ["error"],
+    "@stylistic/type-annotation-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true,
+        "overrides": { "arrow": { "before": true, "after": true } }
+      }
+    ],
+    "@stylistic/arrow-parens": ["error", "always"],
+    "@stylistic/arrow-spacing": ["error", { "before": true, "after": true }],
+    "@stylistic/eol-last": ["error", "always"],
+    "@stylistic/keyword-spacing": ["error", { "before": true, "after": true }],
+    "@stylistic/function-call-argument-newline": ["error", "consistent"],
+    "@stylistic/function-paren-newline": ["error", "consistent"],
+    "@stylistic/object-curly-newline": [
+      "error",
+      {
+        "consistent": true
+      }
+    ],
+    "@stylistic/object-property-newline": [
+      "error",
+      { "allowAllPropertiesOnSameLine": true }
+    ],
+    "@stylistic/one-var-declaration-per-line": ["error", "initializations"],
+    "@stylistic/jsx-indent": ["error", 2],
+    "@stylistic/jsx-pascal-case": ["error", { "allowAllCaps": true }],
+    "@stylistic/jsx-sort-props": ["error", { "callbacksLast": true }],
+    "@stylistic/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": "parens",
+        "assignment": "parens",
+        "return": "parens",
+        "arrow": "parens",
+        "condition": "ignore",
+        "logical": "ignore",
+        "prop": "ignore"
+      }
+    ],
+    "import/no-unresolved": [2, { "commonjs": true, "amd": true }],
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/default": 2,
+    "import/export": 2
   },
   "settings": {
     "react": {
