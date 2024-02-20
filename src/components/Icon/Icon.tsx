@@ -4,7 +4,10 @@ import { IconMenu } from "./IconMenu";
 import { IconNewFile } from "./IconNewFile";
 import { IconOpenFile } from "./IconOpenFile";
 
-export type IconProps = (IconMenuProps & { icon: "menu" }) | { icon: "open-file" | "new-file" | "close" } & { inverted?: boolean };
+export type IconProps = (
+  | (IconMenuProps & { icon: "menu" })
+  | { icon: "open-file" | "new-file" | "close" }
+) & { inverted?: boolean };
 
 export const Icon = ({ icon, ...props }: IconProps) => {
   switch (icon) {
@@ -18,5 +21,5 @@ export const Icon = ({ icon, ...props }: IconProps) => {
       return <IconClose {...props} />;
     default:
       return null;
-  }  
+  }
 };

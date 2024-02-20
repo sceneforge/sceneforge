@@ -7,4 +7,4 @@ export const HomePage = () => {
       <h1>Hello, Home Tab!</h1>
     </SafeArea>
   );
-}
+};

@@ -1,5 +1,6 @@
 import { fileOpen } from "browser-fs-access";
 import { useCallback, useState } from "react";
+import type { IconButtonProps } from "../IconButton/IconButton";
 import { ImportModel } from "../ImportModel/ImportModel";
 import { NavList, NavListItem } from "../NavList";
 import { useTabPanel } from "../TabPanel/TabPanelProvider";
@@ -11,9 +12,9 @@ export const AppNav = () => {
 
   const handleImportModel = useCallback(() => {
     fileOpen({
-      description: 'Select a 3D model',
-      mimeTypes: ['model/gltf-binary', 'model/gltf+json'],
-      extensions: ['.glb', '.gltf'],
+      description: "Select a 3D model",
+      mimeTypes: ["model/gltf-binary", "model/gltf+json"],
+      extensions: [".glb", ".gltf"],
       multiple: false,
       excludeAcceptAllOption: true,
     }).then((file) => {
@@ -23,17 +24,31 @@ export const AppNav = () => {
         active: true,
         type: "model-editor",
         component: () => (<ImportModel file={file} />),
-      })
+      });
     }).catch((err) => {
       console.error(err);
     });
   }, [newTab, setRecentFiles]);
-  
+
+  const topbarIconButtons: IconButtonProps[] = [
+    {
+      icon: "new-file",
+      "aria-label": "New File",
+      title: "New File"
+    },
+    {
+      icon: "open-file",
+      "aria-label": "Import Model",
+      title: "Import Model",
+      onClick: handleImportModel
+    }
+  ];
+
   return (
-    <Topbar title="SceneForge" subtitle="Create Easy 3D Structure for Web" topbarIconButtons={[
-      { icon: "new-file", "aria-label": "New File", title: "New File"},
-      { icon: "open-file", "aria-label": "Import Model", title: "Import Model", onClick: handleImportModel }
-    ]}>
+    <Topbar
+      subtitle="Create Easy 3D Structure for Web"
+      title="SceneForge"
+      topbarIconButtons={topbarIconButtons}>
       <NavList>
         <NavListItem>Home</NavListItem>
         <NavListItem header="Recent Files">
@@ -44,4 +59,4 @@ export const AppNav = () => {
       </NavList>
     </Topbar>
   );
-}
+};

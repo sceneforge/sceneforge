@@ -11,5 +11,5 @@ export const NavList = ({ children, direction = "vertical" }: NavListProps) => {
     <nav className={styles.wrapper} data-direction={direction}>
       <ul>{children}</ul>
     </nav>
-  )
-}
+  );
+};

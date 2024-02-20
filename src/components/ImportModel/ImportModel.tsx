@@ -8,5 +8,5 @@ export const ImportModel = ({ file }: ImportModelProps) => {
 
   return (
     <ModelViewer glft={file} />
-  )
-}
+  );
+};

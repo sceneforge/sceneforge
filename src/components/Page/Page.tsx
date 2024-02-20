@@ -10,5 +10,5 @@ export const Page = ({ title, children }: PageProps) => {
 
   return (
     <div className={styles.wrapper}>{children}</div>
-  )
-}
+  );
+};

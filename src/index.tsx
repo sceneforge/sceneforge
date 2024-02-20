@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { App } from "./components/App";
 
-import styles from './styles/Root.module.css';
+import styles from "./styles/Root.module.css";
 
 import "./styles/base.css";
 import "./styles/colors.css";

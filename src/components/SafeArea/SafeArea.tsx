@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 
-import styles from './SafeArea.module.css';
+import styles from "./SafeArea.module.css";
 
 export type SafeAreaProps = PropsWithChildren;
 
@@ -9,5 +9,5 @@ export const SafeArea = ({ children }: SafeAreaProps) => {
     <div className={styles.wrapper}>
       {children}
     </div>
-  )
-}
+  );
+};

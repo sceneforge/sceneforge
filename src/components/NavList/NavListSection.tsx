@@ -13,4 +13,4 @@ export const NavListSection = ({ header, children }: NavListSectionProps) => {
       </ul>
     </section>
   );
-}
+};

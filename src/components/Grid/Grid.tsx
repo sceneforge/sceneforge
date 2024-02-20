@@ -13,4 +13,4 @@ export const Grid = ({ cols, gap, children }: GridProps) => {
       {children}
     </div>
   );
-}
+};

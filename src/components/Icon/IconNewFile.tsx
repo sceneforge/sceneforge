@@ -1,5 +1,5 @@
-import { BaseIcon } from './BaseIcon';
-import styles from './IconNewFile.module.css';
+import { BaseIcon } from "./BaseIcon";
+import styles from "./IconNewFile.module.css";
 
 export interface IconNewFileProps {
   inverted?: boolean;
@@ -15,5 +15,5 @@ export const IconNewFile = ({ inverted }: IconNewFileProps) => {
       </span>
       <span aria-hidden="true" className={styles.cross}></span>
     </BaseIcon>
-  )  
-}
+  );
+};

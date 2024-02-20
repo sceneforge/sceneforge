@@ -1,4 +1,13 @@
-import { createContext, useCallback, useContext, useMemo, useState, type Dispatch, type PropsWithChildren, type SetStateAction } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+  type Dispatch,
+  type PropsWithChildren,
+  type SetStateAction
+} from "react";
 
 export type TabContextType = "model-editor" | "model-preview" | "regular";
 
@@ -29,8 +38,8 @@ export const TabPanelProvider = ({ children, defaultTab }: TabPanelProviderProps
     <TabPanelContext.Provider value={{ tabs, setTabs, defaultTab }}>
       {children}
     </TabPanelContext.Provider>
-  )
-}
+  );
+};
 
 export const useTabPanel = () => {
   const { tabs, setTabs, defaultTab: defaultTabComponent } = useContext(TabPanelContext);
@@ -45,7 +54,7 @@ export const useTabPanel = () => {
           t.createdAt === tab.createdAt
       })));
       document.title = tab.title;
-    }
+    };
   }, [setTabs]);
 
   const newTab = useCallback((tab: Omit<TabContext, "createdAt">) => {
@@ -69,9 +78,9 @@ export const useTabPanel = () => {
           }
         }
 
-        return prevTabs.filter((t) => t !== tab)
+        return prevTabs.filter((t) => t !== tab);
       });
-    }
+    };
   }, [setTabs]);
 
   const defaultTab = useMemo<Omit<TabContext, "createdAt">>(() => {
@@ -80,7 +89,7 @@ export const useTabPanel = () => {
       active: true,
       type: "regular",
       component: defaultTabComponent,
-    }
+    };
   }, [defaultTabComponent]);
 
   return {
@@ -90,5 +99,5 @@ export const useTabPanel = () => {
     newTab,
     closeTab,
     activateTab,
-  }
-}
+  };
+};

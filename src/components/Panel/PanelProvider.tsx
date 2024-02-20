@@ -1,15 +1,33 @@
-import { ReactNode, createContext, useCallback, useContext, useEffect, useRef, useState, type Dispatch, type PropsWithChildren, type SetStateAction } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type Dispatch,
+  type PropsWithChildren,
+  type ReactNode,
+  type SetStateAction
+} from "react";
 
+type EventListenerCallback = (
+  type: string,
+  listener: EventListenerOrEventListenerObject,
+  options?: boolean | AddEventListenerOptions
+) => void;
 
 interface WindowControlsOverlay {
   readonly visible: boolean;
-  addEventListener: (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => void;
-  removeEventListener: (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions) => void;
+  addEventListener: EventListenerCallback;
+  removeEventListener: EventListenerCallback;
 }
 
 const isOverlayVisible = (): boolean => {
-  return "windowControlsOverlay" in window.navigator ? (window.navigator.windowControlsOverlay as WindowControlsOverlay).visible : false;
-}
+  return "windowControlsOverlay" in window.navigator ? (
+    window.navigator.windowControlsOverlay as WindowControlsOverlay
+  ).visible : false;
+};
 
 export interface PanelContextType {
   overlayVisible: boolean;
@@ -38,19 +56,34 @@ export const PanelProvider = ({ children }: PropsWithChildren) => {
   const updateOverlayVisibility = useCallback(() => {
     if (windowControlsOverlayRef.current) {
       setOverlayVisible(windowControlsOverlayRef.current.visible);
-      document.body.setAttribute("data-window-controls-overlay", windowControlsOverlayRef.current.visible ? "visible" : "hidden");
+      document.body.setAttribute(
+        "data-window-controls-overlay",
+        windowControlsOverlayRef.current.visible ? "visible" : "hidden"
+      );
     }
   }, [windowControlsOverlayRef, setOverlayVisible]);
 
   useEffect(() => {
     if ("navigator" in window && "windowControlsOverlay" in window.navigator) {
-      windowControlsOverlayRef.current = window.navigator.windowControlsOverlay as WindowControlsOverlay;
-      windowControlsOverlayRef.current.addEventListener("geometrychange", updateOverlayVisibility);
-      document.body.setAttribute("data-window-controls-overlay", windowControlsOverlayRef.current.visible ? "visible" : "hidden");
+      windowControlsOverlayRef.current = window
+        .navigator.windowControlsOverlay as WindowControlsOverlay;
+
+      windowControlsOverlayRef.current.addEventListener(
+        "geometrychange",
+        updateOverlayVisibility
+      );
+
+      document.body.setAttribute(
+        "data-window-controls-overlay",
+        windowControlsOverlayRef.current.visible ? "visible" : "hidden"
+      );
     }
     return () => {
-      windowControlsOverlayRef.current?.removeEventListener("geometrychange", updateOverlayVisibility);
-    }
+      windowControlsOverlayRef.current?.removeEventListener(
+        "geometrychange",
+        updateOverlayVisibility
+      );
+    };
   }, [updateOverlayVisibility, windowControlsOverlayRef]);
 
   return (
@@ -65,11 +98,19 @@ export const PanelProvider = ({ children }: PropsWithChildren) => {
     }}>
       {children}
     </PanelContext.Provider>
-  )
-}
+  );
+};
 
 export const usePanel = () => {
-  const { menuShow, sidePanelShow, sidePanelContent, overlayVisible, setMenuShow, setSidePanelShow, setSidePanelContent } = useContext(PanelContext);
+  const {
+    menuShow,
+    sidePanelShow,
+    sidePanelContent,
+    overlayVisible,
+    setMenuShow,
+    setSidePanelShow,
+    setSidePanelContent,
+  } = useContext(PanelContext);
 
   return {
     overlayVisible,
@@ -79,5 +120,5 @@ export const usePanel = () => {
     setSidePanelShow,
     sidePanelContent,
     setSidePanelContent,
-  }
-}
+  };
+};

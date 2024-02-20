@@ -12,11 +12,27 @@ export const NavListItem = ({ children, selected, ...props }: NavListItemProps) 
   return (
     <li className={styles.wrapper}>
       {("href" in props) ?
-        (<NavListLink className={styles.content} {...props as NavListLinkProps} aria-selected={selected ? "true" : "false"}>{children}</NavListLink>) :
+        (
+          <NavListLink
+            aria-selected={selected ? "true" : "false"}
+            className={styles.content}
+            {...props as NavListLinkProps}
+          >
+            {children}
+          </NavListLink>
+        ) :
         "header" in props ?
           (<NavListSection {...props as NavListSectionProps}>{children}</NavListSection>) :
-          (<NavListButton className={styles.content} {...props as NavListButtonProps} aria-selected={selected ? "true" : "false"}>{children}</NavListButton>)
+          (
+            <NavListButton
+              aria-selected={selected ? "true" : "false"}
+              className={styles.content}
+              {...props as NavListButtonProps}
+            >
+              {children}
+            </NavListButton>
+          )
       }
     </li>
   );
-}
+};

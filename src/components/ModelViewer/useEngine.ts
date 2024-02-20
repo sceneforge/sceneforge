@@ -3,7 +3,6 @@ import { Color4 } from "@babylonjs/core/Maths/math.color";
 import { Scene } from "@babylonjs/core/scene";
 import { type Nullable } from "@babylonjs/core/types";
 import { useCallback, useRef, type RefObject } from "react";
-
 import { observeComputedStylePropertyValue } from "../../lib/observeComputedStylePropertyValue";
 import {
   parseCSSColorPropertyValue,

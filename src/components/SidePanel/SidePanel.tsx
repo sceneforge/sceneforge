@@ -10,8 +10,12 @@ export const SidePanel = ({ size = "sm" }: SidePanelProps) => {
   const { sidePanelContent, sidePanelShow } = usePanel();
 
   return (
-    <aside className={styles.wrapper} aria-hidden={sidePanelShow && sidePanelContent ? "false" : "true"} data-size={size}>
+    <aside
+      aria-hidden={sidePanelShow && sidePanelContent ? "false" : "true"}
+      className={styles.wrapper}
+      data-size={size}
+    >
       {sidePanelShow && sidePanelContent}
     </aside>
   );
-}
+};

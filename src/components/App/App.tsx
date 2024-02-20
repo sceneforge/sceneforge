@@ -1,8 +1,8 @@
 import { HomePage } from "../../pages";
 import { PanelProvider } from "../Panel/PanelProvider";
-import { TabPanel } from '../TabPanel/TabPanel';
-import { TabPanelProvider } from '../TabPanel/TabPanelProvider';
-import { AppNav } from './AppNav';
+import { TabPanel } from "../TabPanel/TabPanel";
+import { TabPanelProvider } from "../TabPanel/TabPanelProvider";
+import { AppNav } from "./AppNav";
 
 export const App = () => {
   return (
@@ -13,4 +13,4 @@ export const App = () => {
       </TabPanelProvider>
     </PanelProvider>
   );
-}
+};

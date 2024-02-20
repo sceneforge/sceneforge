@@ -9,7 +9,7 @@ export type IconButtonProps = IconProps & {
   size?: ButtonProps["size"];
   onClick?: ButtonProps["onClick"]
   onContextMenu?: ButtonProps["onContextMenu"];
-}
+};
 
 export const IconButton = ({
   "aria-label": ariaLabel,
@@ -22,14 +22,14 @@ export const IconButton = ({
 }: IconButtonProps) => {
   return (
     <Button
-      clear
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
-      title={title}
+      clear
+      data-icon-button
       size={size}
-      onClick={onClick}
-      onContextMenu={onContextMenu} data-icon-button>
+      title={title}
+      onClick={onClick} onContextMenu={onContextMenu}>
       <Icon {...props} />
     </Button>
   );
-}
+};

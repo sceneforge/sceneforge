@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Canvas } from "../Canvas";
 import { useModelViewer } from "./useModelViewer";
 
-interface ModelViewerProps {
+export interface ModelViewerProps {
   glft?: File;
   sceneforge?: File;
 }
