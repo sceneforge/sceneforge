@@ -26,8 +26,6 @@
       border: none;
       position: relative;
 
-      background-color: var(--color-reference);
-
       h1 {
         font-size: 0.75rem;
 
@@ -48,12 +46,12 @@
     border-radius: var(--border-radius-pill);
     position: absolute;
     width: calc(100% - 4rem);
-    box-shadow: inset var(--color-default-background) 0 0.25rem 1rem, color-mix(in srgb, var(--color-default-foreground) 25%, transparent) 0 0.5rem 1.5rem;
+    box-shadow: inset var(--color-default-background) 0 0.25rem 1rem, var(--color-default-foreground-opacity-20) 0 0.5rem 1.5rem;
     background-color: var(--color-background-accent);
-    color: var(--color-text-primary);
-    border-block-start: solid 1px color-mix(in srgb, var(--color-default-background) 50%, var(--color-background-accent));
-    border-block-end: solid 1px color-mix(in srgb, var(--color-default-foreground) 50%, var(--color-background-accent));
-    padding: 0.5rem 1rem;
+    color: var(--color-foreground-contrast-background-accent);
+    border-block-start: solid 1px var(--color-default-background-opacity-70);
+    border-block-end: solid 1px var(--color-default-foreground-opacity-30);
+    padding-inline: 1rem;
     display: flex;
     justify-content: stretch;
     flex-direction: row;
@@ -65,14 +63,37 @@
     transition-property: inset-inline-start, inset-block-start, width, height, padding, box-shadow, border-radius;
     transition-duration: 0.25s;
 
+    svg[data-icon] {
+      color: var(--color-foreground-contrast-background-accent);
+    }
+
     h1 {
       font-size: 1.25rem;
+      color: var(--color-foreground-contrast-background-accent);
 
       small {
         display: block;
         font-size: 0.85rem;
         color: var(--color-text-secondary);
       }
+    }
+
+    .ibs,
+    .ibe {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: row;
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }
+
+    .ibs {
+      justify-content: flex-start;
+    }
+
+    .ibe {
+      justify-content: flex-end;
     }
   }
 }

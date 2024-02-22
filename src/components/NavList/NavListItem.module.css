@@ -10,7 +10,7 @@
     display: block;
     width: 100%;
     padding: 0.75rem;
-    color: var(--color-text-primary);
+    color: var(--color-foreground-primary);
     text-decoration: none;
     border: none;
     font-size: 1rem;

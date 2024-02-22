@@ -92,6 +92,10 @@ export const useTabPanel = () => {
     };
   }, [defaultTabComponent]);
 
+  const getTabByTitle = useCallback((title: string) => {
+    return tabs.find((tab) => tab.title === title);
+  }, [tabs]);
+
   return {
     tabs,
     defaultTab,
@@ -99,5 +103,6 @@ export const useTabPanel = () => {
     newTab,
     closeTab,
     activateTab,
+    getTabByTitle,
   };
 };

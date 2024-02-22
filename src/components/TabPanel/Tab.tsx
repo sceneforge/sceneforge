@@ -21,7 +21,6 @@ export const Tab = ({ title, onCloseClick, onActiveClick, active }: TabProps) =>
       <IconButton
         aria-label="close"
         icon="close"
-        inverted
         size="xs"
         title="Close"
         onClick={onCloseClick} />

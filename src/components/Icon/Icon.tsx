@@ -1,25 +1,21 @@
-import { IconClose } from "./IconClose";
-import type { IconMenuProps } from "./IconMenu";
-import { IconMenu } from "./IconMenu";
-import { IconNewFile } from "./IconNewFile";
-import { IconOpenFile } from "./IconOpenFile";
+import { type IconName } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export type IconProps = (
-  | (IconMenuProps & { icon: "menu" })
-  | { icon: "open-file" | "new-file" | "close" }
-) & { inverted?: boolean };
+export interface IconProps {
+  icon: "menu" | "close" | "settings" | "new-file" | "open-file" | "import-file";
+}
 
-export const Icon = ({ icon, ...props }: IconProps) => {
-  switch (icon) {
-    case "menu":
-      return <IconMenu {...props} />;
-    case "open-file":
-      return <IconOpenFile {...props} />;
-    case "new-file":
-      return <IconNewFile {...props} />;
-    case "close":
-      return <IconClose {...props} />;
-    default:
-      return null;
-  }
+const iconMap: Record<IconProps["icon"], IconName> = {
+  "menu": "bars",
+  "close": "close",
+  "settings": "cog",
+  "new-file": "file",
+  "open-file": "folder-open",
+  "import-file": "file-import",
+};
+
+export const Icon = ({ icon }: IconProps) => {
+  return (
+    <FontAwesomeIcon icon={["fas", iconMap[icon]]} />
+  );
 };

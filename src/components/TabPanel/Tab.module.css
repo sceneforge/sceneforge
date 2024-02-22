@@ -12,13 +12,9 @@
   border-block-end-color: var(--color-foreground-accent-20);
 
   &[aria-selected="true"] {
-    button {
-      color: var(--color-background-accent-90);
-    }
-
     box-shadow: inset 0rem -0.75rem 0.75rem 0.25rem var(--color-foreground-accent-60),
-    inset 0rem 1rem 2rem 0.125rem var(--color-foreground-accent-50),
-    0rem 0.5rem 0.5rem 0.25rem var(--color-foreground-accent-50);
+      inset 0rem 1rem 2rem 0.125rem var(--color-foreground-accent-50),
+      0rem 0.5rem 0.5rem 0.25rem var(--color-foreground-accent-50);
     background-color: var(--color-foreground-accent-40);
     border-block-end-color: var(--color-background-accent-20);
     border-end-end-radius: calc(var(--border-radius-pill) / 3);
@@ -28,9 +24,10 @@
   button {
     position: relative;
     font-size: large;
+    color: var(--color-foreground-contrast-background-accent);
 
     &:not([data-icon-button]) {
-      color: var(--color-background-accent-70);
+
       text-wrap: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;

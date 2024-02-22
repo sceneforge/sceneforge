@@ -1,56 +1,81 @@
 :root {
-  --color-reference: rgb(200, 58, 162);
+  --color-reference: rgb(150, 30, 120);
+
   --color-default-background: rgb(255, 255, 255);
   --color-default-foreground: rgb(0, 0, 0);
-  --color-background-accent: color-mix(in srgb, var(--color-default-background) 25%, var(--color-reference));
-  --color-divider: color-mix(in srgb, var(--color-default-foreground) 30%, var(--color-background-accent));
-  --color-text-primary: color-mix(in srgb, var(--color-default-foreground) 85%, var(--color-default-background));
-  --color-background: color-mix(in srgb, var(--color-background-accent) 65%, var(--color-default-background));
-  --color-background-base: color-mix(in srgb, var(--color-background) 75%, var(--color-default-background));
 
-  --color-background-accent-10: color-mix(in srgb, var(--color-default-background) 10%, var(--color-reference));
-  --color-background-accent-20: color-mix(in srgb, var(--color-default-background) 20%, var(--color-reference));
-  --color-background-accent-30: color-mix(in srgb, var(--color-default-background) 30%, var(--color-reference));
-  --color-background-accent-40: color-mix(in srgb, var(--color-default-background) 40%, var(--color-reference));
-  --color-background-accent-50: color-mix(in srgb, var(--color-default-background) 50%, var(--color-reference));
-  --color-background-accent-60: color-mix(in srgb, var(--color-default-background) 60%, var(--color-reference));
-  --color-background-accent-70: color-mix(in srgb, var(--color-default-background) 70%, var(--color-reference));
-  --color-background-accent-80: color-mix(in srgb, var(--color-default-background) 80%, var(--color-reference));
-  --color-background-accent-90: color-mix(in srgb, var(--color-default-background) 90%, var(--color-reference));
+  --color-reference-default-background: color-contrast(var(--color-reference) vs var(--color-default-background), var(--color-default-foreground) to AAA);
+  --color-reference-default-foreground: color-contrast(var(--color-reference-default-background) vs var(--color-default-foreground), var(--color-default-background) to AAA);
 
-  --color-foreground-accent-10: color-mix(in srgb, var(--color-default-foreground) 10%, var(--color-reference));
-  --color-foreground-accent-20: color-mix(in srgb, var(--color-default-foreground) 20%, var(--color-reference));
-  --color-foreground-accent-30: color-mix(in srgb, var(--color-default-foreground) 30%, var(--color-reference));
-  --color-foreground-accent-40: color-mix(in srgb, var(--color-default-foreground) 40%, var(--color-reference));
-  --color-foreground-accent-50: color-mix(in srgb, var(--color-default-foreground) 50%, var(--color-reference));
-  --color-foreground-accent-60: color-mix(in srgb, var(--color-default-foreground) 60%, var(--color-reference));
-  --color-foreground-accent-70: color-mix(in srgb, var(--color-default-foreground) 70%, var(--color-reference));
-  --color-foreground-accent-80: color-mix(in srgb, var(--color-default-foreground) 80%, var(--color-reference));
-  --color-foreground-accent-90: color-mix(in srgb, var(--color-default-foreground) 90%, var(--color-reference));
+  --color-foreground-primary-10: color-mix(in srgb, var(--color-reference-default-background) 10%, var(--color-reference-default-foreground));
+  --color-foreground-primary-20: color-mix(in srgb, var(--color-reference-default-background) 20%, var(--color-reference-default-foreground));
+  --color-foreground-primary-30: color-mix(in srgb, var(--color-reference-default-background) 30%, var(--color-reference-default-foreground));
+  --color-foreground-primary-40: color-mix(in srgb, var(--color-reference-default-background) 40%, var(--color-reference-default-foreground));
+  --color-foreground-primary-50: color-mix(in srgb, var(--color-reference-default-background) 50%, var(--color-reference-default-foreground));
+  --color-foreground-primary-60: color-mix(in srgb, var(--color-reference-default-background) 60%, var(--color-reference-default-foreground));
+  --color-foreground-primary-70: color-mix(in srgb, var(--color-reference-default-background) 70%, var(--color-reference-default-foreground));
+  --color-foreground-primary-80: color-mix(in srgb, var(--color-reference-default-background) 80%, var(--color-reference-default-foreground));
+  --color-foreground-primary-90: color-mix(in srgb, var(--color-reference-default-background) 90%, var(--color-reference-default-foreground));
+  --color-foreground-primary: var(--color-reference-default-foreground);
 
-  --color-default-background-opacity-10: color-mix(in srgb, var(--color-default-background) 10%, transparent);
-  --color-default-background-opacity-20: color-mix(in srgb, var(--color-default-background) 20%, transparent);
-  --color-default-background-opacity-30: color-mix(in srgb, var(--color-default-background) 30%, transparent);
-  --color-default-background-opacity-40: color-mix(in srgb, var(--color-default-background) 40%, transparent);
-  --color-default-background-opacity-50: color-mix(in srgb, var(--color-default-background) 50%, transparent);
-  --color-default-background-opacity-60: color-mix(in srgb, var(--color-default-background) 60%, transparent);
-  --color-default-background-opacity-70: color-mix(in srgb, var(--color-default-background) 70%, transparent);
-  --color-default-background-opacity-80: color-mix(in srgb, var(--color-default-background) 80%, transparent);
-  --color-default-background-opacity-90: color-mix(in srgb, var(--color-default-background) 90%, transparent);
+  --color-background-accent-10: color-mix(in srgb, var(--color-reference-default-background) 10%, var(--color-reference));
+  --color-foreground-contrast-background-accent-10: color-contrast(var(--color-background-accent-10) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
 
-  --color-default-foreground-opacity-10: color-mix(in srgb, var(--color-default-foreground) 10%, transparent);
-  --color-default-foreground-opacity-20: color-mix(in srgb, var(--color-default-foreground) 20%, transparent);
-  --color-default-foreground-opacity-30: color-mix(in srgb, var(--color-default-foreground) 30%, transparent);
-  --color-default-foreground-opacity-40: color-mix(in srgb, var(--color-default-foreground) 40%, transparent);
-  --color-default-foreground-opacity-50: color-mix(in srgb, var(--color-default-foreground) 50%, transparent);
-  --color-default-foreground-opacity-60: color-mix(in srgb, var(--color-default-foreground) 60%, transparent);
-  --color-default-foreground-opacity-70: color-mix(in srgb, var(--color-default-foreground) 70%, transparent);
-  --color-default-foreground-opacity-80: color-mix(in srgb, var(--color-default-foreground) 80%, transparent);
-  --color-default-foreground-opacity-90: color-mix(in srgb, var(--color-default-foreground) 90%, transparent);
+  --color-background-accent-20: color-mix(in srgb, var(--color-reference-default-background) 20%, var(--color-reference));
+  --color-foreground-contrast-background-accent-20: color-contrast(var(--color-background-accent-20) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
 
-  --color-icon-1: var(--color-text-primary);
-  --color-icon-2: var(--color-foreground-accent-40);
+  --color-background-accent-30: color-mix(in srgb, var(--color-reference-default-background) 30%, var(--color-reference));
+  --color-foreground-contrast-background-accent-30: color-contrast(var(--color-background-accent-30) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
 
-  --color-icon-inverted-1: var(--color-background-accent-40);
-  --color-icon-inverted-2: var(--color-background-accent-60);
+  --color-background-accent-40: color-mix(in srgb, var(--color-reference-default-background) 40%, var(--color-reference));
+  --color-foreground-contrast-background-accent-40: color-contrast(var(--color-background-accent-40) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
+
+  --color-background-accent-50: color-mix(in srgb, var(--color-reference-default-background) 50%, var(--color-reference));
+  --color-foreground-contrast-background-accent-50: color-contrast(var(--color-background-accent-50) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
+
+  --color-background-accent-60: color-mix(in srgb, var(--color-reference-default-background) 60%, var(--color-reference));
+  --color-foreground-contrast-background-accent-60: color-contrast(var(--color-background-accent-60) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
+
+  --color-background-accent-70: color-mix(zin srgb, var(--color-reference-default-background) 70%, var(--color-reference));
+  --color-foreground-contrast-background-accent-70: color-contrast(var(--color-background-accent-70) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
+
+  --color-background-accent-80: color-mix(in srgb, var(--color-reference-default-background) 80%, var(--color-reference));
+  --color-foreground-contrast-background-accent-80: color-contrast(var(--color-background-accent-80) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
+
+  --color-background-accent-90: color-mix(in srgb, var(--color-reference-default-background) 90%, var(--color-reference));
+  --color-foreground-contrast-background-accent-90: color-contrast(var(--color-background-accent-90) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
+
+  --color-background-accent: var(--color-reference);
+  --color-foreground-contrast-background-accent: color-contrast(var(--color-background-accent) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
+
+  --color-foreground-accent-10: color-mix(in srgb, var(--color-reference-default-foreground) 10%, var(--color-reference));
+  --color-foreground-accent-20: color-mix(in srgb, var(--color-reference-default-foreground) 20%, var(--color-reference));
+  --color-foreground-accent-30: color-mix(in srgb, var(--color-reference-default-foreground) 30%, var(--color-reference));
+  --color-foreground-accent-40: color-mix(in srgb, var(--color-reference-default-foreground) 40%, var(--color-reference));
+  --color-foreground-accent-50: color-mix(in srgb, var(--color-reference-default-foreground) 50%, var(--color-reference));
+  --color-foreground-accent-60: color-mix(in srgb, var(--color-reference-default-foreground) 60%, var(--color-reference));
+  --color-foreground-accent-70: color-mix(in srgb, var(--color-reference-default-foreground) 70%, var(--color-reference));
+  --color-foreground-accent-80: color-mix(in srgb, var(--color-reference-default-foreground) 80%, var(--color-reference));
+  --color-foreground-accent-90: color-mix(in srgb, var(--color-reference-default-foreground) 90%, var(--color-reference));
+  --color-foreground-accent: var(--color-reference);
+
+  --color-default-background-opacity-10: color-mix(in srgb, var(--color-reference-default-foreground) 10%, transparent);
+  --color-default-background-opacity-20: color-mix(in srgb, var(--color-reference-default-foreground) 20%, transparent);
+  --color-default-background-opacity-30: color-mix(in srgb, var(--color-reference-default-foreground) 30%, transparent);
+  --color-default-background-opacity-40: color-mix(in srgb, var(--color-reference-default-foreground) 40%, transparent);
+  --color-default-background-opacity-50: color-mix(in srgb, var(--color-reference-default-foreground) 50%, transparent);
+  --color-default-background-opacity-60: color-mix(in srgb, var(--color-reference-default-foreground) 60%, transparent);
+  --color-default-background-opacity-70: color-mix(in srgb, var(--color-reference-default-foreground) 70%, transparent);
+  --color-default-background-opacity-80: color-mix(in srgb, var(--color-reference-default-foreground) 80%, transparent);
+  --color-default-background-opacity-90: color-mix(in srgb, var(--color-reference-default-foreground) 90%, transparent);
+
+  --color-default-foreground-opacity-10: color-mix(in srgb, var(--color-reference-default-foreground) 10%, transparent);
+  --color-default-foreground-opacity-20: color-mix(in srgb, var(--color-reference-default-foreground) 20%, transparent);
+  --color-default-foreground-opacity-30: color-mix(in srgb, var(--color-reference-default-foreground) 30%, transparent);
+  --color-default-foreground-opacity-40: color-mix(in srgb, var(--color-reference-default-foreground) 40%, transparent);
+  --color-default-foreground-opacity-50: color-mix(in srgb, var(--color-reference-default-foreground) 50%, transparent);
+  --color-default-foreground-opacity-60: color-mix(in srgb, var(--color-reference-default-foreground) 60%, transparent);
+  --color-default-foreground-opacity-70: color-mix(in srgb, var(--color-reference-default-foreground) 70%, transparent);
+  --color-default-foreground-opacity-80: color-mix(in srgb, var(--color-reference-default-foreground) 80%, transparent);
+  --color-default-foreground-opacity-90: color-mix(in srgb, var(--color-reference-default-foreground) 90%, transparent);
 }

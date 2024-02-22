@@ -1,5 +1,6 @@
 import { fileOpen } from "browser-fs-access";
 import { useCallback, useState } from "react";
+import { SettingsPage } from "../../pages";
 import type { IconButtonProps } from "../IconButton/IconButton";
 import { ImportModel } from "../ImportModel/ImportModel";
 import { NavList, NavListItem } from "../NavList";
@@ -8,7 +9,21 @@ import { Topbar } from "../Topbar";
 
 export const AppNav = () => {
   const [recentFiles, setRecentFiles] = useState<File[]>([]);
-  const { newTab } = useTabPanel();
+  const { newTab, getTabByTitle, activateTab } = useTabPanel();
+
+  const openSettingsPage = useCallback(() => {
+    const tab = getTabByTitle("Settings");
+    if (tab) {
+      activateTab(tab)();
+    } else {
+      newTab({
+        title: "Settings",
+        active: true,
+        type: "regular",
+        component: SettingsPage,
+      });
+    }
+  }, [activateTab, getTabByTitle, newTab]);
 
   const handleImportModel = useCallback(() => {
     fileOpen({
@@ -30,25 +45,36 @@ export const AppNav = () => {
     });
   }, [newTab, setRecentFiles]);
 
-  const topbarIconButtons: IconButtonProps[] = [
+  const iconButtonsStart: IconButtonProps[] = [
     {
       icon: "new-file",
       "aria-label": "New File",
       title: "New File"
     },
     {
-      icon: "open-file",
+      icon: "import-file",
       "aria-label": "Import Model",
       title: "Import Model",
       onClick: handleImportModel
     }
   ];
 
+  const iconButtonsEnd: IconButtonProps[] = [
+    {
+      icon: "settings",
+      "aria-label": "Settings",
+      title: "Settings",
+      onClick: openSettingsPage
+    }
+  ];
+
   return (
     <Topbar
+      iconButtonsEnd={iconButtonsEnd}
+      iconButtonsStart={iconButtonsStart}
       subtitle="Create Easy 3D Structure for Web"
       title="SceneForge"
-      topbarIconButtons={topbarIconButtons}>
+    >
       <NavList>
         <NavListItem>Home</NavListItem>
         <NavListItem header="Recent Files">

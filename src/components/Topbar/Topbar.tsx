@@ -8,10 +8,17 @@ import styles from "./Topbar.module.css";
 export type TopbarProps = PropsWithChildren<{
   title: string;
   subtitle?: string;
-  topbarIconButtons?: IconButtonProps[];
+  iconButtonsStart?: IconButtonProps[];
+  iconButtonsEnd?: IconButtonProps[];
 }>;
 
-export const Topbar = ({ title, subtitle, topbarIconButtons, children }: TopbarProps) => {
+export const Topbar = ({
+  title,
+  subtitle,
+  iconButtonsStart,
+  iconButtonsEnd,
+  children
+}: TopbarProps) => {
   const { menuShow, setMenuShow, sidePanelShow } = usePanel();
 
   const toggleMenu = useCallback(() => {
@@ -27,13 +34,21 @@ export const Topbar = ({ title, subtitle, topbarIconButtons, children }: TopbarP
       <div className={styles.bar}>
         <IconButton
           aria-label="Menu"
-          icon="menu"
-          open={menuShow}
+          icon={menuShow ? "close" : "menu"}
           title="Menu"
           onClick={toggleMenu}
         />
         <h1>{title}{subtitle && (<small>{subtitle}</small>)}</h1>
-        {topbarIconButtons?.map((props, index) => (<IconButton key={index} {...props} />))}
+        {iconButtonsStart?.length && (
+          <div className={styles.ibs}>
+            {iconButtonsStart.map((props, index) => (<IconButton key={index} {...props} />))}
+          </div>
+        )}
+        {iconButtonsEnd?.length && (
+          <div className={styles.ibe}>
+            {iconButtonsEnd.map((props, index) => (<IconButton key={index} {...props} />))}
+          </div>
+        )}
       </div>
     </header>
   );

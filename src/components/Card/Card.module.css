@@ -1,6 +1,6 @@
 .wrapper {
   display: block;
-  background-color: var(--color-background);
+  background-color: var(--color-background-accent-50);
   border-radius: var(--border-radius-pill);
   width: 100%;
 

@@ -2,8 +2,8 @@
   position: absolute;
   inset-block-start: 2rem;
   inset-inline-end: 2rem;
-  border-inline-start: solid 1px var(--color-divider);
-  background-color: var(--color-background);
+  border-inline-start: solid 1px var(--color-default-foreground-opacity-80);
+  background-color: var(--color-background-accent-50);
   overflow: hidden;
   padding-block-start: 5rem;
   padding-inline: 0;
