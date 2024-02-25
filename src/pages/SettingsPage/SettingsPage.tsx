@@ -1,15 +1,28 @@
-import { useCallback, type ChangeEvent } from "react";
+import { useCallback, useEffect, useState, type ChangeEvent } from "react";
 import { Card } from "../../components/Card";
 import { InputList, InputListItem } from "../../components/InputList";
+import { usePanel } from "../../components/Panel";
 import { SafeArea } from "../../components/SafeArea";
 import { getThemeColor, setThemeColor } from "../../lib/themeColor";
 
 export const SettingsPage = () => {
-  const themeColor = getThemeColor() ?? undefined;
+  const { getUserData, setUserData } = usePanel();
+  const [colorReference, setColorReference] = useState(getThemeColor() ?? undefined);
 
   const changeThemeColor = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setThemeColor(e.target.value);
-  }, []);
+    setUserData("colorScheme", "color-reference", e.target.value);
+    setColorReference(e.target.value);
+  }, [setUserData]);
+
+  useEffect(() => {
+    getUserData("colorScheme", "color-reference", (color) => {
+      if (color && typeof color === "string" && color.startsWith("#")) {
+        setThemeColor(color);
+        setColorReference(color);
+      }
+    });
+  }, [getUserData, setColorReference]);
 
   return (
     <SafeArea>
@@ -17,10 +30,10 @@ export const SettingsPage = () => {
       <Card title="Color Scheme">
         <InputList>
           <InputListItem
-            defaultValue={themeColor}
             label="Color Theme"
             name="theme-color"
             type="color"
+            value={colorReference}
             onChange={changeThemeColor}
           />
         </InputList>

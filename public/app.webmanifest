@@ -7,8 +7,8 @@
   "display_override": ["window-controls-overlay", "minimal-ui"],
   "display": "standalone",
   "orientation": "landscape",
-  "background_color": "rgb(150, 30, 120)",
-  "theme_color": "rgb(150, 30, 120)",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "icons/favicon.ico",

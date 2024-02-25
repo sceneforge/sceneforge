@@ -5,12 +5,13 @@ import style from "./InputListColor.module.css";
 export interface InputListColorProps {
   name: string;
   defaultValue?: string;
+  value?: HTMLInputElement["value"];
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
 export const InputListColor = forwardRef(
   function InputListColor(
-    { name, defaultValue, onChange }: InputListColorProps,
+    { name, defaultValue, value, onChange }: InputListColorProps,
     ref: ForwardedRef<HTMLInputElement>
   ) {
     return (
@@ -20,6 +21,7 @@ export const InputListColor = forwardRef(
         name={name}
         ref={ref}
         type="color"
+        value={value}
         onChange={onChange}
       />
     );

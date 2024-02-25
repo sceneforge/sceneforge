@@ -10,12 +10,13 @@ export interface InputListItemProps {
   name: string;
   type: InputListType
   defaultValue?: string;
+  value?: HTMLInputElement["value"];
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
 export const InputListItem = forwardRef(
   function InputListItem(
-    { label, type, name, defaultValue, onChange }: InputListItemProps,
+    { label, type, name, defaultValue, onChange, value }: InputListItemProps,
     ref: ForwardedRef<HTMLInputElement>
   ) {
     return (
@@ -28,6 +29,7 @@ export const InputListItem = forwardRef(
                 defaultValue={defaultValue}
                 name={name}
                 ref={ref}
+                value={value}
                 onChange={onChange}
               />
             )

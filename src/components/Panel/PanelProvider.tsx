@@ -10,6 +10,7 @@ import {
   type ReactNode,
   type SetStateAction
 } from "react";
+import { type Database } from "../../lib/Database";
 
 type EventListenerCallback = (
   type: string,
@@ -37,6 +38,7 @@ export interface PanelContextType {
   setSidePanelShow?: Dispatch<SetStateAction<boolean>>;
   sidePanelContent?: ReactNode;
   setSidePanelContent?: Dispatch<SetStateAction<ReactNode>>;
+  userData?: Database<"UserData">;
 }
 
 const PanelContext = createContext<PanelContextType>({
@@ -45,7 +47,11 @@ const PanelContext = createContext<PanelContextType>({
   sidePanelShow: false,
 });
 
-export const PanelProvider = ({ children }: PropsWithChildren) => {
+export type PanelProviderProps = PropsWithChildren<{
+  userData: Database<"UserData">;
+}>;
+
+export const PanelProvider = ({ userData, children }: PanelProviderProps) => {
   const [menuShow, setMenuShow] = useState(false);
   const [sidePanelShow, setSidePanelShow] = useState(false);
   const [sidePanelContent, setSidePanelContent] = useState<ReactNode>();
@@ -95,6 +101,7 @@ export const PanelProvider = ({ children }: PropsWithChildren) => {
       setSidePanelShow,
       sidePanelContent,
       setSidePanelContent,
+      userData,
     }}>
       {children}
     </PanelContext.Provider>
@@ -110,7 +117,33 @@ export const usePanel = () => {
     setMenuShow,
     setSidePanelShow,
     setSidePanelContent,
+    userData,
   } = useContext(PanelContext);
+
+  const getUserData = useCallback((
+    store: string,
+    key: string,
+    callback: (value: unknown) => void,
+    errorCallback?: (error: unknown) => void
+  ) => {
+    if (userData) {
+      userData.get(store, key)
+        .then(callback)
+        .catch(errorCallback ?? (() => void (0)));
+    }
+  }, [userData]);
+
+  const setUserData = useCallback((
+    store: string,
+    key: string,
+    value: string,
+    errorCallback?: (error: unknown) => void
+  ) => {
+    if (userData) {
+      userData.setLast(store, key, value)
+        .catch(errorCallback ?? (() => void (0)));
+    }
+  }, [userData]);
 
   return {
     overlayVisible,
@@ -120,5 +153,8 @@ export const usePanel = () => {
     setSidePanelShow,
     sidePanelContent,
     setSidePanelContent,
+    userData,
+    getUserData,
+    setUserData
   };
 };
