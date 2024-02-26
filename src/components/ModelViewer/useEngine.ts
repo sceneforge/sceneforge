@@ -5,18 +5,20 @@ import { type Nullable } from "@babylonjs/core/types";
 import { useCallback, useRef, type RefObject } from "react";
 import { observeComputedStylePropertyValue } from "../../lib/observeComputedStylePropertyValue";
 import {
+  ColorRGBA,
   parseCSSColorPropertyValue,
-  type ColorRGBA,
 } from "../../lib/parseCSSColorPropertyValue";
 
-let backgroundColor: ColorRGBA = { r: 0, g: 0, b: 0, a: 0 };
+let backgroundColor: ColorRGBA = { r: 0, g: 0, b: 0, a: 1 };
 
 observeComputedStylePropertyValue(
   document.firstElementChild,
   "background-color",
   (color) => {
+    console.log("color", color);
     const newColor = parseCSSColorPropertyValue(color);
     if (newColor) {
+      console.log("DEBUG: newColor", newColor);
       backgroundColor = newColor;
     }
   }
@@ -40,8 +42,7 @@ export const useEngine = (canvasRef: RefObject<HTMLCanvasElement>) => {
       sceneRef.current.clearColor = new Color4(
         backgroundColor.r,
         backgroundColor.g,
-        backgroundColor.b,
-        backgroundColor.a
+        backgroundColor.b
       );
     }
   }, [engineRef, sceneRef]);
