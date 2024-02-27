@@ -1,29 +1,35 @@
-import { Button } from "../Button";
-import { IconButton } from "../IconButton/IconButton";
-
+import { PropsWithChildren, useEffect, type ReactNode } from "react";
 import styles from "./Tab.module.css";
 
-export interface TabProps {
-  title: string;
-  active?: boolean;
-  onCloseClick?: () => void;
-  onActiveClick?: () => void;
+export type TabProps<
+  P extends Record<string, unknown> = Record<string, unknown>
+> = PropsWithChildren<{
+  title?: string;
+} & P>;
+
+interface TabRenderFunction<
+  P extends Record<string, unknown> = Record<string, unknown>
+> {
+  (props: TabProps<P>): ReactNode | JSX.Element;
+  displayName?: string | undefined;
 }
 
-export const Tab = ({ title, onCloseClick, onActiveClick, active }: TabProps) => {
-  return (
-    <li
-      aria-label={title}
-      aria-selected={active ? "true" : "false"}
-      className={styles.wrapper} role="tab"
-    >
-      <Button clear title={title} onClick={onActiveClick}>{title}</Button>
-      <IconButton
-        aria-label="close"
-        icon="close"
-        size="xs"
-        title="Close"
-        onClick={onCloseClick} />
-    </li>
-  );
+export const Tab = <
+  P extends Record<string, unknown> = Record<string, unknown>
+>(
+  Component: TabRenderFunction<P>
+) => {
+  return function TabWrapper(props: TabProps<P>) {
+    useEffect(() => {
+      if (props.title) {
+        document.title = props.title;
+      }
+    }, [props.title]);
+
+    return (
+      <div className={styles.wrapper}>
+        <Component {...props} />
+      </div>
+    );
+  };
 };

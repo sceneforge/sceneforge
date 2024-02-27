@@ -1,8 +1,7 @@
 import { fileOpen } from "browser-fs-access";
 import { useCallback, useState } from "react";
-import { SettingsPage } from "../../pages";
+import { ModelViewTab, SettingsTab, type ModelViewTabProps } from "../../tabs";
 import type { IconButtonProps } from "../IconButton/IconButton";
-import { ImportModel } from "../ImportModel/ImportModel";
 import { NavList, NavListItem } from "../NavList";
 import { useTabPanel } from "../TabPanel/TabPanelProvider";
 import { Topbar } from "../Topbar";
@@ -20,7 +19,7 @@ export const AppNav = () => {
         title: "Settings",
         active: true,
         type: "regular",
-        component: SettingsPage,
+        component: SettingsTab,
       });
     }
   }, [activateTab, getTabByTitle, newTab]);
@@ -34,11 +33,11 @@ export const AppNav = () => {
       excludeAcceptAllOption: true,
     }).then((file) => {
       setRecentFiles((prev) => [file, ...prev]);
-      newTab({
+      newTab<ModelViewTabProps>({
         title: file.name,
         active: true,
-        type: "model-editor",
-        component: () => (<ImportModel file={file} />),
+        component: ModelViewTab,
+        props: { gltf: file },
       });
     }).catch((err) => {
       console.error(err);

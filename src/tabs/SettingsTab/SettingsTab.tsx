@@ -3,9 +3,10 @@ import { Card } from "../../components/Card";
 import { InputList, InputListItem } from "../../components/InputList";
 import { usePanel } from "../../components/Panel";
 import { SafeArea } from "../../components/SafeArea";
+import { Tab } from "../../components/TabPanel";
 import { getThemeColor, setThemeColor } from "../../lib/themeColor";
 
-export const SettingsPage = () => {
+export const SettingsTab = Tab(() => {
   const { getUserData, setUserData } = usePanel();
   const [colorReference, setColorReference] = useState(getThemeColor() ?? undefined);
 
@@ -40,4 +41,4 @@ export const SettingsPage = () => {
       </Card>
     </SafeArea>
   );
-};
+});

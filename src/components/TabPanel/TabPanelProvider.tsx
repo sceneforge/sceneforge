@@ -1,4 +1,5 @@
 import {
+  ReactNode,
   createContext,
   useCallback,
   useContext,
@@ -8,30 +9,43 @@ import {
   type PropsWithChildren,
   type SetStateAction
 } from "react";
+import { Tab, type TabProps } from "./Tab";
 
-export type TabContextType = "model-editor" | "model-preview" | "regular";
+type Component<P extends TabProps = TabProps> = (
+  props: P,
+  ...args: unknown[]
+) => (JSX.Element | ReactNode | null);
 
-export interface TabContext {
+export interface TabContext<
+  P extends TabProps = TabProps,
+  C extends Component<P> = Component<P>
+> {
   title: string;
   active: boolean;
-  type: TabContextType;
-  component?: () => JSX.Element;
+  component: C;
+  props?: Parameters<C>[0];
   createdAt?: number;
 }
 
 export interface TabPanelContextType {
   tabs: TabContext[];
   setTabs: Dispatch<SetStateAction<TabContext[]>>;
-  defaultTab?: () => JSX.Element;
+  defaultTab?: Omit<TabContext, "active" | "createdAt">;
 }
 
 export type TabPanelProviderProps = PropsWithChildren<{
-  defaultTab?: () => JSX.Element;
+  defaultTab?: Omit<TabContext, "active" | "createdAt">;
 }>;
 
-const TabPanelContext = createContext<TabPanelContextType>({ tabs: [], setTabs: (() => void (0)) });
+const TabPanelContext = createContext<TabPanelContextType>({
+  tabs: [],
+  setTabs: (() => void (0))
+});
 
-export const TabPanelProvider = ({ children, defaultTab }: TabPanelProviderProps) => {
+export const TabPanelProvider = ({
+  children,
+  defaultTab
+}: TabPanelProviderProps) => {
   const [tabs, setTabs] = useState<TabContext[]>([]);
 
   return (
@@ -44,24 +58,32 @@ export const TabPanelProvider = ({ children, defaultTab }: TabPanelProviderProps
 export const useTabPanel = () => {
   const { tabs, setTabs, defaultTab: defaultTabComponent } = useContext(TabPanelContext);
 
-  const activateTab = useCallback((tab: TabContext) => {
-    return () => {
-      setTabs((prevTabs) => prevTabs.map((t) => ({
-        ...t,
-        active: t.title === tab.title &&
-          t.type === tab.type &&
-          t.component === tab.component &&
-          t.createdAt === tab.createdAt
-      })));
-      document.title = tab.title;
-    };
-  }, [setTabs]);
+  const activateTab = useCallback(
+    (tab: TabContext) => {
+      return () => {
+        setTabs((prevTabs) => prevTabs.map((t) => ({
+          ...t,
+          active: t.title === tab.title &&
+            t.component === tab.component &&
+            t.createdAt === tab.createdAt
+        })));
+        document.title = tab.title;
+      };
+    }, [setTabs]
+  );
 
-  const newTab = useCallback((tab: Omit<TabContext, "createdAt">) => {
+  const newTab = useCallback(<
+    P extends TabProps = TabProps,
+    C extends Component<P> = Component<P>,
+    T extends TabContext<P, C> = TabContext<P, C>
+  >(tab: T) => {
     const createdAt = Date.now();
     const newTabContext = { ...tab, createdAt };
-    setTabs((prevTabs) => [...prevTabs, newTabContext]);
-    activateTab(newTabContext)();
+    setTabs((prevTabs) => [
+      ...prevTabs,
+      newTabContext as TabContext<TabProps, Component>
+    ]);
+    activateTab(newTabContext as TabContext<TabProps, Component>)();
   }, [setTabs, activateTab]);
 
   const closeTab = useCallback((tab: TabContext) => {
@@ -83,12 +105,16 @@ export const useTabPanel = () => {
     };
   }, [setTabs]);
 
-  const defaultTab = useMemo<Omit<TabContext, "createdAt">>(() => {
+  const defaultTab = useMemo((): TabContext => {
+    if (!defaultTabComponent) return {
+      title: "",
+      active: false,
+      component: Tab(() => (<></>)),
+    };
+
     return {
-      title: "Home",
+      ...defaultTabComponent,
       active: true,
-      type: "regular",
-      component: defaultTabComponent,
     };
   }, [defaultTabComponent]);
 

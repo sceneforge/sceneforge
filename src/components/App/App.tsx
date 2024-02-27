@@ -1,5 +1,5 @@
 import { Database } from "../../lib/Database";
-import { HomePage } from "../../pages";
+import { HomeTab } from "../../tabs";
 import { PanelProvider } from "../Panel/PanelProvider";
 import { TabPanel } from "../TabPanel/TabPanel";
 import { TabPanelProvider } from "../TabPanel/TabPanelProvider";
@@ -12,7 +12,10 @@ export interface AppProps {
 export const App = ({ userData }: AppProps) => {
   return (
     <PanelProvider userData={userData}>
-      <TabPanelProvider defaultTab={HomePage}>
+      <TabPanelProvider defaultTab={{
+        title: "Home",
+        component: HomeTab
+      }}>
         <TabPanel />
         <AppNav />
       </TabPanelProvider>

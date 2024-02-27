@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Tab } from "./Tab";
+import { TabItem } from "./TabItem";
 import { useTabPanel } from "./TabPanelProvider";
 
 import styles from "./TabList.module.css";
@@ -16,7 +16,7 @@ export const TabList = () => {
   return (
     <ul className={styles.wrapper} role="tablist">
       {tabs.map((tab, index) => (
-        <Tab
+        <TabItem
           active={tab.active}
           key={index}
           title={tab.title}
