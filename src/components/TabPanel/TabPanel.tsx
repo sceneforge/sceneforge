@@ -11,8 +11,8 @@ export const TabPanel = () => {
       <TabList />
       <div className={styles.panels}>
         <Suspense fallback={<div>Loading...</div>}>
-          {tabs.map(({ id, component: TabComponent, active, props }) => (
-            <div hidden={!active} id={`tabpanel-${id}`} key={id} role="tabpanel">
+          {tabs.map(({ component: TabComponent, active, props }, index) => (
+            <div hidden={!active} id={`tabpanel-${index}`} key={index} role="tabpanel">
               <TabComponent active={active} {...props} />
             </div>
           ))}

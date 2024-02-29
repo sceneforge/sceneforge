@@ -1,11 +1,41 @@
 
+import { useCallback } from "react";
+import { Button } from "../../components/Button";
+import { Card } from "../../components/Card";
+import { Grid } from "../../components/Grid";
+import { type ModelViewerProps } from "../../components/ModelViewer";
 import { SafeArea } from "../../components/SafeArea";
 import { Tab } from "../../components/TabPanel";
+import { useTabs } from "../../hooks/useTabs";
+import { useRecentModels } from "./useRecentModels";
 
-export const HomeTab = Tab(() => {
+export interface HomeTabProps {
+  active?: boolean;
+  title?: string;
+}
+
+export const HomeTab = Tab(({ active }: HomeTabProps) => {
+  const { recentModels } = useRecentModels(active);
+  const { newModelViewTab } = useTabs();
+
+  const openModel = useCallback((model: ModelViewerProps) => {
+    return () => {
+      newModelViewTab(model);
+    };
+  }, [newModelViewTab]);
+
   return (
     <SafeArea>
-      <h1>Hello, Home Tab!</h1>
+      <section>
+        <h2>Recent Models</h2>
+        <Grid cols={5}>
+          {recentModels.map((model, index) => (
+            <Card key={index} title={model.title}>
+              <Button onClick={openModel(model)}>Open</Button>
+            </Card>
+          ))}
+        </Grid>
+      </section>
     </SafeArea>
   );
 });

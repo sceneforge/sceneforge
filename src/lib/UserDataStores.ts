@@ -4,4 +4,7 @@ export const UserDataStores: ObjectStores = {
   colorScheme: {
     keyPath: "key",
   },
+  recentModels: {
+    keyPath: "key",
+  },
 };

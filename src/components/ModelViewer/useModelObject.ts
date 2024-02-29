@@ -8,9 +8,9 @@ export const useModelObject = ({ id, title, glft }: ModelViewerProps) => {
   const [loadState, setLoadState] = useState<
     "none" | "loading" | "loaded" | "error"
   >("none");
-  const [currentID, setCurrentID] = useState(id);
-  const [currentTitle, setCurrentTitle] = useState(title);
-  const [currentGLFT, setCurrentGLFT] = useState(glft);
+  const [currentID, setCurrentID] = useState<string | undefined>(id);
+  const [currentTitle, setCurrentTitle] = useState<string | undefined>(title);
+  const [currentGLFT, setCurrentGLFT] = useState<Blob | undefined>(glft);
   const [currentCreatedAt, setCurrentCreatedAt] = useState<Date | null>(null);
   const [currentUpdatedAt, setCurrentUpdatedAt] = useState<Date | null>(null);
 
@@ -27,14 +27,18 @@ export const useModelObject = ({ id, title, glft }: ModelViewerProps) => {
               data !== null &&
               !Array.isArray(data)
             ) {
-              if ("glft" in data && data.glft instanceof File)
+              if ("glft" in data && data.glft instanceof Blob) {
                 setCurrentGLFT(data.glft);
-              if ("title" in data && typeof data.title === "string")
+              }
+              if ("title" in data && typeof data.title === "string") {
                 setCurrentTitle(data.title);
-              if ("createdAt" in data && data.createdAt instanceof Date)
+              }
+              if ("createdAt" in data && data.createdAt instanceof Date) {
                 setCurrentCreatedAt(data.createdAt);
-              if ("updatedAt" in data && data.updatedAt instanceof Date)
+              }
+              if ("updatedAt" in data && data.updatedAt instanceof Date) {
                 setCurrentUpdatedAt(data.updatedAt);
+              }
               setLoadState("loaded");
               resolve(data);
             }
@@ -77,6 +81,7 @@ export const useModelObject = ({ id, title, glft }: ModelViewerProps) => {
     if (!currentID) return;
     if (!currentTitle) setCurrentTitle("Untitled Model");
     setUserData("recentModels", currentID, {
+      id: currentID,
       title: currentTitle,
       glft: currentGLFT,
       createdAt: currentCreatedAt,

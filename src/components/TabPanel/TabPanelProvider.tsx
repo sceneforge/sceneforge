@@ -129,6 +129,10 @@ export const useTabPanel = () => {
     return tabs.find((tab) => tab.title === title);
   }, [tabs]);
 
+  const getTabById = useCallback((id: string) => {
+    return tabs.find((tab) => tab.id === id);
+  }, [tabs]);
+
   return {
     tabs,
     defaultTab,
@@ -137,5 +141,6 @@ export const useTabPanel = () => {
     closeTab,
     activateTab,
     getTabByTitle,
+    getTabById,
   };
 };

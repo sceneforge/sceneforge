@@ -1,9 +1,24 @@
-import { SceneLoader } from "@babylonjs/core";
+import { SceneLoader, type Scene } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF/2.0";
 import { useCallback, type RefObject } from "react";
 import { useArcRotateCamera } from "./useArcRotateCamera";
 import { useEngine } from "./useEngine";
 import { useHemisphericLight } from "./useHemiphericLight";
+
+const importGLTF = (scene: Scene, blob: Blob) => {
+  SceneLoader.ImportMeshAsync(
+    "",
+    "",
+    URL.createObjectURL(blob),
+    scene,
+    undefined,
+    ".glb"
+  )
+    .then((data) => {
+      console.log("DEBUG: Loaded model data", data);
+    })
+    .catch(console.error);
+};
 
 export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
   const {
@@ -56,34 +71,21 @@ export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
     stopRenderSceneLoop,
   ]);
 
-  const openGLTF = useCallback(
-    (file: File) => {
-      file
-        .arrayBuffer()
-        .then((buffer) => {
-          const assetBlob = new Blob([buffer], {
-            type: "application/octet-stream",
-          });
-          const assetUrl = URL.createObjectURL(assetBlob);
+  const openGLTFBlob = useCallback(
+    (blob: Blob, attempt?: number) => {
+      const withAttempt = typeof attempt !== "number" ? 3 : attempt;
 
-          SceneLoader.ImportMeshAsync(
-            "",
-            "",
-            assetUrl,
-            sceneRef.current,
-            undefined,
-            ".glb"
-          )
-            .then((data) => {
-              console.log("DEBUG: Loaded model data", data);
-            })
-            .catch((error) => {
-              console.error("Error loading model data", error);
-            });
-        })
-        .catch((error) => {
-          console.error("Error loading model", error);
-        });
+      if (sceneRef.current) {
+        importGLTF(sceneRef.current, blob);
+      } else {
+        setTimeout(() => {
+          if (withAttempt > 0) {
+            openGLTFBlob(blob, withAttempt - 1);
+          } else {
+            throw new Error("Failed to load model");
+          }
+        }, 1000);
+      }
     },
     [sceneRef]
   );
@@ -94,7 +96,7 @@ export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
     sceneRef,
     engineRef,
     cameraRef,
-    openGLTF,
+    openGLTFBlob,
     startAll,
     disposeAll,
   };

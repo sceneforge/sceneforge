@@ -4,18 +4,24 @@ import { IconButton } from "../IconButton/IconButton";
 import styles from "./TabItem.module.css";
 
 export interface TabItemProps {
-  id: string;
   title: string;
   active?: boolean;
+  index?: number;
   onCloseClick?: () => void;
   onActiveClick?: () => void;
 }
 
-export const TabItem = ({ id, title, onCloseClick, onActiveClick, active }: TabItemProps) => {
+export const TabItem = ({
+  title,
+  onCloseClick,
+  onActiveClick,
+  active,
+  index
+}: TabItemProps) => {
   return (
     <li className={styles.wrapper}>
       <Button
-        aria-controls={`tabpanel-${id}`}
+        aria-controls={`tabpanel-${index}`}
         aria-label={title}
         aria-selected={active ? "true" : "false"}
         clear

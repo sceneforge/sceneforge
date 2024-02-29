@@ -4,11 +4,16 @@ import { Tab, TabProps } from "../../components/TabPanel";
 export type ModelViewTabProps = TabProps<{
   active?: boolean;
   id?: string;
-  title: string;
-  gltf?: File;
+  title?: string;
+  gltf?: Blob;
 }>;
 
-export const ModelViewTab = Tab(({ active, id, title, gltf }: ModelViewTabProps) => {
+export const ModelViewTab = Tab(({
+  active,
+  id,
+  title = "Untitled Model",
+  gltf
+}: ModelViewTabProps) => {
   return (
     <ModelViewer active={active} glft={gltf} id={id} title={title} />
   );

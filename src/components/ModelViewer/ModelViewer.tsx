@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Canvas } from "../Canvas";
 import { IconButton } from "../IconButton";
 import { PanelSheet, PanelSheetHeader } from "../PanelSheet";
@@ -9,15 +9,16 @@ export interface ModelViewerProps {
   active?: boolean;
   id?: string;
   title?: string;
-  glft?: File;
+  glft?: Blob;
 }
 
 export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
+  const [loaded, setLoaded] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
     startAll,
     disposeAll,
-    openGLTF,
+    openGLTFBlob,
     renderSceneLoop,
     stopRenderSceneLoop
   } = useModelViewer(canvasRef);
@@ -25,11 +26,17 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   const {
     loadState,
     currentID,
-    currentGLFT,
     currentTitle,
+    currentGLFT,
     loadRecentModel,
     saveRecentModel
   } = useModelObject(props);
+
+  const loadModel = useCallback(() => {
+    loadRecentModel().then(() => {
+      setLoaded(true);
+    }).catch(console.error);
+  }, [setLoaded, loadRecentModel]);
 
   useEffect(() => {
     if (currentID) {
@@ -42,14 +49,22 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
 
   useEffect(() => {
     if (loadState === "none") {
-      loadRecentModel().then(() => {
-        if (currentGLFT) openGLTF(currentGLFT);
-      }).catch(console.error);
+      loadModel();
     }
     if (loadState === "loaded") {
       saveRecentModel();
     }
-  }, [saveRecentModel, loadRecentModel, loadState, currentGLFT, openGLTF, startAll, disposeAll]);
+  }, [
+    loadState,
+    loadModel,
+    saveRecentModel,
+  ]);
+
+  useEffect(() => {
+    if (loaded && currentGLFT) {
+      openGLTFBlob(currentGLFT);
+    }
+  }, [loaded, currentGLFT, openGLTFBlob]);
 
   useEffect(() => {
     if (loadState === "loaded" && active) {

@@ -83,6 +83,37 @@ export class Database<
     });
   }
 
+  private _getAll(store: string): Promise<unknown[]> {
+    return new Promise((resolve, reject) => {
+      if (!this._db) {
+        reject(new Error("Database not open"));
+        return;
+      }
+      const transaction = this._db.transaction(store, "readonly");
+      const objectStore = transaction.objectStore(store);
+      const request = objectStore.getAll();
+      request.onsuccess = () => {
+        resolve(
+          (request.result as Record<"value" | "key", unknown>[]).map(
+            (r) => r.value
+          )
+        );
+      };
+
+      request.onerror = () => {
+        if (request.error instanceof DOMException) {
+          reject(request.error);
+        } else {
+          reject(
+            new Error("Request error", {
+              cause: request.error,
+            })
+          );
+        }
+      };
+    });
+  }
+
   public get ready() {
     return this._ready;
   }
@@ -95,6 +126,18 @@ export class Database<
         }, 500);
       } else {
         this._get(store, key).then(resolve).catch(reject);
+      }
+    });
+  }
+
+  public getAll(store: string): Promise<unknown[]> {
+    return new Promise((resolve, reject) => {
+      if (!this._ready) {
+        setTimeout(() => {
+          this._getAll(store).then(resolve).catch(reject);
+        }, 500);
+      } else {
+        this._getAll(store).then(resolve).catch(reject);
       }
     });
   }

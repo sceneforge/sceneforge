@@ -149,6 +149,18 @@ export const usePanel = () => {
     }
   }, [userData]);
 
+  const getAllUserData = useCallback((
+    store: string,
+    callback: ((value: unknown[]) => void),
+    errorCallback?: ((error: unknown) => void)
+  ) => {
+    if (userData) {
+      userData.getAll(store)
+        .then(callback)
+        .catch(errorCallback ?? (() => void (0)));
+    }
+  }, [userData]);
+
   const setUserData = useCallback(<T = unknown>(
     store: string,
     key: string,
@@ -189,6 +201,7 @@ export const usePanel = () => {
     setSidePanelContent,
     userData,
     getUserData,
+    getAllUserData,
     setUserData
   };
 };

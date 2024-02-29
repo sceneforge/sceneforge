@@ -1,7 +1,8 @@
 import { fileOpen } from "browser-fs-access";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { v4 as uuid } from "uuid";
 import { useTabs } from "../../hooks/useTabs";
+import { loadFile } from "../../lib/loadFile";
 import { SettingsTab } from "../../tabs";
 import type { IconButtonProps } from "../IconButton/IconButton";
 import { NavList, NavListItem } from "../NavList";
@@ -11,7 +12,6 @@ import { Topbar } from "../Topbar";
 
 export const AppNav = () => {
   const { appTitle } = usePanel();
-  const [recentFiles, setRecentFiles] = useState<File[]>([]);
   const { newTab, getTabByTitle, activateTab } = useTabPanel();
   const { newModelViewTab } = useTabs();
 
@@ -36,13 +36,10 @@ export const AppNav = () => {
       extensions: [".glb", ".gltf"],
       multiple: false,
       excludeAcceptAllOption: true,
-    }).then((file) => {
-      setRecentFiles((prev) => [file, ...prev]);
-      newModelViewTab({ title: file.name, gltf: file });
-    }).catch((err) => {
-      console.error(err);
-    });
-  }, [setRecentFiles, newModelViewTab]);
+    }).then(loadFile).then(({ blob }) => {
+      newModelViewTab({ title: "Imported Model", gltf: blob() });
+    }).catch(console.error);
+  }, [newModelViewTab]);
 
   const handleNewModel = useCallback(() => {
     newModelViewTab({ title: "New Model" });
@@ -81,11 +78,6 @@ export const AppNav = () => {
     >
       <NavList>
         <NavListItem>Home</NavListItem>
-        <NavListItem header="Recent Files">
-          {recentFiles.map((file, index) => (
-            <NavListItem key={index}>{file.name}</NavListItem>
-          ))}
-        </NavListItem>
       </NavList>
     </Topbar>
   );
