@@ -99,10 +99,10 @@ export class Database<
     });
   }
 
-  public setLast(
+  public setLast<T = unknown>(
     store: string,
     key: string,
-    value: string
+    value: T
   ): Promise<IDBValidKey> {
     if (this._ongoingSet && this._ready && this._db) {
       const transaction = this._db.transaction(store, "readwrite");
@@ -113,7 +113,11 @@ export class Database<
     return this._ongoingSet;
   }
 
-  public set(store: string, key: string, value: string): Promise<IDBValidKey> {
+  public set<T = unknown>(
+    store: string,
+    key: string,
+    value: T
+  ): Promise<IDBValidKey> {
     this._ongoingSet = new Promise((resolve, reject) => {
       if (!this._db) {
         reject(new Error("Database not open"));

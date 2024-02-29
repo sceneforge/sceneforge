@@ -18,6 +18,7 @@ export const TabList = () => {
       {tabs.map((tab, index) => (
         <TabItem
           active={tab.active}
+          id={tab.id}
           key={index}
           title={tab.title}
           onActiveClick={activateTab(tab)}

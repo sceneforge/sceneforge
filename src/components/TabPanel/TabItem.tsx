@@ -4,20 +4,28 @@ import { IconButton } from "../IconButton/IconButton";
 import styles from "./TabItem.module.css";
 
 export interface TabItemProps {
+  id: string;
   title: string;
   active?: boolean;
   onCloseClick?: () => void;
   onActiveClick?: () => void;
 }
 
-export const TabItem = ({ title, onCloseClick, onActiveClick, active }: TabItemProps) => {
+export const TabItem = ({ id, title, onCloseClick, onActiveClick, active }: TabItemProps) => {
   return (
-    <li
-      aria-label={title}
-      aria-selected={active ? "true" : "false"}
-      className={styles.wrapper} role="tab"
-    >
-      <Button clear title={title} onClick={onActiveClick}>{title}</Button>
+    <li className={styles.wrapper}>
+      <Button
+        aria-controls={`tabpanel-${id}`}
+        aria-label={title}
+        aria-selected={active ? "true" : "false"}
+        clear
+        role="tab"
+        tabIndex={active ? 0 : -1}
+        title={title}
+        onClick={onActiveClick}
+      >
+        {title}
+      </Button>
       <IconButton
         aria-label="close"
         icon="close"

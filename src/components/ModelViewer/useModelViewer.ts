@@ -1,6 +1,6 @@
 import { SceneLoader } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF/2.0";
-import { useCallback, useEffect, type RefObject } from "react";
+import { useCallback, type RefObject } from "react";
 import { useArcRotateCamera } from "./useArcRotateCamera";
 import { useEngine } from "./useEngine";
 import { useHemisphericLight } from "./useHemiphericLight";
@@ -26,22 +26,13 @@ export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
   } = useArcRotateCamera(sceneRef);
   const { createLight } = useHemisphericLight(sceneRef);
 
-  useEffect(() => {
+  const startAll = useCallback(() => {
     createEngine();
     createScene();
     createCamera();
     createLight();
     attachCamera();
     attachControl();
-    renderSceneLoop();
-
-    return () => {
-      detachControl();
-      disposeCamera();
-      stopRenderSceneLoop();
-      disposeScene();
-      disposeEngine();
-    };
   }, [
     attachCamera,
     attachControl,
@@ -49,11 +40,19 @@ export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
     createEngine,
     createLight,
     createScene,
+  ]);
+
+  const disposeAll = useCallback(() => {
+    detachControl();
+    disposeCamera();
+    stopRenderSceneLoop();
+    disposeScene();
+    disposeEngine();
+  }, [
     detachControl,
     disposeCamera,
     disposeEngine,
     disposeScene,
-    renderSceneLoop,
     stopRenderSceneLoop,
   ]);
 
@@ -90,9 +89,13 @@ export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
   );
 
   return {
+    renderSceneLoop,
+    stopRenderSceneLoop,
     sceneRef,
     engineRef,
     cameraRef,
     openGLTF,
+    startAll,
+    disposeAll,
   };
 };

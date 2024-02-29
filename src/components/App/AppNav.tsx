@@ -1,14 +1,19 @@
 import { fileOpen } from "browser-fs-access";
 import { useCallback, useState } from "react";
-import { ModelViewTab, SettingsTab, type ModelViewTabProps } from "../../tabs";
+import { v4 as uuid } from "uuid";
+import { useTabs } from "../../hooks/useTabs";
+import { SettingsTab } from "../../tabs";
 import type { IconButtonProps } from "../IconButton/IconButton";
 import { NavList, NavListItem } from "../NavList";
+import { usePanel } from "../Panel";
 import { useTabPanel } from "../TabPanel/TabPanelProvider";
 import { Topbar } from "../Topbar";
 
 export const AppNav = () => {
+  const { appTitle } = usePanel();
   const [recentFiles, setRecentFiles] = useState<File[]>([]);
   const { newTab, getTabByTitle, activateTab } = useTabPanel();
+  const { newModelViewTab } = useTabs();
 
   const openSettingsPage = useCallback(() => {
     const tab = getTabByTitle("Settings");
@@ -16,9 +21,9 @@ export const AppNav = () => {
       activateTab(tab)();
     } else {
       newTab({
+        id: uuid(),
         title: "Settings",
         active: true,
-        type: "regular",
         component: SettingsTab,
       });
     }
@@ -33,22 +38,22 @@ export const AppNav = () => {
       excludeAcceptAllOption: true,
     }).then((file) => {
       setRecentFiles((prev) => [file, ...prev]);
-      newTab<ModelViewTabProps>({
-        title: file.name,
-        active: true,
-        component: ModelViewTab,
-        props: { gltf: file },
-      });
+      newModelViewTab({ title: file.name, gltf: file });
     }).catch((err) => {
       console.error(err);
     });
-  }, [newTab, setRecentFiles]);
+  }, [setRecentFiles, newModelViewTab]);
+
+  const handleNewModel = useCallback(() => {
+    newModelViewTab({ title: "New Model" });
+  }, [newModelViewTab]);
 
   const iconButtonsStart: IconButtonProps[] = [
     {
       icon: "new-file",
       "aria-label": "New File",
-      title: "New File"
+      title: "New File",
+      onClick: handleNewModel
     },
     {
       icon: "import-file",
@@ -72,7 +77,7 @@ export const AppNav = () => {
       iconButtonsEnd={iconButtonsEnd}
       iconButtonsStart={iconButtonsStart}
       subtitle="Create Easy 3D Structure for Web"
-      title="SceneForge"
+      title={appTitle ?? "SceneForge"}
     >
       <NavList>
         <NavListItem>Home</NavListItem>

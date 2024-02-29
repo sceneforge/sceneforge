@@ -2,11 +2,14 @@ import { ModelViewer } from "../../components/ModelViewer";
 import { Tab, TabProps } from "../../components/TabPanel";
 
 export type ModelViewTabProps = TabProps<{
-  gltf: File;
+  active?: boolean;
+  id?: string;
+  title: string;
+  gltf?: File;
 }>;
 
-export const ModelViewTab = Tab(({ gltf }: ModelViewTabProps) => {
+export const ModelViewTab = Tab(({ active, id, title, gltf }: ModelViewTabProps) => {
   return (
-    <ModelViewer glft={gltf} />
+    <ModelViewer active={active} glft={gltf} id={id} title={title} />
   );
 });

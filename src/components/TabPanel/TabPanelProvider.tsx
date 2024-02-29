@@ -9,6 +9,8 @@ import {
   type PropsWithChildren,
   type SetStateAction
 } from "react";
+import { v4 as uuid } from "uuid";
+import { usePanel } from "../Panel";
 import { Tab, type TabProps } from "./Tab";
 
 type Component<P extends TabProps = TabProps> = (
@@ -20,6 +22,7 @@ export interface TabContext<
   P extends TabProps = TabProps,
   C extends Component<P> = Component<P>
 > {
+  id: string;
   title: string;
   active: boolean;
   component: C;
@@ -56,20 +59,23 @@ export const TabPanelProvider = ({
 };
 
 export const useTabPanel = () => {
+  const { updateTitle } = usePanel();
   const { tabs, setTabs, defaultTab: defaultTabComponent } = useContext(TabPanelContext);
 
   const activateTab = useCallback(
     (tab: TabContext) => {
       return () => {
+        setTabs((prevTabs) => prevTabs.map((t) => ({ ...t, active: false })));
         setTabs((prevTabs) => prevTabs.map((t) => ({
           ...t,
-          active: t.title === tab.title &&
+          active: t.id === tab.id &&
+            t.title === tab.title &&
             t.component === tab.component &&
             t.createdAt === tab.createdAt
         })));
-        document.title = tab.title;
+        updateTitle(tab.title);
       };
-    }, [setTabs]
+    }, [updateTitle, setTabs]
   );
 
   const newTab = useCallback(<
@@ -107,6 +113,7 @@ export const useTabPanel = () => {
 
   const defaultTab = useMemo((): TabContext => {
     if (!defaultTabComponent) return {
+      id: uuid(),
       title: "",
       active: false,
       component: Tab(() => (<></>)),

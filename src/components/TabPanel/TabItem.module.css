@@ -11,7 +11,7 @@
   border-block-end-width: 0.125rem;
   border-block-end-color: var(--color-foreground-accent-20);
 
-  &[aria-selected="true"] {
+  &:has([aria-selected="true"]) {
     box-shadow: inset 0rem -0.75rem 0.75rem 0.25rem var(--color-foreground-accent-60),
       inset 0rem 1rem 2rem 0.125rem var(--color-foreground-accent-50),
       0rem 0.5rem 0.5rem 0.25rem var(--color-foreground-accent-50);

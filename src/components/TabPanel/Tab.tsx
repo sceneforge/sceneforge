@@ -4,7 +4,9 @@ import styles from "./Tab.module.css";
 export type TabProps<
   P extends Record<string, unknown> = Record<string, unknown>
 > = PropsWithChildren<{
+  id?: string;
   title?: string;
+  active?: boolean;
 } & P>;
 
 interface TabRenderFunction<

@@ -6,17 +6,16 @@ import { useTabPanel } from "./TabPanelProvider";
 export const TabPanel = () => {
   const { tabs } = useTabPanel();
 
-  const {
-    component: TabComponent = () => (<></>),
-    props = {},
-  } = tabs.find((tab) => tab.active) ?? {};
-
   return (
     <main className={styles.wrapper}>
       <TabList />
-      <div role="tabpanel">
+      <div className={styles.panels}>
         <Suspense fallback={<div>Loading...</div>}>
-          <TabComponent {...props} />
+          {tabs.map(({ id, component: TabComponent, active, props }) => (
+            <div hidden={!active} id={`tabpanel-${id}`} key={id} role="tabpanel">
+              <TabComponent active={active} {...props} />
+            </div>
+          ))}
         </Suspense>
       </div>
     </main>

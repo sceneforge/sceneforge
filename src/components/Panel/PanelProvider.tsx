@@ -31,6 +31,9 @@ const isOverlayVisible = (): boolean => {
 };
 
 export interface PanelContextType {
+  defaultAppTitle?: string;
+  appTitle?: string;
+  setAppTitle?: Dispatch<SetStateAction<string | undefined>>;
   overlayVisible: boolean;
   menuShow: boolean;
   sidePanelShow: boolean;
@@ -48,10 +51,16 @@ const PanelContext = createContext<PanelContextType>({
 });
 
 export type PanelProviderProps = PropsWithChildren<{
+  title?: string;
   userData: Database<"UserData">;
 }>;
 
-export const PanelProvider = ({ userData, children }: PanelProviderProps) => {
+export const PanelProvider = ({
+  title,
+  userData,
+  children
+}: PanelProviderProps) => {
+  const [appTitle, setAppTitle] = useState<string | undefined>(title);
   const [menuShow, setMenuShow] = useState(false);
   const [sidePanelShow, setSidePanelShow] = useState(false);
   const [sidePanelContent, setSidePanelContent] = useState<ReactNode>();
@@ -84,16 +93,20 @@ export const PanelProvider = ({ userData, children }: PanelProviderProps) => {
         windowControlsOverlayRef.current.visible ? "visible" : "hidden"
       );
     }
+
     return () => {
       windowControlsOverlayRef.current?.removeEventListener(
         "geometrychange",
         updateOverlayVisibility
       );
     };
-  }, [updateOverlayVisibility, windowControlsOverlayRef]);
+  }, [appTitle, updateOverlayVisibility, windowControlsOverlayRef]);
 
   return (
     <PanelContext.Provider value={{
+      defaultAppTitle: title,
+      appTitle,
+      setAppTitle,
       overlayVisible,
       menuShow,
       sidePanelShow,
@@ -110,10 +123,13 @@ export const PanelProvider = ({ userData, children }: PanelProviderProps) => {
 
 export const usePanel = () => {
   const {
+    defaultAppTitle,
+    appTitle,
     menuShow,
     sidePanelShow,
     sidePanelContent,
     overlayVisible,
+    setAppTitle,
     setMenuShow,
     setSidePanelShow,
     setSidePanelContent,
@@ -133,10 +149,10 @@ export const usePanel = () => {
     }
   }, [userData]);
 
-  const setUserData = useCallback((
+  const setUserData = useCallback(<T = unknown>(
     store: string,
     key: string,
-    value: string,
+    value: T,
     errorCallback?: (error: unknown) => void
   ) => {
     if (userData) {
@@ -145,7 +161,25 @@ export const usePanel = () => {
     }
   }, [userData]);
 
+  const updateTitle = useCallback((title?: string) => {
+    if (setAppTitle) {
+      setAppTitle(() => {
+        if (title) {
+          document.title = title;
+          return title;
+        }
+        else if (defaultAppTitle) {
+          document.title = defaultAppTitle;
+          return defaultAppTitle;
+        }
+      });
+    }
+  }, [defaultAppTitle, setAppTitle]);
+
   return {
+    defaultAppTitle,
+    appTitle,
+    updateTitle,
     overlayVisible,
     menuShow,
     sidePanelShow,

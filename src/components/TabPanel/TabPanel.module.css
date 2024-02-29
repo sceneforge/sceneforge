@@ -5,8 +5,20 @@
   width: 100%;
   height: 100%;
 
-  &>div[role="tabpanel"] {
+  .panels {
     flex-grow: 1;
     position: relative;
+    width: 100%;
+    height: 100%;
+
+    [role="tabpanel"] {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      &[hidden] {
+        display: none;
+      }
+    }
   }
 }

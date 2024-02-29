@@ -1,3 +1,4 @@
+import { v4 as uuid } from "uuid";
 import { Database } from "../../lib/Database";
 import { HomeTab } from "../../tabs";
 import { PanelProvider } from "../Panel/PanelProvider";
@@ -11,8 +12,9 @@ export interface AppProps {
 
 export const App = ({ userData }: AppProps) => {
   return (
-    <PanelProvider userData={userData}>
+    <PanelProvider title="SceneForge" userData={userData}>
       <TabPanelProvider defaultTab={{
+        id: uuid(),
         title: "Home",
         component: HomeTab
       }}>

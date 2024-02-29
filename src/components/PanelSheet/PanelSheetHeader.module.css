@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--color-background-accent-10);
+  border-block-end-style: solid;
+  border-block-end-width: 0.125rem;
+  border-block-end-color: var(--color-background-accent);
+
+  &:first-child {
+    flex-grow: 1;
+  }
+
+  .toolbar {
+    flex-grow: shrink;
+
+    button {
+      svg[data-icon] {
+        color: var(--color-foreground-contrast-background-accent-10);
+      }
+    }
+  }
+}
