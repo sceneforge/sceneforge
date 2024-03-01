@@ -1,5 +1,9 @@
 :root {
   --color-reference: rgb(0, 0, 0);
+  --color-reference-danger: rgb(179, 15, 15);
+  --color-reference-warning: rgb(209, 165, 18);
+  --color-reference-success: rgb(19, 172, 19);
+  --color-reference-info: rgb(28, 69, 173);
 
   --color-default-background: rgb(255, 255, 255);
   --color-default-foreground: rgb(0, 0, 0);
@@ -47,6 +51,16 @@
 
   --color-background-accent: var(--color-reference);
   --color-foreground-contrast-background-accent: color-contrast(var(--color-background-accent) vs var(--color-reference-default-foreground), var(--color-reference-default-background) to AAA);
+
+  --color-background-danger: var(--color-reference-danger);
+  --color-background-warning: var(--color-reference-warning);
+  --color-background-success: var(--color-reference-success);
+  --color-background-info: var(--color-reference-info);
+
+  --color-foreground-danger: color-mix(in srgb, var(--color-reference-danger) 85%, var(--color-reference-default-foreground));
+  --color-foreground-warning: color-mix(in srgb, var(--color-reference-warning) 85%, var(--color-reference-default-foreground));
+  --color-foreground-success: color-mix(in srgb, var(--color-reference-success) 85%, var(--color-reference-default-foreground));
+  --color-foreground-info: color-mix(in srgb, var(--color-reference-info) 85%, var(--color-reference-default-foreground));
 
   --color-foreground-accent-10: color-mix(in srgb, var(--color-reference-default-foreground) 10%, var(--color-reference));
   --color-foreground-accent-20: color-mix(in srgb, var(--color-reference-default-foreground) 20%, var(--color-reference));

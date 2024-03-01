@@ -1,7 +1,6 @@
 .wrapper {
   flex-grow: 1;
   display: block;
-  overflow: auto;
   height: 100%;
   width: 100%;
 }

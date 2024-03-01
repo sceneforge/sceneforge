@@ -2,6 +2,13 @@
   cursor: pointer;
   box-sizing: content-box;
 
+  &:not([data-variant="none"]) {
+    border-radius: var(--border-radius-pill);
+    font-size: 1rem;
+    padding-block: 0.5rem;
+    border: none;
+  }
+
   &:active,
   &:focus {
     &[data-clear="true"] {
@@ -37,5 +44,40 @@
 
   &:not([data-size]) {
     width: 100%;
+  }
+
+  &[data-variant="default"] {
+    background-color: var(--color-foreground-primary);
+    color: var(--color-reference-default-background);
+  }
+
+  &[data-variant="accent"] {
+    background-color: var(--color-background-accent);
+    color: var(--color-foreground-contrast-background-accent);
+  }
+
+  &[data-variant="danger"] {
+    background-color: var(--color-background-danger);
+    color: var(--color-foreground-contrast-background-danger);
+  }
+
+  &[data-variant="warning"] {
+    background-color: var(--color-background-warning);
+    color: var(--color-foreground-contrast-background-warning);
+  }
+
+  &[data-variant="success"] {
+    background-color: var(--color-background-success);
+    color: var(--color-foreground-contrast-background-success);
+  }
+
+  &[data-variant="info"] {
+    background-color: var(--color-background-info);
+    color: var(--color-foreground-contrast-background-info);
+  }
+
+  &[data-variant="inverted"] {
+    background-color: var(--color-reference-default-background);
+    color: var(--color-foreground-primary);
   }
 }

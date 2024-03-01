@@ -1,8 +1,7 @@
 
 import { useCallback } from "react";
-import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
-import { Grid } from "../../components/Grid";
+import { Carousel } from "../../components/Carousel";
 import { type ModelProps } from "../../components/ModelViewer/ModelViewer";
 import { SafeArea } from "../../components/SafeArea";
 import { Tab } from "../../components/TabPanel";
@@ -24,18 +23,35 @@ export const HomeTab = Tab(({ active }: HomeTabProps) => {
     };
   }, [newModelViewTab]);
 
+  const deleteModel = useCallback((model: ModelProps) => {
+    return () => {
+      console.log("delete", model);
+    };
+  }, []);
+
   return (
     <SafeArea>
-      <section>
-        <h2>Recent Models</h2>
-        <Grid cols={5}>
-          {recentModels.map((model, index) => (
-            <Card key={index} title={model.title}>
-              <Button onClick={openModel(model)}>Open</Button>
-            </Card>
-          ))}
-        </Grid>
-      </section>
+      <Carousel title="Recent Models">
+        {recentModels.map((model, index) => (
+          <Card
+            actions={[
+              {
+                label: "Open",
+                onClick: openModel(model),
+              },
+              {
+                label: "Delete",
+                icon: "delete",
+                variant: "danger",
+                onClick: deleteModel(model),
+              }
+            ]}
+            img={model.capture}
+            key={index}
+            title={model.title}
+          />
+        ))}
+      </Carousel>
     </SafeArea>
   );
 });

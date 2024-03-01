@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { type ModelViewerProps } from "../../components/ModelViewer";
+import { type ModelProps } from "../../components/ModelViewer";
 import { usePanel } from "../../components/Panel";
 
 export const useRecentModels = (active = true) => {
-  const [recentModels, setRecentModels] = useState<ModelViewerProps[]>([]);
+  const [recentModels, setRecentModels] = useState<ModelProps[]>([]);
   const { getAllUserData } = usePanel();
 
   useEffect(() => {
@@ -29,8 +29,15 @@ export const useRecentModels = (active = true) => {
                 "gltf" in model && model.gltf instanceof Blob
                   ? model.gltf
                   : undefined;
+              const capture =
+                "capture" in model && typeof model.capture === "string"
+                  ? model.capture
+                  : undefined;
 
-              setRecentModels((prev) => [...prev, { title, id, gltf }]);
+              setRecentModels((prev) => [
+                ...prev,
+                { title, id, gltf, capture },
+              ]);
             }
           }
         }

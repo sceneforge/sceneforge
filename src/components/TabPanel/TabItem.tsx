@@ -37,6 +37,7 @@ export const TabItem = ({
         icon="close"
         size="xs"
         title="Close"
+        variant="inverted"
         onClick={onCloseClick} />
     </li>
   );

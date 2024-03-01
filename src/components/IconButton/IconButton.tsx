@@ -1,6 +1,8 @@
 import { Button, type ButtonProps } from "../Button";
 import { Icon, type IconProps } from "../Icon";
 
+import styles from "./IconButton.module.css";
+
 export type IconButtonProps = IconProps & {
   "aria-label"?: string;
   "aria-labelledby"?: string;
@@ -9,6 +11,7 @@ export type IconButtonProps = IconProps & {
   size?: ButtonProps["size"];
   onClick?: ButtonProps["onClick"]
   onContextMenu?: ButtonProps["onContextMenu"];
+  variant?: ButtonProps["variant"];
 };
 
 export const IconButton = ({
@@ -18,17 +21,22 @@ export const IconButton = ({
   onClick,
   onContextMenu,
   size = "sm",
+  variant,
   ...props
 }: IconButtonProps) => {
   return (
     <Button
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
+      className={styles.wrapper}
       clear
       data-icon-button
       size={size}
       title={title}
-      onClick={onClick} onContextMenu={onContextMenu}>
+      variant={variant}
+      onClick={onClick}
+      onContextMenu={onContextMenu}
+    >
       <Icon {...props} />
     </Button>
   );
