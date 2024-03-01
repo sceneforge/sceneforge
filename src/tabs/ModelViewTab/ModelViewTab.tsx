@@ -1,12 +1,10 @@
 import { ModelViewer } from "../../components/ModelViewer";
+import { ModelProps } from "../../components/ModelViewer/ModelViewer";
 import { Tab, TabProps } from "../../components/TabPanel";
 
 export type ModelViewTabProps = TabProps<{
   active?: boolean;
-  id?: string;
-  title?: string;
-  gltf?: Blob;
-}>;
+}> & Omit<ModelProps, "capture">;
 
 export const ModelViewTab = Tab(({
   active,
@@ -15,6 +13,6 @@ export const ModelViewTab = Tab(({
   gltf
 }: ModelViewTabProps) => {
   return (
-    <ModelViewer active={active} glft={gltf} id={id} title={title} />
+    <ModelViewer active={active} gltf={gltf} id={id} title={title} />
   );
 });

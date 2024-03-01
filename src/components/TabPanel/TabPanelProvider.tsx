@@ -133,6 +133,15 @@ export const useTabPanel = () => {
     return tabs.find((tab) => tab.id === id);
   }, [tabs]);
 
+  const updateTabTitle = useCallback((id: string, title: string) => {
+    setTabs((prevTabs) => prevTabs.map((tab) => {
+      if (tab.id === id) {
+        return { ...tab, title };
+      }
+      return tab;
+    }));
+  }, [setTabs]);
+
   return {
     tabs,
     defaultTab,
@@ -142,5 +151,6 @@ export const useTabPanel = () => {
     activateTab,
     getTabByTitle,
     getTabById,
+    updateTabTitle,
   };
 };

@@ -25,12 +25,12 @@ export const useRecentModels = (active = true) => {
                 "id" in model && typeof model.id === "string"
                   ? model.id
                   : undefined;
-              const glft =
-                "glft" in model && model.glft instanceof Blob
-                  ? model.glft
+              const gltf =
+                "gltf" in model && model.gltf instanceof Blob
+                  ? model.gltf
                   : undefined;
 
-              setRecentModels((prev) => [...prev, { title, id, glft }]);
+              setRecentModels((prev) => [...prev, { title, id, gltf }]);
             }
           }
         }

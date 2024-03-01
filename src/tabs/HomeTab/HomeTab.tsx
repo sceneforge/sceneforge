@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
 import { Grid } from "../../components/Grid";
-import { type ModelViewerProps } from "../../components/ModelViewer";
+import { type ModelProps } from "../../components/ModelViewer/ModelViewer";
 import { SafeArea } from "../../components/SafeArea";
 import { Tab } from "../../components/TabPanel";
 import { useTabs } from "../../hooks/useTabs";
@@ -18,7 +18,7 @@ export const HomeTab = Tab(({ active }: HomeTabProps) => {
   const { recentModels } = useRecentModels(active);
   const { newModelViewTab } = useTabs();
 
-  const openModel = useCallback((model: ModelViewerProps) => {
+  const openModel = useCallback((model: ModelProps) => {
     return () => {
       newModelViewTab(model);
     };

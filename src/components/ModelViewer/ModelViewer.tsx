@@ -1,21 +1,28 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { Canvas } from "../Canvas";
 import { IconButton } from "../IconButton";
 import { PanelSheet, PanelSheetHeader } from "../PanelSheet";
+import { useTabPanel } from "../TabPanel";
 import { useModelObject } from "./useModelObject";
 import { useModelViewer } from "./useModelViewer";
 
-export interface ModelViewerProps {
-  active?: boolean;
+export interface ModelProps {
   id?: string;
   title?: string;
-  glft?: Blob;
+  gltf?: Blob;
+  capture?: string;
+}
+
+export interface ModelViewerProps extends Omit<ModelProps, "capture"> {
+  active?: boolean;
 }
 
 export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   const [loaded, setLoaded] = useState(false);
+  const { updateTabTitle } = useTabPanel();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
+    capture,
     startAll,
     disposeAll,
     openGLTFBlob,
@@ -27,16 +34,26 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     loadState,
     currentID,
     currentTitle,
-    currentGLFT,
+    currentGLTF,
     loadRecentModel,
-    saveRecentModel
-  } = useModelObject(props);
+    saveRecentModel,
+    updateTitle
+  } = useModelObject({ ...props, capture });
 
   const loadModel = useCallback(() => {
     loadRecentModel().then(() => {
       setLoaded(true);
     }).catch(console.error);
   }, [setLoaded, loadRecentModel]);
+
+  const handleInput = useCallback((event: SyntheticEvent<HTMLInputElement, InputEvent>) => {
+    if (event.target instanceof HTMLInputElement) {
+      updateTitle(event.target.value);
+      if (currentID) {
+        updateTabTitle(currentID, event.target.value);
+      }
+    }
+  }, [currentID, updateTabTitle, updateTitle]);
 
   useEffect(() => {
     if (currentID) {
@@ -61,10 +78,10 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   ]);
 
   useEffect(() => {
-    if (loaded && currentGLFT) {
-      openGLTFBlob(currentGLFT);
+    if (loaded && currentGLTF) {
+      openGLTFBlob(currentGLTF);
     }
-  }, [loaded, currentGLFT, openGLTFBlob]);
+  }, [loaded, currentGLTF, openGLTFBlob]);
 
   useEffect(() => {
     if (loadState === "loaded" && active) {
@@ -81,7 +98,12 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     <>
       <Canvas ref={canvasRef} />
       <PanelSheet orientation="block" position="end" resizable size="md">
-        <PanelSheetHeader editable name="model-name" title={currentTitle ?? "Untitled Model"}>
+        <PanelSheetHeader
+          editable
+          name="model-name"
+          title={currentTitle ?? "Untitled Model"}
+          onInput={handleInput}
+        >
           <IconButton icon="menu" />
         </PanelSheetHeader>
       </PanelSheet>

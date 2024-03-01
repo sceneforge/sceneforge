@@ -1,11 +1,15 @@
-import { SceneLoader, type Scene } from "@babylonjs/core";
+import { CreateScreenshot, SceneLoader, type Scene } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF/2.0";
-import { useCallback, type RefObject } from "react";
+import { useCallback, useState, type RefObject } from "react";
 import { useArcRotateCamera } from "./useArcRotateCamera";
 import { useEngine } from "./useEngine";
 import { useHemisphericLight } from "./useHemiphericLight";
 
-const importGLTF = (scene: Scene, blob: Blob) => {
+const importGLTF = (
+  scene: Scene,
+  blob: Blob,
+  capture?: (data: string) => void
+) => {
   SceneLoader.ImportMeshAsync(
     "",
     "",
@@ -14,13 +18,23 @@ const importGLTF = (scene: Scene, blob: Blob) => {
     undefined,
     ".glb"
   )
-    .then((data) => {
-      console.log("DEBUG: Loaded model data", data);
+    .then(() => {
+      scene.onReadyObservable.addOnce(() => {
+        if (scene.activeCamera) {
+          CreateScreenshot(
+            scene.getEngine(),
+            scene.activeCamera,
+            1024,
+            capture
+          );
+        }
+      });
     })
     .catch(console.error);
 };
 
 export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
+  const [capture, setCapture] = useState<string | undefined>(undefined);
   const {
     engineRef,
     sceneRef,
@@ -76,7 +90,7 @@ export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
       const withAttempt = typeof attempt !== "number" ? 3 : attempt;
 
       if (sceneRef.current) {
-        importGLTF(sceneRef.current, blob);
+        importGLTF(sceneRef.current, blob, setCapture);
       } else {
         setTimeout(() => {
           if (withAttempt > 0) {
@@ -91,6 +105,7 @@ export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
   );
 
   return {
+    capture,
     renderSceneLoop,
     stopRenderSceneLoop,
     sceneRef,

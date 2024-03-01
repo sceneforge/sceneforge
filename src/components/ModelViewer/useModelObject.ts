@@ -1,16 +1,16 @@
 import { useCallback, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { usePanel } from "../Panel";
-import type { ModelViewerProps } from "./ModelViewer";
+import type { ModelProps } from "./ModelViewer";
 
-export const useModelObject = ({ id, title, glft }: ModelViewerProps) => {
+export const useModelObject = ({ id, title, gltf, capture }: ModelProps) => {
   const { getUserData, setUserData } = usePanel();
   const [loadState, setLoadState] = useState<
     "none" | "loading" | "loaded" | "error"
   >("none");
   const [currentID, setCurrentID] = useState<string | undefined>(id);
   const [currentTitle, setCurrentTitle] = useState<string | undefined>(title);
-  const [currentGLFT, setCurrentGLFT] = useState<Blob | undefined>(glft);
+  const [currentGLTF, setCurrentGLTF] = useState<Blob | undefined>(gltf);
   const [currentCreatedAt, setCurrentCreatedAt] = useState<Date | null>(null);
   const [currentUpdatedAt, setCurrentUpdatedAt] = useState<Date | null>(null);
 
@@ -27,8 +27,8 @@ export const useModelObject = ({ id, title, glft }: ModelViewerProps) => {
               data !== null &&
               !Array.isArray(data)
             ) {
-              if ("glft" in data && data.glft instanceof Blob) {
-                setCurrentGLFT(data.glft);
+              if ("gltf" in data && data.gltf instanceof Blob) {
+                setCurrentGLTF(data.gltf);
               }
               if ("title" in data && typeof data.title === "string") {
                 setCurrentTitle(data.title);
@@ -40,7 +40,7 @@ export const useModelObject = ({ id, title, glft }: ModelViewerProps) => {
                 setCurrentUpdatedAt(data.updatedAt);
               }
               setLoadState("loaded");
-              resolve(data);
+              resolve({ ...data, capture });
             }
           },
           (error) => {
@@ -57,20 +57,22 @@ export const useModelObject = ({ id, title, glft }: ModelViewerProps) => {
         resolve({
           id: currentID,
           title: currentTitle,
-          glft: currentGLFT,
+          gltf: currentGLTF,
           createdAt: now,
           updatedAt: now,
+          capture,
         });
       }
     });
   }, [
+    capture,
     currentID,
     getUserData,
     currentTitle,
-    currentGLFT,
+    currentGLTF,
     setCurrentID,
     setCurrentTitle,
-    setCurrentGLFT,
+    setCurrentGLTF,
     setCurrentCreatedAt,
     setCurrentUpdatedAt,
     setLoadState,
@@ -83,27 +85,57 @@ export const useModelObject = ({ id, title, glft }: ModelViewerProps) => {
     setUserData("recentModels", currentID, {
       id: currentID,
       title: currentTitle,
-      glft: currentGLFT,
+      gltf: currentGLTF,
       createdAt: currentCreatedAt,
       updatedAt: now,
+      capture,
     });
   }, [
+    capture,
     currentID,
     currentTitle,
-    currentGLFT,
+    currentGLTF,
     currentCreatedAt,
     setUserData,
     setCurrentTitle,
   ]);
 
+  const updateTitle = useCallback(
+    (title: string) => {
+      if (!currentID) return;
+      setCurrentTitle(title);
+      setCurrentUpdatedAt(new Date());
+      setUserData("recentModels", currentID, {
+        id: currentID,
+        title: currentTitle,
+        gltf: currentGLTF,
+        createdAt: currentCreatedAt,
+        updatedAt: currentUpdatedAt,
+        capture,
+      });
+    },
+    [
+      capture,
+      currentCreatedAt,
+      currentGLTF,
+      currentID,
+      currentTitle,
+      currentUpdatedAt,
+      setUserData,
+      setCurrentTitle,
+      setCurrentUpdatedAt,
+    ]
+  );
+
   return {
     loadState,
     currentID,
     currentTitle,
-    currentGLFT,
+    currentGLTF,
     currentCreatedAt,
     currentUpdatedAt,
     loadRecentModel,
     saveRecentModel,
+    updateTitle,
   };
 };
