@@ -1,15 +1,12 @@
 import { useCallback, useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { Canvas } from "../Canvas";
-import { Card } from "../Card";
-import { Grid } from "../Grid";
 import { IconButton } from "../IconButton";
-import { PanelSheet, PanelSheetHeader, PanelSheetHeaderGroup } from "../PanelSheet";
+import { PanelSheet, PanelSheetBody, PanelSheetHeader, PanelSheetHeaderGroup, PanelSheetSection } from "../PanelSheet";
 import { useTabPanel } from "../TabPanel";
 import { useModelObject } from "./useModelObject";
 import { useModelViewer } from "./useModelViewer";
 
 import { TreeView } from "../TreeView";
-import styles from "./ModelViewer.module.css";
 
 export interface ModelProps {
   id?: string;
@@ -114,25 +111,80 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
             <IconButton icon="circle-chevron-up" title="Parent Meshes" />
           </PanelSheetHeaderGroup>
         </PanelSheetHeader>
-        <div className={styles.panel}>
-          <Grid>
-            <Card title="Meshes">
-              <TreeView data={[
-                {
-                  id: "1", name: "Mesh 1", children: [
-                    {
-                      id: "2", name: "Submesh 1", children: [
-                        { id: "3", name: "Submesh 1" },
-                        { id: "4", name: "Submesh 2" },
-                      ]
-                    },
-                    { id: "5", name: "Submesh 2" },
-                  ]
-                },
-              ]} />
-            </Card>
-          </Grid>
-        </div>
+        <PanelSheetBody>
+          <PanelSheetSection title="Meshes">
+            <TreeView data={[
+              {
+                id: "1",
+                label: "Mesh 1",
+                children: [
+                  {
+                    id: "2",
+                    label: "Submesh 1",
+                    children: [
+                      { id: "3", label: "Submesh 1" },
+                      { id: "4", label: "Submesh 2" },
+                    ]
+                  },
+                  {
+                    id: "5",
+                    label: "Submesh 2"
+                  },
+                ],
+              },
+              {
+                id: "6",
+                label: "Mesh 2",
+                children: [
+                  { id: "7", label: "Submesh 1" },
+                  { id: "8", label: "Submesh 2" },
+                ],
+              },
+              {
+                id: "9",
+                label: "Mesh 3",
+                children: [
+                  { id: "10", label: "Submesh 1" },
+                  {
+                    id: "11",
+                    label: "Submesh 2",
+                    children: [
+                      {
+                        id: "12",
+                        label: "Submesh 1"
+                      },
+                      {
+                        id: "13",
+                        label: "Submesh 2",
+                        children: [
+                          {
+                            id: "14",
+                            label: "Submesh 1"
+                          },
+                          {
+                            id: "15",
+                            label: "Submesh 2"
+                          },
+                          {
+                            id: "16",
+                            label: "Submesh 3"
+                          },
+                          {
+                            id: "17",
+                            label: "Submesh 4"
+                          }
+                        ]
+                      },
+                    ]
+                  },
+                ],
+              }
+            ]} />
+          </PanelSheetSection>
+          <PanelSheetSection title="This is an example of a title">
+            <p>This is an example of a section.</p>
+          </PanelSheetSection>
+        </PanelSheetBody>
       </PanelSheet>
     </>
   );

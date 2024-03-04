@@ -1,8 +1,15 @@
+import { type ReactNode } from "react";
 import styles from "./TreeView.module.css";
+
+type Component<P extends Record<string, unknown> = Record<string, unknown>> = (
+  props: P,
+  ...args: unknown[]
+) => (JSX.Element | ReactNode | null);
 
 export interface TreeNode {
   id: string;
-  name: string;
+  label?: string;
+  component?: Component;
   children?: TreeNode[];
 }
 
@@ -13,16 +20,21 @@ export interface TreeViewProps {
 export const TreeView = ({ data }: TreeViewProps) => {
   return (
     <div className={styles.wrapper}>
-      {data.map((node) => (
-        node.children && node.children.length > 0 ? (
-          <details key={node.id}>
-            <summary>{node.name}</summary>
-            {node.children && (
-              <TreeView data={node.children} />
+      {data.map(({ children, component: Component, label, id }) => (
+        children && children.length > 0 ? (
+          <details key={id}>
+            {label && !Component && (<summary>{label}</summary>)}
+            {Component && (
+              <summary>
+                <Component />
+              </summary>
+            )}
+            {children && (
+              <TreeView data={children} />
             )}
           </details>
         ) : (
-          <div key={node.id}>{node.name}</div>
+          <div key={id}>{label}</div>
         )
       ))}
     </div>
