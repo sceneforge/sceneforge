@@ -1,10 +1,15 @@
 import { useCallback, useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { Canvas } from "../Canvas";
+import { Card } from "../Card";
+import { Grid } from "../Grid";
 import { IconButton } from "../IconButton";
 import { PanelSheet, PanelSheetHeader } from "../PanelSheet";
 import { useTabPanel } from "../TabPanel";
 import { useModelObject } from "./useModelObject";
 import { useModelViewer } from "./useModelViewer";
+
+import { TreeView } from "../TreeView";
+import styles from "./ModelViewer.module.css";
 
 export interface ModelProps {
   id?: string;
@@ -107,6 +112,25 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
           <IconButton icon="close" />
           <IconButton icon="bars" />
         </PanelSheetHeader>
+        <div className={styles.panel}>
+          <Grid>
+            <Card title="Meshes">
+              <TreeView data={[
+                {
+                  id: "1", name: "Mesh 1", children: [
+                    {
+                      id: "2", name: "Submesh 1", children: [
+                        { id: "3", name: "Submesh 1" },
+                        { id: "4", name: "Submesh 2" },
+                      ]
+                    },
+                    { id: "5", name: "Submesh 2" },
+                  ]
+                },
+              ]} />
+            </Card>
+          </Grid>
+        </div>
       </PanelSheet>
     </>
   );
