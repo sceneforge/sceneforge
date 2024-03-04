@@ -6,6 +6,8 @@
     gap: 2rem;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: self-start;
     width: 100%;
     overflow-y: hidden;
     overflow-x: visible;

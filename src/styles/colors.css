@@ -92,4 +92,14 @@
   --color-default-foreground-opacity-70: color-mix(in srgb, var(--color-reference-default-foreground) 70%, transparent);
   --color-default-foreground-opacity-80: color-mix(in srgb, var(--color-reference-default-foreground) 80%, transparent);
   --color-default-foreground-opacity-90: color-mix(in srgb, var(--color-reference-default-foreground) 90%, transparent);
+
+  --color-accent-opacity-10: color-mix(in srgb, var(--color-reference) 10%, transparent);
+  --color-accent-opacity-20: color-mix(in srgb, var(--color-reference) 20%, transparent);
+  --color-accent-opacity-30: color-mix(in srgb, var(--color-reference) 30%, transparent);
+  --color-accent-opacity-40: color-mix(in srgb, var(--color-reference) 40%, transparent);
+  --color-accent-opacity-50: color-mix(in srgb, var(--color-reference) 50%, transparent);
+  --color-accent-opacity-60: color-mix(in srgb, var(--color-reference) 60%, transparent);
+  --color-accent-opacity-70: color-mix(in srgb, var(--color-reference) 70%, transparent);
+  --color-accent-opacity-80: color-mix(in srgb, var(--color-reference) 80%, transparent);
+  --color-accent-opacity-90: color-mix(in srgb, var(--color-reference) 90%, transparent);
 }

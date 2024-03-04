@@ -3,7 +3,7 @@ import { Canvas } from "../Canvas";
 import { Card } from "../Card";
 import { Grid } from "../Grid";
 import { IconButton } from "../IconButton";
-import { PanelSheet, PanelSheetHeader } from "../PanelSheet";
+import { PanelSheet, PanelSheetHeader, PanelSheetHeaderGroup } from "../PanelSheet";
 import { useTabPanel } from "../TabPanel";
 import { useModelObject } from "./useModelObject";
 import { useModelViewer } from "./useModelViewer";
@@ -109,8 +109,10 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
           title={currentTitle ?? "Untitled Model"}
           onInput={handleInput}
         >
-          <IconButton icon="close" />
-          <IconButton icon="bars" />
+          <PanelSheetHeaderGroup title="Select" description="Mesh selection methods">
+            <IconButton icon="arrow-pointer" title="Single Mesh" />
+            <IconButton icon="circle-chevron-up" title="Parent Meshes" />
+          </PanelSheetHeaderGroup>
         </PanelSheetHeader>
         <div className={styles.panel}>
           <Grid>

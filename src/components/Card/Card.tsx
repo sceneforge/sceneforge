@@ -34,7 +34,7 @@ export const Card = ({ img, title, actions, children }: CardProps) => {
               {icon ? (
                 <IconButton icon={icon} title={label} variant={variant} onClick={onClick} />
               ) : (
-                <Button title={label} variant={variant} onClick={onClick}>
+                <Button size="full" title={label} variant={variant} onClick={onClick}>
                   {label}
                 </Button>
               )}

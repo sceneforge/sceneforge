@@ -42,7 +42,7 @@
     width: 6rem;
   }
 
-  &:not([data-size]) {
+  &[data-size="full"] {
     width: 100%;
   }
 
