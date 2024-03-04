@@ -47,13 +47,13 @@ export const AppNav = () => {
 
   const iconButtonsStart: IconButtonProps[] = [
     {
-      icon: "new-file",
+      icon: "file",
       "aria-label": "New File",
       title: "New File",
       onClick: handleNewModel
     },
     {
-      icon: "import-file",
+      icon: "file-import",
       "aria-label": "Import Model",
       title: "Import Model",
       onClick: handleImportModel
@@ -62,7 +62,7 @@ export const AppNav = () => {
 
   const iconButtonsEnd: IconButtonProps[] = [
     {
-      icon: "settings",
+      icon: "cog",
       "aria-label": "Settings",
       title: "Settings",
       onClick: openSettingsPage

@@ -104,7 +104,8 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
           title={currentTitle ?? "Untitled Model"}
           onInput={handleInput}
         >
-          <IconButton icon="menu" />
+          <IconButton icon="close" />
+          <IconButton icon="bars" />
         </PanelSheetHeader>
       </PanelSheet>
     </>

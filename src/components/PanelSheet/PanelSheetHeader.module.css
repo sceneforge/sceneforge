@@ -15,6 +15,10 @@
 
   .toolbar {
     flex-grow: shrink;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 
     button {
       svg[data-icon] {

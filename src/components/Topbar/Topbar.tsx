@@ -34,7 +34,7 @@ export const Topbar = ({
       <div className={styles.bar}>
         <IconButton
           aria-label="Menu"
-          icon={menuShow ? "close" : "menu"}
+          icon={menuShow ? "close" : "bars"}
           title="Menu"
           onClick={toggleMenu}
         />

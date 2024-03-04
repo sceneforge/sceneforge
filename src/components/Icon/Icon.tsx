@@ -1,22 +1,13 @@
-import { type IconName } from "@fortawesome/fontawesome-svg-core";
+import { type IconName, type IconPrefix } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface IconProps {
-  icon: "menu" | "close" | "settings" | "new-file" | "open-file" | "import-file" | "delete";
+  prefix?: IconPrefix;
+  icon: IconName;
 }
 
-const iconMap: Record<IconProps["icon"], IconName> = {
-  "menu": "bars",
-  "close": "close",
-  "settings": "cog",
-  "new-file": "file",
-  "open-file": "folder-open",
-  "import-file": "file-import",
-  "delete": "trash",
-};
-
-export const Icon = ({ icon }: IconProps) => {
+export const Icon = ({ prefix = "fas", icon }: IconProps) => {
   return (
-    <FontAwesomeIcon icon={["fas", iconMap[icon]]} />
+    <FontAwesomeIcon icon={[prefix, icon]} />
   );
 };

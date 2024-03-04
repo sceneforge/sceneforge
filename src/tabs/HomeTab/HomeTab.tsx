@@ -41,7 +41,7 @@ export const HomeTab = Tab(({ active }: HomeTabProps) => {
               },
               {
                 label: "Delete",
-                icon: "delete",
+                icon: "trash",
                 variant: "danger",
                 onClick: deleteModel(model),
               }
