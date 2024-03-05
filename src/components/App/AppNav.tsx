@@ -30,6 +30,7 @@ export const AppNav = () => {
   }, [activateTab, getTabByTitle, newTab]);
 
   const handleImportModel = useCallback(() => {
+    console.log("Import Model");
     fileOpen({
       description: "Select a 3D model",
       mimeTypes: ["model/gltf-binary", "model/gltf+json"],

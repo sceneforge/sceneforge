@@ -6,12 +6,12 @@ type Component<P extends Record<string, unknown> = Record<string, unknown>> = (
   ...args: unknown[]
 ) => (JSX.Element | ReactNode | null);
 
-export interface TreeNode {
+export type TreeNode = {
   id: string;
   label?: string;
   component?: Component;
   children?: TreeNode[];
-}
+};
 
 export interface TreeViewProps {
   data: TreeNode[];

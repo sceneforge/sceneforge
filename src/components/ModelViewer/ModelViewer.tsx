@@ -1,12 +1,18 @@
 import { useCallback, useEffect, useRef, useState, type SyntheticEvent } from "react";
+import { meshTree } from "../../lib/meshTree";
 import { Canvas } from "../Canvas";
 import { IconButton } from "../IconButton";
-import { PanelSheet, PanelSheetBody, PanelSheetHeader, PanelSheetHeaderGroup, PanelSheetSection } from "../PanelSheet";
+import {
+  PanelSheet,
+  PanelSheetBody,
+  PanelSheetHeader,
+  PanelSheetHeaderGroup,
+  PanelSheetSection
+} from "../PanelSheet";
 import { useTabPanel } from "../TabPanel";
+import { TreeView } from "../TreeView";
 import { useModelObject } from "./useModelObject";
 import { useModelViewer } from "./useModelViewer";
-
-import { TreeView } from "../TreeView";
 
 export interface ModelProps {
   id?: string;
@@ -24,6 +30,7 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   const { updateTabTitle } = useTabPanel();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
+    loadResult,
     capture,
     startAll,
     disposeAll,
@@ -48,7 +55,9 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     }).catch(console.error);
   }, [setLoaded, loadRecentModel]);
 
-  const handleInput = useCallback((event: SyntheticEvent<HTMLInputElement, InputEvent>) => {
+  const handleInput = useCallback((
+    event: SyntheticEvent<HTMLInputElement, InputEvent>
+  ) => {
     if (event.target instanceof HTMLInputElement) {
       updateTitle(event.target.value);
       if (currentID) {
@@ -60,10 +69,11 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   useEffect(() => {
     if (currentID) {
       startAll();
+
+      return () => {
+        disposeAll();
+      };
     }
-    return () => {
-      disposeAll();
-    };
   }, [currentID, startAll, disposeAll]);
 
   useEffect(() => {
@@ -113,73 +123,7 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
         </PanelSheetHeader>
         <PanelSheetBody>
           <PanelSheetSection title="Meshes">
-            <TreeView data={[
-              {
-                id: "1",
-                label: "Mesh 1",
-                children: [
-                  {
-                    id: "2",
-                    label: "Submesh 1",
-                    children: [
-                      { id: "3", label: "Submesh 1" },
-                      { id: "4", label: "Submesh 2" },
-                    ]
-                  },
-                  {
-                    id: "5",
-                    label: "Submesh 2"
-                  },
-                ],
-              },
-              {
-                id: "6",
-                label: "Mesh 2",
-                children: [
-                  { id: "7", label: "Submesh 1" },
-                  { id: "8", label: "Submesh 2" },
-                ],
-              },
-              {
-                id: "9",
-                label: "Mesh 3",
-                children: [
-                  { id: "10", label: "Submesh 1" },
-                  {
-                    id: "11",
-                    label: "Submesh 2",
-                    children: [
-                      {
-                        id: "12",
-                        label: "Submesh 1"
-                      },
-                      {
-                        id: "13",
-                        label: "Submesh 2",
-                        children: [
-                          {
-                            id: "14",
-                            label: "Submesh 1"
-                          },
-                          {
-                            id: "15",
-                            label: "Submesh 2"
-                          },
-                          {
-                            id: "16",
-                            label: "Submesh 3"
-                          },
-                          {
-                            id: "17",
-                            label: "Submesh 4"
-                          }
-                        ]
-                      },
-                    ]
-                  },
-                ],
-              }
-            ]} />
+            <TreeView data={meshTree(loadResult?.meshes)} />
           </PanelSheetSection>
           <PanelSheetSection title="This is an example of a title">
             <p>This is an example of a section.</p>
@@ -189,4 +133,3 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     </>
   );
 };
-
