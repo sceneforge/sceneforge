@@ -1,3 +1,16 @@
-.panel {
-  padding: 1rem;
+.paneltree {
+  &>:not(:has(details)) {
+    button[data-icon-button="true"]:has(svg[data-icon="square-minus"]) {
+      opacity: 0.25;
+    }
+  }
+
+  &:has(details[open]) {
+    &>div:has(h2) {
+
+      button[data-icon-button="true"]:has(svg[data-icon="square-minus"]) {
+        opacity: 1;
+      }
+    }
+  }
 }

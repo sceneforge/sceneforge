@@ -22,6 +22,14 @@
     justify-content: flex-end;
     align-items: center;
 
+    &>:not(:last-child) {
+      padding-inline-end: 0.5rem;
+      margin-inline-end: 0.5rem;
+      border-inline-end-style: solid;
+      border-inline-end-width: 0.0625rem;
+      border-inline-end-color: var(--color-background-accent);
+    }
+
     button {
       svg[data-icon] {
         color: var(--color-foreground-contrast-background-accent-10);

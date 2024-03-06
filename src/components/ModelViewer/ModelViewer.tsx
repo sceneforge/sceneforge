@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type SyntheticEvent } from "react";
-import { meshTree } from "../../lib/meshTree";
 import { Canvas } from "../Canvas";
 import { IconButton } from "../IconButton";
+import { MeshTree, useMeshTree } from "../MeshTree";
 import {
   PanelSheet,
   PanelSheetBody,
@@ -10,9 +10,11 @@ import {
   PanelSheetSection
 } from "../PanelSheet";
 import { useTabPanel } from "../TabPanel";
-import { TreeView } from "../TreeView";
 import { useModelObject } from "./useModelObject";
 import { useModelViewer } from "./useModelViewer";
+
+import { type AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
+import styles from "./ModelViewer.module.css";
 
 export interface ModelProps {
   id?: string;
@@ -29,6 +31,9 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   const [loaded, setLoaded] = useState(false);
   const { updateTabTitle } = useTabPanel();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const meshTreeRef = useRef<HTMLDivElement>(null);
+  const [currentMesh, setCurrentMesh] = useState<AbstractMesh | null>(null);
+  const { closeAll } = useMeshTree(meshTreeRef);
   const {
     loadResult,
     capture,
@@ -116,18 +121,29 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
           title={currentTitle ?? "Untitled Model"}
           onInput={handleInput}
         >
+          <PanelSheetHeaderGroup title="Objects" description="Object management">
+            <IconButton icon="circle-plus" title="Add Hotspot" />
+          </PanelSheetHeaderGroup>
           <PanelSheetHeaderGroup title="Select" description="Mesh selection methods">
-            <IconButton icon="arrow-pointer" title="Single Mesh" />
-            <IconButton icon="circle-chevron-up" title="Parent Meshes" />
+            <IconButton toggle icon="arrow-pointer" title="Single Mesh" />
+            <IconButton toggle icon="circle-chevron-up" title="Parent Meshes" />
           </PanelSheetHeaderGroup>
         </PanelSheetHeader>
         <PanelSheetBody>
-          <PanelSheetSection title="Meshes">
-            <TreeView data={meshTree(loadResult?.meshes)} />
+          <PanelSheetSection className={styles.paneltree} title="Meshes" actions={[
+            { icon: "square-minus", label: "Close All", onClick: closeAll },
+          ]}>
+            <MeshTree ref={meshTreeRef} meshes={loadResult?.meshes} onClick={({ data }) => {
+              if (data && data.reference) {
+                setCurrentMesh(data.reference);
+              }
+            }} />
           </PanelSheetSection>
-          <PanelSheetSection title="This is an example of a title">
-            <p>This is an example of a section.</p>
-          </PanelSheetSection>
+          {currentMesh && (
+            <PanelSheetSection title={currentMesh.name}>
+              <p>More about the given selected mesh</p>
+            </PanelSheetSection>
+          )}
         </PanelSheetBody>
       </PanelSheet>
     </>

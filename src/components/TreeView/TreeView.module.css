@@ -3,16 +3,19 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  margin-inline-start: 1rem;
 
   details {
-    padding-inline-start: 1.5rem;
-
     &>summary {
       list-style-type: disclosure-closed;
       list-style-position: outside;
       padding: 0;
       margin: 0;
       cursor: pointer;
+
+      &::marker {
+        font-size: 0.75rem;
+      }
 
       &:hover {
         color: var(--color-foreground-accent);

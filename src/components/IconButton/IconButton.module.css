@@ -1,5 +1,5 @@
 .wrapper {
-  &[data-icon-button="true"] {
+  &[data-icon-button] {
     background-color: transparent;
 
     &[data-variant="default"] {

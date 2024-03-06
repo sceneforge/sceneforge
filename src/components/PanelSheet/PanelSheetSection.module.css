@@ -12,17 +12,41 @@
   border-block-end-color: var(--color-background-accent-40);
 
   .title {
-    font-size: 0.85rem;
     flex-shrink: 1;
-    font-weight: normal;
-    padding: 0;
+    padding: 0.25rem 0.5rem;
     margin: 0;
-    line-height: normal;
-    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: center;
+    height: 2.75rem;
+
+    h2 {
+      flex-grow: 1;
+      font-size: 1rem;
+      font-weight: normal;
+      line-height: normal;
+      margin: 0;
+      padding: 0;
+      height: fit-content;
+    }
+
+    .actions {
+      flex-shrink: 1;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: stretch;
+      align-items: center;
+
+      svg[data-icon] {
+        color: var(--color-foreground-contrast-background-accent-30);
+      }
+    }
+
     background-color: var(--color-background-accent-10);
     border-start-start-radius: calc(var(--border-radius-pill)/4);
     border-start-end-radius: calc(var(--border-radius-pill)/4);
-    padding: 0.25rem 0.5rem;
     border-block-style: solid;
     border-block-width: 0.125rem;
     border-block-start-color: var(--color-background-accent-30);

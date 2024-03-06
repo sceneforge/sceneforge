@@ -34,6 +34,7 @@ export const TabItem = ({
       </Button>
       <IconButton
         aria-label="close"
+        tabIndex={-1}
         icon="close"
         size="xs"
         title="Close"
