@@ -1,4 +1,5 @@
 .wrapper {
+  color: inherit;
   cursor: pointer;
   box-sizing: content-box;
 

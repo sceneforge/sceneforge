@@ -10,6 +10,7 @@ import { observeThemeColor, updateReferenceColor } from "./lib/themeColor";
 import styles from "./styles/Root.module.css";
 import "./styles/base.css";
 import "./styles/colors.css";
+import "./styles/icons.css";
 import "./styles/reset.css";
 import "./styles/round.css";
 

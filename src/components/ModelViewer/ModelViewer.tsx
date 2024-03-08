@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { Canvas } from "../Canvas";
 import { IconButton } from "../IconButton";
-import { MeshTree, useMeshTree } from "../MeshTree";
 import {
   PanelSheet,
   PanelSheetBody,
@@ -13,8 +12,8 @@ import { useTabPanel } from "../TabPanel";
 import { useModelObject } from "./useModelObject";
 import { useModelViewer } from "./useModelViewer";
 
-import { type AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
-import styles from "./ModelViewer.module.css";
+import { SceneNodeTree } from "../SceneNodeTree";
+import { SceneObjectSection } from "./SceneObjectSection";
 
 export interface ModelProps {
   id?: string;
@@ -31,11 +30,9 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   const [loaded, setLoaded] = useState(false);
   const { updateTabTitle } = useTabPanel();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const meshTreeRef = useRef<HTMLDivElement>(null);
-  const [currentMesh, setCurrentMesh] = useState<AbstractMesh | null>(null);
-  const { closeAll } = useMeshTree(meshTreeRef);
+  const [currentNode, setCurrentNode] = useState<unknown>(null);
   const {
-    loadResult,
+    sceneRef,
     capture,
     startAll,
     disposeAll,
@@ -111,6 +108,10 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     };
   }, [active, loadState, renderSceneLoop, stopRenderSceneLoop]);
 
+  const handleSceneObjectSectionClose = useCallback(() => {
+    setCurrentNode(null)
+  }, [setCurrentNode]);
+
   return (
     <>
       <Canvas ref={canvasRef} />
@@ -121,8 +122,11 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
           title={currentTitle ?? "Untitled Model"}
           onInput={handleInput}
         >
-          <PanelSheetHeaderGroup title="Objects" description="Object management">
-            <IconButton icon="circle-plus" title="Add Hotspot" />
+          <PanelSheetHeaderGroup title="Objects" description="Scene Objects management">
+            <IconButton icon="plus-square" title="New Object" />
+          </PanelSheetHeaderGroup>
+          <PanelSheetHeaderGroup title="Hotspots" description="Hotspots management">
+            <IconButton icon="circle" title="Add" />
           </PanelSheetHeaderGroup>
           <PanelSheetHeaderGroup title="Select" description="Mesh selection methods">
             <IconButton toggle icon="arrow-pointer" title="Single Mesh" />
@@ -130,20 +134,10 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
           </PanelSheetHeaderGroup>
         </PanelSheetHeader>
         <PanelSheetBody>
-          <PanelSheetSection className={styles.paneltree} title="Meshes" actions={[
-            { icon: "square-minus", label: "Close All", onClick: closeAll },
-          ]}>
-            <MeshTree ref={meshTreeRef} meshes={loadResult?.meshes} onClick={({ data }) => {
-              if (data && data.reference) {
-                setCurrentMesh(data.reference);
-              }
-            }} />
+          <PanelSheetSection title="Scene Nodes">
+            <SceneNodeTree scene={sceneRef.current} onNodeSelect={setCurrentNode} />
           </PanelSheetSection>
-          {currentMesh && (
-            <PanelSheetSection title={currentMesh.name}>
-              <p>More about the given selected mesh</p>
-            </PanelSheetSection>
-          )}
+          <SceneObjectSection node={currentNode} onClose={handleSceneObjectSectionClose} />
         </PanelSheetBody>
       </PanelSheet>
     </>
