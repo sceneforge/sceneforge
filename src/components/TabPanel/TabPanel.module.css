@@ -5,6 +5,10 @@
   width: 100%;
   height: 100%;
 
+  &[data-tabs-position="top"] {
+    flex-direction: column;
+  }
+
   .panels {
     flex-grow: 1;
     position: relative;

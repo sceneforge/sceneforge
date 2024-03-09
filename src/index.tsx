@@ -17,7 +17,7 @@ import "./styles/round.css";
 library.add(fas, far, fab);
 const userData = new Database("UserData", UserDataStores);
 
-userData.get("colorScheme", "color-reference").then((color) => {
+userData.get("settings", "color-theme").then((color) => {
   if (color && typeof color === "string" && color.startsWith("#")) {
     document.querySelector("meta[name=theme-color]")?.setAttribute("content", color);
   } else {

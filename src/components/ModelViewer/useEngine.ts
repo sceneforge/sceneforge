@@ -2,7 +2,7 @@ import { Engine } from "@babylonjs/core/Engines/engine";
 import { Color4 } from "@babylonjs/core/Maths/math.color";
 import { Scene } from "@babylonjs/core/scene";
 import { type Nullable } from "@babylonjs/core/types";
-import { useCallback, useRef, type RefObject } from "react";
+import { useCallback, useMemo, useRef, type RefObject } from "react";
 import { observeComputedStylePropertyValue } from "../../lib/observeComputedStylePropertyValue";
 import {
   ColorRGBA,
@@ -59,23 +59,39 @@ export const useEngine = (canvasRef: RefObject<HTMLCanvasElement>) => {
     }
   }, [sceneRef]);
 
+  const resizeObserver = useMemo(() => {
+    return new ResizeObserver(() => {
+      if (engineRef.current) {
+        engineRef.current.resize();
+      }
+    });
+  }, [engineRef]);
+
   const renderSceneLoop = useCallback(() => {
     if (engineRef.current && sceneRef.current) {
       engineRef.current.runRenderLoop(() => {
         sceneRef.current?.render();
       });
+
+      if (canvasRef.current) {
+        resizeObserver.observe(canvasRef.current);
+      }
     }
-  }, [engineRef, sceneRef]);
+  }, [canvasRef, resizeObserver]);
 
   const stopRenderSceneLoop = useCallback(() => {
     if (engineRef.current) {
       engineRef.current.stopRenderLoop();
     }
-  }, [engineRef]);
+    if (canvasRef.current) {
+      resizeObserver.unobserve(canvasRef.current);
+    }
+  }, [canvasRef, resizeObserver]);
 
   return {
     engineRef,
     sceneRef,
+    resizeObserver,
     createEngine,
     createScene,
     disposeEngine,

@@ -1,7 +1,7 @@
 .wrapper {
   position: absolute;
-  inset-block-start: 2rem;
-  inset-inline-end: 2rem;
+  inset-block-start: 0;
+  inset-inline-end: 1.5rem;
   border-inline-start: solid 1px var(--color-default-foreground-opacity-80);
   background-color: var(--color-background-accent-50);
   overflow: hidden;

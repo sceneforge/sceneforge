@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { TabItem } from "./TabItem";
-import { useTabPanel } from "./TabPanelProvider";
 
 import styles from "./TabList.module.css";
+import { useTabPanel } from "./useTabPanel";
 
 export const TabList = () => {
   const { tabs, closeTab, newTab, activateTab, defaultTab } = useTabPanel();

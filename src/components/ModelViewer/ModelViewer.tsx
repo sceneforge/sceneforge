@@ -100,12 +100,10 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   useEffect(() => {
     if (loadState === "loaded" && active) {
       renderSceneLoop();
-    }
-    return () => {
-      if (active) {
+      return () => {
         stopRenderSceneLoop();
-      }
-    };
+      };
+    }
   }, [active, loadState, renderSceneLoop, stopRenderSceneLoop]);
 
   const handleSceneObjectSectionClose = useCallback(() => {

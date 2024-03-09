@@ -1,2 +1,4 @@
-export { PanelProvider, usePanel } from "./PanelProvider";
+export { PanelProvider } from "./PanelProvider";
 export type { PanelContextType } from "./PanelProvider";
+export { usePanel } from "./usePanel";
+

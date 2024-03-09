@@ -2,19 +2,76 @@
   inset-inline-start: 0;
   inset-block-start: 0;
   position: fixed;
-  height: 5rem;
+  height: 2.5rem;
   width: 100%;
   transition: inset-inline-start 0.25s 0.25s, inset-block-start 0.25s 0.25s, width 0.25s 0.25s, height 0.25s 0.25s, box-shadow 0.25s 0s;
 
-  [data-window-controls-overlay="visible"] & {
+  .bar {
+    position: absolute;
+    width: 100%;
+    box-shadow: var(--color-default-foreground-opacity-20) 0 0.5rem 1.5rem;
+    background-color: var(--color-background-accent);
+    color: var(--color-foreground-contrast-background-accent);
+    border-block-end-style: solid;
+    border-block-end-color: var(--color-default-foreground-opacity-30);
+    border-block-end-width: 0.00625rem;
+    padding-inline: 1rem;
+    display: flex;
+    justify-content: stretch;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    inset-inline-start: 0;
+    inset-block-start: 0;
+    height: 100%;
+    transition-property: inset-inline-start, inset-block-start, width, height, padding, box-shadow, border-radius;
+    transition-duration: 0.25s;
+
+    h1 {
+      font-size: 1rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    .ibs,
+    .ibe {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: row;
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }
+
+    .ibs {
+      justify-content: flex-start;
+    }
+
+    .ibe {
+      justify-content: flex-end;
+    }
+  }
+}
+
+[data-window-controls-overlay="visible"] {
+  .wrapper {
+    -webkit-app-region: drag;
+    area-region: drag;
     inset-inline-start: -1rem;
     inset-block-start: 0;
     width: calc(100% + 2rem);
+
     height: env(titlebar-area-height, 5rem);
-    -webkit-app-region: drag;
-    area-region: drag;
-    box-shadow: 0 0.25rem 0.75rem var(--color-foreground-accent-60);
-    transition: inset-inline-start 0.25s, inset-block-start 0.25s, width 0.25s, height 0.25s, box-shadow 0.25s 0.25s;
+
+    transition: inset-inline-start 0.25s,
+      inset-block-start 0.25s,
+      width 0.25s,
+      height 0.25s,
+      box-shadow 0.25s 0.25s;
+
+    &[data-tabs-position="bottom"] {
+      box-shadow: 0 0.25rem 0.75rem var(--color-foreground-accent-60);
+    }
 
     .bar {
       width: env(titlebar-area-width, 100%);
@@ -39,61 +96,6 @@
         -webkit-app-region: no-drag;
         area-region: no-drag;
       }
-    }
-  }
-
-  .bar {
-    border-radius: var(--border-radius-pill);
-    position: absolute;
-    width: calc(100% - 4rem);
-    box-shadow: inset var(--color-default-background) 0 0.25rem 1rem, var(--color-default-foreground-opacity-20) 0 0.5rem 1.5rem;
-    background-color: var(--color-background-accent);
-    color: var(--color-foreground-contrast-background-accent);
-    border-block-start: solid 1px var(--color-default-background-opacity-70);
-    border-block-end: solid 1px var(--color-default-foreground-opacity-30);
-    padding-inline: 1rem;
-    display: flex;
-    justify-content: stretch;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-    inset-inline-start: 2rem;
-    inset-block-start: 2rem;
-    height: 4rem;
-    transition-property: inset-inline-start, inset-block-start, width, height, padding, box-shadow, border-radius;
-    transition-duration: 0.25s;
-
-    svg[data-icon] {
-      color: var(--color-foreground-contrast-background-accent);
-    }
-
-    h1 {
-      font-size: 1.25rem;
-      color: var(--color-foreground-contrast-background-accent);
-
-      small {
-        display: block;
-        font-size: 0.85rem;
-        color: var(--color-text-secondary);
-      }
-    }
-
-    .ibs,
-    .ibe {
-      display: flex;
-      flex-grow: 1;
-      flex-direction: row;
-      padding: 0;
-      margin: 0;
-      height: 100%;
-    }
-
-    .ibs {
-      justify-content: flex-start;
-    }
-
-    .ibe {
-      justify-content: flex-end;
     }
   }
 }

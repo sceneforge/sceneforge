@@ -1,0 +1,33 @@
+.wrapper {
+  position: relative;
+
+  select {
+    appearance: none;
+    display: block;
+    background-color: var(--color-background-accent-10);
+    color: var(--color-reference-default-background);
+    padding: 0.0125rem 0.5rem;
+    border-style: solid;
+    border-width: 0.25rem;
+    border-color: var(--color-background-accent-20);
+    border-radius: var(--border-radius-pill);
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    min-width: max-content;
+    margin-inline-end: 0.75rem;
+  }
+
+  &::after {
+    content: "▼";
+    color: var(--color-reference-default-background);
+    font-size: 0.75rem;
+    display: block;
+    position: absolute;
+    inset-block-start: calc(50% - 0.5rem);
+    inset-inline-end: 0.5rem;
+    width: 1rem;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

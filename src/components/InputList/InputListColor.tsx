@@ -3,6 +3,7 @@ import { convertColor } from "../../lib/convertColor";
 import style from "./InputListColor.module.css";
 
 export interface InputListColorProps {
+  id?: string;
   name: string;
   defaultValue?: string;
   value?: HTMLInputElement["value"];
@@ -11,11 +12,12 @@ export interface InputListColorProps {
 
 export const InputListColor = forwardRef(
   function InputListColor(
-    { name, defaultValue, value, onChange }: InputListColorProps,
+    { id, name, defaultValue, value, onChange }: InputListColorProps,
     ref: ForwardedRef<HTMLInputElement>
   ) {
     return (
       <input
+        id={id}
         className={style.wrapper}
         defaultValue={convertColor(defaultValue)}
         name={name}

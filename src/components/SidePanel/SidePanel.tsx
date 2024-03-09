@@ -1,4 +1,4 @@
-import { usePanel } from "../Panel/PanelProvider";
+import { usePanel } from "../Panel";
 import styles from "./SidePanel.module.css";
 
 export interface SidePanelProps {

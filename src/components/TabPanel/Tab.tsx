@@ -1,9 +1,9 @@
 import { PropsWithChildren, useEffect, type ReactNode } from "react";
-import styles from "./Tab.module.css";
 
 export type TabProps<
   P extends Record<string, unknown> = Record<string, unknown>
 > = PropsWithChildren<{
+  tabId?: string;
   id?: string;
   title?: string;
   active?: boolean;
@@ -12,7 +12,7 @@ export type TabProps<
 interface TabRenderFunction<
   P extends Record<string, unknown> = Record<string, unknown>
 > {
-  (props: TabProps<P>): ReactNode | JSX.Element;
+  (props: Omit<TabProps<P>, "tabId">): ReactNode | JSX.Element;
   displayName?: string | undefined;
 }
 
@@ -21,7 +21,7 @@ export const Tab = <
 >(
   Component: TabRenderFunction<P>
 ) => {
-  return function TabWrapper(props: TabProps<P>) {
+  return function TabWrapper({ tabId, ...props }: TabProps<P>) {
     useEffect(() => {
       if (props.title) {
         document.title = props.title;
@@ -29,7 +29,11 @@ export const Tab = <
     }, [props.title]);
 
     return (
-      <div className={styles.wrapper}>
+      <div
+        id={tabId}
+        role="tabpanel"
+        hidden={!props.active}
+      >
         <Component {...props} />
       </div>
     );

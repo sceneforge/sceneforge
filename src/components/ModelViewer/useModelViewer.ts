@@ -9,6 +9,7 @@ export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
   const {
     engineRef,
     sceneRef,
+    resizeObserver,
     createEngine,
     createScene,
     renderSceneLoop,
@@ -46,10 +47,12 @@ export const useModelViewer = (canvasRef: RefObject<HTMLCanvasElement>) => {
   const disposeAll = useCallback(() => {
     detachControl();
     disposeCamera();
+    resizeObserver.disconnect();
     stopRenderSceneLoop();
     disposeScene();
     disposeEngine();
   }, [
+    resizeObserver,
     detachControl,
     disposeCamera,
     disposeEngine,

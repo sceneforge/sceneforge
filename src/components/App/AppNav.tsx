@@ -7,7 +7,7 @@ import { SettingsTab } from "../../tabs";
 import type { IconButtonProps } from "../IconButton/IconButton";
 import { NavList, NavListItem } from "../NavList";
 import { usePanel } from "../Panel";
-import { useTabPanel } from "../TabPanel/TabPanelProvider";
+import { useTabPanel } from "../TabPanel";
 import { Topbar } from "../Topbar";
 
 export const AppNav = () => {
@@ -74,7 +74,6 @@ export const AppNav = () => {
     <Topbar
       iconButtonsEnd={iconButtonsEnd}
       iconButtonsStart={iconButtonsStart}
-      subtitle="Create Easy 3D Structure for Web"
       title={appTitle ?? "SceneForge"}
     >
       <NavList>

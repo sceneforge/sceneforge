@@ -1,11 +1,12 @@
 export { Tab } from "./Tab";
 export { TabPanel } from "./TabPanel";
-export { TabPanelProvider, useTabPanel } from "./TabPanelProvider";
+export { TabPanelProvider } from "./TabPanelProvider";
+export { useTabPanel } from "./useTabPanel";
 
 export type {
   TabContext,
   TabPanelContextType,
-  TabPanelProviderProps,
+  TabPanelProviderProps
 } from "./TabPanelProvider";
 
 export type { TabProps } from "./Tab";
