@@ -1,10 +1,53 @@
+@property --glow {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 1rem;
+}
+
 .wrapper {
   color: inherit;
   cursor: pointer;
   box-sizing: content-box;
+  -webkit-user-select: none;
+  user-select: none;
+  border-radius: calc(var(--border-radius-pill) / 2);
+
+  &:not([data-clear="true"]) {
+    background-color: var(--color-background-accent);
+    color: var(--color-foreground-contrast-background-accent);
+    border: none;
+    padding: 0.25rem 1rem;
+
+    box-shadow:
+      inset 0 calc(1 * var(--glow, 1rem)) calc(0.5 * var(--glow, 1rem)) color-mix(in srgb, var(--color-reference-default-background) 15%, transparent),
+      inset 0 calc(0.125 * var(--glow, 1rem)) calc(0.125 * var(--glow, 1rem)) color-mix(in srgb, var(--color-reference-default-background) 7.5%, transparent);
+
+    &:focus {
+      background-color: var(--color-background-accent-30);
+      box-shadow:
+        inset 0 calc(-1 * var(--glow, 1rem)) calc(0.5 * var(--glow, 1rem)) color-mix(in srgb, var(--color-background-accent) 70%, transparent),
+        0 0 calc(0.125 * var(--glow, 1rem)) color-mix(in srgb, var(--color-reference-default-background) 80%, transparent);
+    }
+
+    &:hover {
+      background-color: var(--color-background-accent-10);
+      box-shadow:
+        inset 0 calc(1 * var(--glow, 1rem)) calc(0.5 * var(--glow, 1rem)) color-mix(in srgb, var(--color-reference-default-background) 20%, transparent),
+        inset 0 calc(0.25 * var(--glow, 1rem)) calc(0.25 * var(--glow, 1rem)) color-mix(in srgb, var(--color-reference-default-background) 10%, transparent),
+        0 calc(0.125 * var(--glow, 1rem)) calc(0.25 * var(--glow, 1rem)) color-mix(in srgb, var(--color-reference-default-foreground) 20%, transparent);
+    }
+
+    &:active {
+      background-color: var(--color-background-accent);
+      box-shadow:
+        inset 0 calc(-1 * var(--glow, 1rem)) calc(0.5 * var(--glow, 1rem)) color-mix(in srgb, var(--color-reference-default-background) 20%, transparent),
+        inset 0 calc(-0.25 * var(--glow, 1rem)) calc(0.25 * var(--glow, 1rem)) color-mix(in srgb, var(--color-reference-default-background) 10%, transparent),
+        inset 0 0 calc(0.125 * var(--glow, 1rem)) color-mix(in srgb, var(--color-reference-default-background) 90%, transparent),
+        0 0 calc(0.125 * var(--glow, 1rem)) color-mix(in srgb, var(--color-background-accent) 50%, transparent);
+    }
+  }
 
   &:not([data-variant="none"]) {
-    border-radius: var(--border-radius-pill);
     font-size: 1rem;
     padding-block: 0.5rem;
     border: none;
@@ -48,8 +91,8 @@
   }
 
   &[data-variant="default"] {
-    background-color: var(--color-foreground-primary);
-    color: var(--color-reference-default-background);
+    background-color: var(--color-background-accent);
+    color: var(--color-foreground-contrast-background-accent);
   }
 
   &[data-variant="accent"] {

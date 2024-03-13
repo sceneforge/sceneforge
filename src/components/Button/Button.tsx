@@ -8,6 +8,7 @@ import {
   type MouseEvent as ReactMouseEvent
 } from "react";
 import styles from "./Button.module.css";
+import { Variant } from "../../types/variants";
 
 export type ButtonToggleEvent = {
   nativeEvent: ReactMouseEvent<HTMLButtonElement, MouseEvent>["nativeEvent"];
@@ -15,8 +16,6 @@ export type ButtonToggleEvent = {
   type: "toggle";
   state: "pressed" | "released";
 }
-
-export type Variant = "none" | "default" | "accent" | "danger" | "warning" | "success" | "info" | "inverted";
 
 export type ToggleProps<Toggle = unknown, Regular = unknown> = ({
   toggle: true,

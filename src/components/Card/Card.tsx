@@ -1,13 +1,14 @@
 import { Fragment, type MouseEventHandler, type PropsWithChildren } from "react";
-import { Button, type ButtonProps } from "../Button";
+import { Button } from "../Button";
 import { type IconProps } from "../Icon";
 import { IconButton } from "../IconButton";
 import styles from "./Card.module.css";
+import type { Variant } from "../../types/variants";
 
 export interface CardActionProps {
   label: string;
   icon?: IconProps["icon"];
-  variant?: ButtonProps["variant"];
+  variant?: Variant;
   onClick?: MouseEventHandler<HTMLElement>;
 }
 

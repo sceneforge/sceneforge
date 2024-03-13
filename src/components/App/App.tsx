@@ -5,6 +5,7 @@ import { PanelProvider } from "../Panel/PanelProvider";
 import { TabPanel } from "../TabPanel/TabPanel";
 import { TabPanelProvider } from "../TabPanel/TabPanelProvider";
 import { AppNav } from "./AppNav";
+import { ReloadPrompt } from "../ReloadPrompt";
 
 export interface AppProps {
   userData: Database<"UserData">;
@@ -21,6 +22,7 @@ export const App = ({ userData }: AppProps) => {
         <TabPanel />
         <AppNav />
       </TabPanelProvider>
+      <ReloadPrompt />
     </PanelProvider>
   );
 };

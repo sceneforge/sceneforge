@@ -2,6 +2,7 @@
   "name": "scene-forge",
   "version": "0.0.1",
   "description": "Web Application for 3D objects handling",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/phinpho/scene-forge"
@@ -43,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "browser-sync": "^3.0.2",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
@@ -50,7 +52,10 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2",
     "vite": "^5.1.6",
-    "vite-plugin-pwa": "^0.19.2"
+    "vite-plugin-browser-sync": "^3.0.1",
+    "vite-plugin-pwa": "^0.19.2",
+    "workbox-precaching": "^7.0.0",
+    "workbox-window": "^7.0.0"
   },
   "engines": {
     "node": ">=21.7.1",
