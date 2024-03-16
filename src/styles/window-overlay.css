@@ -1,0 +1,26 @@
+.topbar {
+  @apply: fixed bg-white dark:bg-black b-b-1 b-b-solid b-b-black:75 shadow shadow-md shadow-black:30 w-full h-10 inset-t-0 inset-x-0;
+  -webkit-app-region: drag;
+  app-region: drag;
+
+  button {
+    -webkit-app-region: no-drag;
+    app-region: no-drag;
+  }
+
+  .topbar-inner {
+    @apply: absolute text-light w-full h-full ps pe flex flex-row items-center justify-stretch gap-2 inset-inline-0 inset-block-0 h-full;
+  }
+}
+
+@media (display-mode: window-controls-overlay) { 
+  .topbar {
+    height: env(titlebar-area-height, 2.5rem);
+
+    .topbar-inner {
+      width: env(titlebar-area-width, 100%);
+      inset-inline-start: env(titlebar-area-x, 0);
+      inset-block-start: env(titlebar-area-y, 0);
+    }
+  }
+}

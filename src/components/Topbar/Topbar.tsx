@@ -20,13 +20,10 @@ export const Topbar = ({
   const { tabsPosition } = useTabPanel();
 
   return (
-    <header
-      data-tabs-position={tabsPosition}
-      className="fixed inset-inline-0 inset-block-0 h-10 w-full bg-white dark:bg-black"
-    >
+    <header data-tabs-position={tabsPosition} className="topbar">
       <div
         className={cls(
-          "absolute text-light w-full h-full ps pe flex flex-row items-center justify-stretch gap-4 inset-inline-0 inset-block-0 h-full b-b-2 b-b-solid light:b-b-white:20 dark:b-b-black:20 shadow shadow-md shadow-black:30",
+          "topbar-inner",
           variant ? variantBgClass[variant] : "bg-primary"
         )}
       >

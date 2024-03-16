@@ -39,8 +39,6 @@ export default defineConfig({
           import("@iconify-json/material-symbols-light/icons.json").then(
             (i) => i.default as any
           ),
-        mdi: () =>
-          import("@iconify-json/mdi/icons.json").then((i) => i.default),
       },
     }),
   ],
