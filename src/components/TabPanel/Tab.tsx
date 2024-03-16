@@ -2,12 +2,14 @@ import { PropsWithChildren, useEffect, type ReactNode } from "react";
 
 export type TabProps<
   P extends Record<string, unknown> = Record<string, unknown>
-> = PropsWithChildren<{
-  tabId?: string;
-  id?: string;
-  title?: string;
-  active?: boolean;
-} & P>;
+> = PropsWithChildren<
+  {
+    tabId?: string;
+    id?: string;
+    title?: string;
+    active?: boolean;
+  } & P
+>;
 
 interface TabRenderFunction<
   P extends Record<string, unknown> = Record<string, unknown>
@@ -33,6 +35,7 @@ export const Tab = <
         id={tabId}
         role="tabpanel"
         hidden={!props.active}
+        className="relative w-full h-full m-0"
       >
         <Component {...props} />
       </div>

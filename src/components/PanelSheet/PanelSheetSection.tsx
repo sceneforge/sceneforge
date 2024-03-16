@@ -1,48 +1,31 @@
-import { type IconName, type IconPrefix } from "@fortawesome/fontawesome-svg-core";
-import { Fragment, type PropsWithChildren } from "react";
-import { Button, type ButtonProps } from "../Button";
+import { type PropsWithChildren } from "react";
 import { H2 } from "../Heading";
-import { IconButton } from "../IconButton";
-import styles from "./PanelSheetSection.module.css";
-
-type PanelSheetSectionAction = {
-  label?: string;
-  onClick?: ButtonProps["onClick"];
-  icon?: IconName;
-  prefix?: IconPrefix;
-}
+import { Action, ActionProps } from "../Action";
 
 export type PanelSheetSectionProps = PropsWithChildren<{
-  title?: string,
-  className?: string,
-  actions?: PanelSheetSectionAction[]
+  title?: string;
+  className?: string;
+  actions?: ActionProps[];
 }>;
 
 export const PanelSheetSection = ({
   title,
-  className,
   actions,
-  children
+  children,
 }: PanelSheetSectionProps) => {
-  const classNames = [styles.wrapper, className].filter(Boolean).join(" ");
   return (
-    <section className={classNames}>
-      <div className={styles.title}>
+    <section className="w-full flex-shrink flex flex-col justify-stretch dark:bg-black:25 light:bg-white:25 c-inherit rounded overflow-clip">
+      <div className="flex-shrink p-l-2 p-r-1 p-block-1 m-b-1 flex flex-row justify-stretch items-center dark:bg-black:10 light:bg-white:10 b-block-1 b-block-solid dark:b-t-white:10 light:b-t-black:10 dark:b-b-black:15 light:b-b-white:10">
         {title && <H2 text={title} />}
         {actions && actions.length > 0 && (
-          <div className={styles.actions}>
-            {actions.map(({ icon, prefix, onClick, label }, index) => (
-              <Fragment key={index}>
-                {icon && (<IconButton icon={icon} prefix={prefix} onClick={onClick} title={label} />)}
-                {!icon && label && (<Button clear onClick={onClick}>{label}</Button>)}
-              </Fragment>
+          <div className="flex-shrink flex flex-row flex-nowrap justify-stretch items-center">
+            {actions.map((props, index) => (
+              <Action key={index} {...props} />
             ))}
           </div>
         )}
       </div>
-      <div className={styles.content}>
-        {children}
-      </div>
+      <div className="flex-grow h-full overflow-auto p-1">{children}</div>
     </section>
-  )
-}
+  );
+};

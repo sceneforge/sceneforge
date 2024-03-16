@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { TabItem } from "./TabItem";
 
-import styles from "./TabList.module.css";
 import { useTabPanel } from "./useTabPanel";
 
 export const TabList = () => {
@@ -14,7 +13,10 @@ export const TabList = () => {
   }, [tabs, newTab, defaultTab]);
 
   return (
-    <ul className={styles.wrapper} role="tablist">
+    <ul
+      className="flex flex-row justify-start list-none p-inline-2 m-0 gap-2 bg-primary:50 p-t-0 p-b-2 text-light shadow-primary:75 shadow-inner"
+      role="tablist"
+    >
       {tabs.map((tab, index) => (
         <TabItem
           active={tab.active}

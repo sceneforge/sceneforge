@@ -1,12 +1,11 @@
 import { type PropsWithChildren } from "react";
-import styles from "./PanelSheetBody.module.css";
 
 export type PanelSheetBodyProps = PropsWithChildren;
 
 export const PanelSheetBody = ({ children }: PanelSheetBodyProps) => {
   return (
-    <div className={styles.wrapper}>
+    <div className="flex-grow flex flex-row justify-stretch p-2 gap-2 overflow-hidden">
       {children}
     </div>
-  )
-}
+  );
+};

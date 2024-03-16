@@ -1,45 +1,78 @@
-import { Fragment, type MouseEventHandler, type PropsWithChildren } from "react";
-import { Button } from "../Button";
-import { type IconProps } from "../Icon";
-import { IconButton } from "../IconButton";
-import styles from "./Card.module.css";
-import type { Variant } from "../../types/variants";
-
-export interface CardActionProps {
-  label: string;
-  icon?: IconProps["icon"];
-  variant?: Variant;
-  onClick?: MouseEventHandler<HTMLElement>;
-}
+import { useMemo, type PropsWithChildren } from "react";
+import { Action, ActionProps } from "../Action";
+import { cls } from "../../lib/cls";
+import { Variant } from "../../types/variants";
+import { variantBgClass } from "../../lib/variantClasses";
 
 export type CardProps = PropsWithChildren<{
   title?: string;
   img?: string;
-  actions?: CardActionProps[];
+  zoom?: keyof typeof classesImgZoom;
+  actions?: ActionProps[];
+  variant?: Variant;
 }>;
 
-export const Card = ({ img, title, actions, children }: CardProps) => {
+// @unocss-include
+const classesImgZoom = {
+  0: "w-full max-w-full m-block-0 m-inline-0",
+  1: "w-150% max-w-150% m-block--10% m-inline--25%",
+  2: "w-200% max-w-200% m-block--20% m-inline--50%",
+  3: "w-250% max-w-250% m-block--30% m-inline--75%",
+  4: "w-300% max-w-300% m-block--40% m-inline--100%",
+} as const;
+
+export const Card = ({
+  img,
+  zoom = 0,
+  title,
+  actions,
+  variant = "default",
+  children,
+}: CardProps) => {
+  const cardBgClass = useMemo(
+    () =>
+      variant && variantBgClass[variant]
+        ? variantBgClass[variant]!
+        : "bg-primary",
+    []
+  );
   return (
-    <div className={styles.wrapper}>
-      {title && <span className={styles.title}>{title}</span>}
-      {img && <div className={styles.img}><img alt={`Image of ${title}`} src={img} /></div>}
+    <div className="relative dark:bg-black light:bg-white rounded-5 w-full c-inherit overflow-clip">
+      {title && (
+        <span
+          className={cls(
+            "block font-size-4 p-block-3 p-inline-4 c-inherit text-start",
+            `${cardBgClass}:75`
+          )}
+        >
+          {title}
+        </span>
+      )}
+      {img && (
+        <div className={`${cardBgClass}:35`}>
+          <div className="relative w-full overflow-clip rounded-be-5 dark:bg-black:20 light:bg-white:20 after:content-empty after:block after:p-b-80%">
+            <img
+              className={cls("absolute block", classesImgZoom[zoom])}
+              alt={`Image of ${title}`}
+              src={img}
+            />
+          </div>
+        </div>
+      )}
       {children && (
-        <div className={styles.content}>
+        <div className={cls("w-full m-b-8 c-inherit", `${cardBgClass}:25`)}>
           {children}
         </div>
       )}
       {actions && actions.length > 0 && (
-        <div className={styles.actions}>
-          {actions.map(({ label, icon, onClick, variant = "default" }, index) => (
-            <Fragment key={index}>
-              {icon ? (
-                <IconButton icon={icon} title={label} variant={variant} onClick={onClick} />
-              ) : (
-                <Button size="full" title={label} variant={variant} onClick={onClick}>
-                  {label}
-                </Button>
-              )}
-            </Fragment>
+        <div
+          className={cls(
+            "h-20 flex flex-row justify-stretch gap-2 p-4 c-inherit",
+            `${cardBgClass}:35`
+          )}
+        >
+          {actions.map((props, index) => (
+            <Action key={index} {...props} />
           ))}
         </div>
       )}

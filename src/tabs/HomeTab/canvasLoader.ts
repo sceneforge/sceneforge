@@ -1,5 +1,4 @@
 import {
-  Color4,
   CreateSphere,
   FreeCamera,
   HemisphericLight,
@@ -9,29 +8,11 @@ import { Engine } from "@babylonjs/core/Engines/engine";
 import { Scene } from "@babylonjs/core/scene";
 import { GridMaterial } from "@babylonjs/materials";
 import type { RefObject } from "react";
-import { observeComputedStylePropertyValue } from "../../lib/observeComputedStylePropertyValue";
-import { parseCSSColorPropertyValue } from "../../lib/parseCSSColorPropertyValue";
 
 export const canvasLoader = (canvas: RefObject<HTMLCanvasElement>) => {
   if (canvas.current) {
     const engine = new Engine(canvas.current);
     const scene = new Scene(engine);
-
-    observeComputedStylePropertyValue(
-      document.firstElementChild,
-      "background-color",
-      (value) => {
-        const color = parseCSSColorPropertyValue(value);
-        if (color) {
-          scene.clearColor = new Color4(
-            color.r / 255,
-            color.g / 255,
-            color.b / 255,
-            color.a
-          );
-        }
-      }
-    );
 
     const camera = new FreeCamera("camera1", new Vector3(0, 5, -10), scene);
 

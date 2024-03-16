@@ -113,29 +113,50 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   return (
     <>
       <Canvas ref={canvasRef} />
-      <PanelSheet orientation="block" position="end" resizable size="md">
+      <PanelSheet
+        orientation="block"
+        position="end"
+        resizable
+        size="md"
+        variant="accent"
+      >
         <PanelSheetHeader
           editable
           name="model-name"
           title={currentTitle ?? "Untitled Model"}
           onInput={handleInput}
         >
-          <PanelSheetHeaderGroup title="Objects" description="Scene Objects management">
-            <IconButton icon="plus-square" title="New Object" />
+          <PanelSheetHeaderGroup
+            title="Objects"
+            description="Scene Objects management"
+          >
+            <IconButton icon="addCircle" title="New Object" />
           </PanelSheetHeaderGroup>
-          <PanelSheetHeaderGroup title="Hotspots" description="Hotspots management">
-            <IconButton icon="circle" title="Add" />
+          <PanelSheetHeaderGroup
+            title="Hotspots"
+            description="Hotspots management"
+          >
+            <IconButton icon="fileMap" title="Add" />
           </PanelSheetHeaderGroup>
-          <PanelSheetHeaderGroup title="Select" description="Mesh selection methods">
-            <IconButton toggle icon="arrow-pointer" title="Single Mesh" />
-            <IconButton toggle icon="circle-chevron-up" title="Parent Meshes" />
+          <PanelSheetHeaderGroup
+            title="Select"
+            description="Mesh selection methods"
+          >
+            <IconButton toggle icon="arrowSelectTool" title="Single Mesh" />
+            <IconButton toggle icon="moveSelectionUp" title="Parent Meshes" />
           </PanelSheetHeaderGroup>
         </PanelSheetHeader>
         <PanelSheetBody>
           <PanelSheetSection title="Scene Nodes">
-            <SceneNodeTree scene={sceneRef.current} onNodeSelect={setCurrentNode} />
+            <SceneNodeTree
+              scene={sceneRef.current}
+              onNodeSelect={setCurrentNode}
+            />
           </PanelSheetSection>
-          <SceneObjectSection node={currentNode} onClose={handleSceneObjectSectionClose} />
+          <SceneObjectSection
+            node={currentNode}
+            onClose={handleSceneObjectSectionClose}
+          />
         </PanelSheetBody>
       </PanelSheet>
     </>

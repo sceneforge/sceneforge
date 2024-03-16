@@ -3,8 +3,6 @@ import { usePanel } from "../Panel";
 import { TabList } from "./TabList";
 import { useTabPanel } from "./useTabPanel";
 
-import styles from "./TabPanel.module.css";
-
 export const TabPanel = () => {
   const { getUserData } = usePanel();
   const { tabs, tabsPosition, setTabsPosition } = useTabPanel();
@@ -22,12 +20,20 @@ export const TabPanel = () => {
   }, [getUserData, setTabsPosition]);
 
   return (
-    <main data-tabs-position={tabsPosition} className={styles.wrapper}>
+    <main
+      data-tabs-position={tabsPosition}
+      className="flex flex-col-reverse w-full h-full justify-stretch"
+    >
       <TabList />
-      <div className={styles.panels}>
+      <div className="relative flex-grow h-full w-full">
         <Suspense>
           {tabs.map(({ component: TabComponent, active, props }, index) => (
-            <TabComponent key={index} tabId={`tabpanel-${index}`} active={active} {...props} />
+            <TabComponent
+              key={index}
+              tabId={`tabpanel-${index}`}
+              active={active}
+              {...props}
+            />
           ))}
         </Suspense>
       </div>

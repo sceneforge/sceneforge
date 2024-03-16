@@ -1,0 +1,31 @@
+// @unocss-include
+export const classes = {
+  close: "i-material-symbols:close",
+  menu: "i-material-symbols:menu",
+  add: "i-material-symbols:add",
+  addCircle: "i-material-symbols:add-circle",
+  fileMap: "i-material-symbols:file-map",
+  uploadFile: "i-material-symbols:upload-file",
+  settings: "i-material-symbols:settings",
+  expandMore: "i-material-symbols:expand-more-rounded",
+  expandLess: "i-material-symbols:expand-less-rounded",
+  square: "i-material-symbols:square",
+  squareRounded: "i-material-symbols:square-rounded",
+  sunny: "i-material-symbols:sunny",
+  lightbulb: "i-material-symbols:lightbulb",
+  lightbulbRounded: "i-material-symbols:lightbulb-circle-rounded",
+  camera: "i-material-symbols:camera",
+  cameraswitch: "i-material-symbols:cameraswitch",
+  transform: "i-material-symbols:transform",
+  questionMark: "i-material-symbols:question-mark",
+  deployedCode: "i-material-symbols:deployed-code",
+  deployedCodeSharp: "i-material-symbols:deployed-code-sharp",
+  visibility: "i-material-symbols:visibility",
+  visibilityOff: "i-material-symbols:visibility-off",
+  select: "i-material-symbols:select",
+  arrowSelectTool: "i-material-symbols:arrow-select-tool",
+  moveSelectionUp: "i-material-symbols:move-selection-up",
+  delete: "i-material-symbols:delete",
+} as const;
+
+export type IconName = keyof typeof classes;

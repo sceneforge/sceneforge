@@ -1,55 +1,52 @@
-import { v4 as uuid } from "uuid";
+import { forwardRef, useId, type ForwardedRef } from "react";
 
-import { forwardRef, type ForwardedRef } from "react";
-import { InputListColor, type InputListColorProps } from "./InputListColor";
-
-import styles from "./InputListItem.module.css";
 import { InputListSelect, type InputListSelectProps } from "./InputListSelect";
 
-export type InputListType = "color" | "select" | "checkbox";
+export type InputListType = "select" | "checkbox";
 
-type InputListItemColorProps = InputListColorProps & { type: "color", options?: never };
 type InputListItemSelectProps = InputListSelectProps & { type: "select" };
 
 export type InputListItemProps = {
   label: string;
-} & (InputListItemColorProps | InputListItemSelectProps);
+} & InputListItemSelectProps;
 
-export const InputListItem = forwardRef(
-  function InputListItem(
-    { id, label, type, name, defaultValue, onChange, value, options }: InputListItemProps,
-    ref: ForwardedRef<HTMLInputElement | HTMLSelectElement>
-  ) {
-    const inputId = id ?? `input-${uuid()}`;
-    return (
-      <li className={styles.wrapper}>
-        <label htmlFor={inputId}>{label}</label>
-        {
-          type === "color" && (
-            <InputListColor
-              id={inputId}
-              defaultValue={defaultValue}
-              name={name}
-              ref={ref as ForwardedRef<HTMLInputElement>}
-              value={value}
-              onChange={onChange}
-            />
-          )
-        }
-        {
-          type === "select" && (
-            <InputListSelect
-              id={inputId}
-              defaultValue={defaultValue}
-              name={name}
-              ref={ref as ForwardedRef<HTMLSelectElement>}
-              value={value}
-              onChange={onChange}
-              options={options}
-            />
-          )
-        }
-      </li>
-    );
-  }
-);
+export const InputListItem = forwardRef(function InputListItem(
+  {
+    id,
+    label,
+    type,
+    name,
+    defaultValue,
+    onChange,
+    onBlur,
+    value,
+    options,
+  }: InputListItemProps,
+  ref: ForwardedRef<HTMLInputElement | HTMLSelectElement>
+) {
+  const genId = useId();
+  const inputId = id ?? genId;
+
+  return (
+    <li className="p-0 m-0 flex flex-row flex-nowrap justify-stretch items-center dark:bg-white:15 light:bg-black:15 b-block-1 b-block-solid dark:b-b-white:15 light:b-b-black:15 dark:b-t-black:15 light:b-t-white:15 h-12 last-children:m-r-2">
+      <label
+        htmlFor={inputId}
+        className="flex-grow w-full font-bold p-block-1 p-l-4 text-start text-shadow-md"
+      >
+        {label}
+      </label>
+      {type === "select" && (
+        <InputListSelect
+          id={inputId}
+          defaultValue={defaultValue}
+          name={name}
+          ref={ref as ForwardedRef<HTMLSelectElement>}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          options={options}
+        />
+      )}
+    </li>
+  );
+});

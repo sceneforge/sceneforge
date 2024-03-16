@@ -1,12 +1,17 @@
 import { PropsWithChildren } from "react";
+import { cls } from "../../lib/cls";
 
-import styles from "./SafeArea.module.css";
+export type SafeAreaProps = PropsWithChildren<{
+  vertical?: boolean;
+  horizonal?: boolean;
+}>;
 
-export type SafeAreaProps = PropsWithChildren;
+export const SafeArea = ({ vertical, horizonal, children }: SafeAreaProps) => {
+  const classVertical = vertical ? "p-t-12" : null;
+  const classHorizonal = horizonal ? "p-inline-4" : null;
 
-export const SafeArea = ({ children }: SafeAreaProps) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={cls("c-inherit", classVertical, classHorizonal)}>
       {children}
     </div>
   );

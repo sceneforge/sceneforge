@@ -1,7 +1,9 @@
 import {
-  ForwardedRef, forwardRef, type CanvasHTMLAttributes, type DetailedHTMLProps
+  ForwardedRef,
+  forwardRef,
+  type CanvasHTMLAttributes,
+  type DetailedHTMLProps,
 } from "react";
-import styles from "./Canvas.module.css";
 
 export type CanvasProps = Omit<DetailedHTMLProps<
   CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement
@@ -9,9 +11,7 @@ export type CanvasProps = Omit<DetailedHTMLProps<
 
 export const Canvas = forwardRef(
   function Canvas(props: CanvasProps, ref: ForwardedRef<HTMLCanvasElement>) {
-    return (
-      <canvas className={styles.wrapper} {...props} ref={ref} />
-    );
+    return <canvas className="w-full h-90% touch-none" {...props} ref={ref} />;
   }
 );
 

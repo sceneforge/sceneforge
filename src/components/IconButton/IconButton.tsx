@@ -1,63 +1,100 @@
-import { useCallback, useState } from "react";
-import { Button, type ButtonProps, type ToggleProps } from "../Button";
+import {
+  type ForwardedRef,
+  forwardRef,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
+import {
+  Button,
+  type ButtonToggleEvent,
+  type ButtonProps,
+  type ToggleProps,
+} from "../Button";
 import { Icon, type IconProps } from "../Icon";
 
-import { ButtonToggleEvent } from "../Button/Button";
-import styles from "./IconButton.module.css";
-
-export type IconButtonProps = Omit<ButtonProps, "children" | "clear" | "className"> & ToggleProps<
+type IconToggleProps = ToggleProps<
   {
-    prefix?: IconProps["prefix"] | [IconProps["prefix"], IconProps["prefix"]];
     icon: IconProps["icon"] | [IconProps["icon"], IconProps["icon"]];
+    size?: IconProps["size"] | [IconProps["size"], IconProps["size"]];
   },
-  {
-    prefix?: IconProps["prefix"];
-    icon: IconProps["icon"];
-  }
+  Omit<IconProps, "label">
 >;
 
-export const IconButton = ({
-  toggle,
-  variant,
-  pressed,
-  onToggle,
-  prefix,
-  icon,
-  ...props
-}: IconButtonProps) => {
-  const [currentPrefix, setCurrentPrefix] = useState<IconProps["prefix"]>(Array.isArray(prefix) ? prefix[0] : prefix);
-  const [currentIcon, setCurrentIcon] = useState<IconProps["icon"]>(Array.isArray(icon) ? icon[0] : icon);
+export type IconButtonProps = Omit<
+  ButtonProps,
+  "children" | keyof ToggleProps
+> &
+  IconToggleProps;
 
-  const handleToggleEvent = useCallback((e: ButtonToggleEvent) => {
-    if (e.state === "pressed") {
-      if (Array.isArray(prefix)) {
-        setCurrentPrefix(prefix[1]);
-      }
-      if (Array.isArray(icon)) {
-        setCurrentIcon(icon[1]);
-      }
-    } else {
-      if (Array.isArray(prefix)) {
-        setCurrentPrefix(prefix[0]);
-      }
-      if (Array.isArray(icon)) {
-        setCurrentIcon(icon[0]);
-      }
-    }
-    if (onToggle) onToggle(e);
-  }, [icon, onToggle, prefix]);
+export const IconButton = forwardRef(function IconButton(
+  {
+    toggle,
+    pressed,
+    onToggle,
+    icon,
+    size,
+    grow = false,
+    shrink = true,
+    inverted = true,
+    label,
+    variant,
+    ...props
+  }: IconButtonProps,
+  ref: ForwardedRef<HTMLButtonElement>
+) {
+  const isPressed = useMemo(() => {
+    if (!toggle) return false;
+    if (typeof pressed === "boolean") return pressed;
+    if (typeof pressed === "string") return pressed === "true";
+    return false;
+  }, []);
 
-  const toggleProps: ToggleProps = toggle ? { toggle: true, variant, pressed, onToggle: handleToggleEvent } : { variant }
+  const [currentIcon, setCurrentIcon] = useState<IconProps["icon"]>(
+    Array.isArray(icon) ? icon[isPressed ? 1 : 0] : icon
+  );
+  const [currentSize, setCurrentSize] = useState<IconProps["size"]>(
+    Array.isArray(size) ? size[isPressed ? 1 : 0] : size
+  );
+
+  const handleToggleEvent = useCallback(
+    (e: ButtonToggleEvent) => {
+      if (e.state === "pressed") {
+        if (Array.isArray(icon)) {
+          setCurrentIcon(icon[1]);
+        }
+        if (Array.isArray(size)) {
+          setCurrentSize(size[1]);
+        }
+      } else {
+        if (Array.isArray(icon)) {
+          setCurrentIcon(icon[0]);
+        }
+        if (Array.isArray(size)) {
+          setCurrentSize(size[0]);
+        }
+      }
+      if (onToggle) onToggle(e);
+    },
+    [icon, size, onToggle, setCurrentIcon, setCurrentSize]
+  );
+
+  const buttonProps = {
+    ...(toggle
+      ? { toggle: true, label, variant, pressed, onToggle: handleToggleEvent }
+      : { label, variant }),
+    ...props,
+  } as ButtonProps;
 
   return (
     <Button
-      className={styles.wrapper}
-      clear
-      data-icon-button
-      {...toggleProps}
-      {...props}
+      ref={ref}
+      grow={grow}
+      shrink={shrink}
+      inverted={inverted}
+      {...buttonProps}
     >
-      <Icon prefix={currentPrefix} icon={currentIcon} />
+      <Icon icon={currentIcon} size={currentSize} aria-hidden />
     </Button>
   );
-};
+});

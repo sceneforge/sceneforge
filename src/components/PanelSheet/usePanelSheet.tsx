@@ -8,7 +8,7 @@ import {
 import { changeSize, targetClicked } from "./panelHandler";
 
 export const usePanelSheet = (
-  panelRef: RefObject<HTMLDivElement>,
+  panelRef: RefObject<HTMLDivElement | null>,
   resizeable: boolean,
   orientation: "block" | "inline",
   position: "start" | "end"
@@ -19,22 +19,31 @@ export const usePanelSheet = (
     setClickDown(false);
   }, [setClickDown]);
 
-  const mouseDown = useCallback((event: MouseEvent) => {
-    if (resizeable && targetClicked(panelRef.current, orientation, position, event, "::after")) {
-      setClickDown(true);
-    } else {
-      setClickDown(false);
-    }
-  }, [resizeable, panelRef, orientation, position, setClickDown]);
+  const mouseDown = useCallback(
+    (event: MouseEvent) => {
+      if (
+        resizeable &&
+        targetClicked(panelRef.current, orientation, position, event, "::after")
+      ) {
+        setClickDown(true);
+      } else {
+        setClickDown(false);
+      }
+    },
+    [resizeable, panelRef, orientation, position, setClickDown]
+  );
 
-  const mouseOver: MouseEventHandler<HTMLDivElement> = useCallback((event) => {
-    if (!resizeable) return;
-    if (!clickDown) return;
+  const mouseOver: MouseEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      if (!resizeable) return;
+      if (!clickDown) return;
 
-    event.preventDefault();
-    event.stopPropagation();
-    changeSize(panelRef.current, orientation, position, event);
-  }, [resizeable, panelRef, clickDown, orientation, position]);
+      event.preventDefault();
+      event.stopPropagation();
+      changeSize(panelRef.current, orientation, position, event);
+    },
+    [resizeable, panelRef, clickDown, orientation, position]
+  );
 
   useEffect(() => {
     if (resizeable && panelRef.current) {
@@ -50,6 +59,6 @@ export const usePanelSheet = (
 
   return {
     mouseOver,
-    clickDown
+    clickDown,
   };
 };

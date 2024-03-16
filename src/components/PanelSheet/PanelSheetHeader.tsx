@@ -6,7 +6,6 @@ import {
   type SyntheticEvent
 } from "react";
 import { H2 } from "../Heading";
-import styles from "./PanelSheetHeader.module.css";
 
 export type PanelSheetHeaderProps = PropsWithChildren<{
   title: string;
@@ -22,30 +21,33 @@ export const PanelSheetHeader = ({
   editable,
   children,
   onChange,
-  onInput
+  onInput,
 }: PanelSheetHeaderProps) => {
-
   const [currentTitle, setCurrentTitle] = useState<string>(title);
 
-  const handleInput = useCallback((event: SyntheticEvent<HTMLInputElement, InputEvent>) => {
-    if (event.target instanceof HTMLInputElement) {
-      setCurrentTitle(event.target.value);
-    }
-    if (onInput) {
-      onInput(event);
-    }
-  }, [onInput, setCurrentTitle]);
+  const handleInput = useCallback(
+    (event: SyntheticEvent<HTMLInputElement, InputEvent>) => {
+      if (event.target instanceof HTMLInputElement) {
+        setCurrentTitle(event.target.value);
+      }
+      if (onInput) {
+        onInput(event);
+      }
+    },
+    [onInput, setCurrentTitle]
+  );
 
   return (
-    <div className={styles.wrapper}>
+    <div className="max-h-10 flex flex-row justify-stretch items-center p-2 light:bg-white:15 dark:bg-black:15 b-b-1 b-b-solid b-b-black:25 b-t-1 b-t-solid b-t-white:25 c-light">
       <H2
+        className="flex-grow"
         clickToEdit={editable}
         name={name}
         text={currentTitle}
         onChange={onChange}
         onInput={handleInput}
       />
-      <div className={styles.toolbar}>
+      <div className="flex-shrink flex flex-row items-center c-inherit">
         {children}
       </div>
     </div>

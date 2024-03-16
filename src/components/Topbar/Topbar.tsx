@@ -1,52 +1,48 @@
-import { useCallback, type PropsWithChildren } from "react";
-import { IconButton, type IconButtonProps } from "../../components/IconButton/IconButton";
-import { usePanel } from "../Panel";
-import { SideBar } from "../SideBar";
-import { SidePanel } from "../SidePanel/SidePanel";
 import { useTabPanel } from "../TabPanel";
-import styles from "./Topbar.module.css";
+import { Variant } from "../../types/variants";
+import { cls } from "../../lib/cls";
+import { variantBgClass } from "../../lib/variantClasses";
+import { Action, ActionProps } from "../Action";
 
-export type TopbarProps = PropsWithChildren<{
+export type TopbarProps = {
   title: string;
-  iconButtonsStart?: IconButtonProps[];
-  iconButtonsEnd?: IconButtonProps[];
-}>;
+  variant?: Variant;
+  actionsStart?: ActionProps[];
+  actionsEnd?: ActionProps[];
+};
 
 export const Topbar = ({
   title,
-  iconButtonsStart,
-  iconButtonsEnd,
-  children
+  actionsStart,
+  actionsEnd,
+  variant = "default",
 }: TopbarProps) => {
-  const { menuShow, setMenuShow, sidePanelShow } = usePanel();
   const { tabsPosition } = useTabPanel();
 
-  const toggleMenu = useCallback(() => {
-    if (setMenuShow) {
-      setMenuShow((value) => !value);
-    }
-  }, [setMenuShow]);
-
   return (
-    <header data-tabs-position={tabsPosition} className={styles.wrapper}>
-      <SideBar menuOpen={menuShow}>{children}</SideBar>
-      <SidePanel show={sidePanelShow} />
-      <div className={styles.bar}>
-        <IconButton
-          aria-label="Menu"
-          icon={menuShow ? "close" : "bars"}
-          title="Menu"
-          onClick={toggleMenu}
-        />
-        <h1>{title}</h1>
-        {iconButtonsStart?.length && (
-          <div className={styles.ibs}>
-            {iconButtonsStart.map((props, index) => (<IconButton key={index} {...props} />))}
+    <header
+      data-tabs-position={tabsPosition}
+      className="fixed inset-inline-0 inset-block-0 h-10 w-full bg-white dark:bg-black"
+    >
+      <div
+        className={cls(
+          "absolute text-light w-full h-full ps pe flex flex-row items-center justify-stretch gap-4 inset-inline-0 inset-block-0 h-full b-b-2 b-b-solid light:b-b-white:20 dark:b-b-black:20 shadow shadow-md shadow-black:30",
+          variant ? variantBgClass[variant] : "bg-primary"
+        )}
+      >
+        <h1 className="font-size-4 p-0 m-0">{title}</h1>
+        {actionsStart?.length && (
+          <div className="flex-grow flex gap-2 flex-row p-0 m-0 h-full justify-start">
+            {actionsStart.map((props, index) => (
+              <Action key={index} {...props} />
+            ))}
           </div>
         )}
-        {iconButtonsEnd?.length && (
-          <div className={styles.ibe}>
-            {iconButtonsEnd.map((props, index) => (<IconButton key={index} {...props} />))}
+        {actionsEnd?.length && (
+          <div className="flex-grow flex gap-2 flex-row p-0 m-0 h-full justify-end">
+            {actionsEnd.map((props, index) => (
+              <Action key={index} {...props} />
+            ))}
           </div>
         )}
       </div>
