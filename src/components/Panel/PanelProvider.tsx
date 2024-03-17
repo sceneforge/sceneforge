@@ -7,7 +7,7 @@ import {
   type Dispatch,
   type PropsWithChildren,
   type ReactNode,
-  type SetStateAction
+  type SetStateAction,
 } from "react";
 import { type Database } from "../../lib/Database";
 
@@ -24,9 +24,9 @@ interface WindowControlsOverlay {
 }
 
 const isOverlayVisible = (): boolean => {
-  return "windowControlsOverlay" in window.navigator ? (
-    window.navigator.windowControlsOverlay as WindowControlsOverlay
-  ).visible : false;
+  return "windowControlsOverlay" in window.navigator
+    ? (window.navigator.windowControlsOverlay as WindowControlsOverlay).visible
+    : false;
 };
 
 export interface PanelContextType {
@@ -54,18 +54,16 @@ export type PanelProviderProps = PropsWithChildren<{
   userData: Database<"UserData">;
 }>;
 
-export const PanelProvider = ({
-  title,
-  userData,
-  children
-}: PanelProviderProps) => {
+export const PanelProvider = ({ title, userData, children }: PanelProviderProps) => {
   const [appTitle, setAppTitle] = useState<string | undefined>(title);
   const [menuShow, setMenuShow] = useState(false);
   const [sidePanelShow, setSidePanelShow] = useState(false);
   const [sidePanelContent, setSidePanelContent] = useState<ReactNode>();
 
   const windowControlsOverlayRef = useRef<WindowControlsOverlay | null>(null);
-  const [overlayVisible, setOverlayVisible] = useState<boolean>(isOverlayVisible());
+  const [overlayVisible, setOverlayVisible] = useState<boolean>(
+    isOverlayVisible()
+  );
 
   const updateOverlayVisibility = useCallback(() => {
     if (windowControlsOverlayRef.current) {
@@ -79,8 +77,8 @@ export const PanelProvider = ({
 
   useEffect(() => {
     if ("navigator" in window && "windowControlsOverlay" in window.navigator) {
-      windowControlsOverlayRef.current = window
-        .navigator.windowControlsOverlay as WindowControlsOverlay;
+      windowControlsOverlayRef.current = window.navigator
+        .windowControlsOverlay as WindowControlsOverlay;
 
       windowControlsOverlayRef.current.addEventListener(
         "geometrychange",
@@ -102,19 +100,21 @@ export const PanelProvider = ({
   }, [appTitle, updateOverlayVisibility, windowControlsOverlayRef]);
 
   return (
-    <PanelContext.Provider value={{
-      defaultAppTitle: title,
-      appTitle,
-      setAppTitle,
-      overlayVisible,
-      menuShow,
-      sidePanelShow,
-      setMenuShow,
-      setSidePanelShow,
-      sidePanelContent,
-      setSidePanelContent,
-      userData,
-    }}>
+    <PanelContext.Provider
+      value={{
+        defaultAppTitle: title,
+        appTitle,
+        setAppTitle,
+        overlayVisible,
+        menuShow,
+        sidePanelShow,
+        setMenuShow,
+        setSidePanelShow,
+        sidePanelContent,
+        setSidePanelContent,
+        userData,
+      }}
+    >
       {children}
     </PanelContext.Provider>
   );

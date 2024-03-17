@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { type MouseEvent, useCallback, useEffect, useRef } from "react";
 import { TabItem } from "./TabItem";
 
 import { useTabPanel } from "./useTabPanel";
 import { type Variant } from "../../types/variants";
 import { cls } from "../../lib/cls";
 import { variantBgClass } from "../../lib/variantClasses";
+import { useContextMenu } from "../ContextMenu";
 
 export type TabListProps = {
   variant?: Variant;
@@ -13,6 +14,7 @@ export type TabListProps = {
 export const TabList = ({ variant = "default" }: TabListProps) => {
   const { tabs, tabsPosition, closeTab, newTab, activateTab, defaultTab } =
     useTabPanel();
+  const ref = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     if (tabs.length === 0) {
@@ -20,8 +22,32 @@ export const TabList = ({ variant = "default" }: TabListProps) => {
     }
   }, [tabs, newTab, defaultTab]);
 
+  const { openContextMenu } = useContextMenu();
+
+  const handleTabListContextMenu = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      if (ref.current && ref.current === event.target) {
+        openContextMenu({
+          event,
+          header: "Tab Context Menu",
+          items: [
+            {
+              type: "item",
+              label: "New Tab",
+              onClick: () => {
+                console.log("DEBUG: New Tab");
+              },
+            },
+          ],
+        });
+      }
+    },
+    [openContextMenu]
+  );
+
   return (
     <ul
+      ref={ref}
       className={cls(
         "flex flex-row justify-start list-none p-inline-2 m-0 gap-2 text-light",
         variantBgClass[variant]
@@ -36,6 +62,7 @@ export const TabList = ({ variant = "default" }: TabListProps) => {
           : "p-t-0 p-b-2 dark:shadow-black:25 light:shadow-white:25 shadow-inner"
       )}
       role="tablist"
+      onContextMenu={handleTabListContextMenu}
     >
       {tabs.map((tab, index) => (
         <TabItem
