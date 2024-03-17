@@ -1,26 +1,51 @@
-.topbar {
-  @apply: fixed bg-white dark:bg-black b-b-1 b-b-solid b-b-black:75 shadow shadow-md shadow-black:30 w-full h-10 inset-t-0 inset-x-0;
+.app-region-drag {
   -webkit-app-region: drag;
   app-region: drag;
 
-  button {
+  button, a, input, select {
     -webkit-app-region: no-drag;
     app-region: no-drag;
   }
-
-  .topbar-inner {
-    @apply: absolute text-light w-full h-full ps pe flex flex-row items-center justify-stretch gap-2 inset-inline-0 inset-block-0 h-full;
-  }
 }
 
-@media (display-mode: window-controls-overlay) { 
-  .topbar {
-    height: env(titlebar-area-height, 2.5rem);
+.titlebar-area-height {
+  @apply: h-10;
+}
 
-    .topbar-inner {
-      width: env(titlebar-area-width, 100%);
-      inset-inline-start: env(titlebar-area-x, 0);
-      inset-block-start: env(titlebar-area-y, 0);
-    }
+.titlebar-area-width {
+  @apply: w-full;
+}
+
+.inset-titlebar-area-x {
+  @apply: inset-inline-start-0;
+}
+
+.inset-titlebar-area-y {
+  @apply: inset-block-start-0;
+}
+
+.p-t-titlebar-area-y {
+  @apply: p-t-10;
+}
+
+@media (display-mode: window-controls-overlay) {
+  .titlebar-area-height {
+    height: env(titlebar-area-height);
+  }
+
+  .titlebar-area-width {
+    width: env(titlebar-area-width);
+  }
+
+  .inset-titlebar-area-x {
+    inset-inline-start: env(titlebar-area-x);
+  }
+
+  .inset-titlebar-area-y {
+    inset-block-start: env(titlebar-area-y);
+  }
+
+  .p-t-titlebar-area-y {
+    padding-top: env(titlebar-area-height);
   }
 }

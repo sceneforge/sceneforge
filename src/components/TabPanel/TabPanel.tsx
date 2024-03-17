@@ -2,8 +2,14 @@ import { Suspense, useEffect } from "react";
 import { usePanel } from "../Panel";
 import { TabList } from "./TabList";
 import { useTabPanel } from "./useTabPanel";
+import { cls } from "../../lib/cls";
+import { Variant } from "../../types/variants";
 
-export const TabPanel = () => {
+export type TabPanelProps = {
+  variant?: Variant;
+};
+
+export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
   const { getUserData } = usePanel();
   const { tabs, tabsPosition, setTabsPosition } = useTabPanel();
 
@@ -21,10 +27,14 @@ export const TabPanel = () => {
 
   return (
     <main
-      data-tabs-position={tabsPosition}
-      className="flex flex-col-reverse w-full h-full justify-stretch"
+      className={cls(
+        "flex w-full h-full justify-stretch",
+        tabsPosition === "top"
+          ? "flex-col p-t-titlebar-area-y"
+          : "flex-col-reverse"
+      )}
     >
-      <TabList />
+      <TabList variant={variant} />
       <div className="relative flex-grow h-full w-full">
         <Suspense>
           {tabs.map(({ component: TabComponent, active, props }, index) => (

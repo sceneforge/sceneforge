@@ -23,7 +23,7 @@ export const App = ({ userData }: AppProps) => {
           component: HomeTab,
         }}
       >
-        <TabPanel />
+        <TabPanel variant="default" />
         <AppNav />
       </TabPanelProvider>
       <ReloadPrompt />

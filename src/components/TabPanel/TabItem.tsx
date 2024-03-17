@@ -1,5 +1,7 @@
+import { cls } from "../../lib/cls";
 import { Button } from "../Button";
 import { IconButton } from "../IconButton";
+import { useTabPanel } from "./useTabPanel";
 
 export interface TabItemProps {
   title: string;
@@ -16,11 +18,16 @@ export const TabItem = ({
   active,
   index,
 }: TabItemProps) => {
+  const { tabsPosition } = useTabPanel();
+
   return (
-    <li className="relative min-w-24 max-w-80 overflow-clip text-light">
+    <li className="relative min-w-24 max-w-80 overflow-clip c-inherit">
       <div className="w-full h-full flex flex-row justify-stretch items-center">
         <Button
-          className="c-light b-none b-0 flex-grow p-block-3 p-inline-2 text-start w-full h-full rounded-bl-2 bg-transparent siblings:bg-transparent siblings:c-transparent aria-selected:bg-accent:65 siblings:aria-selected:bg-accent:65 siblings:aria-selected:c-light:25 siblings:hover:c-light:50"
+          className={cls(
+            "c-inherit b-none b-0 flex-grow p-block-3 p-inline-2 text-start w-full h-full bg-transparent siblings:bg-transparent siblings:c-transparent aria-selected:bg-accent:65 siblings:aria-selected:bg-accent:65 siblings:aria-selected:c-light:25 siblings:hover:c-light:50",
+            tabsPosition === "top" ? "rounded-tl-2" : "rounded-bl-2"
+          )}
           aria-controls={`tabpanel-${index}`}
           aria-label={title}
           aria-selected={active ? "true" : "false"}
@@ -32,7 +39,10 @@ export const TabItem = ({
           {title}
         </Button>
         <IconButton
-          className="b-none b-0 flex-shrink p-block-3 p-inline-2 h-full rounded-br-2 hover:c-light:100 cursor-pointer"
+          className={cls(
+            "b-none b-0 flex-shrink p-block-3 p-inline-2 h-full hover:c-light:100 cursor-pointer",
+            tabsPosition === "top" ? "rounded-tr-2" : "rounded-br-2"
+          )}
           icon="close"
           label="close"
           tabIndex={-1}
