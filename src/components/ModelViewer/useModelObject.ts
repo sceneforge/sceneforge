@@ -1,4 +1,5 @@
-import { useCallback, useId, useState } from "react";
+import { v4 as uuid } from "uuid";
+import { useCallback, useState } from "react";
 import { usePanel } from "../Panel";
 import type { ModelProps } from "./ModelViewer";
 
@@ -49,7 +50,7 @@ export const useModelObject = ({ id, title, gltf, capture }: ModelProps) => {
         );
       } else {
         const now = new Date();
-        setCurrentID(useId());
+        setCurrentID(uuid());
         setCurrentCreatedAt(now);
         setCurrentUpdatedAt(now);
         setLoadState("loaded");

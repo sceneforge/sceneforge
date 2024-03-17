@@ -1,4 +1,5 @@
-import { useCallback, useId } from "react";
+import { v4 as uuid } from "uuid";
+import { useCallback } from "react";
 import { useTabPanel } from "../components/TabPanel";
 import { ModelViewTab, type ModelViewTabProps } from "../tabs";
 
@@ -16,7 +17,7 @@ export const useTabs = () => {
       }
 
       newTab<ModelViewTabProps>({
-        id: id ?? useId(),
+        id: id ?? uuid(),
         title: title ?? "Untitled Model",
         props: { id, title, gltf },
         active: true,

@@ -12,7 +12,7 @@ import { type Variant } from "../../types/variants";
 
 export type MenuItem =
   | (ActionProps & { type: "item" })
-  | { type: "divider"; onClick: never };
+  | { type: "divider"; icon: never; toggle: never; onClick: never };
 
 export type ContextMenuContextType = {
   showContextMenu?: boolean;

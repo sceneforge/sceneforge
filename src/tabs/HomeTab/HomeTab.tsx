@@ -34,7 +34,7 @@ export const HomeTab = Tab(({ active }: HomeTabProps) => {
 
   return (
     <SafeArea vertical>
-      <Carousel title="Recent Models">
+      <Carousel title="Models">
         {recentModels.map((model, index) => (
           <Card
             variant="accent"
