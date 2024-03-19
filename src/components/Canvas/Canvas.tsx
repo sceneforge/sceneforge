@@ -11,7 +11,7 @@ export type CanvasProps = Omit<DetailedHTMLProps<
 
 export const Canvas = forwardRef(
   function Canvas(props: CanvasProps, ref: ForwardedRef<HTMLCanvasElement>) {
-    return <canvas className="w-full h-90% touch-none" {...props} ref={ref} />;
+    return <canvas className="h-90% w-full touch-none" {...props} ref={ref} />;
   }
 );
 

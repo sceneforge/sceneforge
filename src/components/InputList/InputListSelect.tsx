@@ -17,7 +17,7 @@ export const InputListSelect = forwardRef(function InputListSelect(
   return (
     <div className="relative">
       <select
-        className="c-inherit appearance-none block bg-accent p-block-1 p-inline-3 b-solid b-0.25rem b-accent:20 rounded-4 min-w-max m-r-3 after:content-[▼] after:c-inherit after:block after:absolute after:w-5 after:h-full after:pointer-events-none after:opacity-50 inset-r-2"
+        className="inset-r-2 m-r-3 block min-w-max appearance-none b-0.25rem b-accent:20 rounded-4 b-solid bg-accent p-block-1 p-inline-3 c-inherit after:pointer-events-none after:absolute after:block after:h-full after:w-5 after:c-inherit after:opacity-50 after:content-[▼]"
         id={id}
         ref={ref}
         name={name}

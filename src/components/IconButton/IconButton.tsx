@@ -49,7 +49,7 @@ export const IconButton = forwardRef(function IconButton(
     if (typeof pressed === "boolean") return pressed;
     if (typeof pressed === "string") return pressed === "true";
     return false;
-  }, []);
+  }, [pressed, toggle]);
 
   const [currentIcon, setCurrentIcon] = useState<IconProps["icon"]>(
     Array.isArray(icon) ? icon[isPressed ? 1 : 0] : icon

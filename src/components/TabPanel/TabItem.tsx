@@ -21,8 +21,8 @@ export const TabItem = ({
   const { tabsPosition } = useTabPanel();
 
   return (
-    <li className="relative min-w-24 max-w-80 overflow-clip c-inherit">
-      <div className="w-full h-full flex flex-row justify-stretch items-center">
+    <li className="relative max-w-80 min-w-24 overflow-clip c-inherit">
+      <div className="h-full w-full flex flex-row items-center justify-stretch">
         <Button
           className={cls(
             "c-inherit b-none b-0 flex-grow p-block-3 p-inline-2 text-start w-full h-full bg-transparent siblings:bg-transparent siblings:c-transparent aria-selected:bg-accent:65 siblings:aria-selected:bg-accent:65 siblings:aria-selected:c-light:25 siblings:hover:c-light:50",

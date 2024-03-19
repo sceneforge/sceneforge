@@ -1,10 +1,8 @@
-const unocss = require("@unocss/eslint-config/flat");
-
 module.exports = {
-  unocss,
   root: true,
   env: { browser: true, es2020: true },
   extends: [
+    "@unocss",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",

@@ -116,7 +116,7 @@ export const Button = forwardRef(function Button(
         }
       }
     },
-    [onToggle, pressedState, variant, label]
+    [toggle, isPressed, onToggle, variant, label, pressedState]
   );
 
   useImperativeHandle(
@@ -138,7 +138,7 @@ export const Button = forwardRef(function Button(
       handleToggle(event);
       if (onClick) onClick(event);
     },
-    [toggle, onClick, onToggle, isPressed, pressedState]
+    [handleToggle, onClick]
   );
 
   useEffect(() => {

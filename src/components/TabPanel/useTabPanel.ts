@@ -8,6 +8,7 @@ import {
 } from "./TabPanelProvider";
 
 export const useTabPanel = () => {
+  const unknownId = useId();
   const { updateTitle } = usePanel();
   const {
     tabs,
@@ -81,8 +82,8 @@ export const useTabPanel = () => {
   const defaultTab = useMemo((): TabContext => {
     if (!defaultTabComponent)
       return {
-        id: useId(),
-        title: "",
+        id: unknownId,
+        title: "Undefined Tab",
         active: false,
         component: Tab(() => null),
       };
@@ -91,7 +92,7 @@ export const useTabPanel = () => {
       ...defaultTabComponent,
       active: true,
     };
-  }, [defaultTabComponent]);
+  }, [unknownId, defaultTabComponent]);
 
   const getTabByTitle = useCallback(
     (title: string) => {

@@ -22,14 +22,17 @@ export const ContextMenu = () => {
         clearContextMenu();
       }
     },
-    [clearContextMenu, ref]
+    [clearContextMenu]
   );
 
-  const handleClickOut = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event.target as Node)) {
-      clearContextMenu();
-    }
-  };
+  const handleClickOut = useCallback(
+    (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        clearContextMenu();
+      }
+    },
+    [clearContextMenu]
+  );
 
   useEffect(() => {
     if (show) {
@@ -49,7 +52,7 @@ export const ContextMenu = () => {
         window.removeEventListener("contextmenu", handleClickOut, true);
       };
     }
-  }, [show, clearContextMenu]);
+  }, [show, clearContextMenu, handleClickOut, handleKeyDown]);
 
   useLayoutEffect(() => {
     setPosition(ref);
@@ -68,7 +71,7 @@ export const ContextMenu = () => {
       )}
     >
       {header && (
-        <li className="light:bg-black:10 dark:bg-white:10 rounded-1 p-block-1 p-inline-2 font-size-3 opacity-50 b-b-1 b-b-solid light:b-b-white:15 dark:b-b-black:15">
+        <li className="b-b-1 rounded-1 b-b-solid p-block-1 p-inline-2 font-size-3 opacity-50 dark:b-b-black:15 light:b-b-white:15 dark:bg-white:10 light:bg-black:10">
           {header}
         </li>
       )}
@@ -80,7 +83,7 @@ export const ContextMenu = () => {
             ) : (
               <Action
                 {...item}
-                className="b-none bg-transparent c-inherit w-full text-start p-2 rounded light:hover:bg-white:15 dark:hover:bg-black:15"
+                className="w-full rounded b-none bg-transparent p-2 text-start c-inherit dark:hover:bg-black:15 light:hover:bg-white:15"
                 onClick={handleItemClick(onClick)}
               />
             )}

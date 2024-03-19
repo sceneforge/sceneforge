@@ -20,7 +20,7 @@ export const PanelSheetHeaderGroup = ({
         {title && !description && <h3 className="font-size-sm">{title}</h3>}
         {title && description && (
           <Popover
-            className="bg-transparent b-0 b-none m-0 p-0 text-inherit"
+            className="m-0 b-0 b-none bg-transparent p-0 text-inherit"
             label={title}
           >
             {description}

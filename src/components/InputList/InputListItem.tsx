@@ -28,10 +28,10 @@ export const InputListItem = forwardRef(function InputListItem(
   const inputId = id ?? genId;
 
   return (
-    <li className="p-0 m-0 flex flex-row flex-nowrap justify-stretch items-center dark:bg-white:15 light:bg-black:15 b-block-1 b-block-solid dark:b-b-white:15 light:b-b-black:15 dark:b-t-black:15 light:b-t-white:15 h-12 last-children:m-r-2">
+    <li className="m-0 h-12 flex flex-row flex-nowrap items-center justify-stretch b-block-1 b-block-solid p-0 dark:b-b-white:15 dark:b-t-black:15 light:b-b-black:15 light:b-t-white:15 dark:bg-white:15 light:bg-black:15 last-children:m-r-2">
       <label
         htmlFor={inputId}
-        className="flex-grow w-full font-bold p-block-1 p-l-4 text-start text-shadow-md"
+        className="w-full flex-grow p-l-4 p-block-1 text-start font-bold text-shadow-md"
       >
         {label}
       </label>

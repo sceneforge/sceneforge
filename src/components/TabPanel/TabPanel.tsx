@@ -35,7 +35,7 @@ export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
       )}
     >
       <TabList variant={variant} />
-      <div className="relative flex-grow h-full w-full">
+      <div className="relative h-full w-full flex-grow">
         <Suspense>
           {tabs.map(({ component: TabComponent, active, props }, index) => (
             <TabComponent

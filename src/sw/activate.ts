@@ -1,5 +1,5 @@
 export const activate = () => {
-  self.addEventListener("activate", (_event) => {
+  self.addEventListener("activate", () => {
     // TODO: implement the activate handler
   });
 }

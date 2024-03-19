@@ -7,17 +7,10 @@ import { type AriaAttributes } from "react";
 export type IconProps = AriaAttributes & {
   icon: IconName;
   size?: number;
-  label?: string;
   variant?: Variant;
 };
 
-export const Icon = ({
-  icon,
-  label,
-  variant,
-  size = 4,
-  ...props
-}: IconProps) => {
+export const Icon = ({ icon, variant, size = 4, ...props }: IconProps) => {
   return (
     <span
       role="img"

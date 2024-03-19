@@ -34,25 +34,25 @@ export const Topbar = ({
           variant ? variantBgClass[variant] : "bg-primary"
         )}
       >
-        <h1 className="font-size-4 p-0 m-0">{title}</h1>
+        <h1 className="m-0 p-0 font-size-4">{title}</h1>
         {actionsStart?.length && (
-          <div className="flex-grow flex gap-2 flex-row p-0 m-0 h-full justify-start">
+          <div className="m-0 h-full flex flex-grow flex-row justify-start gap-2 p-0">
             {actionsStart.map((props, index) => (
               <Action
                 key={index}
                 {...props}
-                className="min-w bg-transparent c-inherit b-none"
+                className="min-w b-none bg-transparent c-inherit"
               />
             ))}
           </div>
         )}
         {actionsEnd?.length && (
-          <div className="flex-grow flex gap-2 flex-row p-0 m-0 h-full justify-end">
+          <div className="m-0 h-full flex flex-grow flex-row justify-end gap-2 p-0">
             {actionsEnd.map((props, index) => (
               <Action
                 key={index}
                 {...props}
-                className="min-w bg-transparent c-inherit b-none"
+                className="min-w b-none bg-transparent c-inherit"
               />
             ))}
           </div>

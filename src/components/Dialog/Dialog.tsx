@@ -55,7 +55,7 @@ export const Dialog = forwardRef(function Dialog(
 
   return (
     <dialog
-      className="fixed flex flex-col p-0 m-0 inset-inline-50% inset-block-50% translate--50% light:bg-white dark:bg-black light:text-dark dark:text-light rounded-4 b b-solid b-accent drop-shadow-2xl backdrop:backdrop-filter backdrop:backdrop-blur-2 backdrop:backdrop-grayscale-60 backdrop:bg-accent:10"
+      className="fixed inset-block-50% inset-inline-50% m-0 flex flex-col translate--50% b b-accent rounded-4 b-solid p-0 drop-shadow-2xl backdrop:bg-accent:10 dark:bg-black light:bg-white dark:text-light light:text-dark backdrop:backdrop-blur-2 backdrop:backdrop-grayscale-60 backdrop:backdrop-filter"
       ref={dialogRef}
       onClose={onClose}
       onCancel={onCancel}
@@ -63,10 +63,10 @@ export const Dialog = forwardRef(function Dialog(
       aria-describedby={description && descriptionId}
       {...props}
     >
-      <div className="select-none flex-shrink w-full flex flex-row flex-nowrap justify-stretch p-2 gap-2 bg-accent:75 b-b b-b-solid b-b-black:20">
+      <div className="w-full flex flex-shrink flex-row flex-nowrap select-none justify-stretch gap-2 b-b b-b-black:20 b-b-solid bg-accent:75 p-2">
         <h1
           id={headId}
-          className="p-0 m-0 flex-grow text-size-sm text-nowrap text-start"
+          className="m-0 flex-grow p-0 text-start text-nowrap text-size-sm"
         >
           {title}
         </h1>
@@ -80,9 +80,9 @@ export const Dialog = forwardRef(function Dialog(
       <div
         role="document"
         tabIndex={0}
-        className="flex-grow flex flex-col justify-stretch bg-accent:40 text-size-sm text-start"
+        className="flex flex-grow flex-col justify-stretch bg-accent:40 text-start text-size-sm"
       >
-        <div className="p-2 m-b">
+        <div className="m-b p-2">
           {description && (
             <p className="m-0" id={descriptionId}>
               {description}
@@ -95,7 +95,7 @@ export const Dialog = forwardRef(function Dialog(
           )}
         </div>
         {actions && actions.length > 0 && (
-          <div className="w-full flex flex-row justify-center items-center p-2 bg-accent:50 text-center">
+          <div className="w-full flex flex-row items-center justify-center bg-accent:50 p-2 text-center">
             {actions.map((props, index) => (
               <Fragment key={index}>
                 {"icon" in props && props.icon ? (

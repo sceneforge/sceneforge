@@ -44,11 +44,11 @@ export const PanelSheet = ({
       {resizable && (
         <div
           hidden={!clickDown}
-          className="fixed inset-t-0 inset-l-0 w-full h-full dark:bg-white:5 light:bg-dark:5"
+          className="fixed inset-l-0 inset-t-0 h-full w-full dark:bg-white:5 light:bg-dark:5"
           onMouseMove={mouseOver}
         />
       )}
-      <div className="flex flex-col justify-stretch w-full h-full items-stretch overflow-auto text-light c-inherit">
+      <div className="h-full w-full flex flex-col items-stretch justify-stretch overflow-auto text-light c-inherit">
         {children}
       </div>
     </div>

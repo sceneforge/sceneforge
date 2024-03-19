@@ -7,7 +7,7 @@ export const Carousel = (props: CarouselProps) => {
     <Section
       {...props}
       headingClassName="m-b-4 m-t-0 c-inherit text-start text-shadow-xl p-inline-4"
-      className="flex p-block-2 p-inline-4 flex-row flex-nowrap justify-start items-start gap-4 w-full overflow-y-hidden overflow-x-visible scroll-smooth snap-start snap-always children:flex-basis-80"
+      className="w-full flex flex-row flex-nowrap snap-start snap-always items-start justify-start gap-4 overflow-x-visible overflow-y-hidden scroll-smooth p-block-2 p-inline-4 children:flex-basis-80"
     />
   );
 };

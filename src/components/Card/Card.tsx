@@ -34,10 +34,10 @@ export const Card = ({
       variant && variantBgClass[variant]
         ? variantBgClass[variant]!
         : "bg-primary",
-    []
+    [variant]
   );
   return (
-    <div className="relative dark:bg-black light:bg-white rounded-5 w-full c-inherit overflow-clip">
+    <div className="relative w-full overflow-clip rounded-5 c-inherit dark:bg-black light:bg-white">
       {title && (
         <span
           className={cls(
@@ -50,7 +50,7 @@ export const Card = ({
       )}
       {img && (
         <div className={`${cardBgClass}:35`}>
-          <div className="relative w-full overflow-clip rounded-be-5 dark:bg-black:20 light:bg-white:20 after:content-empty after:block after:p-b-80%">
+          <div className="relative w-full overflow-clip rounded-be-5 after:block dark:bg-black:20 light:bg-white:20 after:p-b-80% after:content-empty">
             <img
               className={cls("absolute block", classesImgZoom[zoom])}
               alt={`Image of ${title}`}

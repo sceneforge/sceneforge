@@ -101,10 +101,10 @@ export const SceneNode = ({ node, onNodeSelect }: SceneNodeProps) => {
 
   return (
     <li id={genId} data-open={open} className="list-none p-l-5 c-inherit">
-      <div className="relative flex flex-row justify-stretch items-center flex-nowrap light:focus-within:bg-white:10 dark:focus-within:bg-black:10 c-inherit dark:hover:bg-white:10 light:hover:bg-black:10">
+      <div className="relative flex flex-row flex-nowrap items-center justify-stretch c-inherit dark:focus-within:bg-black:10 dark:hover:bg-white:10 light:focus-within:bg-white:10 light:hover:bg-black:10">
         {nodeHasChildren && (
           <IconButton
-            className="absolute c-inherit bg-transparent p-0 m-0 b-none b-0 children:rotate--90 children:aria-expanded:rotate-0 translate-x--4"
+            className="absolute m-0 translate-x--4 b-0 b-none bg-transparent p-0 c-inherit children:rotate--90 children:aria-expanded:rotate-0"
             aria-expanded={open}
             aria-controls={`${genId}-children`}
             icon="expandMore"
@@ -114,14 +114,14 @@ export const SceneNode = ({ node, onNodeSelect }: SceneNodeProps) => {
         <Button
           clear
           onClick={handleOnNodeSelect}
-          className="flex-grow flex flex-row justify-start items-center gap-2 bg-transparent b-none b-0 text-start c-inherit w-full h-full p-block-1 cursor-pointer"
+          className="h-full w-full flex flex-grow flex-row cursor-pointer items-center justify-start gap-2 b-0 b-none bg-transparent p-block-1 text-start c-inherit"
         >
           <Icon icon={nodeTypeIconMap[nodeType]} />
-          <span className="flex-grow text-ellipsis text-nowrap overflow-hidden w-0">
+          <span className="w-0 flex-grow overflow-hidden text-ellipsis text-nowrap">
             {nodeName}
           </span>
         </Button>
-        <div className="flex-shrink c-inherit flex flex-row justify-stretch items-center m-block--2">
+        <div className="m-block--2 flex flex-shrink flex-row items-center justify-stretch c-inherit">
           <IconButton
             toggle
             icon={["visibility", "visibilityOff"]}
@@ -135,7 +135,7 @@ export const SceneNode = ({ node, onNodeSelect }: SceneNodeProps) => {
         <ul
           id={`${genId}-children`}
           hidden={!open}
-          className="list-none m-0 p-0 c-inherit"
+          className="m-0 list-none p-0 c-inherit"
         >
           {open &&
             childrenNodes.map((node, index) => (

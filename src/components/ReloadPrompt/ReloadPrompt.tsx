@@ -18,7 +18,7 @@ export const ReloadPrompt = () => {
   const reload = useCallback(() => {
     updateServiceWorker(true);
     close();
-  }, []);
+  }, [close, updateServiceWorker]);
 
   if (!offlineReady && !needRefresh) return null;
 

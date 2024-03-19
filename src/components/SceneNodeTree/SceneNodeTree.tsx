@@ -12,7 +12,7 @@ export type SceneNodeTreeProps = {
 export const SceneNodeTree = ({ scene, onNodeSelect }: SceneNodeTreeProps) => {
   return (
     <div>
-      <ul className="list-none m-0 p-0">
+      <ul className="m-0 list-none p-0">
         {scene &&
           scene.rootNodes
             .sort(compare)

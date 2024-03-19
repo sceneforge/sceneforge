@@ -4,6 +4,7 @@ import presetTypography from "@unocss/preset-typography";
 import transformerDirectives from "@unocss/transformer-directives";
 import presetIcons from "@unocss/preset-icons/browser";
 import { safeList } from "./src/lib/safeList";
+import { type IconifyJSON } from "@iconify/types";
 
 const colors = {
   primary: "#86159d",
@@ -33,11 +34,11 @@ export default defineConfig({
       collections: {
         "material-symbols": () =>
           import("@iconify-json/material-symbols/icons.json").then(
-            (i) => i.default as any
+            (i) => i.default as IconifyJSON
           ),
         "material-symbols-light": () =>
           import("@iconify-json/material-symbols-light/icons.json").then(
-            (i) => i.default as any
+            (i) => i.default as IconifyJSON
           ),
       },
     }),

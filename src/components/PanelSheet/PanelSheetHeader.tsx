@@ -38,7 +38,7 @@ export const PanelSheetHeader = ({
   );
 
   return (
-    <div className="max-h-10 flex flex-row justify-stretch items-center p-2 light:bg-white:15 dark:bg-black:15 b-b-1 b-b-solid b-b-black:25 b-t-1 b-t-solid b-t-white:25 c-light">
+    <div className="max-h-10 flex flex-row items-center justify-stretch b-b-1 b-t-1 b-b-black:25 b-t-white:25 b-b-solid b-t-solid p-2 c-light dark:bg-black:15 light:bg-white:15">
       <H2
         className="flex-grow"
         clickToEdit={editable}
@@ -47,7 +47,7 @@ export const PanelSheetHeader = ({
         onChange={onChange}
         onInput={handleInput}
       />
-      <div className="flex-shrink flex flex-row items-center c-inherit">
+      <div className="flex flex-shrink flex-row items-center c-inherit">
         {children}
       </div>
     </div>

@@ -54,7 +54,7 @@ export const Dropdown = forwardRef(function Dropdown(
       pressed,
       toggle: buttonRef.current?.toggle,
     }),
-    [buttonRef]
+    [pressed]
   );
 
   const clear = useCallback(() => {
@@ -97,7 +97,7 @@ export const Dropdown = forwardRef(function Dropdown(
         }
       }
     },
-    [itemListRef, pressed, clear]
+    [itemListRef, clear]
   );
 
   const handleClickOut = useCallback(
@@ -144,7 +144,7 @@ export const Dropdown = forwardRef(function Dropdown(
         window.removeEventListener("contextmenu", handleClickOut, true);
       };
     }
-  }, [buttonRef]);
+  }, [buttonRef, handleClickOut, handleKeyDown]);
 
   useLayoutEffect(() => {
     if (pressed && itemListRef.current && buttonRef.current?.button) {
@@ -193,7 +193,7 @@ export const Dropdown = forwardRef(function Dropdown(
                 <Action
                   {...item}
                   onClick={handleItemClick(onClick)}
-                  className="bg-transparent w-full c-inherit p-2 b-none light:hover:bg-white:25 dark:hover:bg-black:25 rounded-2 text-start cursor-pointer"
+                  className="w-full cursor-pointer rounded-2 b-none bg-transparent p-2 text-start c-inherit dark:hover:bg-black:25 light:hover:bg-white:25"
                 />
               )}
             </li>

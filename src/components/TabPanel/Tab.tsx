@@ -35,7 +35,7 @@ export const Tab = <
         id={tabId}
         role="tabpanel"
         hidden={!props.active}
-        className="relative w-full h-full m-0"
+        className="relative m-0 h-full w-full"
       >
         <Component {...props} />
       </div>

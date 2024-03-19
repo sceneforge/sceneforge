@@ -7,7 +7,7 @@ export interface AboutTabProps {
   title?: string;
 }
 
-export const AboutTab = Tab(({}: AboutTabProps) => {
+export const AboutTab = Tab(() => {
   return (
     <SafeArea vertical horizonal>
       <Section title="About Scene Forge">

@@ -31,7 +31,7 @@ export type ContextMenuContextType = {
 
 export const ContextMenuContext = createContext<ContextMenuContextType>({});
 
-export type ContextMenuProviderProps = PropsWithChildren<{}>;
+export type ContextMenuProviderProps = PropsWithChildren;
 export const ContextMenuProvider = ({ children }: ContextMenuProviderProps) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuHeader, setContextMenuHeader] = useState<
