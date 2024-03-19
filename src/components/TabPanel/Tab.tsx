@@ -1,8 +1,6 @@
 import { PropsWithChildren, useEffect, type ReactNode } from "react";
 
-export type TabProps<
-  P extends Record<string, unknown> = Record<string, unknown>
-> = PropsWithChildren<
+export type TabProps<P extends object> = PropsWithChildren<
   {
     tabId?: string;
     id?: string;
@@ -11,15 +9,13 @@ export type TabProps<
   } & P
 >;
 
-interface TabRenderFunction<
-  P extends Record<string, unknown> = Record<string, unknown>
-> {
+interface TabRenderFunction<P extends object> {
   (props: Omit<TabProps<P>, "tabId">): ReactNode | JSX.Element;
   displayName?: string | undefined;
 }
 
 export const Tab = <
-  P extends Record<string, unknown> = Record<string, unknown>
+  P extends object
 >(
   Component: TabRenderFunction<P>
 ) => {

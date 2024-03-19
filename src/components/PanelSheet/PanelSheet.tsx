@@ -1,15 +1,16 @@
-import { useRef, type PropsWithChildren } from "react";
+import { RefObject, useRef, type PropsWithChildren } from "react";
 import { usePanelSheet } from "./usePanelSheet";
 import { type Variant } from "../../types/variants";
 import { cls } from "../../lib/cls";
 import { variantBgClass } from "../../lib/variantClasses";
+import { Dropdown } from "../Dropdown";
 
 export type PanelSheetProps = PropsWithChildren<{
   variant?: Variant;
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
   resizable?: boolean;
   orientation?: "inline" | "block";
   position?: "start" | "end";
+  dragIndicator?: RefObject<HTMLSpanElement>;
 }>;
 
 export const PanelSheet = ({
@@ -17,15 +18,16 @@ export const PanelSheet = ({
   resizable = false,
   orientation = "block",
   position = "end",
-  size = "md",
+  dragIndicator,
   children,
 }: PanelSheetProps) => {
   const panelRef = useRef<HTMLDivElement>(null);
-  const { clickDown, mouseOver } = usePanelSheet(
+  const { clickDown, mouseOver, updateSize } = usePanelSheet(
     panelRef,
     resizable,
     orientation,
-    position
+    position,
+    dragIndicator
   );
 
   return (
@@ -38,7 +40,6 @@ export const PanelSheet = ({
       data-orientation={orientation}
       data-position={position}
       data-resizable={resizable ? "true" : "false"}
-      data-size={size}
       ref={panelRef}
     >
       {resizable && (
@@ -49,6 +50,18 @@ export const PanelSheet = ({
         />
       )}
       <div className="h-full w-full flex flex-col items-stretch justify-stretch overflow-auto text-light c-inherit">
+        <div className="absolute inset-r-0 inset-t-0 md:hidden">
+          <Dropdown
+            contentVariant="default"
+            icon="dragIndicator"
+            label="Panel Size"
+            items={[70, 65, 60, 55, 50, 45, 40, 35, 30, 25].map((size) => ({
+              type: "item",
+              label: `${size}%`,
+              onClick: () => updateSize({ size }),
+            }))}
+          />
+        </div>
         {children}
       </div>
     </div>

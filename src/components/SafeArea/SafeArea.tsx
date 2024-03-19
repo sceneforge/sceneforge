@@ -18,7 +18,7 @@ export const SafeArea = ({ vertical, horizonal, children }: SafeAreaProps) => {
   const classHorizonal = horizonal ? "p-inline-4" : null;
 
   return (
-    <div className={cls("c-inherit", classVertical, classHorizonal)}>
+    <div className={cls("c-light", classVertical, classHorizonal)}>
       {children}
     </div>
   );

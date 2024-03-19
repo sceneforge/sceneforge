@@ -5,7 +5,6 @@ import { TabPanel } from "../TabPanel/TabPanel";
 import { TabPanelProvider } from "../TabPanel/TabPanelProvider";
 import { AppNav } from "./AppNav";
 import { ReloadPrompt } from "../ReloadPrompt";
-import { useId } from "react";
 import { ContextMenuProvider } from "../ContextMenu";
 
 export interface AppProps {
@@ -13,14 +12,12 @@ export interface AppProps {
 }
 
 export const App = ({ userData }: AppProps) => {
-  const id = useId();
-
   return (
     <PanelProvider title="SceneForge" userData={userData}>
       <ContextMenuProvider>
         <TabPanelProvider
           defaultTab={{
-            id,
+            id: "home",
             title: "Scene Forge",
             component: HomeTab,
           }}

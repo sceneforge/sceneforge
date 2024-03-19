@@ -1,13 +1,13 @@
 import {
   useCallback,
   useRef,
-  useLayoutEffect,
   useEffect,
   forwardRef,
   ForwardedRef,
   useImperativeHandle,
   useState,
   MouseEventHandler,
+  useId,
 } from "react";
 import { Action, type ActionProps } from "../Action";
 import {
@@ -46,6 +46,8 @@ export const Dropdown = forwardRef(function Dropdown(
   const buttonRef = useRef<ButtonComponent>(null);
   const itemListRef = useRef<HTMLUListElement>(null);
   const [pressed, setPressed] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const popoverId = useId();
 
   useImperativeHandle(
     ref,
@@ -59,6 +61,7 @@ export const Dropdown = forwardRef(function Dropdown(
 
   const clear = useCallback(() => {
     setPressed(false);
+    itemListRef.current?.hidePopover();
     if (onToggle)
       onToggle({
         type: "toggle",
@@ -115,12 +118,14 @@ export const Dropdown = forwardRef(function Dropdown(
   const handleToggle = useCallback(
     (event: ButtonToggleEvent) => {
       setPressed(event.state === "pressed");
-      if (event.state === "pressed") {
-        setPressed(true);
-      }
+      setTimeout(() => {
+        if (pressed && itemListRef.current && buttonRef.current?.button) {
+          setPositionOnTarget(itemListRef.current, buttonRef.current.button);
+        }
+      }, 100);
       if (onToggle) onToggle(event);
     },
-    [setPressed, onToggle]
+    [onToggle, pressed]
   );
 
   const handleItemClick = useCallback(
@@ -146,11 +151,25 @@ export const Dropdown = forwardRef(function Dropdown(
     }
   }, [buttonRef, handleClickOut, handleKeyDown]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (pressed && itemListRef.current && buttonRef.current?.button) {
-      setPositionOnTarget(itemListRef.current, buttonRef.current.button);
+      const button = buttonRef.current.button;
+      const list = itemListRef.current;
+      const interval = setInterval(() => {
+        setPositionOnTarget(list, button);
+        if (visible !== true) {
+          setVisible(true);
+        }
+      }, 100);
+
+      return () => {
+        if (visible !== false) {
+          setVisible(false);
+        }
+        clearInterval(interval);
+      };
     }
-  }, [pressed, buttonRef, itemListRef]);
+  }, [pressed, buttonRef, itemListRef, visible, setVisible]);
 
   const buttonProps = {
     ...props,
@@ -166,23 +185,29 @@ export const Dropdown = forwardRef(function Dropdown(
           toggle
           pressed={pressed}
           ref={buttonRef}
+          popovertargetaction={pressed ? "show" : "hide"}
+          popovertarget={popoverId}
         />
       ) : (
         <Button
           {...(buttonProps as ButtonProps)}
           toggle
           pressed={pressed}
+          popovertargetaction={pressed ? "show" : "hide"}
           ref={buttonRef}
         />
       )}
-      {pressed && items && items.length && (
+      {items && items.length && (
         <ul
+          id={popoverId}
+          popover="manual"
           ref={itemListRef}
           className={cls(
             "fixed w-min list-none m-0 p-2 b-1 b-solid light:b-white:15 dark:b-black:15 c-inherit shadow-2xl shadow-black rounded-3",
             contentVariant && variantBgClass[contentVariant]
               ? variantBgClass[contentVariant]
-              : "bg-accent"
+              : "bg-accent",
+            visible ? "opacity-100" : "opacity-0 pointer-events-none"
           )}
         >
           {items.map(({ type, onClick, ...item }, index) => (

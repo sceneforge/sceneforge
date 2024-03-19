@@ -25,7 +25,7 @@ export const TabItem = ({
       <div className="h-full w-full flex flex-row items-center justify-stretch">
         <Button
           className={cls(
-            "c-inherit b-none b-0 flex-grow p-block-3 p-inline-2 text-start w-full h-full bg-transparent siblings:bg-transparent siblings:c-transparent aria-selected:bg-accent:65 siblings:aria-selected:bg-accent:65 siblings:aria-selected:c-light:25 siblings:hover:c-light:50",
+            "c-inherit b-none b-0 flex-grow p-block-3 p-inline-2 text-start text-nowrap text-ellipsis w-full h-full overflow-clip bg-transparent siblings:bg-transparent siblings:c-transparent aria-selected:bg-accent:65 siblings:aria-selected:bg-accent:65 siblings:aria-selected:c-light:25 siblings:hover:c-light:50",
             tabsPosition === "top" ? "rounded-tl-2" : "rounded-bl-2"
           )}
           aria-controls={`tabpanel-${index}`}

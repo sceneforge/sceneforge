@@ -1,5 +1,6 @@
 import { type PropsWithChildren, type ReactNode } from "react";
 import { Popover } from "../Popover";
+import { Heading } from "../Heading";
 
 export type PanelSheetHeaderGroupProps = PropsWithChildren<{
   title?: string;
@@ -17,10 +18,14 @@ export const PanelSheetHeaderGroup = ({
         className="flex flex-row items-center text-inherit"
         aria-label={title}
       >
-        {title && !description && <h3 className="font-size-sm">{title}</h3>}
+        {title && !description && (
+          <Heading level={3} className="hidden font-size-sm sm:block">
+            {title}
+          </Heading>
+        )}
         {title && description && (
           <Popover
-            className="m-0 b-0 b-none bg-transparent p-0 text-inherit"
+            className="m-0 hidden b-0 b-none bg-transparent p-0 text-inherit sm:block"
             label={title}
           >
             {description}

@@ -38,7 +38,7 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     disposeAll,
     openGLTFBlob,
     renderSceneLoop,
-    stopRenderSceneLoop
+    stopRenderSceneLoop,
   } = useModelViewer(canvasRef);
 
   const {
@@ -48,25 +48,28 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     currentGLTF,
     loadRecentModel,
     saveRecentModel,
-    updateTitle
+    updateTitle,
   } = useModelObject({ ...props, capture });
 
   const loadModel = useCallback(() => {
-    loadRecentModel().then(() => {
-      setLoaded(true);
-    }).catch(console.error);
+    loadRecentModel()
+      .then(() => {
+        setLoaded(true);
+      })
+      .catch(console.error);
   }, [setLoaded, loadRecentModel]);
 
-  const handleInput = useCallback((
-    event: SyntheticEvent<HTMLInputElement, InputEvent>
-  ) => {
-    if (event.target instanceof HTMLInputElement) {
-      updateTitle(event.target.value);
-      if (currentID) {
-        updateTabTitle(currentID, event.target.value);
+  const handleInput = useCallback(
+    (event: SyntheticEvent<HTMLInputElement, InputEvent>) => {
+      if (event.target instanceof HTMLInputElement) {
+        updateTitle(event.target.value);
+        if (currentID) {
+          updateTabTitle(currentID, event.target.value);
+        }
       }
-    }
-  }, [currentID, updateTabTitle, updateTitle]);
+    },
+    [currentID, updateTabTitle, updateTitle]
+  );
 
   useEffect(() => {
     if (currentID) {
@@ -85,11 +88,7 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     if (loadState === "loaded") {
       saveRecentModel();
     }
-  }, [
-    loadState,
-    loadModel,
-    saveRecentModel,
-  ]);
+  }, [loadState, loadModel, saveRecentModel]);
 
   useEffect(() => {
     if (loaded && currentGLTF) {
@@ -107,19 +106,13 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   }, [active, loadState, renderSceneLoop, stopRenderSceneLoop]);
 
   const handleSceneObjectSectionClose = useCallback(() => {
-    setCurrentNode(null)
+    setCurrentNode(null);
   }, [setCurrentNode]);
 
   return (
     <>
       <Canvas ref={canvasRef} />
-      <PanelSheet
-        orientation="block"
-        position="end"
-        resizable
-        size="md"
-        variant="accent"
-      >
+      <PanelSheet orientation="block" position="end" resizable variant="accent">
         <PanelSheetHeader
           editable
           name="model-name"

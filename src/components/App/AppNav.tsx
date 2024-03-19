@@ -1,8 +1,8 @@
 import { fileOpen } from "browser-fs-access";
-import { useCallback, useId } from "react";
+import { useCallback } from "react";
 import { useTabs } from "../../hooks/useTabs";
 import { loadFile } from "../../lib/loadFile";
-import { AboutTab, SettingsTab } from "../../tabs";
+import { SettingsTab } from "../../tabs";
 import { usePanel } from "../Panel";
 import { useTabPanel } from "../TabPanel";
 import { Topbar } from "../Topbar";
@@ -11,9 +11,7 @@ import { type ActionProps } from "../Action";
 export const AppNav = () => {
   const { appTitle } = usePanel();
   const { openTab, defaultTab } = useTabPanel();
-  const { newModelViewTab } = useTabs();
-  const aboutTabId = useId();
-  const settingsTabId = useId();
+  const { newModelViewTab, newMarkdownTab } = useTabs();
 
   const handleImportModel = useCallback(() => {
     console.log("Import Model");
@@ -61,18 +59,19 @@ export const AppNav = () => {
         {
           type: "item",
           label: "About",
-          onClick: openTab({
-            id: aboutTabId,
-            title: "About",
-            active: true,
-            component: AboutTab,
-          }),
+          onClick: () => {
+            newMarkdownTab({
+              id: "about",
+              title: "About",
+              file: "/docs/about.md",
+            });
+          },
         },
         {
           type: "item",
           label: "Settings",
           onClick: openTab({
-            id: settingsTabId,
+            id: "settings",
             title: "Settings",
             active: true,
             component: SettingsTab,

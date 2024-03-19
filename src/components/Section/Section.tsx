@@ -3,9 +3,9 @@ import {
   type HTMLAttributes,
   type PropsWithChildren,
   forwardRef,
-  createElement,
 } from "react";
 import { cls } from "../../lib/cls";
+import { Heading } from "../Heading";
 
 export type SectionProps = HTMLAttributes<HTMLElement> &
   PropsWithChildren<{
@@ -18,23 +18,27 @@ export const Section = forwardRef(function Section(
   { title, level = 2, className, headingClassName, children }: SectionProps,
   ref: ForwardedRef<HTMLElement>
 ) {
-  const titleElement = title
-    ? createElement(
-        `h${level}`,
-        {
-          className: cls(
-            headingClassName ??
-              "m-b-4 m-t-0 c-inherit text-start text-shadow-xl"
-          ),
-        },
-        title
-      )
-    : null;
-
   return (
-    <section ref={ref} className="c-light">
-      {titleElement}
-      <div className={className ?? "text-start"}>{children}</div>
+    <section ref={ref} className="text-start c-light">
+      {title && (
+        <Heading
+          level={level}
+          className={cls(
+            headingClassName ??
+              "w-full lg:w-3xl sm:w-lg xl:w-6xl m-inline-auto m-b-4 m-t-0 c-inherit text-start text-shadow-xl"
+          )}
+        >
+          {title}
+        </Heading>
+      )}
+      <div
+        className={
+          className ??
+          "c-inherit w-full lg:w-3xl sm:w-lg xl:w-6xl m-inline-auto"
+        }
+      >
+        {children}
+      </div>
     </section>
   );
 });

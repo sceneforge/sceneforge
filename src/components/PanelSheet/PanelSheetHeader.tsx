@@ -1,11 +1,9 @@
 import {
-  useCallback,
-  useState,
   type ChangeEvent,
   type PropsWithChildren,
-  type SyntheticEvent
+  type SyntheticEvent,
 } from "react";
-import { H2 } from "../Heading";
+import { Heading } from "../Heading";
 
 export type PanelSheetHeaderProps = PropsWithChildren<{
   title: string;
@@ -15,38 +13,15 @@ export type PanelSheetHeaderProps = PropsWithChildren<{
   onInput?: (event: SyntheticEvent<HTMLInputElement, InputEvent>) => void;
 }>;
 
-export const PanelSheetHeader = ({
-  title,
-  name,
-  editable,
-  children,
-  onChange,
-  onInput,
-}: PanelSheetHeaderProps) => {
-  const [currentTitle, setCurrentTitle] = useState<string>(title);
-
-  const handleInput = useCallback(
-    (event: SyntheticEvent<HTMLInputElement, InputEvent>) => {
-      if (event.target instanceof HTMLInputElement) {
-        setCurrentTitle(event.target.value);
-      }
-      if (onInput) {
-        onInput(event);
-      }
-    },
-    [onInput, setCurrentTitle]
-  );
-
+export const PanelSheetHeader = ({ title, children }: PanelSheetHeaderProps) => {
   return (
-    <div className="max-h-10 flex flex-row items-center justify-stretch b-b-1 b-t-1 b-b-black:25 b-t-white:25 b-b-solid b-t-solid p-2 c-light dark:bg-black:15 light:bg-white:15">
-      <H2
-        className="flex-grow"
-        clickToEdit={editable}
-        name={name}
-        text={currentTitle}
-        onChange={onChange}
-        onInput={handleInput}
-      />
+    <div className="max-h-10 flex flex-row items-center justify-stretch b-b-1 b-t-1 b-b-black:25 b-t-white:25 b-b-solid b-t-solid p-2 p-r-8 c-light dark:bg-black:15 light:bg-white:15 md:p-r-0">
+      <Heading
+        level={2}
+        className="m-0 flex-grow overflow-clip text-ellipsis p-0 text-start text-nowrap font-size-4"
+      >
+        {title}
+      </Heading>
       <div className="flex flex-shrink flex-row items-center c-inherit">
         {children}
       </div>
