@@ -194,6 +194,7 @@ export const Dropdown = forwardRef(function Dropdown(
           toggle
           pressed={pressed}
           popovertargetaction={pressed ? "show" : "hide"}
+          popovertarget={popoverId}
           ref={buttonRef}
         />
       )}
@@ -218,7 +219,7 @@ export const Dropdown = forwardRef(function Dropdown(
                 <Action
                   {...item}
                   onClick={handleItemClick(onClick)}
-                  className="w-full cursor-pointer rounded-2 b-none bg-transparent p-2 text-start c-inherit dark:hover:bg-black:25 light:hover:bg-white:25"
+                  className="w-full cursor-pointer rounded-2 b-none bg-transparent p-2 text-start text-nowrap c-inherit dark:hover:bg-black:25 light:hover:bg-white:25"
                 />
               )}
             </li>

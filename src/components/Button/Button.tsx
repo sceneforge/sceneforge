@@ -83,12 +83,15 @@ export const Button = forwardRef(function Button(
     if (pressed === false || pressed === "false") return false;
     return undefined;
   }, [pressed]);
-  const [currentLabel, setCurrentLabel] = useState<string | undefined>(
-    Array.isArray(label) ? label[isPressed ? 1 : 0] : label
-  );
-  const [currentVariant, setCurrentVariant] = useState<Variant>(
-    Array.isArray(variant) ? variant[isPressed ? 1 : 0] : variant
-  );
+
+  const currentLabel = useMemo(() => {
+    return Array.isArray(label) ? label[isPressed ? 1 : 0] : label;
+  }, [label, isPressed]);
+
+  const currentVariant = useMemo(() => {
+    return Array.isArray(variant) ? variant[isPressed ? 1 : 0] : variant;
+  }, [variant, isPressed]);
+
   const [pressedState, setPressedState] = useState<boolean>(isPressed ?? false);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -108,15 +111,9 @@ export const Button = forwardRef(function Button(
             nativeEvent: event?.nativeEvent,
           });
         }
-        if (Array.isArray(variant)) {
-          setCurrentVariant(variant[pressedState ? 1 : 0]);
-        }
-        if (Array.isArray(label)) {
-          setCurrentLabel(label[pressedState ? 1 : 0]);
-        }
       }
     },
-    [toggle, isPressed, onToggle, variant, label, pressedState]
+    [toggle, isPressed, onToggle, pressedState]
   );
 
   useImperativeHandle(

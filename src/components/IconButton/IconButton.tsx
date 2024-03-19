@@ -4,6 +4,7 @@ import {
   useCallback,
   useMemo,
   useState,
+  useEffect,
 } from "react";
 import {
   Button,
@@ -45,44 +46,48 @@ export const IconButton = forwardRef(function IconButton(
   ref: ForwardedRef<ButtonComponent>
 ) {
   const isPressed = useMemo(() => {
-    if (!toggle) return false;
-    if (typeof pressed === "boolean") return pressed;
-    if (typeof pressed === "string") return pressed === "true";
-    return false;
-  }, [pressed, toggle]);
+    if (pressed === true || pressed === "true") return true;
+    if (pressed === false || pressed === "false") return false;
+    return undefined;
+  }, [pressed]);
+  const [pressedState, setPressedState] = useState(isPressed ?? false);
 
-  const [currentIcon, setCurrentIcon] = useState<IconProps["icon"]>(
-    Array.isArray(icon) ? icon[isPressed ? 1 : 0] : icon
-  );
-  const [currentSize, setCurrentSize] = useState<IconProps["size"]>(
-    Array.isArray(size) ? size[isPressed ? 1 : 0] : size
-  );
+  const currentIcon = useMemo(() => {
+    if (Array.isArray(icon)) {
+      return icon[isPressed ? 1 : 0];
+    }
+    return icon;
+  }, [icon, isPressed]);
+
+  const currentSize = useMemo(() => {
+    return Array.isArray(size) ? size[isPressed ? 1 : 0] : size;
+  }, [isPressed, size]);
 
   const handleToggleEvent = useCallback(
     (e: ButtonToggleEvent) => {
-      if (e.state === "pressed") {
-        if (Array.isArray(icon)) {
-          setCurrentIcon(icon[1]);
-        }
-        if (Array.isArray(size)) {
-          setCurrentSize(size[1]);
-        }
-      } else {
-        if (Array.isArray(icon)) {
-          setCurrentIcon(icon[0]);
-        }
-        if (Array.isArray(size)) {
-          setCurrentSize(size[0]);
-        }
-      }
+      setPressedState(e.state === "pressed");
       if (onToggle) onToggle(e);
     },
-    [icon, size, onToggle, setCurrentIcon, setCurrentSize]
+    [onToggle]
   );
+
+  useEffect(() => {
+    if (isPressed === true) {
+      setPressedState(true);
+    } else if (isPressed === false) {
+      setPressedState(false);
+    }
+  }, [isPressed]);
 
   const buttonProps = {
     ...(toggle
-      ? { toggle: true, label, variant, pressed, onToggle: handleToggleEvent }
+      ? {
+          toggle: true,
+          label,
+          variant,
+          pressed: pressedState,
+          onToggle: handleToggleEvent,
+        }
       : { label, variant }),
     ...props,
   } as ButtonProps;

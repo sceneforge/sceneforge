@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useRef, useState, type SyntheticEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type SyntheticEvent,
+} from "react";
 import { Canvas } from "../Canvas";
 import { IconButton } from "../IconButton";
 import {
@@ -6,7 +13,7 @@ import {
   PanelSheetBody,
   PanelSheetHeader,
   PanelSheetHeaderGroup,
-  PanelSheetSection
+  PanelSheetSection,
 } from "../PanelSheet";
 import { useTabPanel } from "../TabPanel";
 import { useModelObject } from "./useModelObject";
@@ -14,6 +21,17 @@ import { useModelViewer } from "./useModelViewer";
 
 import { SceneNodeTree } from "../SceneNodeTree";
 import { SceneObjectSection } from "./SceneObjectSection";
+import { Dropdown } from "../Dropdown";
+
+enum Mode {
+  Edit = "edit",
+  Material = "material",
+}
+
+const modeLabels = {
+  [Mode.Edit]: "Edit Mode",
+  [Mode.Material]: "Material Mode",
+} as const;
 
 export interface ModelProps {
   id?: string;
@@ -28,6 +46,7 @@ export interface ModelViewerProps extends Omit<ModelProps, "capture"> {
 
 export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   const [loaded, setLoaded] = useState(false);
+  const [mode, setMode] = useState<Mode>(Mode.Edit);
   const { updateTabTitle } = useTabPanel();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentNode, setCurrentNode] = useState<unknown>(null);
@@ -109,6 +128,13 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     setCurrentNode(null);
   }, [setCurrentNode]);
 
+  const handleModeChange = useCallback(
+    (newMode: Mode) => () => setMode(newMode),
+    [setMode]
+  );
+
+  const modeLabel = useMemo(() => modeLabels[mode], [mode]);
+
   return (
     <>
       <Canvas ref={canvasRef} />
@@ -119,25 +145,54 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
           title={currentTitle ?? "Untitled Model"}
           onInput={handleInput}
         >
-          <PanelSheetHeaderGroup
-            title="Objects"
-            description="Scene Objects management"
-          >
-            <IconButton icon="addCircle" title="New Object" />
-          </PanelSheetHeaderGroup>
-          <PanelSheetHeaderGroup
-            title="Hotspots"
-            description="Hotspots management"
-          >
-            <IconButton icon="fileMap" title="Add" />
-          </PanelSheetHeaderGroup>
-          <PanelSheetHeaderGroup
-            title="Select"
-            description="Mesh selection methods"
-          >
-            <IconButton toggle icon="arrowSelectTool" title="Single Mesh" />
-            <IconButton toggle icon="moveSelectionUp" title="Parent Meshes" />
-          </PanelSheetHeaderGroup>
+          <Dropdown
+            contentVariant="default"
+            label={modeLabel}
+            className="m-0 b-none bg-transparent p-2 c-inherit"
+            items={[
+              {
+                type: "item",
+                label: "Edit Mode",
+                onClick: handleModeChange(Mode.Edit),
+              },
+              {
+                type: "item",
+                label: "Material Mode",
+                onClick: handleModeChange(Mode.Material),
+              },
+            ]}
+          />
+          {mode === Mode.Edit && (
+            <>
+              <PanelSheetHeaderGroup
+                title="Objects"
+                description="Scene Objects management"
+              >
+                <IconButton icon="addCircle" title="New Object" />
+              </PanelSheetHeaderGroup>
+              <PanelSheetHeaderGroup
+                title="Hotspots"
+                description="Hotspots management"
+              >
+                <IconButton icon="fileMap" title="Add" />
+              </PanelSheetHeaderGroup>
+              <PanelSheetHeaderGroup
+                title="Select"
+                description="Mesh selection methods"
+              >
+                <IconButton
+                  toggle
+                  icon="arrowSelectorTool"
+                  title="Single Mesh"
+                />
+                <IconButton
+                  toggle
+                  icon="moveSelectionUp"
+                  title="Parent Meshes"
+                />
+              </PanelSheetHeaderGroup>
+            </>
+          )}
         </PanelSheetHeader>
         <PanelSheetBody>
           <PanelSheetSection title="Scene Nodes">

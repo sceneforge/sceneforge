@@ -2,7 +2,7 @@
 export const classes = {
   add: "i-material-symbols:add",
   addCircle: "i-material-symbols:add-circle",
-  arrowSelectTool: "i-material-symbols:arrow-select-tool",
+  arrowSelectorTool: "i-material-symbols:arrow-selector-tool",
   camera: "i-material-symbols:camera",
   cameraswitch: "i-material-symbols:cameraswitch",
   close: "i-material-symbols:close",

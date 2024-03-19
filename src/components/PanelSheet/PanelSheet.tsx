@@ -55,7 +55,7 @@ export const PanelSheet = ({
             contentVariant="default"
             icon="dragIndicator"
             label="Panel Size"
-            items={[70, 65, 60, 55, 50, 45, 40, 35, 30, 25].map((size) => ({
+            items={[75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25].map((size) => ({
               type: "item",
               label: `${size}%`,
               onClick: () => updateSize({ size }),
