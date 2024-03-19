@@ -7,6 +7,7 @@ import {
 } from "react";
 import { ContextMenuContext, type MenuItem } from "./ContextMenuProvider";
 import { type Variant } from "../../types/variants";
+import { setPositionOnPointer } from "../../lib/setPosition";
 
 export const useContextMenu = () => {
   const {
@@ -105,18 +106,7 @@ export const useContextMenu = () => {
   const setPosition = useCallback(
     (ref: RefObject<HTMLElement>) => {
       if (ref.current && contextMenuEvent) {
-        const { width, height } = ref.current.getBoundingClientRect();
-        ref.current.style.left = `${contextMenuEvent.clientX}px`;
-        ref.current.style.top = `${contextMenuEvent.clientY}px`;
-        const view = contextMenuEvent.view;
-        const { width: documentWidth, height: documentHeight } =
-          view.document.body.getBoundingClientRect();
-        if (contextMenuEvent.clientX + width > documentWidth) {
-          ref.current.style.left = `${contextMenuEvent.clientX - width}px`;
-        }
-        if (contextMenuEvent.clientY + height > documentHeight) {
-          ref.current.style.top = `${contextMenuEvent.clientY - height}px`;
-        }
+        setPositionOnPointer(ref.current, contextMenuEvent);
       }
     },
     [contextMenuEvent]

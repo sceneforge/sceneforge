@@ -1,3 +1,7 @@
 export { Button } from "./Button";
-export type { ButtonProps, ButtonToggleEvent, ToggleProps } from "./Button";
-
+export type {
+  ButtonComponent,
+  ButtonProps,
+  ButtonToggleEvent,
+  ToggleProps,
+} from "./Button";

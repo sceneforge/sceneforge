@@ -34,7 +34,7 @@ export const Section = forwardRef(function Section(
   return (
     <section ref={ref} className="c-light">
       {titleElement}
-      <div className={className}>{children}</div>
+      <div className={className ?? "text-start"}>{children}</div>
     </section>
   );
 });

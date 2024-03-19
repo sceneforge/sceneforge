@@ -38,14 +38,22 @@ export const Topbar = ({
         {actionsStart?.length && (
           <div className="flex-grow flex gap-2 flex-row p-0 m-0 h-full justify-start">
             {actionsStart.map((props, index) => (
-              <Action key={index} {...props} />
+              <Action
+                key={index}
+                {...props}
+                className="min-w bg-transparent c-inherit b-none"
+              />
             ))}
           </div>
         )}
         {actionsEnd?.length && (
           <div className="flex-grow flex gap-2 flex-row p-0 m-0 h-full justify-end">
             {actionsEnd.map((props, index) => (
-              <Action key={index} {...props} />
+              <Action
+                key={index}
+                {...props}
+                className="min-w bg-transparent c-inherit b-none"
+              />
             ))}
           </div>
         )}

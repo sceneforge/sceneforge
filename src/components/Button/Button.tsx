@@ -1,7 +1,10 @@
 import {
   forwardRef,
   useCallback,
+  useEffect,
+  useImperativeHandle,
   useMemo,
+  useRef,
   useState,
   type ButtonHTMLAttributes,
   type DetailedHTMLProps,
@@ -13,8 +16,9 @@ import { cls } from "../../lib/cls";
 import { variantBgClass, variantTextClass } from "../../lib/variantClasses";
 
 export type ButtonToggleEvent = {
-  nativeEvent: ReactMouseEvent<HTMLButtonElement, MouseEvent>["nativeEvent"];
-  target: HTMLButtonElement;
+  nativeEvent?: ReactMouseEvent<HTMLButtonElement, MouseEvent>["nativeEvent"];
+  target?: HTMLButtonElement;
+  direct: boolean;
   type: "toggle";
   state: "pressed" | "released";
 };
@@ -46,7 +50,14 @@ export type ButtonProps = Omit<
   popovertarget?: string;
   inverted?: boolean;
   variant?: Variant;
+  ref?: ForwardedRef<ButtonComponent>;
 } & ToggleProps;
+
+export type ButtonComponent = {
+  button?: HTMLButtonElement;
+  pressed?: boolean;
+  toggle?: () => void;
+};
 
 export const Button = forwardRef(function Button(
   {
@@ -65,43 +76,78 @@ export const Button = forwardRef(function Button(
     onToggle,
     ...props
   }: ButtonProps,
-  ref: ForwardedRef<HTMLButtonElement>
+  ref: ForwardedRef<ButtonComponent>
 ) {
-  const isPressed = useMemo(
-    () => pressed === true || pressed === "true",
-    [pressed]
-  );
+  const isPressed = useMemo(() => {
+    if (pressed === true || pressed === "true") return true;
+    if (pressed === false || pressed === "false") return false;
+    return undefined;
+  }, [pressed]);
   const [currentLabel, setCurrentLabel] = useState<string | undefined>(
     Array.isArray(label) ? label[isPressed ? 1 : 0] : label
   );
   const [currentVariant, setCurrentVariant] = useState<Variant>(
     Array.isArray(variant) ? variant[isPressed ? 1 : 0] : variant
   );
-  const [pressedState, setPressedState] = useState<boolean>(isPressed);
+  const [pressedState, setPressedState] = useState<boolean>(isPressed ?? false);
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const handleToggle = useCallback(
+    (event?: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => {
+      if (toggle) {
+        if (isPressed === undefined) {
+          setPressedState((prev) => !prev);
+        }
+        if (onToggle) {
+          onToggle({
+            target: event?.currentTarget ?? buttonRef.current ?? undefined,
+            direct: !!event,
+            type: "toggle",
+            state: pressedState ? "released" : "pressed",
+            nativeEvent: event?.nativeEvent,
+          });
+        }
+        if (Array.isArray(variant)) {
+          setCurrentVariant(variant[pressedState ? 1 : 0]);
+        }
+        if (Array.isArray(label)) {
+          setCurrentLabel(label[pressedState ? 1 : 0]);
+        }
+      }
+    },
+    [onToggle, pressedState, variant, label]
+  );
+
+  useImperativeHandle(
+    ref,
+    (): ButtonComponent => {
+      return {
+        button: buttonRef.current ?? undefined,
+        pressed: pressedState,
+        toggle: () => {
+          handleToggle();
+        },
+      };
+    },
+    [buttonRef, pressedState, handleToggle]
+  );
 
   const handleClickEvent = useCallback(
     (event: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => {
-      if (toggle) {
-        setPressedState((prev) => !prev);
-        if (onToggle) {
-          onToggle({
-            target: event.currentTarget,
-            type: "toggle",
-            state: pressedState ? "released" : "pressed",
-            nativeEvent: event.nativeEvent,
-          });
-          if (Array.isArray(variant)) {
-            setCurrentVariant(variant[pressedState ? 1 : 0]);
-          }
-          if (Array.isArray(label)) {
-            setCurrentLabel(label[pressedState ? 1 : 0]);
-          }
-        }
-      }
+      handleToggle(event);
       if (onClick) onClick(event);
     },
-    [toggle, onClick, onToggle, pressedState]
+    [toggle, onClick, onToggle, isPressed, pressedState]
   );
+
+  useEffect(() => {
+    if (isPressed === true) {
+      setPressedState(true);
+    } else if (isPressed === false) {
+      setPressedState(false);
+    }
+  }, [isPressed, setPressedState]);
 
   const toggleProps = toggle
     ? {
@@ -114,7 +160,7 @@ export const Button = forwardRef(function Button(
     <button
       aria-label={children && currentLabel ? currentLabel : undefined}
       data-variant={currentVariant}
-      ref={ref}
+      ref={buttonRef}
       className={cls(
         className
           ? className

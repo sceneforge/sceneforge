@@ -2,31 +2,18 @@ import { fileOpen } from "browser-fs-access";
 import { useCallback, useId } from "react";
 import { useTabs } from "../../hooks/useTabs";
 import { loadFile } from "../../lib/loadFile";
-import { SettingsTab } from "../../tabs";
-import type { IconButtonProps } from "../IconButton/IconButton";
+import { AboutTab, SettingsTab } from "../../tabs";
 import { usePanel } from "../Panel";
 import { useTabPanel } from "../TabPanel";
 import { Topbar } from "../Topbar";
+import { type ActionProps } from "../Action";
 
 export const AppNav = () => {
   const { appTitle } = usePanel();
-  const { newTab, getTabByTitle, activateTab } = useTabPanel();
+  const { openTab, defaultTab } = useTabPanel();
   const { newModelViewTab } = useTabs();
+  const aboutTabId = useId();
   const settingsTabId = useId();
-
-  const openSettingsPage = useCallback(() => {
-    const tab = getTabByTitle("Settings");
-    if (tab) {
-      activateTab(tab)();
-    } else {
-      newTab({
-        id: settingsTabId,
-        title: "Settings",
-        active: true,
-        component: SettingsTab,
-      });
-    }
-  }, [activateTab, getTabByTitle, newTab]);
 
   const handleImportModel = useCallback(() => {
     console.log("Import Model");
@@ -48,7 +35,7 @@ export const AppNav = () => {
     newModelViewTab({ title: "New Model" });
   }, [newModelViewTab]);
 
-  const actionsStart: IconButtonProps[] = [
+  const actionsStart: ActionProps[] = [
     {
       icon: "add",
       label: "New File",
@@ -61,11 +48,37 @@ export const AppNav = () => {
     },
   ];
 
-  const actionsEnd: IconButtonProps[] = [
+  const actionsEnd: ActionProps[] = [
     {
-      icon: "settings",
-      label: "Settings",
-      onClick: openSettingsPage,
+      icon: "moreVert",
+      label: "Menu",
+      items: [
+        {
+          type: "item",
+          label: "Home",
+          onClick: openTab(defaultTab),
+        },
+        {
+          type: "item",
+          label: "About",
+          onClick: openTab({
+            id: aboutTabId,
+            title: "About",
+            active: true,
+            component: AboutTab,
+          }),
+        },
+        {
+          type: "item",
+          label: "Settings",
+          onClick: openTab({
+            id: settingsTabId,
+            title: "Settings",
+            active: true,
+            component: SettingsTab,
+          }),
+        },
+      ],
     },
   ];
 

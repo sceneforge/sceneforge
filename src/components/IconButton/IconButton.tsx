@@ -10,10 +10,11 @@ import {
   type ButtonToggleEvent,
   type ButtonProps,
   type ToggleProps,
+  ButtonComponent,
 } from "../Button";
 import { Icon, type IconProps } from "../Icon";
 
-type IconToggleProps = ToggleProps<
+export type IconToggleProps = ToggleProps<
   {
     icon: IconProps["icon"] | [IconProps["icon"], IconProps["icon"]];
     size?: IconProps["size"] | [IconProps["size"], IconProps["size"]];
@@ -41,7 +42,7 @@ export const IconButton = forwardRef(function IconButton(
     variant,
     ...props
   }: IconButtonProps,
-  ref: ForwardedRef<HTMLButtonElement>
+  ref: ForwardedRef<ButtonComponent>
 ) {
   const isPressed = useMemo(() => {
     if (!toggle) return false;
@@ -88,11 +89,11 @@ export const IconButton = forwardRef(function IconButton(
 
   return (
     <Button
-      ref={ref}
+      {...buttonProps}
       grow={grow}
       shrink={shrink}
       inverted={inverted}
-      {...buttonProps}
+      ref={ref}
     >
       <Icon icon={currentIcon} size={currentSize} aria-hidden />
     </Button>

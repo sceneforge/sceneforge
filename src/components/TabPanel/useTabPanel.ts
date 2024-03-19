@@ -107,6 +107,13 @@ export const useTabPanel = () => {
     [tabs]
   );
 
+  const getTabByComponent = useCallback(
+    (component: Component) => {
+      return tabs.find((tab) => tab.component === component);
+    },
+    [tabs]
+  );
+
   const updateTabTitle = useCallback(
     (id: string, title: string) => {
       setTabs((prevTabs) =>
@@ -121,6 +128,18 @@ export const useTabPanel = () => {
     [setTabs]
   );
 
+  const openTab = useCallback(
+    (tabContext: TabContext) => () => {
+      const tab = getTabByComponent(tabContext.component);
+      if (tab) {
+        activateTab(tab)();
+      } else {
+        newTab(tabContext);
+      }
+    },
+    [getTabByComponent, activateTab, newTab]
+  );
+
   return {
     tabs,
     defaultTab,
@@ -132,6 +151,8 @@ export const useTabPanel = () => {
     activateTab,
     getTabByTitle,
     getTabById,
+    getTabByComponent,
     updateTabTitle,
+    openTab,
   };
 };

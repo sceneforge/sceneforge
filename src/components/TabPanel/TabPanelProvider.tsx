@@ -11,7 +11,7 @@ import { type TabProps } from "./Tab";
 export type Component<P extends TabProps = TabProps> = (
   props: P,
   ...args: unknown[]
-) => (JSX.Element | ReactNode | null);
+) => JSX.Element | ReactNode | null;
 
 export interface TabContext<
   P extends TabProps = TabProps,
@@ -39,20 +39,28 @@ export type TabPanelProviderProps = PropsWithChildren<{
 
 export const TabPanelContext = createContext<TabPanelContextType>({
   tabs: [],
-  setTabs: (() => void (0)),
+  setTabs: () => void 0,
   tabsPosition: "bottom",
-  setTabsPosition: (() => void (0)),
+  setTabsPosition: () => void 0,
 });
 
 export const TabPanelProvider = ({
   children,
-  defaultTab
+  defaultTab,
 }: TabPanelProviderProps) => {
   const [tabs, setTabs] = useState<TabContext[]>([]);
   const [tabsPosition, setTabsPosition] = useState<"top" | "bottom">("bottom");
 
   return (
-    <TabPanelContext.Provider value={{ tabs, setTabs, defaultTab, tabsPosition, setTabsPosition }}>
+    <TabPanelContext.Provider
+      value={{
+        tabs,
+        setTabs,
+        defaultTab,
+        tabsPosition,
+        setTabsPosition,
+      }}
+    >
       {children}
     </TabPanelContext.Provider>
   );

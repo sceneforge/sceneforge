@@ -26,6 +26,7 @@ export const classes = {
   arrowSelectTool: "i-material-symbols:arrow-select-tool",
   moveSelectionUp: "i-material-symbols:move-selection-up",
   delete: "i-material-symbols:delete",
+  moreVert: "i-material-symbols:more-vert",
 } as const;
 
 export type IconName = keyof typeof classes;

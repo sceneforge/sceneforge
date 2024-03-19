@@ -21,7 +21,7 @@ export const App = ({ userData }: AppProps) => {
         <TabPanelProvider
           defaultTab={{
             id,
-            title: "Home",
+            title: "Scene Forge",
             component: HomeTab,
           }}
         >
