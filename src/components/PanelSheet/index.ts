@@ -8,4 +8,5 @@ export { PanelSheetHeaderGroup } from "./PanelSheetHeaderGroup";
 export type { PanelSheetHeaderGroupProps } from "./PanelSheetHeaderGroup";
 export { PanelSheetSection } from "./PanelSheetSection";
 export type { PanelSheetSectionProps } from "./PanelSheetSection";
-
+export { PanelSheetHeaderToolbar } from "./PanelSheetHeaderToolbar";
+export type { PanelSheetHeaderToolbarProps } from "./PanelSheetHeaderToolbar";

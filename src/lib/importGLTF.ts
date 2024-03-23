@@ -9,7 +9,7 @@ export const importGLTF = (
   scene: Scene,
   blob: Blob,
   capture?: (data: string) => void,
-  callback?: (data: ISceneLoaderAsyncResult) => void,
+  callback?: (data: ISceneLoaderAsyncResult) => void
 ) => {
   SceneLoader.ImportMeshAsync(
     "",
@@ -21,7 +21,7 @@ export const importGLTF = (
   )
     .then((data) => {
       if (callback) callback(data);
-      sceneSnapshot(scene, capture)
+      sceneSnapshot(scene, capture);
     })
     .catch(console.error);
 };

@@ -1,37 +1,15 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type SyntheticEvent,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Canvas } from "../Canvas";
-import { IconButton } from "../IconButton";
-import {
-  PanelSheet,
-  PanelSheetBody,
-  PanelSheetHeader,
-  PanelSheetHeaderGroup,
-  PanelSheetSection,
-} from "../PanelSheet";
-import { useTabPanel } from "../TabPanel";
+import { PanelSheet, PanelSheetBody } from "../PanelSheet";
 import { useModelObject } from "./useModelObject";
 import { useModelViewer } from "./useModelViewer";
-
-import { SceneNodeTree } from "../SceneNodeTree";
 import { SceneObjectSection } from "./SceneObjectSection";
-import { Dropdown } from "../Dropdown";
-
-enum Mode {
-  Edit = "edit",
-  Material = "material",
-}
-
-const modeLabels = {
-  [Mode.Edit]: "Edit Mode",
-  [Mode.Material]: "Material Mode",
-} as const;
+import { SceneNodesSection } from "./SceneNodesSection";
+import { Mode } from "./mode";
+import { ModelViewerHeader } from "./ModelViewerHeader";
+import { Mesh } from "@babylonjs/core/Meshes/mesh";
+import { AbstractMesh } from "@babylonjs/core";
+import { select } from "../../lib/sceneHandler";
 
 export interface ModelProps {
   id?: string;
@@ -46,8 +24,7 @@ export interface ModelViewerProps extends Omit<ModelProps, "capture"> {
 
 export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   const [loaded, setLoaded] = useState(false);
-  const [mode, setMode] = useState<Mode>(Mode.Edit);
-  const { updateTabTitle } = useTabPanel();
+  const [mode, setMode] = useState<Mode>(Mode.View);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentNode, setCurrentNode] = useState<unknown>(null);
   const {
@@ -67,7 +44,6 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     currentGLTF,
     loadRecentModel,
     saveRecentModel,
-    updateTitle,
   } = useModelObject({ ...props, capture });
 
   const loadModel = useCallback(() => {
@@ -77,18 +53,6 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
       })
       .catch(console.error);
   }, [setLoaded, loadRecentModel]);
-
-  const handleInput = useCallback(
-    (event: SyntheticEvent<HTMLInputElement, InputEvent>) => {
-      if (event.target instanceof HTMLInputElement) {
-        updateTitle(event.target.value);
-        if (currentID) {
-          updateTabTitle(currentID, event.target.value);
-        }
-      }
-    },
-    [currentID, updateTabTitle, updateTitle]
-  );
 
   useEffect(() => {
     if (currentID) {
@@ -124,83 +88,35 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     }
   }, [active, loadState, renderSceneLoop, stopRenderSceneLoop]);
 
+  useEffect(() => {
+    if (loadState === "loaded" && active && mode === Mode.Edit) {
+      const mesh = sceneRef.current?.rootNodes.filter(
+        (node) => node instanceof Mesh || node instanceof AbstractMesh
+      );
+      if (
+        mesh &&
+        mesh.length === 1 &&
+        (mesh[0] instanceof Mesh || mesh[0] instanceof AbstractMesh)
+      ) {
+        return select(mesh[0]);
+      }
+    }
+  }, [active, loadState, mode, sceneRef]);
+
   const handleSceneObjectSectionClose = useCallback(() => {
     setCurrentNode(null);
   }, [setCurrentNode]);
-
-  const handleModeChange = useCallback(
-    (newMode: Mode) => () => setMode(newMode),
-    [setMode]
-  );
-
-  const modeLabel = useMemo(() => modeLabels[mode], [mode]);
 
   return (
     <>
       <Canvas ref={canvasRef} />
       <PanelSheet orientation="block" position="end" resizable variant="accent">
-        <PanelSheetHeader
-          editable
-          name="model-name"
-          title={currentTitle ?? "Untitled Model"}
-          onInput={handleInput}
-        >
-          <Dropdown
-            contentVariant="default"
-            label={modeLabel}
-            className="m-0 b-none bg-transparent p-2 c-inherit"
-            items={[
-              {
-                type: "item",
-                label: "Edit Mode",
-                onClick: handleModeChange(Mode.Edit),
-              },
-              {
-                type: "item",
-                label: "Material Mode",
-                onClick: handleModeChange(Mode.Material),
-              },
-            ]}
-          />
-          {mode === Mode.Edit && (
-            <>
-              <PanelSheetHeaderGroup
-                title="Objects"
-                description="Scene Objects management"
-              >
-                <IconButton icon="addCircle" title="New Object" />
-              </PanelSheetHeaderGroup>
-              <PanelSheetHeaderGroup
-                title="Hotspots"
-                description="Hotspots management"
-              >
-                <IconButton icon="fileMap" title="Add" />
-              </PanelSheetHeaderGroup>
-              <PanelSheetHeaderGroup
-                title="Select"
-                description="Mesh selection methods"
-              >
-                <IconButton
-                  toggle
-                  icon="arrowSelectorTool"
-                  title="Single Mesh"
-                />
-                <IconButton
-                  toggle
-                  icon="moveSelectionUp"
-                  title="Parent Meshes"
-                />
-              </PanelSheetHeaderGroup>
-            </>
-          )}
-        </PanelSheetHeader>
+        <ModelViewerHeader title={currentTitle} mode={mode} setMode={setMode} />
         <PanelSheetBody>
-          <PanelSheetSection title="Scene Nodes">
-            <SceneNodeTree
-              scene={sceneRef.current}
-              onNodeSelect={setCurrentNode}
-            />
-          </PanelSheetSection>
+          <SceneNodesSection
+            scene={sceneRef.current}
+            onNodeSelect={setCurrentNode}
+          />
           <SceneObjectSection
             node={currentNode}
             onClose={handleSceneObjectSectionClose}
