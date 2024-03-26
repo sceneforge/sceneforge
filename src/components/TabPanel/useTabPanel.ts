@@ -40,19 +40,18 @@ export const useTabPanel = () => {
 
   const newTab = useCallback(
     <
-      P extends TabProps<object> = TabProps<object>,
+      I extends object = object,
+      P extends TabProps<I> = TabProps<I>,
       C extends Component<P> = Component<P>,
       T extends TabContext<P, C> = TabContext<P, C>
     >(
       tab: T
     ) => {
       const createdAt = Date.now();
-      const newTabContext = { ...tab, createdAt };
-      setTabs((prevTabs) => [
-        ...prevTabs,
-        newTabContext as TabContext<P, Component>,
-      ]);
-      activateTab(newTabContext as TabContext<P, Component>)();
+      // @TODO: Fix this type assertion
+      const newTabContext = { ...tab, createdAt } as unknown as TabContext;
+      setTabs((prevTabs) => [...prevTabs, newTabContext]);
+      activateTab(newTabContext)();
     },
     [setTabs, activateTab]
   );

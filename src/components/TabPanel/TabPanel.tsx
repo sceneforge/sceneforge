@@ -37,14 +37,18 @@ export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
       <TabList variant={variant} />
       <div className="relative h-full w-full flex-grow">
         <Suspense>
-          {tabs.map(({ component: TabComponent, active, props }, index) => (
-            <TabComponent
-              key={index}
-              tabId={`tabpanel-${index}`}
-              active={active}
-              {...props}
-            />
-          ))}
+          {tabs.map(
+            ({ component: TabComponent, active, id, title, props }, index) => (
+              <TabComponent
+                key={index}
+                tabId={`tabpanel-${index}`}
+                active={active}
+                id={id}
+                title={title}
+                {...props}
+              />
+            )
+          )}
         </Suspense>
       </div>
     </main>

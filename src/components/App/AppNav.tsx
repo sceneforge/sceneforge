@@ -1,7 +1,6 @@
-import { fileOpen } from "browser-fs-access";
+import { v4 as uuid } from "uuid";
 import { useCallback } from "react";
 import { useTabs } from "../../hooks/useTabs";
-import { loadFile } from "../../lib/loadFile";
 import { SettingsTab } from "../../tabs";
 import { usePanel } from "../Panel";
 import { useTabPanel } from "../TabPanel";
@@ -13,24 +12,8 @@ export const AppNav = () => {
   const { openTab, defaultTab } = useTabPanel();
   const { newModelViewTab, newMarkdownTab } = useTabs();
 
-  const handleImportModel = useCallback(() => {
-    console.log("Import Model");
-    fileOpen({
-      description: "Select a 3D model",
-      mimeTypes: ["model/gltf-binary", "model/gltf+json"],
-      extensions: [".glb", ".gltf"],
-      multiple: false,
-      excludeAcceptAllOption: true,
-    })
-      .then(loadFile)
-      .then(({ blob }) => {
-        newModelViewTab({ title: "Imported Model", gltf: blob() });
-      })
-      .catch(console.error);
-  }, [newModelViewTab]);
-
   const handleNewModel = useCallback(() => {
-    newModelViewTab({ title: "New Model" });
+    newModelViewTab({ id: uuid(), title: "New Model" });
   }, [newModelViewTab]);
 
   const actionsStart: ActionProps[] = [
@@ -38,11 +21,6 @@ export const AppNav = () => {
       icon: "add",
       label: "New File",
       onClick: handleNewModel,
-    },
-    {
-      icon: "uploadFile",
-      label: "Import Model",
-      onClick: handleImportModel,
     },
   ];
 

@@ -1,26 +1,49 @@
 import {
+  type ForwardedRef,
+  forwardRef,
   useCallback,
   useEffect,
   useId,
+  useImperativeHandle,
   useMemo,
   useRef,
   useState,
 } from "react";
-import { Button, type ToggleProps, type ButtonProps } from "../Button";
-import { Variant } from "../../types/variants";
+import {
+  Button,
+  type ToggleProps,
+  type ButtonProps,
+  type ButtonComponent,
+} from "../Button";
+import type { Variant } from "../../types/variants";
 
 export type PopoverProps = Omit<ButtonProps, keyof ToggleProps> & {
   label?: string;
   variant?: Variant;
 };
 
-export const Popover = ({ id, label, children, ...props }: PopoverProps) => {
+export const Popover = forwardRef(function Popover(
+  { id, label, children, ...props }: PopoverProps,
+  ref: ForwardedRef<ButtonComponent>
+) {
   const genId = useId();
   const [opened, setOpened] = useState(false);
   const currentId = useMemo(() => id || genId, [genId, id]);
   const popoverId = useMemo(() => `${currentId}-popover`, [currentId]);
 
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<ButtonComponent>(null);
+
+  useImperativeHandle(
+    ref,
+    () =>
+      buttonRef.current ?? {
+        button: undefined,
+        pressed: false,
+        toggle: () => {},
+      },
+    [buttonRef]
+  );
+
   const popoverRef = useRef<HTMLDivElement>(null);
 
   const handleBeforeToggle = useCallback(
@@ -28,8 +51,11 @@ export const Popover = ({ id, label, children, ...props }: PopoverProps) => {
       if (event instanceof ToggleEvent) {
         setOpened(event.newState === "open");
         if (event.newState === "open") {
-          if (buttonRef.current && buttonRef.current.checkVisibility()) {
-            const rect = buttonRef.current.getBoundingClientRect();
+          if (
+            buttonRef.current?.button &&
+            buttonRef.current.button.checkVisibility()
+          ) {
+            const rect = buttonRef.current?.button.getBoundingClientRect();
             const x = rect.left;
             const y = rect.top;
             if (event.target instanceof HTMLElement) {
@@ -93,4 +119,4 @@ export const Popover = ({ id, label, children, ...props }: PopoverProps) => {
       </div>
     </div>
   );
-};
+});

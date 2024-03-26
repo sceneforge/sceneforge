@@ -1,10 +1,10 @@
 import { PropsWithChildren, useEffect, type ReactNode } from "react";
 
-export type TabProps<P extends object> = PropsWithChildren<
+export type TabProps<P extends object = object> = PropsWithChildren<
   {
     tabId?: string;
-    id?: string;
-    title?: string;
+    id: string;
+    title: string;
     active?: boolean;
   } & P
 >;
