@@ -8,14 +8,14 @@ import {
 } from "react";
 import { type TabProps } from "./Tab";
 
-export type Component<P extends TabProps = TabProps> = (
+export type TabComponent<P extends TabProps = TabProps> = (
   props: P,
   ...args: unknown[]
 ) => JSX.Element | ReactNode | null;
 
 export interface TabContext<
   P extends TabProps = TabProps,
-  C extends Component<P> = Component<P>
+  C extends TabComponent<P> = TabComponent<P>
 > {
   id: string;
   title: string;

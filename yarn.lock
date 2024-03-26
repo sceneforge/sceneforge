@@ -8917,6 +8917,7 @@ __metadata:
     marked-react: "npm:^2.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
+    terser: "npm:^5.29.2"
     ts-jest: "npm:^29.1.2"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^5.4.2"
@@ -8924,6 +8925,7 @@ __metadata:
     uuid: "npm:^9.0.1"
     vite: "npm:^5.1.6"
     vite-plugin-browser-sync: "npm:^3.0.1"
+    vite-plugin-meta-env: "npm:^1.0.2"
     vite-plugin-pwa: "npm:^0.19.2"
     workbox-precaching: "npm:^7.0.0"
     workbox-window: "npm:^7.0.0"
@@ -9614,7 +9616,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.0.0":
+"terser@npm:^5.0.0, terser@npm:^5.29.2":
   version: 5.29.2
   resolution: "terser@npm:5.29.2"
   dependencies:
@@ -10221,6 +10223,13 @@ __metadata:
   peerDependencies:
     vite: ^4.0.0 || ^5.0.0
   checksum: 10c0/1d74ed287b991c30f1ee5844c2cce07c80e1ef7e54cd0fe4dde11fa6cbee80ce02f4bb5d058b139517319f3f4f84e4fb1828279b0afb67446133cf3811ddc1ff
+  languageName: node
+  linkType: hard
+
+"vite-plugin-meta-env@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "vite-plugin-meta-env@npm:1.0.2"
+  checksum: 10c0/42e3932e34c54ebed8950a128a3d234bcaf2509e7db332f6a078b8e277291869f12068f42b33806c270bd1b47db3209100f8c5bfed8145c48aa4affd3c00c0e1
   languageName: node
   linkType: hard
 

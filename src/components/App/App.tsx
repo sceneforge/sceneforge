@@ -10,15 +10,7 @@ export interface AppProps {
 
 export const App = ({ userData }: AppProps) => {
   return (
-    <AppProvider
-      title="SceneForge"
-      userData={userData}
-      defaultTab={{
-        id: "home",
-        title: "Scene Forge",
-        component: HomeTab,
-      }}
-    >
+    <AppProvider userData={userData} homeComponent={HomeTab}>
       <TabPanel variant="default" />
       <AppNav />
     </AppProvider>

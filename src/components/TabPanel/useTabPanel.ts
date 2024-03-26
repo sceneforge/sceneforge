@@ -2,7 +2,7 @@ import { useCallback, useContext, useId, useMemo } from "react";
 import { usePanel } from "../Panel";
 import { Tab, type TabProps } from "./Tab";
 import {
-  Component,
+  TabComponent,
   TabPanelContext,
   type TabContext,
 } from "./TabPanelProvider";
@@ -42,7 +42,7 @@ export const useTabPanel = () => {
     <
       I extends object = object,
       P extends TabProps<I> = TabProps<I>,
-      C extends Component<P> = Component<P>,
+      C extends TabComponent<P> = TabComponent<P>,
       T extends TabContext<P, C> = TabContext<P, C>
     >(
       tab: T
@@ -108,7 +108,7 @@ export const useTabPanel = () => {
   );
 
   const getTabByComponent = useCallback(
-    (component: Component) => {
+    (component: TabComponent) => {
       return tabs.find((tab) => tab.component === component);
     },
     [tabs]

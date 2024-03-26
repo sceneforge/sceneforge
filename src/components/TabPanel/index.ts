@@ -6,7 +6,8 @@ export { useTabPanel } from "./useTabPanel";
 export type {
   TabContext,
   TabPanelContextType,
-  TabPanelProviderProps
+  TabPanelProviderProps,
+  TabComponent,
 } from "./TabPanelProvider";
 
 export type { TabProps } from "./Tab";

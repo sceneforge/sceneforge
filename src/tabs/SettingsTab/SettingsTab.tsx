@@ -5,10 +5,12 @@ import { usePanel } from "../../components/Panel";
 import { Tab, useTabPanel } from "../../components/TabPanel";
 import { Section } from "../../components/Section";
 import { SafeArea } from "../../components/SafeArea";
+import { useAppContext } from "../../components/App";
 
 export const SettingsTab = Tab(() => {
   const { getUserData, setUserData } = usePanel();
   const { tabsPosition, setTabsPosition } = useTabPanel();
+  const { name, description, version, dev } = useAppContext();
 
   const changeTabsPosition = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
@@ -52,6 +54,26 @@ export const SettingsTab = Tab(() => {
             />
           </InputList>
         </Card>
+        {dev ? (
+          <dl>
+            <dt>Info</dt>
+            <dd>
+              <dl>
+                <dt>Name</dt>
+                <dd>{name}</dd>
+                <dt>Description</dt>
+                <dd>{description}</dd>
+                <dt>Version</dt>
+                <dd>{version}</dd>
+              </dl>
+            </dd>
+          </dl>
+        ) : (
+          <dl>
+            <dt>Version</dt>
+            <dd>{version}</dd>
+          </dl>
+        )}
       </Section>
     </SafeArea>
   );
