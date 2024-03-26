@@ -40,7 +40,7 @@ export const useTabPanel = () => {
 
   const newTab = useCallback(
     <
-      P extends TabProps = TabProps,
+      P extends TabProps<object> = TabProps<object>,
       C extends Component<P> = Component<P>,
       T extends TabContext<P, C> = TabContext<P, C>
     >(
@@ -50,9 +50,9 @@ export const useTabPanel = () => {
       const newTabContext = { ...tab, createdAt };
       setTabs((prevTabs) => [
         ...prevTabs,
-        newTabContext as TabContext<TabProps, Component>,
+        newTabContext as TabContext<P, Component>,
       ]);
-      activateTab(newTabContext as TabContext<TabProps, Component>)();
+      activateTab(newTabContext as TabContext<P, Component>)();
     },
     [setTabs, activateTab]
   );

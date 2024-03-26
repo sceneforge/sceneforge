@@ -10,6 +10,7 @@ import {
   type SetStateAction,
 } from "react";
 import { type Database } from "../../lib/Database";
+import { ReloadPrompt } from "../ReloadPrompt";
 
 type EventListenerCallback = (
   type: string,
@@ -54,7 +55,11 @@ export type PanelProviderProps = PropsWithChildren<{
   userData: Database<"UserData">;
 }>;
 
-export const PanelProvider = ({ title, userData, children }: PanelProviderProps) => {
+export const PanelProvider = ({
+  title,
+  userData,
+  children,
+}: PanelProviderProps) => {
   const [appTitle, setAppTitle] = useState<string | undefined>(title);
   const [menuShow, setMenuShow] = useState(false);
   const [sidePanelShow, setSidePanelShow] = useState(false);
@@ -116,6 +121,7 @@ export const PanelProvider = ({ title, userData, children }: PanelProviderProps)
       }}
     >
       {children}
+      <ReloadPrompt />
     </PanelContext.Provider>
   );
 };

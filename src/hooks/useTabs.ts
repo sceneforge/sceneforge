@@ -5,7 +5,7 @@ import { ModelViewTab, type ModelViewTabProps } from "../tabs";
 import { MarkdownTab, type MarkdownTabProps } from "../tabs/MarkdownTab";
 
 export const useTabs = () => {
-  const { activateTab, newTab, getTabById } = useTabPanel();
+  const { activateTab, newTab, getTabById, closeTab } = useTabPanel();
 
   const newMarkdownTab = useCallback(
     ({ id, title, file, value, isInline }: MarkdownTabProps) => {
@@ -49,8 +49,20 @@ export const useTabs = () => {
     [newTab, getTabById, activateTab]
   );
 
+  const closeModelViewTab = useCallback(
+    (id?: string) => {
+      if (!id) return;
+      const tab = getTabById(id);
+      if (tab && tab.component === ModelViewTab) {
+        closeTab(tab)();
+      }
+    },
+    [closeTab, getTabById]
+  );
+
   return {
     newModelViewTab,
     newMarkdownTab,
+    closeModelViewTab,
   };
 };

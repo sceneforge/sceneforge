@@ -8,7 +8,7 @@ export class Database<
   private _factory: IDBOpenDBRequest;
   private _db: IDBDatabase | null = null;
   private _ready: boolean;
-  private _ongoingSet: Promise<IDBValidKey> | null = null;
+  private _ongoingSet: Promise<IDBValidKey | void> | null = null;
 
   public static SupportIndexedDB() {
     return (
@@ -153,7 +153,7 @@ export class Database<
       this._ongoingSet = null;
     }
     this._ongoingSet = this.set(store, key, value);
-    return this._ongoingSet;
+    return this._ongoingSet as Promise<IDBValidKey>;
   }
 
   public set<T = unknown>(
@@ -186,6 +186,41 @@ export class Database<
         }
       };
     });
-    return this._ongoingSet;
+    return this._ongoingSet as Promise<IDBValidKey>;
+  }
+
+  public remove(store: string, key: string): Promise<void> {
+    if (this._ongoingSet && this._ready && this._db) {
+      const transaction = this._db.transaction(store, "readwrite");
+      transaction.abort();
+      this._ongoingSet = null;
+    }
+
+    this._ongoingSet = new Promise((resolve, reject) => {
+      if (!this._db) {
+        reject(new Error("Database not open"));
+        return;
+      }
+
+      const transaction = this._db.transaction(store, "readwrite");
+      const objectStore = transaction.objectStore(store);
+      const request = objectStore.delete(key);
+      request.onsuccess = () => {
+        resolve();
+      };
+      request.onerror = () => {
+        if (request.error instanceof DOMException) {
+          reject(request.error);
+        } else {
+          reject(
+            new Error("Request error", {
+              cause: request.error,
+            })
+          );
+        }
+      };
+    });
+
+    return this._ongoingSet as Promise<void>;
   }
 }

@@ -1,12 +1,12 @@
 
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { Carousel } from "../../components/Carousel";
 import { type ModelProps } from "../../components/ModelViewer/ModelViewer";
 import { Tab } from "../../components/TabPanel";
 import { useTabs } from "../../hooks/useTabs";
-import { useRecentModels } from "./useRecentModels";
 import { SafeArea } from "../../components/SafeArea";
+import { useModelContext } from "../../components/ModelContext";
 
 export interface HomeTabProps {
   active?: boolean;
@@ -14,8 +14,9 @@ export interface HomeTabProps {
 }
 
 export const HomeTab = Tab(({ active }: HomeTabProps) => {
-  const { recentModels } = useRecentModels(active);
-  const { newModelViewTab } = useTabs();
+  const [loaded, setLoaded] = useState(false);
+  const { models, loadModels } = useModelContext();
+  const { newModelViewTab, closeModelViewTab } = useTabs();
 
   const openModel = useCallback(
     (model: ModelProps) => {
@@ -26,16 +27,33 @@ export const HomeTab = Tab(({ active }: HomeTabProps) => {
     [newModelViewTab]
   );
 
-  const deleteModel = useCallback((model: ModelProps) => {
-    return () => {
-      console.log("delete", model);
-    };
-  }, []);
+  const deleteModel = useCallback(
+    (model: ModelProps) => {
+      return () => {
+        console.log("delete", model);
+        closeModelViewTab(model.id);
+      };
+    },
+    [closeModelViewTab]
+  );
+
+  useEffect(() => {
+    if (!active) {
+      setLoaded(false);
+    }
+  }, [active, setLoaded]);
+
+  useEffect(() => {
+    if (!loaded && active) {
+      loadModels();
+      setLoaded(true);
+    }
+  }, [loaded, active, loadModels, setLoaded]);
 
   return (
     <SafeArea vertical>
       <Carousel title="Models">
-        {recentModels.map((model, index) => (
+        {models.map((model, index) => (
           <Card
             variant="accent"
             actions={[

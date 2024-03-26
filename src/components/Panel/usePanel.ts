@@ -41,17 +41,31 @@ export const usePanel = () => {
     }
   }, [userData]);
 
-  const setUserData = useCallback(<T = unknown>(
-    store: string,
-    key: string,
-    value: T,
-    errorCallback?: (error: unknown) => void
-  ) => {
-    if (userData) {
-      userData.setLast(store, key, value)
-        .catch(errorCallback ?? (() => void (0)));
-    }
-  }, [userData]);
+  const setUserData = useCallback(
+    <T = unknown>(
+      store: string,
+      key: string,
+      value: T,
+      errorCallback?: (error: unknown) => void
+    ) => {
+      if (userData) {
+        return userData
+          .setLast(store, key, value)
+          .catch(errorCallback ?? (() => void 0));
+      }
+      return Promise.reject(new Error("userData is not available"));
+    },
+    [userData]
+  );
+
+  const removeUserData = useCallback(
+    (store: string, key: string, errorCallback?: (error: unknown) => void) => {
+      if (userData) {
+        userData.remove(store, key).catch(errorCallback ?? (() => void 0));
+      }
+    },
+    [userData]
+  );
 
   const updateTitle = useCallback((title?: string) => {
     if (setAppTitle) {
@@ -82,6 +96,7 @@ export const usePanel = () => {
     userData,
     getUserData,
     getAllUserData,
-    setUserData
+    setUserData,
+    removeUserData,
   };
 };

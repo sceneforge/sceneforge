@@ -6,9 +6,13 @@ import {
   type PanelSheetHeaderToolbarProps,
 } from "../PanelSheet";
 import { Mode } from "./mode";
+import { Model } from "../../lib/isModel";
+import { loadFile } from "../../lib/loadFile";
+import { fileOpen } from "browser-fs-access";
+import { useModelContext } from "../ModelContext";
 
 export type ModelViewerHeaderProps = {
-  title?: string;
+  model?: Model;
   mode?: Mode;
   setMode?: Dispatch<Mode>;
 };
@@ -59,10 +63,11 @@ const editToolbarItems: PanelSheetHeaderToolbarProps["items"] = [
 ];
 
 export const ModelViewerHeader = ({
-  title,
+  model,
   mode = Mode.Edit,
   setMode,
 }: ModelViewerHeaderProps) => {
+  const { updateModel } = useModelContext();
   const modeLabel = useMemo(() => modeLabels[mode], [mode]);
 
   const handleModeChange = useCallback(
@@ -70,17 +75,38 @@ export const ModelViewerHeader = ({
     [setMode]
   );
 
+  const handleImport = useCallback(() => {
+    fileOpen({
+      description: "Select a 3D model",
+      mimeTypes: ["model/gltf-binary", "model/gltf+json"],
+      extensions: [".glb", ".gltf"],
+      multiple: false,
+      excludeAcceptAllOption: true,
+    })
+      .then(loadFile)
+      .then(({ blob }) => {
+        if (model && model.id) {
+          updateModel(model.id, { gltf: blob() });
+        }
+      });
+  }, [model, updateModel]);
+
   return (
     <PanelSheetHeader
       editable
       name="model-name"
-      title={title ?? "Untitled Model"}
+      title={model?.title ?? "Untitled Model"}
     >
       <Dropdown
         contentVariant="default"
         label={modeLabel}
         className="m-0 b-none bg-transparent p-2 c-inherit"
         items={[
+          {
+            type: "item",
+            label: "Import...",
+            onClick: handleImport,
+          },
           {
             type: "item",
             label: "View Mode",

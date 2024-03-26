@@ -4,7 +4,7 @@ export const UserDataStores: ObjectStores = {
   settings: {
     keyPath: "key",
   },
-  recentModels: {
+  models: {
     keyPath: "key",
   },
 };
