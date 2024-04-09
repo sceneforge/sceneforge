@@ -4,12 +4,12 @@ import { useArcRotateCamera } from "./useArcRotateCamera";
 import { useEngine } from "./useEngine";
 import { useGLTFLoader } from "./useGLTFLoader";
 import { useHemisphericLight } from "./useHemiphericLight";
-import { Model } from "../../lib/isModel";
-import { Mode } from "./mode";
-import { useModelContext } from "../ModelContext";
+import { Model } from "../../../lib/isModel";
+import { Mode } from "./../mode";
+import { useModelContext } from "../../ModelContext";
 import { Mesh } from "@babylonjs/core/Meshes/mesh";
 import { AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
-import { select } from "../../lib/sceneHandler";
+import { select } from "../../../lib/sceneHandler";
 
 export const useModelViewer = (
   canvasRef: RefObject<HTMLCanvasElement>,

@@ -2,19 +2,19 @@ import { useTabPanel } from "../TabPanel";
 import { Variant } from "../../types/variants";
 import { cls } from "../../lib/cls";
 import { variantBgClass } from "../../lib/variantClasses";
-import { Action, ActionProps } from "../Action";
+import { Toolbar, ToolbarProps } from "../Toolbar";
 
 export type TopbarProps = {
   title: string;
   variant?: Variant;
-  actionsStart?: ActionProps[];
-  actionsEnd?: ActionProps[];
+  toolbarStart?: ToolbarProps;
+  toolbarEnd?: ToolbarProps;
 };
 
 export const Topbar = ({
   title,
-  actionsStart,
-  actionsEnd,
+  toolbarStart,
+  toolbarEnd,
   variant = "default",
 }: TopbarProps) => {
   const { tabsPosition } = useTabPanel();
@@ -34,29 +34,13 @@ export const Topbar = ({
           variant ? variantBgClass[variant] : "bg-primary"
         )}
       >
-        <h1 className="m-0 p-0 font-size-4">{title}</h1>
-        {actionsStart?.length && (
-          <div className="m-0 h-full flex flex-grow flex-row justify-start gap-2 p-0">
-            {actionsStart.map((props, index) => (
-              <Action
-                key={index}
-                {...props}
-                className="min-w b-none bg-transparent c-inherit"
-              />
-            ))}
-          </div>
-        )}
-        {actionsEnd?.length && (
-          <div className="m-0 h-full flex flex-grow flex-row justify-end gap-2 p-0">
-            {actionsEnd.map((props, index) => (
-              <Action
-                key={index}
-                {...props}
-                className="min-w b-none bg-transparent c-inherit"
-              />
-            ))}
-          </div>
-        )}
+        <h1 className="m-0 p-0 text-nowrap font-size-4">{title}</h1>
+        <div className="h-full w-full flex flex-row items-center justify-start">
+          {toolbarStart && <Toolbar {...toolbarStart} />}
+        </div>
+        <div className="h-full w-full flex flex-row items-center justify-end">
+          {toolbarEnd && <Toolbar {...toolbarEnd} />}
+        </div>
       </div>
     </header>
   );

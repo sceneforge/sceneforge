@@ -4,12 +4,10 @@ import { Markdown, type MarkdownProps } from "../../components/Markdown";
 
 export type MarkdownTabProps = TabProps<MarkdownProps>;
 
-export const MarkdownTab = Tab<MarkdownProps>(
-  ({ value, file, isInline }: MarkdownTabProps) => {
-    return (
-      <SafeArea vertical horizonal>
-        <Markdown value={value} isInline={isInline} file={file} />
-      </SafeArea>
-    );
-  }
-);
+export const MarkdownTab = Tab<MarkdownProps>(({ value, href }: MarkdownTabProps) => {
+  return (
+    <SafeArea vertical horizonal>
+      <Markdown value={value} href={href} />
+    </SafeArea>
+  );
+});

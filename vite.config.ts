@@ -112,9 +112,6 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
             notify: true,
           },
         },
-        preview: {
-          enable: isDev(),
-        },
       }),
     ],
     server: {

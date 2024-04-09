@@ -1,11 +1,13 @@
 import { type ISceneLoaderAsyncResult } from "@babylonjs/core/Loading/sceneLoader";
 import { type Scene } from "@babylonjs/core/scene";
 import { useCallback, useState, type RefObject } from "react";
-import { importGLTF } from "../../lib/importGLTF";
+import { importGLTF } from "../../../lib/importGLTF";
 
 export const useGLTFLoader = (sceneRef: RefObject<Scene>) => {
   const [capture, setCapture] = useState<string | undefined>(undefined);
-  const [loadResult, setLoadResult] = useState<ISceneLoaderAsyncResult | undefined>(undefined);
+  const [loadResult, setLoadResult] = useState<
+    ISceneLoaderAsyncResult | undefined
+  >(undefined);
 
   const openGLTFBlob = useCallback(
     (blob: Blob, attempt?: number) => {
@@ -30,5 +32,5 @@ export const useGLTFLoader = (sceneRef: RefObject<Scene>) => {
     capture,
     loadResult,
     openGLTFBlob,
-  }
-}
+  };
+};

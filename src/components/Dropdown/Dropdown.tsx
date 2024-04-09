@@ -26,21 +26,34 @@ export type DropdownProps = (
   | (Omit<ButtonProps, "toggle" | "pressed"> & { icon?: never })
   | Omit<IconButtonProps, "toggle" | "pressed">
 ) & {
+  parentDropdown?: string;
   contentVariant?: Variant;
+  clearDropdown?: () => void;
   items?: (
-    | (ActionProps & { type: "item" })
+    | (ActionProps & { type: "item"; active?: boolean })
     | {
         type: "divider";
-        onClick: never;
-        label: never;
-        icon: never;
-        variant: never;
+        onClick?: never;
+        label?: never;
+        icon?: never;
+        variant?: never;
+        className?: string;
+        active?: never;
+        parentDropdown?: never;
+        clearDropdown?: never;
       }
   )[];
 };
 
 export const Dropdown = forwardRef(function Dropdown(
-  { items, contentVariant, onToggle, ...props }: DropdownProps,
+  {
+    items,
+    contentVariant,
+    onToggle,
+    parentDropdown,
+    clearDropdown,
+    ...props
+  }: DropdownProps,
   ref: ForwardedRef<ButtonComponent>
 ) {
   const buttonRef = useRef<ButtonComponent>(null);
@@ -131,10 +144,25 @@ export const Dropdown = forwardRef(function Dropdown(
   const handleItemClick = useCallback(
     (onClick?: MouseEventHandler): MouseEventHandler =>
       (event) => {
-        clear();
+        const popoverTargetId =
+          event.target instanceof HTMLElement &&
+          event.target.getAttribute("popovertarget")
+            ? event.target.getAttribute("popovertarget")
+            : undefined;
+        const popoverTarget = popoverTargetId
+          ? document.getElementById(popoverTargetId)
+          : undefined;
+        const popoverTargetAnchor =
+          popoverTarget && popoverTarget.getAttribute("anchor")
+            ? popoverTarget.getAttribute("anchor")
+            : undefined;
+        if (popoverTargetAnchor !== popoverId) {
+          clear();
+          if (clearDropdown) clearDropdown();
+        }
         if (onClick) return onClick(event);
       },
-    [clear]
+    [clear, popoverId, clearDropdown]
   );
 
   useEffect(() => {
@@ -203,6 +231,7 @@ export const Dropdown = forwardRef(function Dropdown(
           id={popoverId}
           popover="manual"
           ref={itemListRef}
+          anchor={parentDropdown ?? undefined}
           className={cls(
             "fixed w-min list-none m-0 p-2 b-1 b-solid light:b-white:15 dark:b-black:15 c-inherit shadow-2xl shadow-black rounded-3",
             contentVariant && variantBgClass[contentVariant]
@@ -211,15 +240,26 @@ export const Dropdown = forwardRef(function Dropdown(
             visible ? "opacity-100" : "opacity-0 pointer-events-none"
           )}
         >
-          {items.map(({ type, onClick, ...item }, index) => (
-            <li key={index}>
+          {items.map(({ type, onClick, className, active, ...item }, index) => (
+            <li
+              key={index}
+              className={cls(
+                className,
+                active
+                  ? "dark:bg-black:30 light:bg-white:30 rounded-2"
+                  : undefined
+              )}
+            >
               {type === "divider" ? (
                 <hr />
               ) : (
                 <Action
+                  className="w-full cursor-pointer rounded-2 b-none bg-transparent p-2 text-start text-nowrap c-inherit dark:hover:bg-black:25 light:hover:bg-white:25"
+                  contentVariant={contentVariant}
                   {...item}
                   onClick={handleItemClick(onClick)}
-                  className="w-full cursor-pointer rounded-2 b-none bg-transparent p-2 text-start text-nowrap c-inherit dark:hover:bg-black:25 light:hover:bg-white:25"
+                  parentDropdown={popoverId}
+                  clearDropdown={clear}
                 />
               )}
             </li>

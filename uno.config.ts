@@ -3,6 +3,7 @@ import presetUno from "@unocss/preset-uno";
 import presetTypography from "@unocss/preset-typography";
 import transformerDirectives from "@unocss/transformer-directives";
 import presetIcons from "@unocss/preset-icons/browser";
+import presetAnimations from "unocss-preset-animations";
 import { safeList } from "./src/lib/safeList";
 import { type IconifyJSON } from "@iconify/types";
 
@@ -29,6 +30,7 @@ export default defineConfig({
     presetUno({
       dark: "media",
     }),
+    presetAnimations(),
     presetTypography(),
     presetIcons({
       collections: {
@@ -45,9 +47,16 @@ export default defineConfig({
   ],
   transformers: [transformerDirectives()],
   safelist: [
+    ..."animate-in zoom-in-1/2 h-full flex-shrink cursor-pointer rounded-5 b-none children:inline-block".split(
+      " "
+    ),
+    ..."w-25 min-w-25 h-25 min-h-25".split(" "),
+    ..."max-h-10 flex flex-row items-center justify-stretch b-b-1 b-t-1 b-b-black:25 b-t-white:25 b-b-solid b-t-solid p-2 p-r-8 c-light dark:bg-black:15 light:bg-white:15 sm:p-r-0".split(
+      " "
+    ),
     ...safeList(
       [...Object.keys(colors), "white", "black", "dark", "light"],
-      [10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 75, 80, 85, 90, 95]
+      [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 75, 80, 85, 90, 95]
     ),
   ],
   theme: {

@@ -7,6 +7,7 @@ import { Tab } from "../../components/TabPanel";
 import { useTabs } from "../../hooks/useTabs";
 import { SafeArea } from "../../components/SafeArea";
 import { useModelContext } from "../../components/ModelContext";
+import { HeroIconButton } from "../../components/HeroIconButton";
 
 export interface HomeTabProps {
   active?: boolean;
@@ -75,6 +76,7 @@ export const HomeTab = Tab(({ active }: HomeTabProps) => {
             title={model.title}
           />
         ))}
+        <HeroIconButton icon="add" variant="accent" />
       </Carousel>
     </SafeArea>
   );

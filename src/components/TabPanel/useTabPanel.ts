@@ -1,4 +1,4 @@
-import { useCallback, useContext, useId, useMemo } from "react";
+import { useCallback, useContext, useEffect, useId, useMemo } from "react";
 import { usePanel } from "../Panel";
 import { Tab, type TabProps } from "./Tab";
 import {
@@ -9,7 +9,7 @@ import {
 
 export const useTabPanel = () => {
   const unknownId = useId();
-  const { updateTitle } = usePanel();
+  const { updateTitle, appTitle } = usePanel();
   const {
     tabs,
     setTabs,
@@ -139,6 +139,16 @@ export const useTabPanel = () => {
     },
     [getTabByComponent, activateTab, newTab]
   );
+
+  const activeTab = useMemo(() => {
+    return tabs.find((tab) => tab.active);
+  }, [tabs]);
+
+  useEffect(() => {
+    if (activeTab && activeTab.title !== appTitle) {
+      updateTitle(activeTab.title);
+    }
+  }, [activeTab, appTitle, updateTitle]);
 
   return {
     tabs,

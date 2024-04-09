@@ -50,7 +50,7 @@ export const PanelSheet = ({
         />
       )}
       <div className="h-full w-full flex flex-col items-stretch justify-stretch overflow-auto text-light c-inherit">
-        <div className="absolute inset-r-0 inset-t-0 md:hidden">
+        <div className="absolute inset-r-0 inset-t-0 sm:hidden">
           <Dropdown
             contentVariant="default"
             icon="dragIndicator"

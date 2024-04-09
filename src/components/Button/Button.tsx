@@ -43,6 +43,7 @@ export type ButtonProps = Omit<
   DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
   "type"
 > & {
+  extendedClassName?: string;
   clear?: boolean;
   grow?: boolean;
   shrink?: boolean;
@@ -61,6 +62,7 @@ export type ButtonComponent = {
 
 export const Button = forwardRef(function Button(
   {
+    extendedClassName,
     grow = true,
     shrink,
     clear,
@@ -180,7 +182,8 @@ export const Button = forwardRef(function Button(
                     variantTextClass[currentVariant] ?? "c-inherit",
                     "bg-transparent",
                   ]),
-            ]
+            ],
+        extendedClassName
       )}
       data-size={size}
       type="button"

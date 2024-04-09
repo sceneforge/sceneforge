@@ -8,7 +8,7 @@ export const useTabs = () => {
   const { activateTab, newTab, getTabById, closeTab } = useTabPanel();
 
   const newMarkdownTab = useCallback(
-    ({ id, title, file, value, isInline }: MarkdownTabProps) => {
+    ({ id, title, href, value }: MarkdownTabProps) => {
       if (id) {
         const tab = getTabById(id);
         if (tab) {
@@ -20,7 +20,7 @@ export const useTabs = () => {
       newTab<MarkdownTabProps>({
         id: id ?? uuid(),
         title: title ?? "Untitled Markdown",
-        props: { id, title, file, value, isInline },
+        props: { id, title, href, value },
         active: true,
         component: MarkdownTab,
       });

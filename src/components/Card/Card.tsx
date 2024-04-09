@@ -37,7 +37,7 @@ export const Card = ({
     [variant]
   );
   return (
-    <div className="relative w-full overflow-clip rounded-5 c-inherit dark:bg-black light:bg-white">
+    <div className="relative h-full w-full animate-in overflow-clip rounded-5 c-inherit zoom-in-1/2 dark:bg-black light:bg-white">
       {title && (
         <span
           className={cls(
@@ -67,7 +67,7 @@ export const Card = ({
       {actions && actions.length > 0 && (
         <div
           className={cls(
-            "h-20 flex flex-row justify-stretch gap-2 p-4 c-inherit",
+            "flex flex-row justify-stretch gap-2 p-3 c-inherit",
             `${cardBgClass}:35`
           )}
         >

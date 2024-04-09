@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Canvas } from "../Canvas";
 import { PanelSheet, PanelSheetBody } from "../PanelSheet";
-import { useModelViewer } from "./useModelViewer";
+import { useModelViewer } from "./hooks/useModelViewer";
 import { SceneObjectSection } from "./SceneObjectSection";
 import { SceneNodesSection } from "./SceneNodesSection";
 import { ModelViewerHeader } from "./ModelViewerHeader";
