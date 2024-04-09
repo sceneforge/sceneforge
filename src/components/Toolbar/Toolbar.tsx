@@ -30,7 +30,7 @@ export const Toolbar = ({
               type !== "divider" && (
                 <li key={index}>
                   <Action
-                    className="m-0 cursor-pointer rounded-4 b-none bg-transparent p-2 c-inherit dark:hover:bg-black:10 light:hover:bg-white:10"
+                    className="m-0 cursor-pointer rounded-2 b-none bg-transparent p-2 c-inherit dark:hover:bg-black:10 light:hover:bg-white:10"
                     {...({ ...item, variant, contentVariant } as ActionProps)}
                   />
                 </li>

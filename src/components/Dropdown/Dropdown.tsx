@@ -52,6 +52,7 @@ export const Dropdown = forwardRef(function Dropdown(
     onToggle,
     parentDropdown,
     clearDropdown,
+    extendedClassName,
     ...props
   }: DropdownProps,
   ref: ForwardedRef<ButtonComponent>
@@ -215,6 +216,10 @@ export const Dropdown = forwardRef(function Dropdown(
           ref={buttonRef}
           popovertargetaction={pressed ? "show" : "hide"}
           popovertarget={popoverId}
+          extendedClassName={cls(
+            extendedClassName,
+            pressed ? "dark:bg-black:20 light:bg-white:20" : undefined
+          )}
         />
       ) : (
         <Button
@@ -224,6 +229,10 @@ export const Dropdown = forwardRef(function Dropdown(
           popovertargetaction={pressed ? "show" : "hide"}
           popovertarget={popoverId}
           ref={buttonRef}
+          extendedClassName={cls(
+            extendedClassName,
+            pressed ? "dark:bg-black:20 light:bg-white:20" : undefined
+          )}
         />
       )}
       {items && items.length && (
@@ -233,7 +242,7 @@ export const Dropdown = forwardRef(function Dropdown(
           ref={itemListRef}
           anchor={parentDropdown ?? undefined}
           className={cls(
-            "fixed w-min list-none m-0 p-2 b-1 b-solid light:b-white:15 dark:b-black:15 c-inherit shadow-2xl shadow-black rounded-3",
+            "fixed w-min list-none m-0 p-1 b-1 b-solid light:b-white:15 dark:b-black:15 c-inherit shadow-2xl shadow-black rounded-3",
             contentVariant && variantBgClass[contentVariant]
               ? variantBgClass[contentVariant]
               : "bg-accent",
