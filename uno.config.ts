@@ -51,6 +51,9 @@ export default defineConfig({
       " "
     ),
     ..."w-25 min-w-25 h-25 min-h-25".split(" "),
+    ..."backdrop:bg-accent:10 backdrop:backdrop-blur-2 backdrop:backdrop-grayscale-60 backdrop:backdrop-filter backdrop:w-full backdrop:h-full".split(
+      " "
+    ),
     ..."max-h-10 flex flex-row items-center justify-stretch b-b-1 b-t-1 b-b-black:25 b-t-white:25 b-b-solid b-t-solid p-2 p-r-8 c-light dark:bg-black:15 light:bg-white:15 sm:p-r-0".split(
       " "
     ),

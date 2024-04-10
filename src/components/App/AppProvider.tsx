@@ -3,6 +3,7 @@ import { ContextMenuProvider } from "../ContextMenu";
 import { ModelContextProvider } from "../ModelContext";
 import { PanelProvider, type PanelProviderProps } from "../Panel";
 import { TabPanelProvider, type TabComponent } from "../TabPanel";
+import { AppInstallProvider } from "../AppInstall";
 
 export type AppProviderProps = PropsWithChildren<{
   userData: PanelProviderProps["userData"];
@@ -30,23 +31,25 @@ export const AppProvider = ({
 
   return (
     <AppContext.Provider value={{ name, description, version, dev }}>
-      <PanelProvider title={name} userData={userData}>
-        <ModelContextProvider>
-          <ContextMenuProvider>
-            <TabPanelProvider
-              defaultTab={
-                homeComponent && {
-                  id: "home",
-                  title: name,
-                  component: homeComponent,
+      <AppInstallProvider>
+        <PanelProvider title={name} userData={userData}>
+          <ModelContextProvider>
+            <ContextMenuProvider>
+              <TabPanelProvider
+                defaultTab={
+                  homeComponent && {
+                    id: "home",
+                    title: name,
+                    component: homeComponent,
+                  }
                 }
-              }
-            >
-              {children}
-            </TabPanelProvider>
-          </ContextMenuProvider>
-        </ModelContextProvider>
-      </PanelProvider>
+              >
+                {children}
+              </TabPanelProvider>
+            </ContextMenuProvider>
+          </ModelContextProvider>
+        </PanelProvider>
+      </AppInstallProvider>
     </AppContext.Provider>
   );
 };

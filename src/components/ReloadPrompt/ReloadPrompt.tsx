@@ -25,22 +25,27 @@ export const ReloadPrompt = () => {
   return (
     <Dialog
       ref={dialogRef}
-      open={true}
       title="Service Worker Update"
-      actions={
-        needRefresh ? [{
-          onClick: reload,
-          children: "Reload"
-        }] : undefined
-      }
+      variant="accent"
+      toolbar={{
+        items: needRefresh
+          ? [
+              {
+                type: "item",
+                onClick: reload,
+                children: "Reload",
+              },
+            ]
+          : undefined,
+      }}
       description={
-        offlineReady ?
-          "App ready tp work offline." :
-          needRefresh ?
-            "New content available, click on reload button to update." :
-            undefined
+        offlineReady
+          ? "App ready tp work offline."
+          : needRefresh
+          ? "New content available, click on reload button to update."
+          : undefined
       }
       onClose={close}
     />
-  )
+  );
 }

@@ -1,22 +1,27 @@
 import {
-  type ForwardedRef,
   forwardRef,
   useCallback,
   useImperativeHandle,
   useRef,
   type DialogHTMLAttributes,
   type PropsWithChildren,
-  Fragment,
   useEffect,
   useId,
+  type ForwardedRef,
+  useState,
 } from "react";
-import { IconButton, type IconButtonProps } from "../IconButton";
-import { Button, type ButtonProps } from "../Button";
+import { IconButton } from "../IconButton";
+import { Heading } from "../Heading";
+import { Toolbar, type ToolbarProps } from "../Toolbar";
+import { Variant } from "../../types/variants";
+import { variantBgClass } from "../../lib/variantClasses";
+import { cls } from "../../lib/cls";
 
 export type DialogProps = PropsWithChildren<{
   title?: string;
   description?: string;
-  actions?: (IconButtonProps | ButtonProps)[];
+  toolbar?: ToolbarProps;
+  variant?: Variant;
 }> &
   DialogHTMLAttributes<HTMLDialogElement>;
 
@@ -24,53 +29,65 @@ export const Dialog = forwardRef(function Dialog(
   {
     title,
     description,
-    open,
+    open = true,
     onClose,
     onCancel,
-    actions,
     children,
+    toolbar,
+    variant = "accent",
     ...props
   }: DialogProps,
-  forwardedRef: ForwardedRef<HTMLDialogElement | null>
+  ref: ForwardedRef<HTMLDialogElement>
 ) {
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const [openState, setOpenState] = useState<boolean>(open ?? false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const headId = useId();
   const descriptionId = useId();
 
-  useImperativeHandle(
-    forwardedRef,
-    () => dialogRef.current as HTMLDialogElement,
-    [dialogRef]
-  );
+  useImperativeHandle(ref, () => dialogRef.current as HTMLDialogElement, [
+    dialogRef,
+  ]);
 
   const handleCloseClick = useCallback(() => {
-    dialogRef.current?.close();
+    if (dialogRef.current instanceof HTMLDialogElement) {
+      setOpenState(false);
+      dialogRef.current.close();
+    }
   }, [dialogRef]);
 
   useEffect(() => {
-    if (open && dialogRef.current) {
-      dialogRef.current.showModal();
+    const dialog = dialogRef.current;
+    if (openState && dialog) {
+      dialog.showModal();
+      return () => {
+        dialog.close();
+      };
     }
-  }, [open, dialogRef]);
+  }, [openState, dialogRef]);
 
   return (
     <dialog
-      className="fixed inset-block-50% inset-inline-50% m-0 flex flex-col translate--50% b b-accent rounded-4 b-solid p-0 drop-shadow-2xl backdrop:bg-accent:10 dark:bg-black light:bg-white dark:text-light light:text-dark backdrop:backdrop-blur-2 backdrop:backdrop-grayscale-60 backdrop:backdrop-filter"
-      ref={dialogRef}
+      className={cls(
+        "fixed inset-block-50% inset-inline-50% m-0 min-w-64 flex flex-col translate--50% overflow-clip b dark:b-black:10 light:b-white:10 rounded-4 b-solid bg-accent p-0 c-light drop-shadow-2xl backdrop:h-full backdrop:w-full backdrop:bg-accent:10 backdrop:backdrop-blur-2 backdrop:backdrop-grayscale-60 backdrop:backdrop-filter",
+        variantBgClass[variant]
+      )}
       onClose={onClose}
       onCancel={onCancel}
       aria-labelledby={headId}
       aria-describedby={description && descriptionId}
       {...props}
+      ref={dialogRef}
     >
-      <div className="w-full flex flex-shrink flex-row flex-nowrap select-none justify-stretch gap-2 b-b b-b-black:20 b-b-solid bg-accent:75 p-2">
-        <h1
+      <div className="w-full flex flex-shrink flex-row flex-nowrap select-none items-center justify-stretch gap-2 b-b b-b-black:20 b-b-solid p-2 dark:bg-black:10 light:bg-white:10">
+        <Heading
+          level={1}
           id={headId}
-          className="m-0 flex-grow p-0 text-start text-nowrap text-size-sm"
+          className="m-0 flex-grow p-0 text-start text-nowrap font-size-4"
         >
           {title}
-        </h1>
+        </Heading>
         <IconButton
+          className="m-0 block cursor-pointer b-0 rounded-full bg-transparent p-1 c-inherit hover:dark:bg-black:10 hover:light:bg-white:10"
           autoFocus
           label="Close"
           icon="close"
@@ -79,8 +96,7 @@ export const Dialog = forwardRef(function Dialog(
       </div>
       <div
         role="document"
-        tabIndex={0}
-        className="flex flex-grow flex-col justify-stretch bg-accent:40 text-start text-size-sm"
+        className="flex flex-grow flex-col justify-stretch text-start text-size-sm dark:bg-black:25 light:bg-white:25"
       >
         <div className="m-b p-2">
           {description && (
@@ -94,17 +110,9 @@ export const Dialog = forwardRef(function Dialog(
             </div>
           )}
         </div>
-        {actions && actions.length > 0 && (
-          <div className="w-full flex flex-row items-center justify-center bg-accent:50 p-2 text-center">
-            {actions.map((props, index) => (
-              <Fragment key={index}>
-                {"icon" in props && props.icon ? (
-                  <IconButton {...(props as IconButtonProps)} />
-                ) : (
-                  <Button variant="accent" {...(props as ButtonProps)} />
-                )}
-              </Fragment>
-            ))}
+        {toolbar && toolbar.items && toolbar.items.length > 0 && (
+          <div className="w-full flex flex-row items-center justify-center p-2 text-center dark:bg-black:10 light:bg-white:10">
+            <Toolbar contrast withDropdown={false} {...toolbar} />
           </div>
         )}
       </div>
