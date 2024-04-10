@@ -151,6 +151,7 @@ export const useTabPanel = () => {
   }, [activeTab, appTitle, updateTitle]);
 
   return {
+    activeTab,
     tabs,
     defaultTab,
     tabsPosition,

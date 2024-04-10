@@ -6,6 +6,7 @@ import { loadFile } from "../../lib/loadFile";
 import { fileOpen } from "browser-fs-access";
 import { useModelContext } from "../ModelContext";
 import { Toolbar } from "../Toolbar";
+import { useTabPanel } from "../TabPanel";
 
 export type ModelViewerHeaderProps = {
   model?: Model;
@@ -25,6 +26,7 @@ export const ModelViewerHeader = ({
   setMode,
 }: ModelViewerHeaderProps) => {
   const { updateModel } = useModelContext();
+  const { updateTabTitle, activeTab } = useTabPanel();
   const modeLabel = useMemo(() => modeLabels[mode], [mode]);
 
   const handleModeChange = useCallback(
@@ -48,11 +50,28 @@ export const ModelViewerHeader = ({
       });
   }, [model, updateModel]);
 
+  const handleModelNameChange = useCallback(
+    async (value: string) => {
+      if (model && model.id) {
+        try {
+          await updateModel(model.id, { title: value });
+          if (activeTab) {
+            updateTabTitle(activeTab.id, value);
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    },
+    [model, updateModel, activeTab, updateTabTitle]
+  );
+
   return (
     <PanelSheetHeader
       editable={mode === Mode.Edit}
       name="model-name"
       title={model?.title ?? "Untitled Model"}
+      onUpdate={handleModelNameChange}
     >
       <Toolbar
         icon="menu"
