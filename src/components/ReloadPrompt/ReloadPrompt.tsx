@@ -40,7 +40,7 @@ export const ReloadPrompt = () => {
       }}
       description={
         offlineReady
-          ? "App ready tp work offline."
+          ? "App ready to work offline."
           : needRefresh
           ? "New content available, click on reload button to update."
           : undefined
