@@ -50,7 +50,7 @@ export const ModelViewerHeader = ({
 
   return (
     <PanelSheetHeader
-      editable
+      editable={mode === Mode.Edit}
       name="model-name"
       title={model?.title ?? "Untitled Model"}
     >

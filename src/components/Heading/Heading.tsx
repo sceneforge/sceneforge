@@ -1,7 +1,7 @@
 import {
   type HTMLAttributes,
   createElement,
-  ForwardedRef,
+  type ForwardedRef,
   forwardRef,
 } from "react";
 
@@ -13,5 +13,8 @@ export const Heading = forwardRef(function Heading(
   { level, ...props }: HeadingProps,
   ref: ForwardedRef<HTMLHeadingElement>
 ) {
-  return createElement(`h${level}`, { ...props, ref });
+  return createElement(`h${level}`, {
+    ...props,
+    ref,
+  });
 });
