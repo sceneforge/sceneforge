@@ -6,8 +6,10 @@ import { Tab, useTabPanel } from "../../components/TabPanel";
 import { Section } from "../../components/Section";
 import { SafeArea } from "../../components/SafeArea";
 import { useAppContext } from "../../components/App";
+import { useTranslation } from "react-i18next";
 
 export const SettingsTab = Tab(() => {
+  const { t } = useTranslation("tabs");
   const { getUserData, setUserData } = usePanel();
   const { tabsPosition, setTabsPosition } = useTabPanel();
   const { name, description, version, dev } = useAppContext();
@@ -38,17 +40,23 @@ export const SettingsTab = Tab(() => {
 
   return (
     <SafeArea vertical horizonal>
-      <Section level={1} title="Settings">
-        <Card title="Tabs">
+      <Section level={1} title={t("SettingsTab.title")}>
+        <Card title={t("SettingsTab.sections.tabs.title")}>
           <InputList>
             <InputListItem
-              label="Position"
+              label={t("SettingsTab.sections.tabs.positionLabel")}
               name="tab-position"
               type="select"
               value={tabsPosition}
               options={[
-                { value: "top", text: "Top" },
-                { value: "bottom", text: "Bottom" },
+                {
+                  value: "top",
+                  text: t("SettingsTab.sections.tabs.positionTopOption"),
+                },
+                {
+                  value: "bottom",
+                  text: t("SettingsTab.sections.tabs.positionBottomOption"),
+                },
               ]}
               onChange={changeTabsPosition}
             />

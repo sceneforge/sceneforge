@@ -7,6 +7,7 @@ import { fileOpen } from "browser-fs-access";
 import { useModelContext } from "../ModelContext";
 import { Toolbar } from "../Toolbar";
 import { useTabPanel } from "../TabPanel";
+import { useTranslation } from "react-i18next";
 
 export type ModelViewerHeaderProps = {
   model?: Model;
@@ -14,20 +15,23 @@ export type ModelViewerHeaderProps = {
   setMode?: Dispatch<Mode>;
 };
 
-const modeLabels = {
-  [Mode.View]: "View Mode",
-  [Mode.Edit]: "Edit Mode",
-  [Mode.Material]: "Material Mode",
-} as const;
-
 export const ModelViewerHeader = ({
   model,
   mode = Mode.Edit,
   setMode,
 }: ModelViewerHeaderProps) => {
+  const { t } = useTranslation("ModelViewer");
+  const modes = useMemo(
+    () => ({
+      view: t("modes.view"),
+      edit: t("modes.edit"),
+      material: t("modes.material"),
+    }),
+    [t]
+  );
   const { updateModel } = useModelContext();
   const { updateTabTitle, activeTab } = useTabPanel();
-  const modeLabel = useMemo(() => modeLabels[mode], [mode]);
+  const modeLabel = useMemo(() => modes[mode], [modes, mode]);
 
   const handleModeChange = useCallback(
     (newMode: Mode) => () => setMode?.(newMode),
@@ -36,7 +40,7 @@ export const ModelViewerHeader = ({
 
   const handleImport = useCallback(() => {
     fileOpen({
-      description: "Select a 3D model",
+      description: t("ModelViewerHeader.fileImportDescription"),
       mimeTypes: ["model/gltf-binary", "model/gltf+json"],
       extensions: [".glb", ".gltf"],
       multiple: false,
@@ -48,7 +52,7 @@ export const ModelViewerHeader = ({
           updateModel(model.id, { gltf: blob() });
         }
       });
-  }, [model, updateModel]);
+  }, [t, model, updateModel]);
 
   const handleModelNameChange = useCallback(
     async (value: string) => {
@@ -70,7 +74,7 @@ export const ModelViewerHeader = ({
     <PanelSheetHeader
       editable={mode === Mode.Edit}
       name="model-name"
-      title={model?.title ?? "Untitled Model"}
+      title={model?.title ?? t("ModelViewerHeader.untitled")}
       onUpdate={handleModelNameChange}
     >
       <Toolbar
@@ -79,11 +83,11 @@ export const ModelViewerHeader = ({
         items={[
           {
             type: "item",
-            label: "Model",
+            label: t("ModelViewerHeader.actions.modelDropdown"),
             items: [
               {
                 type: "item",
-                label: "Import...",
+                label: t("ModelViewerHeader.actions.import"),
                 onClick: handleImport,
               },
             ],
@@ -94,19 +98,19 @@ export const ModelViewerHeader = ({
             items: [
               {
                 type: "item",
-                label: "View Mode",
+                label: t("modes.view"),
                 active: mode === Mode.View,
                 onClick: handleModeChange(Mode.View),
               },
               {
                 type: "item",
-                label: "Edit Mode",
+                label: t("modes.edit"),
                 active: mode === Mode.Edit,
                 onClick: handleModeChange(Mode.Edit),
               },
               {
                 type: "item",
-                label: "Material Mode",
+                label: t("modes.material"),
                 active: mode === Mode.Material,
                 onClick: handleModeChange(Mode.Material),
               },

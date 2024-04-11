@@ -3,8 +3,10 @@ import { useCallback } from "react";
 import { useTabPanel } from "../components/TabPanel";
 import { ModelViewTab, type ModelViewTabProps } from "../tabs";
 import { MarkdownTab, type MarkdownTabProps } from "../tabs/MarkdownTab";
+import { useTranslation } from "react-i18next";
 
 export const useTabs = () => {
+  const { t } = useTranslation("common");
   const { activateTab, newTab, getTabById, closeTab } = useTabPanel();
 
   const newMarkdownTab = useCallback(
@@ -19,13 +21,13 @@ export const useTabs = () => {
 
       newTab<MarkdownTabProps>({
         id: id ?? uuid(),
-        title: title ?? "Untitled Markdown",
+        title: title ?? t("tabs.untitledMarkdown"),
         props: { id, title, href, value },
         active: true,
         component: MarkdownTab,
       });
     },
-    [activateTab, getTabById, newTab]
+    [t, activateTab, getTabById, newTab]
   );
 
   const newModelViewTab = useCallback(
@@ -40,13 +42,13 @@ export const useTabs = () => {
 
       newTab<ModelViewTabProps>({
         id: id ?? uuid(),
-        title: title ?? "Untitled Model",
+        title: title ?? t("tabs.untitledModel"),
         props: { id, title, gltf },
         active: true,
         component: ModelViewTab,
       });
     },
-    [newTab, getTabById, activateTab]
+    [t, newTab, getTabById, activateTab]
   );
 
   const closeModelViewTab = useCallback(

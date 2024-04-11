@@ -8,6 +8,7 @@ import { useTabs } from "../../hooks/useTabs";
 import { SafeArea } from "../../components/SafeArea";
 import { useModelContext } from "../../components/ModelContext";
 import { HeroIconButton } from "../../components/HeroIconButton";
+import { useTranslation } from "react-i18next";
 
 export interface HomeTabProps {
   active?: boolean;
@@ -15,6 +16,7 @@ export interface HomeTabProps {
 }
 
 export const HomeTab = Tab(({ active }: HomeTabProps) => {
+  const { t } = useTranslation("tabs");
   const [loaded, setLoaded] = useState(false);
   const { models, loadModels } = useModelContext();
   const { newModelViewTab, closeModelViewTab } = useTabs();
@@ -53,18 +55,18 @@ export const HomeTab = Tab(({ active }: HomeTabProps) => {
 
   return (
     <SafeArea vertical>
-      <Carousel title="Models">
+      <Carousel title={t("HomeTab.sections.models.title")}>
         {models.map((model, index) => (
           <Card
             variant="accent"
             actions={[
               {
-                label: "Open",
+                label: t("HomeTab.sections.models.actions.open"),
                 variant: "accent",
                 onClick: openModel(model),
               },
               {
-                label: "Delete",
+                label: t("HomeTab.sections.models.actions.delete"),
                 icon: "delete",
                 variant: "danger",
                 onClick: deleteModel(model),

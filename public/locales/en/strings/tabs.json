@@ -1,0 +1,28 @@
+{
+  "HomeTab": {
+    "sections": {
+      "models": {
+        "title": "Models",
+        "viewAll": "View all",
+        "actions": {
+          "open": "Open",
+          "delete": "Delete"
+        }
+      }
+    }
+  },
+  "ModelViewTab": {
+    "untitledModel": "Untitled Model"
+  },
+  "SettingsTab": {
+    "title": "Settings",
+    "sections": {
+      "tabs": {
+        "title": "Tabs",
+        "positionLabel": "Position",
+        "positionTopOption": "Top",
+        "positionBottomOption": "Bottom"
+      }
+    }
+  }
+}

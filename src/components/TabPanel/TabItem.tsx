@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { cls } from "../../lib/cls";
 import { Button } from "../Button";
 import { IconButton } from "../IconButton";
@@ -18,6 +19,7 @@ export const TabItem = ({
   active,
   index,
 }: TabItemProps) => {
+  const { t } = useTranslation("TabPanel");
   const { tabsPosition } = useTabPanel();
 
   return (
@@ -44,7 +46,7 @@ export const TabItem = ({
             tabsPosition === "top" ? "rounded-tr-2" : "rounded-br-2"
           )}
           icon="close"
-          label="close"
+          label={t("TabItem.actions.close")}
           tabIndex={-1}
           onClick={onCloseClick}
         />

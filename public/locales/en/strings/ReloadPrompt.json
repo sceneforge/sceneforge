@@ -1,0 +1,10 @@
+{
+  "title": "Service Worker Update",
+  "description": {
+    "offlineReady": "App ready to work offline.",
+    "needsRefresh": "New content available, click on reload button to update."
+  },
+  "actions": {
+    "reloadButton": "Reload"
+  }
+}

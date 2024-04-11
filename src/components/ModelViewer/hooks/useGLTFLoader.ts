@@ -2,8 +2,10 @@ import { type ISceneLoaderAsyncResult } from "@babylonjs/core/Loading/sceneLoade
 import { type Scene } from "@babylonjs/core/scene";
 import { useCallback, useState, type RefObject } from "react";
 import { importGLTF } from "../../../lib/importGLTF";
+import { useTranslation } from "react-i18next";
 
 export const useGLTFLoader = (sceneRef: RefObject<Scene>) => {
+  const { t } = useTranslation("ModelViewer");
   const [capture, setCapture] = useState<string | undefined>(undefined);
   const [loadResult, setLoadResult] = useState<
     ISceneLoaderAsyncResult | undefined
@@ -20,12 +22,12 @@ export const useGLTFLoader = (sceneRef: RefObject<Scene>) => {
           if (withAttempt > 0) {
             openGLTFBlob(blob, withAttempt - 1);
           } else {
-            throw new Error("Failed to load model");
+            throw new Error(t("errorMessages.openGLTFBlob"));
           }
         }, 1000);
       }
     },
-    [sceneRef, setCapture, setLoadResult]
+    [t, sceneRef, setCapture, setLoadResult]
   );
 
   return {

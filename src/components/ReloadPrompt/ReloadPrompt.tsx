@@ -1,8 +1,10 @@
 import { useCallback, useRef } from "react";
 import { useRegisterSW } from "virtual:pwa-register/react"
 import { Dialog } from "../Dialog";
+import { useTranslation } from "react-i18next";
 
 export const ReloadPrompt = () => {
+  const { t } = useTranslation("ReloadPrompt");
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const {
     offlineReady: [offlineReady, setOfflineReady],
@@ -25,7 +27,7 @@ export const ReloadPrompt = () => {
   return (
     <Dialog
       ref={dialogRef}
-      title="Service Worker Update"
+      title={t("title")}
       variant="accent"
       toolbar={{
         items: needRefresh
@@ -33,19 +35,19 @@ export const ReloadPrompt = () => {
               {
                 type: "item",
                 onClick: reload,
-                children: "Reload",
+                children: t("actions.reloadButton"),
               },
             ]
           : undefined,
       }}
       description={
         offlineReady
-          ? "App ready to work offline."
+          ? t("description.offlineReady")
           : needRefresh
-          ? "New content available, click on reload button to update."
+          ? t("description.needsRefresh")
           : undefined
       }
       onClose={close}
     />
   );
-}
+};

@@ -1,9 +1,16 @@
-import { createContext, type PropsWithChildren } from "react";
+import {
+  type Dispatch,
+  type SetStateAction,
+  createContext,
+  useState,
+  type PropsWithChildren,
+} from "react";
 import { ContextMenuProvider } from "../ContextMenu";
 import { ModelContextProvider } from "../ModelContext";
 import { PanelProvider, type PanelProviderProps } from "../Panel";
 import { TabPanelProvider, type TabComponent } from "../TabPanel";
 import { AppInstallProvider } from "../AppInstall";
+import { useTranslation } from "react-i18next";
 
 export type AppProviderProps = PropsWithChildren<{
   userData: PanelProviderProps["userData"];
@@ -15,6 +22,10 @@ export type AppContextType = {
   description?: string;
   version?: string;
   dev?: boolean;
+  resolvedLanguage?: string;
+  dir?: string;
+  setResolvedLanguage?: Dispatch<SetStateAction<string | undefined>>;
+  setDir?: Dispatch<SetStateAction<string | undefined>>;
 };
 
 export const AppContext = createContext<AppContextType>({});
@@ -24,13 +35,31 @@ export const AppProvider = ({
   homeComponent,
   children,
 }: AppProviderProps) => {
+  const {
+    i18n: { resolvedLanguage: i18nResolvedLanguage, dir: i18nDir },
+  } = useTranslation();
+  const [resolvedLanguage, setResolvedLanguage] = useState<string | undefined>(
+    i18nResolvedLanguage
+  );
+  const [dir, setDir] = useState<string | undefined>(i18nDir());
   const name = import.meta.env.VITE_APP_NAME ?? "";
   const description = import.meta.env.VITE_APP_DESCRIPTION ?? "";
   const version = import.meta.env.VITE_APP_VERSION ?? "";
   const dev = import.meta.env.DEV ? true : false;
 
   return (
-    <AppContext.Provider value={{ name, description, version, dev }}>
+    <AppContext.Provider
+      value={{
+        name,
+        description,
+        version,
+        dev,
+        resolvedLanguage,
+        setResolvedLanguage,
+        dir,
+        setDir,
+      }}
+    >
       <AppInstallProvider>
         <PanelProvider title={name} userData={userData}>
           <ModelContextProvider>

@@ -1,0 +1,7 @@
+{
+  "title": "Install",
+  "description": "Install this app to your device for a better experience",
+  "actions": {
+    "installButton": "Install"
+  }
+}

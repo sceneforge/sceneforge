@@ -1,0 +1,13 @@
+{
+  "defaultAppTitle": "Scene Forge",
+  "AppNav": {
+    "toolbarEnd": {
+      "homeButton": "Home",
+      "aboutButton": "About",
+      "aboutTabTitle": "About",
+      "settingsButton": "Settings",
+      "settingsTabTitle": "Settings",
+      "installButton": "Install"
+    }
+  }
+}

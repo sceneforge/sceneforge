@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { ModelViewer } from "../../components/ModelViewer";
 import { Tab, TabProps } from "../../components/TabPanel";
 import { Model } from "../../lib/isModel";
@@ -8,7 +9,15 @@ export type ModelViewTabProps = TabProps<{
   Omit<Model & { title?: string }, "capture">;
 
 export const ModelViewTab = Tab(
-  ({ active, id, title = "Untitled Model", gltf }: ModelViewTabProps) => {
-    return <ModelViewer active={active} gltf={gltf} id={id} title={title} />;
+  ({ active, id, title, gltf }: ModelViewTabProps) => {
+    const { t } = useTranslation("tabs");
+    return (
+      <ModelViewer
+        active={active}
+        gltf={gltf}
+        id={id}
+        title={title ?? t("ModelViewTab.untitledModel")}
+      />
+    );
   }
 );

@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { Dialog } from "../Dialog";
 import { useAppInstall } from "./useAppInstall";
 
 export const AppInstall = () => {
+  const { t } = useTranslation("AppInstall");
   const { closeInstallDialog, installPrompt, showInstallDialog } =
     useAppInstall();
 
@@ -9,15 +11,15 @@ export const AppInstall = () => {
 
   return (
     <Dialog
-      title="Install"
-      description="Install this app to your device for a better experience"
+      title={t("title")}
+      description={t("description")}
       onClose={closeInstallDialog}
       variant="default"
       toolbar={{
         items: [
           {
             type: "item",
-            label: "Install",
+            label: t("actions.installButton"),
             onClick: () => {
               installPrompt();
               closeInstallDialog();

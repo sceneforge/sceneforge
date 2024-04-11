@@ -4,6 +4,7 @@ import { type Variant } from "../../types/variants";
 import { cls } from "../../lib/cls";
 import { variantBgClass } from "../../lib/variantClasses";
 import { Dropdown } from "../Dropdown";
+import { useTranslation } from "react-i18next";
 
 export type PanelSheetProps = PropsWithChildren<{
   variant?: Variant;
@@ -21,6 +22,7 @@ export const PanelSheet = ({
   dragIndicator,
   children,
 }: PanelSheetProps) => {
+  const { t } = useTranslation("PanelSheet");
   const panelRef = useRef<HTMLDivElement>(null);
   const { clickDown, mouseOver, updateSize } = usePanelSheet(
     panelRef,
@@ -54,7 +56,7 @@ export const PanelSheet = ({
           <Dropdown
             contentVariant="default"
             icon="dragIndicator"
-            label="Panel Size"
+            label={t("size")}
             items={[75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25].map((size) => ({
               type: "item",
               label: `${size}%`,
