@@ -22,7 +22,7 @@ export const HomeTab = Tab(({ active }: HomeTabProps) => {
   const { newModelViewTab, closeModelViewTab } = useTabs();
 
   const openModel = useCallback(
-    (model: ModelProps) => {
+    (model: Partial<ModelProps> = {}) => {
       return () => {
         newModelViewTab(model);
       };
@@ -78,7 +78,7 @@ export const HomeTab = Tab(({ active }: HomeTabProps) => {
             title={model.title}
           />
         ))}
-        <HeroIconButton icon="add" variant="accent" />
+        <HeroIconButton icon="add" variant="accent" onClick={openModel()} />
       </Carousel>
     </SafeArea>
   );

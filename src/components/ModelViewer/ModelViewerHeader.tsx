@@ -87,7 +87,7 @@ export const ModelViewerHeader = ({
             items: [
               {
                 type: "item",
-                label: t("ModelViewerHeader.actions.import"),
+                label: t("ModelViewerHeader.actions.importButton"),
                 onClick: handleImport,
               },
             ],

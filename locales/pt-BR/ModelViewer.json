@@ -8,7 +8,8 @@
     "fileImportDescription": "Selecione um modelo 3D",
     "untitled": "Modelo Sem Título",
     "actions": {
-      "importButton": "Importar..."
+      "importButton": "Importar...",
+      "modelDropdown": "Modelo"
     }
   },
   "SceneNodesSection": {

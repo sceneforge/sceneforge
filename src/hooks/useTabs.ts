@@ -44,7 +44,7 @@ export const useTabs = () => {
   );
 
   const newModelViewTab = useCallback(
-    ({ id, title, translation, gltf }: ModelViewTabProps) => {
+    ({ id, title, translation, gltf }: Partial<ModelViewTabProps>) => {
       if (id) {
         const tab = getTabById(id);
         if (tab) {
@@ -53,17 +53,21 @@ export const useTabs = () => {
         }
       }
 
+      const withId = id ?? uuid();
+      const withTitle = title ?? t("tabs.untitledModel");
+      const withTranslation = translation ?? {
+        ns: "common",
+        key: "tabs.untitledModel",
+      };
+
       newTab<ModelViewTabProps>({
-        id: id ?? uuid(),
-        title: title ?? t("tabs.untitledModel"),
-        translation: translation ?? { ns: "common", key: "tabs.untitledModel" },
+        id: withId,
+        title: withTitle,
+        translation: withTranslation,
         props: {
-          id,
-          title,
-          translation: translation ?? {
-            ns: "common",
-            key: "tabs.untitledModel",
-          },
+          id: withId,
+          title: withTitle,
+          translation: withTranslation,
           gltf,
         },
         active: true,
