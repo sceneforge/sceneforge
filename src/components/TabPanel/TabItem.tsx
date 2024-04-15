@@ -3,9 +3,15 @@ import { cls } from "../../lib/cls";
 import { Button } from "../Button";
 import { IconButton } from "../IconButton";
 import { useTabPanel } from "./useTabPanel";
+import { useMemo } from "react";
+import { useAppContext } from "../App";
 
 export interface TabItemProps {
   title: string;
+  translation?: {
+    ns: string;
+    key: string;
+  };
   active?: boolean;
   index?: number;
   onCloseClick?: () => void;
@@ -14,13 +20,27 @@ export interface TabItemProps {
 
 export const TabItem = ({
   title,
+  translation,
   onCloseClick,
   onActiveClick,
   active,
   index,
 }: TabItemProps) => {
-  const { t } = useTranslation("TabPanel");
+  const { resolvedLanguage } = useAppContext();
+  const { t } = useTranslation();
   const { tabsPosition } = useTabPanel();
+
+  const tabTitle = useMemo(() => {
+    if (translation) {
+      return t(translation.key, {
+        ns: translation.ns,
+        lng: resolvedLanguage,
+      });
+    } else if (title) {
+      return title;
+    }
+    return " -- ";
+  }, [translation, title, t, resolvedLanguage]);
 
   return (
     <li className="relative max-w-80 min-w-24 overflow-clip c-inherit">
@@ -31,14 +51,14 @@ export const TabItem = ({
             tabsPosition === "top" ? "rounded-tl-2" : "rounded-bl-2"
           )}
           aria-controls={`tabpanel-${index}`}
-          aria-label={title}
+          aria-label={tabTitle}
           aria-selected={active ? "true" : "false"}
           role="tab"
           tabIndex={active ? -1 : 0}
-          title={title}
+          title={tabTitle}
           onClick={onActiveClick}
         >
-          {title}
+          {tabTitle}
         </Button>
         <IconButton
           className={cls(
@@ -46,7 +66,7 @@ export const TabItem = ({
             tabsPosition === "top" ? "rounded-tr-2" : "rounded-br-2"
           )}
           icon="close"
-          label={t("TabItem.actions.close")}
+          label={t("TabPanel:TabItem.actions.close")}
           tabIndex={-1}
           onClick={onCloseClick}
         />

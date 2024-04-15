@@ -1,0 +1,10 @@
+{
+  "title": "Atualização Disponível",
+  "description": {
+    "offlineReady": "Aplicação está pronta para ser usada offline.",
+    "needsRefresh": "Nova versão disponível. Por favor, recarregue a página."
+  },
+  "actions": {
+    "reloadButton": "Recarregar"
+  }
+}

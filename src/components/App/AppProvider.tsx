@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 
 export type AppProviderProps = PropsWithChildren<{
   userData: PanelProviderProps["userData"];
+  languages?: readonly string[];
   homeComponent?: TabComponent;
 }>;
 
@@ -26,18 +27,21 @@ export type AppContextType = {
   dir?: string;
   setResolvedLanguage?: Dispatch<SetStateAction<string | undefined>>;
   setDir?: Dispatch<SetStateAction<string | undefined>>;
+  languages?: readonly string[];
 };
 
 export const AppContext = createContext<AppContextType>({});
 
 export const AppProvider = ({
   userData,
+  languages,
   homeComponent,
   children,
 }: AppProviderProps) => {
   const {
     i18n: { resolvedLanguage: i18nResolvedLanguage, dir: i18nDir },
   } = useTranslation();
+
   const [resolvedLanguage, setResolvedLanguage] = useState<string | undefined>(
     i18nResolvedLanguage
   );
@@ -58,6 +62,7 @@ export const AppProvider = ({
         setResolvedLanguage,
         dir,
         setDir,
+        languages,
       }}
     >
       <AppInstallProvider>

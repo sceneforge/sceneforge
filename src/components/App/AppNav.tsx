@@ -30,6 +30,7 @@ export const AppNav = () => {
           newMarkdownTab({
             id: "about",
             title: t("AppNav.toolbarEnd.aboutTabTitle"),
+            translation: { ns: "App", key: "AppNav.toolbarEnd.aboutTabTitle" },
             href: "/docs/about.md",
           });
         },
@@ -40,6 +41,7 @@ export const AppNav = () => {
         onClick: openTab({
           id: "settings",
           title: t("AppNav.toolbarEnd.settingsTabTitle"),
+          translation: { ns: "App", key: "AppNav.toolbarEnd.settingsTabTitle" },
           active: true,
           component: SettingsTab,
         }),

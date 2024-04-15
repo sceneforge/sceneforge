@@ -19,6 +19,10 @@ export interface TabContext<
 > {
   id: string;
   title: string;
+  translation?: {
+    ns: string;
+    key: string;
+  };
   active: boolean;
   component: C;
   props?: Parameters<C>[0];

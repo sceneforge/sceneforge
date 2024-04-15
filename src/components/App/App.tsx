@@ -6,11 +6,16 @@ import { AppProvider } from "./AppProvider";
 
 export interface AppProps {
   userData: Database<"UserData">;
+  languages?: readonly string[];
 }
 
-export const App = ({ userData }: AppProps) => {
+export const App = ({ userData, languages }: AppProps) => {
   return (
-    <AppProvider userData={userData} homeComponent={HomeTab}>
+    <AppProvider
+      userData={userData}
+      homeComponent={HomeTab}
+      languages={languages}
+    >
       <TabPanel variant="default" />
       <AppNav />
     </AppProvider>

@@ -11,8 +11,8 @@ document.body.appendChild(rootElement);
 const userData = new Database("UserData", UserDataStores);
 
 export const render = async () => {
-  await i18nInit();
-  root.render(<App userData={userData} />);
+  const { languages } = await i18nInit();
+  root.render(<App userData={userData} languages={languages} />);
   return root;
 };
 

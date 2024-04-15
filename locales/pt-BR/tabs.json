@@ -1,0 +1,35 @@
+{
+  "general": {
+    "untitledTab": "Sem Título"
+  },
+  "HomeTab": {
+    "sections": {
+      "models": {
+        "title": "Modelos",
+        "viewAll": "Ver todos",
+        "actions": {
+          "open": "Abrir",
+          "delete": "Apagar"
+        }
+      }
+    }
+  },
+  "ModelViewTab": {
+    "untitledModel": "Modelo Sem Título"
+  },
+  "SettingsTab": {
+    "title": "Ajustes",
+    "sections": {
+      "general": {
+        "title": "Geral",
+        "languageLabel": "Idioma"
+      },
+      "tabs": {
+        "title": "Abas",
+        "positionLabel": "Posição",
+        "positionTopOption": "Topo",
+        "positionBottomOption": "Fundo"
+      }
+    }
+  }
+}

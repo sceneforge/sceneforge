@@ -1,6 +1,5 @@
 import { type MouseEvent, useCallback, useEffect, useRef } from "react";
 import { TabItem } from "./TabItem";
-
 import { useTabPanel } from "./useTabPanel";
 import { type Variant } from "../../types/variants";
 import { cls } from "../../lib/cls";
@@ -70,6 +69,7 @@ export const TabList = ({ variant = "default" }: TabListProps) => {
           index={index}
           key={index}
           title={tab.title}
+          translation={tab.translation}
           onActiveClick={activateTab(tab)}
           onCloseClick={closeTab(tab)}
         />

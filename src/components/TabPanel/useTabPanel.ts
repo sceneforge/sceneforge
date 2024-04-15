@@ -6,6 +6,8 @@ import {
   TabPanelContext,
   type TabContext,
 } from "./TabPanelProvider";
+import { useTranslation } from "react-i18next";
+import { useAppContext } from "../App";
 
 export const useTabPanel = () => {
   const unknownId = useId();
@@ -17,6 +19,8 @@ export const useTabPanel = () => {
     tabsPosition,
     setTabsPosition,
   } = useContext(TabPanelContext);
+  const { t } = useTranslation();
+  const { resolvedLanguage } = useAppContext();
 
   const activateTab = useCallback(
     (tab: TabContext) => {
@@ -28,6 +32,7 @@ export const useTabPanel = () => {
             active:
               t.id === tab.id &&
               t.title === tab.title &&
+              t.translation === tab.translation &&
               t.component === tab.component &&
               t.createdAt === tab.createdAt,
           }))
@@ -83,6 +88,10 @@ export const useTabPanel = () => {
       return {
         id: unknownId,
         title: "Undefined Tab",
+        translation: {
+          ns: "tabs",
+          key: "general.undefinedTab",
+        },
         active: false,
         component: Tab(() => null),
       };
@@ -115,11 +124,11 @@ export const useTabPanel = () => {
   );
 
   const updateTabTitle = useCallback(
-    (id: string, title: string) => {
+    (id: string, title: string, translation?: { ns: string; key: string }) => {
       setTabs((prevTabs) =>
         prevTabs.map((tab) => {
           if (tab.id === id) {
-            return { ...tab, title };
+            return { ...tab, title, translation };
           }
           return tab;
         })
@@ -144,11 +153,25 @@ export const useTabPanel = () => {
     return tabs.find((tab) => tab.active);
   }, [tabs]);
 
+  const activeTabTitle = useMemo(() => {
+    return activeTab
+      ? activeTab.translation
+        ? t(activeTab.translation.key, {
+            ns: activeTab.translation.ns,
+            lng: resolvedLanguage,
+          })
+        : activeTab.title
+      : undefined;
+  }, [t, activeTab, resolvedLanguage]);
+
   useEffect(() => {
-    if (activeTab && activeTab.title !== appTitle) {
-      updateTitle(activeTab.title);
+    if (activeTabTitle && activeTabTitle !== appTitle) {
+      updateTitle(activeTabTitle);
+      if (activeTab?.id) {
+        updateTabTitle(activeTab.id, activeTabTitle, activeTab.translation);
+      }
     }
-  }, [activeTab, appTitle, updateTitle]);
+  }, [activeTab, activeTabTitle, appTitle, updateTitle, updateTabTitle]);
 
   return {
     activeTab,

@@ -2,5 +2,9 @@
   "tabs": {
     "untitledMarkdown": "Untitled Markdown",
     "untitledModel": "Untitled Model"
+  },
+  "locales": {
+    "en": "English",
+    "pt-BR": "Portuguese (Brazil)"
   }
 }

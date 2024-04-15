@@ -9,10 +9,18 @@ import { useAppContext } from "../../components/App";
 import { useTranslation } from "react-i18next";
 
 export const SettingsTab = Tab(() => {
-  const { t } = useTranslation("tabs");
+  const { t, i18n } = useTranslation("tabs");
+  const {
+    name,
+    description,
+    version,
+    dev,
+    resolvedLanguage,
+    setResolvedLanguage,
+    languages,
+  } = useAppContext();
   const { getUserData, setUserData } = usePanel();
   const { tabsPosition, setTabsPosition } = useTabPanel();
-  const { name, description, version, dev } = useAppContext();
 
   const changeTabsPosition = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
@@ -25,6 +33,19 @@ export const SettingsTab = Tab(() => {
       }
     },
     [setTabsPosition, setUserData]
+  );
+
+  const changeLanguage = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      if (e.target.value) {
+        setUserData("settings", "language", e.target.value);
+        if (setResolvedLanguage) {
+          setResolvedLanguage(e.target.value);
+        }
+        i18n.changeLanguage(e.target.value);
+      }
+    },
+    [setUserData, setResolvedLanguage, i18n]
   );
 
   useEffect(() => {
@@ -41,6 +62,34 @@ export const SettingsTab = Tab(() => {
   return (
     <SafeArea vertical horizonal>
       <Section level={1} title={t("SettingsTab.title")}>
+        <Card title={t("SettingsTab.sections.general.title")}>
+          <InputList>
+            <InputListItem
+              label={t("SettingsTab.sections.general.languageLabel")}
+              name="language"
+              type="select"
+              value={resolvedLanguage}
+              options={
+                languages?.map((locale) => ({
+                  text:
+                    t(`locales.${locale}`, {
+                      ns: "common",
+                      defaultValue: locale,
+                      lng: locale,
+                    }) +
+                    (resolvedLanguage !== locale
+                      ? ` (${t(`locales.${locale}`, {
+                          ns: "common",
+                          defaultValue: locale,
+                        })})`
+                      : ""),
+                  value: locale,
+                })) ?? []
+              }
+              onChange={changeLanguage}
+            />
+          </InputList>
+        </Card>
         <Card title={t("SettingsTab.sections.tabs.title")}>
           <InputList>
             <InputListItem
@@ -64,21 +113,21 @@ export const SettingsTab = Tab(() => {
         </Card>
         {dev ? (
           <dl>
-            <dt>Info</dt>
+            <dt>{"Info"}</dt>
             <dd>
               <dl>
-                <dt>Name</dt>
+                <dt>{"Name"}</dt>
                 <dd>{name}</dd>
-                <dt>Description</dt>
+                <dt>{"Description"}</dt>
                 <dd>{description}</dd>
-                <dt>Version</dt>
+                <dt>{"Version"}</dt>
                 <dd>{version}</dd>
               </dl>
             </dd>
           </dl>
         ) : (
           <dl>
-            <dt>Version</dt>
+            <dt>{"Version"}</dt>
             <dd>{version}</dd>
           </dl>
         )}

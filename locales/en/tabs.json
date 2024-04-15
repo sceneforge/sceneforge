@@ -1,4 +1,7 @@
 {
+  "general": {
+    "undefinedTab": "Undefined Tab"
+  },
   "HomeTab": {
     "sections": {
       "models": {
@@ -17,6 +20,10 @@
   "SettingsTab": {
     "title": "Settings",
     "sections": {
+      "general": {
+        "title": "General",
+        "languageLabel": "Language"
+      },
       "tabs": {
         "title": "Tabs",
         "positionLabel": "Position",

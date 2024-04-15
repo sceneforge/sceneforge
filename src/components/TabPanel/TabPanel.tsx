@@ -38,13 +38,24 @@ export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
       <div className="relative h-full w-full flex-grow">
         <Suspense>
           {tabs.map(
-            ({ component: TabComponent, active, id, title, props }, index) => (
+            (
+              {
+                component: TabComponent,
+                active,
+                id,
+                title,
+                translation,
+                props,
+              },
+              index
+            ) => (
               <TabComponent
                 key={index}
                 tabId={`tabpanel-${index}`}
                 active={active}
                 id={id}
                 title={title}
+                translation={translation}
                 {...props}
               />
             )

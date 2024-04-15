@@ -4,6 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 import VitePluginBrowserSync from "vite-plugin-browser-sync";
 import VitePluginMetaEnv from "vite-plugin-meta-env";
 import UnoCSS from "unocss/vite";
+import i18nextLoader from "vite-plugin-i18next-loader";
 
 export default defineConfig(async ({ command, mode, isPreview }) => {
   const { description, version } = await import("./package.json");
@@ -24,6 +25,10 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
 
   return {
     plugins: [
+      i18nextLoader({
+        namespaceResolution: "basename",
+        paths: ["locales"],
+      }),
       VitePluginMetaEnv(metaEnv, "import.meta.env"),
       React(),
       UnoCSS(),
@@ -137,3 +142,4 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
     },
   } as UserConfig;
 });
+
