@@ -1,14 +1,20 @@
+import { v4 as uuid } from "uuid";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { ModelContext } from "./ModelContextProvider";
 import { usePanel } from "../Panel";
 import { Model, isModel } from "../../lib/isModel";
+import { useTranslation } from "react-i18next";
 
-export const useModelContext = ({ id }: Partial<Model> = {}) => {
+export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
+  const { t } = useTranslation("common");
   const { models, loaded, setModels, setLoaded, loadState, setLoadState } =
     useContext(ModelContext);
   const { getAllUserData, setUserData, removeUserData } = usePanel();
 
   const [currentID, setCurrentID] = useState<string | undefined>(id);
+  const [captureSaveState, setCaptureSaveState] = useState<boolean | undefined>(
+    false
+  );
 
   const loadModels = useCallback((): Promise<Model[]> => {
     setLoadState("loading");
@@ -41,61 +47,125 @@ export const useModelContext = ({ id }: Partial<Model> = {}) => {
   }, [setLoadState, getAllUserData, setModels, setLoaded, models]);
 
   const getModel = useCallback(
-    async (id?: string): Promise<Model | undefined> => {
-      if (!id) return undefined;
+    async (givenID?: string): Promise<Model | undefined> => {
+      if (!givenID) return undefined;
       if (loaded) {
-        return models.find((model) => model.id === id);
+        return models.find((model) => model.id === givenID);
       } else {
-        return (await loadModels()).find((model) => model.id === id);
+        return (await loadModels()).find((model) => model.id === givenID);
       }
     },
     [models, loaded, loadModels]
   );
 
+  const currentModel = useMemo(() => {
+    if (currentID) {
+      const result = models.find((model) => model.id === currentID);
+      if (result && result.id === id && capture) {
+        return { ...result, capture };
+      }
+      return result;
+    }
+    return undefined;
+  }, [id, capture, currentID, models]);
+
   const saveModel = useCallback(
-    (model: Model) => {
-      setModels((prev) => prev.filter((m) => m.id !== model.id).concat(model));
-      return setUserData("models", model.id, model);
+    async (
+      model: Partial<Omit<Model, "updatedAt">>,
+      create: boolean = true
+    ): Promise<Model> => {
+      const now = new Date();
+      const withId = model.id ?? currentID ?? uuid();
+      const storedModel: Partial<Model> | undefined = await getModel(model.id);
+
+      if (!create && !storedModel) {
+        throw new Error(`Model with the ID "${model.id}" is not found`);
+      }
+
+      const title =
+        model.title ?? storedModel?.title ?? t("tabs.untitledModel");
+      const gltf = model.gltf ?? storedModel?.gltf ?? undefined;
+      const withCapture =
+        withId === id && capture
+          ? capture
+          : model.capture ?? storedModel?.capture ?? undefined;
+      const createdAt = model.createdAt ?? storedModel?.createdAt ?? now;
+      const updatedAt = now;
+      const modelToSave: Model = {
+        id: withId,
+        title,
+        gltf,
+        capture: withCapture,
+        createdAt,
+        updatedAt,
+      };
+
+      try {
+        await setUserData("models", modelToSave.id, modelToSave);
+        setModels((prev) =>
+          prev.filter((m) => m.id !== modelToSave.id).concat(modelToSave)
+        );
+        return modelToSave;
+      } catch (error) {
+        throw new Error("Failed to save model", { cause: error });
+      }
     },
-    [setModels, setUserData]
+    [id, capture, currentID, getModel, setModels, setUserData, t]
   );
 
   const deleteModel = useCallback(
-    (id: string) => {
-      setModels((prev) => prev.filter((m) => m.id !== id));
-      removeUserData("models", id);
+    (givenID: string) => {
+      setModels((prev) => prev.filter((m) => m.id !== givenID));
+      removeUserData("models", givenID);
     },
     [setModels, removeUserData]
   );
 
-  const updateModel = useCallback(
-    async (
-      id: string,
-      model: Partial<Omit<Model, "id" | "createdAt" | "updatedAt">>
-    ): Promise<Model | undefined> => {
-      const currentModel = await getModel(id);
-      if (currentModel) {
-        const now = new Date();
-        saveModel({ ...currentModel, ...model, updatedAt: now });
-        return { ...currentModel, ...model, updatedAt: now };
+  const updateModelID = useCallback(
+    async (givenID: string, newID: string): Promise<Model> => {
+      const model = await getModel(givenID);
+      if (!model)
+        throw new Error(`Model with the ID "${givenID}" is not found`);
+
+      const result = await saveModel({ ...model, id: newID });
+      if (currentID === givenID) {
+        setCurrentID(newID);
       }
-      return undefined;
+      deleteModel(givenID);
+      return result;
     },
-    [getModel, saveModel]
+    [getModel, saveModel, currentID, setCurrentID, deleteModel]
   );
 
-  const currentModel = useMemo(() => {
-    if (currentID) {
-      return models.find((model) => model.id === currentID);
-    }
-    return undefined;
-  }, [currentID, models]);
+  const updateModel = useCallback(
+    async (
+      givenID: string,
+      model: Partial<Omit<Model, "id" | "createdAt" | "updatedAt">>
+    ): Promise<Model> => {
+      return saveModel({ ...model, id: givenID }, false);
+    },
+    [saveModel]
+  );
 
   useEffect(() => {
     if (id && loadState === "none") {
       loadModels();
     }
   }, [id, loadState, loadModels]);
+
+  useEffect(() => {
+    if (
+      id &&
+      capture &&
+      currentID &&
+      currentID === id &&
+      loadState === "loaded" &&
+      !captureSaveState
+    ) {
+      saveModel({ id, capture });
+      setCaptureSaveState(true);
+    }
+  }, [id, capture, currentID, loadState, captureSaveState, saveModel]);
 
   return {
     models,
@@ -108,5 +178,6 @@ export const useModelContext = ({ id }: Partial<Model> = {}) => {
     saveModel,
     updateModel,
     deleteModel,
+    updateModelID,
   };
 };

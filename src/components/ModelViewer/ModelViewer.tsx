@@ -23,13 +23,19 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     sceneRef,
     onNodeSelect,
     clearSelectedNode,
+    onImported,
   } = useModelViewer(canvasRef, active ?? false, props);
 
   return (
     <>
       <Canvas ref={canvasRef} />
       <PanelSheet orientation="block" position="end" resizable variant="accent">
-        <ModelViewerHeader model={currentModel} mode={mode} setMode={setMode} />
+        <ModelViewerHeader
+          model={currentModel}
+          mode={mode}
+          setMode={setMode}
+          onImported={onImported}
+        />
         <PanelSheetBody>
           <SceneNodesSection
             scene={sceneRef.current}

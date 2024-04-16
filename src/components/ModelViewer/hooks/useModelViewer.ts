@@ -75,10 +75,11 @@ export const useModelViewer = (
     stopRenderSceneLoop,
   ]);
 
-  const { loadState, loadModels, currentID, currentModel } = useModelContext({
-    ...props,
-    capture,
-  });
+  const { loadState, loadModels, currentID, currentModel, saveModel } =
+    useModelContext({
+      ...props,
+      capture,
+    });
 
   const onNodeSelect = useCallback(
     (node: unknown) => {
@@ -140,6 +141,25 @@ export const useModelViewer = (
     }
   }, [ready, mode, sceneRef]);
 
+  const onImported = useCallback(
+    async (model: Partial<Model>) => {
+      if (model.id && model.id !== currentID) {
+        throw new Error("Model ID is not matched");
+      }
+      const id = model.id ?? currentID;
+
+      if (!id) {
+        throw new Error("Model ID is not defined");
+      }
+
+      return await saveModel({
+        ...model,
+        id,
+      });
+    },
+    [currentID, saveModel]
+  );
+
   return {
     loadResult,
     mode,
@@ -159,5 +179,6 @@ export const useModelViewer = (
     startAll,
     disposeAll,
     clearSelectedNode,
+    onImported,
   };
 };

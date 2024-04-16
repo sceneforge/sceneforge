@@ -13,12 +13,14 @@ export type ModelViewerHeaderProps = {
   model?: Model;
   mode?: Mode;
   setMode?: Dispatch<Mode>;
+  onImported?: (model: Partial<Model>) => void;
 };
 
 export const ModelViewerHeader = ({
   model,
   mode = Mode.Edit,
   setMode,
+  onImported,
 }: ModelViewerHeaderProps) => {
   const { t } = useTranslation("ModelViewer");
   const modes = useMemo(
@@ -29,7 +31,7 @@ export const ModelViewerHeader = ({
     }),
     [t]
   );
-  const { updateModel } = useModelContext();
+  const { updateModel } = useModelContext(model);
   const { updateTabTitle, activeTab } = useTabPanel();
   const modeLabel = useMemo(() => modes[mode], [modes, mode]);
 
@@ -38,21 +40,25 @@ export const ModelViewerHeader = ({
     [setMode]
   );
 
-  const handleImport = useCallback(() => {
-    fileOpen({
+  const handleImport = useCallback(async () => {
+    const result = await fileOpen({
       description: t("ModelViewerHeader.fileImportDescription"),
       mimeTypes: ["model/gltf-binary", "model/gltf+json"],
       extensions: [".glb", ".gltf"],
       multiple: false,
       excludeAcceptAllOption: true,
-    })
-      .then(loadFile)
-      .then(({ blob }) => {
-        if (model && model.id) {
-          updateModel(model.id, { gltf: blob() });
-        }
+    });
+    const { blob } = await loadFile(result);
+    if (onImported) {
+      onImported({
+        id: model?.id,
+        title: model?.title ?? t("ModelViewerHeader.untitled"),
+        gltf: blob(),
+        capture: undefined,
+        createdAt: model?.createdAt ?? new Date(),
       });
-  }, [t, model, updateModel]);
+    }
+  }, [model, onImported, t]);
 
   const handleModelNameChange = useCallback(
     async (value: string) => {
