@@ -66,7 +66,7 @@ export const TabItem = ({
             tabsPosition === "top" ? "rounded-tr-2" : "rounded-br-2"
           )}
           icon="close"
-          label={t("TabPanel:TabItem.actions.close")}
+          label={t("TabPanel:TabItem.actions.closeButton")}
           tabIndex={-1}
           onClick={onCloseClick}
         />

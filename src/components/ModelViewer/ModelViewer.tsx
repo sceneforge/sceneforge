@@ -11,6 +11,7 @@ export type ModelProps = Model;
 
 export type ModelViewerProps = Omit<Model, "capture"> & {
   active?: boolean;
+  tabId?: string;
 };
 
 export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {

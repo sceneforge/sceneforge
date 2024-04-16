@@ -22,17 +22,27 @@ export const useTabs = () => {
       newTab<MarkdownTabProps>({
         id: id ?? uuid(),
         title: title ?? t("tabs.untitledMarkdown"),
-        translation: translation ?? {
-          ns: "common",
-          key: "tabs.untitledMarkdown",
-        },
+        translation:
+          !title && translation
+            ? translation
+            : !title && !translation
+            ? {
+                ns: "common",
+                key: "tabs.untitledMarkdown",
+              }
+            : undefined,
         props: {
           id,
           title,
-          translation: translation ?? {
-            ns: "common",
-            key: "tabs.untitledMarkdown",
-          },
+          translation:
+            !title && translation
+              ? translation
+              : !title && !translation
+              ? {
+                  ns: "common",
+                  key: "tabs.untitledMarkdown",
+                }
+              : undefined,
           href,
           value,
         },
@@ -55,10 +65,15 @@ export const useTabs = () => {
 
       const withId = id ?? uuid();
       const withTitle = title ?? t("tabs.untitledModel");
-      const withTranslation = translation ?? {
-        ns: "common",
-        key: "tabs.untitledModel",
-      };
+      const withTranslation =
+        !title && translation
+          ? translation
+          : !title && !translation
+          ? {
+              ns: "common",
+              key: "tabs.untitledModel",
+            }
+          : undefined;
 
       newTab<ModelViewTabProps>({
         id: withId,
