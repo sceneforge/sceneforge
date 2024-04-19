@@ -7,8 +7,24 @@ import { ActionManager } from "@babylonjs/core/Actions/actionManager";
 import { ExecuteCodeAction } from "@babylonjs/core/Actions/directActions";
 import { MeshSelectorControl } from "./MeshSelectorControl";
 import { MeshParentSelectorControl } from "./MeshParentSelectorControl";
+import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 
-export const select = (rootMesh: AbstractMesh | undefined | null) => {
+type SelectEvent<T extends object = object> = (
+  mesh: AbstractMesh,
+  ev: ActionEvent,
+  extra: T
+) => void | Promise<void>;
+
+type MeshSelectionEvents = {
+  onMeshSelect?: SelectEvent;
+  onParentSelect?: SelectEvent;
+  onHotspotSelect?: SelectEvent<{ hotspot: AbstractMesh }>;
+};
+
+export const select = (
+  rootMesh: AbstractMesh | undefined | null,
+  { onMeshSelect, onParentSelect, onHotspotSelect }: MeshSelectionEvents = {}
+) => {
   if (!rootMesh) return;
   const scene = rootMesh.getScene();
   if (!scene) return;
@@ -73,14 +89,25 @@ export const select = (rootMesh: AbstractMesh | undefined | null) => {
               );
               hotspotHover.position.subtractInPlace(norm.scale(3));
               hotspotHover.isVisible = true;
+              if (onHotspotSelect) {
+                onHotspotSelect(meshUnderPointer, ev, {
+                  hotspot: hotspotHover,
+                });
+              }
             }
             return;
           }
 
           if (!keyboardControl.altPressed) {
             selectedLayer.addMesh(meshUnderPointer);
+            if (onMeshSelect) {
+              onMeshSelect(meshUnderPointer, ev, {});
+            }
           } else {
             parentSelectedLayer.mesh = meshUnderPointer;
+            if (onParentSelect) {
+              onParentSelect(meshUnderPointer, ev, {});
+            }
           }
         })
       );

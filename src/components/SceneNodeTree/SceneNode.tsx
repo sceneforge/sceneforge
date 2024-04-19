@@ -1,4 +1,4 @@
-import { useCallback, useId, useMemo, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import { Button, ButtonToggleEvent } from "../Button";
 import { IconButton } from "../IconButton";
 
@@ -8,6 +8,7 @@ import {
   SceneObjectType,
   compare,
   hasChildren,
+  id,
   isVisible,
   name,
   typeOf,
@@ -16,6 +17,8 @@ import { Icon, type IconName } from "../Icon";
 
 export type SceneNodeProps = {
   node: unknown;
+  meshSelectionPath?: readonly string[];
+  clearMeshSelectionPath?: () => void;
   onNodeSelect?: (node: unknown) => void;
 };
 
@@ -30,36 +33,38 @@ const nodeTypeIconMap: Record<SceneObjectType, IconName> = {
   [SceneObjectType.Unknown]: "questionMark",
 };
 
-export const SceneNode = ({ node, onNodeSelect }: SceneNodeProps) => {
+export const SceneNode = ({
+  node,
+  meshSelectionPath: [meshSelection, ...meshSelectionPath] = [],
+  clearMeshSelectionPath,
+  onNodeSelect,
+}: SceneNodeProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean | undefined>(isVisible(node));
   const nodeName = useMemo(() => name(node), [node]);
   const nodeType = useMemo(() => typeOf(node), [node]);
   const genId = useId();
 
-  const [childrenNodes, setChildrenNodes] = useState<unknown[]>([]);
   const nodeHasChildren = useMemo(() => hasChildren(node), [node]);
+
+  const childrenNodes: unknown[] = (
+    open && nodeHasChildren && typeof node === "object" && node !== null
+      ? "getChildrenMeshes" in node &&
+        typeof node.getChildrenMeshes === "function"
+        ? node.getChildrenMeshes()
+        : "getChildren" in node && typeof node.getChildren === "function"
+        ? node.getChildren()
+        : []
+      : []
+  ).sort(compare);
 
   const expandNode = useCallback(() => {
     if (!open) {
-      if (nodeHasChildren && childrenNodes.length === 0) {
-        if (typeof node === "object" && node !== null) {
-          if (
-            "getChildMeshes" in node &&
-            typeof node.getChildMeshes === "function"
-          ) {
-            setChildrenNodes(node.getChildMeshes().sort(compare));
-          }
-          if ("getChildren" in node && typeof node.getChildren === "function") {
-            setChildrenNodes(node.getChildren().sort(compare));
-          }
-        }
-      }
       setOpen(true);
     } else {
       setOpen(false);
     }
-  }, [open, node, nodeHasChildren, childrenNodes, setChildrenNodes, setOpen]);
+  }, [open]);
 
   const handleOnNodeSelect = useCallback(() => {
     if (!open) expandNode();
@@ -99,6 +104,23 @@ export const SceneNode = ({ node, onNodeSelect }: SceneNodeProps) => {
     [hideNode, showNode]
   );
 
+  useEffect(() => {
+    if (meshSelection && meshSelectionPath && meshSelectionPath.length > 0) {
+      if (meshSelection === id(node) && !open) {
+        setOpen(true);
+      } else if (meshSelection !== id(node) && open) {
+        setOpen(false);
+      }
+    }
+  }, [meshSelection, meshSelectionPath, node, open]);
+
+  const handleExpandNode = useCallback(() => {
+    if (clearMeshSelectionPath) {
+      clearMeshSelectionPath();
+    }
+    expandNode();
+  }, [clearMeshSelectionPath, expandNode]);
+
   return (
     <li id={genId} data-open={open} className="list-none p-l-5 c-inherit">
       <div className="relative flex flex-row flex-nowrap items-center justify-stretch c-inherit dark:focus-within:bg-black:10 dark:hover:bg-white:10 light:focus-within:bg-white:10 light:hover:bg-black:10">
@@ -108,7 +130,7 @@ export const SceneNode = ({ node, onNodeSelect }: SceneNodeProps) => {
             aria-expanded={open}
             aria-controls={`${genId}-children`}
             icon="expandMore"
-            onClick={expandNode}
+            onClick={handleExpandNode}
           />
         )}
         <Button
@@ -139,7 +161,13 @@ export const SceneNode = ({ node, onNodeSelect }: SceneNodeProps) => {
         >
           {open &&
             childrenNodes.map((node, index) => (
-              <SceneNode key={index} node={node} onNodeSelect={onNodeSelect} />
+              <SceneNode
+                key={`${genId}-${index}`}
+                node={node}
+                onNodeSelect={onNodeSelect}
+                meshSelectionPath={meshSelectionPath}
+                clearMeshSelectionPath={clearMeshSelectionPath}
+              />
             ))}
         </ul>
       )}

@@ -25,6 +25,8 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
     onNodeSelect,
     clearSelectedNode,
     onImported,
+    meshSelectionPath,
+    clearMeshSelectionPath,
   } = useModelViewer(canvasRef, active ?? false, props);
 
   return (
@@ -41,6 +43,8 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
           <SceneNodesSection
             scene={sceneRef.current}
             onNodeSelect={onNodeSelect}
+            meshSelectionPath={meshSelectionPath}
+            clearMeshSelectionPath={clearMeshSelectionPath}
           />
           <SceneObjectSection node={currentNode} onClose={clearSelectedNode} />
         </PanelSheetBody>
