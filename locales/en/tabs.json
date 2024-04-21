@@ -2,18 +2,6 @@
   "general": {
     "undefinedTab": "Undefined Tab"
   },
-  "HomeTab": {
-    "sections": {
-      "models": {
-        "title": "Models",
-        "viewAll": "View all",
-        "actions": {
-          "open": "Open",
-          "delete": "Delete"
-        }
-      }
-    }
-  },
   "ModelViewTab": {
     "untitledModel": "Untitled Model"
   },

@@ -2,18 +2,6 @@
   "general": {
     "untitledTab": "Sem Título"
   },
-  "HomeTab": {
-    "sections": {
-      "models": {
-        "title": "Modelos",
-        "viewAll": "Ver todos",
-        "actions": {
-          "open": "Abrir",
-          "delete": "Apagar"
-        }
-      }
-    }
-  },
   "ModelViewTab": {
     "untitledModel": "Modelo Sem Título"
   },

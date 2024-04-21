@@ -1,0 +1,8 @@
+{
+  "title": "Models",
+  "actions": {
+    "openButton": "Open",
+    "deleteButton": "Delete",
+    "newButton": "New Model"
+  }
+}
