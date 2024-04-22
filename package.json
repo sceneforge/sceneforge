@@ -11,7 +11,7 @@
     "name": "Rodolfo Pereira",
     "email": "phinpho@gmail.com"
   },
-  "license": "MIT",
+  "license": "CC0",
   "private": true,
   "scripts": {
     "dev": "vite",
