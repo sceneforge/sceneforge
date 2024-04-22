@@ -52,7 +52,8 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
         manifest: {
           dir: "ltr",
           lang: "en",
-          id: "phinpho.github.io/scene-forge",
+          id: "https://phinpho.github.io/scene-forge/",
+          scope: isProd() ? "https://phinpho.github.io/scene-forge/" : "/",
           name: metaEnv.VITE_APP_NAME,
           short_name: metaEnv.VITE_APP_NAME,
           description: metaEnv.VITE_APP_DESCRIPTION,
