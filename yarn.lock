@@ -1460,11 +1460,11 @@ __metadata:
   linkType: hard
 
 "@babylonjs/materials@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "@babylonjs/materials@npm:7.1.0"
+  version: 7.3.1
+  resolution: "@babylonjs/materials@npm:7.3.1"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
-  checksum: 10c0/5f6ebdb9416e8764b50bf73cdad7c421f028db6577dab584d0cb5183629710278e7c187ac5c9fcd36bc4155472803bb5aca2fef5cf7f428ac0c510875704481f
+  checksum: 10c0/03ee86fb41495a1cbf1770dd1f74f9db5496cd071c63c275d4760463c0f33d0cc95e4d3bbe6c0b7c8cd54a4e5a90f9c684b20f1d6a47573254c1c4860a11937e
   languageName: node
   linkType: hard
 
