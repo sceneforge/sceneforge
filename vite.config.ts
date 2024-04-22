@@ -24,6 +24,8 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
   };
 
   return {
+    base: isProd() ? "/scene-forge/" : "/",
+    appType: "spa",
     plugins: [
       i18nextLoader({
         namespaceResolution: "basename",
