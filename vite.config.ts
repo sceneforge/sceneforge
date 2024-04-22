@@ -24,6 +24,8 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
   };
 
   return {
+    base: isProd() ? "/scene-forge/" : "/",
+    appType: "spa",
     plugins: [
       i18nextLoader({
         namespaceResolution: "basename",
@@ -50,11 +52,14 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
         manifest: {
           dir: "ltr",
           lang: "en",
-          id: "phinpho.github.io/scene-forge",
+          id: "https://phinpho.github.io/scene-forge/",
+          scope: isProd() ? "https://phinpho.github.io/scene-forge/" : "/",
           name: metaEnv.VITE_APP_NAME,
           short_name: metaEnv.VITE_APP_NAME,
           description: metaEnv.VITE_APP_DESCRIPTION,
-          start_url: "/index.html",
+          start_url: isProd()
+            ? "https://phinpho.github.io/scene-forge/index.html"
+            : "/index.html",
           display_override: [
             "window-controls-overlay",
             "fullscreen",
@@ -62,7 +67,9 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
           ],
           file_handlers: [
             {
-              action: "/#file",
+              action: isProd()
+                ? "https://phinpho.github.io/scene-forge/index.html#file"
+                : "/index.html#file",
               accept: {
                 "application/json": [".scfg", ".sceneforge"],
               },
@@ -154,7 +161,9 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
           related_applications: [
             {
               platform: "webapp",
-              url: "http://localhost:9000/manifest.json",
+              url: isProd()
+                ? "https://phinpho.github.io/scene-forge/manifest.webmanifest"
+                : "http://localhost:9000/manifest.webmanifest",
             },
           ],
           prefer_related_applications: true,
