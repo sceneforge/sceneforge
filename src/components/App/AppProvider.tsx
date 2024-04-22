@@ -28,9 +28,12 @@ export type AppContextType = {
   setResolvedLanguage?: Dispatch<SetStateAction<string | undefined>>;
   setDir?: Dispatch<SetStateAction<string | undefined>>;
   languages?: readonly string[];
+  basePath: string;
 };
 
-export const AppContext = createContext<AppContextType>({});
+export const AppContext = createContext<AppContextType>({
+  basePath: "/",
+});
 
 export const AppProvider = ({
   userData,
@@ -50,6 +53,7 @@ export const AppProvider = ({
   const description = import.meta.env.VITE_APP_DESCRIPTION ?? "";
   const version = import.meta.env.VITE_APP_VERSION ?? "";
   const dev = import.meta.env.DEV ? true : false;
+  const basePath = import.meta.env.VITE_APP_BASE_PATH ?? "/";
 
   return (
     <AppContext.Provider
@@ -63,6 +67,7 @@ export const AppProvider = ({
         dir,
         setDir,
         languages,
+        basePath,
       }}
     >
       <AppInstallProvider>

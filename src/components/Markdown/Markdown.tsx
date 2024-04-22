@@ -9,15 +9,15 @@ export type MarkdownProps = {
 };
 
 export const Markdown = ({ href, value, ...props }: MarkdownProps) => {
-  const { resolvedLanguage } = useAppContext();
+  const { resolvedLanguage, basePath } = useAppContext();
   const [currentDoc, setCurrentDoc] = useState<string | undefined>(value);
   const [contentUrl, setContentUrl] = useState<string>("initial-content");
 
   const i18nHref = useMemo(() => {
     return href && href.startsWith("/docs")
-      ? href.replace("/docs", `/locales/docs/${resolvedLanguage}`)
+      ? href.replace("/docs", `${basePath}locales/docs/${resolvedLanguage}`)
       : href;
-  }, [href, resolvedLanguage]);
+  }, [href, resolvedLanguage, basePath]);
 
   useEffect(() => {
     if (i18nHref) {

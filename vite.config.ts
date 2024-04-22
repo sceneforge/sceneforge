@@ -14,6 +14,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
     command === "build" && mode === "production" && !isPreview;
 
   const metaEnv = {
+    VITE_APP_BASE_PATH: isProd() ? "/scene-forge/" : "/",
     VITE_APP_NAME: "Scene Forge",
     VITE_APP_DESCRIPTION: description,
     VITE_APP_VERSION: isProd()

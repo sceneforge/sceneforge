@@ -11,6 +11,7 @@ export const useAppContext = () => {
     dir,
     languages,
     setResolvedLanguage,
+    basePath,
   } = useContext(AppContext);
 
   return {
@@ -22,5 +23,6 @@ export const useAppContext = () => {
     setResolvedLanguage,
     dir,
     languages,
+    basePath,
   };
 };
