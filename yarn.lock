@@ -1442,29 +1442,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babylonjs/core@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "@babylonjs/core@npm:7.1.0"
-  checksum: 10c0/15b5318dc5de95cf6ae943c84c9145aeeb62822b7d74b182273f1126111d1d56a1eb4a34ca8085cb9655aa86b3dae23e06d96020764166e4b8b8f61cc73bf3ee
+"@babylonjs/core@npm:^7.3.1":
+  version: 7.3.1
+  resolution: "@babylonjs/core@npm:7.3.1"
+  checksum: 10c0/f4356d3b3ef265d01f1d06caa567e48ccc6cb8c9d576a4917c07ff192c2caca39dbba4c71f9870a1444e6d8d06c5638bd70455694212a90262730a71e465da5a
   languageName: node
   linkType: hard
 
-"@babylonjs/loaders@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "@babylonjs/loaders@npm:7.1.0"
+"@babylonjs/loaders@npm:^7.3.1":
+  version: 7.3.1
+  resolution: "@babylonjs/loaders@npm:7.3.1"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
     babylonjs-gltf2interface: ^7.0.0
-  checksum: 10c0/f9079f589d591317094a9276c49e6c6bed97cbabab7a865c119a32f221ebb7e9e958a1cf4359ee933c8be35b1c4497c930e70fdba1685b9c51ff1bb23333508a
+  checksum: 10c0/7562fdf565489fe325fbd6b1977adec062bbc450008478f5d0441f67736df0029bbedc29658861e2b675c28002b2a5e6dba52c3ac20984121d588c821864d51c
   languageName: node
   linkType: hard
 
-"@babylonjs/materials@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "@babylonjs/materials@npm:7.1.0"
+"@babylonjs/materials@npm:^7.3.1":
+  version: 7.3.1
+  resolution: "@babylonjs/materials@npm:7.3.1"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
-  checksum: 10c0/5f6ebdb9416e8764b50bf73cdad7c421f028db6577dab584d0cb5183629710278e7c187ac5c9fcd36bc4155472803bb5aca2fef5cf7f428ac0c510875704481f
+  checksum: 10c0/03ee86fb41495a1cbf1770dd1f74f9db5496cd071c63c275d4760463c0f33d0cc95e4d3bbe6c0b7c8cd54a4e5a90f9c684b20f1d6a47573254c1c4860a11937e
   languageName: node
   linkType: hard
 
@@ -3965,10 +3965,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babylonjs-gltf2interface@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "babylonjs-gltf2interface@npm:7.1.0"
-  checksum: 10c0/a2e16fd5337093654a32febc122c68cea3a0c4e464fd64005247aaecf42431c919eec0ad4a8838dcf22b5bc62300337c6e930e9483b14c1e1feb593ce3779755
+"babylonjs-gltf2interface@npm:^7.3.1":
+  version: 7.3.1
+  resolution: "babylonjs-gltf2interface@npm:7.3.1"
+  checksum: 10c0/7b88f3280e9c4d3743aecb49f6b22edf0ecb865e3552874a56002ea0bdd09ece1863418a67981688ec31052417348bcac1a44df8f69dff935660089c3f6cf173
   languageName: node
   linkType: hard
 
@@ -10016,9 +10016,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "scene-forge@workspace:."
   dependencies:
-    "@babylonjs/core": "npm:^7.1.0"
-    "@babylonjs/loaders": "npm:^7.1.0"
-    "@babylonjs/materials": "npm:^7.1.0"
+    "@babylonjs/core": "npm:^7.3.1"
+    "@babylonjs/loaders": "npm:^7.3.1"
+    "@babylonjs/materials": "npm:^7.3.1"
     "@commitlint/cli": "npm:^19.2.1"
     "@commitlint/config-conventional": "npm:^19.1.0"
     "@commitlint/format": "npm:^19.0.3"
@@ -10044,7 +10044,7 @@ __metadata:
     "@unocss/reset": "npm:^0.58.5"
     "@unocss/transformer-directives": "npm:^0.58.5"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
-    babylonjs-gltf2interface: "npm:^7.1.0"
+    babylonjs-gltf2interface: "npm:^7.3.1"
     browser-fs-access: "npm:^0.35.0"
     browser-sync: "npm:^3.0.2"
     conventional-changelog-angular: "npm:^7.0.0"
@@ -10064,7 +10064,7 @@ __metadata:
     terser: "npm:^5.29.2"
     ts-jest: "npm:^29.1.2"
     ts-node: "npm:^10.9.2"
-    typescript: "npm:^5.4.2"
+    typescript: "npm:^5.4.5"
     unocss: "npm:^0.58.5"
     unocss-preset-animations: "npm:^1.0.2"
     uuid: "npm:^9.0.1"
@@ -11142,23 +11142,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.4.2":
-  version: 5.4.2
-  resolution: "typescript@npm:5.4.2"
+"typescript@npm:^5.4.5":
+  version: 5.4.5
+  resolution: "typescript@npm:5.4.5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/583ff68cafb0c076695f72d61df6feee71689568179fb0d3a4834dac343df6b6ed7cf7b6f6c801fa52d43cd1d324e2f2d8ae4497b09f9e6cfe3d80a6d6c9ca52
+  checksum: 10c0/2954022ada340fd3d6a9e2b8e534f65d57c92d5f3989a263754a78aba549f7e6529acc1921913560a4b816c46dce7df4a4d29f9f11a3dc0d4213bb76d043251e
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.4.2#optional!builtin<compat/typescript>":
-  version: 5.4.2
-  resolution: "typescript@patch:typescript@npm%3A5.4.2#optional!builtin<compat/typescript>::version=5.4.2&hash=5adc0c"
+"typescript@patch:typescript@npm%3A^5.4.5#optional!builtin<compat/typescript>":
+  version: 5.4.5
+  resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/fcf6658073d07283910d9a0e04b1d5d0ebc822c04dbb7abdd74c3151c7aa92fcddbac7d799404e358197222006ccdc4c0db219d223d2ee4ccd9e2b01333b49be
+  checksum: 10c0/db2ad2a16ca829f50427eeb1da155e7a45e598eec7b086d8b4e8ba44e5a235f758e606d681c66992230d3fc3b8995865e5fd0b22a2c95486d0b3200f83072ec9
   languageName: node
   linkType: hard
 
