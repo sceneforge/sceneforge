@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from "react";
-import { type ModelProps } from "../ModelViewer";
 import { useTabs } from "../../hooks/useTabs";
 import { useModelContext } from "../ModelContext";
 
@@ -10,26 +9,11 @@ export type UseModelListProps = {
 export const useModelList = ({ active }: UseModelListProps) => {
   const [loaded, setLoaded] = useState(false);
   const { models, loadModels } = useModelContext();
-  const { newModelViewTab, closeModelViewTab } = useTabs();
+  const { newModelViewTab } = useTabs();
 
-  const openModel = useCallback(
-    (model: Partial<ModelProps> = {}) => {
-      return () => {
-        newModelViewTab(model);
-      };
-    },
-    [newModelViewTab]
-  );
-
-  const deleteModel = useCallback(
-    (model: ModelProps) => {
-      return () => {
-        console.log("delete", model);
-        closeModelViewTab(model.id);
-      };
-    },
-    [closeModelViewTab]
-  );
+  const openNewModel = useCallback(() => {
+    newModelViewTab({});
+  }, [newModelViewTab]);
 
   useEffect(() => {
     if (!active) {
@@ -46,7 +30,6 @@ export const useModelList = ({ active }: UseModelListProps) => {
 
   return {
     models,
-    openModel,
-    deleteModel,
+    openNewModel,
   };
 };
