@@ -1,7 +1,7 @@
 {
   "name": "scene-forge",
   "version": "0.0.1",
-  "description": "Web Application for 3D objects handling",
+  "description": "Web Application for 3D scenes handling",
   "type": "module",
   "repository": {
     "type": "git",

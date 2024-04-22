@@ -15,7 +15,7 @@ concurrency:
 jobs:
   deploy:
     environment:
-      name: 'github-pages'
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
@@ -38,11 +38,10 @@ jobs:
         uses: actions/configure-pages@v4
       
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
       
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        
