@@ -13,8 +13,8 @@ includes some features, such as:
    other web pages;
  - Export the scene to a series of images to create a 3D animation.
 
-The application is offline capable, which means it does not depends on a
-request to a backend service to enable any given feature/capability.
+The application is offline capable, which means it does not depend on a request
+to a backend service to enable any given feature/capability.
 
 ## Development
 

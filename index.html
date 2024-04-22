@@ -24,6 +24,14 @@
     <link rel="icon" type="image/x-icon" href="./icons/favicon.ico" />
     <title>SceneForge</title>
   </head>
+  <script>
+    /**
+     * Redirect to the new website URL.
+     */
+    if (window.location.hostname === 'phinpho.github.io') {
+      window.location.href = 'https://sceneforge.org/index.html';
+    }
+  </script>
   <script type="module" blocking="render" async src="/src/index.tsx"></script>
   <body class="light:bg-white dark:bg-black"></body>
 </html>

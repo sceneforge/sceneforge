@@ -14,7 +14,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
     command === "build" && mode === "production" && !isPreview;
 
   const metaEnv = {
-    VITE_APP_BASE_PATH: isProd() ? "/scene-forge/" : "/",
+    VITE_APP_BASE_PATH: isProd() ? "/" : "/",
     VITE_APP_NAME: "Scene Forge",
     VITE_APP_DESCRIPTION: description,
     VITE_APP_VERSION: isProd()
@@ -25,7 +25,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
   };
 
   return {
-    base: isProd() ? "/scene-forge/" : "/",
+    base: isProd() ? "/" : "/",
     appType: "spa",
     plugins: [
       i18nextLoader({
@@ -53,13 +53,13 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
         manifest: {
           dir: "ltr",
           lang: "en",
-          id: "https://phinpho.github.io/scene-forge/",
-          scope: isProd() ? "https://phinpho.github.io/scene-forge/" : "/",
+          id: "https://sceneforge.org/",
+          scope: isProd() ? "https://sceneforge.org/" : "/",
           name: metaEnv.VITE_APP_NAME,
           short_name: metaEnv.VITE_APP_NAME,
           description: metaEnv.VITE_APP_DESCRIPTION,
           start_url: isProd()
-            ? "https://phinpho.github.io/scene-forge/index.html"
+            ? "https://sceneforge.org/index.html"
             : "/index.html",
           display_override: [
             "window-controls-overlay",
@@ -69,7 +69,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
           file_handlers: [
             {
               action: isProd()
-                ? "https://phinpho.github.io/scene-forge/index.html#file"
+                ? "https://sceneforge.org/index.html#file"
                 : "/index.html#file",
               accept: {
                 "application/json": [".scfg", ".sceneforge"],
@@ -163,7 +163,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
             {
               platform: "webapp",
               url: isProd()
-                ? "https://phinpho.github.io/scene-forge/manifest.webmanifest"
+                ? "https://sceneforge.org/manifest.webmanifest"
                 : "http://localhost:9000/manifest.webmanifest",
             },
           ],
