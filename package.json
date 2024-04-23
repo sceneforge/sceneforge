@@ -68,7 +68,7 @@
     "@unocss/preset-icons": "^0.58.5",
     "@unocss/preset-typography": "^0.58.5",
     "@unocss/preset-uno": "^0.58.5",
-    "@unocss/transformer-directives": "^0.58.5",
+    "@unocss/transformer-directives": "^0.59.4",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "browser-sync": "^3.0.2",
     "conventional-changelog-angular": "^7.0.0",

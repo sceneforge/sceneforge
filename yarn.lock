@@ -3383,6 +3383,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/core@npm:0.59.4, @unocss/core@npm:^0.59.4":
+  version: 0.59.4
+  resolution: "@unocss/core@npm:0.59.4"
+  checksum: 10c0/a238da632e99c796e7a45910fc9d177df07ab812b117b01c2282cffea8051c10fb4b37a76676d0d863003da3163cfc73ef4c245109b64c04d62b0a78d8e76ab0
+  languageName: node
+  linkType: hard
+
 "@unocss/eslint-config@npm:^0.58.5":
   version: 0.58.6
   resolution: "@unocss/eslint-config@npm:0.58.6"
@@ -3543,6 +3550,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/rule-utils@npm:0.59.4":
+  version: 0.59.4
+  resolution: "@unocss/rule-utils@npm:0.59.4"
+  dependencies:
+    "@unocss/core": "npm:^0.59.4"
+    magic-string: "npm:^0.30.10"
+  checksum: 10c0/6c96550fccb9841d3cdadf13ff1a839ad9ca34faeab321588c8e7e36e5dd62d8b09d11d1e12592673b9e89ad2120f2de05723122cad71661a011c943b5139c79
+  languageName: node
+  linkType: hard
+
 "@unocss/scope@npm:0.58.6":
   version: 0.58.6
   resolution: "@unocss/scope@npm:0.58.6"
@@ -3580,7 +3597,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unocss/transformer-directives@npm:0.58.6, @unocss/transformer-directives@npm:^0.58.5":
+"@unocss/transformer-directives@npm:0.58.6":
   version: 0.58.6
   resolution: "@unocss/transformer-directives@npm:0.58.6"
   dependencies:
@@ -3588,6 +3605,17 @@ __metadata:
     "@unocss/rule-utils": "npm:0.58.6"
     css-tree: "npm:^2.3.1"
   checksum: 10c0/91da43f02bec8a24f3d363e6a48cca5858107e9c357767715dd8fdf208b9a6bcce0cf806aa86b646e4839691e005f45a99e26bda5e5957711b4821d8c00c03b1
+  languageName: node
+  linkType: hard
+
+"@unocss/transformer-directives@npm:^0.59.4":
+  version: 0.59.4
+  resolution: "@unocss/transformer-directives@npm:0.59.4"
+  dependencies:
+    "@unocss/core": "npm:0.59.4"
+    "@unocss/rule-utils": "npm:0.59.4"
+    css-tree: "npm:^2.3.1"
+  checksum: 10c0/b7c3e74065a2ea87d6bc6f5e0b65c29370acd3e5f58e652de620afcdac7c0959907235ee57515c8865edde8c384d86177253be58ece0c5753bf12f1e2484fb58
   languageName: node
   linkType: hard
 
@@ -7986,6 +8014,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"magic-string@npm:^0.30.10":
+  version: 0.30.10
+  resolution: "magic-string@npm:0.30.10"
+  dependencies:
+    "@jridgewell/sourcemap-codec": "npm:^1.4.15"
+  checksum: 10c0/aa9ca17eae571a19bce92c8221193b6f93ee8511abb10f085e55ffd398db8e4c089a208d9eac559deee96a08b7b24d636ea4ab92f09c6cf42a7d1af51f7fd62b
+  languageName: node
+  linkType: hard
+
 "magic-string@npm:^0.30.8":
   version: 0.30.8
   resolution: "magic-string@npm:0.30.8"
@@ -10114,7 +10151,7 @@ __metadata:
     "@unocss/preset-typography": "npm:^0.58.5"
     "@unocss/preset-uno": "npm:^0.58.5"
     "@unocss/reset": "npm:^0.58.5"
-    "@unocss/transformer-directives": "npm:^0.58.5"
+    "@unocss/transformer-directives": "npm:^0.59.4"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
     babylonjs-gltf2interface: "npm:^7.3.2"
     browser-fs-access: "npm:^0.35.0"
