@@ -12,6 +12,12 @@ includes some features, such as:
 The application is offline capable, which means it does not depends on a
 request to a backend service to enable any given feature/capability.
 
+> [!GALLERY]
+> ## Screenshots
+> 
+> - ![Main Screen](/screenshots/macos-main-1280.png#!image-dialog "Main screen of the application running in Mac OS using the Chrome browser")
+> - ![Editor Screen](/screenshots/macos-modelview-1280.png#!image-dialog "Model viewer screen of the application running in Mac OS using the Chrome browser")
+
 ## Development
 
 Take a look on our [GitHub repository](https://github.com/phinpho/scene-forge)
