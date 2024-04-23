@@ -20,7 +20,7 @@ recurso/funcionalidade.
 > - ![Tela de edição](/screenshots/macos-modelview-1280.png#!image-dialog "Tela de visualização de modelos da aplicação rodando em Mac OS usando o navegador Chrome")
 
 
-## Development
+## Desenvolvimento
 
 Acesse o [repositório no GitHub](https://github.com/phinpho/scene-forge)
 para ver o código fonte e contribuir com o projeto.

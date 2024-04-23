@@ -1,0 +1,20 @@
+{
+  "title": "Modelos",
+  "actions": {
+    "newButton": "Nuevo Modelo"
+  },
+  "ModelListItem": {
+    "actions": {
+      "openButton": "Abrir",
+      "deleteButton": "Eliminar"
+    },
+    "deleteDialog": {
+      "title": "Eliminar Modelo",
+      "description": "¿Está seguro de que desea eliminar el modelo \"{{ title }}\"?",
+      "actions": {
+        "cancelButton": "Cancelar",
+        "deleteButton": "Eliminar"
+      }
+    }
+  }
+}
