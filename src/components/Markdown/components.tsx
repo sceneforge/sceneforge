@@ -2,6 +2,7 @@ import { type ComponentType } from "react";
 import { type Element } from "hast";
 import { type MarkdownProps } from "@simplecomponent/markdown";
 import { Heading } from "../Heading";
+import { Link } from "../Link";
 
 type IntrinsicElement<
   T extends keyof JSX.IntrinsicElements = keyof JSX.IntrinsicElements
@@ -28,4 +29,5 @@ export const components: MarkdownProps["components"] = {
   h4: wrapper(Heading, { level: 4 }),
   h5: wrapper(Heading, { level: 5 }),
   h6: wrapper(Heading, { level: 6 }),
+  a: wrapper(Link, { target: "_blank", rel: "nofollow" }),
 };

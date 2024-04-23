@@ -12,6 +12,9 @@ export const useAppContext = () => {
     languages,
     setResolvedLanguage,
     basePath,
+    keywords,
+    author,
+    repository,
   } = useContext(AppContext);
 
   return {
@@ -24,5 +27,8 @@ export const useAppContext = () => {
     dir,
     languages,
     basePath,
+    keywords,
+    author,
+    repository,
   };
 };

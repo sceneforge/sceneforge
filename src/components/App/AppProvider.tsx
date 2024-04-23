@@ -29,6 +29,9 @@ export type AppContextType = {
   setDir?: Dispatch<SetStateAction<string | undefined>>;
   languages?: readonly string[];
   basePath: string;
+  keywords?: string;
+  author?: string;
+  repository?: string;
 };
 
 export const AppContext = createContext<AppContextType>({
@@ -51,9 +54,12 @@ export const AppProvider = ({
   const [dir, setDir] = useState<string | undefined>(i18nDir());
   const name = import.meta.env.VITE_APP_NAME ?? "";
   const description = import.meta.env.VITE_APP_DESCRIPTION ?? "";
+  const keywords = import.meta.env.VITE_APP_KEYWORDS ?? "";
+  const author = import.meta.env.VITE_APP_AUTHOR ?? "";
   const version = import.meta.env.VITE_APP_VERSION ?? "";
   const dev = import.meta.env.DEV ? true : false;
   const basePath = import.meta.env.VITE_APP_BASE_PATH ?? "/";
+  const repository = import.meta.env.VITE_APP_REPOSITORY ?? "";
 
   return (
     <AppContext.Provider
@@ -68,6 +74,9 @@ export const AppProvider = ({
         setDir,
         languages,
         basePath,
+        keywords,
+        author,
+        repository,
       }}
     >
       <AppInstallProvider>

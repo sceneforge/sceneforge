@@ -12,3 +12,8 @@ inclui alguns recursos, como:
 O aplicativo funciona inteiramente off-line, o que significa que não depende de
 uma requisição a um serviço de back-end para ativar qualquer
 recurso/funcionalidade.
+
+## Development
+
+Acesse o [repositório no GitHub](https://github.com/phinpho/scene-forge)
+para ver o código fonte e contribuir com o projeto.

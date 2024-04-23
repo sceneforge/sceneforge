@@ -1,7 +1,15 @@
 {
   "name": "scene-forge",
   "version": "0.0.1",
-  "description": "Web Application for 3D scenes handling",
+  "description": "Unleash your creativity with our cutting-edge Progressive Web Application that empowers you to craft, visualise, and manipulate stunning 3D scenes.",
+  "keywords": [
+    "3d",
+    "web",
+    "pwa",
+    "hotspots",
+    "editor",
+    "scene"
+  ],
   "type": "module",
   "repository": {
     "type": "git",

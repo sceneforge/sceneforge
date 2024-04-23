@@ -11,3 +11,8 @@ includes some features, such as:
 
 The application is offline capable, which means it does not depends on a
 request to a backend service to enable any given feature/capability.
+
+## Development
+
+Take a look on our [GitHub repository](https://github.com/phinpho/scene-forge)
+to see the source code and contribute to the project.

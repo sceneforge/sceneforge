@@ -7,16 +7,21 @@ import UnoCSS from "unocss/vite";
 import i18nextLoader from "vite-plugin-i18next-loader";
 
 export default defineConfig(async ({ command, mode, isPreview }) => {
-  const { description, version } = await import("./package.json");
+  const { description, version, author, repository, keywords } = await import(
+    "./package.json"
+  );
 
   const isDev = () => command === "serve" || mode === "development";
   const isProd = () =>
     command === "build" && mode === "production" && !isPreview;
 
   const metaEnv = {
-    VITE_APP_BASE_PATH: isProd() ? "/" : "/",
+    VITE_APP_BASE_PATH: "/",
     VITE_APP_NAME: "Scene Forge",
     VITE_APP_DESCRIPTION: description,
+    VITE_APP_AUTHOR: author.name,
+    VITE_APP_REPOSITORY: repository.url,
+    VITE_APP_KEYWORDS: keywords.join(", "),
     VITE_APP_VERSION: isProd()
       ? version
       : isDev()
@@ -25,7 +30,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
   };
 
   return {
-    base: isProd() ? "/" : "/",
+    base: metaEnv.VITE_APP_BASE_PATH,
     appType: "spa",
     plugins: [
       i18nextLoader({
@@ -87,7 +92,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
             "entertainment",
           ],
           launch_handler: {
-            client_mode: "focus-existing",
+            client_mode: ["focus-existing", "auto"],
           },
           icons: [
             {
