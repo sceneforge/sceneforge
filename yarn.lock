@@ -1450,12 +1450,12 @@ __metadata:
   linkType: hard
 
 "@babylonjs/loaders@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "@babylonjs/loaders@npm:7.3.1"
+  version: 7.3.2
+  resolution: "@babylonjs/loaders@npm:7.3.2"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
     babylonjs-gltf2interface: ^7.0.0
-  checksum: 10c0/7562fdf565489fe325fbd6b1977adec062bbc450008478f5d0441f67736df0029bbedc29658861e2b675c28002b2a5e6dba52c3ac20984121d588c821864d51c
+  checksum: 10c0/a26293a98d821597fb9f51352fd3e2c2c406fe7f89d09739cc27e04a5e07cca8a1bd17ebb58f30679eabbe77098ed08810364233d5bc19f9f0fcdc60f4f06f65
   languageName: node
   linkType: hard
 
