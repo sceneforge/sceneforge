@@ -1443,9 +1443,9 @@ __metadata:
   linkType: hard
 
 "@babylonjs/core@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "@babylonjs/core@npm:7.3.1"
-  checksum: 10c0/f4356d3b3ef265d01f1d06caa567e48ccc6cb8c9d576a4917c07ff192c2caca39dbba4c71f9870a1444e6d8d06c5638bd70455694212a90262730a71e465da5a
+  version: 7.3.2
+  resolution: "@babylonjs/core@npm:7.3.2"
+  checksum: 10c0/0b1e9e0dbc9d0a02beb9604eb068ba3d2d9903faa49640dc84bf552bc8e0c6a935aa41420932c07535ab77739ab6ac2a993f25742f0ed28c9286b83bf3bb4bc2
   languageName: node
   linkType: hard
 
