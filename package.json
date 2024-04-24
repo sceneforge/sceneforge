@@ -73,7 +73,7 @@
     "browser-sync": "^3.0.2",
     "conventional-changelog-angular": "^7.0.0",
     "conventional-changelog-cli": "^4.1.0",
-    "eslint": "^8.56.0",
+    "eslint": "^9.1.1",
     "eslint-plugin-i18next": "^6.0.3",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
