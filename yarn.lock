@@ -1442,29 +1442,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babylonjs/core@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "@babylonjs/core@npm:7.3.1"
-  checksum: 10c0/f4356d3b3ef265d01f1d06caa567e48ccc6cb8c9d576a4917c07ff192c2caca39dbba4c71f9870a1444e6d8d06c5638bd70455694212a90262730a71e465da5a
+"@babylonjs/core@npm:^7.3.2":
+  version: 7.3.2
+  resolution: "@babylonjs/core@npm:7.3.2"
+  checksum: 10c0/0b1e9e0dbc9d0a02beb9604eb068ba3d2d9903faa49640dc84bf552bc8e0c6a935aa41420932c07535ab77739ab6ac2a993f25742f0ed28c9286b83bf3bb4bc2
   languageName: node
   linkType: hard
 
-"@babylonjs/loaders@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "@babylonjs/loaders@npm:7.3.1"
+"@babylonjs/loaders@npm:^7.3.2":
+  version: 7.3.2
+  resolution: "@babylonjs/loaders@npm:7.3.2"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
     babylonjs-gltf2interface: ^7.0.0
-  checksum: 10c0/7562fdf565489fe325fbd6b1977adec062bbc450008478f5d0441f67736df0029bbedc29658861e2b675c28002b2a5e6dba52c3ac20984121d588c821864d51c
+  checksum: 10c0/a26293a98d821597fb9f51352fd3e2c2c406fe7f89d09739cc27e04a5e07cca8a1bd17ebb58f30679eabbe77098ed08810364233d5bc19f9f0fcdc60f4f06f65
   languageName: node
   linkType: hard
 
-"@babylonjs/materials@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "@babylonjs/materials@npm:7.3.1"
+"@babylonjs/materials@npm:^7.3.2":
+  version: 7.3.2
+  resolution: "@babylonjs/materials@npm:7.3.2"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
-  checksum: 10c0/03ee86fb41495a1cbf1770dd1f74f9db5496cd071c63c275d4760463c0f33d0cc95e4d3bbe6c0b7c8cd54a4e5a90f9c684b20f1d6a47573254c1c4860a11937e
+  checksum: 10c0/44a33174bdaa0b30852587572ee2a8228828f6967cb130ba4c234d957bd2b910133639e4f54f44a297c471e7c17bc13e59cfbb88e1005bbaedfe7baf83091b99
   languageName: node
   linkType: hard
 
@@ -4028,10 +4028,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babylonjs-gltf2interface@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "babylonjs-gltf2interface@npm:7.3.1"
-  checksum: 10c0/7b88f3280e9c4d3743aecb49f6b22edf0ecb865e3552874a56002ea0bdd09ece1863418a67981688ec31052417348bcac1a44df8f69dff935660089c3f6cf173
+"babylonjs-gltf2interface@npm:^7.3.2":
+  version: 7.3.2
+  resolution: "babylonjs-gltf2interface@npm:7.3.2"
+  checksum: 10c0/e74d03a9abae87c2a79099dc623026571b9ebe4adea29c2610016562ddb595615e72f20568f2b1a9e402edc2d4bd4bb88a54801c455abfc422c1e920b26858f2
   languageName: node
   linkType: hard
 
@@ -10088,9 +10088,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "scene-forge@workspace:."
   dependencies:
-    "@babylonjs/core": "npm:^7.3.1"
-    "@babylonjs/loaders": "npm:^7.3.1"
-    "@babylonjs/materials": "npm:^7.3.1"
+    "@babylonjs/core": "npm:^7.3.2"
+    "@babylonjs/loaders": "npm:^7.3.2"
+    "@babylonjs/materials": "npm:^7.3.2"
     "@commitlint/cli": "npm:^19.2.1"
     "@commitlint/config-conventional": "npm:^19.1.0"
     "@commitlint/format": "npm:^19.0.3"
@@ -10116,7 +10116,7 @@ __metadata:
     "@unocss/reset": "npm:^0.58.5"
     "@unocss/transformer-directives": "npm:^0.58.5"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
-    babylonjs-gltf2interface: "npm:^7.3.1"
+    babylonjs-gltf2interface: "npm:^7.3.2"
     browser-fs-access: "npm:^0.35.0"
     browser-sync: "npm:^3.0.2"
     conventional-changelog-angular: "npm:^7.0.0"
