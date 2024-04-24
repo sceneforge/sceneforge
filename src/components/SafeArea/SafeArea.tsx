@@ -13,7 +13,7 @@ export const SafeArea = ({ vertical, horizonal, children }: SafeAreaProps) => {
   const classVertical = vertical
     ? tabsPosition === "top"
       ? "p-t-2"
-      : "p-t-12"
+      : "p-t-16"
     : null;
   const classHorizonal = horizonal ? "p-inline-4" : null;
 

@@ -13,7 +13,14 @@ O aplicativo funciona inteiramente off-line, o que significa que não depende de
 uma requisição a um serviço de back-end para ativar qualquer
 recurso/funcionalidade.
 
-## Development
+> [!GALLERY]
+> ## Amostras de telas
+> 
+> - ![Tela principal](/screenshots/macos-main-1280.png#!image-dialog "Tela principal da aplicação rodando em Mac OS usando o navegador Chrome")
+> - ![Tela de edição](/screenshots/macos-modelview-1280.png#!image-dialog "Tela de visualização de modelos da aplicação rodando em Mac OS usando o navegador Chrome")
+
+
+## Desenvolvimento
 
 Acesse o [repositório no GitHub](https://github.com/phinpho/scene-forge)
 para ver o código fonte e contribuir com o projeto.

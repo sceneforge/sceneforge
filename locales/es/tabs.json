@@ -1,0 +1,23 @@
+{
+  "general": {
+    "untitledTab": "Sin título"
+  },
+  "ModelViewTab": {
+    "untitledModel": "Modelo sin título"
+  },
+  "SettingsTab": {
+    "title": "Ajustes",
+    "sections": {
+      "general": {
+        "title": "General",
+        "languageLabel": "Idioma"
+      },
+      "tabs": {
+        "title": "Pestañas",
+        "positionLabel": "Posición",
+        "positionTopOption": "Superior",
+        "positionBottomOption": "Inferior"
+      }
+    }
+  }
+}

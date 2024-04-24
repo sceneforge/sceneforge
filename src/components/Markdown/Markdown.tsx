@@ -31,7 +31,7 @@ export const Markdown = ({ href, value, ...props }: MarkdownProps) => {
   }, [i18nHref, setCurrentDoc]);
 
   return (
-    <div className="m-inline-auto w-full select-text text-start c-inherit lg:w-3xl sm:w-lg xl:w-6xl">
+    <div className="m-inline-auto select-text p-b-2xl text-start c-inherit lg:w-3xl sm:w-lg xl:w-6xl">
       <SimpleMarkdown
         key={contentUrl}
         components={components}

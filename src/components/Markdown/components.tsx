@@ -3,6 +3,8 @@ import { type Element } from "hast";
 import { type MarkdownProps } from "@simplecomponent/markdown";
 import { Heading } from "../Heading";
 import { Link } from "../Link";
+import { Image } from "../Image";
+import { Blockquote } from "../Blockquote";
 
 type IntrinsicElement<
   T extends keyof JSX.IntrinsicElements = keyof JSX.IntrinsicElements
@@ -30,4 +32,6 @@ export const components: MarkdownProps["components"] = {
   h5: wrapper(Heading, { level: 5 }),
   h6: wrapper(Heading, { level: 6 }),
   a: wrapper(Link, { target: "_blank", rel: "nofollow" }),
+  img: wrapper(Image),
+  blockquote: wrapper(Blockquote),
 };

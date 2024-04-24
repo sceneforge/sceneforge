@@ -1,0 +1,27 @@
+{
+  "modes": {
+    "view": "Modo de vista",
+    "edit": "Modo de edición",
+    "material": "Modo de material"
+  },
+  "ModelViewerHeader": {
+    "fileImportDescription": "Seleccione un modelo 3D",
+    "untitled": "Modelo sin título",
+    "actions": {
+      "importButton": "Importar...",
+      "modelDropdown": "Modelo"
+    }
+  },
+  "SceneNodesSection": {
+    "title": "Objetos de escena"
+  },
+  "SceneObjectSection": {
+    "actions": {
+      "modelDropdown": "Modelo",
+      "closeButton": "Cerrar"
+    }
+  },
+  "errorMessages": {
+    "openGLTFBlob": "Falló al intentar abrir el archivo glTF"
+  }
+}
