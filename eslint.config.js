@@ -1,0 +1,48 @@
+import globals from "globals";
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+import react from "eslint-plugin-react";
+import unocss from "@unocss/eslint-config/flat";
+import prettierRecommended from "eslint-plugin-prettier/recommended";
+
+export default tseslint.config(
+  {
+    ignores: ["dist/**/*", "node_modules/**/*", "dev-dist/**/*", ".yarn/**/*"],
+  },
+  eslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  {
+    files: ["*.config.ts", "lib/**/*.ts"],
+    languageOptions: {
+      parserOptions: {
+        project: "./tsconfig.node.json",
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: ["src/**/*.{ts,tsx,mts,mtsx}"],
+    languageOptions: {
+      parserOptions: {
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: ["*.js", "*.mjs", "*.cjs"],
+    ...tseslint.configs.disableTypeChecked,
+  },
+  unocss,
+  {
+    files: ["src/**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+    ...react.recommended,
+  },
+  {
+    files: ["src/sw/**/*.{js,mjs,cjs,ts,mts}"],
+    languageOptions: {
+      globals: globals.serviceworker,
+    },
+  },
+  prettierRecommended,
+);
