@@ -41,6 +41,10 @@ export default tseslint.config(
   {
     files: ["src/sw/**/*.{js,mjs,cjs,ts,mts}"],
     languageOptions: {
+      parserOptions: {
+        project: "./src/sw/tsconfig.json",
+        tsconfigRootDir: import.meta.dirname,
+      },
       globals: globals.serviceworker,
     },
   },
