@@ -9,9 +9,9 @@ export const safeList = (colors: string[], opacity: number[]): string[] => {
       .map((c) =>
         schemePrefix
           .map((sp) =>
-            colorBackgroundPrefix.map((cbp) => `${sp}:${cbp}-${c}`).flat()
+            colorBackgroundPrefix.map((cbp) => `${sp}:${cbp}-${c}`).flat(),
           )
-          .flat()
+          .flat(),
       )
       .flat(),
   ].flat();
@@ -21,7 +21,7 @@ export const safeList = (colors: string[], opacity: number[]): string[] => {
       .map((c) =>
         schemePrefix
           .map((sp) => colorTextPrefix.map((ctp) => `${sp}:${ctp}-${c}`))
-          .flat()
+          .flat(),
       )
       .flat(),
   ].flat();

@@ -9,4 +9,4 @@ export const name = (node: unknown): string => {
     return node.constructor.name;
   }
   return "Unknown Node Object";
-}
+};

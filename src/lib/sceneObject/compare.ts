@@ -10,4 +10,4 @@ export const compare = (a: unknown, b: unknown): number => {
   const aName = name(a);
   const bName = name(b);
   return aName.localeCompare(bName);
-}
+};

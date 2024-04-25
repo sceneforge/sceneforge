@@ -1,5 +1,5 @@
 import { useCallback, useRef } from "react";
-import { useRegisterSW } from "virtual:pwa-register/react"
+import { useRegisterSW } from "virtual:pwa-register/react";
 import { Dialog } from "../Dialog";
 import { useTranslation } from "react-i18next";
 
@@ -18,8 +18,14 @@ export const ReloadPrompt = () => {
   }, [setOfflineReady, setNeedRefresh]);
 
   const reload = useCallback(() => {
-    updateServiceWorker(true);
-    close();
+    updateServiceWorker(true)
+      .then(() => {
+        close();
+      })
+      .catch((err: unknown) => {
+        close();
+        throw new Error("Failed to update service worker", { cause: err });
+      });
   }, [close, updateServiceWorker]);
 
   if (!offlineReady && !needRefresh) return null;
@@ -44,8 +50,8 @@ export const ReloadPrompt = () => {
         offlineReady
           ? t("description.offlineReady")
           : needRefresh
-          ? t("description.needsRefresh")
-          : undefined
+            ? t("description.needsRefresh")
+            : undefined
       }
       onClose={close}
     />

@@ -43,7 +43,7 @@ export const IconButton = forwardRef(function IconButton(
     variant,
     ...props
   }: IconButtonProps,
-  ref: ForwardedRef<ButtonComponent>
+  ref: ForwardedRef<ButtonComponent>,
 ) {
   const isPressed = useMemo(() => {
     if (pressed === true || pressed === "true") return true;
@@ -68,7 +68,7 @@ export const IconButton = forwardRef(function IconButton(
       setPressedState(e.state === "pressed");
       if (onToggle) onToggle(e);
     },
-    [onToggle]
+    [onToggle],
   );
 
   useEffect(() => {

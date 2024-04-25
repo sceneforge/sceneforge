@@ -3,7 +3,7 @@ import {
   useCallback,
   useEffect,
   useState,
-  type MouseEventHandler
+  type MouseEventHandler,
 } from "react";
 import { changeSize, targetClicked } from "./panelHandler";
 
@@ -16,7 +16,7 @@ export const usePanelSheet = (
   resizeable: boolean,
   orientation: "block" | "inline",
   position: "start" | "end",
-  handleRef?: RefObject<HTMLSpanElement | null>
+  handleRef?: RefObject<HTMLSpanElement | null>,
 ) => {
   const [clickDown, setClickDown] = useState(false);
 
@@ -33,7 +33,7 @@ export const usePanelSheet = (
           orientation,
           position,
           event,
-          "::after"
+          "::after",
         ) ||
           (handleRef?.current &&
             targetClicked(
@@ -42,7 +42,7 @@ export const usePanelSheet = (
               position,
               event,
               undefined,
-              true
+              true,
             )))
       ) {
         setClickDown(true);
@@ -50,7 +50,7 @@ export const usePanelSheet = (
         setClickDown(false);
       }
     },
-    [resizeable, panelRef, handleRef, orientation, position, setClickDown]
+    [resizeable, panelRef, handleRef, orientation, position, setClickDown],
   );
 
   const updateSize = useCallback(
@@ -64,12 +64,12 @@ export const usePanelSheet = (
         } else if (size && !movementX && !movementY) {
           panelRef.current.style.setProperty(
             orientation === "block" ? "height" : "width",
-            `${size}%`
+            `${size}%`,
           );
         }
       }
     },
-    [orientation, panelRef, position]
+    [orientation, panelRef, position],
   );
 
   const mouseOver: MouseEventHandler<HTMLDivElement> = useCallback(
@@ -81,7 +81,7 @@ export const usePanelSheet = (
       event.stopPropagation();
       updateSize(event);
     },
-    [resizeable, clickDown, updateSize]
+    [resizeable, clickDown, updateSize],
   );
 
   useEffect(() => {

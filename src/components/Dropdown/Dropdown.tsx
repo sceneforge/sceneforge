@@ -55,7 +55,7 @@ export const Dropdown = forwardRef(function Dropdown(
     extendedClassName,
     ...props
   }: DropdownProps,
-  ref: ForwardedRef<ButtonComponent>
+  ref: ForwardedRef<ButtonComponent>,
 ) {
   const buttonRef = useRef<ButtonComponent>(null);
   const itemListRef = useRef<HTMLUListElement>(null);
@@ -70,7 +70,7 @@ export const Dropdown = forwardRef(function Dropdown(
       pressed,
       toggle: buttonRef.current?.toggle,
     }),
-    [pressed]
+    [pressed],
   );
 
   const clear = useCallback(() => {
@@ -108,13 +108,13 @@ export const Dropdown = forwardRef(function Dropdown(
             nextIndex < 0 ? items.length + nextIndex : nextIndex % items.length;
           (
             items[nextIndex].querySelector(
-              "button, a, input, select, textarea"
+              "button, a, input, select, textarea",
             ) as HTMLElement
           )?.focus();
         }
       }
     },
-    [itemListRef, clear]
+    [itemListRef, clear],
   );
 
   const handleClickOut = useCallback(
@@ -126,7 +126,7 @@ export const Dropdown = forwardRef(function Dropdown(
         clear();
       }
     },
-    [itemListRef, clear]
+    [itemListRef, clear],
   );
 
   const handleToggle = useCallback(
@@ -139,7 +139,7 @@ export const Dropdown = forwardRef(function Dropdown(
       }, 100);
       if (onToggle) onToggle(event);
     },
-    [onToggle, pressed]
+    [onToggle, pressed],
   );
 
   const handleItemClick = useCallback(
@@ -163,7 +163,7 @@ export const Dropdown = forwardRef(function Dropdown(
         }
         if (onClick) return onClick(event);
       },
-    [clear, popoverId, clearDropdown]
+    [clear, popoverId, clearDropdown],
   );
 
   useEffect(() => {
@@ -218,7 +218,7 @@ export const Dropdown = forwardRef(function Dropdown(
           popovertarget={popoverId}
           extendedClassName={cls(
             extendedClassName,
-            pressed ? "dark:bg-black:20 light:bg-white:20" : undefined
+            pressed ? "dark:bg-black:20 light:bg-white:20" : undefined,
           )}
         />
       ) : (
@@ -231,7 +231,7 @@ export const Dropdown = forwardRef(function Dropdown(
           ref={buttonRef}
           extendedClassName={cls(
             extendedClassName,
-            pressed ? "dark:bg-black:20 light:bg-white:20" : undefined
+            pressed ? "dark:bg-black:20 light:bg-white:20" : undefined,
           )}
         />
       )}
@@ -246,7 +246,7 @@ export const Dropdown = forwardRef(function Dropdown(
             contentVariant && variantBgClass[contentVariant]
               ? variantBgClass[contentVariant]
               : "bg-accent",
-            visible ? "opacity-100" : "opacity-0 pointer-events-none"
+            visible ? "opacity-100" : "opacity-0 pointer-events-none",
           )}
         >
           {items.map(({ type, onClick, className, active, ...item }, index) => (
@@ -256,7 +256,7 @@ export const Dropdown = forwardRef(function Dropdown(
                 className,
                 active
                   ? "dark:bg-black:30 light:bg-white:30 rounded-2"
-                  : undefined
+                  : undefined,
               )}
             >
               {type === "divider" ? (

@@ -24,7 +24,7 @@ export type PopoverProps = Omit<ButtonProps, keyof ToggleProps> & {
 
 export const Popover = forwardRef(function Popover(
   { id, label, children, ...props }: PopoverProps,
-  ref: ForwardedRef<ButtonComponent>
+  ref: ForwardedRef<ButtonComponent>,
 ) {
   const genId = useId();
   const [opened, setOpened] = useState(false);
@@ -41,7 +41,7 @@ export const Popover = forwardRef(function Popover(
         pressed: false,
         toggle: () => {},
       },
-    [buttonRef]
+    [buttonRef],
   );
 
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -71,7 +71,7 @@ export const Popover = forwardRef(function Popover(
         }
       }
     },
-    [buttonRef, setOpened]
+    [buttonRef, setOpened],
   );
 
   useEffect(() => {

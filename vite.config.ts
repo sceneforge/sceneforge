@@ -25,8 +25,8 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
     VITE_APP_VERSION: isProd()
       ? version
       : isDev()
-      ? `dev-${version}`
-      : "unknown",
+        ? `dev-${version}`
+        : "unknown",
   };
 
   return {
@@ -209,4 +209,3 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
     },
   } as UserConfig;
 });
-

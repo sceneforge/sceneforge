@@ -41,7 +41,7 @@ export const TabList = ({ variant = "default" }: TabListProps) => {
         });
       }
     },
-    [openContextMenu]
+    [openContextMenu],
   );
 
   return (
@@ -54,11 +54,11 @@ export const TabList = ({ variant = "default" }: TabListProps) => {
             ? variantBgClass[variant]
             : `${variantBgClass[variant]}:50`
           : tabsPosition === "top"
-          ? "bg-primary"
-          : "bg-primary:50",
+            ? "bg-primary"
+            : "bg-primary:50",
         tabsPosition === "top"
           ? "p-t-2 p-b-0 app-region-drag b-b-1 b-b-solid b-b-black:75 shadow shadow-md shadow-black:30"
-          : "p-t-0 p-b-2 dark:shadow-black:25 light:shadow-white:25 shadow-inner"
+          : "p-t-0 p-b-2 dark:shadow-black:25 light:shadow-white:25 shadow-inner",
       )}
       role="tablist"
       onContextMenu={handleTabListContextMenu}

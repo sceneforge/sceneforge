@@ -7,17 +7,17 @@ import { Image } from "../Image";
 import { Blockquote } from "../Blockquote";
 
 type IntrinsicElement<
-  T extends keyof JSX.IntrinsicElements = keyof JSX.IntrinsicElements
+  T extends keyof JSX.IntrinsicElements = keyof JSX.IntrinsicElements,
 > = JSX.IntrinsicElements[T];
 
 const wrapper =
   <
     T extends keyof JSX.IntrinsicElements = keyof JSX.IntrinsicElements,
     WP extends object = object,
-    P extends IntrinsicElement<T> = IntrinsicElement<T>
+    P extends IntrinsicElement<T> = IntrinsicElement<T>,
   >(
     Component: ComponentType<WP>,
-    initialProps: WP = {} as WP
+    initialProps: WP = {} as WP,
   ) =>
   ({ node, ...props }: P & { node?: Element }) =>
     node && node.type === "element" ? (

@@ -2,7 +2,7 @@ import { type MouseEvent } from "react";
 
 export const setPositionOnTarget = (
   element: HTMLElement,
-  target: HTMLElement
+  target: HTMLElement,
 ) => {
   const { width, height } = element.getBoundingClientRect();
   const { top, bottom, left, right } = target.getBoundingClientRect();
@@ -25,7 +25,7 @@ export const setPositionOnTarget = (
 
 export const setPositionOnPointer = (
   element: HTMLElement,
-  event: MouseEvent<HTMLElement>
+  event: MouseEvent<HTMLElement>,
 ) => {
   const { width, height } = element.getBoundingClientRect();
   element.style.left = `${event.clientX}px`;

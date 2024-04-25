@@ -15,14 +15,14 @@ import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 export const useModelViewer = (
   canvasRef: RefObject<HTMLCanvasElement>,
   active: boolean,
-  props: Partial<Model>
+  props: Partial<Model>,
 ) => {
   const [loaded, setLoaded] = useState(false);
   const [ready, setReady] = useState(false);
   const [currentNode, setCurrentNode] = useState<unknown>(null);
   const [mode, setMode] = useState<Mode>(Mode.View);
   const [meshSelectionPath, setMeshSelectionPath] = useState<readonly string[]>(
-    []
+    [],
   );
 
   const {
@@ -94,7 +94,7 @@ export const useModelViewer = (
       clearMeshSelectionPath();
       setCurrentNode(node);
     },
-    [clearMeshSelectionPath, setCurrentNode]
+    [clearMeshSelectionPath, setCurrentNode],
   );
 
   const clearSelectedNode = useCallback(() => {
@@ -113,7 +113,9 @@ export const useModelViewer = (
 
   useEffect(() => {
     if (loadState === "none") {
-      loadModels();
+      loadModels().catch((err: unknown) => {
+        throw new Error("Failed to load models", { cause: err });
+      });
     } else if (loadState === "loaded") {
       setReady(active);
     }
@@ -160,24 +162,24 @@ export const useModelViewer = (
       setMeshSelectionPath(objectPath(mesh));
       setCurrentNode(mesh);
     },
-    [clearMeshSelectionPath, objectPath]
+    [clearMeshSelectionPath, objectPath],
   );
 
   const onHotspotSelect = useCallback(
     (
       mesh: AbstractMesh,
       ev: ActionEvent,
-      { hotspot }: { hotspot: AbstractMesh }
+      { hotspot }: { hotspot: AbstractMesh },
     ) => {
       console.log("DEBUG: onHotspotSelect", mesh, ev, hotspot);
     },
-    []
+    [],
   );
 
   useEffect(() => {
     if (ready && mode === Mode.Edit) {
       const mesh = sceneRef.current?.rootNodes.filter(
-        (node) => node instanceof Mesh || node instanceof AbstractMesh
+        (node) => node instanceof Mesh || node instanceof AbstractMesh,
       );
       if (
         mesh &&
@@ -193,7 +195,7 @@ export const useModelViewer = (
   }, [ready, mode, sceneRef, onMeshSelect, onHotspotSelect]);
 
   const onImported = useCallback(
-    async (model: Partial<Model>) => {
+    async (model: Partial<Model>): Promise<Model> => {
       if (model.id && model.id !== currentID) {
         throw new Error("Model ID is not matched");
       }
@@ -208,7 +210,7 @@ export const useModelViewer = (
         id,
       });
     },
-    [currentID, saveModel]
+    [currentID, saveModel],
   );
 
   return {

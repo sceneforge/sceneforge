@@ -4,7 +4,7 @@ import {
   useState,
   type Dispatch,
   type PropsWithChildren,
-  type SetStateAction
+  type SetStateAction,
 } from "react";
 import { type TabProps } from "./Tab";
 
@@ -15,7 +15,7 @@ export type TabComponent<P extends TabProps = TabProps> = (
 
 export interface TabContext<
   P extends TabProps = TabProps,
-  C extends TabComponent<P> = TabComponent<P>
+  C extends TabComponent<P> = TabComponent<P>,
 > {
   id: string;
   title: string;

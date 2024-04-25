@@ -1,1 +1,1 @@
-export { activate } from './activate';
+export { activate } from "./activate";

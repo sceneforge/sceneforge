@@ -21,8 +21,13 @@ export const AppInstall = () => {
             type: "item",
             label: t("actions.installButton"),
             onClick: () => {
-              installPrompt();
-              closeInstallDialog();
+              installPrompt()
+                ?.then(() => {
+                  closeInstallDialog();
+                })
+                .catch(() => {
+                  closeInstallDialog();
+                });
             },
           },
         ],

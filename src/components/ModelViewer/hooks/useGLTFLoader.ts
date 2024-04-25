@@ -27,7 +27,7 @@ export const useGLTFLoader = (sceneRef: RefObject<Scene>) => {
         }, 1000);
       }
     },
-    [t, sceneRef, setCapture, setLoadResult]
+    [t, sceneRef, setCapture, setLoadResult],
   );
 
   return {

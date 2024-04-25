@@ -5,7 +5,7 @@ import {
   HemisphericLight,
   Light,
   Mesh,
-  TransformNode
+  TransformNode,
 } from "@babylonjs/core";
 
 export enum SceneObjectType {
@@ -16,7 +16,7 @@ export enum SceneObjectType {
   ArcRotateCamera = "ArcRotateCamera",
   Camera = "Camera",
   TransformNode = "TransformNode",
-  Unknown = "Unknown"
+  Unknown = "Unknown",
 }
 
 export const typeOf = (node: unknown): SceneObjectType => {
@@ -36,4 +36,4 @@ export const typeOf = (node: unknown): SceneObjectType => {
     return SceneObjectType.TransformNode;
   }
   return SceneObjectType.Unknown;
-}
+};

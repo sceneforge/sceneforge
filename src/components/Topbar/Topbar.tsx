@@ -25,13 +25,13 @@ export const Topbar = ({
         "fixed bg-white dark:bg-black w-full inset-t-0 inset-x-0 titlebar-area-height app-region-drag inset-titlebar-area-y",
         tabsPosition === "top"
           ? null
-          : "b-b-1 b-b-solid b-b-black:75 shadow shadow-md shadow-black:30"
+          : "b-b-1 b-b-solid b-b-black:75 shadow shadow-md shadow-black:30",
       )}
     >
       <div
         className={cls(
           "absolute text-light h-full ps pe flex flex-row items-center justify-stretch gap-2 inset-t-0 titlebar-area-width inset-titlebar-area-x",
-          variant ? variantBgClass[variant] : "bg-primary"
+          variant ? variantBgClass[variant] : "bg-primary",
         )}
       >
         <h1 className="m-0 p-0 text-nowrap font-size-4">{title}</h1>

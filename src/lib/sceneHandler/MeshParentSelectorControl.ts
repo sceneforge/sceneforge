@@ -64,7 +64,7 @@ export class MeshParentSelectorControl {
   private static getParent(
     mesh: AbstractMesh | Node | undefined | null,
     depth: number = 1,
-    currentDepth: number = 0
+    currentDepth: number = 0,
   ): Nullable<Node> {
     if (!mesh) return null;
     const parent = mesh.parent;

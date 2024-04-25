@@ -15,7 +15,7 @@ import { ReloadPrompt } from "../ReloadPrompt";
 type EventListenerCallback = (
   type: string,
   listener: EventListenerOrEventListenerObject,
-  options?: boolean | AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions,
 ) => void;
 
 interface WindowControlsOverlay {
@@ -66,16 +66,15 @@ export const PanelProvider = ({
   const [sidePanelContent, setSidePanelContent] = useState<ReactNode>();
 
   const windowControlsOverlayRef = useRef<WindowControlsOverlay | null>(null);
-  const [overlayVisible, setOverlayVisible] = useState<boolean>(
-    isOverlayVisible()
-  );
+  const [overlayVisible, setOverlayVisible] =
+    useState<boolean>(isOverlayVisible());
 
   const updateOverlayVisibility = useCallback(() => {
     if (windowControlsOverlayRef.current) {
       setOverlayVisible(windowControlsOverlayRef.current.visible);
       document.body.setAttribute(
         "data-window-controls-overlay",
-        windowControlsOverlayRef.current.visible ? "visible" : "hidden"
+        windowControlsOverlayRef.current.visible ? "visible" : "hidden",
       );
     }
   }, [windowControlsOverlayRef, setOverlayVisible]);
@@ -87,19 +86,19 @@ export const PanelProvider = ({
 
       windowControlsOverlayRef.current.addEventListener(
         "geometrychange",
-        updateOverlayVisibility
+        updateOverlayVisibility,
       );
 
       document.body.setAttribute(
         "data-window-controls-overlay",
-        windowControlsOverlayRef.current.visible ? "visible" : "hidden"
+        windowControlsOverlayRef.current.visible ? "visible" : "hidden",
       );
     }
 
     return () => {
       windowControlsOverlayRef.current?.removeEventListener(
         "geometrychange",
-        updateOverlayVisibility
+        updateOverlayVisibility,
       );
     };
   }, [appTitle, updateOverlayVisibility, windowControlsOverlayRef]);
@@ -125,4 +124,3 @@ export const PanelProvider = ({
     </PanelContext.Provider>
   );
 };
-

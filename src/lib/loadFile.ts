@@ -5,7 +5,7 @@ export const loadFile = async (file: File) => {
     blob: () => new Blob([buffer], { type: "application/octet-stream" }),
     url: () =>
       URL.createObjectURL(
-        new Blob([buffer], { type: "application/octet-stream" })
+        new Blob([buffer], { type: "application/octet-stream" }),
       ),
   };
 };

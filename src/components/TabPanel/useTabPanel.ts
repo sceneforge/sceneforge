@@ -35,12 +35,12 @@ export const useTabPanel = () => {
               t.translation === tab.translation &&
               t.component === tab.component &&
               t.createdAt === tab.createdAt,
-          }))
+          })),
         );
         updateTitle(tab.title);
       };
     },
-    [updateTitle, setTabs]
+    [updateTitle, setTabs],
   );
 
   const newTab = useCallback(
@@ -48,9 +48,9 @@ export const useTabPanel = () => {
       I extends object = object,
       P extends TabProps<I> = TabProps<I>,
       C extends TabComponent<P> = TabComponent<P>,
-      T extends TabContext<P, C> = TabContext<P, C>
+      T extends TabContext<P, C> = TabContext<P, C>,
     >(
-      tab: T
+      tab: T,
     ) => {
       const createdAt = Date.now();
       // @TODO: Fix this type assertion
@@ -58,7 +58,7 @@ export const useTabPanel = () => {
       setTabs((prevTabs) => [...prevTabs, newTabContext]);
       activateTab(newTabContext)();
     },
-    [setTabs, activateTab]
+    [setTabs, activateTab],
   );
 
   const closeTab = useCallback(
@@ -80,7 +80,7 @@ export const useTabPanel = () => {
         });
       };
     },
-    [setTabs]
+    [setTabs],
   );
 
   const defaultTab = useMemo((): TabContext => {
@@ -106,21 +106,21 @@ export const useTabPanel = () => {
     (title: string) => {
       return tabs.find((tab) => tab.title === title);
     },
-    [tabs]
+    [tabs],
   );
 
   const getTabById = useCallback(
     (id: string) => {
       return tabs.find((tab) => tab.id === id);
     },
-    [tabs]
+    [tabs],
   );
 
   const getTabByComponent = useCallback(
     (component: TabComponent) => {
       return tabs.find((tab) => tab.component === component);
     },
-    [tabs]
+    [tabs],
   );
 
   const updateTabTitle = useCallback(
@@ -131,10 +131,10 @@ export const useTabPanel = () => {
             return { ...tab, title, translation };
           }
           return tab;
-        })
+        }),
       );
     },
-    [setTabs]
+    [setTabs],
   );
 
   const openTab = useCallback(
@@ -146,7 +146,7 @@ export const useTabPanel = () => {
         newTab(tabContext);
       }
     },
-    [getTabByComponent, activateTab, newTab]
+    [getTabByComponent, activateTab, newTab],
   );
 
   const activeTab = useMemo(() => {

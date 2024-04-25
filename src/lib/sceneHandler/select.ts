@@ -8,11 +8,12 @@ import { ExecuteCodeAction } from "@babylonjs/core/Actions/directActions";
 import { MeshSelectorControl } from "./MeshSelectorControl";
 import { MeshParentSelectorControl } from "./MeshParentSelectorControl";
 import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
+import { getActionEventAdditionalData } from "../getActionEventAdditionalData";
 
 type SelectEvent<T extends object = object> = (
   mesh: AbstractMesh,
   ev: ActionEvent,
-  extra: T
+  extra: T,
 ) => void | Promise<void>;
 
 type MeshSelectionEvents = {
@@ -23,7 +24,7 @@ type MeshSelectionEvents = {
 
 export const select = (
   rootMesh: AbstractMesh | undefined | null,
-  { onMeshSelect, onParentSelect, onHotspotSelect }: MeshSelectionEvents = {}
+  { onMeshSelect, onParentSelect, onHotspotSelect }: MeshSelectionEvents = {},
 ) => {
   if (!rootMesh) return;
   const scene = rootMesh.getScene();
@@ -39,7 +40,7 @@ export const select = (
   });
   const parentSelectedLayer = new MeshParentSelectorControl(
     "parentSelectedLayer",
-    scene
+    scene,
   );
 
   selectedLayer.highlight();
@@ -52,7 +53,7 @@ export const select = (
       tessellation: 32,
       sideOrientation: Mesh.DOUBLESIDE,
     },
-    scene
+    scene,
   );
 
   hotspotHover.isVisible = false;
@@ -81,18 +82,28 @@ export const select = (
           if (!meshUnderPointer || !(meshUnderPointer instanceof Mesh)) return;
           hoverLayer.removeMesh(meshUnderPointer);
 
+          const additionalData = getActionEventAdditionalData(ev);
+
           if (keyboardControl.controlPressed) {
-            if (ev.additionalData.hit && ev.additionalData.pickedPoint) {
-              hotspotHover.position = ev.additionalData.pickedPoint;
+            if (additionalData.hit && additionalData.pickedPoint) {
+              hotspotHover.position = additionalData.pickedPoint;
+
+              if (additionalData.faceId === undefined)
+                throw new Error("Face ID is undefined");
+
               const norm = meshUnderPointer.getFacetNormal(
-                ev.additionalData.faceId
+                additionalData.faceId,
               );
               hotspotHover.position.subtractInPlace(norm.scale(3));
               hotspotHover.isVisible = true;
               if (onHotspotSelect) {
                 onHotspotSelect(meshUnderPointer, ev, {
                   hotspot: hotspotHover,
-                });
+                })
+                  ?.then(() => {})
+                  ?.catch((err: unknown) => {
+                    throw new Error("Failed to select hotspot", { cause: err });
+                  });
               }
             }
             return;
@@ -101,15 +112,23 @@ export const select = (
           if (!keyboardControl.altPressed) {
             selectedLayer.addMesh(meshUnderPointer);
             if (onMeshSelect) {
-              onMeshSelect(meshUnderPointer, ev, {});
+              onMeshSelect(meshUnderPointer, ev, {})
+                ?.then(() => {})
+                ?.catch((err: unknown) => {
+                  throw new Error("Failed to select mesh", { cause: err });
+                });
             }
           } else {
             parentSelectedLayer.mesh = meshUnderPointer;
             if (onParentSelect) {
-              onParentSelect(meshUnderPointer, ev, {});
+              onParentSelect(meshUnderPointer, ev, {})
+                ?.then(() => {})
+                ?.catch((err: unknown) => {
+                  throw new Error("Failed to select parent", { cause: err });
+                });
             }
           }
-        })
+        }),
       );
       mesh.actionManager.registerAction(
         new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, (ev) => {
@@ -120,7 +139,7 @@ export const select = (
           if (parentSelectedLayer.mesh === meshUnderPointer) return;
 
           hoverLayer.addMesh(meshUnderPointer);
-        })
+        }),
       );
       mesh.actionManager.registerAction(
         new ExecuteCodeAction(ActionManager.OnPointerOutTrigger, (ev) => {
@@ -128,7 +147,7 @@ export const select = (
           if (!meshUnderPointer || !(meshUnderPointer instanceof Mesh)) return;
           if (!meshUnderPointer) return;
           hoverLayer.removeMesh(meshUnderPointer);
-        })
+        }),
       );
     }
   }

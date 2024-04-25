@@ -48,7 +48,7 @@ export const TabItem = ({
         <Button
           className={cls(
             "c-inherit b-none b-0 flex-grow p-block-3 p-inline-2 text-start text-nowrap text-ellipsis w-full h-full overflow-clip bg-transparent siblings:bg-transparent siblings:c-transparent aria-selected:bg-accent:65 siblings:aria-selected:bg-accent:65 siblings:aria-selected:c-light:25 siblings:hover:c-light:50",
-            tabsPosition === "top" ? "rounded-tl-2" : "rounded-bl-2"
+            tabsPosition === "top" ? "rounded-tl-2" : "rounded-bl-2",
           )}
           aria-controls={`tabpanel-${index}`}
           aria-label={tabTitle}
@@ -63,7 +63,7 @@ export const TabItem = ({
         <IconButton
           className={cls(
             "b-none b-0 flex-shrink p-block-3 p-inline-2 h-full hover:c-light:100 cursor-pointer",
-            tabsPosition === "top" ? "rounded-tr-2" : "rounded-br-2"
+            tabsPosition === "top" ? "rounded-tr-2" : "rounded-br-2",
           )}
           icon="close"
           label={t("TabPanel:TabItem.actions.closeButton")}
