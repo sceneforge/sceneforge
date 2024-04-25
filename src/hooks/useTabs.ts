@@ -26,11 +26,11 @@ export const useTabs = () => {
           !title && translation
             ? translation
             : !title && !translation
-            ? {
-                ns: "common",
-                key: "tabs.untitledMarkdown",
-              }
-            : undefined,
+              ? {
+                  ns: "common",
+                  key: "tabs.untitledMarkdown",
+                }
+              : undefined,
         props: {
           id,
           title,
@@ -38,11 +38,11 @@ export const useTabs = () => {
             !title && translation
               ? translation
               : !title && !translation
-              ? {
-                  ns: "common",
-                  key: "tabs.untitledMarkdown",
-                }
-              : undefined,
+                ? {
+                    ns: "common",
+                    key: "tabs.untitledMarkdown",
+                  }
+                : undefined,
           href,
           value,
         },
@@ -50,7 +50,7 @@ export const useTabs = () => {
         component: MarkdownTab,
       });
     },
-    [t, activateTab, getTabById, newTab]
+    [t, activateTab, getTabById, newTab],
   );
 
   const newModelViewTab = useCallback(
@@ -69,11 +69,11 @@ export const useTabs = () => {
         !title && translation
           ? translation
           : !title && !translation
-          ? {
-              ns: "common",
-              key: "tabs.untitledModel",
-            }
-          : undefined;
+            ? {
+                ns: "common",
+                key: "tabs.untitledModel",
+              }
+            : undefined;
 
       newTab<ModelViewTabProps>({
         id: withId,
@@ -89,7 +89,7 @@ export const useTabs = () => {
         component: ModelViewTab,
       });
     },
-    [t, newTab, getTabById, activateTab]
+    [t, newTab, getTabById, activateTab],
   );
 
   const closeModelViewTab = useCallback(
@@ -100,7 +100,7 @@ export const useTabs = () => {
         closeTab(tab)();
       }
     },
-    [closeTab, getTabById]
+    [closeTab, getTabById],
   );
 
   return {

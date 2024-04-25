@@ -12,7 +12,7 @@ export const useHemisphericLight = (sceneRef: RefObject<Nullable<Scene>>) => {
       lightRef.current = new HemisphericLight(
         "hemisphericLight",
         new Vector3(0, 1, 0),
-        sceneRef.current
+        sceneRef.current,
       );
     }
   }, [sceneRef, lightRef]);

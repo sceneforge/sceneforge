@@ -13,7 +13,7 @@ export type ModelViewerHeaderProps = {
   model?: Model;
   mode?: Mode;
   setMode?: Dispatch<Mode>;
-  onImported?: (model: Partial<Model>) => void;
+  onImported?: (model: Partial<Model>) => Promise<Model>;
 };
 
 export const ModelViewerHeader = ({
@@ -29,7 +29,7 @@ export const ModelViewerHeader = ({
       edit: t("modes.edit"),
       material: t("modes.material"),
     }),
-    [t]
+    [t],
   );
   const { updateModel } = useModelContext(model);
   const { updateTabTitle, activeTab } = useTabPanel();
@@ -37,10 +37,10 @@ export const ModelViewerHeader = ({
 
   const handleModeChange = useCallback(
     (newMode: Mode) => () => setMode?.(newMode),
-    [setMode]
+    [setMode],
   );
 
-  const handleImport = useCallback(async () => {
+  const doImport = useCallback(async () => {
     const result = await fileOpen({
       description: t("ModelViewerHeader.fileImportDescription"),
       mimeTypes: ["model/gltf-binary", "model/gltf+json"],
@@ -50,7 +50,7 @@ export const ModelViewerHeader = ({
     });
     const { blob } = await loadFile(result);
     if (onImported) {
-      onImported({
+      await onImported({
         id: model?.id,
         title: model?.title ?? t("ModelViewerHeader.untitled"),
         gltf: blob(),
@@ -60,8 +60,14 @@ export const ModelViewerHeader = ({
     }
   }, [model, onImported, t]);
 
+  const handleImport = useCallback(() => {
+    doImport().catch((err: unknown) => {
+      throw new Error("Failed to import model", { cause: err });
+    });
+  }, [doImport]);
+
   const handleModelNameChange = useCallback(
-    async (value: string) => {
+    async (value: string): Promise<void> => {
       if (model && model.id) {
         try {
           await updateModel(model.id, { title: value });
@@ -73,7 +79,7 @@ export const ModelViewerHeader = ({
         }
       }
     },
-    [model, updateModel, activeTab, updateTabTitle]
+    [model, updateModel, activeTab, updateTabTitle],
   );
 
   return (

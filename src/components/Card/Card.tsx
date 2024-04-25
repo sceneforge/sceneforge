@@ -34,7 +34,7 @@ export const Card = ({
       variant && variantBgClass[variant]
         ? variantBgClass[variant]!
         : "bg-primary",
-    [variant]
+    [variant],
   );
   return (
     <div className="relative h-full w-full animate-in overflow-clip rounded-5 c-inherit zoom-in-1/2 dark:bg-black light:bg-white">
@@ -42,7 +42,7 @@ export const Card = ({
         <span
           className={cls(
             "block font-size-4 p-block-3 p-inline-4 c-inherit text-start",
-            `${cardBgClass}:75`
+            `${cardBgClass}:75`,
           )}
         >
           {title}
@@ -68,7 +68,7 @@ export const Card = ({
         <div
           className={cls(
             "flex flex-row justify-stretch gap-2 p-3 c-inherit",
-            `${cardBgClass}:35`
+            `${cardBgClass}:35`,
           )}
         >
           {actions.map((props, index) => (

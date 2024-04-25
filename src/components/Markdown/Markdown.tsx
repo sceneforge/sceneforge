@@ -21,12 +21,23 @@ export const Markdown = ({ href, value, ...props }: MarkdownProps) => {
 
   useEffect(() => {
     if (i18nHref) {
-      fetch(i18nHref).then((response) => {
-        response.text().then((text) => {
-          setContentUrl(response.url);
-          setCurrentDoc(text);
+      fetch(i18nHref)
+        .then((response) => {
+          response
+            .text()
+            .then((text) => {
+              setContentUrl(response.url);
+              setCurrentDoc(text);
+            })
+            .catch((err: unknown) => {
+              throw new Error("Failed to get the fetched document content", {
+                cause: err,
+              });
+            });
+        })
+        .catch((err: unknown) => {
+          throw new Error("Failed to fetch document", { cause: err });
         });
-      });
     }
   }, [i18nHref, setCurrentDoc]);
 

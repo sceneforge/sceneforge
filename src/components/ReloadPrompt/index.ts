@@ -1,1 +1,1 @@
-export { ReloadPrompt } from './ReloadPrompt';
+export { ReloadPrompt } from "./ReloadPrompt";

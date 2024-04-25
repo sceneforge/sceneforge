@@ -5,7 +5,7 @@ export type PanelSheetHeaderProps = PropsWithChildren<{
   title: string;
   name: string;
   editable?: boolean;
-  onUpdate?: (value: string) => void;
+  onUpdate?: (value: string) => Promise<void> | void;
 }>;
 
 export const PanelSheetHeader = ({

@@ -18,7 +18,7 @@ export class KeyboardControl {
   constructor(scene: Scene) {
     this._scene = scene;
     this._observable = this._scene.onKeyboardObservable.add(
-      this._onKeyboardObservable
+      this._onKeyboardObservable,
     );
   }
 

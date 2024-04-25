@@ -18,7 +18,7 @@ export type ActionProps = (
 
 export const Action = forwardRef(function Action(
   { contentVariant, parentDropdown, clearDropdown, ...props }: ActionProps,
-  ref: ForwardedRef<ButtonComponent>
+  ref: ForwardedRef<ButtonComponent>,
 ) {
   if (props.items) {
     return (

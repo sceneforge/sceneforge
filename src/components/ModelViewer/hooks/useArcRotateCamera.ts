@@ -16,7 +16,7 @@ export const useArcRotateCamera = (sceneRef: RefObject<Nullable<Scene>>) => {
         0,
         10,
         Vector3.Zero(),
-        sceneRef.current
+        sceneRef.current,
       );
     }
   }, [sceneRef, cameraRef]);
@@ -30,7 +30,7 @@ export const useArcRotateCamera = (sceneRef: RefObject<Nullable<Scene>>) => {
   const attachControl = useCallback(() => {
     if (sceneRef.current && cameraRef.current) {
       cameraRef.current.attachControl(
-        sceneRef.current.getEngine().getRenderingCanvas()
+        sceneRef.current.getEngine().getRenderingCanvas(),
       );
     }
   }, [sceneRef, cameraRef]);

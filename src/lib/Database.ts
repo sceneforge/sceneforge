@@ -2,7 +2,7 @@ export type ObjectStores = Record<string, IDBObjectStoreParameters>;
 
 export class Database<
   Name extends string = string,
-  Store extends ObjectStores = ObjectStores
+  Store extends ObjectStores = ObjectStores,
 > {
   private _dbName: Name;
   private _factory: IDBOpenDBRequest;
@@ -76,7 +76,7 @@ export class Database<
           reject(
             new Error("Request error", {
               cause: request.error,
-            })
+            }),
           );
         }
       };
@@ -95,8 +95,8 @@ export class Database<
       request.onsuccess = () => {
         resolve(
           (request.result as Record<"value" | "key", unknown>[]).map(
-            (r) => r.value
-          )
+            (r) => r.value,
+          ),
         );
       };
 
@@ -107,7 +107,7 @@ export class Database<
           reject(
             new Error("Request error", {
               cause: request.error,
-            })
+            }),
           );
         }
       };
@@ -145,7 +145,7 @@ export class Database<
   public setLast<T = unknown>(
     store: string,
     key: string,
-    value: T
+    value: T,
   ): Promise<IDBValidKey> {
     if (this._ongoingSet && this._ready && this._db) {
       const transaction = this._db.transaction(store, "readwrite");
@@ -159,7 +159,7 @@ export class Database<
   public set<T = unknown>(
     store: string,
     key: string,
-    value: T
+    value: T,
   ): Promise<IDBValidKey> {
     this._ongoingSet = new Promise((resolve, reject) => {
       if (!this._db) {
@@ -181,7 +181,7 @@ export class Database<
           reject(
             new Error("Request error", {
               cause: request.error,
-            })
+            }),
           );
         }
       };
@@ -215,7 +215,7 @@ export class Database<
           reject(
             new Error("Request error", {
               cause: request.error,
-            })
+            }),
           );
         }
       };

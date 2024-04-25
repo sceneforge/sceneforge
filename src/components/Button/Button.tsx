@@ -78,7 +78,7 @@ export const Button = forwardRef(function Button(
     onToggle,
     ...props
   }: ButtonProps,
-  ref: ForwardedRef<ButtonComponent>
+  ref: ForwardedRef<ButtonComponent>,
 ) {
   const isPressed = useMemo(() => {
     if (pressed === true || pressed === "true") return true;
@@ -115,7 +115,7 @@ export const Button = forwardRef(function Button(
         }
       }
     },
-    [toggle, isPressed, onToggle, pressedState]
+    [toggle, isPressed, onToggle, pressedState],
   );
 
   useImperativeHandle(
@@ -129,7 +129,7 @@ export const Button = forwardRef(function Button(
         },
       };
     },
-    [buttonRef, pressedState, handleToggle]
+    [buttonRef, pressedState, handleToggle],
   );
 
   const handleClickEvent = useCallback(
@@ -137,7 +137,7 @@ export const Button = forwardRef(function Button(
       handleToggle(event);
       if (onClick) onClick(event);
     },
-    [handleToggle, onClick]
+    [handleToggle, onClick],
   );
 
   useEffect(() => {
@@ -164,26 +164,29 @@ export const Button = forwardRef(function Button(
         className
           ? className
           : clear
-          ? "bg-transparent c-inherit b-none b-0 cursor-pointer c-inherit m-0 p-0 inline-block"
-          : [
-              "text-center",
-              "p-inline-2",
-              "p-block-3",
-              "rounded-4",
-              "b-none",
-              "b-0",
-              "m-0",
-              "cursor-pointer",
-              grow ? "flex-grow" : null,
-              shrink ? "flex-shrink" : null,
-              ...(!inverted
-                ? [variantBgClass[currentVariant] ?? "bg-primary", "c-inherit"]
-                : [
-                    variantTextClass[currentVariant] ?? "c-inherit",
-                    "bg-transparent",
-                  ]),
-            ],
-        extendedClassName
+            ? "bg-transparent c-inherit b-none b-0 cursor-pointer c-inherit m-0 p-0 inline-block"
+            : [
+                "text-center",
+                "p-inline-2",
+                "p-block-3",
+                "rounded-4",
+                "b-none",
+                "b-0",
+                "m-0",
+                "cursor-pointer",
+                grow ? "flex-grow" : null,
+                shrink ? "flex-shrink" : null,
+                ...(!inverted
+                  ? [
+                      variantBgClass[currentVariant] ?? "bg-primary",
+                      "c-inherit",
+                    ]
+                  : [
+                      variantTextClass[currentVariant] ?? "c-inherit",
+                      "bg-transparent",
+                    ]),
+              ],
+        extendedClassName,
       )}
       data-size={size}
       type="button"

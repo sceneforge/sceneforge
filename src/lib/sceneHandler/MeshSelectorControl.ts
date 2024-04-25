@@ -19,7 +19,7 @@ export class MeshSelectorControl {
   constructor(
     name: string,
     scene?: Scene,
-    options?: MeshSelectorControlOptions
+    options?: MeshSelectorControlOptions,
   ) {
     this._name = name;
     if (scene) this._scene = scene;

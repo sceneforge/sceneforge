@@ -19,5 +19,5 @@ export const ModelViewTab = Tab(
         title={title ?? t("ModelViewTab.untitledModel")}
       />
     );
-  }
+  },
 );

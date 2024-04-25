@@ -1,8 +1,7 @@
-import { type BlockquoteProps } from "./Blockquote";
 import { Gallery } from "../Gallery";
-import { type PropsWithChildren } from "react";
+import { ReactNode, type PropsWithChildren } from "react";
 
-const filterEmptyLines = (child: string | JSX.Element) => {
+const filterEmptyLines = (child: unknown): unknown => {
   return (
     child &&
     (typeof child !== "string" ||
@@ -21,15 +20,53 @@ const blockTypeComponent: Record<
   GALLERY: Gallery,
 };
 
-export const parseBlock = (children: BlockquoteProps["children"]) => {
+const isParagraphElement = (
+  element: unknown,
+): element is {
+  props: Record<string, unknown>;
+  type: "p";
+  [key: string]: unknown;
+} => {
+  if (
+    element &&
+    typeof element === "object" &&
+    element !== null &&
+    !Array.isArray(element) &&
+    "type" in element &&
+    typeof element.type === "string" &&
+    element.type === "p"
+  )
+    return true;
+  return false;
+};
+
+const getParagraphChildren = (element: unknown): unknown => {
+  if (isParagraphElement(element)) {
+    if (
+      "props" in element &&
+      typeof element.props === "object" &&
+      element.props !== null
+    ) {
+      if ("children" in element.props) {
+        return element.props.children;
+      }
+    }
+  }
+  return [];
+};
+
+export const parseBlock = (
+  children: unknown,
+): {
+  Component: ((props: Record<string, unknown>) => JSX.Element) | null;
+  props: Record<string, unknown>;
+} => {
   if (Array.isArray(children)) {
-    const elements = children.filter(filterEmptyLines);
+    const elements: unknown[] = children.filter(filterEmptyLines);
     if (elements.length > 1) {
-      if (
-        elements[0].type === "p" &&
-        blockTypeRegExp.test(elements[0].props.children)
-      ) {
-        const result = blockTypeRegExp.exec(elements[0].props.children);
+      const children = getParagraphChildren(elements[0]);
+      if (typeof children === "string" && blockTypeRegExp.test(children)) {
+        const result = blockTypeRegExp.exec(children);
         if (
           result &&
           result.length === 2 &&
@@ -39,7 +76,7 @@ export const parseBlock = (children: BlockquoteProps["children"]) => {
           return {
             Component: blockTypeComponent[result[1]],
             props: {
-              children: elements.slice(1),
+              children: elements.slice(1) as ReactNode,
             },
           };
         }

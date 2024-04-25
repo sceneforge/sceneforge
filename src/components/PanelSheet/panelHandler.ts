@@ -6,7 +6,7 @@ export const changeSize = (
   panel: HTMLElement | null | undefined,
   orientation: "block" | "inline",
   position: "start" | "end",
-  { movementX, movementY }: Pick<MouseEvent, "movementX" | "movementY">
+  { movementX, movementY }: Pick<MouseEvent, "movementX" | "movementY">,
 ) => {
   if (!panel) return;
 
@@ -26,7 +26,7 @@ export const changeSize = (
 const elementInTarget = (
   element: HTMLElement,
   target: HTMLElement,
-  maxDepth: number
+  maxDepth: number,
 ): boolean => {
   if (element === target) return true;
   if (maxDepth <= 0) return false;
@@ -41,7 +41,7 @@ export const targetClicked = (
   position: "start" | "end",
   { target, offsetX, offsetY }: MouseEvent,
   pseudoElt?: string | null,
-  children?: boolean
+  children?: boolean,
 ) => {
   if (!panel) return false;
   if (!children && target !== panel) return false;

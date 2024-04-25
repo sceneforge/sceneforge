@@ -17,9 +17,9 @@ export const render = async () => {
 };
 
 export const withUserData = (
-  callback: (userData: Database<"UserData">) => void | Promise<void>
+  callback: (userData: Database<"UserData">) => void | Promise<void>,
 ) => callback(userData);
 
 export const withRoot = (
-  callback: (root: HTMLDivElement) => void | Promise<void>
+  callback: (root: HTMLDivElement) => void | Promise<void>,
 ) => callback(rootElement);

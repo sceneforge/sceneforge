@@ -12,7 +12,7 @@ export type InputListSelectProps = {
 
 export const InputListSelect = forwardRef(function InputListSelect(
   { id, name, defaultValue, value, onChange, options }: InputListSelectProps,
-  ref: ForwardedRef<HTMLSelectElement>
+  ref: ForwardedRef<HTMLSelectElement>,
 ) {
   return (
     <div className="relative">

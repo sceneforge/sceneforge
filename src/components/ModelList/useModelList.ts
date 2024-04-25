@@ -23,8 +23,14 @@ export const useModelList = ({ active }: UseModelListProps) => {
 
   useEffect(() => {
     if (!loaded && active) {
-      loadModels();
-      setLoaded(true);
+      loadModels()
+        .then(() => {
+          setLoaded(true);
+        })
+        .catch((err: unknown) => {
+          setLoaded(true);
+          throw new Error("Failed to load models", { cause: err });
+        });
     }
   }, [loaded, active, loadModels, setLoaded]);
 

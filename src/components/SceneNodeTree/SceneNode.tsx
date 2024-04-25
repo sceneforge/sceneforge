@@ -14,6 +14,7 @@ import {
   typeOf,
 } from "../../lib/sceneObject";
 import { Icon, type IconName } from "../Icon";
+import { getNodeChildren } from "../../lib/sceneObject/getNodeChildren";
 
 export type SceneNodeProps = {
   node: unknown;
@@ -47,16 +48,7 @@ export const SceneNode = ({
 
   const nodeHasChildren = useMemo(() => hasChildren(node), [node]);
 
-  const childrenNodes: unknown[] = (
-    open && nodeHasChildren && typeof node === "object" && node !== null
-      ? "getChildrenMeshes" in node &&
-        typeof node.getChildrenMeshes === "function"
-        ? node.getChildrenMeshes()
-        : "getChildren" in node && typeof node.getChildren === "function"
-        ? node.getChildren()
-        : []
-      : []
-  ).sort(compare);
+  const childrenNodes: unknown[] = getNodeChildren(node).sort(compare);
 
   const expandNode = useCallback(() => {
     if (!open) {
@@ -101,7 +93,7 @@ export const SceneNode = ({
         showNode();
       }
     },
-    [hideNode, showNode]
+    [hideNode, showNode],
   );
 
   useEffect(() => {

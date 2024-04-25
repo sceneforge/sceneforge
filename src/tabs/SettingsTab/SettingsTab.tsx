@@ -23,29 +23,53 @@ export const SettingsTab = Tab(() => {
   const { tabsPosition, setTabsPosition } = useTabPanel();
 
   const changeTabsPosition = useCallback(
-    (e: ChangeEvent<HTMLSelectElement>) => {
+    (e: ChangeEvent<HTMLSelectElement>): void => {
       if (e.target.value === "top" || e.target.value === "bottom") {
-        setUserData("settings", "tabs-position", e.target.value);
-        setTabsPosition(e.target.value);
+        const position = e.target.value;
+        setUserData("settings", "tabs-position", e.target.value)
+          .then(() => {
+            setTabsPosition(position);
+          })
+          .catch((err: unknown) => {
+            throw new Error("Failed to set tabs position", { cause: err });
+          });
       } else {
-        setUserData("settings", "tabs-position", "bottom");
-        setTabsPosition("bottom");
+        setUserData("settings", "tabs-position", "bottom")
+          .then(() => {
+            setTabsPosition("bottom");
+          })
+          .catch((err: unknown) => {
+            throw new Error("Failed to set tabs position", { cause: err });
+          });
       }
     },
-    [setTabsPosition, setUserData]
+    [setTabsPosition, setUserData],
   );
 
   const changeLanguage = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
       if (e.target.value) {
-        setUserData("settings", "language", e.target.value);
-        if (setResolvedLanguage) {
-          setResolvedLanguage(e.target.value);
-        }
-        i18n.changeLanguage(e.target.value);
+        const language = e.target.value;
+        setUserData("settings", "language", language)
+          .then(() => {
+            if (setResolvedLanguage) {
+              setResolvedLanguage(language);
+            }
+            i18n
+              .changeLanguage(language)
+              .then(() => {
+                i18n.dir(language);
+              })
+              .catch((err: unknown) => {
+                throw new Error("Failed to change language", { cause: err });
+              });
+          })
+          .catch((err: unknown) => {
+            throw new Error("Failed to set language", { cause: err });
+          });
       }
     },
-    [setUserData, setResolvedLanguage, i18n]
+    [setUserData, setResolvedLanguage, i18n],
   );
 
   useEffect(() => {

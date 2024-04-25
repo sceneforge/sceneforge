@@ -26,7 +26,7 @@ export const useAppInstall = () => {
       }
       setShowInstall(true);
     },
-    [setShowInstall, setBeforeInstallPromptEvent]
+    [setShowInstall, setBeforeInstallPromptEvent],
   );
 
   useEffect(() => {

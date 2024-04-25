@@ -6,4 +6,4 @@ export const id = (node: unknown): string => {
     return "Unknown Node Object";
   }
   return "Unknown Node Object";
-}
+};

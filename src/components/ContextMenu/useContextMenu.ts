@@ -84,23 +84,23 @@ export const useContextMenu = () => {
       setContextMenuVariant,
       setContextMenuItems,
       setShowContextMenu,
-    ]
+    ],
   );
 
   const handleContextMenu = useCallback(
     ({
-        header,
-        variant,
-        items,
-      }: {
-        header?: string;
-        variant?: Variant;
-        items?: MenuItem[];
-      }) =>
+      header,
+      variant,
+      items,
+    }: {
+      header?: string;
+      variant?: Variant;
+      items?: MenuItem[];
+    }) =>
       (event: MouseEvent<HTMLElement>) => {
         openContextMenu({ event, header, variant, items });
       },
-    [openContextMenu]
+    [openContextMenu],
   );
 
   const setPosition = useCallback(
@@ -109,7 +109,7 @@ export const useContextMenu = () => {
         setPositionOnPointer(ref.current, contextMenuEvent);
       }
     },
-    [contextMenuEvent]
+    [contextMenuEvent],
   );
 
   const handleItemClick = useCallback(
@@ -121,7 +121,7 @@ export const useContextMenu = () => {
         }
       };
     },
-    [clearContextMenu]
+    [clearContextMenu],
   );
 
   return {

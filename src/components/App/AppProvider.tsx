@@ -49,7 +49,7 @@ export const AppProvider = ({
   } = useTranslation();
 
   const [resolvedLanguage, setResolvedLanguage] = useState<string | undefined>(
-    i18nResolvedLanguage
+    i18nResolvedLanguage,
   );
   const [dir, setDir] = useState<string | undefined>(i18nDir());
   const name = import.meta.env.VITE_APP_NAME ?? "";

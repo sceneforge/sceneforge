@@ -22,7 +22,7 @@ export const InputListItem = forwardRef(function InputListItem(
     value,
     options,
   }: InputListItemProps,
-  ref: ForwardedRef<HTMLInputElement | HTMLSelectElement>
+  ref: ForwardedRef<HTMLInputElement | HTMLSelectElement>,
 ) {
   const genId = useId();
   const inputId = id ?? genId;
