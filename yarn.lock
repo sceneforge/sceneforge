@@ -3007,7 +3007,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^20.11.26":
+"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^20.12.7":
   version: 20.12.7
   resolution: "@types/node@npm:20.12.7"
   dependencies:
@@ -10371,7 +10371,7 @@ __metadata:
     "@types/i18next": "npm:^13.0.0"
     "@types/i18next-browser-languagedetector": "npm:^3.0.0"
     "@types/jest": "npm:^29.5.12"
-    "@types/node": "npm:^20.11.26"
+    "@types/node": "npm:^20.12.7"
     "@types/react": "npm:^18.2.56"
     "@types/react-dom": "npm:^18.2.19"
     "@types/react-i18next": "npm:^8.1.0"

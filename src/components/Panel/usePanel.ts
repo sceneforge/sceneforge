@@ -1,5 +1,13 @@
-import { useCallback, useContext } from "react";
+import {
+  type ChangeEvent,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import { PanelContext } from "./PanelProvider";
+import { useAppContext } from "../App";
+import { useTranslation } from "react-i18next";
 
 export const usePanel = () => {
   const {
@@ -9,12 +17,16 @@ export const usePanel = () => {
     sidePanelShow,
     sidePanelContent,
     overlayVisible,
+    showWelcome,
+    userData,
     setAppTitle,
     setMenuShow,
     setSidePanelShow,
     setSidePanelContent,
-    userData,
   } = useContext(PanelContext);
+  const { t, i18n } = useTranslation();
+  const { setResolvedLanguage, languages, resolvedLanguage } = useAppContext();
+  const [showWelcomeState, setShowWelcomeState] = useState(showWelcome);
 
   const getUserData = useCallback(
     (
@@ -92,6 +104,57 @@ export const usePanel = () => {
     [defaultAppTitle, setAppTitle],
   );
 
+  const changeLanguage = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      if (e.target.value) {
+        const language = e.target.value;
+        setUserData("settings", "language", language)
+          .then(() => {
+            if (setResolvedLanguage) {
+              setResolvedLanguage(language);
+            }
+            i18n
+              .changeLanguage(language)
+              .then(() => {
+                i18n.dir(language);
+              })
+              .catch((err: unknown) => {
+                throw new Error("Failed to change language", { cause: err });
+              });
+          })
+          .catch((err: unknown) => {
+            throw new Error("Failed to set language", { cause: err });
+          });
+      }
+    },
+    [setUserData, setResolvedLanguage, i18n],
+  );
+
+  const languageList = useMemo(() => {
+    return languages?.map((locale) => ({
+      local: t(`locales.${locale}`, {
+        ns: "common",
+        defaultValue: locale,
+        lng: locale,
+      }),
+      translated: t(`locales.${locale}`, {
+        ns: "common",
+        defaultValue: locale,
+      }),
+      locale,
+    }));
+  }, [languages, resolvedLanguage, t]);
+
+  const changeShowWelcome = useCallback(
+    (show: boolean) => {
+      setUserData("settings", "welcome", show).catch((err: unknown) => {
+        throw new Error("Failed to set welcome setting", { cause: err });
+      });
+      setShowWelcomeState(show);
+    },
+    [setUserData],
+  );
+
   return {
     defaultAppTitle,
     appTitle,
@@ -108,5 +171,9 @@ export const usePanel = () => {
     getAllUserData,
     setUserData,
     removeUserData,
+    changeLanguage,
+    languageList,
+    showWelcomeState,
+    changeShowWelcome,
   };
 };

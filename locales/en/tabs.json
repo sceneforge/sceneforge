@@ -10,7 +10,8 @@
     "sections": {
       "general": {
         "title": "General",
-        "languageLabel": "Language"
+        "languageLabel": "Language",
+        "showWelcomeLabel": "Show Welcome on startup"
       },
       "tabs": {
         "title": "Tabs",

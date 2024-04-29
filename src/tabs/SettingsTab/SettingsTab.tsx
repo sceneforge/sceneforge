@@ -1,4 +1,4 @@
-import { useCallback, useEffect, type ChangeEvent } from "react";
+import { useCallback, useEffect, useState, type ChangeEvent } from "react";
 import { Card } from "../../components/Card";
 import { InputList, InputListItem } from "../../components/InputList";
 import { usePanel } from "../../components/Panel";
@@ -9,18 +9,17 @@ import { useAppContext } from "../../components/App";
 import { useTranslation } from "react-i18next";
 
 export const SettingsTab = Tab(() => {
-  const { t, i18n } = useTranslation("tabs");
+  const { t } = useTranslation("tabs");
+  const { name, description, version, dev, resolvedLanguage } = useAppContext();
   const {
-    name,
-    description,
-    version,
-    dev,
-    resolvedLanguage,
-    setResolvedLanguage,
-    languages,
-  } = useAppContext();
-  const { getUserData, setUserData } = usePanel();
+    getUserData,
+    setUserData,
+    changeLanguage,
+    languageList,
+    changeShowWelcome,
+  } = usePanel();
   const { tabsPosition, setTabsPosition } = useTabPanel();
+  const [showWelcome, setShowWelcome] = useState(true);
 
   const changeTabsPosition = useCallback(
     (e: ChangeEvent<HTMLSelectElement>): void => {
@@ -46,30 +45,12 @@ export const SettingsTab = Tab(() => {
     [setTabsPosition, setUserData],
   );
 
-  const changeLanguage = useCallback(
-    (e: ChangeEvent<HTMLSelectElement>) => {
-      if (e.target.value) {
-        const language = e.target.value;
-        setUserData("settings", "language", language)
-          .then(() => {
-            if (setResolvedLanguage) {
-              setResolvedLanguage(language);
-            }
-            i18n
-              .changeLanguage(language)
-              .then(() => {
-                i18n.dir(language);
-              })
-              .catch((err: unknown) => {
-                throw new Error("Failed to change language", { cause: err });
-              });
-          })
-          .catch((err: unknown) => {
-            throw new Error("Failed to set language", { cause: err });
-          });
-      }
+  const changeShowWelcomeStartup = useCallback(
+    (ev: ChangeEvent<HTMLInputElement>) => {
+      changeShowWelcome(ev.target.checked);
+      setShowWelcome(ev.target.checked);
     },
-    [setUserData, setResolvedLanguage, i18n],
+    [],
   );
 
   useEffect(() => {
@@ -83,6 +64,18 @@ export const SettingsTab = Tab(() => {
     });
   }, [getUserData, setTabsPosition]);
 
+  useEffect(() => {
+    getUserData("settings", "welcome", (show) => {
+      if (show && typeof show === "boolean") {
+        setShowWelcome(show);
+      } else if (typeof show === "undefined") {
+        setShowWelcome(true);
+      } else {
+        setShowWelcome(false);
+      }
+    });
+  }, [getUserData, setShowWelcome]);
+
   return (
     <SafeArea vertical horizonal>
       <Section level={1} title={t("SettingsTab.title")}>
@@ -94,23 +87,20 @@ export const SettingsTab = Tab(() => {
               type="select"
               value={resolvedLanguage}
               options={
-                languages?.map((locale) => ({
+                languageList?.map(({ local, translated, locale }) => ({
                   text:
-                    t(`locales.${locale}`, {
-                      ns: "common",
-                      defaultValue: locale,
-                      lng: locale,
-                    }) +
-                    (resolvedLanguage !== locale
-                      ? ` (${t(`locales.${locale}`, {
-                          ns: "common",
-                          defaultValue: locale,
-                        })})`
-                      : ""),
+                    local !== translated ? `${local} (${translated})` : local,
                   value: locale,
-                })) ?? []
+                })) || []
               }
               onChange={changeLanguage}
+            />
+            <InputListItem
+              label={t("SettingsTab.sections.general.showWelcomeLabel")}
+              name="show-welcome"
+              type="checkbox"
+              checked={showWelcome}
+              onChange={changeShowWelcomeStartup}
             />
           </InputList>
         </Card>

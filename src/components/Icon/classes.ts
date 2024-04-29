@@ -28,6 +28,7 @@ export const classes = {
   uploadFile: "i-material-symbols:upload-file",
   visibility: "i-material-symbols:visibility",
   visibilityOff: "i-material-symbols:visibility-off",
+  globe: "i-material-symbols:globe",
 } as const;
 
 export type IconName = keyof typeof classes;

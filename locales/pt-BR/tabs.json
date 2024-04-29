@@ -10,7 +10,8 @@
     "sections": {
       "general": {
         "title": "Geral",
-        "languageLabel": "Idioma"
+        "languageLabel": "Idioma",
+        "showWelcomeLabel": "Mostrar tela de boas-vindas ao iniciar"
       },
       "tabs": {
         "title": "Abas",

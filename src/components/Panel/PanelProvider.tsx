@@ -11,6 +11,7 @@ import {
 } from "react";
 import { type Database } from "../../lib/Database";
 import { ReloadPrompt } from "../ReloadPrompt";
+import { Welcome } from "../Welcome";
 
 type EventListenerCallback = (
   type: string,
@@ -42,12 +43,15 @@ export interface PanelContextType {
   sidePanelContent?: ReactNode;
   setSidePanelContent?: Dispatch<SetStateAction<ReactNode>>;
   userData?: Database<"UserData">;
+  showWelcome?: boolean;
+  setShowWelcome?: Dispatch<SetStateAction<boolean>>;
 }
 
 export const PanelContext = createContext<PanelContextType>({
   overlayVisible: isOverlayVisible(),
   menuShow: false,
   sidePanelShow: false,
+  showWelcome: false,
 });
 
 export type PanelProviderProps = PropsWithChildren<{
@@ -64,6 +68,7 @@ export const PanelProvider = ({
   const [menuShow, setMenuShow] = useState(false);
   const [sidePanelShow, setSidePanelShow] = useState(false);
   const [sidePanelContent, setSidePanelContent] = useState<ReactNode>();
+  const [showWelcome, setShowWelcome] = useState(false);
 
   const windowControlsOverlayRef = useRef<WindowControlsOverlay | null>(null);
   const [overlayVisible, setOverlayVisible] =
@@ -103,6 +108,17 @@ export const PanelProvider = ({
     };
   }, [appTitle, updateOverlayVisibility, windowControlsOverlayRef]);
 
+  useEffect(() => {
+    userData
+      .get("settings", "welcome")
+      .then((value) => {
+        setShowWelcome(value === undefined || value === true);
+      })
+      .catch((err) => {
+        throw new Error("Failed to get welcome setting", { cause: err });
+      });
+  }, [userData, setShowWelcome]);
+
   return (
     <PanelContext.Provider
       value={{
@@ -117,9 +133,12 @@ export const PanelProvider = ({
         sidePanelContent,
         setSidePanelContent,
         userData,
+        showWelcome,
+        setShowWelcome,
       }}
     >
       {children}
+      {showWelcome && <Welcome />}
       <ReloadPrompt />
     </PanelContext.Provider>
   );

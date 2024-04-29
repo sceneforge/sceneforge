@@ -10,7 +10,8 @@
     "sections": {
       "general": {
         "title": "General",
-        "languageLabel": "Idioma"
+        "languageLabel": "Idioma",
+        "showWelcomeLabel": "Mostrar mensaje de saludo al inicio"
       },
       "tabs": {
         "title": "Pestañas",

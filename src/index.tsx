@@ -1,4 +1,4 @@
-import { render, withRoot } from "./root";
+import { render, withRoot, withUserData } from "./root";
 import "@unocss/reset/sanitize/sanitize.css";
 import "@unocss/reset/sanitize/assets.css";
 import "virtual:uno.css";
@@ -6,6 +6,17 @@ import "virtual:unocss-devtools";
 import "./styles/window-overlay.css";
 
 render()
+  .then(() => {
+    return withUserData(async (userData) => {
+      if (userData) {
+        const value = await userData.get("settings", "welcome");
+        if (value === undefined) {
+          await userData.set("settings", "welcome", true);
+          return;
+        }
+      }
+    });
+  })
   .then(() => {
     return withRoot((root) => {
       root.classList.add(
