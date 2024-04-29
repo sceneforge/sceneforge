@@ -48,7 +48,8 @@ export const SceneNode = ({
 
   const nodeHasChildren = useMemo(() => hasChildren(node), [node]);
 
-  const childrenNodes: unknown[] = getNodeChildren(node).sort(compare);
+  const childrenNodes: unknown[] =
+    open && nodeHasChildren ? getNodeChildren(node).sort(compare) : [];
 
   const expandNode = useCallback(() => {
     if (!open) {
