@@ -31,12 +31,12 @@
     "postinstall": "husky"
   },
   "dependencies": {
-    "@babylonjs/core": "^7.3.2",
-    "@babylonjs/loaders": "^7.3.2",
-    "@babylonjs/materials": "^7.3.2",
+    "@babylonjs/core": "^7.4.0",
+    "@babylonjs/loaders": "^7.4.0",
+    "@babylonjs/materials": "^7.4.0",
     "@simplecomponent/markdown": "^0.0.2",
     "@unocss/reset": "^0.59.4",
-    "babylonjs-gltf2interface": "^7.3.2",
+    "babylonjs-gltf2interface": "^7.4.0",
     "browser-fs-access": "^0.35.0",
     "i18next": "^23.11.1",
     "i18next-browser-languagedetector": "^7.2.1",
