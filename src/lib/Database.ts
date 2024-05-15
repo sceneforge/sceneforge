@@ -12,9 +12,9 @@ export class Database<
 
   public static SupportIndexedDB() {
     return (
-      "indexedDB" in window &&
-      "IDBFactory" in window &&
-      window.indexedDB instanceof window.IDBFactory
+      "indexedDB" in self &&
+      "IDBFactory" in self &&
+      self.indexedDB instanceof self.IDBFactory
     );
   }
 
@@ -25,7 +25,7 @@ export class Database<
 
     this._dbName = dbName;
 
-    this._factory = window.indexedDB.open(this._dbName, undefined);
+    this._factory = self.indexedDB.open(this._dbName, undefined);
     this._factory.onupgradeneeded = (event) => {
       if (event.target instanceof IDBOpenDBRequest) {
         const db = event.target.result;

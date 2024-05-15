@@ -53,7 +53,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
         injectManifest: {
           sourcemap: "inline",
           maximumFileSizeToCacheInBytes: 40 * 1024 * 1024, // 40MB
-          globPatterns: ["**/*.{js,css,html,png,svg,jpg,ico,gif}"],
+          globPatterns: ["**/*.{js,css,html,png,svg,jpg,ico,gif,md,json}"],
         },
         manifest: {
           dir: "ltr",
