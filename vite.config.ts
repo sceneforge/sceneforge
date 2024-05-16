@@ -58,10 +58,6 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
         manifest: {
           dir: "ltr",
           lang: "en",
-          id: isProd() ? "https://sceneforge.org/" : undefined,
-          scope: isProd()
-            ? "https://sceneforge.org/"
-            : "http://localhost:9000/",
           name: metaEnv.VITE_APP_NAME,
           short_name: metaEnv.VITE_APP_NAME,
           description: metaEnv.VITE_APP_DESCRIPTION,
@@ -73,10 +69,23 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
           ],
           file_handlers: [
             {
-              action: isProd() ? "https://sceneforge.org/" : "/",
+              action: "/index.html#!action=new-tab&tab=new-scene",
               accept: {
                 "application/json": [".scfg", ".sceneforge"],
               },
+              // icons: [
+              //   {
+              //     src: "icons/file-512x740.png",
+              //     sizes: "512x740",
+              //     type: "image/png",
+              //   },
+              //   {
+              //     src: "icons/file-256x370.png",
+              //     sizes: "256x370",
+              //     type: "image/png",
+              //   },
+              // ],
+              // launch_type: "single-client",
             },
           ],
           display: "standalone",
@@ -86,6 +95,12 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
           edge_side_panel: {
             preferred_width: 480,
           },
+          protocol_handlers: [
+            {
+              protocol: "sceneforge",
+              url: "/index.html#!%s",
+            },
+          ],
           handle_links: "preferred",
           categories: [
             "productivity",
@@ -216,15 +231,26 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
               platform: "ios",
             },
           ],
-          related_applications: [
-            {
-              platform: "webapp",
-              url: isProd()
-                ? "https://sceneforge.org/manifest.webmanifest"
-                : "http://localhost:9000/manifest.webmanifest",
-            },
-          ],
+
           prefer_related_applications: true,
+          ...(isProd()
+            ? {
+                id: "https://sceneforge.org/",
+                scope: "https://sceneforge.org/",
+                related_applications: [
+                  {
+                    platform: "webapp",
+                    url: "https://sceneforge.org/manifest.webmanifest",
+                  },
+                ],
+                scope_extensions: [
+                  { origin: "*.sceneforge.org" },
+                  { origin: "sceneforge.org" },
+                ],
+              }
+            : {
+                scope: "/",
+              }),
         },
       }),
       VitePluginBrowserSync({
