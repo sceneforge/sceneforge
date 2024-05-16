@@ -3,6 +3,7 @@ import { Carousel } from "../Carousel";
 import { HeroIconButton } from "../HeroIconButton";
 import { useModelList } from "./useModelList";
 import { ModelListItem } from "./ModelListItem";
+import { useShortcuts } from "../../hooks/useShortcuts";
 
 export type ModelListProps = {
   active?: boolean;
@@ -10,7 +11,8 @@ export type ModelListProps = {
 
 export const ModelList = ({ active }: ModelListProps) => {
   const { t } = useTranslation("ModelList");
-  const { models, openNewModel } = useModelList({ active });
+  const { models } = useModelList({ active });
+  const { newTabScene } = useShortcuts();
 
   return (
     <Carousel title={t("title")}>
@@ -21,7 +23,7 @@ export const ModelList = ({ active }: ModelListProps) => {
         icon="add"
         label={t("actions.newButton")}
         variant="accent"
-        onClick={openNewModel}
+        onClick={newTabScene}
       />
     </Carousel>
   );

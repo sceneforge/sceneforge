@@ -48,7 +48,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
         devOptions: {
           enabled: true,
           type: "module",
-          navigateFallback: "index.html",
+          navigateFallback: "/",
         },
         injectManifest: {
           sourcemap: "inline",
@@ -58,14 +58,14 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
         manifest: {
           dir: "ltr",
           lang: "en",
-          id: "https://sceneforge.org/",
-          scope: isProd() ? "https://sceneforge.org/" : "/",
+          id: isProd() ? "https://sceneforge.org/" : undefined,
+          scope: isProd()
+            ? "https://sceneforge.org/"
+            : "http://localhost:9000/",
           name: metaEnv.VITE_APP_NAME,
           short_name: metaEnv.VITE_APP_NAME,
           description: metaEnv.VITE_APP_DESCRIPTION,
-          start_url: isProd()
-            ? "https://sceneforge.org/index.html"
-            : "/index.html",
+          start_url: "/",
           display_override: [
             "window-controls-overlay",
             "fullscreen",
@@ -73,18 +73,20 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
           ],
           file_handlers: [
             {
-              action: isProd()
-                ? "https://sceneforge.org/index.html#file"
-                : "/index.html#file",
+              action: isProd() ? "https://sceneforge.org/" : "/",
               accept: {
                 "application/json": [".scfg", ".sceneforge"],
               },
             },
           ],
           display: "standalone",
-          orientation: "landscape",
+          orientation: "natural",
           background_color: "#86159d",
           theme_color: "#86159d",
+          edge_side_panel: {
+            preferred_width: 480,
+          },
+          handle_links: "preferred",
           categories: [
             "productivity",
             "utilities",
@@ -92,13 +94,63 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
             "entertainment",
           ],
           launch_handler: {
-            client_mode: ["focus-existing", "auto"],
+            client_mode: ["focus-existing", "navigate-existing", "auto"],
           },
+          shortcuts: [
+            {
+              name: "New Scene",
+              short_name: "New",
+              url: "/index.html#!action=new-tab&tab=new-scene",
+              description: "Create a new scene",
+              icons: [
+                {
+                  src: "icons/shortcut-icon-deployed-code.png",
+                  sizes: "96x96",
+                  type: "image/png",
+                  purpose: "any",
+                },
+              ],
+            },
+            {
+              name: "Settings",
+              short_name: "Settings",
+              url: "/index.html#!action=open-tab&tab=settings",
+              description: "Open the settings",
+              icons: [
+                {
+                  src: "icons/shortcut-icon-settings.png",
+                  sizes: "96x96",
+                  type: "image/png",
+                  purpose: "any",
+                },
+              ],
+            },
+            {
+              name: "About Scene Forge",
+              short_name: "About",
+              url: "/index.html#!action=open-tab&tab=about",
+              description: "About Scene Forge",
+              icons: [
+                {
+                  src: "icons/shortcut-icon-info.png",
+                  sizes: "96x96",
+                  type: "image/png",
+                  purpose: "any",
+                },
+              ],
+            },
+          ],
           icons: [
             {
               src: "icons/favicon.ico",
               sizes: "48x48",
               type: "image/x-icon",
+              purpose: "any",
+            },
+            {
+              src: "icons/512.png",
+              sizes: "512x512",
+              type: "image/png",
               purpose: "any",
             },
             {
@@ -108,22 +160,22 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
               purpose: "maskable",
             },
             {
-              src: "icons/1024.webp",
-              sizes: "1024x1024",
-              type: "image/webp",
-              purpose: "maskable",
-            },
-            {
               src: "icons/icon.svg",
               sizes: "any",
               type: "image/svg+xml",
               purpose: "any",
             },
             {
+              src: "icons/monochrome-512.png",
+              sizes: "512x512",
+              type: "image/png",
+              purpose: "monochrome",
+            },
+            {
               src: "icons/monochrome-1024.png",
               sizes: "1024x1024",
               type: "image/png",
-              purpose: "monochrome",
+              purpose: "maskable monochrome",
             },
             {
               src: "icons/favicon-16x16.png",

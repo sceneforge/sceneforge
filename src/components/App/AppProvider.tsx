@@ -11,6 +11,7 @@ import { PanelProvider, type PanelProviderProps } from "../Panel";
 import { TabPanelProvider, type TabComponent } from "../TabPanel";
 import { AppInstallProvider } from "../AppInstall";
 import { useTranslation } from "react-i18next";
+import { AppShortcuts } from "./AppShortcuts";
 
 export type AppProviderProps = PropsWithChildren<{
   userData: PanelProviderProps["userData"];
@@ -93,6 +94,7 @@ export const AppProvider = ({
                 }
               >
                 {children}
+                <AppShortcuts />
               </TabPanelProvider>
             </ContextMenuProvider>
           </ModelContextProvider>

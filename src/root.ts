@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import { App } from "./components/App";
 import { createRoot } from "react-dom/client";
 import { Database } from "./lib/Database";
@@ -12,7 +13,7 @@ const userData = new Database("UserData", UserDataStores);
 
 export const render = async () => {
   const { languages } = await i18nInit();
-  root.render(<App userData={userData} languages={languages} />);
+  root.render(createElement(App, { userData, languages }));
   return root;
 };
 

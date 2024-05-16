@@ -1,17 +1,14 @@
-import { useTabs } from "../../hooks/useTabs";
-import { SettingsTab } from "../../tabs";
 import { usePanel } from "../Panel";
-import { useTabPanel } from "../TabPanel";
 import { Topbar } from "../Topbar";
 import { ToolbarProps } from "../Toolbar";
 import { useAppInstall } from "../AppInstall";
 import { useTranslation } from "react-i18next";
+import { useShortcuts } from "../../hooks/useShortcuts";
 
 export const AppNav = () => {
   const { t } = useTranslation("App");
   const { appTitle } = usePanel();
-  const { openTab, defaultTab } = useTabPanel();
-  const { newMarkdownTab } = useTabs();
+  const { openTabHome, openTabAbout, openTabSettings } = useShortcuts();
   const { showInstall, openInstallDialog, animateInstallButton } =
     useAppInstall();
 
@@ -21,30 +18,17 @@ export const AppNav = () => {
       {
         type: "item",
         label: t("AppNav.toolbarEnd.homeButton"),
-        onClick: openTab(defaultTab),
+        onClick: openTabHome,
       },
       {
         type: "item",
         label: t("AppNav.toolbarEnd.aboutButton"),
-        onClick: () => {
-          newMarkdownTab({
-            id: "about",
-            title: t("AppNav.toolbarEnd.aboutTabTitle"),
-            translation: { ns: "App", key: "AppNav.toolbarEnd.aboutTabTitle" },
-            href: "/docs/about.md",
-          });
-        },
+        onClick: openTabAbout,
       },
       {
         type: "item",
         label: t("AppNav.toolbarEnd.settingsButton"),
-        onClick: openTab({
-          id: "settings",
-          title: t("AppNav.toolbarEnd.settingsTabTitle"),
-          translation: { ns: "App", key: "AppNav.toolbarEnd.settingsTabTitle" },
-          active: true,
-          component: SettingsTab,
-        }),
+        onClick: openTabSettings,
       },
     ],
   };

@@ -1,5 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
-import { useTabs } from "../../hooks/useTabs";
+import { useState, useEffect } from "react";
 import { useModelContext } from "../ModelContext";
 
 export type UseModelListProps = {
@@ -9,11 +8,6 @@ export type UseModelListProps = {
 export const useModelList = ({ active }: UseModelListProps) => {
   const [loaded, setLoaded] = useState(false);
   const { models, loadModels } = useModelContext();
-  const { newModelViewTab } = useTabs();
-
-  const openNewModel = useCallback(() => {
-    newModelViewTab({});
-  }, [newModelViewTab]);
 
   useEffect(() => {
     if (!active) {
@@ -36,6 +30,5 @@ export const useModelList = ({ active }: UseModelListProps) => {
 
   return {
     models,
-    openNewModel,
   };
 };
