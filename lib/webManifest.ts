@@ -186,6 +186,7 @@ export const webManifest = ({
               {
                 platform: "webapp",
                 url: "https://sceneforge.org/manifest.webmanifest",
+                id: "https://sceneforge.org/",
               },
             ],
           }
