@@ -188,10 +188,6 @@ export const webManifest = ({
                 url: "https://sceneforge.org/manifest.webmanifest",
               },
             ],
-            scope_extensions: [
-              { origin: "*.sceneforge.org" },
-              { origin: "sceneforge.org" },
-            ],
           }
         : {
             scope: "/",
