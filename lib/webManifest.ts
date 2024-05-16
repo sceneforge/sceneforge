@@ -48,7 +48,7 @@ export const webManifest = ({
       },
       protocol_handlers: [
         {
-          protocol: "sceneforge",
+          protocol: "web+sceneforge",
           url: "/index.html#!%s",
         },
       ],
