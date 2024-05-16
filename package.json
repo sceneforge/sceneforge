@@ -91,7 +91,7 @@
     "vite-plugin-browser-sync": "^3.0.1",
     "vite-plugin-i18next-loader": "^2.0.12",
     "vite-plugin-meta-env": "^1.0.2",
-    "vite-plugin-pwa": "^0.19.2",
+    "vite-plugin-pwa": "^0.20.0",
     "workbox-precaching": "^7.0.0",
     "workbox-window": "^7.0.0"
   },
@@ -99,5 +99,5 @@
     "node": ">=21.7.1 < 22",
     "yarn": ">=4.1.1 < 5"
   },
-  "packageManager": "yarn@4.1.1"
+  "packageManager": "yarn@4.2.2"
 }
