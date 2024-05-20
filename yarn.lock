@@ -3433,10 +3433,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unocss/reset@npm:0.60.2, @unocss/reset@npm:^0.60.2":
+"@unocss/reset@npm:0.60.2":
   version: 0.60.2
   resolution: "@unocss/reset@npm:0.60.2"
   checksum: 10c0/9af31cd404c68cdb90845d90eb0a709b67c218ba2ab48dae5b9dc2bcde276ea2c086ef6a965f59d8cce44b959e15c7b7b79aae34dd0525355e17fb513fa72774
+  languageName: node
+  linkType: hard
+
+"@unocss/reset@npm:^0.60.2":
+  version: 0.60.3
+  resolution: "@unocss/reset@npm:0.60.3"
+  checksum: 10c0/735f91e5730153e5ab00ce4d0dc4ce1ca146740933f559e88cd207f810630ef83e7a17b8a683ed2add93a1b73de9ef40c82b07ebeeeafdfd12b592533f9c7019
   languageName: node
   linkType: hard
 
