@@ -7,14 +7,15 @@ import UnoCSS from "unocss/vite";
 import i18nextLoader from "vite-plugin-i18next-loader";
 import { webManifest } from "./lib/webManifest";
 
+const DEFAULT_DEV_PORT = 9000;
+
 export default defineConfig(async ({ command, mode, isPreview }) => {
   const { description, version, author, repository, keywords } = await import(
     "./package.json"
   );
 
-  const isDev = () => command === "serve" || mode === "development";
-  const isProd = () =>
-    command === "build" && mode === "production" && !isPreview;
+  const isDev = command === "serve" || mode === "development";
+  const isProd = command === "build" && mode === "production" && !isPreview;
 
   const metaEnv = {
     VITE_APP_BASE_PATH: "/",
@@ -23,11 +24,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
     VITE_APP_AUTHOR: author.name,
     VITE_APP_REPOSITORY: repository.url,
     VITE_APP_KEYWORDS: keywords.join(", "),
-    VITE_APP_VERSION: isProd()
-      ? version
-      : isDev()
-        ? `dev-${version}`
-        : "unknown",
+    VITE_APP_VERSION: isProd ? version : isDev ? `dev-${version}` : "unknown",
   };
 
   return {
@@ -59,7 +56,9 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
         manifest: webManifest({
           name: metaEnv.VITE_APP_NAME,
           description: metaEnv.VITE_APP_DESCRIPTION,
-          isProd: isProd(),
+          isProd: isProd,
+          isDev: isDev,
+          devPort: DEFAULT_DEV_PORT,
         }),
       }),
       VitePluginBrowserSync({
@@ -74,16 +73,16 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
       }),
     ],
     server: {
-      port: 9000,
+      port: DEFAULT_DEV_PORT,
     },
     build: {
-      manifest: isProd() ? ".vite/manifest.json" : false,
+      manifest: isProd ? ".vite/manifest.json" : false,
       ssr: false,
-      minify: isProd() ? "terser" : isDev() ? false : "esbuild",
+      minify: isProd ? "terser" : isDev ? false : "esbuild",
       terserOptions: {
         keep_classnames: false,
       },
-      sourcemap: isProd() ? "hidden" : "inline",
+      sourcemap: isProd ? "hidden" : "inline",
       chunkSizeWarningLimit: 40 * 1024,
       rollupOptions: {
         treeshake: {

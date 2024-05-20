@@ -4,10 +4,14 @@ export const webManifest = ({
   name,
   description,
   isProd,
+  isDev,
+  devPort,
 }: {
   name: string;
   description?: string;
-  isProd: boolean;
+  isProd?: boolean;
+  isDev?: boolean;
+  devPort?: number;
 }): Partial<ManifestOptions> | false => {
   {
     return {
@@ -190,9 +194,14 @@ export const webManifest = ({
               },
             ],
           }
-        : {
-            scope: "/",
-          }),
+        : isDev
+          ? {
+              id: `http://localhost:${devPort}/`,
+              scope: `http://localhost:${devPort}/`,
+            }
+          : {
+              scope: "/",
+            }),
     };
   }
 };
