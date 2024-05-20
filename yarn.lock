@@ -3290,6 +3290,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/core@npm:0.60.3, @unocss/core@npm:^0.60.3":
+  version: 0.60.3
+  resolution: "@unocss/core@npm:0.60.3"
+  checksum: 10c0/fcbe86d3be7475442a9c21b678d4566b64733b008f09ecd4eaae206ef64a3a3a776da137023547f56cf57508c1e4dfa45e0c8494f999d1fb9509a2fdff271996
+  languageName: node
+  linkType: hard
+
 "@unocss/eslint-config@npm:^0.60.2":
   version: 0.60.2
   resolution: "@unocss/eslint-config@npm:0.60.2"
@@ -3318,6 +3325,15 @@ __metadata:
   dependencies:
     "@unocss/core": "npm:0.60.2"
   checksum: 10c0/65a0504dc0966bba1ad8daadd5dbc9b914f9849728fc9f93f8b827d45a6bfa09379db2a1d66008ac9d56efd81b261d47d46fcec929237f6a0c76105ec505f8e9
+  languageName: node
+  linkType: hard
+
+"@unocss/extractor-arbitrary-variants@npm:0.60.3":
+  version: 0.60.3
+  resolution: "@unocss/extractor-arbitrary-variants@npm:0.60.3"
+  dependencies:
+    "@unocss/core": "npm:0.60.3"
+  checksum: 10c0/710fa258ad0590ede9811ecfdd11a22538f61d2cff324b364c76ca368ef6b64257bfe309d7961105d15a13faa84b24f731f3aa0787b6746bb7858f9276095ff0
   languageName: node
   linkType: hard
 
@@ -3381,6 +3397,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/preset-mini@npm:0.60.3":
+  version: 0.60.3
+  resolution: "@unocss/preset-mini@npm:0.60.3"
+  dependencies:
+    "@unocss/core": "npm:0.60.3"
+    "@unocss/extractor-arbitrary-variants": "npm:0.60.3"
+    "@unocss/rule-utils": "npm:0.60.3"
+  checksum: 10c0/cc76cb2aec92ebcbbf1775df5787774e58a7fc726c7bc3f120f1c43816ddd39c2a1abf1c3b9878d4e6749bf90f7320829d1a7b4cec1ef2176915d649a177d435
+  languageName: node
+  linkType: hard
+
 "@unocss/preset-tagify@npm:0.60.2":
   version: 0.60.2
   resolution: "@unocss/preset-tagify@npm:0.60.2"
@@ -3390,13 +3417,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unocss/preset-typography@npm:0.60.2, @unocss/preset-typography@npm:^0.60.2":
+"@unocss/preset-typography@npm:0.60.2":
   version: 0.60.2
   resolution: "@unocss/preset-typography@npm:0.60.2"
   dependencies:
     "@unocss/core": "npm:0.60.2"
     "@unocss/preset-mini": "npm:0.60.2"
   checksum: 10c0/22102556c16f69f649db45132d47770bec05df2c96cdeff394835ca40c6557cff1ff0b6ee2b2bffb409c69cffc1a2526ac674f26482f6199d0039bdcc09ca886
+  languageName: node
+  linkType: hard
+
+"@unocss/preset-typography@npm:^0.60.2":
+  version: 0.60.3
+  resolution: "@unocss/preset-typography@npm:0.60.3"
+  dependencies:
+    "@unocss/core": "npm:0.60.3"
+    "@unocss/preset-mini": "npm:0.60.3"
+  checksum: 10c0/e66dde86891461ce4f47c7b6df1a38b0e9fd3f34d3ba3b59cf1ebf2b1a47b21feca250350f39685b0a8a786c668058d43680499ccd7b741c3203eef3ecc16a34
   languageName: node
   linkType: hard
 
@@ -3447,6 +3484,16 @@ __metadata:
     "@unocss/core": "npm:^0.60.2"
     magic-string: "npm:^0.30.10"
   checksum: 10c0/1ad351b311fa0977edf564e15d7d71de22e0ee610a479d1f72de5d79faf1ec3eb1226e410ee29a4018d120b5d2b9ed8de25ae7452f28bd2ae7b8655e39903c0f
+  languageName: node
+  linkType: hard
+
+"@unocss/rule-utils@npm:0.60.3":
+  version: 0.60.3
+  resolution: "@unocss/rule-utils@npm:0.60.3"
+  dependencies:
+    "@unocss/core": "npm:^0.60.3"
+    magic-string: "npm:^0.30.10"
+  checksum: 10c0/02c5e2bf542878c20bb66839f9c314b67e840322d5756c331d2063fe5c17566ba9b9b5ba177db3e7b72fe2ab1e31acb7cf65c28eb142dd281c55d79aaa343769
   languageName: node
   linkType: hard
 
