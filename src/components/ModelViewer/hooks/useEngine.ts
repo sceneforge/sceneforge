@@ -4,7 +4,7 @@ import { Scene } from "@babylonjs/core/scene";
 import { type Nullable } from "@babylonjs/core/types";
 import { useCallback, useMemo, useRef, type RefObject } from "react";
 
-export const useEngine = (canvasRef: RefObject<HTMLCanvasElement>) => {
+export const useEngine = (canvasRef: RefObject<HTMLCanvasElement | null>) => {
   const engineRef = useRef<Nullable<Engine>>(null);
   const sceneRef = useRef<Nullable<Scene>>(null);
 
@@ -43,21 +43,25 @@ export const useEngine = (canvasRef: RefObject<HTMLCanvasElement>) => {
     });
   }, [engineRef]);
 
+  const renderLoop = useCallback(() => {
+    if (sceneRef.current) {
+      sceneRef.current.render();
+    }
+  }, [sceneRef]);
+
   const renderSceneLoop = useCallback(() => {
     if (engineRef.current && sceneRef.current) {
-      engineRef.current.runRenderLoop(() => {
-        sceneRef.current?.render();
-      });
+      engineRef.current.runRenderLoop(renderLoop);
 
       if (canvasRef.current) {
         resizeObserver.observe(canvasRef.current);
       }
     }
-  }, [canvasRef, resizeObserver]);
+  }, [canvasRef, resizeObserver, renderLoop]);
 
   const stopRenderSceneLoop = useCallback(() => {
     if (engineRef.current) {
-      engineRef.current.stopRenderLoop();
+      engineRef.current.stopRenderLoop(renderLoop);
     }
     if (canvasRef.current) {
       resizeObserver.unobserve(canvasRef.current);

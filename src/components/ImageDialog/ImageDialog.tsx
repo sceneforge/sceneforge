@@ -5,7 +5,7 @@ import { Image } from "../Image";
 
 export type ImageDialogProps = {
   src: string;
-  title: string;
+  title?: string;
   alt?: string;
 };
 

@@ -2,15 +2,15 @@ import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import { Button, ButtonToggleEvent } from "../Button";
 import { IconButton } from "../IconButton";
 
-import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
-import { AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
 import {
   SceneObjectType,
   compare,
   hasChildren,
+  hideNode,
   id,
   isVisible,
   name,
+  showNode,
   typeOf,
 } from "../../lib/sceneObject";
 import { Icon, type IconName } from "../Icon";
@@ -66,36 +66,17 @@ export const SceneNode = ({
     }
   }, [onNodeSelect, node, open, expandNode]);
 
-  const hideNode = useCallback(() => {
-    if (node instanceof AbstractMesh) {
-      node.isVisible = false;
-      setVisible(false);
-    } else if (node instanceof HemisphericLight) {
-      node.setEnabled(false);
-      setVisible(false);
-    }
-  }, [node, setVisible]);
-
-  const showNode = useCallback(() => {
-    if (node instanceof AbstractMesh) {
-      node.isVisible = true;
-      setVisible(true);
-    } else if (node instanceof HemisphericLight) {
-      node.setEnabled(true);
-      setVisible(true);
-    }
-  }, [node, setVisible]);
-
-  const handleVisibility = useCallback(
-    (event: ButtonToggleEvent) => {
-      if (event.state === "pressed") {
-        hideNode();
-      } else if (event.state === "released") {
-        showNode();
+  const handleVisibility = useCallback((event: ButtonToggleEvent) => {
+    if (event.state === "pressed") {
+      if (hideNode(node)) {
+        setVisible(false);
       }
-    },
-    [hideNode, showNode],
-  );
+    } else if (event.state === "released") {
+      if (showNode(node)) {
+        setVisible(true);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (meshSelection && meshSelectionPath && meshSelectionPath.length > 0) {

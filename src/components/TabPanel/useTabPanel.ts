@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useId, useMemo } from "react";
 import { usePanel } from "../Panel";
-import { Tab, type TabProps } from "./Tab";
+import { type TabProps } from "./Tab";
 import {
   TabComponent,
   TabPanelContext,
@@ -8,6 +8,7 @@ import {
 } from "./TabPanelProvider";
 import { useTranslation } from "react-i18next";
 import { useAppContext } from "../App";
+import { TabNull } from "./TabNull";
 
 export const useTabPanel = () => {
   const unknownId = useId();
@@ -93,7 +94,7 @@ export const useTabPanel = () => {
           key: "general.undefinedTab",
         },
         active: false,
-        component: Tab(() => null),
+        component: TabNull,
       };
 
     return {

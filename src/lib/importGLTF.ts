@@ -11,17 +11,19 @@ export const importGLTF = (
   capture?: (data: string) => void,
   callback?: (data: ISceneLoaderAsyncResult) => void,
 ) => {
-  SceneLoader.ImportMeshAsync(
-    "",
-    "",
-    URL.createObjectURL(blob),
-    scene,
-    undefined,
-    ".glb",
-  )
-    .then((data) => {
-      if (callback) callback(data);
-      sceneSnapshot(scene, capture);
-    })
-    .catch(console.error);
+  if (!scene.isDisposed) {
+    SceneLoader.ImportMeshAsync(
+      "",
+      "",
+      URL.createObjectURL(blob),
+      scene,
+      undefined,
+      ".glb",
+    )
+      .then((data) => {
+        if (callback) callback(data);
+        sceneSnapshot(scene, capture);
+      })
+      .catch(console.error);
+  }
 };

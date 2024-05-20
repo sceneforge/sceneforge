@@ -4,6 +4,7 @@ import { TabList } from "./TabList";
 import { useTabPanel } from "./useTabPanel";
 import { cls } from "../../lib/cls";
 import { Variant } from "../../types/variants";
+import { Tab } from "./Tab";
 
 export type TabPanelProps = {
   variant?: Variant;
@@ -49,13 +50,13 @@ export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
               },
               index,
             ) => (
-              <TabComponent
-                key={index}
-                tabId={`tabpanel-${index}`}
-                active={active}
+              <Tab
+                key={`tabpanel-${index}`}
+                Component={TabComponent}
                 id={id}
                 title={title}
                 translation={translation}
+                active={active}
                 {...props}
               />
             ),

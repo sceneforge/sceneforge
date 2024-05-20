@@ -15,7 +15,7 @@ export type ModelViewerProps = Omit<Model, "capture"> & {
 };
 
 export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const {
     mode,
     setMode,

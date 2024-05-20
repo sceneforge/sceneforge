@@ -92,10 +92,8 @@ export const usePanel = () => {
       if (setAppTitle) {
         setAppTitle(() => {
           if (title) {
-            document.title = title;
             return title;
           } else if (defaultAppTitle) {
-            document.title = defaultAppTitle;
             return defaultAppTitle;
           }
         });

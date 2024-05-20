@@ -1,4 +1,4 @@
-import React from "@vitejs/plugin-react-swc";
+import React from "@vitejs/plugin-react";
 import { type UserConfig, defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 import VitePluginBrowserSync from "vite-plugin-browser-sync";
@@ -27,6 +27,10 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
     VITE_APP_VERSION: isProd ? version : isDev ? `dev-${version}` : "unknown",
   };
 
+  const ReactCompilerConfig = {
+    sources: (filename: string) => filename.indexOf("src/") !== -1,
+  };
+
   return {
     base: metaEnv.VITE_APP_BASE_PATH,
     appType: "spa",
@@ -36,7 +40,11 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
         paths: ["locales"],
       }),
       VitePluginMetaEnv(metaEnv, "import.meta.env"),
-      React(),
+      React({
+        babel: {
+          plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
+        },
+      }),
       UnoCSS(),
       VitePWA({
         srcDir: "src",

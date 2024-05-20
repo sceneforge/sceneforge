@@ -4,8 +4,14 @@ import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
 import unocss from "@unocss/eslint-config/flat";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
+import eslintPluginReactCompiler from "eslint-plugin-react-compiler";
 
 export default tseslint.config(
+  {
+    plugins: {
+      "react-compiler": eslintPluginReactCompiler,
+    },
+  },
   {
     ignores: ["dist/**/*", "node_modules/**/*", "dev-dist/**/*", ".yarn/**/*"],
   },
@@ -37,6 +43,9 @@ export default tseslint.config(
   {
     files: ["src/**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
     ...react.recommended,
+    rules: {
+      "react-compiler/react-compiler": "error",
+    },
   },
   {
     files: ["src/sw/**/*.{js,mjs,cjs,ts,mts}"],

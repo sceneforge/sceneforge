@@ -2,13 +2,13 @@ import { useCallback, useEffect, useState, type ChangeEvent } from "react";
 import { Card } from "../../components/Card";
 import { InputList, InputListItem } from "../../components/InputList";
 import { usePanel } from "../../components/Panel";
-import { Tab, useTabPanel } from "../../components/TabPanel";
+import { useTabPanel } from "../../components/TabPanel";
 import { Section } from "../../components/Section";
 import { SafeArea } from "../../components/SafeArea";
 import { useAppContext } from "../../components/App";
 import { useTranslation } from "react-i18next";
 
-export const SettingsTab = Tab(() => {
+export const SettingsTab = () => {
   const { t } = useTranslation("tabs");
   const { name, description, version, dev, resolvedLanguage } = useAppContext();
   const {
@@ -148,4 +148,4 @@ export const SettingsTab = Tab(() => {
       </Section>
     </SafeArea>
   );
-});
+};

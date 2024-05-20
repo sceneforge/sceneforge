@@ -104,7 +104,7 @@ export const useContextMenu = () => {
   );
 
   const setPosition = useCallback(
-    (ref: RefObject<HTMLElement>) => {
+    (ref: RefObject<HTMLElement | null>) => {
       if (ref.current && contextMenuEvent) {
         setPositionOnPointer(ref.current, contextMenuEvent);
       }

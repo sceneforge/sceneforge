@@ -4,7 +4,7 @@ import { useCallback, useState, type RefObject } from "react";
 import { importGLTF } from "../../../lib/importGLTF";
 import { useTranslation } from "react-i18next";
 
-export const useGLTFLoader = (sceneRef: RefObject<Scene>) => {
+export const useGLTFLoader = (sceneRef: RefObject<Scene | null>) => {
   const { t } = useTranslation("ModelViewer");
   const [capture, setCapture] = useState<string | undefined>(undefined);
   const [loadResult, setLoadResult] = useState<

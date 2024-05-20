@@ -137,6 +137,7 @@ export const PanelProvider = ({
         setShowWelcome,
       }}
     >
+      <title>{appTitle || title}</title>
       {children}
       {showWelcome && <Welcome />}
       <ReloadPrompt />

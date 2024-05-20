@@ -23,7 +23,7 @@ export const useArcRotateCamera = (sceneRef: RefObject<Nullable<Scene>>) => {
 
   const attachCamera = useCallback(() => {
     if (sceneRef.current && cameraRef.current) {
-      sceneRef.current.activeCamera = cameraRef.current;
+      sceneRef.current.setActiveCameraById(cameraRef.current.id);
     }
   }, [sceneRef, cameraRef]);
 

@@ -13,17 +13,19 @@ import { select } from "../../../lib/sceneHandler";
 import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 
 export const useModelViewer = (
-  canvasRef: RefObject<HTMLCanvasElement>,
+  canvasRef: RefObject<HTMLCanvasElement | null>,
   active: boolean,
   props: Partial<Model>,
 ) => {
   const [loaded, setLoaded] = useState(false);
   const [ready, setReady] = useState(false);
+  const [initiate, setInitiate] = useState(false);
   const [currentNode, setCurrentNode] = useState<unknown>(null);
   const [mode, setMode] = useState<Mode>(Mode.View);
   const [meshSelectionPath, setMeshSelectionPath] = useState<readonly string[]>(
     [],
   );
+  const [timeoutRef, setTimeoutRef] = useState<NodeJS.Timeout | null>(null);
 
   const {
     engineRef,
@@ -129,13 +131,27 @@ export const useModelViewer = (
   }, [loaded, ready, currentModel, openGLTFBlob]);
 
   useEffect(() => {
-    if (ready) {
-      renderSceneLoop();
-      return () => {
-        stopRenderSceneLoop();
-      };
+    if (ready && timeoutRef === null && !initiate) {
+      setTimeoutRef(
+        setTimeout(() => {
+          setTimeoutRef(null);
+          setInitiate(true);
+          renderSceneLoop();
+        }, 1000),
+      );
     }
-  }, [ready, renderSceneLoop, stopRenderSceneLoop]);
+
+    return () => {
+      if (timeoutRef !== null) {
+        clearTimeout(timeoutRef);
+        setTimeoutRef(null);
+      } else if (ready) {
+        setInitiate(false);
+        setReady(false);
+        stopRenderSceneLoop();
+      }
+    };
+  }, [timeoutRef, initiate, ready, renderSceneLoop, stopRenderSceneLoop]);
 
   const objectPath = useCallback((node: unknown): string[] => {
     if (
