@@ -26,7 +26,6 @@ export const useModelViewer = (
   const [meshSelectionPath, setMeshSelectionPath] = useState<readonly string[]>(
     []
   );
-  const [timeoutRef, setTimeoutRef] = useState<NodeJS.Timeout | null>(null);
 
   const {
     createEngine,
@@ -133,28 +132,19 @@ export const useModelViewer = (
   }, [loaded, ready, currentModel, openGLTFBlob]);
 
   useEffect(() => {
-    if (ready && timeoutRef === null && !initiate) {
-      setTimeoutRef(
-        setTimeout(() => {
-          setTimeoutRef(null);
-          setInitiate(true);
-          renderSceneLoop();
-        }, 1000)
-      );
+    if (ready && !initiate) {
+      setInitiate(true);
+      renderSceneLoop();
     }
 
     return () => {
-      if (timeoutRef !== null) {
-        clearTimeout(timeoutRef);
-        setTimeoutRef(null);
-      }
-      else if (ready) {
+      if (ready && initiate) {
         setInitiate(false);
         setReady(false);
         stopRenderSceneLoop();
       }
     };
-  }, [timeoutRef, initiate, ready, renderSceneLoop, stopRenderSceneLoop]);
+  }, [initiate, ready, renderSceneLoop, stopRenderSceneLoop]);
 
   const objectPath = useCallback((node: unknown): string[] => {
     if (
@@ -184,16 +174,19 @@ export const useModelViewer = (
     [clearMeshSelectionPath, objectPath]
   );
 
-  const onHotspotSelect = useCallback(
-    (
-      mesh: AbstractMesh,
-      event: ActionEvent,
-      { hotspot }: { hotspot: AbstractMesh }
-    ) => {
-      console.log("DEBUG: onHotspotSelect", mesh, event, hotspot);
-    },
-    []
-  );
+  const onHotspotSelect = useCallback((
+    mesh: AbstractMesh,
+    event: ActionEvent,
+    hotspotMeshes: { hotspot: AbstractMesh }
+  ) => {
+    // TODO: Implement hotspot selection
+    throw new Error("Function 'onHotspotSelect' is not implemented", {
+      cause: {
+        code: "NotImplementedError",
+        values: { args: { event, hotspotMeshes, mesh } },
+      },
+    });
+  }, []);
 
   useEffect(() => {
     if (ready && mode === Mode.Edit) {
