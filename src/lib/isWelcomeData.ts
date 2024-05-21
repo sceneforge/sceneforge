@@ -1,14 +1,14 @@
 export type MarkdownAction = {
-  type: "markdown";
   label: string;
   path: string;
+  type: "markdown";
 };
 
 export type Highlight = {
-  title: string;
+  action?: MarkdownAction;
   description?: string;
   image?: string;
-  action?: MarkdownAction;
+  title: string;
 };
 
 export type WelcomeData = {

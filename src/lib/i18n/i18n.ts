@@ -5,15 +5,15 @@ import resources from "virtual:i18next-loader";
 
 export const i18nInit = async () => {
   return {
-    languages: Object.keys(resources),
     i18n: await i18n
       .use(LanguageDetector)
       .use(initReactI18next)
       .init({
+        fallbackLng: Object.keys(resources),
+        load: "all",
         resources,
         supportedLngs: Object.keys(resources),
-        load: "all",
-        fallbackLng: Object.keys(resources),
       }),
+    languages: Object.keys(resources),
   };
 };

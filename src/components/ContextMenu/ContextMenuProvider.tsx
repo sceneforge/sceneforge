@@ -6,27 +6,28 @@ import {
   createContext,
   useState,
 } from "react";
+
+import { type Variant } from "../../types/variants";
 import { type ActionProps } from "../Action";
 import { ContextMenu } from "./ContextMenu";
-import { type Variant } from "../../types/variants";
 
 export type MenuItem =
-  | (ActionProps & { type: "item" })
-  | { type: "divider"; icon: never; toggle: never; onClick: never };
+  | { icon: never; onClick: never; toggle: never; type: "divider" }
+  | ({ type: "item" } & ActionProps);
 
 export type ContextMenuContextType = {
-  showContextMenu?: boolean;
+  contextMenuEvent?: MouseEvent<HTMLElement>;
   contextMenuHeader?: string;
   contextMenuItems?: MenuItem[];
   contextMenuVariant?: Variant;
-  setShowContextMenu?: Dispatch<SetStateAction<boolean>>;
-  setContextMenuHeader?: Dispatch<SetStateAction<string | undefined>>;
-  setContextMenuItems?: Dispatch<SetStateAction<MenuItem[] | undefined>>;
-  setContextMenuVariant?: Dispatch<SetStateAction<Variant | undefined>>;
-  contextMenuEvent?: MouseEvent<HTMLElement>;
   setContextMenuEvent?: Dispatch<
     SetStateAction<MouseEvent<HTMLElement> | undefined>
   >;
+  setContextMenuHeader?: Dispatch<SetStateAction<string | undefined>>;
+  setContextMenuItems?: Dispatch<SetStateAction<MenuItem[] | undefined>>;
+  setContextMenuVariant?: Dispatch<SetStateAction<Variant | undefined>>;
+  setShowContextMenu?: Dispatch<SetStateAction<boolean>>;
+  showContextMenu?: boolean;
 };
 
 export const ContextMenuContext = createContext<ContextMenuContextType>({});
@@ -50,16 +51,16 @@ export const ContextMenuProvider = ({ children }: ContextMenuProviderProps) => {
   return (
     <ContextMenuContext.Provider
       value={{
-        showContextMenu,
-        setShowContextMenu,
-        contextMenuHeader,
-        setContextMenuHeader,
-        contextMenuVariant,
-        setContextMenuVariant,
-        contextMenuItems,
-        setContextMenuItems,
         contextMenuEvent,
+        contextMenuHeader,
+        contextMenuItems,
+        contextMenuVariant,
         setContextMenuEvent,
+        setContextMenuHeader,
+        setContextMenuItems,
+        setContextMenuVariant,
+        setShowContextMenu,
+        showContextMenu,
       }}
     >
       {children}

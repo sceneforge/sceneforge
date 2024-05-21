@@ -9,12 +9,12 @@ import {
 } from "@babylonjs/core";
 
 export enum SceneObjectType {
-  Mesh = "Mesh",
   AbstractMesh = "AbstractMesh",
-  HemisphericLight = "HemisphericLight",
-  Light = "Light",
   ArcRotateCamera = "ArcRotateCamera",
   Camera = "Camera",
+  HemisphericLight = "HemisphericLight",
+  Light = "Light",
+  Mesh = "Mesh",
   TransformNode = "TransformNode",
   Unknown = "Unknown",
 }

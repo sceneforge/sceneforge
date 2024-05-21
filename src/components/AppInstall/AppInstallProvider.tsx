@@ -5,6 +5,7 @@ import {
   createContext,
   useState,
 } from "react";
+
 import { AppInstall } from "./AppInstall";
 
 export interface BeforeInstallPromptEvent extends Event {
@@ -18,6 +19,13 @@ export interface BeforeInstallPromptEvent extends Event {
   readonly platforms: Array<string>;
 
   /**
+   * Allows a developer to show the install prompt at a time of their own
+   * choosing.
+   * This method returns a Promise.
+   */
+  prompt(): Promise<void>;
+
+  /**
    * Returns a Promise that resolves to a DOMString containing either "accepted"
    * or "dismissed".
    */
@@ -25,35 +33,28 @@ export interface BeforeInstallPromptEvent extends Event {
     outcome: "accepted" | "dismissed";
     platform: string;
   }>;
-
-  /**
-   * Allows a developer to show the install prompt at a time of their own
-   * choosing.
-   * This method returns a Promise.
-   */
-  prompt(): Promise<void>;
 }
 
 export type AppInstallContextType = {
-  showInstall: boolean;
-  setShowInstall: Dispatch<SetStateAction<boolean>>;
-  showInstallDialog: boolean;
-  setShowInstallDialog: Dispatch<SetStateAction<boolean>>;
+  animateInstallButton: boolean;
   beforeInstallPromptEvent?: BeforeInstallPromptEvent | null;
+  setAnimateInstallButton: Dispatch<SetStateAction<boolean>>;
   setBeforeInstallPromptEvent?: Dispatch<
     SetStateAction<BeforeInstallPromptEvent | null>
   >;
-  animateInstallButton: boolean;
-  setAnimateInstallButton: Dispatch<SetStateAction<boolean>>;
+  setShowInstall: Dispatch<SetStateAction<boolean>>;
+  setShowInstallDialog: Dispatch<SetStateAction<boolean>>;
+  showInstall: boolean;
+  showInstallDialog: boolean;
 };
 
 export const AppInstallContext = createContext<AppInstallContextType>({
-  showInstall: false,
-  setShowInstall: () => {},
-  showInstallDialog: false,
-  setShowInstallDialog: () => {},
   animateInstallButton: false,
   setAnimateInstallButton: () => {},
+  setShowInstall: () => {},
+  setShowInstallDialog: () => {},
+  showInstall: false,
+  showInstallDialog: false,
 });
 
 export type AppInstallProviderProps = PropsWithChildren;
@@ -68,14 +69,14 @@ export const AppInstallProvider = ({ children }: AppInstallProviderProps) => {
   return (
     <AppInstallContext.Provider
       value={{
-        showInstall,
-        setShowInstall,
-        showInstallDialog,
-        setShowInstallDialog,
-        beforeInstallPromptEvent,
-        setBeforeInstallPromptEvent,
         animateInstallButton,
+        beforeInstallPromptEvent,
         setAnimateInstallButton,
+        setBeforeInstallPromptEvent,
+        setShowInstall,
+        setShowInstallDialog,
+        showInstall,
+        showInstallDialog,
       }}
     >
       {children}

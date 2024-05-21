@@ -6,6 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
+
 import {
   Button,
   ButtonComponent,
@@ -17,28 +18,28 @@ import { Icon, type IconProps } from "../Icon";
 
 export type IconToggleProps = ToggleProps<
   {
-    icon: IconProps["icon"] | [IconProps["icon"], IconProps["icon"]];
-    size?: IconProps["size"] | [IconProps["size"], IconProps["size"]];
+    icon: [IconProps["icon"], IconProps["icon"]] | IconProps["icon"];
+    size?: [IconProps["size"], IconProps["size"]] | IconProps["size"];
   },
   Omit<IconProps, "label">
 >;
 
-export type IconButtonProps = Omit<
+export type IconButtonProps = IconToggleProps & Omit<
   ButtonProps,
   "children" | keyof ToggleProps
-> & IconToggleProps;
+>;
 
 export const IconButton = forwardRef(function IconButton(
   {
-    toggle,
-    pressed,
-    onToggle,
-    icon,
-    size,
     grow = false,
-    shrink = true,
+    icon,
     inverted = true,
     label,
+    onToggle,
+    pressed,
+    shrink = true,
+    size,
+    toggle,
     variant,
     ...props
   }: IconButtonProps,
@@ -82,11 +83,11 @@ export const IconButton = forwardRef(function IconButton(
   const buttonProps = {
     ...(toggle
       ? {
-        toggle: true,
         label,
-        variant,
-        pressed: pressedState,
         onToggle: handleToggleEvent,
+        pressed: pressedState,
+        toggle: true,
+        variant,
       }
       : { label, variant }),
     ...props,
@@ -96,11 +97,11 @@ export const IconButton = forwardRef(function IconButton(
     <Button
       {...buttonProps}
       grow={grow}
-      shrink={shrink}
       inverted={inverted}
       ref={ref}
+      shrink={shrink}
     >
-      <Icon icon={currentIcon} size={currentSize} aria-hidden />
+      <Icon aria-hidden icon={currentIcon} size={currentSize} />
     </Button>
   );
 });

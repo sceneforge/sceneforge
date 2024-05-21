@@ -1,15 +1,16 @@
 import { type PropsWithChildren, useMemo } from "react";
-import { Action, ActionProps } from "../Action";
+
 import { cls } from "../../lib/cls";
-import { Variant } from "../../types/variants";
 import { variantBgClass } from "../../lib/variantClasses";
+import { Variant } from "../../types/variants";
+import { Action, ActionProps } from "../Action";
 
 export type CardProps = PropsWithChildren<{
-  title?: string;
-  img?: string;
-  zoom?: keyof typeof classesImgZoom;
   actions?: ActionProps[];
+  img?: string;
+  title?: string;
   variant?: Variant;
+  zoom?: keyof typeof classesImgZoom;
 }>;
 
 // @unocss-include
@@ -22,12 +23,12 @@ const classesImgZoom = {
 } as const;
 
 export const Card = ({
-  img,
-  zoom = 0,
-  title,
   actions,
-  variant = "default",
   children,
+  img,
+  title,
+  variant = "default",
+  zoom = 0,
 }: CardProps) => {
   const cardBgClass = useMemo(
     () =>
@@ -52,8 +53,8 @@ export const Card = ({
         <div className={`${cardBgClass}:35`}>
           <div className="relative w-full overflow-clip rounded-be-5 after:block dark:bg-black:20 light:bg-white:20 after:p-b-80% after:content-empty">
             <img
-              className={cls("absolute block", classesImgZoom[zoom])}
               alt={`Image of ${title}`}
+              className={cls("absolute block", classesImgZoom[zoom])}
               src={img}
             />
           </div>

@@ -5,34 +5,35 @@ import {
   createContext,
   useState,
 } from "react";
+import { useTranslation } from "react-i18next";
+
+import { AppInstallProvider } from "../AppInstall";
 import { ContextMenuProvider } from "../ContextMenu";
 import { ModelContextProvider } from "../ModelContext";
 import { PanelProvider, type PanelProviderProps } from "../Panel";
 import { type TabComponent, TabPanelProvider } from "../TabPanel";
-import { AppInstallProvider } from "../AppInstall";
-import { useTranslation } from "react-i18next";
 import { AppShortcuts } from "./AppShortcuts";
 
 export type AppProviderProps = PropsWithChildren<{
-  userData: PanelProviderProps["userData"];
-  languages?: readonly string[];
   homeComponent?: TabComponent;
+  languages?: readonly string[];
+  userData: PanelProviderProps["userData"];
 }>;
 
 export type AppContextType = {
-  name?: string;
-  description?: string;
-  version?: string;
-  development?: boolean;
-  resolvedLanguage?: string;
-  direction?: string;
-  setResolvedLanguage?: Dispatch<SetStateAction<string | undefined>>;
-  setDirection?: Dispatch<SetStateAction<string | undefined>>;
-  languages?: readonly string[];
-  basePath: string;
-  keywords?: string;
   author?: string;
+  basePath: string;
+  description?: string;
+  development?: boolean;
+  direction?: string;
+  keywords?: string;
+  languages?: readonly string[];
+  name?: string;
   repository?: string;
+  resolvedLanguage?: string;
+  setDirection?: Dispatch<SetStateAction<string | undefined>>;
+  setResolvedLanguage?: Dispatch<SetStateAction<string | undefined>>;
+  version?: string;
 };
 
 export const AppContext = createContext<AppContextType>({
@@ -40,13 +41,13 @@ export const AppContext = createContext<AppContextType>({
 });
 
 export const AppProvider = ({
-  userData,
-  languages,
-  homeComponent,
   children,
+  homeComponent,
+  languages,
+  userData,
 }: AppProviderProps) => {
   const {
-    i18n: { resolvedLanguage: i18nResolvedLanguage, dir: i18nDir },
+    i18n: { dir: i18nDir, resolvedLanguage: i18nResolvedLanguage },
   } = useTranslation();
 
   const [resolvedLanguage, setResolvedLanguage] = useState<string | undefined>(
@@ -65,19 +66,19 @@ export const AppProvider = ({
   return (
     <AppContext.Provider
       value={{
-        name,
-        description,
-        version,
-        development,
-        resolvedLanguage,
-        setResolvedLanguage,
-        direction,
-        setDirection,
-        languages,
-        basePath,
-        keywords,
         author,
+        basePath,
+        description,
+        development,
+        direction,
+        keywords,
+        languages,
+        name,
         repository,
+        resolvedLanguage,
+        setDirection,
+        setResolvedLanguage,
+        version,
       }}
     >
       <AppInstallProvider>
@@ -87,9 +88,9 @@ export const AppProvider = ({
               <TabPanelProvider
                 defaultTab={
                   homeComponent && {
+                    component: homeComponent,
                     id: "home",
                     title: name,
-                    component: homeComponent,
                   }
                 }
               >

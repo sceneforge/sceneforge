@@ -1,10 +1,11 @@
 import { Suspense, useEffect } from "react";
-import { usePanel } from "../Panel";
-import { TabList } from "./TabList";
-import { useTabPanel } from "./useTabPanel";
+
 import { cls } from "../../lib/cls";
 import { Variant } from "../../types/variants";
+import { usePanel } from "../Panel";
 import { Tab } from "./Tab";
+import { TabList } from "./TabList";
+import { useTabPanel } from "./useTabPanel";
 
 export type TabPanelProps = {
   variant?: Variant;
@@ -12,7 +13,7 @@ export type TabPanelProps = {
 
 export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
   const { getUserData } = usePanel();
-  const { tabs, tabsPosition, setTabsPosition } = useTabPanel();
+  const { setTabsPosition, tabs, tabsPosition } = useTabPanel();
 
   useEffect(() => {
     getUserData("settings", "tabs-position", (position) => {
@@ -42,22 +43,22 @@ export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
           {tabs.map(
             (
               {
-                component: TabComponent,
                 active,
+                component: TabComponent,
                 id,
+                props,
                 title,
                 translation,
-                props,
               },
               index
             ) => (
               <Tab
-                key={`tabpanel-${index}`}
                 Component={TabComponent}
+                active={active}
                 id={id}
+                key={`tabpanel-${index}`}
                 title={title}
                 translation={translation}
-                active={active}
                 {...props}
               />
             )

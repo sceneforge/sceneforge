@@ -3,6 +3,7 @@ import {
   SceneLoader,
 } from "@babylonjs/core/Loading/sceneLoader";
 import { type Scene } from "@babylonjs/core/scene";
+
 import { sceneSnapshot } from "./sceneSnapshot";
 
 export const importGLTF = (

@@ -2,9 +2,9 @@ import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 import { Vector3 } from "@babylonjs/core/Maths/math.vector";
 
 export type AdditionalData = {
+  faceId?: number;
   hit?: boolean;
   pickedPoint?: Vector3;
-  faceId?: number;
 };
 
 export const getActionEventAdditionalData = (

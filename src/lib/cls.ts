@@ -1,5 +1,5 @@
 export const cls = (
-  ...args: (string | undefined | null | (string | undefined | null)[])[]
+  ...args: ((null | string | undefined)[] | null | string | undefined)[]
 ) => {
   return args
     .flat()

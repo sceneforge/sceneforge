@@ -1,22 +1,23 @@
 import type { Scene } from "@babylonjs/core/scene";
 import type { Nullable } from "@babylonjs/core/types";
-import { SceneNode } from "./SceneNode";
 
-import { compare } from "../../lib/sceneObject";
 import { useId } from "react";
 
+import { compare } from "../../lib/sceneObject";
+import { SceneNode } from "./SceneNode";
+
 export type SceneNodeTreeProps = {
-  scene: Nullable<Scene>;
-  meshSelectionPath?: readonly string[];
   clearMeshSelectionPath?: () => void;
+  meshSelectionPath?: readonly string[];
   onNodeSelect?: (node: unknown) => void;
+  scene: Nullable<Scene>;
 };
 
 export const SceneNodeTree = ({
-  scene,
-  meshSelectionPath,
   clearMeshSelectionPath,
+  meshSelectionPath,
   onNodeSelect,
+  scene,
 }: SceneNodeTreeProps) => {
   const genId = useId();
   return (
@@ -26,11 +27,11 @@ export const SceneNodeTree = ({
         .sort(compare)
         .map((node, index) => (
           <SceneNode
+            clearMeshSelectionPath={clearMeshSelectionPath}
             key={`${genId}-${index}`}
+            meshSelectionPath={meshSelectionPath}
             node={node}
             onNodeSelect={onNodeSelect}
-            meshSelectionPath={meshSelectionPath}
-            clearMeshSelectionPath={clearMeshSelectionPath}
           />
         ))}
     </ul>

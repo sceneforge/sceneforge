@@ -1,7 +1,8 @@
 import { MouseEventHandler, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+
 import { id, name, typeOf } from "../../lib/sceneObject";
 import { PanelSheetSection } from "../PanelSheet";
-import { useTranslation } from "react-i18next";
 
 export interface SceneObjectSectionProps {
   node: unknown;
@@ -21,7 +22,6 @@ export const SceneObjectSection = ({
 
   return (
     <PanelSheetSection
-      title={nodeName}
       actions={[
         {
           icon: "close",
@@ -29,6 +29,7 @@ export const SceneObjectSection = ({
           onClick: onClose,
         },
       ]}
+      title={nodeName}
     >
       <dl>
         <dt>Instance</dt>

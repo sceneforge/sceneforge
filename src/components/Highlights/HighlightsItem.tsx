@@ -1,14 +1,15 @@
 import { useCallback } from "react";
+
 import { Highlight } from "../../lib/isWelcomeData";
 import { Button } from "../Button";
 
 export type HighlightsItemProps = Highlight;
 
 export const HighlightsItem = ({
-  title,
+  action,
   description,
   image,
-  action,
+  title,
 }: HighlightsItemProps) => {
   const handleClick = useCallback(() => {
     if (action && action.type === "markdown") {
@@ -22,9 +23,9 @@ export const HighlightsItem = ({
       onClick={handleClick}
     >
       <img
+        alt=""
         className="absolute left-0 top-0 h-full w-full object-cover"
         src={image}
-        alt=""
       />
       <div className="absolute inset-l-0 inset-t-0 block h-full w-full bg-gradient-from-primary:50 bg-gradient-linear bg-gradient-shape-r text-start">
         <h2 className="m-0 p-l-3 p-t-5 text-size-3xl c-light font-extrabold text-shadow-lg text-shadow-color-black:40 lg:p-l-5 lg:p-t-8 md:p-l-4 md:p-t-6 xl:p-l-8 xl:p-t-12 lg:text-size-5xl md:text-size-4xl xl:text-size-6xl">

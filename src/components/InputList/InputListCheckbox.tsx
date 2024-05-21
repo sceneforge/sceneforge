@@ -1,29 +1,29 @@
 import { ChangeEventHandler, type ForwardedRef, forwardRef } from "react";
 
 export type InputListCheckboxProps = {
+  checked?: boolean;
+  defaultValue?: string;
   id?: string;
   name: string;
-  defaultValue?: string;
-  value?: HTMLSelectElement["value"];
-  checked?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  value?: HTMLSelectElement["value"];
 };
 
 export const InputListCheckbox = forwardRef(function InputListCheckbox(
-  { id, name, defaultValue, value, checked, onChange }: InputListCheckboxProps,
+  { checked, defaultValue, id, name, onChange, value }: InputListCheckboxProps,
   ref: ForwardedRef<HTMLInputElement>
 ) {
   return (
     <div className="relative">
       <input
-        ref={ref}
-        type="checkbox"
+        checked={checked}
+        defaultValue={defaultValue}
         id={id}
         name={name}
-        checked={checked}
-        value={value}
-        defaultValue={defaultValue}
         onChange={onChange}
+        ref={ref}
+        type="checkbox"
+        value={value}
       />
     </div>
   );

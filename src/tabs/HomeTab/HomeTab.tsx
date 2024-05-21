@@ -1,5 +1,5 @@
-import { SafeArea } from "../../components/SafeArea";
 import { ModelList } from "../../components/ModelList";
+import { SafeArea } from "../../components/SafeArea";
 import { type TabProps } from "../../components/TabPanel";
 
 export type HomeTabProps = TabProps<{

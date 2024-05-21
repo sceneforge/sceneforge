@@ -2,24 +2,24 @@ import { cls } from "../../lib/cls";
 import { Action, type ActionProps } from "../Action";
 import { Dropdown, type DropdownProps } from "../Dropdown";
 
-export type ToolbarProps = DropdownProps & {
-  withDropdown?: boolean;
+export type ToolbarProps = {
   contrast?: boolean;
-};
+  withDropdown?: boolean;
+} & DropdownProps;
 
 export const Toolbar = ({
-  extendedClassName,
-  variant,
   contentVariant,
-  items,
-  withDropdown = true,
   contrast = false,
+  extendedClassName,
+  items,
+  variant,
+  withDropdown = true,
   ...props
 }: ToolbarProps) => {
   const dropdownProps = {
-    variant,
     contentVariant,
     items,
+    variant,
     ...props,
   } as DropdownProps;
   return (
@@ -48,7 +48,7 @@ export const Toolbar = ({
                       ? "dark:bg-black:10 light:bg-white:10 dark:hover:bg-black:20 light:hover:bg-white:20"
                       : "bg-transparent dark:hover:bg-black:10 light:hover:bg-white:10"
                   )}
-                  {...({ ...item, variant, contentVariant } as ActionProps)}
+                  {...({ ...item, contentVariant, variant } as ActionProps)}
                 />
               </li>
             )

@@ -1,10 +1,11 @@
-import { type ComponentType } from "react";
-import { type Element } from "hast";
 import { type MarkdownProps } from "@simplecomponent/markdown";
-import { Heading } from "../Heading";
-import { Link } from "../Link";
-import { Image } from "../Image";
+import { type Element } from "hast";
+import { type ComponentType } from "react";
+
 import { Blockquote } from "../Blockquote";
+import { Heading } from "../Heading";
+import { Image } from "../Image";
+import { Link } from "../Link";
 
 type IntrinsicElement<
   T extends keyof JSX.IntrinsicElements = keyof JSX.IntrinsicElements,
@@ -19,7 +20,7 @@ const wrapper
     Component: ComponentType<WP>,
     initialProps: WP = {} as WP
   ) =>
-    ({ node, ...props }: P & { node?: Element }) =>
+    ({ node, ...props }: { node?: Element } & P) =>
       node && node.type === "element"
         ? (
           <Component {...props} {...initialProps} />
@@ -27,13 +28,13 @@ const wrapper
         : null;
 
 export const components: MarkdownProps["components"] = {
+  a: wrapper(Link, { rel: "nofollow", target: "_blank" }),
+  blockquote: wrapper(Blockquote),
   h1: wrapper(Heading, { level: 1 }),
   h2: wrapper(Heading, { level: 2 }),
   h3: wrapper(Heading, { level: 3 }),
   h4: wrapper(Heading, { level: 4 }),
   h5: wrapper(Heading, { level: 5 }),
   h6: wrapper(Heading, { level: 6 }),
-  a: wrapper(Link, { target: "_blank", rel: "nofollow" }),
   img: wrapper(Image),
-  blockquote: wrapper(Blockquote),
 };

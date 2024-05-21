@@ -1,15 +1,16 @@
-import { v4 as uuid } from "uuid";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { ModelContext } from "./ModelContextProvider";
-import { usePanel } from "../Panel";
-import { Model, isModel } from "../../lib/isModel";
 import { useTranslation } from "react-i18next";
+import { v4 as uuid } from "uuid";
 
-export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
+import { Model, isModel } from "../../lib/isModel";
+import { usePanel } from "../Panel";
+import { ModelContext } from "./ModelContextProvider";
+
+export const useModelContext = ({ capture, id }: Partial<Model> = {}) => {
   const { t } = useTranslation("common");
-  const { models, loaded, setModels, setLoaded, loadState, setLoadState }
+  const { loadState, loaded, models, setLoadState, setLoaded, setModels }
     = useContext(ModelContext);
-  const { getAllUserData, setUserData, removeUserData } = usePanel();
+  const { getAllUserData, removeUserData, setUserData } = usePanel();
 
   const [currentID, setCurrentID] = useState<string | undefined>(id);
   const [captureSaveState, setCaptureSaveState] = useState<boolean | undefined>(
@@ -100,11 +101,11 @@ export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
       const createdAt = model.createdAt ?? storedModel?.createdAt ?? now;
       const updatedAt = now;
       const modelToSave: Model = {
-        id: withId,
-        title,
-        gltf,
         capture: withCapture,
         createdAt,
+        gltf,
+        id: withId,
+        title,
         updatedAt,
       };
 
@@ -150,7 +151,7 @@ export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
   const updateModel = useCallback(
     async (
       givenID: string,
-      model: Partial<Omit<Model, "id" | "createdAt" | "updatedAt">>
+      model: Partial<Omit<Model, "createdAt" | "id" | "updatedAt">>
     ): Promise<Model> => {
       return saveModel({ ...model, id: givenID }, false);
     },
@@ -174,7 +175,7 @@ export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
       && loadState === "loaded"
       && !captureSaveState
     ) {
-      saveModel({ id, capture })
+      saveModel({ capture, id })
         .then(() => {
           setCaptureSaveState(true);
         })
@@ -185,16 +186,16 @@ export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
   }, [id, capture, currentID, loadState, captureSaveState, saveModel]);
 
   return {
-    models,
     currentID,
-    setCurrentID,
     currentModel,
-    loadState,
-    loadModels,
-    getModel,
-    saveModel,
-    updateModel,
     deleteModel,
+    getModel,
+    loadModels,
+    loadState,
+    models,
+    saveModel,
+    setCurrentID,
+    updateModel,
     updateModelID,
   };
 };

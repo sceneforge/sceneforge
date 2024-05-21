@@ -5,17 +5,18 @@ import {
   useEffect,
   useState,
 } from "react";
+
 import { changeSize, targetClicked } from "./panelHandler";
 
 type UpdateSizeArguments =
   | { movementX: number; movementY: number; size?: never }
-  | { size: number; movementX?: never; movementY?: never };
+  | { movementX?: never; movementY?: never; size: number };
 
 export const usePanelSheet = (
   panelRef: RefObject<HTMLDivElement | null>,
   resizeable: boolean,
   orientation: "block" | "inline",
-  position: "start" | "end",
+  position: "end" | "start",
   handleRef?: RefObject<HTMLSpanElement | null>
 ) => {
   const [clickDown, setClickDown] = useState(false);
@@ -99,8 +100,8 @@ export const usePanelSheet = (
   }, [resizeable, mouseDown, mouseUp, mouseOver, panelRef]);
 
   return {
-    mouseOver,
     clickDown,
+    mouseOver,
     updateSize,
   };
 };

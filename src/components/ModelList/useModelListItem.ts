@@ -1,11 +1,12 @@
 import { useCallback, useState } from "react";
-import { type Model } from "../../lib/isModel";
+
 import { useTabs } from "../../hooks/useTabs";
+import { type Model } from "../../lib/isModel";
 import { useModelContext } from "../ModelContext";
 
 export const useModelListItem = (model: Model) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const { newModelViewTab, closeModelViewTab } = useTabs();
+  const { closeModelViewTab, newModelViewTab } = useTabs();
   const { deleteModel } = useModelContext();
 
   const handleOpenModel = useCallback(() => {
@@ -31,10 +32,10 @@ export const useModelListItem = (model: Model) => {
   }, []);
 
   return {
-    handleOpenModel,
+    closeDeleteModelDialog,
     handleDeleteModel,
+    handleOpenModel,
     openDeleteModelDialog,
     showDeleteDialog,
-    closeDeleteModelDialog,
   };
 };

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+
 import { type Model } from "../../lib/isModel";
 import { Card } from "../Card";
 import { Dialog } from "../Dialog";
@@ -11,59 +12,59 @@ export type ModelListItemProps = {
 export const ModelListItem = ({ model }: ModelListItemProps) => {
   const { t } = useTranslation("ModelList");
   const {
+    closeDeleteModelDialog,
+    handleDeleteModel,
     handleOpenModel,
     openDeleteModelDialog,
     showDeleteDialog,
-    closeDeleteModelDialog,
-    handleDeleteModel,
   } = useModelListItem(model);
   return (
     <>
       <Card
-        variant="accent"
         actions={[
           {
             label: t("ModelListItem.actions.openButton"),
-            variant: "accent",
             onClick: handleOpenModel,
+            variant: "accent",
           },
           {
-            label: t("ModelListItem.actions.deleteButton"),
             icon: "delete",
-            variant: "danger",
+            label: t("ModelListItem.actions.deleteButton"),
             onClick: openDeleteModelDialog,
+            variant: "danger",
           },
         ]}
         img={model.capture}
-        zoom={2}
         title={model.title}
+        variant="accent"
+        zoom={2}
       />
       {showDeleteDialog && (
         <Dialog
-          title={t("ModelListItem.deleteDialog.title")}
           description={t("ModelListItem.deleteDialog.description", {
             title: model.title,
           })}
-          variant="danger"
           onClose={closeDeleteModelDialog}
+          title={t("ModelListItem.deleteDialog.title")}
           toolbar={{
-            withDropdown: false,
             contrast: false,
             items: [
               {
-                type: "item",
                 label: t("ModelListItem.deleteDialog.actions.cancelButton"),
-                variant: "default",
                 onClick: closeDeleteModelDialog,
+                type: "item",
+                variant: "default",
               },
               {
-                type: "item",
                 label: t("ModelListItem.deleteDialog.actions.deleteButton"),
-                variant: "danger",
                 onClick: handleDeleteModel,
+                type: "item",
+                variant: "danger",
               },
             ],
+            withDropdown: false,
           }}
+          variant="danger"
         />
       )}
     </>

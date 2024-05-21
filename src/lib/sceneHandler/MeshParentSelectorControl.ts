@@ -1,16 +1,17 @@
-import { type Node } from "@babylonjs/core/node";
-import { type AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
-import { MeshSelectorControl } from "./MeshSelectorControl";
-import { type Scene } from "@babylonjs/core/scene";
 import { Color3 } from "@babylonjs/core/Maths/math.color";
+import { type AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
+import { type Node } from "@babylonjs/core/node";
+import { type Scene } from "@babylonjs/core/scene";
 import { type Nullable } from "@babylonjs/core/types";
 
+import { MeshSelectorControl } from "./MeshSelectorControl";
+
 export class MeshParentSelectorControl {
-  private _selectedLayer: MeshSelectorControl;
-  private _mesh: AbstractMesh | undefined | null;
-  private _name: string;
   private _depth: number = 1;
-  private _direction: "up" | "down" = "up";
+  private _direction: "down" | "up" = "up";
+  private _mesh: AbstractMesh | null | undefined;
+  private _name: string;
+  private _selectedLayer: MeshSelectorControl;
 
   constructor(name: string, scene?: Scene) {
     this._name = name;
@@ -19,21 +20,48 @@ export class MeshParentSelectorControl {
     });
   }
 
-  public get mesh(): AbstractMesh | undefined | null {
-    return this._mesh;
+  private _parentChildren() {
+    if (!this._mesh) return [];
+    const parent = MeshParentSelectorControl.getParent(this._mesh, this._depth);
+    if (!parent) return [];
+    return parent.getChildMeshes();
   }
 
-  public set mesh(value: AbstractMesh | undefined | null) {
+  private static getParent(
+    mesh: AbstractMesh | Node | null | undefined,
+    depth: number = 1,
+    currentDepth: number = 0
+  ): Nullable<Node> {
+    if (!mesh) return null;
+    const parent = mesh.parent;
+    if (!parent) return mesh;
+    if (depth === currentDepth) return parent;
+    return MeshParentSelectorControl.getParent(parent, depth, currentDepth + 1);
+  }
+
+  public clear(): void {
+    this._selectedLayer.removeAllMeshes();
+    this._selectedLayer.clear();
+  }
+
+  public depthDown(): void {
+    if (this._depth > 1) this.depth--;
+  }
+
+  public depthUp(): void {
+    this.depth++;
+  }
+
+  public dispose(): void {
     this.clear();
-    if (this._mesh === value) {
-      if (this._direction === "up") this.depthUp();
-      else if (this._direction === "down") this.depthDown();
+    this._selectedLayer.dispose();
+  }
+
+  public highlight(): void {
+    for (const mesh of this._parentChildren()) {
+      this._selectedLayer.addMesh(mesh);
     }
-    else {
-      this._depth = 1;
-      this._mesh = value;
-    }
-    if (this._selectedLayer.state === "idle") this.highlight();
+    this._selectedLayer.highlight();
   }
 
   public set depth(depth: number) {
@@ -46,55 +74,28 @@ export class MeshParentSelectorControl {
     return this._depth;
   }
 
-  public depthUp(): void {
-    this.depth++;
-  }
-
-  public depthDown(): void {
-    if (this._depth > 1) this.depth--;
-  }
-
-  public get direction(): "up" | "down" {
+  public get direction(): "down" | "up" {
     return this._direction;
   }
 
-  public set direction(value: "up" | "down") {
+  public set direction(value: "down" | "up") {
     this._direction = value;
   }
 
-  private static getParent(
-    mesh: AbstractMesh | Node | undefined | null,
-    depth: number = 1,
-    currentDepth: number = 0
-  ): Nullable<Node> {
-    if (!mesh) return null;
-    const parent = mesh.parent;
-    if (!parent) return mesh;
-    if (depth === currentDepth) return parent;
-    return MeshParentSelectorControl.getParent(parent, depth, currentDepth + 1);
+  public get mesh(): AbstractMesh | null | undefined {
+    return this._mesh;
   }
 
-  private _parentChildren() {
-    if (!this._mesh) return [];
-    const parent = MeshParentSelectorControl.getParent(this._mesh, this._depth);
-    if (!parent) return [];
-    return parent.getChildMeshes();
-  }
-
-  public highlight(): void {
-    for (const mesh of this._parentChildren()) {
-      this._selectedLayer.addMesh(mesh);
-    }
-    this._selectedLayer.highlight();
-  }
-
-  public clear(): void {
-    this._selectedLayer.removeAllMeshes();
-    this._selectedLayer.clear();
-  }
-
-  public dispose(): void {
+  public set mesh(value: AbstractMesh | null | undefined) {
     this.clear();
-    this._selectedLayer.dispose();
+    if (this._mesh === value) {
+      if (this._direction === "up") this.depthUp();
+      else if (this._direction === "down") this.depthDown();
+    }
+    else {
+      this._depth = 1;
+      this._mesh = value;
+    }
+    if (this._selectedLayer.state === "idle") this.highlight();
   }
 }

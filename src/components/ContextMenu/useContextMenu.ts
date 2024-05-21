@@ -5,22 +5,23 @@ import {
   useCallback,
   useContext,
 } from "react";
-import { ContextMenuContext, type MenuItem } from "./ContextMenuProvider";
-import { type Variant } from "../../types/variants";
+
 import { setPositionOnPointer } from "../../lib/setPosition";
+import { type Variant } from "../../types/variants";
+import { ContextMenuContext, type MenuItem } from "./ContextMenuProvider";
 
 export const useContextMenu = () => {
   const {
-    showContextMenu,
-    setShowContextMenu,
-    contextMenuHeader,
-    setContextMenuHeader,
-    contextMenuVariant,
-    setContextMenuVariant,
-    contextMenuItems,
-    setContextMenuItems,
     contextMenuEvent,
+    contextMenuHeader,
+    contextMenuItems,
+    contextMenuVariant,
     setContextMenuEvent,
+    setContextMenuHeader,
+    setContextMenuItems,
+    setContextMenuVariant,
+    setShowContextMenu,
+    showContextMenu,
   } = useContext(ContextMenuContext);
 
   const clearContextMenu = useCallback(() => {
@@ -51,13 +52,13 @@ export const useContextMenu = () => {
     ({
       event,
       header,
-      variant,
       items,
+      variant,
     }: {
       event: MouseEvent<HTMLElement>;
       header?: string;
-      variant?: Variant;
       items?: MenuItem[];
+      variant?: Variant;
     }) => {
       event.preventDefault();
       event.stopPropagation();
@@ -90,15 +91,15 @@ export const useContextMenu = () => {
   const handleContextMenu = useCallback(
     ({
       header,
-      variant,
       items,
+      variant,
     }: {
       header?: string;
-      variant?: Variant;
       items?: MenuItem[];
+      variant?: Variant;
     }) =>
       (event: MouseEvent<HTMLElement>) => {
-        openContextMenu({ event, header, variant, items });
+        openContextMenu({ event, header, items, variant });
       },
     [openContextMenu]
   );
@@ -125,15 +126,15 @@ export const useContextMenu = () => {
   );
 
   return {
-    show: showContextMenu,
+    clearContextMenu,
+    event: contextMenuEvent,
+    handleContextMenu,
+    handleItemClick,
     header: contextMenuHeader,
     items: contextMenuItems,
-    event: contextMenuEvent,
-    variant: contextMenuVariant,
-    handleItemClick,
     openContextMenu,
-    clearContextMenu,
-    handleContextMenu,
     setPosition,
+    show: showContextMenu,
+    variant: contextMenuVariant,
   };
 };

@@ -1,19 +1,20 @@
 import { type IconifyJSON } from "@iconify/types";
-import { defineConfig } from "unocss";
-import presetAnimations from "unocss-preset-animations";
 import presetIcons from "@unocss/preset-icons/browser";
 import presetTypography from "@unocss/preset-typography";
 import presetUno from "@unocss/preset-uno";
-import { safeList } from "./lib/safeList";
 import transformerDirectives from "@unocss/transformer-directives";
+import { defineConfig } from "unocss";
+import presetAnimations from "unocss-preset-animations";
+
+import { safeList } from "./lib/safeList";
 
 const colors = {
-  primary: "#86159d",
   accent: "rgb(0 110 80 / 1)",
   danger: "rgb(179 15 15 / 1)",
-  warning: "rgb(209 165 18 / 1)",
-  success: "rgb(19 172 19 / 1)",
   info: "rgb(28 69 173 / 1)",
+  primary: "#86159d",
+  success: "rgb(19 172 19 / 1)",
+  warning: "rgb(209 165 18 / 1)",
 };
 
 export default defineConfig({
@@ -45,7 +46,6 @@ export default defineConfig({
       },
     }),
   ],
-  transformers: [transformerDirectives()],
   safelist: [
     ..."animate-in zoom-in-1/2 h-full flex-shrink cursor-pointer rounded-5 b-none children:inline-block".split(
       " "
@@ -65,4 +65,5 @@ export default defineConfig({
   theme: {
     colors,
   },
+  transformers: [transformerDirectives()],
 });

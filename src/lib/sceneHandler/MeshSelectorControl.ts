@@ -9,11 +9,11 @@ export interface MeshSelectorControlOptions {
 }
 
 export class MeshSelectorControl {
-  private _meshes: (AbstractMesh | undefined | null)[] = [];
-  private _scene: Scene | undefined;
-  private _name: string;
   private _highlightLayer: HighlightLayer | undefined;
+  private _meshes: (AbstractMesh | null | undefined)[] = [];
+  private _name: string;
   private _outlineColor: Color3 = Color3.White();
+  private _scene: Scene | undefined;
   private _state: "idle" | "selected" = "idle";
 
   constructor(
@@ -40,44 +40,25 @@ export class MeshSelectorControl {
     }
   }
 
-  public get state(): "idle" | "selected" {
-    return this._state;
-  }
-
-  public get length(): number {
-    return this._meshes.length;
-  }
-
-  public addMesh(mesh: AbstractMesh | undefined | null): void {
+  public addMesh(mesh: AbstractMesh | null | undefined): void {
     if (!mesh) return;
     this._meshes.push(mesh);
     this.refresh();
   }
 
-  public hasMesh(mesh: AbstractMesh | undefined | null): boolean {
+  public clear(): void {
+    this._highlightLayer?.removeAllMeshes();
+    this._state = "idle";
+  }
+
+  public dispose(): void {
+    this.clear();
+    this._highlightLayer?.dispose();
+  }
+
+  public hasMesh(mesh: AbstractMesh | null | undefined): boolean {
     if (!mesh) return false;
     return this._meshes.includes(mesh);
-  }
-
-  public removeMesh(mesh: AbstractMesh | undefined | null): void {
-    if (!mesh) return;
-    this._meshes = this._meshes.filter(m => m !== mesh);
-    this.refresh();
-  }
-
-  public removeAllMeshes(): void {
-    this._meshes = [];
-    this.refresh();
-  }
-
-  public refresh(): void {
-    if (this._state === "selected") {
-      this.clear();
-      this.highlight();
-    }
-    else {
-      this.clear();
-    }
   }
 
   public highlight(): void {
@@ -90,13 +71,32 @@ export class MeshSelectorControl {
     this._state = "selected";
   }
 
-  public clear(): void {
-    this._highlightLayer?.removeAllMeshes();
-    this._state = "idle";
+  public refresh(): void {
+    if (this._state === "selected") {
+      this.clear();
+      this.highlight();
+    }
+    else {
+      this.clear();
+    }
   }
 
-  public dispose(): void {
-    this.clear();
-    this._highlightLayer?.dispose();
+  public removeAllMeshes(): void {
+    this._meshes = [];
+    this.refresh();
+  }
+
+  public removeMesh(mesh: AbstractMesh | null | undefined): void {
+    if (!mesh) return;
+    this._meshes = this._meshes.filter(m => m !== mesh);
+    this.refresh();
+  }
+
+  public get length(): number {
+    return this._meshes.length;
+  }
+
+  public get state(): "idle" | "selected" {
+    return this._state;
   }
 }

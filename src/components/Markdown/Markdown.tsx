@@ -1,15 +1,16 @@
 import { Markdown as SimpleMarkdown } from "@simplecomponent/markdown";
-import { components } from "./components";
-import { useAppContext } from "../App";
 import { useEffect, useMemo, useState } from "react";
 
+import { useAppContext } from "../App";
+import { components } from "./components";
+
 export type MarkdownProps = {
-  value?: string;
   href?: string;
+  value?: string;
 };
 
 export const Markdown = ({ href, value, ...props }: MarkdownProps) => {
-  const { resolvedLanguage, basePath } = useAppContext();
+  const { basePath, resolvedLanguage } = useAppContext();
   const [
     currentDocument,
     setCurrentDocument,
@@ -47,8 +48,8 @@ export const Markdown = ({ href, value, ...props }: MarkdownProps) => {
   return (
     <div className="m-inline-auto select-text p-b-2xl text-start c-inherit lg:w-3xl sm:w-lg xl:w-6xl">
       <SimpleMarkdown
-        key={contentUrl}
         components={components}
+        key={contentUrl}
         {...props}
         value={currentDocument}
       />

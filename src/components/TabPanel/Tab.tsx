@@ -5,27 +5,28 @@ import {
   useEffect,
   useMemo,
 } from "react";
-import { useAppContext } from "../App";
 import { useTranslation } from "react-i18next";
+
+import { useAppContext } from "../App";
 
 export type TabWrapperProps<P extends object = object> = PropsWithChildren<
   {
     Component: TabRenderFunction<P>;
-    tabId?: string;
+    active?: boolean;
     id: string;
+    tabId?: string;
     title: string;
     translation?: {
-      ns: string;
       key: string;
+      ns: string;
     };
-    active?: boolean;
   } & P
 >;
 
 export interface TabRenderFunction<P extends object = object> {
   (
     props: Omit<TabWrapperProps<P>, "Component" | "tabId">,
-  ): ReactNode | JSX.Element;
+  ): JSX.Element | ReactNode;
   displayName?: string | undefined;
 }
 
@@ -45,8 +46,8 @@ export const Tab = <P extends object = object>({
   const tabTitle = useMemo(() => {
     if (props.translation && props.translation.ns && props.translation.key) {
       return t(props.translation.key, {
-        ns: props.translation.ns,
         lng: resolvedLanguage,
+        ns: props.translation.ns,
       });
     }
     else if (props.title) {
@@ -62,10 +63,10 @@ export const Tab = <P extends object = object>({
 
   return (
     <div
+      className="relative m-0 h-full w-full"
+      hidden={!props.active}
       id={tabId}
       role="tabpanel"
-      hidden={!props.active}
-      className="relative m-0 h-full w-full"
     >
       <Component {...props} />
     </div>

@@ -1,24 +1,25 @@
 import { useCallback, useContext, useEffect, useId, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+
+import { useAppContext } from "../App";
 import { usePanel } from "../Panel";
 import { type TabProps } from "./Tab";
+import { TabNull } from "./TabNull";
 import {
   TabComponent,
   type TabContext,
   TabPanelContext,
 } from "./TabPanelProvider";
-import { useTranslation } from "react-i18next";
-import { useAppContext } from "../App";
-import { TabNull } from "./TabNull";
 
 export const useTabPanel = () => {
   const unknownId = useId();
-  const { updateTitle, appTitle } = usePanel();
+  const { appTitle, updateTitle } = usePanel();
   const {
-    tabs,
-    setTabs,
     defaultTab: defaultTabComponent,
-    tabsPosition,
+    setTabs,
     setTabsPosition,
+    tabs,
+    tabsPosition,
   } = useContext(TabPanelContext);
   const { t } = useTranslation();
   const { resolvedLanguage } = useAppContext();
@@ -92,14 +93,14 @@ export const useTabPanel = () => {
   const defaultTab = useMemo((): TabContext => {
     if (!defaultTabComponent)
       return {
+        active: false,
+        component: TabNull,
         id: unknownId,
         title: "Undefined Tab",
         translation: {
-          ns: "tabs",
           key: "general.undefinedTab",
+          ns: "tabs",
         },
-        active: false,
-        component: TabNull,
       };
 
     return {
@@ -130,7 +131,7 @@ export const useTabPanel = () => {
   );
 
   const updateTabTitle = useCallback(
-    (id: string, title: string, translation?: { ns: string; key: string }) => {
+    (id: string, title: string, translation?: { key: string; ns: string }) => {
       setTabs(previousTabs =>
         previousTabs.map((tab) => {
           if (tab.id === id) {
@@ -163,8 +164,8 @@ export const useTabPanel = () => {
     return activeTab
       ? (activeTab.translation
         ? t(activeTab.translation.key, {
-          ns: activeTab.translation.ns,
           lng: resolvedLanguage,
+          ns: activeTab.translation.ns,
         })
         : activeTab.title)
       : undefined;
@@ -180,19 +181,19 @@ export const useTabPanel = () => {
   }, [activeTab, activeTabTitle, appTitle, updateTitle, updateTabTitle]);
 
   return {
-    activeTab,
-    tabs,
-    defaultTab,
-    tabsPosition,
-    setTabsPosition,
-    setTabs,
-    newTab,
-    closeTab,
     activateTab,
-    getTabByTitle,
-    getTabById,
+    activeTab,
+    closeTab,
+    defaultTab,
     getTabByComponent,
-    updateTabTitle,
+    getTabById,
+    getTabByTitle,
+    newTab,
     openTab,
+    setTabs,
+    setTabsPosition,
+    tabs,
+    tabsPosition,
+    updateTabTitle,
   };
 };

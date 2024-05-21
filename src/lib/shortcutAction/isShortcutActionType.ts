@@ -18,9 +18,9 @@ export type NoneActionType = {
 };
 
 export type ShortcutActionType =
-  | OpenTabActionType
   | NewTabActionType
-  | NoneActionType;
+  | NoneActionType
+  | OpenTabActionType;
 
 export const isShortcutActionType = (
   shortcutAction: unknown

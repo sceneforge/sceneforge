@@ -1,14 +1,15 @@
 import { useCallback, useRef } from "react";
-import { useRegisterSW } from "virtual:pwa-register/react";
-import { Dialog } from "../Dialog";
 import { useTranslation } from "react-i18next";
+import { useRegisterSW } from "virtual:pwa-register/react";
+
+import { Dialog } from "../Dialog";
 
 export const ReloadPrompt = () => {
   const { t } = useTranslation("ReloadPrompt");
   const dialogReference = useRef<HTMLDialogElement | null>(null);
   const {
-    offlineReady: [offlineReady, setOfflineReady],
     needRefresh: [needRefresh, setNeedRefresh],
+    offlineReady: [offlineReady, setOfflineReady],
     updateServiceWorker,
   } = useRegisterSW();
 
@@ -32,20 +33,6 @@ export const ReloadPrompt = () => {
 
   return (
     <Dialog
-      ref={dialogReference}
-      title={t("title")}
-      variant="accent"
-      toolbar={{
-        items: needRefresh
-          ? [
-            {
-              type: "item",
-              onClick: reload,
-              children: t("actions.reloadButton"),
-            },
-          ]
-          : undefined,
-      }}
       description={
         offlineReady
           ? t("description.offlineReady")
@@ -54,6 +41,20 @@ export const ReloadPrompt = () => {
             : undefined)
       }
       onClose={close}
+      ref={dialogReference}
+      title={t("title")}
+      toolbar={{
+        items: needRefresh
+          ? [
+            {
+              children: t("actions.reloadButton"),
+              onClick: reload,
+              type: "item",
+            },
+          ]
+          : undefined,
+      }}
+      variant="accent"
     />
   );
 };

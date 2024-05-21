@@ -1,9 +1,10 @@
 import { useTranslation } from "react-i18next";
+
+import { useShortcuts } from "../../hooks/useShortcuts";
 import { Carousel } from "../Carousel";
 import { HeroIconButton } from "../HeroIconButton";
-import { useModelList } from "./useModelList";
 import { ModelListItem } from "./ModelListItem";
-import { useShortcuts } from "../../hooks/useShortcuts";
+import { useModelList } from "./useModelList";
 
 export type ModelListProps = {
   active?: boolean;
@@ -22,8 +23,8 @@ export const ModelList = ({ active }: ModelListProps) => {
       <HeroIconButton
         icon="add"
         label={t("actions.newButton")}
-        variant="accent"
         onClick={newTabScene}
+        variant="accent"
       />
     </Carousel>
   );

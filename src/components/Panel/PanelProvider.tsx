@@ -9,21 +9,22 @@ import {
   useRef,
   useState,
 } from "react";
+
 import { type Database } from "../../lib/Database";
+import { dataset } from "../../lib/dataset";
 import { ReloadPrompt } from "../ReloadPrompt";
 import { Welcome } from "../Welcome";
-import { dataset } from "../../lib/dataset";
 
 type EventListenerCallback = (
   type: string,
   listener: EventListenerOrEventListenerObject,
-  options?: boolean | AddEventListenerOptions,
+  options?: AddEventListenerOptions | boolean,
 ) => void;
 
 interface WindowControlsOverlay {
-  readonly visible: boolean;
   addEventListener: EventListenerCallback;
   removeEventListener: EventListenerCallback;
+  readonly visible: boolean;
 }
 
 const isOverlayVisible = (): boolean => {
@@ -33,26 +34,26 @@ const isOverlayVisible = (): boolean => {
 };
 
 export interface PanelContextType {
-  defaultAppTitle?: string;
   appTitle?: string;
-  setAppTitle?: Dispatch<SetStateAction<string | undefined>>;
-  overlayVisible: boolean;
+  defaultAppTitle?: string;
   menuShow: boolean;
-  sidePanelShow: boolean;
+  overlayVisible: boolean;
+  setAppTitle?: Dispatch<SetStateAction<string | undefined>>;
   setMenuShow?: Dispatch<SetStateAction<boolean>>;
-  setSidePanelShow?: Dispatch<SetStateAction<boolean>>;
-  sidePanelContent?: ReactNode;
-  setSidePanelContent?: Dispatch<SetStateAction<ReactNode>>;
-  userData?: Database<"UserData">;
-  showWelcome?: boolean;
   setShowWelcome?: Dispatch<SetStateAction<boolean>>;
+  setSidePanelContent?: Dispatch<SetStateAction<ReactNode>>;
+  setSidePanelShow?: Dispatch<SetStateAction<boolean>>;
+  showWelcome?: boolean;
+  sidePanelContent?: ReactNode;
+  sidePanelShow: boolean;
+  userData?: Database<"UserData">;
 }
 
 export const PanelContext = createContext<PanelContextType>({
-  overlayVisible: isOverlayVisible(),
   menuShow: false,
-  sidePanelShow: false,
+  overlayVisible: isOverlayVisible(),
   showWelcome: false,
+  sidePanelShow: false,
 });
 
 export type PanelProviderProps = PropsWithChildren<{
@@ -61,9 +62,9 @@ export type PanelProviderProps = PropsWithChildren<{
 }>;
 
 export const PanelProvider = ({
+  children,
   title,
   userData,
-  children,
 }: PanelProviderProps) => {
   const [appTitle, setAppTitle] = useState<string | undefined>(title);
   const [menuShow, setMenuShow] = useState(false);
@@ -117,19 +118,19 @@ export const PanelProvider = ({
   return (
     <PanelContext.Provider
       value={{
-        defaultAppTitle: title,
         appTitle,
-        setAppTitle,
-        overlayVisible,
+        defaultAppTitle: title,
         menuShow,
-        sidePanelShow,
+        overlayVisible,
+        setAppTitle,
         setMenuShow,
-        setSidePanelShow,
-        sidePanelContent,
-        setSidePanelContent,
-        userData,
-        showWelcome,
         setShowWelcome,
+        setSidePanelContent,
+        setSidePanelShow,
+        showWelcome,
+        sidePanelContent,
+        sidePanelShow,
+        userData,
       }}
     >
       <title>{appTitle || title}</title>

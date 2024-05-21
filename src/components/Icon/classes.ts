@@ -13,6 +13,7 @@ export const classes = {
   expandLess: "i-material-symbols:expand-less-rounded",
   expandMore: "i-material-symbols:expand-more-rounded",
   fileMap: "i-material-symbols:file-map",
+  globe: "i-material-symbols:globe",
   lightbulb: "i-material-symbols:lightbulb",
   lightbulbRounded: "i-material-symbols:lightbulb-circle-rounded",
   menu: "i-material-symbols:menu",
@@ -28,7 +29,6 @@ export const classes = {
   uploadFile: "i-material-symbols:upload-file",
   visibility: "i-material-symbols:visibility",
   visibilityOff: "i-material-symbols:visibility-off",
-  globe: "i-material-symbols:globe",
 } as const;
 
 export type IconName = keyof typeof classes;

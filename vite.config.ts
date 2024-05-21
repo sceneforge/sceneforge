@@ -1,16 +1,17 @@
-import { type UserConfig, defineConfig } from "vite";
 import React from "@vitejs/plugin-react";
 import UnoCSS from "unocss/vite";
-import { VitePWA } from "vite-plugin-pwa";
+import { type UserConfig, defineConfig } from "vite";
 import VitePluginBrowserSync from "vite-plugin-browser-sync";
-import VitePluginMetaEnv from "vite-plugin-meta-env";
 import i18nextLoader from "vite-plugin-i18next-loader";
+import VitePluginMetaEnv from "vite-plugin-meta-env";
+import { VitePWA } from "vite-plugin-pwa";
+
 import { webManifest } from "./lib/webManifest";
 
 const DEFAULT_DEV_PORT = 9000;
 
-export default defineConfig(async ({ command, mode, isPreview }) => {
-  const { description, version, author, repository, keywords } = await import(
+export default defineConfig(async ({ command, isPreview, mode }) => {
+  const { author, description, keywords, repository, version } = await import(
     "./package.json"
   );
 
@@ -19,12 +20,12 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
     = command === "build" && mode === "production" && !isPreview;
 
   const metaEnvironment = {
-    VITE_APP_BASE_PATH: "/",
-    VITE_APP_NAME: "Scene Forge",
-    VITE_APP_DESCRIPTION: description,
     VITE_APP_AUTHOR: author.name,
-    VITE_APP_REPOSITORY: repository.url,
+    VITE_APP_BASE_PATH: "/",
+    VITE_APP_DESCRIPTION: description,
     VITE_APP_KEYWORDS: keywords.join(", "),
+    VITE_APP_NAME: "Scene Forge",
+    VITE_APP_REPOSITORY: repository.url,
     VITE_APP_VERSION: isProduction
       ? version
       : (isDevelopment
@@ -37,8 +38,27 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
   };
 
   return {
-    base: metaEnvironment.VITE_APP_BASE_PATH,
     appType: "spa",
+    base: metaEnvironment.VITE_APP_BASE_PATH,
+    build: {
+      chunkSizeWarningLimit: 40 * 1024,
+      manifest: isProduction ? ".vite/manifest.json" : false,
+      minify: isProduction ? "terser" : (isDevelopment ? false : "esbuild"),
+      rollupOptions: {
+        output: {
+          compact: true,
+        },
+        treeshake: {
+          preset: "safest",
+        },
+      },
+      sourcemap: isProduction ? "hidden" : "inline",
+      ssr: false,
+      target: "esnext",
+      terserOptions: {
+        keep_classnames: false,
+      },
+    },
     plugins: [
       i18nextLoader({
         namespaceResolution: "basename",
@@ -52,60 +72,41 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
       }),
       UnoCSS(),
       VitePWA({
-        srcDir: "src",
-        filename: "serviceWorker.ts",
-        strategies: "injectManifest",
-        registerType: "prompt",
         devOptions: {
           enabled: true,
-          type: "module",
           navigateFallback: "/",
+          type: "module",
         },
+        filename: "serviceWorker.ts",
         injectManifest: {
-          sourcemap: "inline",
-          maximumFileSizeToCacheInBytes: 40 * 1024 * 1024, // 40MB
           globPatterns: ["**/*.{js,css,html,png,svg,jpg,ico,gif,md,json}"],
+          maximumFileSizeToCacheInBytes: 40 * 1024 * 1024, // 40MB
+          sourcemap: "inline",
         },
         manifest: webManifest({
-          name: metaEnvironment.VITE_APP_NAME,
           description: metaEnvironment.VITE_APP_DESCRIPTION,
-          isProd: isProduction,
-          isDev: isDevelopment,
           devPort: DEFAULT_DEV_PORT,
+          isDev: isDevelopment,
+          isProd: isProduction,
+          name: metaEnvironment.VITE_APP_NAME,
         }),
+        registerType: "prompt",
+        srcDir: "src",
+        strategies: "injectManifest",
       }),
       VitePluginBrowserSync({
         dev: {
-          enable: true,
-          mode: "snippet",
           bs: {
             logFileChanges: true,
             notify: true,
           },
+          enable: true,
+          mode: "snippet",
         },
       }),
     ],
     server: {
       port: DEFAULT_DEV_PORT,
-    },
-    build: {
-      target: "esnext",
-      manifest: isProduction ? ".vite/manifest.json" : false,
-      ssr: false,
-      minify: isProduction ? "terser" : (isDevelopment ? false : "esbuild"),
-      terserOptions: {
-        keep_classnames: false,
-      },
-      sourcemap: isProduction ? "hidden" : "inline",
-      chunkSizeWarningLimit: 40 * 1024,
-      rollupOptions: {
-        treeshake: {
-          preset: "safest",
-        },
-        output: {
-          compact: true,
-        },
-      },
     },
   } as UserConfig;
 });

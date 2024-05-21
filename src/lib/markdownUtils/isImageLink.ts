@@ -1,11 +1,11 @@
 export type ImageChildren = {
   props: {
+    alt?: string;
     node: {
       tagName: "img";
     };
     src: string;
     title?: string;
-    alt?: string;
   };
 };
 

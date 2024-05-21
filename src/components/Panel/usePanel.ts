@@ -5,27 +5,28 @@ import {
   useMemo,
   useState,
 } from "react";
-import { PanelContext } from "./PanelProvider";
-import { useAppContext } from "../App";
 import { useTranslation } from "react-i18next";
+
+import { useAppContext } from "../App";
+import { PanelContext } from "./PanelProvider";
 
 export const usePanel = () => {
   const {
-    defaultAppTitle,
     appTitle,
+    defaultAppTitle,
     menuShow,
-    sidePanelShow,
-    sidePanelContent,
     overlayVisible,
-    showWelcome,
-    userData,
     setAppTitle,
     setMenuShow,
-    setSidePanelShow,
     setSidePanelContent,
+    setSidePanelShow,
+    showWelcome,
+    sidePanelContent,
+    sidePanelShow,
+    userData,
   } = useContext(PanelContext);
-  const { t, i18n } = useTranslation();
-  const { setResolvedLanguage, languages } = useAppContext();
+  const { i18n, t } = useTranslation();
+  const { languages, setResolvedLanguage } = useAppContext();
   const [showWelcomeState, setShowWelcomeState] = useState(showWelcome);
 
   const getUserData = useCallback(
@@ -132,15 +133,15 @@ export const usePanel = () => {
   const languageList = useMemo(() => {
     return languages?.map(locale => ({
       local: t(`locales.${locale}`, {
-        ns: "common",
         defaultValue: locale,
         lng: locale,
-      }),
-      translated: t(`locales.${locale}`, {
         ns: "common",
-        defaultValue: locale,
       }),
       locale,
+      translated: t(`locales.${locale}`, {
+        defaultValue: locale,
+        ns: "common",
+      }),
     }));
   }, [languages, t]);
 
@@ -155,24 +156,24 @@ export const usePanel = () => {
   );
 
   return {
-    defaultAppTitle,
     appTitle,
-    updateTitle,
-    overlayVisible,
-    menuShow,
-    sidePanelShow,
-    setMenuShow,
-    setSidePanelShow,
-    sidePanelContent,
-    setSidePanelContent,
-    userData,
-    getUserData,
-    getAllUserData,
-    setUserData,
-    removeUserData,
     changeLanguage,
-    languageList,
-    showWelcomeState,
     changeShowWelcome,
+    defaultAppTitle,
+    getAllUserData,
+    getUserData,
+    languageList,
+    menuShow,
+    overlayVisible,
+    removeUserData,
+    setMenuShow,
+    setSidePanelContent,
+    setSidePanelShow,
+    setUserData,
+    showWelcomeState,
+    sidePanelContent,
+    sidePanelShow,
+    updateTitle,
+    userData,
   };
 };

@@ -18,7 +18,7 @@ export const useHemisphericLight = (sceneRef: RefObject<Nullable<Scene>>) => {
   }, [sceneRef, lightRef]);
 
   return {
-    lightRef,
     createLight,
+    lightRef,
   };
 };

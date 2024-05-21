@@ -1,26 +1,27 @@
 import { type PropsWithChildren, RefObject, useRef } from "react";
-import { usePanelSheet } from "./usePanelSheet";
-import { type Variant } from "../../types/variants";
-import { cls } from "../../lib/cls";
-import { variantBgClass } from "../../lib/variantClasses";
-import { Dropdown } from "../Dropdown";
 import { useTranslation } from "react-i18next";
 
+import { cls } from "../../lib/cls";
+import { variantBgClass } from "../../lib/variantClasses";
+import { type Variant } from "../../types/variants";
+import { Dropdown } from "../Dropdown";
+import { usePanelSheet } from "./usePanelSheet";
+
 export type PanelSheetProps = PropsWithChildren<{
-  variant?: Variant;
-  resizable?: boolean;
-  orientation?: "inline" | "block";
-  position?: "start" | "end";
   dragIndicator?: RefObject<HTMLSpanElement>;
+  orientation?: "block" | "inline";
+  position?: "end" | "start";
+  resizable?: boolean;
+  variant?: Variant;
 }>;
 
 export const PanelSheet = ({
-  variant = "default",
-  resizable = false,
+  children,
+  dragIndicator,
   orientation = "block",
   position = "end",
-  dragIndicator,
-  children,
+  resizable = false,
+  variant = "default",
 }: PanelSheetProps) => {
   const { t } = useTranslation("PanelSheet");
   const panelRef = useRef<HTMLDivElement>(null);
@@ -46,8 +47,8 @@ export const PanelSheet = ({
     >
       {resizable && (
         <div
-          hidden={!clickDown}
           className="fixed inset-l-0 inset-t-0 h-full w-full dark:bg-white:5 light:bg-dark:5"
+          hidden={!clickDown}
           onMouseMove={mouseOver}
         />
       )}
@@ -56,12 +57,12 @@ export const PanelSheet = ({
           <Dropdown
             contentVariant="default"
             icon="dragIndicator"
-            label={t("size")}
             items={[75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25].map(size => ({
-              type: "item",
               label: `${size}%`,
               onClick: () => updateSize({ size }),
+              type: "item",
             }))}
+            label={t("size")}
           />
         </div>
         {children}

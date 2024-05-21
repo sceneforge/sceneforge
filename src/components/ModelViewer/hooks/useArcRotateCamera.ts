@@ -48,10 +48,10 @@ export const useArcRotateCamera = (sceneRef: RefObject<Nullable<Scene>>) => {
   }, [cameraRef]);
 
   return {
-    cameraRef,
-    createCamera,
     attachCamera,
     attachControl,
+    cameraRef,
+    createCamera,
     detachControl,
     disposeCamera,
   };

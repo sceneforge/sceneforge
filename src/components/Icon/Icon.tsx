@@ -1,25 +1,24 @@
-import { cls } from "../../lib/cls";
-import { type Variant } from "../../types/variants";
-import { type IconName, classes } from "./classes";
-import { variantTextClass } from "../../lib/variantClasses";
 import { type ForwardedRef, type HTMLAttributes, forwardRef } from "react";
 
-export type IconProps = HTMLAttributes<HTMLSpanElement> & {
+import { cls } from "../../lib/cls";
+import { variantTextClass } from "../../lib/variantClasses";
+import { type Variant } from "../../types/variants";
+import { type IconName, classes } from "./classes";
+
+export type IconProps = {
+  className?: string;
   icon: IconName;
   size?: number;
   variant?: Variant;
-  className?: string;
-};
+} & HTMLAttributes<HTMLSpanElement>;
 
 export const Icon = forwardRef(function Icon(
-  { icon, variant, size = 4, className, ...props }: IconProps,
+  { className, icon, size = 4, variant, ...props }: IconProps,
   ref: ForwardedRef<HTMLSpanElement>
 ) {
   return (
     <span
       {...props}
-      ref={ref}
-      role="img"
       className={cls(
         classes[icon],
         className ?? [
@@ -30,6 +29,8 @@ export const Icon = forwardRef(function Icon(
             : ["w-4 min-w-4", "h-4 min-h-4"]),
         ]
       )}
+      ref={ref}
+      role="img"
     />
   );
 });

@@ -1,8 +1,8 @@
 export type Variant =
-  | "none"
-  | "default"
   | "accent"
   | "danger"
-  | "warning"
+  | "default"
+  | "info"
+  | "none"
   | "success"
-  | "info";
+  | "warning";

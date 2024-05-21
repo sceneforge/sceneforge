@@ -1,4 +1,5 @@
 import { Children, type PropsWithChildren, type ReactNode } from "react";
+
 import { isUnorderedList } from "../../lib/markdownUtils/isUnorderedList";
 
 export type GalleryProps = PropsWithChildren;

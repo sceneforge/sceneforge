@@ -4,19 +4,11 @@ export class Database<
   Name extends string = string,
   Store extends ObjectStores = ObjectStores,
 > {
+  private _db: IDBDatabase | undefined = undefined;
   private _dbName: Name;
   private _factory: IDBOpenDBRequest;
-  private _db: IDBDatabase | undefined = undefined;
-  private _ready: boolean;
   private _ongoingSet: Promise<IDBValidKey | void> | undefined = undefined;
-
-  public static SupportIndexedDB() {
-    return (
-      "indexedDB" in self
-      && "IDBFactory" in self
-      && self.indexedDB instanceof self.IDBFactory
-    );
-  }
+  private _ready: boolean;
 
   constructor(databaseName: Name, stores: Store) {
     this._ready = false;
@@ -55,6 +47,14 @@ export class Database<
         throw error;
       }
     });
+  }
+
+  public static SupportIndexedDB() {
+    return (
+      "indexedDB" in self
+      && "IDBFactory" in self
+      && self.indexedDB instanceof self.IDBFactory
+    );
   }
 
   private _get(store: string, key: string): Promise<unknown> {
@@ -96,7 +96,7 @@ export class Database<
       const request = objectStore.getAll();
       request.onsuccess = () => {
         resolve(
-          (request.result as Record<"value" | "key", unknown>[]).map(
+          (request.result as Record<"key" | "value", unknown>[]).map(
             r => r.value
           )
         );
@@ -115,10 +115,6 @@ export class Database<
         }
       });
     });
-  }
-
-  public get ready() {
-    return this._ready;
   }
 
   public get(store: string, key: string): Promise<unknown> {
@@ -149,56 +145,6 @@ export class Database<
         }, 500);
       }
     });
-  }
-
-  public setLast<T = unknown>(
-    store: string,
-    key: string,
-    value: T
-  ): Promise<IDBValidKey> {
-    if (this._ongoingSet && this._ready && this._db) {
-      const transaction = this._db.transaction(store, "readwrite");
-      transaction.abort();
-      this._ongoingSet = undefined;
-    }
-    this._ongoingSet = this.set(store, key, value);
-    return this._ongoingSet as Promise<IDBValidKey>;
-  }
-
-  public set<T = unknown>(
-    store: string,
-    key: string,
-    value: T
-  ): Promise<IDBValidKey> {
-    this._ongoingSet = new Promise((resolve, reject) => {
-      if (!this._db) {
-        reject(new Error("Database not open"));
-        return;
-      }
-
-      const transaction = this._db.transaction(store, "readwrite");
-      const objectStore = transaction.objectStore(store);
-      const request = objectStore.put({ key, value });
-
-      request.addEventListener("success", () => {
-        resolve(request.result);
-      });
-
-      request.addEventListener("error", () => {
-        if (request.error instanceof DOMException) {
-          reject(request.error);
-        }
-        else {
-          reject(
-            new Error("Request error", {
-              cause: request.error,
-            })
-          );
-        }
-      });
-    });
-
-    return this._ongoingSet as Promise<IDBValidKey>;
   }
 
   public remove(store: string, key: string): Promise<void> {
@@ -237,5 +183,59 @@ export class Database<
     });
 
     return this._ongoingSet as Promise<void>;
+  }
+
+  public set<T = unknown>(
+    store: string,
+    key: string,
+    value: T
+  ): Promise<IDBValidKey> {
+    this._ongoingSet = new Promise((resolve, reject) => {
+      if (!this._db) {
+        reject(new Error("Database not open"));
+        return;
+      }
+
+      const transaction = this._db.transaction(store, "readwrite");
+      const objectStore = transaction.objectStore(store);
+      const request = objectStore.put({ key, value });
+
+      request.addEventListener("success", () => {
+        resolve(request.result);
+      });
+
+      request.addEventListener("error", () => {
+        if (request.error instanceof DOMException) {
+          reject(request.error);
+        }
+        else {
+          reject(
+            new Error("Request error", {
+              cause: request.error,
+            })
+          );
+        }
+      });
+    });
+
+    return this._ongoingSet as Promise<IDBValidKey>;
+  }
+
+  public setLast<T = unknown>(
+    store: string,
+    key: string,
+    value: T
+  ): Promise<IDBValidKey> {
+    if (this._ongoingSet && this._ready && this._db) {
+      const transaction = this._db.transaction(store, "readwrite");
+      transaction.abort();
+      this._ongoingSet = undefined;
+    }
+    this._ongoingSet = this.set(store, key, value);
+    return this._ongoingSet as Promise<IDBValidKey>;
+  }
+
+  public get ready() {
+    return this._ready;
   }
 }

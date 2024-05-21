@@ -1,34 +1,35 @@
 import { useContext } from "react";
+
 import { AppContext } from "./AppProvider";
 
 export const useAppContext = () => {
   const {
-    name,
-    description,
-    version,
-    development,
-    resolvedLanguage,
-    direction,
-    languages,
-    setResolvedLanguage,
-    basePath,
-    keywords,
     author,
+    basePath,
+    description,
+    development,
+    direction,
+    keywords,
+    languages,
+    name,
     repository,
+    resolvedLanguage,
+    setResolvedLanguage,
+    version,
   } = useContext(AppContext);
 
   return {
-    name,
+    author,
+    basePath,
     description,
-    version,
     development,
+    direction,
+    keywords,
+    languages,
+    name,
+    repository,
     resolvedLanguage,
     setResolvedLanguage,
-    direction,
-    languages,
-    basePath,
-    keywords,
-    author,
-    repository,
+    version,
   };
 };

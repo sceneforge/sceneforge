@@ -1,16 +1,17 @@
+import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
+import { AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
+import { Mesh } from "@babylonjs/core/Meshes/mesh";
 import "@babylonjs/loaders/glTF/2.0";
 import { type RefObject, useCallback, useEffect, useState } from "react";
+
+import { Model } from "../../../lib/isModel";
+import { select } from "../../../lib/sceneHandler";
+import { useModelContext } from "../../ModelContext";
+import { Mode } from "./../mode";
 import { useArcRotateCamera } from "./useArcRotateCamera";
 import { useEngine } from "./useEngine";
 import { useGLTFLoader } from "./useGLTFLoader";
 import { useHemisphericLight } from "./useHemiphericLight";
-import { Model } from "../../../lib/isModel";
-import { Mode } from "./../mode";
-import { useModelContext } from "../../ModelContext";
-import { Mesh } from "@babylonjs/core/Meshes/mesh";
-import { AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
-import { select } from "../../../lib/sceneHandler";
-import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 
 export const useModelViewer = (
   canvasRef: RefObject<HTMLCanvasElement | null>,
@@ -28,21 +29,21 @@ export const useModelViewer = (
   const [timeoutRef, setTimeoutRef] = useState<NodeJS.Timeout | null>(null);
 
   const {
-    engineRef,
-    sceneRef,
-    resizeObserver,
     createEngine,
     createScene,
-    renderSceneLoop,
-    stopRenderSceneLoop,
     disposeEngine,
     disposeScene,
+    engineRef,
+    renderSceneLoop,
+    resizeObserver,
+    sceneRef,
+    stopRenderSceneLoop,
   } = useEngine(canvasRef);
   const {
-    cameraRef,
-    createCamera,
     attachCamera,
     attachControl,
+    cameraRef,
+    createCamera,
     detachControl,
     disposeCamera,
   } = useArcRotateCamera(sceneRef);
@@ -81,7 +82,7 @@ export const useModelViewer = (
     stopRenderSceneLoop,
   ]);
 
-  const { loadState, loadModels, currentID, currentModel, saveModel }
+  const { currentID, currentModel, loadModels, loadState, saveModel }
     = useModelContext({
       ...props,
       capture,
@@ -205,8 +206,8 @@ export const useModelViewer = (
         && (mesh[0] instanceof Mesh || mesh[0] instanceof AbstractMesh)
       ) {
         return select(mesh[0], {
-          onMeshSelect,
           onHotspotSelect,
+          onMeshSelect,
         });
       }
     }
@@ -232,26 +233,26 @@ export const useModelViewer = (
   );
 
   return {
-    loadResult,
-    mode,
-    currentNode,
-    onNodeSelect,
-    setMode,
-    currentModel,
-    loaded,
-    loadState,
-    capture,
-    renderSceneLoop,
-    stopRenderSceneLoop,
-    sceneRef,
-    engineRef,
     cameraRef,
-    openGLTFBlob,
-    startAll,
-    disposeAll,
-    clearSelectedNode,
-    onImported,
-    meshSelectionPath,
+    capture,
     clearMeshSelectionPath,
+    clearSelectedNode,
+    currentModel,
+    currentNode,
+    disposeAll,
+    engineRef,
+    loadResult,
+    loadState,
+    loaded,
+    meshSelectionPath,
+    mode,
+    onImported,
+    onNodeSelect,
+    openGLTFBlob,
+    renderSceneLoop,
+    sceneRef,
+    setMode,
+    startAll,
+    stopRenderSceneLoop,
   };
 };

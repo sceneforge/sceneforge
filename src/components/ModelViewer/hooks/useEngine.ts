@@ -69,14 +69,14 @@ export const useEngine = (canvasRef: RefObject<HTMLCanvasElement | null>) => {
   }, [canvasRef, renderLoop, resizeObserver]);
 
   return {
-    engineRef,
-    sceneRef,
-    resizeObserver,
     createEngine,
     createScene,
     disposeEngine,
     disposeScene,
+    engineRef,
     renderSceneLoop,
+    resizeObserver,
+    sceneRef,
     stopRenderSceneLoop,
   };
 };

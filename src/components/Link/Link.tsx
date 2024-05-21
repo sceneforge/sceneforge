@@ -3,8 +3,9 @@ import {
   type ForwardedRef,
   forwardRef,
 } from "react";
-import { ImageDialog } from "../ImageDialog";
+
 import { isImageLink } from "../../lib/markdownUtils/isImageLink";
+import { ImageDialog } from "../ImageDialog";
 
 export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 

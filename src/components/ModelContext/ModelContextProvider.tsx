@@ -5,28 +5,29 @@ import {
   createContext,
   useState,
 } from "react";
+
 import { type Model } from "../../lib/isModel";
 
 export type ModelContextProviderProps = PropsWithChildren;
 
 export type ModelContextType = {
-  models: Model[];
-  setModels: Dispatch<SetStateAction<Model[]>>;
+  loadState: "error" | "loaded" | "loading" | "none";
   loaded: boolean;
-  setLoaded: Dispatch<SetStateAction<boolean>>;
-  loadState: "none" | "loading" | "loaded" | "error";
+  models: Model[];
   setLoadState: Dispatch<
-    SetStateAction<"none" | "loading" | "loaded" | "error">
+    SetStateAction<"error" | "loaded" | "loading" | "none">
   >;
+  setLoaded: Dispatch<SetStateAction<boolean>>;
+  setModels: Dispatch<SetStateAction<Model[]>>;
 };
 
 export const ModelContext = createContext<ModelContextType>({
-  models: [],
-  setModels: () => {},
-  loaded: false,
-  setLoaded: () => {},
   loadState: "none",
+  loaded: false,
+  models: [],
   setLoadState: () => {},
+  setLoaded: () => {},
+  setModels: () => {},
 });
 
 export const ModelContextProvider = ({
@@ -35,18 +36,18 @@ export const ModelContextProvider = ({
   const [models, setModels] = useState<Model[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [loadState, setLoadState] = useState<
-    "none" | "loading" | "loaded" | "error"
+    "error" | "loaded" | "loading" | "none"
   >("none");
 
   return (
     <ModelContext.Provider
       value={{
-        models,
-        loaded,
         loadState,
-        setModels,
-        setLoaded,
+        loaded,
+        models,
         setLoadState,
+        setLoaded,
+        setModels,
       }}
     >
       {children}

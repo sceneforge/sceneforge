@@ -1,33 +1,35 @@
 import type { ManifestOptions } from "vite-plugin-pwa";
 
 export const webManifest = ({
-  name,
   description,
-  isProd,
-  isDev,
   devPort,
+  isDev,
+  isProd,
+  name,
 }: {
-  name: string;
   description?: string;
-  isProd?: boolean;
-  isDev?: boolean;
   devPort?: number;
+  isDev?: boolean;
+  isProd?: boolean;
+  name: string;
 }): Partial<ManifestOptions> | false => {
   {
     return {
-      dir: "ltr",
-      lang: "en",
-      name,
-      short_name: name,
+      background_color: "#86159d",
+      categories: ["productivity", "utilities", "education", "entertainment"],
       description: description,
-      start_url: "/",
+      dir: "ltr",
+      display: "standalone",
       display_override: ["window-controls-overlay", "fullscreen", "minimal-ui"],
+      edge_side_panel: {
+        preferred_width: 480,
+      },
       file_handlers: [
         {
-          action: "/index.html#!action=new-tab&tab=new-scene",
           accept: {
             "application/json": [".scfg", ".sceneforge"],
           },
+          action: "/index.html#!action=new-tab&tab=new-scene",
           // icons: [
           //   {
           //     src: "icons/file-512x740.png",
@@ -43,156 +45,154 @@ export const webManifest = ({
           // launch_type: "single-client",
         },
       ],
-      display: "standalone",
-      orientation: "natural",
-      background_color: "#86159d",
-      theme_color: "#86159d",
-      edge_side_panel: {
-        preferred_width: 480,
+      handle_links: "preferred",
+      icons: [
+        {
+          purpose: "any",
+          sizes: "48x48",
+          src: "icons/favicon.ico",
+          type: "image/x-icon",
+        },
+        {
+          purpose: "any",
+          sizes: "512x512",
+          src: "icons/512.png",
+          type: "image/png",
+        },
+        {
+          purpose: "maskable",
+          sizes: "1024x1024",
+          src: "icons/1024.png",
+          type: "image/png",
+        },
+        {
+          purpose: "any",
+          sizes: "any",
+          src: "icons/icon.svg",
+          type: "image/svg+xml",
+        },
+        {
+          purpose: "monochrome",
+          sizes: "512x512",
+          src: "icons/monochrome-512.png",
+          type: "image/png",
+        },
+        {
+          purpose: "maskable monochrome",
+          sizes: "1024x1024",
+          src: "icons/monochrome-1024.png",
+          type: "image/png",
+        },
+        {
+          purpose: "any",
+          sizes: "16x16",
+          src: "icons/favicon-16x16.png",
+          type: "image/png",
+        },
+        {
+          purpose: "any",
+          sizes: "32x32",
+          src: "icons/favicon-32x32.png",
+          type: "image/png",
+        },
+      ],
+      lang: "en",
+      launch_handler: {
+        client_mode: ["focus-existing", "navigate-existing", "auto"],
       },
+      name,
+      orientation: "natural",
+      prefer_related_applications: true,
       protocol_handlers: [
         {
           protocol: "web+sceneforge",
           url: "/index.html#!%s",
         },
       ],
-      handle_links: "preferred",
-      categories: ["productivity", "utilities", "education", "entertainment"],
-      launch_handler: {
-        client_mode: ["focus-existing", "navigate-existing", "auto"],
-      },
-      shortcuts: [
-        {
-          name: "New Scene",
-          short_name: "New",
-          url: "/index.html#!action=new-tab&tab=new-scene",
-          description: "Create a new scene",
-          icons: [
-            {
-              src: "icons/shortcut-icon-deployed-code.png",
-              sizes: "96x96",
-              type: "image/png",
-              purpose: "any",
-            },
-          ],
-        },
-        {
-          name: "Settings",
-          short_name: "Settings",
-          url: "/index.html#!action=open-tab&tab=settings",
-          description: "Open the settings",
-          icons: [
-            {
-              src: "icons/shortcut-icon-settings.png",
-              sizes: "96x96",
-              type: "image/png",
-              purpose: "any",
-            },
-          ],
-        },
-        {
-          name: "About Scene Forge",
-          short_name: "About",
-          url: "/index.html#!action=open-tab&tab=about",
-          description: "About Scene Forge",
-          icons: [
-            {
-              src: "icons/shortcut-icon-info.png",
-              sizes: "96x96",
-              type: "image/png",
-              purpose: "any",
-            },
-          ],
-        },
-      ],
-      icons: [
-        {
-          src: "icons/favicon.ico",
-          sizes: "48x48",
-          type: "image/x-icon",
-          purpose: "any",
-        },
-        {
-          src: "icons/512.png",
-          sizes: "512x512",
-          type: "image/png",
-          purpose: "any",
-        },
-        {
-          src: "icons/1024.png",
-          sizes: "1024x1024",
-          type: "image/png",
-          purpose: "maskable",
-        },
-        {
-          src: "icons/icon.svg",
-          sizes: "any",
-          type: "image/svg+xml",
-          purpose: "any",
-        },
-        {
-          src: "icons/monochrome-512.png",
-          sizes: "512x512",
-          type: "image/png",
-          purpose: "monochrome",
-        },
-        {
-          src: "icons/monochrome-1024.png",
-          sizes: "1024x1024",
-          type: "image/png",
-          purpose: "maskable monochrome",
-        },
-        {
-          src: "icons/favicon-16x16.png",
-          sizes: "16x16",
-          type: "image/png",
-          purpose: "any",
-        },
-        {
-          src: "icons/favicon-32x32.png",
-          sizes: "32x32",
-          type: "image/png",
-          purpose: "any",
-        },
-      ],
       screenshots: [
         {
-          src: "screenshots/macos-main-1280.png",
-          sizes: "1280x800",
-          type: "image/png",
           form_factor: "wide",
           label: "Entry Screen of Scene Forge",
           platform: "macos",
+          sizes: "1280x800",
+          src: "screenshots/macos-main-1280.png",
+          type: "image/png",
         },
         {
-          src: "screenshots/macos-modelview-1280.png",
-          sizes: "1280x800",
-          type: "image/png",
           form_factor: "wide",
           label: "Model Viewer and Editor Screen",
           platform: "macos",
+          sizes: "1280x800",
+          src: "screenshots/macos-modelview-1280.png",
+          type: "image/png",
         },
         {
-          src: "screenshots/ios-main-iphone-15-pro-max.jpeg",
-          sizes: "1290x2796",
-          type: "image/jpeg",
           form_factor: "narrow",
           label: "Entry Screen of Scene Forge",
           platform: "ios",
+          sizes: "1290x2796",
+          src: "screenshots/ios-main-iphone-15-pro-max.jpeg",
+          type: "image/jpeg",
         },
       ],
-      prefer_related_applications: true,
+      short_name: name,
+      shortcuts: [
+        {
+          description: "Create a new scene",
+          icons: [
+            {
+              purpose: "any",
+              sizes: "96x96",
+              src: "icons/shortcut-icon-deployed-code.png",
+              type: "image/png",
+            },
+          ],
+          name: "New Scene",
+          short_name: "New",
+          url: "/index.html#!action=new-tab&tab=new-scene",
+        },
+        {
+          description: "Open the settings",
+          icons: [
+            {
+              purpose: "any",
+              sizes: "96x96",
+              src: "icons/shortcut-icon-settings.png",
+              type: "image/png",
+            },
+          ],
+          name: "Settings",
+          short_name: "Settings",
+          url: "/index.html#!action=open-tab&tab=settings",
+        },
+        {
+          description: "About Scene Forge",
+          icons: [
+            {
+              purpose: "any",
+              sizes: "96x96",
+              src: "icons/shortcut-icon-info.png",
+              type: "image/png",
+            },
+          ],
+          name: "About Scene Forge",
+          short_name: "About",
+          url: "/index.html#!action=open-tab&tab=about",
+        },
+      ],
+      start_url: "/",
+      theme_color: "#86159d",
       ...(isProd
         ? {
           id: "https://sceneforge.org/",
-          scope: "https://sceneforge.org/",
           related_applications: [
             {
+              id: "https://sceneforge.org/",
               platform: "webapp",
               url: "https://sceneforge.org/manifest.webmanifest",
-              id: "https://sceneforge.org/",
             },
           ],
+          scope: "https://sceneforge.org/",
         }
         : (isDev
           ? {

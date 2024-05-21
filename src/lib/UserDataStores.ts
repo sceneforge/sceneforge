@@ -1,10 +1,10 @@
 import { type ObjectStores } from "./Database";
 
 export const UserDataStores: ObjectStores = {
-  settings: {
+  models: {
     keyPath: "key",
   },
-  models: {
+  settings: {
     keyPath: "key",
   },
 };

@@ -5,7 +5,7 @@ const toNumber = (value: string): number => {
 export const changeSize = (
   panel: HTMLElement | null | undefined,
   orientation: "block" | "inline",
-  position: "start" | "end",
+  position: "end" | "start",
   { movementX, movementY }: Pick<MouseEvent, "movementX" | "movementY">
 ) => {
   if (!panel) return;
@@ -38,9 +38,9 @@ const elementInTarget = (
 export const targetClicked = (
   panel: HTMLElement | null | undefined,
   orientation: "block" | "inline",
-  position: "start" | "end",
-  { target, offsetX, offsetY }: MouseEvent,
-  pseudoElt?: string | null,
+  position: "end" | "start",
+  { offsetX, offsetY, target }: MouseEvent,
+  pseudoElt?: null | string,
   children?: boolean
 ) => {
   if (!panel) return false;

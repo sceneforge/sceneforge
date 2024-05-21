@@ -11,48 +11,49 @@ import {
   useRef,
   useState,
 } from "react";
-import { type Variant } from "../../types/variants";
+
 import { cls } from "../../lib/cls";
 import { variantBgClass, variantTextClass } from "../../lib/variantClasses";
+import { type Variant } from "../../types/variants";
 
 export type ButtonToggleEvent = {
-  nativeEvent?: ReactMouseEvent<HTMLButtonElement, MouseEvent>["nativeEvent"];
-  target?: HTMLButtonElement;
   direct: boolean;
-  type: "toggle";
+  nativeEvent?: ReactMouseEvent<HTMLButtonElement, MouseEvent>["nativeEvent"];
   state: "pressed" | "released";
+  target?: HTMLButtonElement;
+  type: "toggle";
 };
 
 export type ToggleProps<Toggle = unknown, Regular = unknown> =
   | ({
-    toggle: true;
-    variant?: Variant | [Variant, Variant];
-    pressed?: boolean | "true" | "false";
-    label?: string | [string, string];
+    label?: [string, string] | string;
     onToggle?: (event: ButtonToggleEvent) => void;
+    pressed?: "false" | "true" | boolean;
+    toggle: true;
+    variant?: [Variant, Variant] | Variant;
   } & Toggle)
   | ({
+    label?: string;
+    onToggle?: never;
+    pressed?: never;
     toggle?: false;
     variant?: Variant;
-    pressed?: never;
-    onToggle?: never;
-    label?: string;
   } & Regular);
 
-export type ButtonProps = Omit<
+export type ButtonProps = {
+  clear?: boolean;
+  extendedClassName?: string;
+  grow?: boolean;
+  inverted?: boolean;
+  popovertarget?: string;
+  ref?: ForwardedRef<ButtonComponent>;
+  shrink?: boolean;
+  size?: "full" | "lg" | "md" | "sm" | "xl" | "xs";
+  variant?: Variant;
+} & Omit<
   DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
   "type"
-> & {
-  extendedClassName?: string;
-  clear?: boolean;
-  grow?: boolean;
-  shrink?: boolean;
-  size?: "xs" | "sm" | "md" | "lg" | "xl" | "full";
-  popovertarget?: string;
-  inverted?: boolean;
-  variant?: Variant;
-  ref?: ForwardedRef<ButtonComponent>;
-} & ToggleProps;
+> & ToggleProps;
 
 export type ButtonComponent = {
   button?: HTMLButtonElement;
@@ -62,20 +63,20 @@ export type ButtonComponent = {
 
 export const Button = forwardRef(function Button(
   {
+    children,
+    className,
+    clear,
     extendedClassName,
     grow = true,
-    shrink,
-    clear,
-    label,
-    size,
-    children,
-    variant = "none",
-    className,
-    toggle = false,
-    pressed,
     inverted,
+    label,
     onClick,
     onToggle,
+    pressed,
+    shrink,
+    size,
+    toggle = false,
+    variant = "none",
     ...props
   }: ButtonProps,
   ref: ForwardedRef<ButtonComponent>
@@ -106,11 +107,11 @@ export const Button = forwardRef(function Button(
         }
         if (onToggle) {
           onToggle({
-            target: event?.currentTarget ?? buttonRef.current ?? undefined,
             direct: !!event,
-            type: "toggle",
-            state: pressedState ? "released" : "pressed",
             nativeEvent: event?.nativeEvent,
+            state: pressedState ? "released" : "pressed",
+            target: event?.currentTarget ?? buttonRef.current ?? undefined,
+            type: "toggle",
           });
         }
       }
@@ -151,16 +152,14 @@ export const Button = forwardRef(function Button(
 
   const toggleProps = toggle
     ? {
-      "role": "switch",
       "aria-pressed": pressedState,
+      "role": "switch",
     }
     : {};
 
   return (
     <button
       aria-label={children && currentLabel ? currentLabel : undefined}
-      data-variant={currentVariant}
-      ref={buttonRef}
       className={cls(
         className ?? (clear
           ? "bg-transparent c-inherit b-none b-0 cursor-pointer c-inherit m-0 p-0 inline-block"
@@ -188,9 +187,11 @@ export const Button = forwardRef(function Button(
         extendedClassName
       )}
       data-size={size}
-      type="button"
+      data-variant={currentVariant}
       onClick={handleClickEvent}
+      ref={buttonRef}
       title={currentLabel}
+      type="button"
       {...toggleProps}
       {...props}
     >

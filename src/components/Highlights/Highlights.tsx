@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Button } from "../Button";
-import { HighlightsItem, type HighlightsItemProps } from "./HighlightsItem";
+
 import { cls } from "../../lib/cls";
 import { getShiftedIndex } from "../../lib/getShiftedIndex";
+import { Button } from "../Button";
+import { HighlightsItem, type HighlightsItemProps } from "./HighlightsItem";
 
 const SLIDE_INTERVAL = 5000; // 5 seconds
 
 export type HighlightsProps = {
-  items: HighlightsItemProps[];
   extendedClassName?: string;
+  items: HighlightsItemProps[];
 };
 
-export const Highlights = ({ items, extendedClassName }: HighlightsProps) => {
+export const Highlights = ({ extendedClassName, items }: HighlightsProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [intervalProcess, setIntervalProcess] = useState<NodeJS.Timeout | null>(
     null
@@ -63,7 +64,6 @@ export const Highlights = ({ items, extendedClassName }: HighlightsProps) => {
       >
         {items.map((item, index) => (
           <li
-            key={index}
             className={cls(
               "absolute inset-t-0 inset-l-0 h-full w-full list-none",
               zIndexes[index],
@@ -71,6 +71,7 @@ export const Highlights = ({ items, extendedClassName }: HighlightsProps) => {
                 ? "animate-in fade-in animate-slide-in-right"
                 : "animate-out"
             )}
+            key={index}
           >
             <HighlightsItem {...item} />
           </li>
@@ -79,13 +80,13 @@ export const Highlights = ({ items, extendedClassName }: HighlightsProps) => {
       <div className="flex flex-row justify-center">
         {items.map((_, index) => (
           <Button
-            key={index}
             className={cls(
               "h-5 w-5 rounded-2xl b-none c-transparent m-1  shadow-md shadow-inset cursor-pointer",
               index === activeIndex
                 ? "bg-accent drop-shadow-xl shadow-white:35"
                 : "bg-primary drop-shadow-lg shadow-white:20"
             )}
+            key={index}
             onClick={handleSlideDropClick(index)}
           >
             {index + 1}

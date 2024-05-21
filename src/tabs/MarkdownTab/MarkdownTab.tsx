@@ -1,13 +1,13 @@
-import { type TabProps } from "../../components/TabPanel";
-import { SafeArea } from "../../components/SafeArea";
 import { Markdown, type MarkdownProps } from "../../components/Markdown";
+import { SafeArea } from "../../components/SafeArea";
+import { type TabProps } from "../../components/TabPanel";
 
 export type MarkdownTabProps = TabProps<MarkdownProps>;
 
-export const MarkdownTab = ({ value, href }: MarkdownTabProps) => {
+export const MarkdownTab = ({ href, value }: MarkdownTabProps) => {
   return (
-    <SafeArea vertical horizonal>
-      <Markdown value={value} href={href} />
+    <SafeArea horizonal vertical>
+      <Markdown href={href} value={value} />
     </SafeArea>
   );
 };

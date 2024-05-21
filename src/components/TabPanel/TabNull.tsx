@@ -1,5 +1,6 @@
 import { useId } from "react";
-import { Tab, TabWrapperProps } from "./Tab";
+
+import { Tab, type TabWrapperProps } from "./Tab";
 
 const component: TabWrapperProps<object>["Component"] = () => null;
 

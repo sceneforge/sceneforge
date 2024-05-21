@@ -1,16 +1,17 @@
-import { v4 as uuid } from "uuid";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { v4 as uuid } from "uuid";
+
 import { useTabPanel } from "../components/TabPanel";
 import { ModelViewTab, type ModelViewTabProps } from "../tabs";
 import { MarkdownTab, type MarkdownTabProps } from "../tabs/MarkdownTab";
-import { useTranslation } from "react-i18next";
 
 export const useTabs = () => {
   const { t } = useTranslation("common");
-  const { activateTab, newTab, getTabById, closeTab } = useTabPanel();
+  const { activateTab, closeTab, getTabById, newTab } = useTabPanel();
 
   const newMarkdownTab = useCallback(
-    ({ id, title, translation, href, value }: MarkdownTabProps) => {
+    ({ href, id, title, translation, value }: MarkdownTabProps) => {
       if (id) {
         const tab = getTabById(id);
         if (tab) {
@@ -20,18 +21,11 @@ export const useTabs = () => {
       }
 
       newTab<MarkdownTabProps>({
+        active: true,
+        component: MarkdownTab,
         id: id ?? uuid(),
-        title: title ?? t("tabs.untitledMarkdown"),
-        translation:
-          !title && translation
-            ? translation
-            : (!title && !translation
-              ? {
-                ns: "common",
-                key: "tabs.untitledMarkdown",
-              }
-              : undefined),
         props: {
+          href,
           id,
           title,
           translation:
@@ -39,22 +33,29 @@ export const useTabs = () => {
               ? translation
               : (!title && !translation
                 ? {
-                  ns: "common",
                   key: "tabs.untitledMarkdown",
+                  ns: "common",
                 }
                 : undefined),
-          href,
           value,
         },
-        active: true,
-        component: MarkdownTab,
+        title: title ?? t("tabs.untitledMarkdown"),
+        translation:
+          !title && translation
+            ? translation
+            : (!title && !translation
+              ? {
+                key: "tabs.untitledMarkdown",
+                ns: "common",
+              }
+              : undefined),
       });
     },
     [t, activateTab, getTabById, newTab]
   );
 
   const newModelViewTab = useCallback(
-    ({ id, title, translation, gltf }: Partial<ModelViewTabProps>) => {
+    ({ gltf, id, title, translation }: Partial<ModelViewTabProps>) => {
       if (id) {
         const tab = getTabById(id);
         if (tab) {
@@ -70,23 +71,23 @@ export const useTabs = () => {
           ? translation
           : (!title && !translation
             ? {
-              ns: "common",
               key: "tabs.untitledModel",
+              ns: "common",
             }
             : undefined);
 
       newTab<ModelViewTabProps>({
+        active: true,
+        component: ModelViewTab,
         id: withId,
-        title: withTitle,
-        translation: withTranslation,
         props: {
+          gltf,
           id: withId,
           title: withTitle,
           translation: withTranslation,
-          gltf,
         },
-        active: true,
-        component: ModelViewTab,
+        title: withTitle,
+        translation: withTranslation,
       });
     },
     [t, newTab, getTabById, activateTab]
@@ -104,8 +105,8 @@ export const useTabs = () => {
   );
 
   return {
-    newModelViewTab,
-    newMarkdownTab,
     closeModelViewTab,
+    newMarkdownTab,
+    newModelViewTab,
   };
 };

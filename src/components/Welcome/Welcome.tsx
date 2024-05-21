@@ -7,25 +7,26 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Dialog } from "../Dialog";
-import { Highlights } from "../Highlights";
 import { useTranslation } from "react-i18next";
-import { useAppContext } from "../App";
-import { usePanel } from "../Panel";
-import { Icon } from "../Icon";
+
+import { fetchContent } from "../../lib/fetchContent";
 import {
   type Highlight,
   WelcomeData,
   isWelcomeData,
 } from "../../lib/isWelcomeData";
-import { fetchContent } from "../../lib/fetchContent";
+import { useAppContext } from "../App";
+import { Dialog } from "../Dialog";
+import { Highlights } from "../Highlights";
+import { Icon } from "../Icon";
+import { usePanel } from "../Panel";
 
 export const Welcome = () => {
   const [highlights, setHighlights] = useState<Highlight[]>([]);
   const [showWelcome, setShowWelcome] = useState(true);
   const { t } = useTranslation("Welcome");
   const { resolvedLanguage } = useAppContext();
-  const { changeLanguage, languageList, changeShowWelcome } = usePanel();
+  const { changeLanguage, changeShowWelcome, languageList } = usePanel();
   const languageId = useId();
 
   const handleClose = useCallback(() => {
@@ -61,10 +62,10 @@ export const Welcome = () => {
   return (
     showWelcomeDialog && (
       <Dialog
-        variant="default"
+        onClose={handleClose}
         open={true}
         title={t("title")}
-        onClose={handleClose}
+        variant="default"
       >
         <Suspense fallback={<div>Loading...</div>}>
           <Highlights
@@ -79,12 +80,12 @@ export const Welcome = () => {
                     <Icon icon="globe" />
                   </label>
                   <select
-                    id={languageId}
                     className="accent-accent"
                     defaultValue={resolvedLanguage}
+                    id={languageId}
                     onChange={changeLanguage}
                   >
-                    {languageList.map(({ local, translated, locale }) => (
+                    {languageList.map(({ local, locale, translated }) => (
                       <option key={locale} value={locale}>
                         {local === translated
                           ? local
@@ -98,9 +99,9 @@ export const Welcome = () => {
             <label className="flex flex-shrink flex-row items-center gap-2 opacity-50 hover:opacity-100">
               <input
                 className="flex-shrink accent-accent"
-                type="checkbox"
                 name="hide-welcome"
                 onChange={handleHideWelcome}
+                type="checkbox"
               />
               <span className="flex-shrink">{t("dontShowMessageLabel")}</span>
             </label>

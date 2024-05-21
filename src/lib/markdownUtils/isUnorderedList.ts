@@ -1,12 +1,12 @@
 import { ReactNode, isValidElement } from "react";
 
 export type UnorderedList = {
-  type: "ul";
-  props: {
-    children?: ReactNode;
-    [key: string]: unknown;
-  };
   [key: string]: unknown;
+  props: {
+    [key: string]: unknown;
+    children?: ReactNode;
+  };
+  type: "ul";
 };
 
 export const isUnorderedList = (node: unknown): node is UnorderedList => {

@@ -1,8 +1,9 @@
 import { type ISceneLoaderAsyncResult } from "@babylonjs/core/Loading/sceneLoader";
 import { type Scene } from "@babylonjs/core/scene";
 import { type RefObject, useCallback, useState } from "react";
-import { importGLTF } from "../../../lib/importGLTF";
 import { useTranslation } from "react-i18next";
+
+import { importGLTF } from "../../../lib/importGLTF";
 
 export const useGLTFLoader = (sceneRef: RefObject<Scene | null>) => {
   const { t } = useTranslation("ModelViewer");

@@ -9,6 +9,11 @@ import {
   useRef,
   useState,
 } from "react";
+
+import { cls } from "../../lib/cls";
+import { setPositionOnTarget } from "../../lib/setPosition";
+import { variantBgClass } from "../../lib/variantClasses";
+import { type Variant } from "../../types/variants";
 import { Action, type ActionProps } from "../Action";
 import {
   Button,
@@ -17,42 +22,38 @@ import {
   ButtonToggleEvent,
 } from "../Button";
 import { IconButton, type IconButtonProps } from "../IconButton";
-import { setPositionOnTarget } from "../../lib/setPosition";
-import { cls } from "../../lib/cls";
-import { type Variant } from "../../types/variants";
-import { variantBgClass } from "../../lib/variantClasses";
 
-export type DropdownProps = (
-  | (Omit<ButtonProps, "toggle" | "pressed"> & { icon?: never })
-  | Omit<IconButtonProps, "toggle" | "pressed">
-) & {
-  parentDropdown?: string;
-  contentVariant?: Variant;
+export type DropdownProps = {
   clearDropdown?: () => void;
+  contentVariant?: Variant;
   items?: (
-    | (ActionProps & { type: "item"; active?: boolean })
     | {
-      type: "divider";
-      onClick?: never;
-      label?: never;
-      icon?: never;
-      variant?: never;
-      className?: string;
       active?: never;
-      parentDropdown?: never;
+      className?: string;
       clearDropdown?: never;
+      icon?: never;
+      label?: never;
+      onClick?: never;
+      parentDropdown?: never;
+      type: "divider";
+      variant?: never;
     }
+    | ({ active?: boolean; type: "item" } & ActionProps)
   )[];
-};
+  parentDropdown?: string;
+} & (
+  | ({ icon?: never } & Omit<ButtonProps, "pressed" | "toggle">)
+  | Omit<IconButtonProps, "pressed" | "toggle">
+);
 
 export const Dropdown = forwardRef(function Dropdown(
   {
-    items,
+    clearDropdown,
     contentVariant,
+    extendedClassName,
+    items,
     onToggle,
     parentDropdown,
-    clearDropdown,
-    extendedClassName,
     ...props
   }: DropdownProps,
   ref: ForwardedRef<ButtonComponent>
@@ -78,10 +79,10 @@ export const Dropdown = forwardRef(function Dropdown(
     itemListRef.current?.hidePopover();
     if (onToggle)
       onToggle({
-        type: "toggle",
-        state: "released",
         direct: false,
+        state: "released",
         target: buttonRef.current?.button,
+        type: "toggle",
       });
   }, [buttonRef, onToggle]);
 
@@ -201,8 +202,8 @@ export const Dropdown = forwardRef(function Dropdown(
 
   const buttonProps = {
     ...props,
-    toggle: true,
     onToggle: handleToggle,
+    toggle: true,
   };
 
   return (
@@ -211,36 +212,33 @@ export const Dropdown = forwardRef(function Dropdown(
         ? (
           <IconButton
             {...(buttonProps as IconButtonProps)}
-            toggle
-            pressed={pressed}
-            ref={buttonRef}
-            popovertargetaction={pressed ? "show" : "hide"}
-            popovertarget={popoverId}
             extendedClassName={cls(
               extendedClassName,
               pressed ? "dark:bg-black:20 light:bg-white:20" : undefined
             )}
+            popovertarget={popoverId}
+            popovertargetaction={pressed ? "show" : "hide"}
+            pressed={pressed}
+            ref={buttonRef}
+            toggle
           />
         )
         : (
           <Button
             {...(buttonProps as ButtonProps)}
-            toggle
-            pressed={pressed}
-            popovertargetaction={pressed ? "show" : "hide"}
-            popovertarget={popoverId}
-            ref={buttonRef}
             extendedClassName={cls(
               extendedClassName,
               pressed ? "dark:bg-black:20 light:bg-white:20" : undefined
             )}
+            popovertarget={popoverId}
+            popovertargetaction={pressed ? "show" : "hide"}
+            pressed={pressed}
+            ref={buttonRef}
+            toggle
           />
         )}
       {items && items.length > 0 && (
         <ul
-          id={popoverId}
-          popover="manual"
-          ref={itemListRef}
           anchor={parentDropdown ?? undefined}
           className={cls(
             "fixed w-min list-none m-0 p-1 b-1 b-solid light:b-white:15 dark:b-black:15 c-inherit shadow-2xl shadow-black rounded-3",
@@ -249,16 +247,19 @@ export const Dropdown = forwardRef(function Dropdown(
               : "bg-accent",
             visible ? "opacity-100" : "opacity-0 pointer-events-none"
           )}
+          id={popoverId}
+          popover="manual"
+          ref={itemListRef}
         >
-          {items.map(({ type, onClick, className, active, ...item }, index) => (
+          {items.map(({ active, className, onClick, type, ...item }, index) => (
             <li
-              key={index}
               className={cls(
                 className,
                 active
                   ? "dark:bg-black:30 light:bg-white:30 rounded-2"
                   : undefined
               )}
+              key={index}
             >
               {type === "divider"
                 ? (
@@ -269,9 +270,9 @@ export const Dropdown = forwardRef(function Dropdown(
                     className="w-full cursor-pointer rounded-2 b-none bg-transparent p-2 text-start text-nowrap c-inherit dark:hover:bg-black:25 light:hover:bg-white:25"
                     contentVariant={contentVariant}
                     {...item}
+                    clearDropdown={clear}
                     onClick={handleItemClick(onClick)}
                     parentDropdown={popoverId}
-                    clearDropdown={clear}
                   />
                 )}
             </li>

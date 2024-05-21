@@ -1,38 +1,39 @@
-import { Dispatch, useCallback, useMemo } from "react";
-import { PanelSheetHeader } from "../PanelSheet";
-import { Mode } from "./mode";
-import { Model } from "../../lib/isModel";
-import { loadFile } from "../../lib/loadFile";
 import { fileOpen } from "browser-fs-access";
-import { useModelContext } from "../ModelContext";
-import { Toolbar } from "../Toolbar";
-import { useTabPanel } from "../TabPanel";
+import { Dispatch, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Model } from "../../lib/isModel";
+import { loadFile } from "../../lib/loadFile";
+import { useModelContext } from "../ModelContext";
+import { PanelSheetHeader } from "../PanelSheet";
+import { useTabPanel } from "../TabPanel";
+import { Toolbar } from "../Toolbar";
+import { Mode } from "./mode";
+
 export type ModelViewerHeaderProps = {
-  model?: Model;
   mode?: Mode;
-  setMode?: Dispatch<Mode>;
+  model?: Model;
   onImported?: (model: Partial<Model>) => Promise<Model>;
+  setMode?: Dispatch<Mode>;
 };
 
 export const ModelViewerHeader = ({
-  model,
   mode = Mode.Edit,
-  setMode,
+  model,
   onImported,
+  setMode,
 }: ModelViewerHeaderProps) => {
   const { t } = useTranslation("ModelViewer");
   const modes = useMemo(
     () => ({
-      view: t("modes.view"),
       edit: t("modes.edit"),
       material: t("modes.material"),
+      view: t("modes.view"),
     }),
     [t]
   );
   const { updateModel } = useModelContext(model);
-  const { updateTabTitle, activeTab } = useTabPanel();
+  const { activeTab, updateTabTitle } = useTabPanel();
   const modeLabel = useMemo(() => modes[mode], [modes, mode]);
 
   const handleModeChange = useCallback(
@@ -43,19 +44,19 @@ export const ModelViewerHeader = ({
   const doImport = useCallback(async () => {
     const result = await fileOpen({
       description: t("ModelViewerHeader.fileImportDescription"),
-      mimeTypes: ["model/gltf-binary", "model/gltf+json"],
-      extensions: [".glb", ".gltf"],
-      multiple: false,
       excludeAcceptAllOption: true,
+      extensions: [".glb", ".gltf"],
+      mimeTypes: ["model/gltf-binary", "model/gltf+json"],
+      multiple: false,
     });
     const { blob } = await loadFile(result);
     if (onImported) {
       await onImported({
-        id: model?.id,
-        title: model?.title ?? t("ModelViewerHeader.untitled"),
-        gltf: blob(),
         capture: undefined,
         createdAt: model?.createdAt ?? new Date(),
+        gltf: blob(),
+        id: model?.id,
+        title: model?.title ?? t("ModelViewerHeader.untitled"),
       });
     }
   }, [model, onImported, t]);
@@ -87,47 +88,47 @@ export const ModelViewerHeader = ({
     <PanelSheetHeader
       editable={mode === Mode.Edit}
       name="model-name"
-      title={model?.title ?? t("ModelViewerHeader.untitled")}
       onUpdate={handleModelNameChange}
+      title={model?.title ?? t("ModelViewerHeader.untitled")}
     >
       <Toolbar
-        icon="menu"
         contentVariant="default"
+        icon="menu"
         items={[
           {
-            type: "item",
-            label: t("ModelViewerHeader.actions.modelDropdown"),
             items: [
               {
-                type: "item",
                 label: t("ModelViewerHeader.actions.importButton"),
                 onClick: handleImport,
+                type: "item",
               },
             ],
+            label: t("ModelViewerHeader.actions.modelDropdown"),
+            type: "item",
           },
           {
-            type: "item",
-            label: modeLabel,
             items: [
               {
-                type: "item",
-                label: t("modes.view"),
                 active: mode === Mode.View,
+                label: t("modes.view"),
                 onClick: handleModeChange(Mode.View),
+                type: "item",
               },
               {
-                type: "item",
-                label: t("modes.edit"),
                 active: mode === Mode.Edit,
+                label: t("modes.edit"),
                 onClick: handleModeChange(Mode.Edit),
+                type: "item",
               },
               {
-                type: "item",
-                label: t("modes.material"),
                 active: mode === Mode.Material,
+                label: t("modes.material"),
                 onClick: handleModeChange(Mode.Material),
+                type: "item",
               },
             ],
+            label: modeLabel,
+            type: "item",
           },
         ]}
       />

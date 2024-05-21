@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+
 import { Dialog } from "../Dialog";
 import { useAppInstall } from "./useAppInstall";
 
@@ -11,14 +12,12 @@ export const AppInstall = () => {
 
   return (
     <Dialog
-      title={t("title")}
       description={t("description")}
       onClose={closeInstallDialog}
-      variant="default"
+      title={t("title")}
       toolbar={{
         items: [
           {
-            type: "item",
             label: t("actions.installButton"),
             onClick: () => {
               installPrompt()
@@ -29,9 +28,11 @@ export const AppInstall = () => {
                   closeInstallDialog();
                 });
             },
+            type: "item",
           },
         ],
       }}
+      variant="default"
     />
   );
 };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { useModelContext } from "../ModelContext";
 
 export type UseModelListProps = {
@@ -7,7 +8,7 @@ export type UseModelListProps = {
 
 export const useModelList = ({ active }: UseModelListProps) => {
   const [loaded, setLoaded] = useState(false);
-  const { models, loadModels } = useModelContext();
+  const { loadModels, models } = useModelContext();
 
   useEffect(() => {
     if (!active) {

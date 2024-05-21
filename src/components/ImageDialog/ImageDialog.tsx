@@ -1,15 +1,16 @@
 import { useCallback, useState } from "react";
+
 import { Button } from "../Button";
 import { Dialog } from "../Dialog";
 import { Image } from "../Image";
 
 export type ImageDialogProps = {
+  alt?: string;
   src: string;
   title?: string;
-  alt?: string;
 };
 
-export const ImageDialog = ({ src, title, alt }: ImageDialogProps) => {
+export const ImageDialog = ({ alt, src, title }: ImageDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleImageDialogClick = useCallback(() => {
     setIsOpen(previousIsOpen => !previousIsOpen);
@@ -24,25 +25,25 @@ export const ImageDialog = ({ src, title, alt }: ImageDialogProps) => {
         onClick={handleImageDialogClick}
       >
         <Image
-          src={src}
-          title={title}
           alt={alt}
           className="block h-full w-full object-scale-down"
+          src={src}
+          title={title}
         />
       </Button>
       {isOpen && (
         <Dialog
-          variant="accent"
-          title={alt}
-          onClose={closeImageDialog}
           extendedClassName="w-full lg:w-80% xl:w-70% 2xl:w-60%"
+          onClose={closeImageDialog}
+          title={alt}
+          variant="accent"
         >
           <figure>
             <Image
-              src={src}
-              title={title}
               alt={alt}
               className="block h-full w-full object-scale-down"
+              src={src}
+              title={title}
             />
             <figcaption className="block text-center text-size-lg">
               {title}

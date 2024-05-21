@@ -2,9 +2,9 @@ import { Action, ActionProps } from "../Action";
 import { PanelSheetHeaderGroup } from "./PanelSheetHeaderGroup";
 
 type ToolbarGroup = {
-  title: string;
-  description?: string;
   actions: ActionProps[];
+  description?: string;
+  title: string;
 };
 
 export type PanelSheetHeaderToolbarProps = {
@@ -14,8 +14,8 @@ export type PanelSheetHeaderToolbarProps = {
 export const PanelSheetHeaderToolbar = ({
   items,
 }: PanelSheetHeaderToolbarProps) => {
-  return items.map(({ title, description, actions }, index) => (
-    <PanelSheetHeaderGroup key={index} title={title} description={description}>
+  return items.map(({ actions, description, title }, index) => (
+    <PanelSheetHeaderGroup description={description} key={index} title={title}>
       {actions.map((action, index) => (
         <Action key={index} {...action} />
       ))}

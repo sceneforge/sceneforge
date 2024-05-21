@@ -1,25 +1,26 @@
 import { type PropsWithChildren, type ReactNode } from "react";
-import { Popover } from "../Popover";
+
 import { Heading } from "../Heading";
+import { Popover } from "../Popover";
 
 export type PanelSheetHeaderGroupProps = PropsWithChildren<{
-  title?: string;
   description?: ReactNode;
+  title?: string;
 }>;
 
 export const PanelSheetHeaderGroup = ({
-  title,
-  description,
   children,
+  description,
+  title,
 }: PanelSheetHeaderGroupProps) => {
   return (
     <>
       <div
-        className="flex flex-row items-center text-inherit"
         aria-label={title}
+        className="flex flex-row items-center text-inherit"
       >
         {title && !description && (
-          <Heading level={3} className="hidden font-size-sm sm:block">
+          <Heading className="hidden font-size-sm sm:block" level={3}>
             {title}
           </Heading>
         )}

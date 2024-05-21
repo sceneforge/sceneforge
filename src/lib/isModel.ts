@@ -1,9 +1,9 @@
 export type Model = {
-  title: string;
-  id: string;
-  gltf?: Blob;
   capture?: string;
   createdAt?: Date;
+  gltf?: Blob;
+  id: string;
+  title: string;
   updatedAt?: Date;
 };
 

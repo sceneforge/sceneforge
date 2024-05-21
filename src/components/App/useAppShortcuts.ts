@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
+
+import { useShortcuts } from "../../hooks/useShortcuts";
+import { isEqual } from "../../lib/isEqual";
 import { parseParams } from "../../lib/parseParams";
 import {
   ShortcutActionType,
   parseShortcutAction,
 } from "../../lib/shortcutAction";
-import { useShortcuts } from "../../hooks/useShortcuts";
-import { isEqual } from "../../lib/isEqual";
 
 export const useAppShortcuts = () => {
   const [params, setParams] = useState<Record<string, unknown>>({});

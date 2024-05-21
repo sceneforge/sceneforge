@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect } from "react";
+
 import {
   AppInstallContext,
   type BeforeInstallPromptEvent,

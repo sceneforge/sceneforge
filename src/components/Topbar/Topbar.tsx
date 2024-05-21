@@ -1,20 +1,20 @@
-import { useTabPanel } from "../TabPanel";
-import { Variant } from "../../types/variants";
 import { cls } from "../../lib/cls";
 import { variantBgClass } from "../../lib/variantClasses";
+import { Variant } from "../../types/variants";
+import { useTabPanel } from "../TabPanel";
 import { Toolbar, ToolbarProps } from "../Toolbar";
 
 export type TopbarProps = {
   title: string;
-  variant?: Variant;
-  toolbarStart?: ToolbarProps;
   toolbarEnd?: ToolbarProps;
+  toolbarStart?: ToolbarProps;
+  variant?: Variant;
 };
 
 export const Topbar = ({
   title,
-  toolbarStart,
   toolbarEnd,
+  toolbarStart,
   variant = "default",
 }: TopbarProps) => {
   const { tabsPosition } = useTabPanel();

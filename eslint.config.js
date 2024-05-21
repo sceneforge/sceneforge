@@ -1,20 +1,21 @@
-import globals from "globals";
-import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
 import { fixupPluginRules } from "@eslint/compat";
-import react from "eslint-plugin-react";
+import eslint from "@eslint/js";
+import stylistic from "@stylistic/eslint-plugin";
 import unocss from "@unocss/eslint-config/flat";
+import perfectionistNatural from "eslint-plugin-perfectionist/configs/recommended-natural";
+import react from "eslint-plugin-react";
 import eslintPluginReactCompiler from "eslint-plugin-react-compiler";
 import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
-import stylistic from "@stylistic/eslint-plugin";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
     plugins: {
+      "@stylistic": stylistic,
       "react-compiler": fixupPluginRules(eslintPluginReactCompiler),
       "react-hooks": fixupPluginRules(eslintPluginReactHooks),
-      "@stylistic": stylistic,
     },
   },
   {
@@ -50,18 +51,18 @@ export default tseslint.config(
     ...react.recommended,
     rules: {
       "react-compiler/react-compiler": "error",
-      "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
+      "react-hooks/rules-of-hooks": "error",
     },
   },
   {
     files: ["src/sw/**/*.{js,mjs,cjs,ts,mts}"],
     languageOptions: {
+      globals: globals.serviceworker,
       parserOptions: {
         project: "./src/sw/tsconfig.json",
         tsconfigRootDir: import.meta.dirname,
       },
-      globals: globals.serviceworker,
     },
   },
   eslintPluginUnicorn.configs["flat/recommended"],
@@ -69,12 +70,30 @@ export default tseslint.config(
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,jsx,mjsx,tsx,mtsx}"],
     rules: {
-      "@stylistic/quotes": ["error", "double"],
-      "@stylistic/semi": ["error", "always"],
+      "@stylistic/comma-dangle": ["error", {
+        arrays: "always-multiline",
+        enums: "always-multiline",
+        exports: "always-multiline",
+        functions: "never",
+        generics: "always-multiline",
+        imports: "always-multiline",
+        objects: "always-multiline",
+        tuples: "always-multiline",
+      }],
       "@stylistic/eol-last": ["error", "always"],
+      "@stylistic/function-paren-newline": ["error", "multiline-arguments"],
       "@stylistic/indent": ["error", 2],
-      "@stylistic/max-statements-per-line": ["error", { max: 1 }],
       "@stylistic/linebreak-style": ["error", "unix"],
+      "@stylistic/max-len": ["error", {
+        code: 80,
+        ignoreRegExpLiterals: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+        ignoreUrls: true,
+        tabWidth: 2,
+
+      }],
+      "@stylistic/max-statements-per-line": ["error", { max: 1 }],
       "@stylistic/member-delimiter-style": ["error", {
         multiline: {
           delimiter: "semi",
@@ -84,28 +103,9 @@ export default tseslint.config(
       "@stylistic/newline-per-chained-call": ["error", {
         ignoreChainWithDepth: 2,
       }],
-      "@stylistic/function-paren-newline": ["error", "multiline-arguments"],
-      "@stylistic/max-len": ["error", {
-        code: 80,
-        tabWidth: 2,
-        ignoreUrls: true,
-        ignoreStrings: true,
-        ignoreTemplateLiterals: true,
-        ignoreRegExpLiterals: true,
-
-      }],
-      "@stylistic/comma-dangle": ["error", {
-        arrays: "always-multiline",
-        objects: "always-multiline",
-        imports: "always-multiline",
-        exports: "always-multiline",
-        functions: "never",
-        enums: "always-multiline",
-        generics: "always-multiline",
-        tuples: "always-multiline",
-      }],
+      "@stylistic/quotes": ["error", "double"],
+      "@stylistic/semi": ["error", "always"],
       "unicorn/better-regex": "error",
-      "unicorn/switch-case-braces": ["error", "avoid"],
       "unicorn/filename-case": [
         "error",
         {
@@ -116,22 +116,24 @@ export default tseslint.config(
           ignore: ["GLTF"],
         },
       ],
+      "unicorn/no-array-reduce": "off",
+      "unicorn/no-null": "off",
       "unicorn/prevent-abbreviations": [
         "error",
         {
           allowList: {
-            ref: true,
-            Ref: true,
-            props: true,
-            Props: true,
-            params: true,
             Params: true,
+            Props: true,
+            Ref: true,
             args: true,
+            params: true,
+            props: true,
+            ref: true,
           },
         },
       ],
-      "unicorn/no-null": "off",
-      "unicorn/no-array-reduce": "off",
+      "unicorn/switch-case-braces": ["error", "avoid"],
     },
-  }
+  },
+  perfectionistNatural
 );

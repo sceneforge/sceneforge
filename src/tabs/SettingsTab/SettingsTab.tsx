@@ -1,30 +1,31 @@
 import { type ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import { useAppContext } from "../../components/App";
 import { Card } from "../../components/Card";
 import { InputList, InputListItem } from "../../components/InputList";
 import { usePanel } from "../../components/Panel";
-import { useTabPanel } from "../../components/TabPanel";
-import { Section } from "../../components/Section";
 import { SafeArea } from "../../components/SafeArea";
-import { useAppContext } from "../../components/App";
-import { useTranslation } from "react-i18next";
+import { Section } from "../../components/Section";
+import { useTabPanel } from "../../components/TabPanel";
 
 export const SettingsTab = () => {
   const { t } = useTranslation("tabs");
   const {
-    name,
     description,
-    version,
     development,
+    name,
     resolvedLanguage,
+    version,
   } = useAppContext();
   const {
-    getUserData,
-    setUserData,
     changeLanguage,
-    languageList,
     changeShowWelcome,
+    getUserData,
+    languageList,
+    setUserData,
   } = usePanel();
-  const { tabsPosition, setTabsPosition } = useTabPanel();
+  const { setTabsPosition, tabsPosition } = useTabPanel();
   const [showWelcome, setShowWelcome] = useState(true);
 
   const changeTabsPosition = useCallback(
@@ -87,30 +88,30 @@ export const SettingsTab = () => {
   }, [getUserData, setShowWelcome]);
 
   return (
-    <SafeArea vertical horizonal>
+    <SafeArea horizonal vertical>
       <Section level={1} title={t("SettingsTab.title")}>
         <Card title={t("SettingsTab.sections.general.title")}>
           <InputList>
             <InputListItem
               label={t("SettingsTab.sections.general.languageLabel")}
               name="language"
-              type="select"
-              value={resolvedLanguage}
+              onChange={changeLanguage}
               options={
-                languageList?.map(({ local, translated, locale }) => ({
+                languageList?.map(({ local, locale, translated }) => ({
                   text:
                     local === translated ? local : `${local} (${translated})`,
                   value: locale,
                 })) || []
               }
-              onChange={changeLanguage}
+              type="select"
+              value={resolvedLanguage}
             />
             <InputListItem
+              checked={showWelcome}
               label={t("SettingsTab.sections.general.showWelcomeLabel")}
               name="show-welcome"
-              type="checkbox"
-              checked={showWelcome}
               onChange={changeShowWelcomeStartup}
+              type="checkbox"
             />
           </InputList>
         </Card>
@@ -119,19 +120,19 @@ export const SettingsTab = () => {
             <InputListItem
               label={t("SettingsTab.sections.tabs.positionLabel")}
               name="tab-position"
-              type="select"
-              value={tabsPosition}
+              onChange={changeTabsPosition}
               options={[
                 {
-                  value: "top",
                   text: t("SettingsTab.sections.tabs.positionTopOption"),
+                  value: "top",
                 },
                 {
-                  value: "bottom",
                   text: t("SettingsTab.sections.tabs.positionBottomOption"),
+                  value: "bottom",
                 },
               ]}
-              onChange={changeTabsPosition}
+              type="select"
+              value={tabsPosition}
             />
           </InputList>
         </Card>

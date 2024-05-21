@@ -1,13 +1,14 @@
 import { PropsWithChildren } from "react";
+
 import { cls } from "../../lib/cls";
 import { useTabPanel } from "../TabPanel";
 
 export type SafeAreaProps = PropsWithChildren<{
-  vertical?: boolean;
   horizonal?: boolean;
+  vertical?: boolean;
 }>;
 
-export const SafeArea = ({ vertical, horizonal, children }: SafeAreaProps) => {
+export const SafeArea = ({ children, horizonal, vertical }: SafeAreaProps) => {
   const { tabsPosition } = useTabPanel();
 
   const classVertical = vertical

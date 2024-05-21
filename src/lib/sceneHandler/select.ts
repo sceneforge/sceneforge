@@ -1,30 +1,31 @@
-import { type AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
-import { KeyboardControl } from "./KeyboardControl";
-import { Color3 } from "@babylonjs/core/Maths/math.color";
-import { CreateDisc } from "@babylonjs/core/Meshes/Builders/discBuilder";
-import { Mesh } from "@babylonjs/core/Meshes/mesh";
+import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 import { ActionManager } from "@babylonjs/core/Actions/actionManager";
 import { ExecuteCodeAction } from "@babylonjs/core/Actions/directActions";
-import { MeshSelectorControl } from "./MeshSelectorControl";
-import { MeshParentSelectorControl } from "./MeshParentSelectorControl";
-import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
+import { Color3 } from "@babylonjs/core/Maths/math.color";
+import { CreateDisc } from "@babylonjs/core/Meshes/Builders/discBuilder";
+import { type AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
+import { Mesh } from "@babylonjs/core/Meshes/mesh";
+
 import { getActionEventAdditionalData } from "../getActionEventAdditionalData";
+import { KeyboardControl } from "./KeyboardControl";
+import { MeshParentSelectorControl } from "./MeshParentSelectorControl";
+import { MeshSelectorControl } from "./MeshSelectorControl";
 
 type SelectEvent<T extends object = object> = (
   mesh: AbstractMesh,
   event: ActionEvent,
   extra: T,
-) => void | Promise<void>;
+) => Promise<void> | void;
 
 type MeshSelectionEvents = {
+  onHotspotSelect?: SelectEvent<{ hotspot: AbstractMesh }>;
   onMeshSelect?: SelectEvent;
   onParentSelect?: SelectEvent;
-  onHotspotSelect?: SelectEvent<{ hotspot: AbstractMesh }>;
 };
 
 export const select = (
-  rootMesh: AbstractMesh | undefined | null,
-  { onMeshSelect, onParentSelect, onHotspotSelect }: MeshSelectionEvents = {}
+  rootMesh: AbstractMesh | null | undefined,
+  { onHotspotSelect, onMeshSelect, onParentSelect }: MeshSelectionEvents = {}
 ) => {
   if (!rootMesh) return;
   const scene = rootMesh.getScene();
@@ -50,8 +51,8 @@ export const select = (
     "hotspot_hover",
     {
       radius: 0.025,
-      tessellation: 32,
       sideOrientation: Mesh.DOUBLESIDE,
+      tessellation: 32,
     },
     scene
   );

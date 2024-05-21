@@ -1,7 +1,7 @@
-export { useAppInstall } from "./useAppInstall";
+export { AppInstall } from "./AppInstall";
 export { AppInstallProvider } from "./AppInstallProvider";
 export type {
   AppInstallContextType,
   AppInstallProviderProps,
 } from "./AppInstallProvider";
-export { AppInstall } from "./AppInstall";
+export { useAppInstall } from "./useAppInstall";

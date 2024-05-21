@@ -9,21 +9,23 @@ import {
   useRef,
   useState,
 } from "react";
+
+import type { Variant } from "../../types/variants";
+
 import {
   Button,
   type ButtonComponent,
   type ButtonProps,
   type ToggleProps,
 } from "../Button";
-import type { Variant } from "../../types/variants";
 
-export type PopoverProps = Omit<ButtonProps, keyof ToggleProps> & {
+export type PopoverProps = {
   label?: string;
   variant?: Variant;
-};
+} & Omit<ButtonProps, keyof ToggleProps>;
 
 export const Popover = forwardRef(function Popover(
-  { id, label, children, ...props }: PopoverProps,
+  { children, id, label, ...props }: PopoverProps,
   ref: ForwardedRef<ButtonComponent>
 ) {
   const genId = useId();
@@ -90,28 +92,28 @@ export const Popover = forwardRef(function Popover(
     <div className="relative">
       <Button
         key="button"
-        ref={buttonRef}
         popovertarget={popoverId}
+        ref={buttonRef}
         {...props}
-        id={currentId}
-        className={props.className ?? "bg-transparent b-none m-0 p-0"}
-        tabIndex={-1}
-        aria-label={label}
-        aria-haspopup="dialog"
         aria-details={popoverId}
+        aria-haspopup="dialog"
+        aria-label={label}
+        className={props.className ?? "bg-transparent b-none m-0 p-0"}
+        id={currentId}
+        tabIndex={-1}
       >
         {label}
       </Button>
       <div
-        popover="auto"
-        className="fixed inset-0"
-        key="popover"
-        ref={popoverRef}
-        id={popoverId}
-        role="dialog"
         aria-hidden={!opened}
-        aria-modal="true"
         aria-label={label}
+        aria-modal="true"
+        className="fixed inset-0"
+        id={popoverId}
+        key="popover"
+        popover="auto"
+        ref={popoverRef}
+        role="dialog"
       >
         {children}
       </div>

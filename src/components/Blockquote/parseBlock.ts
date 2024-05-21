@@ -1,5 +1,6 @@
-import { Gallery } from "../Gallery";
 import { type PropsWithChildren, ReactNode } from "react";
+
+import { Gallery } from "../Gallery";
 
 const filterEmptyLines = (child: unknown): unknown => {
   return (
@@ -23,9 +24,9 @@ const blockTypeComponent: Record<
 const isParagraphElement = (
   element: unknown
 ): element is {
+  [key: string]: unknown;
   props: Record<string, unknown>;
   type: "p";
-  [key: string]: unknown;
 } => {
   if (
     element

@@ -1,34 +1,35 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useTabs } from "./useTabs";
+
 import { useTabPanel } from "../components/TabPanel";
 import { SettingsTab } from "../tabs";
+import { useTabs } from "./useTabs";
 
 export const useShortcuts = () => {
   const { t } = useTranslation("App");
-  const { openTab, defaultTab } = useTabPanel();
+  const { defaultTab, openTab } = useTabPanel();
   const { newMarkdownTab, newModelViewTab } = useTabs();
 
   const openTabAbout = useCallback(
     () =>
       newMarkdownTab({
+        href: "/docs/about.md",
         id: "about",
         title: t("AppNav.toolbarEnd.aboutTabTitle"),
         translation: {
-          ns: "App",
           key: "AppNav.toolbarEnd.aboutTabTitle",
+          ns: "App",
         },
-        href: "/docs/about.md",
       }),
     [newMarkdownTab, t]
   );
 
   const openTabSettings = openTab({
-    id: "settings",
-    title: t("AppNav.toolbarEnd.settingsTabTitle"),
-    translation: { ns: "App", key: "AppNav.toolbarEnd.settingsTabTitle" },
     active: true,
     component: SettingsTab,
+    id: "settings",
+    title: t("AppNav.toolbarEnd.settingsTabTitle"),
+    translation: { key: "AppNav.toolbarEnd.settingsTabTitle", ns: "App" },
   });
 
   const openTabHome = openTab(defaultTab);
@@ -38,20 +39,20 @@ export const useShortcuts = () => {
   }, [newModelViewTab]);
 
   const shortcutActions = [
-    { action: "open-tab", params: { tab: "about" }, callback: openTabAbout },
+    { action: "open-tab", callback: openTabAbout, params: { tab: "about" } },
     {
       action: "open-tab",
-      params: { tab: "settings" },
       callback: openTabSettings,
+      params: { tab: "settings" },
     },
-    { action: "new-tab", params: { tab: "new-scene" }, callback: newTabScene },
+    { action: "new-tab", callback: newTabScene, params: { tab: "new-scene" } },
   ] as const;
 
   return {
-    openTabHome,
-    openTabAbout,
-    openTabSettings,
     newTabScene,
+    openTabAbout,
+    openTabHome,
+    openTabSettings,
     shortcutActions,
   };
 };
