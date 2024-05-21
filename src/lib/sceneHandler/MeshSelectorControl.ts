@@ -19,7 +19,7 @@ export class MeshSelectorControl {
   constructor(
     name: string,
     scene?: Scene,
-    options?: MeshSelectorControlOptions,
+    options?: MeshSelectorControlOptions
   ) {
     this._name = name;
     if (scene) this._scene = scene;
@@ -27,8 +27,8 @@ export class MeshSelectorControl {
       isStroke: true,
       mainTextureRatio: 4,
     });
-    this._highlightLayer.blurVerticalSize =
-      this._highlightLayer.blurHorizontalSize = 1;
+    this._highlightLayer.blurVerticalSize
+      = this._highlightLayer.blurHorizontalSize = 1;
     this._highlightLayer.innerGlow = true;
 
     if (options) this._config(options);
@@ -61,7 +61,7 @@ export class MeshSelectorControl {
 
   public removeMesh(mesh: AbstractMesh | undefined | null): void {
     if (!mesh) return;
-    this._meshes = this._meshes.filter((m) => m !== mesh);
+    this._meshes = this._meshes.filter(m => m !== mesh);
     this.refresh();
   }
 
@@ -74,7 +74,8 @@ export class MeshSelectorControl {
     if (this._state === "selected") {
       this.clear();
       this.highlight();
-    } else {
+    }
+    else {
       this.clear();
     }
   }

@@ -20,7 +20,8 @@ export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
         if (position === "top" || position === "bottom") {
           setTabsPosition(position);
         }
-      } else {
+      }
+      else {
         setTabsPosition("bottom");
       }
     });
@@ -32,7 +33,7 @@ export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
         "flex w-full h-full justify-stretch",
         tabsPosition === "top"
           ? "flex-col p-t-titlebar-area-y"
-          : "flex-col-reverse",
+          : "flex-col-reverse"
       )}
     >
       <TabList variant={variant} />
@@ -48,7 +49,7 @@ export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
                 translation,
                 props,
               },
-              index,
+              index
             ) => (
               <Tab
                 key={`tabpanel-${index}`}
@@ -59,7 +60,7 @@ export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
                 active={active}
                 {...props}
               />
-            ),
+            )
           )}
         </Suspense>
       </div>

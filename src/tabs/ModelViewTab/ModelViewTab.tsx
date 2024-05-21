@@ -6,7 +6,7 @@ import { Model } from "../../lib/isModel";
 export type ModelViewTabProps = TabProps<{
   active?: boolean;
 }> &
-  Omit<Model & { title?: string }, "capture">;
+Omit<Model & { title?: string }, "capture">;
 
 export const ModelViewTab = ({
   active,

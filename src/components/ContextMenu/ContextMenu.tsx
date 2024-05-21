@@ -22,7 +22,7 @@ export const ContextMenu = () => {
         clearContextMenu();
       }
     },
-    [clearContextMenu],
+    [clearContextMenu]
   );
 
   const handleClickOut = useCallback(
@@ -31,7 +31,7 @@ export const ContextMenu = () => {
         clearContextMenu();
       }
     },
-    [clearContextMenu],
+    [clearContextMenu]
   );
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export const ContextMenu = () => {
         "fixed list-none m-0 rounded-2 c-light p-1 shadow-2xl shadow-black b-1 b-solid b-white:25",
         variant && variantBgClass[variant]
           ? variantBgClass[variant]
-          : "bg-accent",
+          : "bg-accent"
       )}
     >
       {header && (
@@ -75,20 +75,22 @@ export const ContextMenu = () => {
           {header}
         </li>
       )}
-      {items &&
-        items.map(({ type, onClick, ...item }, index) => (
-          <li key={index}>
-            {type === "divider" ? (
+      {items
+      && items.map(({ type, onClick, ...item }, index) => (
+        <li key={index}>
+          {type === "divider"
+            ? (
               <hr />
-            ) : (
+            )
+            : (
               <Action
                 {...item}
                 className="w-full rounded b-none bg-transparent p-2 text-start c-inherit dark:hover:bg-black:15 light:hover:bg-white:15"
                 onClick={handleItemClick(onClick)}
               />
             )}
-          </li>
-        ))}
+        </li>
+      ))}
     </ul>
   );
 };

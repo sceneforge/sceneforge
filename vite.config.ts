@@ -1,9 +1,9 @@
-import React from "@vitejs/plugin-react";
 import { type UserConfig, defineConfig } from "vite";
+import React from "@vitejs/plugin-react";
+import UnoCSS from "unocss/vite";
 import { VitePWA } from "vite-plugin-pwa";
 import VitePluginBrowserSync from "vite-plugin-browser-sync";
 import VitePluginMetaEnv from "vite-plugin-meta-env";
-import UnoCSS from "unocss/vite";
 import i18nextLoader from "vite-plugin-i18next-loader";
 import { webManifest } from "./lib/webManifest";
 
@@ -14,32 +14,37 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
     "./package.json"
   );
 
-  const isDev = command === "serve" || mode === "development";
-  const isProd = command === "build" && mode === "production" && !isPreview;
+  const isDevelopment = command === "serve" || mode === "development";
+  const isProduction
+    = command === "build" && mode === "production" && !isPreview;
 
-  const metaEnv = {
+  const metaEnvironment = {
     VITE_APP_BASE_PATH: "/",
     VITE_APP_NAME: "Scene Forge",
     VITE_APP_DESCRIPTION: description,
     VITE_APP_AUTHOR: author.name,
     VITE_APP_REPOSITORY: repository.url,
     VITE_APP_KEYWORDS: keywords.join(", "),
-    VITE_APP_VERSION: isProd ? version : isDev ? `dev-${version}` : "unknown",
+    VITE_APP_VERSION: isProduction
+      ? version
+      : (isDevelopment
+        ? `dev-${version}`
+        : "unknown"),
   };
 
   const ReactCompilerConfig = {
-    sources: (filename: string) => filename.indexOf("src/") !== -1,
+    sources: (filename: string) => filename.includes("src/"),
   };
 
   return {
-    base: metaEnv.VITE_APP_BASE_PATH,
+    base: metaEnvironment.VITE_APP_BASE_PATH,
     appType: "spa",
     plugins: [
       i18nextLoader({
         namespaceResolution: "basename",
         paths: ["locales"],
       }),
-      VitePluginMetaEnv(metaEnv, "import.meta.env"),
+      VitePluginMetaEnv(metaEnvironment, "import.meta.env"),
       React({
         babel: {
           plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
@@ -48,7 +53,7 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
       UnoCSS(),
       VitePWA({
         srcDir: "src",
-        filename: "service-worker.ts",
+        filename: "serviceWorker.ts",
         strategies: "injectManifest",
         registerType: "prompt",
         devOptions: {
@@ -62,10 +67,10 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
           globPatterns: ["**/*.{js,css,html,png,svg,jpg,ico,gif,md,json}"],
         },
         manifest: webManifest({
-          name: metaEnv.VITE_APP_NAME,
-          description: metaEnv.VITE_APP_DESCRIPTION,
-          isProd: isProd,
-          isDev: isDev,
+          name: metaEnvironment.VITE_APP_NAME,
+          description: metaEnvironment.VITE_APP_DESCRIPTION,
+          isProd: isProduction,
+          isDev: isDevelopment,
           devPort: DEFAULT_DEV_PORT,
         }),
       }),
@@ -84,13 +89,14 @@ export default defineConfig(async ({ command, mode, isPreview }) => {
       port: DEFAULT_DEV_PORT,
     },
     build: {
-      manifest: isProd ? ".vite/manifest.json" : false,
+      target: "esnext",
+      manifest: isProduction ? ".vite/manifest.json" : false,
       ssr: false,
-      minify: isProd ? "terser" : isDev ? false : "esbuild",
+      minify: isProduction ? "terser" : (isDevelopment ? false : "esbuild"),
       terserOptions: {
         keep_classnames: false,
       },
-      sourcemap: isProd ? "hidden" : "inline",
+      sourcemap: isProduction ? "hidden" : "inline",
       chunkSizeWarningLimit: 40 * 1024,
       rollupOptions: {
         treeshake: {

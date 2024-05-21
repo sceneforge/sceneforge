@@ -1,4 +1,4 @@
-import { type ForwardedRef, forwardRef, ChangeEventHandler } from "react";
+import { ChangeEventHandler, type ForwardedRef, forwardRef } from "react";
 
 export type InputListCheckboxProps = {
   id?: string;
@@ -11,7 +11,7 @@ export type InputListCheckboxProps = {
 
 export const InputListCheckbox = forwardRef(function InputListCheckbox(
   { id, name, defaultValue, value, checked, onChange }: InputListCheckboxProps,
-  ref: ForwardedRef<HTMLInputElement>,
+  ref: ForwardedRef<HTMLInputElement>
 ) {
   return (
     <div className="relative">

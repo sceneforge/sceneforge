@@ -1,24 +1,24 @@
 import { type ForwardedRef, forwardRef } from "react";
-import { Button, type ButtonProps, type ButtonComponent } from "../Button";
+import { Button, type ButtonComponent, type ButtonProps } from "../Button";
 import { Dropdown, type DropdownProps } from "../Dropdown";
 import { IconButton, type IconButtonProps } from "../IconButton";
 
 export type ActionProps = (
   | (ButtonProps & {
-      icon?: never;
-      items?: never;
-      contentVariant?: never;
-    })
+    icon?: never;
+    items?: never;
+    contentVariant?: never;
+  })
   | (IconButtonProps & {
-      items?: never;
-      contentVariant?: never;
-    })
+    items?: never;
+    contentVariant?: never;
+  })
   | DropdownProps
 ) & { parentDropdown?: string; clearDropdown?: () => void };
 
 export const Action = forwardRef(function Action(
   { contentVariant, parentDropdown, clearDropdown, ...props }: ActionProps,
-  ref: ForwardedRef<ButtonComponent>,
+  ref: ForwardedRef<ButtonComponent>
 ) {
   if (props.items) {
     return (
@@ -30,9 +30,11 @@ export const Action = forwardRef(function Action(
         ref={ref}
       />
     );
-  } else if (props.icon) {
+  }
+  else if (props.icon) {
     return <IconButton {...(props as IconButtonProps)} ref={ref} />;
-  } else {
+  }
+  else {
     return <Button {...(props as ButtonProps)} ref={ref} />;
   }
 });

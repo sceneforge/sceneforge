@@ -3,8 +3,8 @@ import { usePanel } from "../Panel";
 import { type TabProps } from "./Tab";
 import {
   TabComponent,
-  TabPanelContext,
   type TabContext,
+  TabPanelContext,
 } from "./TabPanelProvider";
 import { useTranslation } from "react-i18next";
 import { useAppContext } from "../App";
@@ -26,22 +26,25 @@ export const useTabPanel = () => {
   const activateTab = useCallback(
     (tab: TabContext) => {
       return () => {
-        setTabs((prevTabs) => prevTabs.map((t) => ({ ...t, active: false })));
-        setTabs((prevTabs) =>
-          prevTabs.map((t) => ({
+        setTabs(previousTabs =>
+          previousTabs.map(t => ({
+            ...t,
+            active: false,
+          })));
+        setTabs(previousTabs =>
+          previousTabs.map(t => ({
             ...t,
             active:
-              t.id === tab.id &&
-              t.title === tab.title &&
-              t.translation === tab.translation &&
-              t.component === tab.component &&
-              t.createdAt === tab.createdAt,
-          })),
-        );
+              t.id === tab.id
+              && t.title === tab.title
+              && t.translation === tab.translation
+              && t.component === tab.component
+              && t.createdAt === tab.createdAt,
+          })));
         updateTitle(tab.title);
       };
     },
-    [updateTitle, setTabs],
+    [updateTitle, setTabs]
   );
 
   const newTab = useCallback(
@@ -51,37 +54,39 @@ export const useTabPanel = () => {
       C extends TabComponent<P> = TabComponent<P>,
       T extends TabContext<P, C> = TabContext<P, C>,
     >(
-      tab: T,
+      tab: T
     ) => {
       const createdAt = Date.now();
       // @TODO: Fix this type assertion
       const newTabContext = { ...tab, createdAt } as unknown as TabContext;
-      setTabs((prevTabs) => [...prevTabs, newTabContext]);
+      setTabs(previousTabs => [...previousTabs, newTabContext]);
       activateTab(newTabContext)();
     },
-    [setTabs, activateTab],
+    [setTabs, activateTab]
   );
 
   const closeTab = useCallback(
     (tab: TabContext) => {
       return () => {
-        setTabs((prevTabs) => {
+        setTabs((previousTabs) => {
           if (tab.active) {
-            const index = prevTabs.findIndex((t) => t === tab);
-            if (prevTabs[index + 1]) {
-              prevTabs[index + 1].active = true;
-            } else if (prevTabs[index - 1]) {
-              prevTabs[index - 1].active = true;
-            } else {
-              prevTabs[0].active = true;
+            const index = previousTabs.indexOf(tab);
+            if (previousTabs[index + 1]) {
+              previousTabs[index + 1].active = true;
+            }
+            else if (previousTabs[index - 1]) {
+              previousTabs[index - 1].active = true;
+            }
+            else {
+              previousTabs[0].active = true;
             }
           }
 
-          return prevTabs.filter((t) => t !== tab);
+          return previousTabs.filter(t => t !== tab);
         });
       };
     },
-    [setTabs],
+    [setTabs]
   );
 
   const defaultTab = useMemo((): TabContext => {
@@ -105,37 +110,36 @@ export const useTabPanel = () => {
 
   const getTabByTitle = useCallback(
     (title: string) => {
-      return tabs.find((tab) => tab.title === title);
+      return tabs.find(tab => tab.title === title);
     },
-    [tabs],
+    [tabs]
   );
 
   const getTabById = useCallback(
     (id: string) => {
-      return tabs.find((tab) => tab.id === id);
+      return tabs.find(tab => tab.id === id);
     },
-    [tabs],
+    [tabs]
   );
 
   const getTabByComponent = useCallback(
     (component: TabComponent) => {
-      return tabs.find((tab) => tab.component === component);
+      return tabs.find(tab => tab.component === component);
     },
-    [tabs],
+    [tabs]
   );
 
   const updateTabTitle = useCallback(
     (id: string, title: string, translation?: { ns: string; key: string }) => {
-      setTabs((prevTabs) =>
-        prevTabs.map((tab) => {
+      setTabs(previousTabs =>
+        previousTabs.map((tab) => {
           if (tab.id === id) {
             return { ...tab, title, translation };
           }
           return tab;
-        }),
-      );
+        }));
     },
-    [setTabs],
+    [setTabs]
   );
 
   const openTab = useCallback(
@@ -143,25 +147,26 @@ export const useTabPanel = () => {
       const tab = getTabByComponent(tabContext.component);
       if (tab) {
         activateTab(tab)();
-      } else {
+      }
+      else {
         newTab(tabContext);
       }
     },
-    [getTabByComponent, activateTab, newTab],
+    [getTabByComponent, activateTab, newTab]
   );
 
   const activeTab = useMemo(() => {
-    return tabs.find((tab) => tab.active);
+    return tabs.find(tab => tab.active);
   }, [tabs]);
 
   const activeTabTitle = useMemo(() => {
     return activeTab
-      ? activeTab.translation
+      ? (activeTab.translation
         ? t(activeTab.translation.key, {
-            ns: activeTab.translation.ns,
-            lng: resolvedLanguage,
-          })
-        : activeTab.title
+          ns: activeTab.translation.ns,
+          lng: resolvedLanguage,
+        })
+        : activeTab.title)
       : undefined;
   }, [t, activeTab, resolvedLanguage]);
 

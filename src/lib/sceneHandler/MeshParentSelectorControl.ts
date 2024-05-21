@@ -28,7 +28,8 @@ export class MeshParentSelectorControl {
     if (this._mesh === value) {
       if (this._direction === "up") this.depthUp();
       else if (this._direction === "down") this.depthDown();
-    } else {
+    }
+    else {
       this._depth = 1;
       this._mesh = value;
     }
@@ -64,7 +65,7 @@ export class MeshParentSelectorControl {
   private static getParent(
     mesh: AbstractMesh | Node | undefined | null,
     depth: number = 1,
-    currentDepth: number = 0,
+    currentDepth: number = 0
   ): Nullable<Node> {
     if (!mesh) return null;
     const parent = mesh.parent;

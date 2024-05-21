@@ -1,13 +1,13 @@
 export const getShiftedIndex = (
-  arr: unknown[],
-  currentIndex: number,
+  array: unknown[],
+  currentIndex: number
 ): number[] => {
   let countDown = 0;
-  return arr.map((_, index) => {
+  return array.map((_, index) => {
     return index > currentIndex
       ? countDown++
-      : index < currentIndex
-        ? arr.length - 1 - currentIndex + index
-        : arr.length - 1;
+      : (index < currentIndex
+        ? array.length - 1 - currentIndex + index
+        : array.length - 1);
   });
 };

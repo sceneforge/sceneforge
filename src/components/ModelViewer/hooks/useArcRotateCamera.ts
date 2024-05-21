@@ -3,7 +3,7 @@ import { type Camera } from "@babylonjs/core/Cameras/camera";
 import { Vector3 } from "@babylonjs/core/Maths/math.vector";
 import { type Scene } from "@babylonjs/core/scene";
 import { type Nullable } from "@babylonjs/core/types";
-import { useCallback, useRef, type RefObject } from "react";
+import { type RefObject, useCallback, useRef } from "react";
 
 export const useArcRotateCamera = (sceneRef: RefObject<Nullable<Scene>>) => {
   const cameraRef = useRef<Nullable<Camera>>(null);
@@ -16,7 +16,7 @@ export const useArcRotateCamera = (sceneRef: RefObject<Nullable<Scene>>) => {
         0,
         10,
         Vector3.Zero(),
-        sceneRef.current,
+        sceneRef.current
       );
     }
   }, [sceneRef, cameraRef]);
@@ -30,7 +30,7 @@ export const useArcRotateCamera = (sceneRef: RefObject<Nullable<Scene>>) => {
   const attachControl = useCallback(() => {
     if (sceneRef.current && cameraRef.current) {
       cameraRef.current.attachControl(
-        sceneRef.current.getEngine().getRenderingCanvas(),
+        sceneRef.current.getEngine().getRenderingCanvas()
       );
     }
   }, [sceneRef, cameraRef]);

@@ -10,7 +10,10 @@ export type MarkdownProps = {
 
 export const Markdown = ({ href, value, ...props }: MarkdownProps) => {
   const { resolvedLanguage, basePath } = useAppContext();
-  const [currentDoc, setCurrentDoc] = useState<string | undefined>(value);
+  const [
+    currentDocument,
+    setCurrentDocument,
+  ] = useState<string | undefined>(value);
   const [contentUrl, setContentUrl] = useState<string>("initial-content");
 
   const i18nHref = useMemo(() => {
@@ -27,19 +30,19 @@ export const Markdown = ({ href, value, ...props }: MarkdownProps) => {
             .text()
             .then((text) => {
               setContentUrl(response.url);
-              setCurrentDoc(text);
+              setCurrentDocument(text);
             })
-            .catch((err: unknown) => {
+            .catch((error) => {
               throw new Error("Failed to get the fetched document content", {
-                cause: err,
+                cause: error,
               });
             });
         })
-        .catch((err: unknown) => {
-          throw new Error("Failed to fetch document", { cause: err });
+        .catch((error) => {
+          throw new Error("Failed to fetch document", { cause: error });
         });
     }
-  }, [i18nHref, setCurrentDoc]);
+  }, [i18nHref, setCurrentDocument]);
 
   return (
     <div className="m-inline-auto select-text p-b-2xl text-start c-inherit lg:w-3xl sm:w-lg xl:w-6xl">
@@ -47,7 +50,7 @@ export const Markdown = ({ href, value, ...props }: MarkdownProps) => {
         key={contentUrl}
         components={components}
         {...props}
-        value={currentDoc}
+        value={currentDocument}
       />
     </div>
   );

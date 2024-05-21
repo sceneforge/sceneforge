@@ -48,14 +48,15 @@ export const SceneNode = ({
 
   const nodeHasChildren = useMemo(() => hasChildren(node), [node]);
 
-  const childrenNodes: unknown[] =
-    open && nodeHasChildren ? getNodeChildren(node).sort(compare) : [];
+  const childrenNodes: unknown[]
+    = open && nodeHasChildren ? getNodeChildren(node).sort(compare) : [];
 
   const expandNode = useCallback(() => {
-    if (!open) {
-      setOpen(true);
-    } else {
+    if (open) {
       setOpen(false);
+    }
+    else {
+      setOpen(true);
     }
   }, [open]);
 
@@ -66,23 +67,26 @@ export const SceneNode = ({
     }
   }, [onNodeSelect, node, open, expandNode]);
 
-  const handleVisibility = useCallback((event: ButtonToggleEvent) => {
-    if (event.state === "pressed") {
-      if (hideNode(node)) {
-        setVisible(false);
+  const handleVisibility = useCallback(
+    (event: ButtonToggleEvent) => {
+      if (event.state === "pressed") {
+        if (hideNode(node)) {
+          setVisible(false);
+        }
       }
-    } else if (event.state === "released") {
-      if (showNode(node)) {
+      else if (event.state === "released" && showNode(node)) {
         setVisible(true);
       }
-    }
-  }, []);
+    },
+    [node]
+  );
 
   useEffect(() => {
     if (meshSelection && meshSelectionPath && meshSelectionPath.length > 0) {
       if (meshSelection === id(node) && !open) {
         setOpen(true);
-      } else if (meshSelection !== id(node) && open) {
+      }
+      else if (meshSelection !== id(node) && open) {
         setOpen(false);
       }
     }
@@ -133,16 +137,16 @@ export const SceneNode = ({
           hidden={!open}
           className="m-0 list-none p-0 c-inherit"
         >
-          {open &&
-            childrenNodes.map((node, index) => (
-              <SceneNode
-                key={`${genId}-${index}`}
-                node={node}
-                onNodeSelect={onNodeSelect}
-                meshSelectionPath={meshSelectionPath}
-                clearMeshSelectionPath={clearMeshSelectionPath}
-              />
-            ))}
+          {open
+          && childrenNodes.map((node, index) => (
+            <SceneNode
+              key={`${genId}-${index}`}
+              node={node}
+              onNodeSelect={onNodeSelect}
+              meshSelectionPath={meshSelectionPath}
+              clearMeshSelectionPath={clearMeshSelectionPath}
+            />
+          ))}
         </ul>
       )}
     </li>

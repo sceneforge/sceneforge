@@ -2,16 +2,16 @@ import {
   type ForwardedRef,
   forwardRef,
   useCallback,
+  useEffect,
   useMemo,
   useState,
-  useEffect,
 } from "react";
 import {
   Button,
-  type ButtonToggleEvent,
-  type ButtonProps,
-  type ToggleProps,
   ButtonComponent,
+  type ButtonProps,
+  type ButtonToggleEvent,
+  type ToggleProps,
 } from "../Button";
 import { Icon, type IconProps } from "../Icon";
 
@@ -26,8 +26,7 @@ export type IconToggleProps = ToggleProps<
 export type IconButtonProps = Omit<
   ButtonProps,
   "children" | keyof ToggleProps
-> &
-  IconToggleProps;
+> & IconToggleProps;
 
 export const IconButton = forwardRef(function IconButton(
   {
@@ -43,12 +42,12 @@ export const IconButton = forwardRef(function IconButton(
     variant,
     ...props
   }: IconButtonProps,
-  ref: ForwardedRef<ButtonComponent>,
+  ref: ForwardedRef<ButtonComponent>
 ) {
   const isPressed = useMemo(() => {
     if (pressed === true || pressed === "true") return true;
     if (pressed === false || pressed === "false") return false;
-    return undefined;
+    return;
   }, [pressed]);
   const [pressedState, setPressedState] = useState(isPressed ?? false);
 
@@ -64,17 +63,18 @@ export const IconButton = forwardRef(function IconButton(
   }, [isPressed, size]);
 
   const handleToggleEvent = useCallback(
-    (e: ButtonToggleEvent) => {
-      setPressedState(e.state === "pressed");
-      if (onToggle) onToggle(e);
+    (event: ButtonToggleEvent) => {
+      setPressedState(event.state === "pressed");
+      if (onToggle) onToggle(event);
     },
-    [onToggle],
+    [onToggle]
   );
 
   useEffect(() => {
     if (isPressed === true) {
       setPressedState(true);
-    } else if (isPressed === false) {
+    }
+    else if (isPressed === false) {
       setPressedState(false);
     }
   }, [isPressed]);
@@ -82,12 +82,12 @@ export const IconButton = forwardRef(function IconButton(
   const buttonProps = {
     ...(toggle
       ? {
-          toggle: true,
-          label,
-          variant,
-          pressed: pressedState,
-          onToggle: handleToggleEvent,
-        }
+        toggle: true,
+        label,
+        variant,
+        pressed: pressedState,
+        onToggle: handleToggleEvent,
+      }
       : { label, variant }),
     ...props,
   } as ButtonProps;

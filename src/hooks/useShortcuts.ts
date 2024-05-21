@@ -20,7 +20,7 @@ export const useShortcuts = () => {
         },
         href: "/docs/about.md",
       }),
-    [newMarkdownTab, t],
+    [newMarkdownTab, t]
   );
 
   const openTabSettings = openTab({

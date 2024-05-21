@@ -1,4 +1,8 @@
 import {
+  type ButtonHTMLAttributes,
+  type DetailedHTMLProps,
+  type ForwardedRef,
+  type MouseEvent as ReactMouseEvent,
   forwardRef,
   useCallback,
   useEffect,
@@ -6,10 +10,6 @@ import {
   useMemo,
   useRef,
   useState,
-  type ButtonHTMLAttributes,
-  type DetailedHTMLProps,
-  type ForwardedRef,
-  type MouseEvent as ReactMouseEvent,
 } from "react";
 import { type Variant } from "../../types/variants";
 import { cls } from "../../lib/cls";
@@ -25,19 +25,19 @@ export type ButtonToggleEvent = {
 
 export type ToggleProps<Toggle = unknown, Regular = unknown> =
   | ({
-      toggle: true;
-      variant?: Variant | [Variant, Variant];
-      pressed?: boolean | "true" | "false";
-      label?: string | [string, string];
-      onToggle?: (event: ButtonToggleEvent) => void;
-    } & Toggle)
+    toggle: true;
+    variant?: Variant | [Variant, Variant];
+    pressed?: boolean | "true" | "false";
+    label?: string | [string, string];
+    onToggle?: (event: ButtonToggleEvent) => void;
+  } & Toggle)
   | ({
-      toggle?: false;
-      variant?: Variant;
-      pressed?: never;
-      onToggle?: never;
-      label?: string;
-    } & Regular);
+    toggle?: false;
+    variant?: Variant;
+    pressed?: never;
+    onToggle?: never;
+    label?: string;
+  } & Regular);
 
 export type ButtonProps = Omit<
   DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
@@ -78,12 +78,12 @@ export const Button = forwardRef(function Button(
     onToggle,
     ...props
   }: ButtonProps,
-  ref: ForwardedRef<ButtonComponent>,
+  ref: ForwardedRef<ButtonComponent>
 ) {
   const isPressed = useMemo(() => {
     if (pressed === true || pressed === "true") return true;
     if (pressed === false || pressed === "false") return false;
-    return undefined;
+    return;
   }, [pressed]);
 
   const currentLabel = useMemo(() => {
@@ -102,7 +102,7 @@ export const Button = forwardRef(function Button(
     (event?: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => {
       if (toggle) {
         if (isPressed === undefined) {
-          setPressedState((prev) => !prev);
+          setPressedState(previous => !previous);
         }
         if (onToggle) {
           onToggle({
@@ -115,7 +115,7 @@ export const Button = forwardRef(function Button(
         }
       }
     },
-    [toggle, isPressed, onToggle, pressedState],
+    [toggle, isPressed, onToggle, pressedState]
   );
 
   useImperativeHandle(
@@ -129,7 +129,7 @@ export const Button = forwardRef(function Button(
         },
       };
     },
-    [buttonRef, pressedState, handleToggle],
+    [buttonRef, pressedState, handleToggle]
   );
 
   const handleClickEvent = useCallback(
@@ -137,22 +137,23 @@ export const Button = forwardRef(function Button(
       handleToggle(event);
       if (onClick) onClick(event);
     },
-    [handleToggle, onClick],
+    [handleToggle, onClick]
   );
 
   useEffect(() => {
     if (isPressed === true) {
       setPressedState(true);
-    } else if (isPressed === false) {
+    }
+    else if (isPressed === false) {
       setPressedState(false);
     }
   }, [isPressed, setPressedState]);
 
   const toggleProps = toggle
     ? {
-        role: "switch",
-        "aria-pressed": pressedState,
-      }
+      "role": "switch",
+      "aria-pressed": pressedState,
+    }
     : {};
 
   return (
@@ -161,32 +162,30 @@ export const Button = forwardRef(function Button(
       data-variant={currentVariant}
       ref={buttonRef}
       className={cls(
-        className
-          ? className
-          : clear
-            ? "bg-transparent c-inherit b-none b-0 cursor-pointer c-inherit m-0 p-0 inline-block"
-            : [
-                "text-center",
-                "p-inline-2",
-                "p-block-3",
-                "rounded-4",
-                "b-none",
-                "b-0",
-                "m-0",
-                "cursor-pointer",
-                grow ? "flex-grow" : null,
-                shrink ? "flex-shrink" : null,
-                ...(!inverted
-                  ? [
-                      variantBgClass[currentVariant] ?? "bg-primary",
-                      "c-inherit",
-                    ]
-                  : [
-                      variantTextClass[currentVariant] ?? "c-inherit",
-                      "bg-transparent",
-                    ]),
-              ],
-        extendedClassName,
+        className ?? (clear
+          ? "bg-transparent c-inherit b-none b-0 cursor-pointer c-inherit m-0 p-0 inline-block"
+          : [
+            "text-center",
+            "p-inline-2",
+            "p-block-3",
+            "rounded-4",
+            "b-none",
+            "b-0",
+            "m-0",
+            "cursor-pointer",
+            grow ? "flex-grow" : null,
+            shrink ? "flex-shrink" : null,
+            ...(inverted
+              ? [
+                variantTextClass[currentVariant] ?? "c-inherit",
+                "bg-transparent",
+              ]
+              : [
+                variantBgClass[currentVariant] ?? "bg-primary",
+                "c-inherit",
+              ]),
+          ]),
+        extendedClassName
       )}
       data-size={size}
       type="button"

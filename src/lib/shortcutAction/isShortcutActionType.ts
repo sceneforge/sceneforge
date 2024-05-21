@@ -23,7 +23,7 @@ export type ShortcutActionType =
   | NoneActionType;
 
 export const isShortcutActionType = (
-  shortcutAction: unknown,
+  shortcutAction: unknown
 ): shortcutAction is ShortcutActionType => {
   if (typeof shortcutAction !== "object" || !shortcutAction) return false;
   if (Array.isArray(shortcutAction)) return false;

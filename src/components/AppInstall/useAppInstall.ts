@@ -19,14 +19,14 @@ export const useAppInstall = () => {
   } = useContext(AppInstallContext);
 
   const beforeInstallHandler = useCallback(
-    (e: Event) => {
-      e.preventDefault();
+    (event: Event) => {
+      event.preventDefault();
       if (setBeforeInstallPromptEvent) {
-        setBeforeInstallPromptEvent(e as BeforeInstallPromptEvent);
+        setBeforeInstallPromptEvent(event as BeforeInstallPromptEvent);
       }
       setShowInstall(true);
     },
-    [setShowInstall, setBeforeInstallPromptEvent],
+    [setShowInstall, setBeforeInstallPromptEvent]
   );
 
   useEffect(() => {
@@ -54,9 +54,9 @@ export const useAppInstall = () => {
 
   const installPrompt = useCallback(() => {
     if (
-      showInstall &&
-      beforeInstallPromptEvent &&
-      beforeInstallPromptEvent.prompt
+      showInstall
+      && beforeInstallPromptEvent
+      && beforeInstallPromptEvent.prompt
     ) {
       return beforeInstallPromptEvent.prompt();
     }

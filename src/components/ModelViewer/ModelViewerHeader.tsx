@@ -29,7 +29,7 @@ export const ModelViewerHeader = ({
       edit: t("modes.edit"),
       material: t("modes.material"),
     }),
-    [t],
+    [t]
   );
   const { updateModel } = useModelContext(model);
   const { updateTabTitle, activeTab } = useTabPanel();
@@ -37,7 +37,7 @@ export const ModelViewerHeader = ({
 
   const handleModeChange = useCallback(
     (newMode: Mode) => () => setMode?.(newMode),
-    [setMode],
+    [setMode]
   );
 
   const doImport = useCallback(async () => {
@@ -61,8 +61,8 @@ export const ModelViewerHeader = ({
   }, [model, onImported, t]);
 
   const handleImport = useCallback(() => {
-    doImport().catch((err: unknown) => {
-      throw new Error("Failed to import model", { cause: err });
+    doImport().catch((error) => {
+      throw new Error("Failed to import model", { cause: error });
     });
   }, [doImport]);
 
@@ -74,12 +74,13 @@ export const ModelViewerHeader = ({
           if (activeTab) {
             updateTabTitle(activeTab.id, value);
           }
-        } catch (e) {
-          console.error(e);
+        }
+        catch (error) {
+          console.error(error);
         }
       }
     },
-    [model, updateModel, activeTab, updateTabTitle],
+    [model, updateModel, activeTab, updateTabTitle]
   );
 
   return (

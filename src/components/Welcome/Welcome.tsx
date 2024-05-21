@@ -1,11 +1,11 @@
 import {
-  useState,
-  useCallback,
-  useId,
   type ChangeEvent,
-  useEffect,
   Suspense,
+  useCallback,
+  useEffect,
+  useId,
   useMemo,
+  useState,
 } from "react";
 import { Dialog } from "../Dialog";
 import { Highlights } from "../Highlights";
@@ -15,8 +15,8 @@ import { usePanel } from "../Panel";
 import { Icon } from "../Icon";
 import {
   type Highlight,
-  isWelcomeData,
   WelcomeData,
+  isWelcomeData,
 } from "../../lib/isWelcomeData";
 import { fetchContent } from "../../lib/fetchContent";
 
@@ -32,9 +32,12 @@ export const Welcome = () => {
     setShowWelcome(false);
   }, []);
 
-  const handleHideWelcome = useCallback((ev: ChangeEvent<HTMLInputElement>) => {
-    changeShowWelcome(!ev.target.checked);
-  }, []);
+  const handleHideWelcome = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      changeShowWelcome(!event.target.checked);
+    },
+    [changeShowWelcome]
+  );
 
   useEffect(() => {
     if (resolvedLanguage && showWelcome) {
@@ -52,7 +55,7 @@ export const Welcome = () => {
 
   const showWelcomeDialog = useMemo(
     () => showWelcome && highlights && highlights.length > 0,
-    [showWelcome, highlights],
+    [showWelcome, highlights]
   );
 
   return (
@@ -83,9 +86,9 @@ export const Welcome = () => {
                   >
                     {languageList.map(({ local, translated, locale }) => (
                       <option key={locale} value={locale}>
-                        {local !== translated
-                          ? `${local} (${translated})`
-                          : local}
+                        {local === translated
+                          ? local
+                          : `${local} (${translated})`}
                       </option>
                     ))}
                   </select>

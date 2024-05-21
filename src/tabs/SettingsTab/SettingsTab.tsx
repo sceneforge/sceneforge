@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type ChangeEvent } from "react";
+import { type ChangeEvent, useCallback, useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { InputList, InputListItem } from "../../components/InputList";
 import { usePanel } from "../../components/Panel";
@@ -10,7 +10,13 @@ import { useTranslation } from "react-i18next";
 
 export const SettingsTab = () => {
   const { t } = useTranslation("tabs");
-  const { name, description, version, dev, resolvedLanguage } = useAppContext();
+  const {
+    name,
+    description,
+    version,
+    development,
+    resolvedLanguage,
+  } = useAppContext();
   const {
     getUserData,
     setUserData,
@@ -22,35 +28,36 @@ export const SettingsTab = () => {
   const [showWelcome, setShowWelcome] = useState(true);
 
   const changeTabsPosition = useCallback(
-    (e: ChangeEvent<HTMLSelectElement>): void => {
-      if (e.target.value === "top" || e.target.value === "bottom") {
-        const position = e.target.value;
-        setUserData("settings", "tabs-position", e.target.value)
+    (event: ChangeEvent<HTMLSelectElement>): void => {
+      if (event.target.value === "top" || event.target.value === "bottom") {
+        const position = event.target.value;
+        setUserData("settings", "tabs-position", event.target.value)
           .then(() => {
             setTabsPosition(position);
           })
-          .catch((err: unknown) => {
-            throw new Error("Failed to set tabs position", { cause: err });
+          .catch((error: unknown) => {
+            throw new Error("Failed to set tabs position", { cause: error });
           });
-      } else {
+      }
+      else {
         setUserData("settings", "tabs-position", "bottom")
           .then(() => {
             setTabsPosition("bottom");
           })
-          .catch((err: unknown) => {
-            throw new Error("Failed to set tabs position", { cause: err });
+          .catch((error: unknown) => {
+            throw new Error("Failed to set tabs position", { cause: error });
           });
       }
     },
-    [setTabsPosition, setUserData],
+    [setTabsPosition, setUserData]
   );
 
   const changeShowWelcomeStartup = useCallback(
-    (ev: ChangeEvent<HTMLInputElement>) => {
-      changeShowWelcome(ev.target.checked);
-      setShowWelcome(ev.target.checked);
+    (event: ChangeEvent<HTMLInputElement>) => {
+      changeShowWelcome(event.target.checked);
+      setShowWelcome(event.target.checked);
     },
-    [],
+    [changeShowWelcome]
   );
 
   useEffect(() => {
@@ -58,7 +65,8 @@ export const SettingsTab = () => {
       if (position && typeof position === "string") {
         if (position === "top" || position === "bottom")
           setTabsPosition(position);
-      } else {
+      }
+      else {
         setTabsPosition("bottom");
       }
     });
@@ -68,9 +76,11 @@ export const SettingsTab = () => {
     getUserData("settings", "welcome", (show) => {
       if (show && typeof show === "boolean") {
         setShowWelcome(show);
-      } else if (typeof show === "undefined") {
+      }
+      else if (show === undefined) {
         setShowWelcome(true);
-      } else {
+      }
+      else {
         setShowWelcome(false);
       }
     });
@@ -89,7 +99,7 @@ export const SettingsTab = () => {
               options={
                 languageList?.map(({ local, translated, locale }) => ({
                   text:
-                    local !== translated ? `${local} (${translated})` : local,
+                    local === translated ? local : `${local} (${translated})`,
                   value: locale,
                 })) || []
               }
@@ -125,26 +135,28 @@ export const SettingsTab = () => {
             />
           </InputList>
         </Card>
-        {dev ? (
-          <dl>
-            <dt>{"Info"}</dt>
-            <dd>
-              <dl>
-                <dt>{"Name"}</dt>
-                <dd>{name}</dd>
-                <dt>{"Description"}</dt>
-                <dd>{description}</dd>
-                <dt>{"Version"}</dt>
-                <dd>{version}</dd>
-              </dl>
-            </dd>
-          </dl>
-        ) : (
-          <dl>
-            <dt>{"Version"}</dt>
-            <dd>{version}</dd>
-          </dl>
-        )}
+        {development
+          ? (
+            <dl>
+              <dt>Info</dt>
+              <dd>
+                <dl>
+                  <dt>Name</dt>
+                  <dd>{name}</dd>
+                  <dt>Description</dt>
+                  <dd>{description}</dd>
+                  <dt>Version</dt>
+                  <dd>{version}</dd>
+                </dl>
+              </dd>
+            </dl>
+          )
+          : (
+            <dl>
+              <dt>Version</dt>
+              <dd>{version}</dd>
+            </dl>
+          )}
       </Section>
     </SafeArea>
   );

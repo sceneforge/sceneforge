@@ -1,9 +1,9 @@
 import {
+  type JSX,
+  type PropsWithChildren,
+  type ReactNode,
   useEffect,
   useMemo,
-  type ReactNode,
-  type PropsWithChildren,
-  type JSX,
 } from "react";
 import { useAppContext } from "../App";
 import { useTranslation } from "react-i18next";
@@ -48,7 +48,8 @@ export const Tab = <P extends object = object>({
         ns: props.translation.ns,
         lng: resolvedLanguage,
       });
-    } else if (props.title) {
+    }
+    else if (props.title) {
       return props.title;
     }
   }, [props.translation, props.title, t, resolvedLanguage]);

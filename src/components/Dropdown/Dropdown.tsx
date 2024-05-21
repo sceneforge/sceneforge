@@ -1,20 +1,20 @@
 import {
-  useCallback,
-  useRef,
-  useEffect,
-  forwardRef,
   ForwardedRef,
-  useImperativeHandle,
-  useState,
   MouseEventHandler,
+  forwardRef,
+  useCallback,
+  useEffect,
   useId,
+  useImperativeHandle,
+  useRef,
+  useState,
 } from "react";
 import { Action, type ActionProps } from "../Action";
 import {
   Button,
-  ButtonToggleEvent,
   type ButtonComponent,
   type ButtonProps,
+  ButtonToggleEvent,
 } from "../Button";
 import { IconButton, type IconButtonProps } from "../IconButton";
 import { setPositionOnTarget } from "../../lib/setPosition";
@@ -32,16 +32,16 @@ export type DropdownProps = (
   items?: (
     | (ActionProps & { type: "item"; active?: boolean })
     | {
-        type: "divider";
-        onClick?: never;
-        label?: never;
-        icon?: never;
-        variant?: never;
-        className?: string;
-        active?: never;
-        parentDropdown?: never;
-        clearDropdown?: never;
-      }
+      type: "divider";
+      onClick?: never;
+      label?: never;
+      icon?: never;
+      variant?: never;
+      className?: string;
+      active?: never;
+      parentDropdown?: never;
+      clearDropdown?: never;
+    }
   )[];
 };
 
@@ -55,7 +55,7 @@ export const Dropdown = forwardRef(function Dropdown(
     extendedClassName,
     ...props
   }: DropdownProps,
-  ref: ForwardedRef<ButtonComponent>,
+  ref: ForwardedRef<ButtonComponent>
 ) {
   const buttonRef = useRef<ButtonComponent>(null);
   const itemListRef = useRef<HTMLUListElement>(null);
@@ -70,7 +70,7 @@ export const Dropdown = forwardRef(function Dropdown(
       pressed,
       toggle: buttonRef.current?.toggle,
     }),
-    [pressed],
+    [pressed]
   );
 
   const clear = useCallback(() => {
@@ -90,43 +90,42 @@ export const Dropdown = forwardRef(function Dropdown(
       if (event.key === "Escape") {
         clear();
       }
-      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-        if (itemListRef.current) {
-          event.preventDefault();
-          event.stopPropagation();
-          const direction = event.key === "ArrowDown" ? 1 : -1;
+      if ((event.key === "ArrowDown" || event.key === "ArrowUp") && itemListRef.current) {
+        event.preventDefault();
+        event.stopPropagation();
+        const direction = event.key === "ArrowDown" ? 1 : -1;
 
-          const items = itemListRef.current.querySelectorAll("li");
-          let nextIndex = 0;
-          for (let i = 0; i < items.length; i++) {
-            if (items[i].querySelector(":focus, :active")) {
-              nextIndex = i + direction;
-              break;
-            }
+        const items = itemListRef.current.querySelectorAll("li");
+        let nextIndex = 0;
+        for (const [index, item] of items.entries()) {
+          if (item.querySelector(":focus, :active")) {
+            nextIndex = index + direction;
+            break;
           }
-          nextIndex =
-            nextIndex < 0 ? items.length + nextIndex : nextIndex % items.length;
-          (
-            items[nextIndex].querySelector(
-              "button, a, input, select, textarea",
-            ) as HTMLElement
-          )?.focus();
         }
+        nextIndex = nextIndex < 0
+          ? items.length + nextIndex
+          : nextIndex % items.length;
+        (
+          items[nextIndex].querySelector(
+            "button, a, input, select, textarea"
+          ) as HTMLElement
+        )?.focus();
       }
     },
-    [itemListRef, clear],
+    [itemListRef, clear]
   );
 
   const handleClickOut = useCallback(
     (event: MouseEvent) => {
       if (
-        itemListRef.current &&
-        !itemListRef.current.contains(event.target as Node)
+        itemListRef.current
+        && !itemListRef.current.contains(event.target as Node)
       ) {
         clear();
       }
     },
-    [itemListRef, clear],
+    [itemListRef, clear]
   );
 
   const handleToggle = useCallback(
@@ -139,22 +138,22 @@ export const Dropdown = forwardRef(function Dropdown(
       }, 100);
       if (onToggle) onToggle(event);
     },
-    [onToggle, pressed],
+    [onToggle, pressed]
   );
 
   const handleItemClick = useCallback(
     (onClick?: MouseEventHandler): MouseEventHandler =>
       (event) => {
-        const popoverTargetId =
-          event.target instanceof HTMLElement &&
-          event.target.getAttribute("popovertarget")
+        const popoverTargetId
+          = event.target instanceof HTMLElement
+          && event.target.getAttribute("popovertarget")
             ? event.target.getAttribute("popovertarget")
             : undefined;
         const popoverTarget = popoverTargetId
-          ? document.getElementById(popoverTargetId)
+          ? document.querySelector(`#${popoverTargetId}`)
           : undefined;
-        const popoverTargetAnchor =
-          popoverTarget && popoverTarget.getAttribute("anchor")
+        const popoverTargetAnchor
+          = popoverTarget && popoverTarget.getAttribute("anchor")
             ? popoverTarget.getAttribute("anchor")
             : undefined;
         if (popoverTargetAnchor !== popoverId) {
@@ -163,7 +162,7 @@ export const Dropdown = forwardRef(function Dropdown(
         }
         if (onClick) return onClick(event);
       },
-    [clear, popoverId, clearDropdown],
+    [clear, popoverId, clearDropdown]
   );
 
   useEffect(() => {
@@ -208,34 +207,36 @@ export const Dropdown = forwardRef(function Dropdown(
 
   return (
     <>
-      {props.icon ? (
-        <IconButton
-          {...(buttonProps as IconButtonProps)}
-          toggle
-          pressed={pressed}
-          ref={buttonRef}
-          popovertargetaction={pressed ? "show" : "hide"}
-          popovertarget={popoverId}
-          extendedClassName={cls(
-            extendedClassName,
-            pressed ? "dark:bg-black:20 light:bg-white:20" : undefined,
-          )}
-        />
-      ) : (
-        <Button
-          {...(buttonProps as ButtonProps)}
-          toggle
-          pressed={pressed}
-          popovertargetaction={pressed ? "show" : "hide"}
-          popovertarget={popoverId}
-          ref={buttonRef}
-          extendedClassName={cls(
-            extendedClassName,
-            pressed ? "dark:bg-black:20 light:bg-white:20" : undefined,
-          )}
-        />
-      )}
-      {items && items.length && (
+      {props.icon
+        ? (
+          <IconButton
+            {...(buttonProps as IconButtonProps)}
+            toggle
+            pressed={pressed}
+            ref={buttonRef}
+            popovertargetaction={pressed ? "show" : "hide"}
+            popovertarget={popoverId}
+            extendedClassName={cls(
+              extendedClassName,
+              pressed ? "dark:bg-black:20 light:bg-white:20" : undefined
+            )}
+          />
+        )
+        : (
+          <Button
+            {...(buttonProps as ButtonProps)}
+            toggle
+            pressed={pressed}
+            popovertargetaction={pressed ? "show" : "hide"}
+            popovertarget={popoverId}
+            ref={buttonRef}
+            extendedClassName={cls(
+              extendedClassName,
+              pressed ? "dark:bg-black:20 light:bg-white:20" : undefined
+            )}
+          />
+        )}
+      {items && items.length > 0 && (
         <ul
           id={popoverId}
           popover="manual"
@@ -246,7 +247,7 @@ export const Dropdown = forwardRef(function Dropdown(
             contentVariant && variantBgClass[contentVariant]
               ? variantBgClass[contentVariant]
               : "bg-accent",
-            visible ? "opacity-100" : "opacity-0 pointer-events-none",
+            visible ? "opacity-100" : "opacity-0 pointer-events-none"
           )}
         >
           {items.map(({ type, onClick, className, active, ...item }, index) => (
@@ -256,21 +257,23 @@ export const Dropdown = forwardRef(function Dropdown(
                 className,
                 active
                   ? "dark:bg-black:30 light:bg-white:30 rounded-2"
-                  : undefined,
+                  : undefined
               )}
             >
-              {type === "divider" ? (
-                <hr />
-              ) : (
-                <Action
-                  className="w-full cursor-pointer rounded-2 b-none bg-transparent p-2 text-start text-nowrap c-inherit dark:hover:bg-black:25 light:hover:bg-white:25"
-                  contentVariant={contentVariant}
-                  {...item}
-                  onClick={handleItemClick(onClick)}
-                  parentDropdown={popoverId}
-                  clearDropdown={clear}
-                />
-              )}
+              {type === "divider"
+                ? (
+                  <hr />
+                )
+                : (
+                  <Action
+                    className="w-full cursor-pointer rounded-2 b-none bg-transparent p-2 text-start text-nowrap c-inherit dark:hover:bg-black:25 light:hover:bg-white:25"
+                    contentVariant={contentVariant}
+                    {...item}
+                    onClick={handleItemClick(onClick)}
+                    parentDropdown={popoverId}
+                    clearDropdown={clear}
+                  />
+                )}
             </li>
           ))}
         </ul>

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 export const ReloadPrompt = () => {
   const { t } = useTranslation("ReloadPrompt");
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const dialogReference = useRef<HTMLDialogElement | null>(null);
   const {
     offlineReady: [offlineReady, setOfflineReady],
     needRefresh: [needRefresh, setNeedRefresh],
@@ -22,9 +22,9 @@ export const ReloadPrompt = () => {
       .then(() => {
         close();
       })
-      .catch((err: unknown) => {
+      .catch((error: unknown) => {
         close();
-        throw new Error("Failed to update service worker", { cause: err });
+        throw new Error("Failed to update service worker", { cause: error });
       });
   }, [close, updateServiceWorker]);
 
@@ -32,26 +32,26 @@ export const ReloadPrompt = () => {
 
   return (
     <Dialog
-      ref={dialogRef}
+      ref={dialogReference}
       title={t("title")}
       variant="accent"
       toolbar={{
         items: needRefresh
           ? [
-              {
-                type: "item",
-                onClick: reload,
-                children: t("actions.reloadButton"),
-              },
-            ]
+            {
+              type: "item",
+              onClick: reload,
+              children: t("actions.reloadButton"),
+            },
+          ]
           : undefined,
       }}
       description={
         offlineReady
           ? t("description.offlineReady")
-          : needRefresh
+          : (needRefresh
             ? t("description.needsRefresh")
-            : undefined
+            : undefined)
       }
       onClose={close}
     />

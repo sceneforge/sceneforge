@@ -11,9 +11,9 @@ import {
 } from "react";
 import {
   Button,
-  type ToggleProps,
-  type ButtonProps,
   type ButtonComponent,
+  type ButtonProps,
+  type ToggleProps,
 } from "../Button";
 import type { Variant } from "../../types/variants";
 
@@ -24,7 +24,7 @@ export type PopoverProps = Omit<ButtonProps, keyof ToggleProps> & {
 
 export const Popover = forwardRef(function Popover(
   { id, label, children, ...props }: PopoverProps,
-  ref: ForwardedRef<ButtonComponent>,
+  ref: ForwardedRef<ButtonComponent>
 ) {
   const genId = useId();
   const [opened, setOpened] = useState(false);
@@ -41,7 +41,7 @@ export const Popover = forwardRef(function Popover(
         pressed: false,
         toggle: () => {},
       },
-    [buttonRef],
+    [buttonRef]
   );
 
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -50,33 +50,31 @@ export const Popover = forwardRef(function Popover(
     (event: Event) => {
       if (event instanceof ToggleEvent) {
         setOpened(event.newState === "open");
-        if (event.newState === "open") {
-          if (
-            buttonRef.current?.button &&
-            buttonRef.current.button.checkVisibility()
-          ) {
-            const rect = buttonRef.current?.button.getBoundingClientRect();
-            const x = rect.left;
-            const y = rect.top;
-            if (event.target instanceof HTMLElement) {
-              const popoverRect = event.target.getBoundingClientRect();
-              const width = popoverRect.width || 0;
-              const height = popoverRect.height || 0;
-              event.target.style.insetInlineStart = `${x - width / 2}px`;
-              event.target.style.insetBlockStart = `calc(${
-                y - height
-              }px - 1rem)`;
-            }
+        if (event.newState === "open"
+          && buttonRef.current?.button
+          && buttonRef.current.button.checkVisibility()
+        ) {
+          const rect = buttonRef.current?.button.getBoundingClientRect();
+          const x = rect.left;
+          const y = rect.top;
+          if (event.target instanceof HTMLElement) {
+            const popoverRect = event.target.getBoundingClientRect();
+            const width = popoverRect.width || 0;
+            const height = popoverRect.height || 0;
+            event.target.style.insetInlineStart = `${x - width / 2}px`;
+            event.target.style.insetBlockStart = `calc(${
+              y - height
+            }px - 1rem)`;
           }
         }
       }
     },
-    [buttonRef, setOpened],
+    [buttonRef, setOpened]
   );
 
   useEffect(() => {
-    const popover =
-      popoverRef.current && popoverRef.current instanceof HTMLElement
+    const popover
+      = popoverRef.current && popoverRef.current instanceof HTMLElement
         ? popoverRef.current
         : null;
 

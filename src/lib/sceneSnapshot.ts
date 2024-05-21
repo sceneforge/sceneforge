@@ -3,7 +3,7 @@ import { type Scene } from "@babylonjs/core/scene";
 
 export const sceneSnapshot = (
   scene: Scene,
-  capture?: (data: string) => void,
+  capture?: (data: string) => void
 ) => {
   if (capture) {
     scene.onReadyObservable.addOnce(() => {

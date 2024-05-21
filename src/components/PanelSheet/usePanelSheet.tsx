@@ -1,13 +1,13 @@
 import {
+  type MouseEventHandler,
   RefObject,
   useCallback,
   useEffect,
   useState,
-  type MouseEventHandler,
 } from "react";
 import { changeSize, targetClicked } from "./panelHandler";
 
-type UpdateSizeArgs =
+type UpdateSizeArguments =
   | { movementX: number; movementY: number; size?: never }
   | { size: number; movementX?: never; movementY?: never };
 
@@ -16,7 +16,7 @@ export const usePanelSheet = (
   resizeable: boolean,
   orientation: "block" | "inline",
   position: "start" | "end",
-  handleRef?: RefObject<HTMLSpanElement | null>,
+  handleRef?: RefObject<HTMLSpanElement | null>
 ) => {
   const [clickDown, setClickDown] = useState(false);
 
@@ -27,49 +27,51 @@ export const usePanelSheet = (
   const mouseDown = useCallback(
     (event: MouseEvent) => {
       if (
-        resizeable &&
-        (targetClicked(
+        resizeable
+        && (targetClicked(
           panelRef.current,
           orientation,
           position,
           event,
-          "::after",
-        ) ||
-          (handleRef?.current &&
-            targetClicked(
-              handleRef.current,
-              orientation,
-              position,
-              event,
-              undefined,
-              true,
-            )))
+          "::after"
+        )
+        || (handleRef?.current
+        && targetClicked(
+          handleRef.current,
+          orientation,
+          position,
+          event,
+          undefined,
+          true
+        )))
       ) {
         setClickDown(true);
-      } else {
+      }
+      else {
         setClickDown(false);
       }
     },
-    [resizeable, panelRef, handleRef, orientation, position, setClickDown],
+    [resizeable, panelRef, handleRef, orientation, position, setClickDown]
   );
 
   const updateSize = useCallback(
-    ({ movementX, movementY, size }: UpdateSizeArgs) => {
+    ({ movementX, movementY, size }: UpdateSizeArguments) => {
       if (panelRef.current && orientation && position) {
         if ((movementX || movementY) && !size) {
           changeSize(panelRef.current, orientation, position, {
             movementX,
             movementY,
           });
-        } else if (size && !movementX && !movementY) {
+        }
+        else if (size && !movementX && !movementY) {
           panelRef.current.style.setProperty(
             orientation === "block" ? "height" : "width",
-            `${size}%`,
+            `${size}%`
           );
         }
       }
     },
-    [orientation, panelRef, position],
+    [orientation, panelRef, position]
   );
 
   const mouseOver: MouseEventHandler<HTMLDivElement> = useCallback(
@@ -81,7 +83,7 @@ export const usePanelSheet = (
       event.stopPropagation();
       updateSize(event);
     },
-    [resizeable, clickDown, updateSize],
+    [resizeable, clickDown, updateSize]
   );
 
   useEffect(() => {

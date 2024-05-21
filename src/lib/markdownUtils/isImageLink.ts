@@ -11,38 +11,29 @@ export type ImageChildren = {
 
 export const isImageLink = (
   children: unknown,
-  href?: string,
+  href?: string
 ): children is ImageChildren => {
   if (
-    href &&
-    children &&
-    typeof children === "object" &&
-    children !== null &&
-    !Array.isArray(children)
+    href
+    && children
+    && typeof children === "object"
+    && children !== null
+    && !Array.isArray(children)
+    && "props" in children
+    && typeof children.props === "object"
+    && children.props !== null
+    && !Array.isArray(children.props)
+    && "node" in children.props
+    && "src" in children.props
+    && typeof children.props.src === "string"
+    && typeof children.props.node === "object"
+    && children.props.node !== null
+    && !Array.isArray(children.props.node)
+    && "tagName" in children.props.node
+    && children.props.node.tagName === "img"
+    && children.props.src === href
   ) {
-    if (
-      "props" in children &&
-      typeof children.props === "object" &&
-      children.props !== null &&
-      !Array.isArray(children.props)
-    ) {
-      if ("node" in children.props && "src" in children.props) {
-        if (
-          typeof children.props.src === "string" &&
-          typeof children.props.node === "object" &&
-          children.props.node !== null &&
-          !Array.isArray(children.props.node)
-        ) {
-          if (
-            "tagName" in children.props.node &&
-            children.props.node.tagName === "img" &&
-            children.props.src === href
-          ) {
-            return true;
-          }
-        }
-      }
-    }
+    return true;
   }
   return false;
 };

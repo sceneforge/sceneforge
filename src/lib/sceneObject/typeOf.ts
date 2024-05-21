@@ -22,17 +22,23 @@ export enum SceneObjectType {
 export const typeOf = (node: unknown): SceneObjectType => {
   if (node instanceof Mesh) {
     return SceneObjectType.Mesh;
-  } else if (node instanceof AbstractMesh) {
+  }
+  else if (node instanceof AbstractMesh) {
     return SceneObjectType.AbstractMesh;
-  } else if (node instanceof HemisphericLight) {
+  }
+  else if (node instanceof HemisphericLight) {
     return SceneObjectType.HemisphericLight;
-  } else if (node instanceof Light) {
+  }
+  else if (node instanceof Light) {
     return SceneObjectType.Light;
-  } else if (node instanceof ArcRotateCamera) {
+  }
+  else if (node instanceof ArcRotateCamera) {
     return SceneObjectType.ArcRotateCamera;
-  } else if (node instanceof Camera) {
+  }
+  else if (node instanceof Camera) {
     return SceneObjectType.Camera;
-  } else if (node instanceof TransformNode) {
+  }
+  else if (node instanceof TransformNode) {
     return SceneObjectType.TransformNode;
   }
   return SceneObjectType.Unknown;

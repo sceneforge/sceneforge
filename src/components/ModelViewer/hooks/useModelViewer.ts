@@ -1,5 +1,5 @@
 import "@babylonjs/loaders/glTF/2.0";
-import { useCallback, useEffect, useState, type RefObject } from "react";
+import { type RefObject, useCallback, useEffect, useState } from "react";
 import { useArcRotateCamera } from "./useArcRotateCamera";
 import { useEngine } from "./useEngine";
 import { useGLTFLoader } from "./useGLTFLoader";
@@ -15,7 +15,7 @@ import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 export const useModelViewer = (
   canvasRef: RefObject<HTMLCanvasElement | null>,
   active: boolean,
-  props: Partial<Model>,
+  props: Partial<Model>
 ) => {
   const [loaded, setLoaded] = useState(false);
   const [ready, setReady] = useState(false);
@@ -23,7 +23,7 @@ export const useModelViewer = (
   const [currentNode, setCurrentNode] = useState<unknown>(null);
   const [mode, setMode] = useState<Mode>(Mode.View);
   const [meshSelectionPath, setMeshSelectionPath] = useState<readonly string[]>(
-    [],
+    []
   );
   const [timeoutRef, setTimeoutRef] = useState<NodeJS.Timeout | null>(null);
 
@@ -81,8 +81,8 @@ export const useModelViewer = (
     stopRenderSceneLoop,
   ]);
 
-  const { loadState, loadModels, currentID, currentModel, saveModel } =
-    useModelContext({
+  const { loadState, loadModels, currentID, currentModel, saveModel }
+    = useModelContext({
       ...props,
       capture,
     });
@@ -96,7 +96,7 @@ export const useModelViewer = (
       clearMeshSelectionPath();
       setCurrentNode(node);
     },
-    [clearMeshSelectionPath, setCurrentNode],
+    [clearMeshSelectionPath, setCurrentNode]
   );
 
   const clearSelectedNode = useCallback(() => {
@@ -115,10 +115,11 @@ export const useModelViewer = (
 
   useEffect(() => {
     if (loadState === "none") {
-      loadModels().catch((err: unknown) => {
-        throw new Error("Failed to load models", { cause: err });
+      loadModels().catch((error: unknown) => {
+        throw new Error("Failed to load models", { cause: error });
       });
-    } else if (loadState === "loaded") {
+    }
+    else if (loadState === "loaded") {
       setReady(active);
     }
   }, [loadState, active, loadModels, setReady]);
@@ -137,7 +138,7 @@ export const useModelViewer = (
           setTimeoutRef(null);
           setInitiate(true);
           renderSceneLoop();
-        }, 1000),
+        }, 1000)
       );
     }
 
@@ -145,7 +146,8 @@ export const useModelViewer = (
       if (timeoutRef !== null) {
         clearTimeout(timeoutRef);
         setTimeoutRef(null);
-      } else if (ready) {
+      }
+      else if (ready) {
         setInitiate(false);
         setReady(false);
         stopRenderSceneLoop();
@@ -155,13 +157,13 @@ export const useModelViewer = (
 
   const objectPath = useCallback((node: unknown): string[] => {
     if (
-      node &&
-      typeof node === "object" &&
-      node !== null &&
-      !Array.isArray(node)
+      node
+      && typeof node === "object"
+      && node !== null
+      && !Array.isArray(node)
     ) {
-      const id =
-        "id" in node && node.id && typeof node.id === "string"
+      const id
+        = "id" in node && node.id && typeof node.id === "string"
           ? node.id
           : "-==[!UNKNOWN_ID]==-";
       if ("parent" in node && node.parent) {
@@ -178,29 +180,29 @@ export const useModelViewer = (
       setMeshSelectionPath(objectPath(mesh));
       setCurrentNode(mesh);
     },
-    [clearMeshSelectionPath, objectPath],
+    [clearMeshSelectionPath, objectPath]
   );
 
   const onHotspotSelect = useCallback(
     (
       mesh: AbstractMesh,
-      ev: ActionEvent,
-      { hotspot }: { hotspot: AbstractMesh },
+      event: ActionEvent,
+      { hotspot }: { hotspot: AbstractMesh }
     ) => {
-      console.log("DEBUG: onHotspotSelect", mesh, ev, hotspot);
+      console.log("DEBUG: onHotspotSelect", mesh, event, hotspot);
     },
-    [],
+    []
   );
 
   useEffect(() => {
     if (ready && mode === Mode.Edit) {
       const mesh = sceneRef.current?.rootNodes.filter(
-        (node) => node instanceof Mesh || node instanceof AbstractMesh,
+        node => node instanceof Mesh || node instanceof AbstractMesh
       );
       if (
-        mesh &&
-        mesh.length === 1 &&
-        (mesh[0] instanceof Mesh || mesh[0] instanceof AbstractMesh)
+        mesh
+        && mesh.length === 1
+        && (mesh[0] instanceof Mesh || mesh[0] instanceof AbstractMesh)
       ) {
         return select(mesh[0], {
           onMeshSelect,
@@ -226,7 +228,7 @@ export const useModelViewer = (
         id,
       });
     },
-    [currentID, saveModel],
+    [currentID, saveModel]
   );
 
   return {

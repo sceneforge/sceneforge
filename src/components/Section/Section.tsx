@@ -16,7 +16,7 @@ export type SectionProps = HTMLAttributes<HTMLElement> &
 
 export const Section = forwardRef(function Section(
   { title, level = 2, className, headingClassName, children }: SectionProps,
-  ref: ForwardedRef<HTMLElement>,
+  ref: ForwardedRef<HTMLElement>
 ) {
   return (
     <section ref={ref} className="text-start c-light">
@@ -24,8 +24,8 @@ export const Section = forwardRef(function Section(
         <Heading
           level={level}
           className={cls(
-            headingClassName ??
-              "w-full lg:w-3xl sm:w-lg xl:w-6xl m-inline-auto m-b-4 m-t-0 c-inherit text-start text-shadow-xl",
+            headingClassName
+            ?? "w-full lg:w-3xl sm:w-lg xl:w-6xl m-inline-auto m-b-4 m-t-0 c-inherit text-start text-shadow-xl"
           )}
         >
           {title}
@@ -33,8 +33,8 @@ export const Section = forwardRef(function Section(
       )}
       <div
         className={
-          className ??
-          "c-inherit w-full lg:w-3xl sm:w-lg xl:w-6xl m-inline-auto"
+          className
+          ?? "c-inherit w-full lg:w-3xl sm:w-lg xl:w-6xl m-inline-auto"
         }
       >
         {children}

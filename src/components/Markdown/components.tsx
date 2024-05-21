@@ -10,19 +10,21 @@ type IntrinsicElement<
   T extends keyof JSX.IntrinsicElements = keyof JSX.IntrinsicElements,
 > = JSX.IntrinsicElements[T];
 
-const wrapper =
-  <
+const wrapper
+  = <
     T extends keyof JSX.IntrinsicElements = keyof JSX.IntrinsicElements,
     WP extends object = object,
     P extends IntrinsicElement<T> = IntrinsicElement<T>,
   >(
     Component: ComponentType<WP>,
-    initialProps: WP = {} as WP,
+    initialProps: WP = {} as WP
   ) =>
-  ({ node, ...props }: P & { node?: Element }) =>
-    node && node.type === "element" ? (
-      <Component {...props} {...initialProps} />
-    ) : null;
+    ({ node, ...props }: P & { node?: Element }) =>
+      node && node.type === "element"
+        ? (
+          <Component {...props} {...initialProps} />
+        )
+        : null;
 
 export const components: MarkdownProps["components"] = {
   h1: wrapper(Heading, { level: 1 }),

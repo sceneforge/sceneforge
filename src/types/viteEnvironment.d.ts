@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 
+// eslint-disable-next-line unicorn/prevent-abbreviations
 interface ImportMetaEnv {
   VITE_APP_NAME?: string;
   VITE_APP_DESCRIPTION?: string;

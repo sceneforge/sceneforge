@@ -4,8 +4,8 @@ import { useAppInstall } from "./useAppInstall";
 
 export const AppInstall = () => {
   const { t } = useTranslation("AppInstall");
-  const { closeInstallDialog, installPrompt, showInstallDialog } =
-    useAppInstall();
+  const { closeInstallDialog, installPrompt, showInstallDialog }
+    = useAppInstall();
 
   if (!showInstallDialog) return null;
 

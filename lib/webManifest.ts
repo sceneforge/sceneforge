@@ -184,24 +184,24 @@ export const webManifest = ({
       prefer_related_applications: true,
       ...(isProd
         ? {
-            id: "https://sceneforge.org/",
-            scope: "https://sceneforge.org/",
-            related_applications: [
-              {
-                platform: "webapp",
-                url: "https://sceneforge.org/manifest.webmanifest",
-                id: "https://sceneforge.org/",
-              },
-            ],
-          }
-        : isDev
+          id: "https://sceneforge.org/",
+          scope: "https://sceneforge.org/",
+          related_applications: [
+            {
+              platform: "webapp",
+              url: "https://sceneforge.org/manifest.webmanifest",
+              id: "https://sceneforge.org/",
+            },
+          ],
+        }
+        : (isDev
           ? {
-              id: `http://localhost:${devPort}/`,
-              scope: `http://localhost:${devPort}/`,
-            }
+            id: `http://localhost:${devPort}/`,
+            scope: `http://localhost:${devPort}/`,
+          }
           : {
-              scope: "/",
-            }),
+            scope: "/",
+          })),
     };
   }
 };

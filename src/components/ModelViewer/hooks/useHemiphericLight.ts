@@ -2,7 +2,7 @@ import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
 import { Vector3 } from "@babylonjs/core/Maths/math.vector";
 import { type Scene } from "@babylonjs/core/scene";
 import { type Nullable } from "@babylonjs/core/types";
-import { useCallback, useRef, type RefObject } from "react";
+import { type RefObject, useCallback, useRef } from "react";
 
 export const useHemisphericLight = (sceneRef: RefObject<Nullable<Scene>>) => {
   const lightRef = useRef<Nullable<HemisphericLight>>(null);
@@ -12,7 +12,7 @@ export const useHemisphericLight = (sceneRef: RefObject<Nullable<Scene>>) => {
       lightRef.current = new HemisphericLight(
         "hemisphericLight",
         new Vector3(0, 1, 0),
-        sceneRef.current,
+        sceneRef.current
       );
     }
   }, [sceneRef, lightRef]);

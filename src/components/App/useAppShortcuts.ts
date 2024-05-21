@@ -12,25 +12,24 @@ export const useAppShortcuts = () => {
   const { shortcutActions } = useShortcuts();
 
   const hashChangeHandler = useCallback(
-    (ev: HashChangeEvent) => {
-      if (ev.newURL && URL.canParse(ev.newURL)) {
-        const url = new URL(ev.newURL);
-        setParams(parseParams(url.hash.replace(/^#!/g, "")));
+    (event: HashChangeEvent) => {
+      if (event.newURL && URL.canParse(event.newURL)) {
+        const url = new URL(event.newURL);
+        setParams(parseParams(url.hash.replaceAll(/^#!/g, "")));
       }
     },
-    [setParams],
+    [setParams]
   );
 
   const handleShortcutAction = useCallback(
     ({ action, params }: ShortcutActionType) => {
-      const result = shortcutActions.find((a) =>
-        isEqual({ action: a.action, params: a.params }, { action, params }),
-      );
+      const result = shortcutActions.find(a =>
+        isEqual({ action: a.action, params: a.params }, { action, params }));
       if (result && result.callback) {
         return result.callback();
       }
     },
-    [shortcutActions],
+    [shortcutActions]
   );
 
   useEffect(() => {
@@ -38,11 +37,11 @@ export const useAppShortcuts = () => {
     return () => {
       self.removeEventListener("hashchange", hashChangeHandler, false);
     };
-  }, []);
+  }, [hashChangeHandler]);
 
   useEffect(() => {
     if (self?.location?.hash) {
-      setParams(parseParams(self.location.hash.replace(/^#!/g, "")));
+      setParams(parseParams(self.location.hash.replaceAll(/^#!/g, "")));
     }
   }, []);
 
@@ -54,5 +53,5 @@ export const useAppShortcuts = () => {
         self.location.hash = "";
       }
     }
-  }, [params]);
+  }, [handleShortcutAction, params]);
 };

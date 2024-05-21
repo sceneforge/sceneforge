@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useModelContext } from "../ModelContext";
 
 export type UseModelListProps = {
@@ -21,9 +21,9 @@ export const useModelList = ({ active }: UseModelListProps) => {
         .then(() => {
           setLoaded(true);
         })
-        .catch((err: unknown) => {
+        .catch((error) => {
           setLoaded(true);
-          throw new Error("Failed to load models", { cause: err });
+          throw new Error("Failed to load models", { cause: error });
         });
     }
   }, [loaded, active, loadModels, setLoaded]);

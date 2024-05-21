@@ -5,7 +5,7 @@ export type ImageProps = AllHTMLAttributes<HTMLImageElement>;
 
 export const Image = forwardRef(function Image(
   { src, title, alt, ...props }: ImageProps,
-  ref: ForwardedRef<HTMLImageElement>,
+  ref: ForwardedRef<HTMLImageElement>
 ) {
   if (title && src && src.endsWith("#!image-dialog")) {
     return (

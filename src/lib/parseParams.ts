@@ -10,10 +10,10 @@ const decodeValue = (value: string) => {
     return null;
   }
   if (decodedValue === "undefined") {
-    return undefined;
+    return;
   }
-  const possibleNumber = parseFloat(decodedValue);
-  if (!isNaN(possibleNumber)) {
+  const possibleNumber = Number.parseFloat(decodedValue);
+  if (!Number.isNaN(possibleNumber)) {
     return possibleNumber;
   }
   return decodedValue;
@@ -24,24 +24,30 @@ export const parseParams = (urlHash?: string) => {
     return {};
   }
 
-  const params = urlHash.replace(/^#!/g, "");
+  const params = urlHash.replaceAll(/^#!/g, "");
   return params
     .split("&")
     .map((p) => {
       const [key, value] = p.split("=");
       return { key, value };
     })
-    .reduce((acc, { key, value }) => {
+    .reduce((accumulator, { key, value }) => {
       const decodedKey = decodeURIComponent(key);
       const decodedValue = decodeValue(value);
-      const keyValue =
-        decodedKey in acc
-          ? Array.isArray((acc as Record<string, unknown>)[decodedKey])
-            ? [...(acc as Record<string, unknown[]>)[decodedKey], decodedValue]
-            : [(acc as Record<string, unknown>)[decodedKey], decodedValue]
+      const keyValue
+        = decodedKey in accumulator
+          ? (Array.isArray((accumulator as Record<string, unknown>)[decodedKey])
+            ? [
+              ...(accumulator as Record<string, unknown[]>)[decodedKey],
+              decodedValue,
+            ]
+            : [
+              (accumulator as Record<string, unknown>)[decodedKey],
+              decodedValue,
+            ])
           : decodedValue;
       return {
-        ...acc,
+        ...accumulator,
         [decodedKey]: keyValue,
       };
     }, {});

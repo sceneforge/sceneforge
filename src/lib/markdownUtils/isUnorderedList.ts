@@ -11,17 +11,17 @@ export type UnorderedList = {
 
 export const isUnorderedList = (node: unknown): node is UnorderedList => {
   if (
-    node &&
-    typeof node === "object" &&
-    "type" in node &&
-    node.type &&
-    node.type === "ul" &&
-    "props" in node &&
-    typeof node.props === "object" &&
-    node.props !== null &&
-    !Array.isArray(node.props) &&
-    "children" in node.props &&
-    isValidElement(node.props.children)
+    node
+    && typeof node === "object"
+    && "type" in node
+    && node.type
+    && node.type === "ul"
+    && "props" in node
+    && typeof node.props === "object"
+    && node.props !== null
+    && !Array.isArray(node.props)
+    && "children" in node.props
+    && isValidElement(node.props.children)
   ) {
     return true;
   }

@@ -25,7 +25,7 @@ export const InputListItem = ({
   ...props
 }: InputListItemProps) => {
   const genId = useId();
-  const inputId = id ? id : genId;
+  const inputId = id ?? genId;
 
   if (type !== "select" && type !== "checkbox") {
     throw new Error("Invalid type");

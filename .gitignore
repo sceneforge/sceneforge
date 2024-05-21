@@ -47,3 +47,6 @@ temp/
 *.esproj
 *.DS_Store
 *.log
+
+# Compiled ViteJS config files
+vite.config.ts.*

@@ -7,13 +7,13 @@ import { useTranslation } from "react-i18next";
 
 export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
   const { t } = useTranslation("common");
-  const { models, loaded, setModels, setLoaded, loadState, setLoadState } =
-    useContext(ModelContext);
+  const { models, loaded, setModels, setLoaded, loadState, setLoadState }
+    = useContext(ModelContext);
   const { getAllUserData, setUserData, removeUserData } = usePanel();
 
   const [currentID, setCurrentID] = useState<string | undefined>(id);
   const [captureSaveState, setCaptureSaveState] = useState<boolean | undefined>(
-    false,
+    false
   );
 
   const loadModels = useCallback((): Promise<Model[]> => {
@@ -26,7 +26,7 @@ export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
           if (Array.isArray(data)) {
             for (const model of data) {
               if (isModel(model)) {
-                setModels((prev) => [...prev, model]);
+                setModels(previous => [...previous, model]);
               }
             }
           }
@@ -38,10 +38,11 @@ export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
           setLoadState("error");
           if (error instanceof Error) {
             reject(error);
-          } else {
+          }
+          else {
             reject(new Error("Failed to load models", { cause: error }));
           }
-        },
+        }
       );
     });
   }, [setLoadState, getAllUserData, setModels, setLoaded, models]);
@@ -50,29 +51,36 @@ export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
     async (givenID?: string): Promise<Model | undefined> => {
       if (!givenID) return undefined;
       if (loaded) {
-        return models.find((model) => model.id === givenID);
-      } else {
-        return (await loadModels()).find((model) => model.id === givenID);
+        return models.find(model => model.id === givenID);
+      }
+      else {
+        try {
+          const modelsResult = await loadModels();
+          return modelsResult.find(model => model.id === givenID);
+        }
+        catch (error) {
+          throw new Error("Failed to get model", { cause: error });
+        }
       }
     },
-    [models, loaded, loadModels],
+    [models, loaded, loadModels]
   );
 
   const currentModel = useMemo(() => {
     if (currentID) {
-      const result = models.find((model) => model.id === currentID);
+      const result = models.find(model => model.id === currentID);
       if (result && result.id === id && capture) {
         return { ...result, capture };
       }
       return result;
     }
-    return undefined;
+    return;
   }, [id, capture, currentID, models]);
 
   const saveModel = useCallback(
     async (
       model: Partial<Omit<Model, "updatedAt">>,
-      create: boolean = true,
+      create: boolean = true
     ): Promise<Model> => {
       const now = new Date();
       const withId = model.id ?? currentID ?? uuid();
@@ -82,11 +90,11 @@ export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
         throw new Error(`Model with the ID "${model.id}" is not found`);
       }
 
-      const title =
-        model.title ?? storedModel?.title ?? t("tabs.untitledModel");
+      const title
+        = model.title ?? storedModel?.title ?? t("tabs.untitledModel");
       const gltf = model.gltf ?? storedModel?.gltf ?? undefined;
-      const withCapture =
-        withId === id && capture
+      const withCapture
+        = withId === id && capture
           ? capture
           : model.capture ?? storedModel?.capture ?? undefined;
       const createdAt = model.createdAt ?? storedModel?.createdAt ?? now;
@@ -102,23 +110,25 @@ export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
 
       try {
         await setUserData("models", modelToSave.id, modelToSave);
-        setModels((prev) =>
-          prev.filter((m) => m.id !== modelToSave.id).concat(modelToSave),
-        );
+        setModels(previous => [
+          ...previous.filter(m => m.id !== modelToSave.id),
+          modelToSave,
+        ]);
         return modelToSave;
-      } catch (error) {
+      }
+      catch (error) {
         throw new Error("Failed to save model", { cause: error });
       }
     },
-    [id, capture, currentID, getModel, setModels, setUserData, t],
+    [id, capture, currentID, getModel, setModels, setUserData, t]
   );
 
   const deleteModel = useCallback(
     (givenID: string) => {
-      setModels((prev) => prev.filter((m) => m.id !== givenID));
+      setModels(previous => previous.filter(m => m.id !== givenID));
       removeUserData("models", givenID);
     },
-    [setModels, removeUserData],
+    [setModels, removeUserData]
   );
 
   const updateModelID = useCallback(
@@ -134,42 +144,42 @@ export const useModelContext = ({ id, capture }: Partial<Model> = {}) => {
       deleteModel(givenID);
       return result;
     },
-    [getModel, saveModel, currentID, setCurrentID, deleteModel],
+    [getModel, saveModel, currentID, setCurrentID, deleteModel]
   );
 
   const updateModel = useCallback(
     async (
       givenID: string,
-      model: Partial<Omit<Model, "id" | "createdAt" | "updatedAt">>,
+      model: Partial<Omit<Model, "id" | "createdAt" | "updatedAt">>
     ): Promise<Model> => {
       return saveModel({ ...model, id: givenID }, false);
     },
-    [saveModel],
+    [saveModel]
   );
 
   useEffect(() => {
     if (id && loadState === "none") {
-      loadModels().catch((err: unknown) => {
-        throw new Error("Failed to load models", { cause: err });
+      loadModels().catch((error: unknown) => {
+        throw new Error("Failed to load models", { cause: error });
       });
     }
   }, [id, loadState, loadModels]);
 
   useEffect(() => {
     if (
-      id &&
-      capture &&
-      currentID &&
-      currentID === id &&
-      loadState === "loaded" &&
-      !captureSaveState
+      id
+      && capture
+      && currentID
+      && currentID === id
+      && loadState === "loaded"
+      && !captureSaveState
     ) {
       saveModel({ id, capture })
         .then(() => {
           setCaptureSaveState(true);
         })
-        .catch((err: unknown) => {
-          throw new Error("Failed to save model", { cause: err });
+        .catch((error: unknown) => {
+          throw new Error("Failed to save model", { cause: error });
         });
     }
   }, [id, capture, currentID, loadState, captureSaveState, saveModel]);

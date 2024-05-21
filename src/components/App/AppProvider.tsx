@@ -1,14 +1,14 @@
 import {
   type Dispatch,
+  type PropsWithChildren,
   type SetStateAction,
   createContext,
   useState,
-  type PropsWithChildren,
 } from "react";
 import { ContextMenuProvider } from "../ContextMenu";
 import { ModelContextProvider } from "../ModelContext";
 import { PanelProvider, type PanelProviderProps } from "../Panel";
-import { TabPanelProvider, type TabComponent } from "../TabPanel";
+import { type TabComponent, TabPanelProvider } from "../TabPanel";
 import { AppInstallProvider } from "../AppInstall";
 import { useTranslation } from "react-i18next";
 import { AppShortcuts } from "./AppShortcuts";
@@ -23,11 +23,11 @@ export type AppContextType = {
   name?: string;
   description?: string;
   version?: string;
-  dev?: boolean;
+  development?: boolean;
   resolvedLanguage?: string;
-  dir?: string;
+  direction?: string;
   setResolvedLanguage?: Dispatch<SetStateAction<string | undefined>>;
-  setDir?: Dispatch<SetStateAction<string | undefined>>;
+  setDirection?: Dispatch<SetStateAction<string | undefined>>;
   languages?: readonly string[];
   basePath: string;
   keywords?: string;
@@ -50,15 +50,15 @@ export const AppProvider = ({
   } = useTranslation();
 
   const [resolvedLanguage, setResolvedLanguage] = useState<string | undefined>(
-    i18nResolvedLanguage,
+    i18nResolvedLanguage
   );
-  const [dir, setDir] = useState<string | undefined>(i18nDir());
+  const [direction, setDirection] = useState<string | undefined>(i18nDir());
   const name = import.meta.env.VITE_APP_NAME ?? "";
   const description = import.meta.env.VITE_APP_DESCRIPTION ?? "";
   const keywords = import.meta.env.VITE_APP_KEYWORDS ?? "";
   const author = import.meta.env.VITE_APP_AUTHOR ?? "";
   const version = import.meta.env.VITE_APP_VERSION ?? "";
-  const dev = import.meta.env.DEV ? true : false;
+  const development = import.meta.env.DEV ? true : false;
   const basePath = import.meta.env.VITE_APP_BASE_PATH ?? "/";
   const repository = import.meta.env.VITE_APP_REPOSITORY ?? "";
 
@@ -68,11 +68,11 @@ export const AppProvider = ({
         name,
         description,
         version,
-        dev,
+        development,
         resolvedLanguage,
         setResolvedLanguage,
-        dir,
-        setDir,
+        direction,
+        setDirection,
         languages,
         basePath,
         keywords,

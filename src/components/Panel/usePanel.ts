@@ -25,7 +25,7 @@ export const usePanel = () => {
     setSidePanelContent,
   } = useContext(PanelContext);
   const { t, i18n } = useTranslation();
-  const { setResolvedLanguage, languages, resolvedLanguage } = useAppContext();
+  const { setResolvedLanguage, languages } = useAppContext();
   const [showWelcomeState, setShowWelcomeState] = useState(showWelcome);
 
   const getUserData = useCallback(
@@ -33,7 +33,7 @@ export const usePanel = () => {
       store: string,
       key: string,
       callback: (value: unknown) => void,
-      errorCallback?: (error: unknown) => void,
+      errorCallback?: (error: unknown) => void
     ) => {
       if (userData) {
         userData
@@ -42,14 +42,14 @@ export const usePanel = () => {
           .catch(errorCallback ?? (() => void 0));
       }
     },
-    [userData],
+    [userData]
   );
 
   const getAllUserData = useCallback(
     (
       store: string,
       callback: (value: unknown[]) => void,
-      errorCallback?: (error: unknown) => void,
+      errorCallback?: (error: unknown) => void
     ) => {
       if (userData) {
         userData
@@ -58,7 +58,7 @@ export const usePanel = () => {
           .catch(errorCallback ?? (() => void 0));
       }
     },
-    [userData],
+    [userData]
   );
 
   const setUserData = useCallback(
@@ -66,7 +66,7 @@ export const usePanel = () => {
       store: string,
       key: string,
       value: T,
-      errorCallback?: (error: unknown) => void,
+      errorCallback?: (error: unknown) => void
     ) => {
       if (userData) {
         return userData
@@ -75,7 +75,7 @@ export const usePanel = () => {
       }
       return Promise.reject(new Error("userData is not available"));
     },
-    [userData],
+    [userData]
   );
 
   const removeUserData = useCallback(
@@ -84,7 +84,7 @@ export const usePanel = () => {
         userData.remove(store, key).catch(errorCallback ?? (() => void 0));
       }
     },
-    [userData],
+    [userData]
   );
 
   const updateTitle = useCallback(
@@ -93,19 +93,20 @@ export const usePanel = () => {
         setAppTitle(() => {
           if (title) {
             return title;
-          } else if (defaultAppTitle) {
+          }
+          else if (defaultAppTitle) {
             return defaultAppTitle;
           }
         });
       }
     },
-    [defaultAppTitle, setAppTitle],
+    [defaultAppTitle, setAppTitle]
   );
 
   const changeLanguage = useCallback(
-    (e: ChangeEvent<HTMLSelectElement>) => {
-      if (e.target.value) {
-        const language = e.target.value;
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      if (event.target.value) {
+        const language = event.target.value;
         setUserData("settings", "language", language)
           .then(() => {
             if (setResolvedLanguage) {
@@ -116,20 +117,20 @@ export const usePanel = () => {
               .then(() => {
                 i18n.dir(language);
               })
-              .catch((err: unknown) => {
-                throw new Error("Failed to change language", { cause: err });
+              .catch((error: unknown) => {
+                throw new Error("Failed to change language", { cause: error });
               });
           })
-          .catch((err: unknown) => {
-            throw new Error("Failed to set language", { cause: err });
+          .catch((error: unknown) => {
+            throw new Error("Failed to set language", { cause: error });
           });
       }
     },
-    [setUserData, setResolvedLanguage, i18n],
+    [setUserData, setResolvedLanguage, i18n]
   );
 
   const languageList = useMemo(() => {
-    return languages?.map((locale) => ({
+    return languages?.map(locale => ({
       local: t(`locales.${locale}`, {
         ns: "common",
         defaultValue: locale,
@@ -141,16 +142,16 @@ export const usePanel = () => {
       }),
       locale,
     }));
-  }, [languages, resolvedLanguage, t]);
+  }, [languages, t]);
 
   const changeShowWelcome = useCallback(
     (show: boolean) => {
-      setUserData("settings", "welcome", show).catch((err: unknown) => {
-        throw new Error("Failed to set welcome setting", { cause: err });
+      setUserData("settings", "welcome", show).catch((error: unknown) => {
+        throw new Error("Failed to set welcome setting", { cause: error });
       });
       setShowWelcomeState(show);
     },
-    [setUserData],
+    [setUserData]
   );
 
   return {

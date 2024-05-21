@@ -20,9 +20,9 @@ export const isMarkdownAction = (data: unknown): data is MarkdownAction => {
   if (Array.isArray(data)) return false;
 
   if (
-    !("type" in data) ||
-    typeof data.type !== "string" ||
-    data.type !== "markdown"
+    !("type" in data)
+    || typeof data.type !== "string"
+    || data.type !== "markdown"
   )
     return false;
   if (!("label" in data) || typeof data.label !== "string") return false;
@@ -48,7 +48,7 @@ export const isHighlights = (data: unknown): data is Highlight[] => {
   if (!Array.isArray(data)) return false;
   if (data.length === 0) return true;
 
-  return data.every((item) => isHighlight(item));
+  return data.every(item => isHighlight(item));
 };
 
 export const isWelcomeData = (data: unknown): data is WelcomeData => {

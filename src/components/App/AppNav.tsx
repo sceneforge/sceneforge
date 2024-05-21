@@ -9,8 +9,8 @@ export const AppNav = () => {
   const { t } = useTranslation("App");
   const { appTitle } = usePanel();
   const { openTabHome, openTabAbout, openTabSettings } = useShortcuts();
-  const { showInstall, openInstallDialog, animateInstallButton } =
-    useAppInstall();
+  const { showInstall, openInstallDialog, animateInstallButton }
+    = useAppInstall();
 
   const toolbarEnd: ToolbarProps = {
     icon: "moreVert",

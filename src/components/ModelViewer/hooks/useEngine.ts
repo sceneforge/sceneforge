@@ -2,7 +2,7 @@ import { Engine } from "@babylonjs/core/Engines/engine";
 import { Color4 } from "@babylonjs/core/Maths/math.color";
 import { Scene } from "@babylonjs/core/scene";
 import { type Nullable } from "@babylonjs/core/types";
-import { useCallback, useMemo, useRef, type RefObject } from "react";
+import { type RefObject, useCallback, useMemo, useRef } from "react";
 
 export const useEngine = (canvasRef: RefObject<HTMLCanvasElement | null>) => {
   const engineRef = useRef<Nullable<Engine>>(null);
@@ -66,7 +66,7 @@ export const useEngine = (canvasRef: RefObject<HTMLCanvasElement | null>) => {
     if (canvasRef.current) {
       resizeObserver.unobserve(canvasRef.current);
     }
-  }, [canvasRef, resizeObserver]);
+  }, [canvasRef, renderLoop, resizeObserver]);
 
   return {
     engineRef,

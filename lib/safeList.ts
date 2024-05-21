@@ -4,32 +4,24 @@ const schemePrefix = ["dark", "light"];
 
 export const safeList = (colors: string[], opacity: number[]): string[] => {
   const colorBackgroundClasses = [
-    colors.map((c) => colorBackgroundPrefix.map((cbp) => `${cbp}-${c}`)).flat(),
+    colors.flatMap(c => colorBackgroundPrefix.map(cbp => `${cbp}-${c}`)),
     colors
-      .map((c) =>
+      .flatMap(c =>
         schemePrefix
-          .map((sp) =>
-            colorBackgroundPrefix.map((cbp) => `${sp}:${cbp}-${c}`).flat(),
-          )
-          .flat(),
-      )
-      .flat(),
+          .flatMap(sp =>
+            colorBackgroundPrefix.flatMap(cbp => `${sp}:${cbp}-${c}`))),
   ].flat();
   const colorTextClasses = [
-    colors.map((c) => colorTextPrefix.map((ctp) => `${ctp}-${c}`)).flat(),
+    colors.flatMap(c => colorTextPrefix.map(ctp => `${ctp}-${c}`)),
     colors
-      .map((c) =>
+      .flatMap(c =>
         schemePrefix
-          .map((sp) => colorTextPrefix.map((ctp) => `${sp}:${ctp}-${c}`))
-          .flat(),
-      )
-      .flat(),
+          .flatMap(sp => colorTextPrefix.map(ctp => `${sp}:${ctp}-${c}`))),
   ].flat();
   return [
     ...colorBackgroundClasses,
     ...colorTextClasses,
     ...colorBackgroundClasses
-      .map((c) => opacity.map((o) => `${c}:${o}`))
-      .flat(),
+      .flatMap(c => opacity.map(o => `${c}:${o}`)),
   ];
 };

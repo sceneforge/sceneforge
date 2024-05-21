@@ -5,7 +5,8 @@ export const hideNode = (node: unknown) => {
   if (node instanceof AbstractMesh) {
     node.isVisible = false;
     return true;
-  } else if (node instanceof HemisphericLight) {
+  }
+  else if (node instanceof HemisphericLight) {
     node.setEnabled(false);
     return true;
   }

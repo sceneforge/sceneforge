@@ -4,7 +4,7 @@ import {
 } from "./isShortcutActionType";
 
 export const parseShortcutAction = (
-  params?: Record<string, unknown>,
+  params?: Record<string, unknown>
 ): ShortcutActionType => {
   if (!params) {
     return {

@@ -1,4 +1,4 @@
-import { RefObject, useRef, type PropsWithChildren } from "react";
+import { type PropsWithChildren, RefObject, useRef } from "react";
 import { usePanelSheet } from "./usePanelSheet";
 import { type Variant } from "../../types/variants";
 import { cls } from "../../lib/cls";
@@ -29,14 +29,14 @@ export const PanelSheet = ({
     resizable,
     orientation,
     position,
-    dragIndicator,
+    dragIndicator
   );
 
   return (
     <div
       className={cls(
         "absolute w-full h-sm after:absolute after:block after:content-empty after:h-1 after:w-full after:inset-t-0 after:inset-x-0 after:cursor-ns-resize dark:after:hover:bg-white:10 light:after:hover:bg-black:10 inset-b-0 overflow-hidden c-light",
-        variantBgClass[variant],
+        variantBgClass[variant]
       )}
       data-dragging={resizable && clickDown ? "true" : "false"}
       data-orientation={orientation}
@@ -57,7 +57,7 @@ export const PanelSheet = ({
             contentVariant="default"
             icon="dragIndicator"
             label={t("size")}
-            items={[75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25].map((size) => ({
+            items={[75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25].map(size => ({
               type: "item",
               label: `${size}%`,
               onClick: () => updateSize({ size }),

@@ -11,9 +11,9 @@ export const SafeArea = ({ vertical, horizonal, children }: SafeAreaProps) => {
   const { tabsPosition } = useTabPanel();
 
   const classVertical = vertical
-    ? tabsPosition === "top"
+    ? (tabsPosition === "top"
       ? "p-t-2"
-      : "p-t-16"
+      : "p-t-16")
     : null;
   const classHorizonal = horizonal ? "p-inline-4" : null;
 

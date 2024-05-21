@@ -1,9 +1,9 @@
 import {
   type MouseEvent,
+  MouseEventHandler,
   type RefObject,
   useCallback,
   useContext,
-  MouseEventHandler,
 } from "react";
 import { ContextMenuContext, type MenuItem } from "./ContextMenuProvider";
 import { type Variant } from "../../types/variants";
@@ -84,7 +84,7 @@ export const useContextMenu = () => {
       setContextMenuVariant,
       setContextMenuItems,
       setShowContextMenu,
-    ],
+    ]
   );
 
   const handleContextMenu = useCallback(
@@ -100,7 +100,7 @@ export const useContextMenu = () => {
       (event: MouseEvent<HTMLElement>) => {
         openContextMenu({ event, header, variant, items });
       },
-    [openContextMenu],
+    [openContextMenu]
   );
 
   const setPosition = useCallback(
@@ -109,7 +109,7 @@ export const useContextMenu = () => {
         setPositionOnPointer(ref.current, contextMenuEvent);
       }
     },
-    [contextMenuEvent],
+    [contextMenuEvent]
   );
 
   const handleItemClick = useCallback(
@@ -121,7 +121,7 @@ export const useContextMenu = () => {
         }
       };
     },
-    [clearContextMenu],
+    [clearContextMenu]
   );
 
   return {

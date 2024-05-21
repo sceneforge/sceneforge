@@ -1,13 +1,13 @@
 import {
+  type DialogHTMLAttributes,
+  type ForwardedRef,
+  type PropsWithChildren,
   forwardRef,
   useCallback,
-  useImperativeHandle,
-  useRef,
-  type DialogHTMLAttributes,
-  type PropsWithChildren,
   useEffect,
   useId,
-  type ForwardedRef,
+  useImperativeHandle,
+  useRef,
   useState,
 } from "react";
 import { IconButton } from "../IconButton";
@@ -24,7 +24,7 @@ export type DialogProps = PropsWithChildren<{
   variant?: Variant;
   extendedClassName?: string;
 }> &
-  DialogHTMLAttributes<HTMLDialogElement>;
+DialogHTMLAttributes<HTMLDialogElement>;
 
 export const Dialog = forwardRef(function Dialog(
   {
@@ -39,7 +39,7 @@ export const Dialog = forwardRef(function Dialog(
     extendedClassName,
     ...props
   }: DialogProps,
-  ref: ForwardedRef<HTMLDialogElement>,
+  ref: ForwardedRef<HTMLDialogElement>
 ) {
   const [openState, setOpenState] = useState<boolean>(open ?? false);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -72,7 +72,7 @@ export const Dialog = forwardRef(function Dialog(
       className={cls(
         "fixed inset-block-50% inset-inline-50% m-0 min-w-64 flex flex-col translate--50% overflow-clip b dark:b-black:10 light:b-white:10 rounded-4 b-solid bg-accent p-0 c-light drop-shadow-2xl backdrop:h-full backdrop:w-full backdrop:bg-accent:10 backdrop:backdrop-blur-2 backdrop:backdrop-grayscale-60 backdrop:backdrop-filter",
         variantBgClass[variant],
-        extendedClassName,
+        extendedClassName
       )}
       onClose={onClose}
       onCancel={onCancel}

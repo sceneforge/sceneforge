@@ -21,18 +21,18 @@ export const SceneNodeTree = ({
   const genId = useId();
   return (
     <ul className="m-0 list-none p-0" id={`${genId}-children`}>
-      {scene &&
-        scene.rootNodes
-          .sort(compare)
-          .map((node, index) => (
-            <SceneNode
-              key={`${genId}-${index}`}
-              node={node}
-              onNodeSelect={onNodeSelect}
-              meshSelectionPath={meshSelectionPath}
-              clearMeshSelectionPath={clearMeshSelectionPath}
-            />
-          ))}
+      {scene
+      && scene.rootNodes
+        .sort(compare)
+        .map((node, index) => (
+          <SceneNode
+            key={`${genId}-${index}`}
+            node={node}
+            onNodeSelect={onNodeSelect}
+            meshSelectionPath={meshSelectionPath}
+            clearMeshSelectionPath={clearMeshSelectionPath}
+          />
+        ))}
     </ul>
   );
 };

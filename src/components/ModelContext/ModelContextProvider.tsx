@@ -1,9 +1,9 @@
 import {
   type Dispatch,
+  type PropsWithChildren,
   type SetStateAction,
   createContext,
   useState,
-  type PropsWithChildren,
 } from "react";
 import { type Model } from "../../lib/isModel";
 

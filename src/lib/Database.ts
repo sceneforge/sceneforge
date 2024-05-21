@@ -6,54 +6,55 @@ export class Database<
 > {
   private _dbName: Name;
   private _factory: IDBOpenDBRequest;
-  private _db: IDBDatabase | null = null;
+  private _db: IDBDatabase | undefined = undefined;
   private _ready: boolean;
-  private _ongoingSet: Promise<IDBValidKey | void> | null = null;
+  private _ongoingSet: Promise<IDBValidKey | void> | undefined = undefined;
 
   public static SupportIndexedDB() {
     return (
-      "indexedDB" in self &&
-      "IDBFactory" in self &&
-      self.indexedDB instanceof self.IDBFactory
+      "indexedDB" in self
+      && "IDBFactory" in self
+      && self.indexedDB instanceof self.IDBFactory
     );
   }
 
-  constructor(dbName: Name, stores: Store) {
+  constructor(databaseName: Name, stores: Store) {
     this._ready = false;
     if (!Database.SupportIndexedDB())
       throw new Error("IndexedDB not supported");
 
-    this._dbName = dbName;
+    this._dbName = databaseName;
 
-    this._factory = self.indexedDB.open(this._dbName, undefined);
-    this._factory.onupgradeneeded = (event) => {
+    this._factory = self.indexedDB.open(this._dbName);
+
+    this._factory.addEventListener("upgradeneeded", (event) => {
       if (event.target instanceof IDBOpenDBRequest) {
-        const db = event.target.result;
+        const database = event.target.result;
         for (const name in stores) {
-          db.createObjectStore(name, stores[name]);
+          database.createObjectStore(name, stores[name]);
         }
       }
-    };
+    });
 
-    this._factory.onsuccess = (event) => {
+    this._factory.addEventListener("success", (event) => {
       if (event.target instanceof IDBOpenDBRequest) {
         this._db = event.target.result;
         this._ready = true;
       }
-    };
+    });
 
-    this._factory.onerror = (event) => {
+    this._factory.addEventListener("error", (event) => {
       if (event.target instanceof IDBOpenDBRequest) {
         this._ready = false;
-        if (event.target.error instanceof DOMException) {
-          throw event.target.error;
-        } else {
-          throw new Error("IndexedDB error", {
-            cause: event.target.error,
-          });
-        }
+        const error
+          = event.target.error instanceof DOMException
+            ? event.target.error
+            : new TypeError("IndexedDB error", {
+              cause: event.target.error,
+            });
+        throw error;
       }
-    };
+    });
   }
 
   private _get(store: string, key: string): Promise<unknown> {
@@ -65,21 +66,22 @@ export class Database<
       const transaction = this._db.transaction(store, "readonly");
       const objectStore = transaction.objectStore(store);
       const request = objectStore.get(key);
-      request.onsuccess = () => {
+      request.addEventListener("success", () => {
         resolve((request.result as Record<string, unknown> | undefined)?.value);
-      };
+      });
 
-      request.onerror = () => {
+      request.addEventListener("error", () => {
         if (request.error instanceof DOMException) {
           reject(request.error);
-        } else {
+        }
+        else {
           reject(
             new Error("Request error", {
               cause: request.error,
-            }),
+            })
           );
         }
-      };
+      });
     });
   }
 
@@ -95,22 +97,23 @@ export class Database<
       request.onsuccess = () => {
         resolve(
           (request.result as Record<"value" | "key", unknown>[]).map(
-            (r) => r.value,
-          ),
+            r => r.value
+          )
         );
       };
 
-      request.onerror = () => {
+      request.addEventListener("error", () => {
         if (request.error instanceof DOMException) {
           reject(request.error);
-        } else {
+        }
+        else {
           reject(
             new Error("Request error", {
               cause: request.error,
-            }),
+            })
           );
         }
-      };
+      });
     });
   }
 
@@ -120,24 +123,30 @@ export class Database<
 
   public get(store: string, key: string): Promise<unknown> {
     return new Promise((resolve, reject) => {
-      if (!this._ready) {
+      if (this._ready) {
+        this._get(store, key).then(resolve)
+          .catch(reject);
+      }
+      else {
         setTimeout(() => {
-          this._get(store, key).then(resolve).catch(reject);
+          this._get(store, key).then(resolve)
+            .catch(reject);
         }, 500);
-      } else {
-        this._get(store, key).then(resolve).catch(reject);
       }
     });
   }
 
   public getAll(store: string): Promise<unknown[]> {
     return new Promise((resolve, reject) => {
-      if (!this._ready) {
+      if (this._ready) {
+        this._getAll(store).then(resolve)
+          .catch(reject);
+      }
+      else {
         setTimeout(() => {
-          this._getAll(store).then(resolve).catch(reject);
+          this._getAll(store).then(resolve)
+            .catch(reject);
         }, 500);
-      } else {
-        this._getAll(store).then(resolve).catch(reject);
       }
     });
   }
@@ -145,12 +154,12 @@ export class Database<
   public setLast<T = unknown>(
     store: string,
     key: string,
-    value: T,
+    value: T
   ): Promise<IDBValidKey> {
     if (this._ongoingSet && this._ready && this._db) {
       const transaction = this._db.transaction(store, "readwrite");
       transaction.abort();
-      this._ongoingSet = null;
+      this._ongoingSet = undefined;
     }
     this._ongoingSet = this.set(store, key, value);
     return this._ongoingSet as Promise<IDBValidKey>;
@@ -159,7 +168,7 @@ export class Database<
   public set<T = unknown>(
     store: string,
     key: string,
-    value: T,
+    value: T
   ): Promise<IDBValidKey> {
     this._ongoingSet = new Promise((resolve, reject) => {
       if (!this._db) {
@@ -170,22 +179,25 @@ export class Database<
       const transaction = this._db.transaction(store, "readwrite");
       const objectStore = transaction.objectStore(store);
       const request = objectStore.put({ key, value });
-      request.onsuccess = () => {
-        resolve(request.result);
-      };
 
-      request.onerror = () => {
+      request.addEventListener("success", () => {
+        resolve(request.result);
+      });
+
+      request.addEventListener("error", () => {
         if (request.error instanceof DOMException) {
           reject(request.error);
-        } else {
+        }
+        else {
           reject(
             new Error("Request error", {
               cause: request.error,
-            }),
+            })
           );
         }
-      };
+      });
     });
+
     return this._ongoingSet as Promise<IDBValidKey>;
   }
 
@@ -193,7 +205,7 @@ export class Database<
     if (this._ongoingSet && this._ready && this._db) {
       const transaction = this._db.transaction(store, "readwrite");
       transaction.abort();
-      this._ongoingSet = null;
+      this._ongoingSet = undefined;
     }
 
     this._ongoingSet = new Promise((resolve, reject) => {
@@ -205,20 +217,23 @@ export class Database<
       const transaction = this._db.transaction(store, "readwrite");
       const objectStore = transaction.objectStore(store);
       const request = objectStore.delete(key);
-      request.onsuccess = () => {
+
+      request.addEventListener("success", () => {
         resolve();
-      };
-      request.onerror = () => {
+      });
+
+      request.addEventListener("error", () => {
         if (request.error instanceof DOMException) {
           reject(request.error);
-        } else {
+        }
+        else {
           reject(
             new Error("Request error", {
               cause: request.error,
-            }),
+            })
           );
         }
-      };
+      });
     });
 
     return this._ongoingSet as Promise<void>;

@@ -8,14 +8,14 @@ export type AdditionalData = {
 };
 
 export const getActionEventAdditionalData = (
-  ev: ActionEvent,
+  event: ActionEvent
 ): AdditionalData => {
   if (
-    "additionalData" in ev &&
-    typeof ev.additionalData === "object" &&
-    ev.additionalData !== null
+    "additionalData" in event
+    && typeof event.additionalData === "object"
+    && event.additionalData !== null
   ) {
-    return ev.additionalData as AdditionalData;
+    return event.additionalData as AdditionalData;
   }
   return {};
 };

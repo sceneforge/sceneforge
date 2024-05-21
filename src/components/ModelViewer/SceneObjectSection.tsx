@@ -31,9 +31,9 @@ export const SceneObjectSection = ({
       ]}
     >
       <dl>
-        <dt>{"Instance"}</dt>
+        <dt>Instance</dt>
         <dd>{nodeType}</dd>
-        <dt>{"id"}</dt>
+        <dt>id</dt>
         <dd>{nodeId}</dd>
       </dl>
     </PanelSheetSection>

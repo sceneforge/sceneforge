@@ -1,4 +1,4 @@
-import { ForwardedRef, forwardRef, type ChangeEventHandler } from "react";
+import { type ChangeEventHandler, ForwardedRef, forwardRef } from "react";
 
 export type InputListSelectProps = {
   id?: string;
@@ -12,7 +12,7 @@ export type InputListSelectProps = {
 
 export const InputListSelect = forwardRef(function InputListSelect(
   { id, name, defaultValue, value, onChange, options }: InputListSelectProps,
-  ref: ForwardedRef<HTMLSelectElement>,
+  ref: ForwardedRef<HTMLSelectElement>
 ) {
   return (
     <div className="relative">

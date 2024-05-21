@@ -4,6 +4,6 @@ export const cls = (
   return args
     .flat()
     .filter(Boolean)
-    .filter((x, i, a) => a.indexOf(x) === i)
+    .filter((x, index, a) => a.indexOf(x) === index)
     .join(" ");
 };

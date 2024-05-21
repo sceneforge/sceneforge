@@ -1,17 +1,18 @@
 import {
+  type Dispatch,
+  type PropsWithChildren,
+  type ReactNode,
+  type SetStateAction,
   createContext,
   useCallback,
   useEffect,
   useRef,
   useState,
-  type Dispatch,
-  type PropsWithChildren,
-  type ReactNode,
-  type SetStateAction,
 } from "react";
 import { type Database } from "../../lib/Database";
 import { ReloadPrompt } from "../ReloadPrompt";
 import { Welcome } from "../Welcome";
+import { dataset } from "../../lib/dataset";
 
 type EventListenerCallback = (
   type: string,
@@ -71,16 +72,13 @@ export const PanelProvider = ({
   const [showWelcome, setShowWelcome] = useState(false);
 
   const windowControlsOverlayRef = useRef<WindowControlsOverlay | null>(null);
-  const [overlayVisible, setOverlayVisible] =
-    useState<boolean>(isOverlayVisible());
+  const [overlayVisible, setOverlayVisible]
+    = useState<boolean>(isOverlayVisible());
 
   const updateOverlayVisibility = useCallback(() => {
     if (windowControlsOverlayRef.current) {
       setOverlayVisible(windowControlsOverlayRef.current.visible);
-      document.body.setAttribute(
-        "data-window-controls-overlay",
-        windowControlsOverlayRef.current.visible ? "visible" : "hidden",
-      );
+      dataset(document.body, "windowControlsOverlay", windowControlsOverlayRef.current.visible ? "visible" : "hidden");
     }
   }, [windowControlsOverlayRef, setOverlayVisible]);
 
@@ -91,19 +89,16 @@ export const PanelProvider = ({
 
       windowControlsOverlayRef.current.addEventListener(
         "geometrychange",
-        updateOverlayVisibility,
+        updateOverlayVisibility
       );
 
-      document.body.setAttribute(
-        "data-window-controls-overlay",
-        windowControlsOverlayRef.current.visible ? "visible" : "hidden",
-      );
+      document.body.dataset.windowControlsOverlay = windowControlsOverlayRef.current.visible ? "visible" : "hidden";
     }
 
     return () => {
       windowControlsOverlayRef.current?.removeEventListener(
         "geometrychange",
-        updateOverlayVisibility,
+        updateOverlayVisibility
       );
     };
   }, [appTitle, updateOverlayVisibility, windowControlsOverlayRef]);
@@ -114,8 +109,8 @@ export const PanelProvider = ({
       .then((value) => {
         setShowWelcome(value === undefined || value === true);
       })
-      .catch((err) => {
-        throw new Error("Failed to get welcome setting", { cause: err });
+      .catch((error) => {
+        throw new Error("Failed to get welcome setting", { cause: error });
       });
   }, [userData, setShowWelcome]);
 

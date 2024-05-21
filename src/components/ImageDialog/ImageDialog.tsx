@@ -12,7 +12,7 @@ export type ImageDialogProps = {
 export const ImageDialog = ({ src, title, alt }: ImageDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleImageDialogClick = useCallback(() => {
-    setIsOpen((prevIsOpen) => !prevIsOpen);
+    setIsOpen(previousIsOpen => !previousIsOpen);
   }, []);
   const closeImageDialog = useCallback(() => {
     setIsOpen(false);

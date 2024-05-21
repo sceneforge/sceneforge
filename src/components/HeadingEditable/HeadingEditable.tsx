@@ -33,8 +33,8 @@ export const HeadingEditable = ({
   const handleBlur = useCallback(() => {
     setIsEditing(false);
     if (currentValue !== previousValue && onUpdate) {
-      onUpdate(currentValue)?.catch((err: unknown) => {
-        throw new Error("Failed to update value", { cause: err });
+      onUpdate(currentValue)?.catch((error) => {
+        throw new Error("Failed to update value", { cause: error });
       });
     }
   }, [previousValue, currentValue, onUpdate, setIsEditing]);
@@ -43,7 +43,7 @@ export const HeadingEditable = ({
     (event) => {
       setCurrentValue(event.target.value);
     },
-    [setCurrentValue],
+    [setCurrentValue]
   );
 
   if (editable && isEditing) {
@@ -58,7 +58,7 @@ export const HeadingEditable = ({
         className={cls(
           className,
           inputClassName,
-          "bg-transparent c-inherit font-bold active:outline-none focus:outline-none h-full w-min inline-block",
+          "bg-transparent c-inherit font-bold active:outline-none focus:outline-none h-full w-min inline-block"
         )}
       />
     );
