@@ -1,13 +1,14 @@
-import { type AllHTMLAttributes, type ForwardedRef, forwardRef } from "react";
+import { type AllHTMLAttributes } from "react";
 
+import { applyBasePath } from "../../lib/applyBasePath";
+import { useAppContext } from "../App";
 import { ImageDialog } from "../ImageDialog";
 
 export type ImageProps = AllHTMLAttributes<HTMLImageElement>;
 
-export const Image = forwardRef(function Image(
-  { alt, src, title, ...props }: ImageProps,
-  ref: ForwardedRef<HTMLImageElement>
-) {
+export const Image = ({ alt, src, title, ...props }: ImageProps) => {
+  const { basePath } = useAppContext();
+
   if (title && src && src.endsWith("#!image-dialog")) {
     return (
       <ImageDialog
@@ -18,5 +19,12 @@ export const Image = forwardRef(function Image(
     );
   }
 
-  return <img alt={alt} src={src} title={title} {...props} ref={ref} />;
-});
+  return (
+    <img
+      alt={alt}
+      src={applyBasePath(basePath, src)}
+      title={title}
+      {...props}
+    />
+  );
+};
