@@ -10282,10 +10282,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.0.0-beta-26f2496093-20240514":
-  version: 19.0.0-beta-26f2496093-20240514
-  resolution: "react@npm:19.0.0-beta-26f2496093-20240514"
-  checksum: 10c0/c45add39db6d944aaee2333a60c0da7c5d0963aadcfb9b88967b90ff57ee9664ef15f1caade35f724f1956ab0bd5bcb2b67a6a474bc8536951f687745ebc0c83
+"react@npm:19.0.0-rc-915b914b3a-20240515":
+  version: 19.0.0-rc-915b914b3a-20240515
+  resolution: "react@npm:19.0.0-rc-915b914b3a-20240515"
+  checksum: 10c0/5a098c977135b20f2011c278461b2ac146c86cc8ca5e91de10e7223beecda9f9c4d35f42c15742b37b0db43b505cc39e399da0c0495f36fe108b54cffecc9618
   languageName: node
   linkType: hard
 
@@ -10869,7 +10869,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^4.6.2"
     eslint-plugin-unicorn: "npm:*"
     globals: "npm:*"
-    react: "npm:19.0.0-beta-26f2496093-20240514"
+    react: "npm:19.0.0-rc-915b914b3a-20240515"
     react-compiler-healthcheck: "npm:0.0.0-experimental-f978439-20240517"
     react-dom: "npm:19.0.0-beta-26f2496093-20240514"
     terser: "npm:^5.31.0"
@@ -10926,7 +10926,7 @@ __metadata:
     i18next-browser-languagedetector: "npm:^8.0.0"
     i18next-http-backend: "npm:^2.5.1"
     jest: "npm:^29.7.0"
-    react: "npm:19.0.0-beta-26f2496093-20240514"
+    react: "npm:19.0.0-rc-915b914b3a-20240515"
     react-compiler-healthcheck: "npm:0.0.0-experimental-f978439-20240517"
     react-dom: "npm:19.0.0-beta-26f2496093-20240514"
     react-i18next: "npm:^14.1.0"
