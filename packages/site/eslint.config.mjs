@@ -1,7 +1,6 @@
 import { fixupPluginRules } from "@eslint/compat";
 import eslint from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
-import unocss from "@unocss/eslint-config/flat";
 import perfectionistNatural from "eslint-plugin-perfectionist/configs/recommended-natural";
 import react from "eslint-plugin-react";
 import eslintPluginReactCompiler from "eslint-plugin-react-compiler";
@@ -14,17 +13,15 @@ export default tseslint.config(
   {
     plugins: {
       "@stylistic": stylistic,
-      "react-compiler": fixupPluginRules(eslintPluginReactCompiler),
-      "react-hooks": fixupPluginRules(eslintPluginReactHooks),
     },
   },
   {
-    ignores: ["dist/**/*", "node_modules/**/*", "dev-dist/**/*", ".yarn/**/*"],
+    ignores: ["dist/*", "dev-dist/*", "node_modules/**/*", ".yarn/**/*"],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   {
-    files: ["*.config.ts", "lib/**/*.ts"],
+    files: ["*.config.ts", "lib/**/*.{js,jsx,mjs,ts,tsx,mts,mtsx}"],
     languageOptions: {
       parserOptions: {
         project: "./tsconfig.node.json",
@@ -33,37 +30,8 @@ export default tseslint.config(
     },
   },
   {
-    files: ["src/**/*.{ts,tsx,mts,mtsx}"],
-    languageOptions: {
-      parserOptions: {
-        project: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-  },
-  {
     files: ["*.js", "*.mjs", "*.cjs"],
     ...tseslint.configs.disableTypeChecked,
-  },
-  unocss,
-  {
-    files: ["src/**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
-    ...react.recommended,
-    rules: {
-      "react-compiler/react-compiler": "error",
-      "react-hooks/exhaustive-deps": "warn",
-      "react-hooks/rules-of-hooks": "error",
-    },
-  },
-  {
-    files: ["src/sw/**/*.{js,mjs,cjs,ts,mts}"],
-    languageOptions: {
-      globals: globals.serviceworker,
-      parserOptions: {
-        project: "./src/sw/tsconfig.json",
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
   },
   eslintPluginUnicorn.configs["flat/recommended"],
   stylistic.configs["recommended-flat"],
@@ -135,5 +103,39 @@ export default tseslint.config(
       "unicorn/switch-case-braces": ["error", "avoid"],
     },
   },
-  perfectionistNatural
+  perfectionistNatural,
+  {
+    plugins: {
+      "react-compiler": fixupPluginRules(eslintPluginReactCompiler),
+      "react-hooks": fixupPluginRules(eslintPluginReactHooks),
+    },
+  },
+  {
+    files: ["src/**/*.{ts,tsx,mts,mtsx}"],
+    languageOptions: {
+      parserOptions: {
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: ["src/**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+    ...react.recommended,
+    rules: {
+      "react-compiler/react-compiler": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react-hooks/rules-of-hooks": "error",
+    },
+  },
+  {
+    files: ["src/sw/**/*.{js,mjs,cjs,ts,mts}"],
+    languageOptions: {
+      globals: globals.serviceworker,
+      parserOptions: {
+        project: "./src/sw/tsconfig.json",
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  }
 );

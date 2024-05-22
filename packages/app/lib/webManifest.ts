@@ -14,6 +14,7 @@ export const webManifest = ({
   name: string;
 }): Partial<ManifestOptions> | false => {
   {
+    const baseUrl = isProd ? "/app" : "";
     return {
       background_color: "#86159d",
       categories: ["productivity", "utilities", "education", "entertainment"],
@@ -29,7 +30,7 @@ export const webManifest = ({
           accept: {
             "application/json": [".scfg", ".sceneforge"],
           },
-          action: "/index.html#!action=new-tab&tab=new-scene",
+          action: `${baseUrl}/index.html#!action=new-tab&tab=new-scene`,
           // icons: [
           //   {
           //     src: "icons/file-512x740.png",
@@ -106,7 +107,7 @@ export const webManifest = ({
       protocol_handlers: [
         {
           protocol: "web+sceneforge",
-          url: "/index.html#!%s",
+          url: `${baseUrl}/index.html#!%s`,
         },
       ],
       screenshots: [
@@ -149,7 +150,7 @@ export const webManifest = ({
           ],
           name: "New Scene",
           short_name: "New",
-          url: "/index.html#!action=new-tab&tab=new-scene",
+          url: `${baseUrl}/index.html#!action=new-tab&tab=new-scene`,
         },
         {
           description: "Open the settings",
@@ -163,7 +164,7 @@ export const webManifest = ({
           ],
           name: "Settings",
           short_name: "Settings",
-          url: "/index.html#!action=open-tab&tab=settings",
+          url: `${baseUrl}/index.html#!action=open-tab&tab=settings`,
         },
         {
           description: "About Scene Forge",
@@ -177,22 +178,22 @@ export const webManifest = ({
           ],
           name: "About Scene Forge",
           short_name: "About",
-          url: "/index.html#!action=open-tab&tab=about",
+          url: `${baseUrl}/index.html#!action=open-tab&tab=about`,
         },
       ],
-      start_url: "/",
+      start_url: `${baseUrl}/index.html`,
       theme_color: "#86159d",
       ...(isProd
         ? {
-          id: "https://sceneforge.org/",
+          id: "https://sceneforge.org/app/",
           related_applications: [
             {
-              id: "https://sceneforge.org/",
+              id: "https://sceneforge.org/app/",
               platform: "webapp",
-              url: "https://sceneforge.org/manifest.webmanifest",
+              url: "https://sceneforge.org/app/manifest.webmanifest",
             },
           ],
-          scope: "https://sceneforge.org/",
+          scope: "https://sceneforge.org/app/",
         }
         : (isDev
           ? {
@@ -200,7 +201,7 @@ export const webManifest = ({
             scope: `http://localhost:${devPort}/`,
           }
           : {
-            scope: "/",
+            scope: `${baseUrl}`,
           })),
     };
   }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+
+<head lang="en">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#86159d" />
+  <meta name="description" content="%VITE_APP_DESCRIPTION%" />
+  <meta name="author" content="%VITE_APP_AUTHOR%" />
+  <meta name="keywords" content="%VITE_APP_KEYWORDS%" />
+  <meta property="og:description" content="%VITE_APP_DESCRIPTION%" />
+  <meta property="og:site_name" content="%VITE_APP_NAME%" />
+  <meta property="og:type" content="website" />
+  <title>%VITE_APP_NAME%</title>
+  <script>
+    /**
+     * Redirect to the new website URL.
+     */
+    if (window.location.hostname === 'phinpho.github.io') {
+      window.location.href = 'https://sceneforge.org/index.html';
+    }
+  </script>
+  <script type="module" blocking="render" async src="/src/index.ts"></script>
+</head>
+
+<body></body>
+
+</html>
