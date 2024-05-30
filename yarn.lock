@@ -3856,12 +3856,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:types-react-dom@beta":
-  version: 19.0.0-beta.2
-  resolution: "types-react-dom@npm:19.0.0-beta.2"
+"@types/react-dom@npm:types-react-dom@rc":
+  version: 19.0.0-rc.0
+  resolution: "types-react-dom@npm:19.0.0-rc.0"
   dependencies:
     "@types/react": "npm:*"
-  checksum: 10c0/0f1cfd80593872a9bee35cd2a16fdb63e4006023ce737a1dd388a0757059bc7e96d8c0edf14ce03d3744b8b8c43a7df7be4bbae629ccacf39656354b646280ec
+  checksum: 10c0/a05f48aec358142f167f4765ed25e4a8185926fe24421c6f0e9af7bbd3029055e01198a300543621c7dd0c045ac84a536e71a74b3ad6d5d95300e4584ab8a0aa
   languageName: node
   linkType: hard
 
@@ -3884,12 +3884,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:types-react@beta":
-  version: 19.0.0-beta.2
-  resolution: "types-react@npm:19.0.0-beta.2"
+"@types/react@npm:types-react@rc":
+  version: 19.0.0-rc.0
+  resolution: "types-react@npm:19.0.0-rc.0"
   dependencies:
     csstype: "npm:^3.0.2"
-  checksum: 10c0/c0facf4b7254e5ba34efa7fe6365712d06f4551d9e459f90ee4d76c960716d80eba3d589ab6b9f1faad69563c694a9fa5b3887bd2a96d73aeeaabb3fb5477973
+  checksum: 10c0/b8c035f3f6354b2b1e24473ec2fb981afab9db726177755cdc6a610f607e8d89ca2297f4a80be1464013aa073a5496627fa0a0125f60af12daa769ad508cf3ea
   languageName: node
   linkType: hard
 
@@ -12654,14 +12654,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.0.0-beta-26f2496093-20240514":
-  version: 19.0.0-beta-26f2496093-20240514
-  resolution: "react-dom@npm:19.0.0-beta-26f2496093-20240514"
+"react-dom@npm:19.0.0-rc-38e3b23483-20240529":
+  version: 19.0.0-rc-38e3b23483-20240529
+  resolution: "react-dom@npm:19.0.0-rc-38e3b23483-20240529"
   dependencies:
-    scheduler: "npm:0.25.0-beta-26f2496093-20240514"
+    scheduler: "npm:0.25.0-rc-38e3b23483-20240529"
   peerDependencies:
-    react: 19.0.0-beta-26f2496093-20240514
-  checksum: 10c0/d37c5e327483b7720805eeed352adad3efca3e5b36e1005b887fc53174699ee917957fc937dfd9076e028a8b04fd86b7ade73e927fdb3ac8022deb9d0eb393b7
+    react: 19.0.0-rc-38e3b23483-20240529
+  checksum: 10c0/396d487099fe3a595182b420ab6fe6eb43d613348b2c1038a536ddc16dabfb2d69c2722e70d225cf40c9edba50963c83b0ee6c9c29101129de335d54ec148aaa
   languageName: node
   linkType: hard
 
@@ -12725,10 +12725,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.0.0-beta-26f2496093-20240514":
-  version: 19.0.0-beta-26f2496093-20240514
-  resolution: "react@npm:19.0.0-beta-26f2496093-20240514"
-  checksum: 10c0/c45add39db6d944aaee2333a60c0da7c5d0963aadcfb9b88967b90ff57ee9664ef15f1caade35f724f1956ab0bd5bcb2b67a6a474bc8536951f687745ebc0c83
+"react@npm:19.0.0-rc-38e3b23483-20240529":
+  version: 19.0.0-rc-38e3b23483-20240529
+  resolution: "react@npm:19.0.0-rc-38e3b23483-20240529"
+  checksum: 10c0/91af73b954d45ce72196db65b80e607bc99283ba3bc142e52702eaf3a72e9813e577baeb72c29e0086bab9e8bbbe67bc10c16c3976eb822b2ebc8b7a6ed574c9
   languageName: node
   linkType: hard
 
@@ -13572,8 +13572,8 @@ __metadata:
     "@types/i18next-browser-languagedetector": "npm:^3.0.0"
     "@types/jest": "npm:^29.5.12"
     "@types/node": "npm:*"
-    "@types/react": "npm:types-react@beta"
-    "@types/react-dom": "npm:types-react-dom@beta"
+    "@types/react": "npm:types-react@rc"
+    "@types/react-dom": "npm:types-react-dom@rc"
     "@types/react-i18next": "npm:^8.1.0"
     "@types/uuid": "npm:^9.0.8"
     "@unocss/eslint-config": "npm:^0.60.2"
@@ -13598,9 +13598,9 @@ __metadata:
     i18next-browser-languagedetector: "npm:^8.0.0"
     i18next-http-backend: "npm:^2.5.1"
     jest: "npm:^29.7.0"
-    react: "npm:19.0.0-beta-26f2496093-20240514"
+    react: "npm:19.0.0-rc-38e3b23483-20240529"
     react-compiler-healthcheck: "npm:0.0.0-experimental-f978439-20240517"
-    react-dom: "npm:19.0.0-beta-26f2496093-20240514"
+    react-dom: "npm:19.0.0-rc-38e3b23483-20240529"
     react-i18next: "npm:^14.1.0"
     terser: "npm:^5.31.0"
     ts-jest: "npm:^29.1.2"
@@ -13620,10 +13620,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"scheduler@npm:0.25.0-beta-26f2496093-20240514":
-  version: 0.25.0-beta-26f2496093-20240514
-  resolution: "scheduler@npm:0.25.0-beta-26f2496093-20240514"
-  checksum: 10c0/6197ccc66d04084c4a7d9f2503490f7137e61c6b94bfc9bfc79fd695b2d4e6eb2bb431ef1826c100a45c1be1867b994b41dec5e1dfaa3ae39130315d1038e0f9
+"scheduler@npm:0.25.0-rc-38e3b23483-20240529":
+  version: 0.25.0-rc-38e3b23483-20240529
+  resolution: "scheduler@npm:0.25.0-rc-38e3b23483-20240529"
+  checksum: 10c0/91cbd3b975429cd88ca1c610fb67e521fee96f7a995fb27f79ca15deb6e1bd28804cebe839613d0b875f9236ac9a93379cc75098813046e18e8422a1206ad0c0
   languageName: node
   linkType: hard
 

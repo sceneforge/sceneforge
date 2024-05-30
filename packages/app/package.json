@@ -41,8 +41,8 @@
     "i18next": "^23.11.4",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^2.5.1",
-    "react": "19.0.0-beta-26f2496093-20240514",
-    "react-dom": "19.0.0-beta-26f2496093-20240514",
+    "react": "19.0.0-rc-38e3b23483-20240529",
+    "react-dom": "19.0.0-rc-38e3b23483-20240529",
     "react-i18next": "^14.1.0",
     "uuid": "^9.0.1"
   },
@@ -58,8 +58,8 @@
     "@types/i18next-browser-languagedetector": "^3.0.0",
     "@types/jest": "^29.5.12",
     "@types/node": "*",
-    "@types/react": "npm:types-react@beta",
-    "@types/react-dom": "npm:types-react-dom@beta",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc",
     "@types/react-i18next": "^8.1.0",
     "@types/uuid": "^9.0.8",
     "@unocss/eslint-config": "^0.60.2",
@@ -95,10 +95,10 @@
     "workbox-window": "^7.1.0"
   },
   "overrides": {
-    "@types/react": "npm:types-react@beta",
-    "@types/react-dom": "npm:types-react-dom@beta",
-    "react": "19.0.0-beta-26f2496093-20240514",
-    "react-dom": "19.0.0-beta-26f2496093-20240514"
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc",
+    "react": "19.0.0-rc-38e3b23483-20240529",
+    "react-dom": "19.0.0-rc-38e3b23483-20240529"
   },
   "engines": {
     "node": ">=21.7.1 < 22",
