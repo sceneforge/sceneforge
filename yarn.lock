@@ -2675,7 +2675,7 @@ __metadata:
     i18next-browser-languagedetector: "npm:^8.0.0"
     i18next-http-backend: "npm:^2.5.1"
     jest: "npm:^29.7.0"
-    react: "npm:19.0.0-rc-38e3b23483-20240529"
+    react: "npm:19.0.0-rc-935180c7e0-20240524"
     react-compiler-healthcheck: "npm:0.0.0-experimental-f978439-20240517"
     react-dom: "npm:19.0.0-rc-38e3b23483-20240529"
     react-i18next: "npm:^14.1.0"
@@ -10348,10 +10348,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.0.0-rc-38e3b23483-20240529":
-  version: 19.0.0-rc-38e3b23483-20240529
-  resolution: "react@npm:19.0.0-rc-38e3b23483-20240529"
-  checksum: 10c0/91af73b954d45ce72196db65b80e607bc99283ba3bc142e52702eaf3a72e9813e577baeb72c29e0086bab9e8bbbe67bc10c16c3976eb822b2ebc8b7a6ed574c9
+"react@npm:19.0.0-rc-935180c7e0-20240524":
+  version: 19.0.0-rc-935180c7e0-20240524
+  resolution: "react@npm:19.0.0-rc-935180c7e0-20240524"
+  checksum: 10c0/c1228568389f75901d3dba7577064a1e2dccf8e62f9294649415095431abfdbad11d96fe479c46a8d5a64db38355b811621f5a9b38cd0eb5393c8833835d65fe
   languageName: node
   linkType: hard
 
