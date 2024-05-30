@@ -4,10 +4,8 @@ import { yarnCommand } from "../lib/yarnCommand";
 
 export const run = async () => {
   await yarnCommand("root", "build:packages");
-  await createDirectory("dist/app", { recursive: true });
-
-  await copyDirectory("packages/site/dist/", "dist/");
-  await copyDirectory("packages/app/dist/", "dist/app/");
+  await createDirectory("dist/", { recursive: true });
+  await copyDirectory("packages/app/dist/", "dist/");
 };
 
 // eslint-disable-next-line unicorn/prefer-top-level-await

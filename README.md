@@ -6,7 +6,6 @@ project ecosystem.
 
 ## Packages
 
-- [Site](packages/site/README.md)
 - [Application](packages/app/README.md)
 
 ## Development
@@ -31,18 +30,6 @@ packages respecting the deployment structure.
 
 #### Deployment Structure
 
-Starting from the package `@sceneforge/site`, all files generated
-by the build process will be placed in the root `dist` folder,
-making the website available at the root URL.
-
-Next, the `@sceneforge/app` generated files will be placed in the
-`dist/app` folder, making the application available at the `/app`
-URL.
-
-> **Note:**
-> 
-> The build process of the `@sceneforge/site` package should not
-> generate a folder named `app` in the root of the `dist` folder,
-> as it will conflict with the application build. The general
-> build will replace the `app` folder, causing the site to have
-> possible broken links or unexpected behaviour.
+The `@sceneforge/app` generated files will be placed in the
+`dist/` folder, making the application available at the
+`https://app.sceneforge.org/` URL.

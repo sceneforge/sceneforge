@@ -20,8 +20,7 @@
     "postinstall": "husky"
   },
   "dependencies": {
-    "@sceneforge/app": "workspaces:*",
-    "@sceneforge/site": "workspaces:*"
+    "@sceneforge/app": "workspaces:*"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.1",

@@ -19,7 +19,7 @@ export default defineConfig(async ({ command, isPreview, mode }) => {
   const isProduction
     = command === "build" && mode === "production" && !isPreview;
 
-  const basePath = isProduction ? "/app/" : "/";
+  const basePath = "/";
 
   const metaEnvironment = {
     VITE_APP_AUTHOR: author.name,

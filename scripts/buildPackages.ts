@@ -1,7 +1,7 @@
 import { yarnCommand } from "../lib/yarnCommand";
 
 const run = async () => {
-  await yarnCommand(["app", "site"], "build");
+  await yarnCommand(["app"], "build");
 };
 
 // eslint-disable-next-line unicorn/prefer-top-level-await
