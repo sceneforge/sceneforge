@@ -11,9 +11,9 @@ const colors = [
 ] as const;
 
 const namespaces = {
-  app: "scene-forge",
-  root: "scene-forge-root",
-  site: "scene-forge-site",
+  app: "@scene-forge/app",
+  root: "scene-forge",
+  site: "@scene-forge/site",
 } as const;
 
 type Namespace = keyof typeof namespaces;

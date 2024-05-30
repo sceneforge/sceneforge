@@ -1,5 +1,5 @@
 {
-  "name": "scene-forge-root",
+  "name": "scene-forge",
   "version": "0.0.1",
   "repository": {
     "type": "git",
@@ -19,8 +19,8 @@
     "postinstall": "husky"
   },
   "dependencies": {
-    "scene-forge": "workspaces:*",
-    "scene-forge-site": "workspaces:*"
+    "@scene-forge/app": "workspaces:*",
+    "@scene-forge/site": "workspaces:*"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.1",

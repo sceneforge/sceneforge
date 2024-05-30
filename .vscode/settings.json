@@ -18,7 +18,4 @@
   "search.exclude": {
     "**/.yarn": true
   },
-  "[mdx]": {
-    "editor.defaultFormatter": "unifiedjs.vscode-mdx"
-  },
 }

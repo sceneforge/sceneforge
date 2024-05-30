@@ -2480,8 +2480,8 @@ __metadata:
   linkType: hard
 
 "@iconify/utils@npm:^2.1.23":
-  version: 2.1.23
-  resolution: "@iconify/utils@npm:2.1.23"
+  version: 2.1.24
+  resolution: "@iconify/utils@npm:2.1.24"
   dependencies:
     "@antfu/install-pkg": "npm:^0.1.1"
     "@antfu/utils": "npm:^0.7.7"
@@ -2490,7 +2490,7 @@ __metadata:
     kolorist: "npm:^1.8.0"
     local-pkg: "npm:^0.5.0"
     mlly: "npm:^1.6.1"
-  checksum: 10c0/754cdfb7c6072fb65d95fac7a3eef3a99fc6a419532f79e54e06f0ec4e5810a09237f58443f40e36aa05fc2e714c5fef9cd474b0c31e9f65244801c8026880c3
+  checksum: 10c0/4ad3f6ecf4e4255c56f3c5355bdba2ce2596ad884cc7c786a6d013101f94743e5297d6afca44ed282c0acd62927ab2c43e500e133a153bc210b27a7b2ec3e2e6
   languageName: node
   linkType: hard
 
@@ -3353,6 +3353,88 @@ __metadata:
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
+
+"@scene-forge/app@workspace:packages/app, @scene-forge/app@workspaces:*":
+  version: 0.0.0-use.local
+  resolution: "@scene-forge/app@workspace:packages/app"
+  dependencies:
+    "@babylonjs/core": "npm:^7.7.0"
+    "@babylonjs/loaders": "npm:^7.7.0"
+    "@babylonjs/materials": "npm:^7.7.0"
+    "@eslint/compat": "npm:*"
+    "@eslint/js": "npm:*"
+    "@iconify-json/material-symbols": "npm:^1.1.75"
+    "@iconify-json/material-symbols-light": "npm:^1.1.15"
+    "@jest/globals": "npm:^29.7.0"
+    "@simplecomponent/markdown": "npm:^0.0.2"
+    "@stylistic/eslint-plugin": "npm:*"
+    "@types/hast": "npm:^3.0.4"
+    "@types/i18next": "npm:^13.0.0"
+    "@types/i18next-browser-languagedetector": "npm:^3.0.0"
+    "@types/jest": "npm:^29.5.12"
+    "@types/node": "npm:*"
+    "@types/react": "npm:types-react@rc"
+    "@types/react-dom": "npm:types-react-dom@rc"
+    "@types/react-i18next": "npm:^8.1.0"
+    "@types/uuid": "npm:^9.0.8"
+    "@unocss/eslint-config": "npm:^0.60.2"
+    "@unocss/preset-icons": "npm:^0.60.2"
+    "@unocss/preset-typography": "npm:^0.60.2"
+    "@unocss/preset-uno": "npm:^0.60.2"
+    "@unocss/reset": "npm:^0.60.2"
+    "@unocss/transformer-directives": "npm:^0.60.2"
+    "@vitejs/plugin-react": "npm:^4.2.1"
+    babel-plugin-react-compiler: "npm:0.0.0-experimental-592953e-20240517"
+    babylonjs-gltf2interface: "npm:^7.7.0"
+    browser-fs-access: "npm:^0.35.0"
+    browser-sync: "npm:^3.0.2"
+    eslint: "npm:*"
+    eslint-plugin-perfectionist: "npm:*"
+    eslint-plugin-react: "npm:^7.34.1"
+    eslint-plugin-react-compiler: "npm:0.0.0-experimental-c8b3f72-20240517"
+    eslint-plugin-react-hooks: "npm:^4.6.2"
+    eslint-plugin-unicorn: "npm:*"
+    globals: "npm:*"
+    i18next: "npm:^23.11.4"
+    i18next-browser-languagedetector: "npm:^8.0.0"
+    i18next-http-backend: "npm:^2.5.1"
+    jest: "npm:^29.7.0"
+    react: "npm:19.0.0-rc-38e3b23483-20240529"
+    react-compiler-healthcheck: "npm:0.0.0-experimental-f978439-20240517"
+    react-dom: "npm:19.0.0-rc-38e3b23483-20240529"
+    react-i18next: "npm:^14.1.0"
+    terser: "npm:^5.31.0"
+    ts-jest: "npm:^29.1.2"
+    ts-node: "npm:*"
+    typescript: "npm:*"
+    typescript-eslint: "npm:*"
+    unocss: "npm:^0.60.2"
+    unocss-preset-animations: "npm:^1.0.2"
+    uuid: "npm:^9.0.1"
+    vite: "npm:^5.2.11"
+    vite-plugin-browser-sync: "npm:^3.0.2"
+    vite-plugin-i18next-loader: "npm:^2.0.12"
+    vite-plugin-meta-env: "npm:^1.0.2"
+    vite-plugin-pwa: "npm:^0.20.0"
+    workbox-precaching: "npm:^7.1.0"
+    workbox-window: "npm:^7.1.0"
+  languageName: unknown
+  linkType: soft
+
+"@scene-forge/site@workspace:packages/site, @scene-forge/site@workspaces:*":
+  version: 0.0.0-use.local
+  resolution: "@scene-forge/site@workspace:packages/site"
+  dependencies:
+    "@astrojs/check": "npm:^0.7.0"
+    "@astrojs/mdx": "npm:^3.0.1"
+    "@astrojs/starlight": "npm:^0.23.1"
+    astro: "npm:^4.8.6"
+    sharp: "npm:^0.32.5"
+    starlight-image-zoom: "npm:^0.5.0"
+    ts-node: "npm:*"
+    typescript: "npm:*"
+  languageName: unknown
+  linkType: soft
 
 "@shikijs/core@npm:1.6.1":
   version: 1.6.1
@@ -13510,15 +13592,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scene-forge-root@workspace:.":
+"scene-forge@workspace:.":
   version: 0.0.0-use.local
-  resolution: "scene-forge-root@workspace:."
+  resolution: "scene-forge@workspace:."
   dependencies:
     "@commitlint/cli": "npm:^19.2.1"
     "@commitlint/config-conventional": "npm:^19.1.0"
     "@commitlint/format": "npm:^19.0.3"
     "@eslint/compat": "npm:^1.0.1"
     "@eslint/js": "npm:^9.1.1"
+    "@scene-forge/app": "workspaces:*"
+    "@scene-forge/site": "workspaces:*"
     "@stylistic/eslint-plugin": "npm:^2.1.0"
     "@types/concurrently": "npm:^7.0.0"
     "@types/node": "npm:^20.12.7"
@@ -13530,93 +13614,9 @@ __metadata:
     eslint-plugin-unicorn: "npm:^53.0.0"
     globals: "npm:^15.0.0"
     husky: "npm:^9.0.11"
-    scene-forge: "workspaces:*"
-    scene-forge-site: "workspaces:*"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^5.4.5"
     typescript-eslint: "npm:^7.7.1"
-  languageName: unknown
-  linkType: soft
-
-"scene-forge-site@workspace:packages/site, scene-forge-site@workspaces:*":
-  version: 0.0.0-use.local
-  resolution: "scene-forge-site@workspace:packages/site"
-  dependencies:
-    "@astrojs/check": "npm:^0.7.0"
-    "@astrojs/mdx": "npm:^3.0.1"
-    "@astrojs/starlight": "npm:^0.23.1"
-    astro: "npm:^4.8.6"
-    sharp: "npm:^0.32.5"
-    starlight-image-zoom: "npm:^0.5.0"
-    ts-node: "npm:*"
-    typescript: "npm:*"
-  languageName: unknown
-  linkType: soft
-
-"scene-forge@workspace:packages/app, scene-forge@workspaces:*":
-  version: 0.0.0-use.local
-  resolution: "scene-forge@workspace:packages/app"
-  dependencies:
-    "@babylonjs/core": "npm:^7.7.0"
-    "@babylonjs/loaders": "npm:^7.7.0"
-    "@babylonjs/materials": "npm:^7.7.0"
-    "@eslint/compat": "npm:*"
-    "@eslint/js": "npm:*"
-    "@iconify-json/material-symbols": "npm:^1.1.75"
-    "@iconify-json/material-symbols-light": "npm:^1.1.15"
-    "@jest/globals": "npm:^29.7.0"
-    "@simplecomponent/markdown": "npm:^0.0.2"
-    "@stylistic/eslint-plugin": "npm:*"
-    "@types/hast": "npm:^3.0.4"
-    "@types/i18next": "npm:^13.0.0"
-    "@types/i18next-browser-languagedetector": "npm:^3.0.0"
-    "@types/jest": "npm:^29.5.12"
-    "@types/node": "npm:*"
-    "@types/react": "npm:types-react@rc"
-    "@types/react-dom": "npm:types-react-dom@rc"
-    "@types/react-i18next": "npm:^8.1.0"
-    "@types/uuid": "npm:^9.0.8"
-    "@unocss/eslint-config": "npm:^0.60.2"
-    "@unocss/preset-icons": "npm:^0.60.2"
-    "@unocss/preset-typography": "npm:^0.60.2"
-    "@unocss/preset-uno": "npm:^0.60.2"
-    "@unocss/reset": "npm:^0.60.2"
-    "@unocss/transformer-directives": "npm:^0.60.2"
-    "@vitejs/plugin-react": "npm:^4.2.1"
-    babel-plugin-react-compiler: "npm:0.0.0-experimental-592953e-20240517"
-    babylonjs-gltf2interface: "npm:^7.7.0"
-    browser-fs-access: "npm:^0.35.0"
-    browser-sync: "npm:^3.0.2"
-    eslint: "npm:*"
-    eslint-plugin-perfectionist: "npm:*"
-    eslint-plugin-react: "npm:^7.34.1"
-    eslint-plugin-react-compiler: "npm:0.0.0-experimental-c8b3f72-20240517"
-    eslint-plugin-react-hooks: "npm:^4.6.2"
-    eslint-plugin-unicorn: "npm:*"
-    globals: "npm:*"
-    i18next: "npm:^23.11.4"
-    i18next-browser-languagedetector: "npm:^8.0.0"
-    i18next-http-backend: "npm:^2.5.1"
-    jest: "npm:^29.7.0"
-    react: "npm:19.0.0-rc-38e3b23483-20240529"
-    react-compiler-healthcheck: "npm:0.0.0-experimental-f978439-20240517"
-    react-dom: "npm:19.0.0-rc-38e3b23483-20240529"
-    react-i18next: "npm:^14.1.0"
-    terser: "npm:^5.31.0"
-    ts-jest: "npm:^29.1.2"
-    ts-node: "npm:*"
-    typescript: "npm:*"
-    typescript-eslint: "npm:*"
-    unocss: "npm:^0.60.2"
-    unocss-preset-animations: "npm:^1.0.2"
-    uuid: "npm:^9.0.1"
-    vite: "npm:^5.2.11"
-    vite-plugin-browser-sync: "npm:^3.0.2"
-    vite-plugin-i18next-loader: "npm:^2.0.12"
-    vite-plugin-meta-env: "npm:^1.0.2"
-    vite-plugin-pwa: "npm:^0.20.0"
-    workbox-precaching: "npm:^7.1.0"
-    workbox-window: "npm:^7.1.0"
   languageName: unknown
   linkType: soft
 
