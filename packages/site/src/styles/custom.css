@@ -1,0 +1,42 @@
+:root[data-theme='light'],
+[data-theme='light'] ::backdrop {
+  --sl-color-accent: rgb(134 21 157);
+  --sl-color-bg-accent: rgb(134 21 157);
+  --sl-color-text-accent: rgb(134 21 157);
+}
+:root,
+::backdrop {
+  --sl-content-width: 50rem;
+  --sl-text-5xl: 3.5rem;
+  --sl-color-accent: rgb(87, 15, 102);
+  --sl-color-bg-accent: rgb(87, 15, 102);
+  --sl-color-text-accent: rgb(134, 21, 157);
+  --sl-color-banner-text: rgb(250, 250, 250);
+}
+
+body {
+  background-color: rgb(134 21 157 / 10%);
+
+  .header {
+    background-color: color-mix(in srgb, rgb(134 21 157) 25%, white);
+  }
+
+  .action.primary {
+    color: var(--sl-color-black);
+  }
+}
+
+[data-theme="dark"] body {
+  .header {
+    background-color: color-mix(in srgb, rgb(87, 15, 102) 45%, black);
+  }
+
+  .action.primary {
+    color: var(--sl-color-white);
+  }
+}
+
+body figure figcaption {
+  text-align: center;
+  font-size: 80%;
+}

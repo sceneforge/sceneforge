@@ -1,6 +1,6 @@
 {
   "name": "scene-forge-site",
-  "description": "Scene Forge Homepage",
+  "description": "Unleash your creativity with our cutting-edge Progressive Web Application that empowers you to craft, visualise, and manipulate stunning 3D scenes.",
   "keywords": [
     "3d",
     "web",
@@ -19,51 +19,27 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/phinpho/scene-forge",
-    "directory": "packages/app"
+    "directory": "packages/newsite"
   },
   "license": "CC0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build --mode production",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "astro dev",
+    "lint": "astro check",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "react": "19.0.0-beta-26f2496093-20240514",
-    "react-dom": "19.0.0-beta-26f2496093-20240514"
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/mdx": "^3.0.1",
+    "@astrojs/starlight": "^0.23.1",
+    "astro": "^4.8.6",
+    "sharp": "^0.32.5",
+    "starlight-image-zoom": "^0.5.0"
   },
   "devDependencies": {
-    "@eslint/compat": "*",
-    "@eslint/js": "*",
-    "@stylistic/eslint-plugin": "*",
-    "@types/react": "npm:types-react@beta",
-    "@types/react-dom": "npm:types-react-dom@beta",
-    "@vitejs/plugin-react": "^4.2.1",
-    "babel-plugin-react-compiler": "0.0.0-experimental-592953e-20240517",
-    "eslint": "*",
-    "eslint-plugin-perfectionist": "*",
-    "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-compiler": "0.0.0-experimental-c8b3f72-20240517",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-unicorn": "*",
-    "globals": "*",
-    "react-compiler-healthcheck": "0.0.0-experimental-f978439-20240517",
-    "terser": "^5.31.0",
     "ts-node": "*",
-    "typescript": "*",
-    "typescript-eslint": "*",
-    "vite": "^5.2.11",
-    "vite-plugin-meta-env": "^1.0.2"
-  },
-  "overrides": {
-    "@types/react": "npm:types-react@beta",
-    "@types/react-dom": "npm:types-react-dom@beta",
-    "react": "19.0.0-beta-26f2496093-20240514",
-    "react-dom": "19.0.0-beta-26f2496093-20240514"
-  },
-  "engines": {
-    "node": ">=21.7.1 < 22",
-    "yarn": ">=4.1.1 < 5"
-  },
-  "packageManager": "yarn@4.2.2"
+    "typescript": "*"
+  }
 }
