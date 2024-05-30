@@ -3354,9 +3354,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@scene-forge/app@workspace:packages/app, @scene-forge/app@workspaces:*":
+"@sceneforge/app@workspace:packages/app, @sceneforge/app@workspaces:*":
   version: 0.0.0-use.local
-  resolution: "@scene-forge/app@workspace:packages/app"
+  resolution: "@sceneforge/app@workspace:packages/app"
   dependencies:
     "@babylonjs/core": "npm:^7.7.0"
     "@babylonjs/loaders": "npm:^7.7.0"
@@ -3421,9 +3421,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@scene-forge/site@workspace:packages/site, @scene-forge/site@workspaces:*":
+"@sceneforge/site@workspace:packages/site, @sceneforge/site@workspaces:*":
   version: 0.0.0-use.local
-  resolution: "@scene-forge/site@workspace:packages/site"
+  resolution: "@sceneforge/site@workspace:packages/site"
   dependencies:
     "@astrojs/check": "npm:^0.7.0"
     "@astrojs/mdx": "npm:^3.0.1"
@@ -6811,9 +6811,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.668":
-  version: 1.4.786
-  resolution: "electron-to-chromium@npm:1.4.786"
-  checksum: 10c0/ba07145a675d4fefda595cc263d4410d7ab49a35c269daa4bebb43993170f4a77942a0b1d80c5de41ac72aa2f595f15ddc129917e0a0ea6a817bed0ddbfd52dd
+  version: 1.4.787
+  resolution: "electron-to-chromium@npm:1.4.787"
+  checksum: 10c0/fa509ca710186461dd53e31773a7b06af3a958ab9b06b2e3d1d64de35204df2ff6f2050c94186adf4b850583666a50d30a6912103a0e3f5bcfc97864712ff424
   languageName: node
   linkType: hard
 
@@ -11716,11 +11716,11 @@ __metadata:
   linkType: hard
 
 "node-abi@npm:^3.3.0":
-  version: 3.62.0
-  resolution: "node-abi@npm:3.62.0"
+  version: 3.63.0
+  resolution: "node-abi@npm:3.63.0"
   dependencies:
     semver: "npm:^7.3.5"
-  checksum: 10c0/62e11264cbb51387cf4599b04e0418c7eba725afe3a228504ade957d61f579a5cb24df79dad9d338b9beb58d723643d40c9fcae2cfc2fe775c0ef56bb0fd0ec8
+  checksum: 10c0/536ce002bb0dbf99034a5ec9ae03cfd9a8afa182b09cc6f44902e365b218e10deee8aba8cea9867dac69eff7f5aa6120f36bf991ec36a615cb43ffd336fbf1ab
   languageName: node
   linkType: hard
 
@@ -13592,17 +13592,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scene-forge@workspace:.":
+"sceneforge@workspace:.":
   version: 0.0.0-use.local
-  resolution: "scene-forge@workspace:."
+  resolution: "sceneforge@workspace:."
   dependencies:
     "@commitlint/cli": "npm:^19.2.1"
     "@commitlint/config-conventional": "npm:^19.1.0"
     "@commitlint/format": "npm:^19.0.3"
     "@eslint/compat": "npm:^1.0.1"
     "@eslint/js": "npm:^9.1.1"
-    "@scene-forge/app": "workspaces:*"
-    "@scene-forge/site": "workspaces:*"
+    "@sceneforge/app": "workspaces:*"
+    "@sceneforge/site": "workspaces:*"
     "@stylistic/eslint-plugin": "npm:^2.1.0"
     "@types/concurrently": "npm:^7.0.0"
     "@types/node": "npm:^20.12.7"
@@ -14295,8 +14295,8 @@ __metadata:
   linkType: hard
 
 "streamx@npm:^2.15.0, streamx@npm:^2.16.1":
-  version: 2.16.1
-  resolution: "streamx@npm:2.16.1"
+  version: 2.17.0
+  resolution: "streamx@npm:2.17.0"
   dependencies:
     bare-events: "npm:^2.2.0"
     fast-fifo: "npm:^1.1.0"
@@ -14304,7 +14304,7 @@ __metadata:
   dependenciesMeta:
     bare-events:
       optional: true
-  checksum: 10c0/202b1d7cb7ceb36cdc5d5d0e2c27deafcc8670a4934cda7a5e3d3d45b8d3a64dc43f1b982b1c1cb316f01964dd5137b7e26af3151582c7c29ad3cf4072c6dbb9
+  checksum: 10c0/d302ed1a9e534ad98afd33b7e5ec59865912126a5714c010042ace151caef8f4277ad998025c04898948943323f7cc5f65417c9e03510fb9a855d07f5dd9559b
   languageName: node
   linkType: hard
 

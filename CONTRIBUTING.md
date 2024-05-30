@@ -21,7 +21,7 @@ bugfixes, minor versions for new features, and major versions for any breaking c
 
 ### Where to Find Known Issues
 
-We are using [GitHub Issues](https://github.com/phinpho/scene-forge/issues) to track known
+We are using [GitHub Issues](https://github.com/sceneforge/sceneforge/issues) to track known
 issues. Please search the existing issues for your bug and create a new one if the issue is
 not yet tracked.
 

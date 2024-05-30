@@ -16,7 +16,7 @@ To start the development server, run the following:
 
 **In the root folder of the repository:**
 ```sh
-yarn workspace scene-forge-site dev
+yarn workspace @sceneforge/site dev
 ```
 
 **In the site workspace folder (`packages/site`):**
@@ -37,7 +37,7 @@ To build the site, run:
 
 **In the root folder of the repository:**
 ```sh
-yarn workspace scene-forge-site build
+yarn workspace @sceneforge/site build
 ```
 
 **In the site workspace folder (`packages/site`):**

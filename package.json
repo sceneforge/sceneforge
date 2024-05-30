@@ -1,13 +1,14 @@
 {
-  "name": "scene-forge",
+  "name": "sceneforge",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/phinpho/scene-forge"
+    "url": "https://github.com/sceneforge/sceneforge"
   },
   "author": {
     "name": "Rodolfo Pereira",
-    "email": "phinpho@gmail.com"
+    "email": "phinpho@gmail.com",
+    "url": "https://phinpho.github.io/"
   },
   "license": "CC0",
   "private": true,
@@ -19,8 +20,8 @@
     "postinstall": "husky"
   },
   "dependencies": {
-    "@scene-forge/app": "workspaces:*",
-    "@scene-forge/site": "workspaces:*"
+    "@sceneforge/app": "workspaces:*",
+    "@sceneforge/site": "workspaces:*"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.1",

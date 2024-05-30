@@ -18,6 +18,9 @@ export default defineConfig({
 				dark: "./src/assets/site-header-logo-dark.svg",
 				replacesTitle: true,
 			},
+			social: {
+				github: "https://github.com/sceneforge/sceneforge",
+			},
 			defaultLocale: 'root',
 			locales: {
 			  root: {

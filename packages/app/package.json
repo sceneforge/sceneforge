@@ -1,5 +1,5 @@
 {
-  "name": "@scene-forge/app",
+  "name": "@sceneforge/app",
   "version": "0.0.1",
   "description": "Unleash your creativity with our cutting-edge Progressive Web Application that empowers you to craft, visualise, and manipulate stunning 3D scenes.",
   "keywords": [
@@ -13,12 +13,13 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/phinpho/scene-forge",
+    "url": "https://github.com/sceneforge/sceneforge",
     "directory": "packages/app"
   },
   "author": {
     "name": "Rodolfo Pereira",
-    "email": "phinpho@gmail.com"
+    "email": "phinpho@gmail.com",
+    "url": "https://phinpho.github.io/"
   },
   "license": "CC0",
   "private": true,

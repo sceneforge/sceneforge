@@ -1,4 +1,4 @@
-name: SceneForge Basic Workflow
+name: Scene Forge Basic Workflow
 
 on:
   push:
