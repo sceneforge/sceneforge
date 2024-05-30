@@ -2677,7 +2677,7 @@ __metadata:
     jest: "npm:^29.7.0"
     react: "npm:19.0.0-rc-38e3b23483-20240529"
     react-compiler-healthcheck: "npm:0.0.0-experimental-f978439-20240517"
-    react-dom: "npm:19.0.0-rc-38e3b23483-20240529"
+    react-dom: "npm:19.0.0-rc-935180c7e0-20240524"
     react-i18next: "npm:^14.1.0"
     terser: "npm:^5.31.0"
     ts-jest: "npm:^29.1.2"
@@ -10277,14 +10277,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.0.0-rc-38e3b23483-20240529":
-  version: 19.0.0-rc-38e3b23483-20240529
-  resolution: "react-dom@npm:19.0.0-rc-38e3b23483-20240529"
+"react-dom@npm:19.0.0-rc-935180c7e0-20240524":
+  version: 19.0.0-rc-935180c7e0-20240524
+  resolution: "react-dom@npm:19.0.0-rc-935180c7e0-20240524"
   dependencies:
-    scheduler: "npm:0.25.0-rc-38e3b23483-20240529"
+    scheduler: "npm:0.25.0-rc-935180c7e0-20240524"
   peerDependencies:
-    react: 19.0.0-rc-38e3b23483-20240529
-  checksum: 10c0/396d487099fe3a595182b420ab6fe6eb43d613348b2c1038a536ddc16dabfb2d69c2722e70d225cf40c9edba50963c83b0ee6c9c29101129de335d54ec148aaa
+    react: 19.0.0-rc-935180c7e0-20240524
+  checksum: 10c0/66829896c60f38a133064fcaf36d293708e4de12ea0bf6cda871389b323e8bf0781a046c258e95ff2d81fc247415b019a33de31be23db98d783d35cd1274610f
   languageName: node
   linkType: hard
 
@@ -10916,10 +10916,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"scheduler@npm:0.25.0-rc-38e3b23483-20240529":
-  version: 0.25.0-rc-38e3b23483-20240529
-  resolution: "scheduler@npm:0.25.0-rc-38e3b23483-20240529"
-  checksum: 10c0/91cbd3b975429cd88ca1c610fb67e521fee96f7a995fb27f79ca15deb6e1bd28804cebe839613d0b875f9236ac9a93379cc75098813046e18e8422a1206ad0c0
+"scheduler@npm:0.25.0-rc-935180c7e0-20240524":
+  version: 0.25.0-rc-935180c7e0-20240524
+  resolution: "scheduler@npm:0.25.0-rc-935180c7e0-20240524"
+  checksum: 10c0/9a4c92fbc873c566156d3e845cca43c51e0b5bb580ff5b77433dcba64854d1a41769abc4b69b29f450d7f20613be881b979e124fed6d9504d3134b88bbcf7ce1
   languageName: node
   linkType: hard
 
