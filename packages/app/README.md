@@ -53,10 +53,10 @@ $ yarn test
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of
+Please read [CONTRIBUTING.md](../../CONTRIBUTING.md) for details on our code of
 conduct, and the process for submitting pull requests to us.
 
 ## License
 
 This project is licensed under the Creative Commons Legal Code - see the
-[LICENSE](LICENSE) file for details.
+[LICENSE](../../LICENSE) file for details.

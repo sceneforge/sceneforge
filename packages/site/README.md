@@ -1,54 +1,70 @@
-# Starlight Starter Kit: Basics
+# Scene Forge Site
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+The Site package contains the source code for the Scene Forge
+project's public-facing website. The site's primary goal is
+to provide documentation and information about the project
+and showcase some of the application's features and
+capabilities.
 
-```
-npm create astro@latest -- --template starlight
-```
+## Development
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/basics)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwithastro%2Fstarlight%2Ftree%2Fmain%2Fexamples%2Fbasics&project-name=my-starlight-docs&repository-name=my-starlight-docs)
+The site creation is on top of the libraries
+[Astro](https://astro.build/) and the
+[Starlight theme](https://starlight.astro.build/).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+To start the development server, run the following:
 
-## 🚀 Project Structure
-
-Inside of your Astro + Starlight project, you'll see the following folders and files:
-
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   ├── docs/
-│   │   └── config.ts
-│   └── env.d.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+**In the root folder of the repository:**
+```sh
+yarn workspace scene-forge-site dev
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+**In the site workspace folder (`packages/site`):**
+```sh
+yarn dev
+```
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+This will start the development server, commonly available at
+the URL `http://localhost:4321'.
 
-Static assets, like favicons, can be placed in the `public/` directory.
+### Build
 
-## 🧞 Commands
+The build process generates a static site ready to deploy to
+any static hosting provider, with no server-side processing
+required.
 
-All commands are run from the root of the project, from a terminal:
+To build the site, run:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+**In the root folder of the repository:**
+```sh
+yarn workspace scene-forge-site build
+```
 
-## 👀 Want to learn more?
+**In the site workspace folder (`packages/site`):**
+```sh
+yarn build
+```
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+The build output will be in the `dist` folder, containing all
+the files needed to deploy the site.
+
+## Authoring Content
+
+As the Starlight theme predefines, the content lives in the
+`src/content` folder. Inside it, the folder `docs` contains
+the Markdown files that will be transformed into stunning
+HTML pages.
+
+More details about the authoring content are available on the
+[Starlight documentation page](https://starlight.astro.build/guides/authoring-content/).
+
+## Contributing
+
+Please read [CONTRIBUTING.md](../../CONTRIBUTING.md) for
+details on our code of conduct, and the process for submitting
+pull requests to us.
+
+## License
+
+This project is licensed under the Creative Commons Legal
+Code - see the [LICENSE](../../LICENSE) file for details.
