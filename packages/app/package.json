@@ -79,7 +79,7 @@
     "eslint-plugin-unicorn": "*",
     "globals": "*",
     "jest": "^29.7.0",
-    "react-compiler-healthcheck": "0.0.0-experimental-f978439-20240517",
+    "react-compiler-healthcheck": "0.0.0-experimental-31393f7-20240529",
     "terser": "^5.31.0",
     "ts-jest": "^29.1.2",
     "ts-node": "*",
