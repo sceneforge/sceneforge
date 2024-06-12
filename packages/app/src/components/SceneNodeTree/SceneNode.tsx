@@ -1,3 +1,11 @@
+import {
+  Button,
+  Icon,
+  IconButton,
+  IconEnum,
+  Toggle,
+  type ToggleEvent,
+} from "@sceneforge/ui";
 import { useCallback, useEffect, useId, useMemo, useState } from "react";
 
 import {
@@ -12,9 +20,6 @@ import {
   typeOf,
 } from "../../lib/sceneObject";
 import { getNodeChildren } from "../../lib/sceneObject/getNodeChildren";
-import { Button, ButtonToggleEvent } from "../Button";
-import { Icon, type IconName } from "../Icon";
-import { IconButton } from "../IconButton";
 
 export type SceneNodeProps = {
   clearMeshSelectionPath?: () => void;
@@ -23,15 +28,15 @@ export type SceneNodeProps = {
   onNodeSelect?: (node: unknown) => void;
 };
 
-const nodeTypeIconMap: Record<SceneObjectType, IconName> = {
-  [SceneObjectType.AbstractMesh]: "deployedCode",
-  [SceneObjectType.ArcRotateCamera]: "cameraswitch",
-  [SceneObjectType.Camera]: "camera",
-  [SceneObjectType.HemisphericLight]: "sunny",
-  [SceneObjectType.Light]: "lightbulb",
-  [SceneObjectType.Mesh]: "deployedCodeSharp",
-  [SceneObjectType.TransformNode]: "transform",
-  [SceneObjectType.Unknown]: "questionMark",
+const nodeTypeIconMap: Record<SceneObjectType, IconEnum> = {
+  [SceneObjectType.AbstractMesh]: IconEnum.DeployedCode,
+  [SceneObjectType.ArcRotateCamera]: IconEnum.CameraSwitch,
+  [SceneObjectType.Camera]: IconEnum.Camera,
+  [SceneObjectType.HemisphericLight]: IconEnum.Sunny,
+  [SceneObjectType.Light]: IconEnum.Lightbulb,
+  [SceneObjectType.Mesh]: IconEnum.DeployedCodeSharp,
+  [SceneObjectType.TransformNode]: IconEnum.Transform,
+  [SceneObjectType.Unknown]: IconEnum.QuestionMark,
 };
 
 export const SceneNode = ({
@@ -68,7 +73,7 @@ export const SceneNode = ({
   }, [onNodeSelect, node, open, expandNode]);
 
   const handleVisibility = useCallback(
-    (event: ButtonToggleEvent) => {
+    (event: ToggleEvent) => {
       if (event.state === "pressed") {
         if (hideNode(node)) {
           setVisible(false);
@@ -106,28 +111,20 @@ export const SceneNode = ({
           <IconButton
             aria-controls={`${genId}-children`}
             aria-expanded={open}
-            className="absolute m-0 translate-x--4 b-0 b-none bg-transparent p-0 c-inherit children:rotate--90 children:aria-expanded:rotate-0"
-            icon="expandMore"
+            icon={IconEnum.ExpandMore}
             onClick={handleExpandNode}
           />
         )}
-        <Button
-          className="h-full w-full flex flex-grow flex-row cursor-pointer items-center justify-start gap-2 b-0 b-none bg-transparent p-block-1 text-start c-inherit"
-          clear
-          onClick={handleOnNodeSelect}
-        >
+        <Button onClick={handleOnNodeSelect}>
           <Icon icon={nodeTypeIconMap[nodeType]} />
-          <span className="w-0 flex-grow overflow-hidden text-ellipsis text-nowrap">
-            {nodeName}
-          </span>
+          <span>{nodeName}</span>
         </Button>
         <div className="m-block--2 flex flex-shrink flex-row items-center justify-stretch c-inherit">
-          <IconButton
-            icon={["visibility", "visibilityOff"]}
-            onToggle={handleVisibility}
-            pressed={!visible}
-            toggle
-          />
+          <Toggle onToggle={handleVisibility} pressed={!visible}>
+            <Icon
+              icon={visible ? IconEnum.Visibility : IconEnum.VisibilityOff}
+            />
+          </Toggle>
         </div>
       </div>
 

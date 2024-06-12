@@ -24,6 +24,7 @@
   "license": "CC0",
   "private": true,
   "scripts": {
+    "postinstall": "yarn workspaces foreach --from . -Rt --exclude @sceneforge/app run prepack",
     "dev": "vite",
     "build": "tsc && vite build --mode production",
     "test": "jest",
@@ -35,8 +36,8 @@
     "@babylonjs/core": "^7.7.0",
     "@babylonjs/loaders": "^7.7.0",
     "@babylonjs/materials": "^7.7.0",
+    "@sceneforge/ui": "workspace:*",
     "@simplecomponent/markdown": "^0.0.2",
-    "@unocss/reset": "^0.60.2",
     "babylonjs-gltf2interface": "^7.7.0",
     "browser-fs-access": "^0.35.0",
     "i18next": "^23.11.4",
@@ -50,8 +51,6 @@
   "devDependencies": {
     "@eslint/compat": "*",
     "@eslint/js": "*",
-    "@iconify-json/material-symbols": "^1.1.75",
-    "@iconify-json/material-symbols-light": "^1.1.15",
     "@jest/globals": "^29.7.0",
     "@stylistic/eslint-plugin": "*",
     "@types/hast": "^3.0.4",
@@ -63,11 +62,6 @@
     "@types/react-dom": "npm:types-react-dom@rc",
     "@types/react-i18next": "^8.1.0",
     "@types/uuid": "^9.0.8",
-    "@unocss/eslint-config": "^0.60.2",
-    "@unocss/preset-icons": "^0.60.2",
-    "@unocss/preset-typography": "^0.60.2",
-    "@unocss/preset-uno": "^0.60.2",
-    "@unocss/transformer-directives": "^0.60.2",
     "@vitejs/plugin-react": "^4.2.1",
     "babel-plugin-react-compiler": "0.0.0-experimental-592953e-20240517",
     "browser-sync": "^3.0.2",
@@ -85,8 +79,6 @@
     "ts-node": "*",
     "typescript": "*",
     "typescript-eslint": "*",
-    "unocss": "^0.60.2",
-    "unocss-preset-animations": "^1.0.2",
     "vite": "^5.2.11",
     "vite-plugin-browser-sync": "^3.0.2",
     "vite-plugin-i18next-loader": "^2.0.12",
@@ -95,15 +87,9 @@
     "workbox-precaching": "^7.1.0",
     "workbox-window": "^7.1.0"
   },
-  "overrides": {
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc",
-    "react": "19.0.0-rc-38e3b23483-20240529",
-    "react-dom": "19.0.0-rc-38e3b23483-20240529"
-  },
   "engines": {
     "node": ">=21.7.1 < 22",
-    "yarn": ">=4.1.1 < 5"
+    "yarn": ">=4.2.2 < 5"
   },
-  "packageManager": "yarn@4.2.2"
+  "packageManager": "yarn@4.3.0"
 }

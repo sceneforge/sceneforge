@@ -1,4 +1,4 @@
-import { type PropsWithChildren, ReactNode } from "react";
+import type { JSX, PropsWithChildren, ReactNode } from "react";
 
 import { Gallery } from "../Gallery";
 

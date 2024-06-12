@@ -1,6 +1,6 @@
+import { Action, type ActionProps } from "@sceneforge/ui";
 import { type PropsWithChildren } from "react";
 
-import { Action, ActionProps } from "../Action";
 import { Heading } from "../Heading";
 
 export type PanelSheetSectionProps = PropsWithChildren<{

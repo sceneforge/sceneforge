@@ -1,7 +1,7 @@
+import { Canvas, Variant } from "@sceneforge/ui";
 import { useRef } from "react";
 
 import { Model } from "../../lib/isModel";
-import { Canvas } from "../Canvas";
 import { PanelSheet, PanelSheetBody } from "../PanelSheet";
 import { ModelViewerHeader } from "./ModelViewerHeader";
 import { SceneNodesSection } from "./SceneNodesSection";
@@ -33,7 +33,7 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   return (
     <>
       <Canvas ref={canvasRef} />
-      <PanelSheet orientation="block" position="end" resizable variant="accent">
+      <PanelSheet orientation="block" position="end" resizable variant={Variant.Accent}>
         <ModelViewerHeader
           mode={mode}
           model={currentModel}

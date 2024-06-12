@@ -1,8 +1,3 @@
-import "@unocss/reset/sanitize/assets.css";
-import "@unocss/reset/sanitize/sanitize.css";
-import "virtual:uno.css";
-import "virtual:unocss-devtools";
-
 import { render, withRoot, withUserData } from "./root";
 import "./styles/window-overlay.css";
 

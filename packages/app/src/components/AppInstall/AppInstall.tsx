@@ -1,6 +1,6 @@
+import { Dialog, Variant } from "@sceneforge/ui";
 import { useTranslation } from "react-i18next";
 
-import { Dialog } from "../Dialog";
 import { useAppInstall } from "./useAppInstall";
 
 export const AppInstall = () => {
@@ -16,7 +16,7 @@ export const AppInstall = () => {
       onClose={closeInstallDialog}
       title={t("title")}
       toolbar={{
-        items: [
+        actions: [
           {
             label: t("actions.installButton"),
             onClick: () => {
@@ -28,11 +28,11 @@ export const AppInstall = () => {
                   closeInstallDialog();
                 });
             },
-            type: "item",
+            type: "button",
           },
         ],
       }}
-      variant="default"
+      variant={Variant.Default}
     />
   );
 };

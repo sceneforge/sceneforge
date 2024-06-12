@@ -1,3 +1,4 @@
+import { Dialog, Icon, IconEnum, Variant } from "@sceneforge/ui";
 import {
   type ChangeEvent,
   Suspense,
@@ -16,9 +17,7 @@ import {
   isWelcomeData,
 } from "../../lib/isWelcomeData";
 import { useAppContext } from "../App";
-import { Dialog } from "../Dialog";
 import { Highlights } from "../Highlights";
-import { Icon } from "../Icon";
 import { usePanel } from "../Panel";
 
 export const Welcome = () => {
@@ -65,7 +64,7 @@ export const Welcome = () => {
         onClose={handleClose}
         open={true}
         title={t("title")}
-        variant="default"
+        variant={Variant.Default}
       >
         <Suspense fallback={<div>Loading...</div>}>
           <Highlights
@@ -77,7 +76,7 @@ export const Welcome = () => {
               {languageList && languageList.length > 1 && (
                 <div className="flex flex-row items-center justify-start gap-1">
                   <label htmlFor={languageId}>
-                    <Icon icon="globe" />
+                    <Icon icon={IconEnum.Globe} />
                   </label>
                   <select
                     className="accent-accent"

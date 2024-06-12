@@ -1,5 +1,6 @@
 import {
   type Dispatch,
+  type JSX,
   type PropsWithChildren,
   ReactNode,
   type SetStateAction,

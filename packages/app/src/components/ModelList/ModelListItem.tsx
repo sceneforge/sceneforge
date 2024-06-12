@@ -1,7 +1,7 @@
+import { Card, Variant } from "@sceneforge/ui";
 import { useTranslation } from "react-i18next";
 
 import { type Model } from "../../lib/isModel";
-import { Card } from "../Card";
 import { Dialog } from "../Dialog";
 import { useModelListItem } from "./useModelListItem";
 
@@ -25,18 +25,20 @@ export const ModelListItem = ({ model }: ModelListItemProps) => {
           {
             label: t("ModelListItem.actions.openButton"),
             onClick: handleOpenModel,
-            variant: "accent",
+            type: "button",
+            variant: Variant.Accent,
           },
           {
             icon: "delete",
             label: t("ModelListItem.actions.deleteButton"),
             onClick: openDeleteModelDialog,
-            variant: "danger",
+            type: "icon",
+            variant: Variant.Danger,
           },
         ]}
         img={model.capture}
         title={model.title}
-        variant="accent"
+        variant={Variant.Accent}
         zoom={2}
       />
       {showDeleteDialog && (
@@ -47,24 +49,24 @@ export const ModelListItem = ({ model }: ModelListItemProps) => {
           onClose={closeDeleteModelDialog}
           title={t("ModelListItem.deleteDialog.title")}
           toolbar={{
-            contrast: false,
-            items: [
+            actions: [
               {
                 label: t("ModelListItem.deleteDialog.actions.cancelButton"),
                 onClick: closeDeleteModelDialog,
-                type: "item",
-                variant: "default",
+                type: "button",
+                variant: Variant.Default,
               },
               {
                 label: t("ModelListItem.deleteDialog.actions.deleteButton"),
                 onClick: handleDeleteModel,
-                type: "item",
-                variant: "danger",
+                type: "button",
+                variant: Variant.Danger,
               },
             ],
+            contrast: false,
             withDropdown: false,
           }}
-          variant="danger"
+          variant={Variant.Danger}
         />
       )}
     </>

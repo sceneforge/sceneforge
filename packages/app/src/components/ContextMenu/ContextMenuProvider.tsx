@@ -1,3 +1,5 @@
+import { type Variant } from "@sceneforge/ui";
+import { type ActionProps } from "@sceneforge/ui";
 import {
   type Dispatch,
   type MouseEvent,
@@ -7,8 +9,6 @@ import {
   useState,
 } from "react";
 
-import { type Variant } from "../../types/variants";
-import { type ActionProps } from "../Action";
 import { ContextMenu } from "./ContextMenu";
 
 export type MenuItem =

@@ -2,6 +2,7 @@ import {
   type JSX,
   type PropsWithChildren,
   type ReactNode,
+  Suspense,
   useEffect,
   useMemo,
 } from "react";
@@ -68,7 +69,9 @@ export const Tab = <P extends object = object>({
       id={tabId}
       role="tabpanel"
     >
-      <Component {...props} />
+      <Suspense fallback={null}>
+        <Component {...props} />
+      </Suspense>
     </div>
   );
 };

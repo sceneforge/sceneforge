@@ -1,10 +1,9 @@
+import { Button, IconButton } from "@sceneforge/ui";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { cls } from "../../lib/cls";
 import { useAppContext } from "../App";
-import { Button } from "../Button";
-import { IconButton } from "../IconButton";
 import { useTabPanel } from "./useTabPanel";
 
 export interface TabItemProps {

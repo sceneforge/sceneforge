@@ -1,8 +1,8 @@
+import { Card } from "@sceneforge/ui";
 import { type ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAppContext } from "../../components/App";
-import { Card } from "../../components/Card";
 import { InputList, InputListItem } from "../../components/InputList";
 import { usePanel } from "../../components/Panel";
 import { SafeArea } from "../../components/SafeArea";

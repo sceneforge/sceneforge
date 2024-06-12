@@ -1,7 +1,7 @@
+import { Variant } from "@sceneforge/ui";
 import { Suspense, useEffect } from "react";
 
 import { cls } from "../../lib/cls";
-import { Variant } from "../../types/variants";
 import { usePanel } from "../Panel";
 import { Tab } from "./Tab";
 import { TabList } from "./TabList";
@@ -11,7 +11,7 @@ export type TabPanelProps = {
   variant?: Variant;
 };
 
-export const TabPanel = ({ variant = "default" }: TabPanelProps) => {
+export const TabPanel = ({ variant = Variant.Default }: TabPanelProps) => {
   const { getUserData } = usePanel();
   const { setTabsPosition, tabs, tabsPosition } = useTabPanel();
 

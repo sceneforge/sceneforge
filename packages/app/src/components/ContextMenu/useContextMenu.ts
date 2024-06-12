@@ -1,3 +1,4 @@
+import { Variant } from "@sceneforge/ui";
 import {
   type MouseEvent,
   MouseEventHandler,
@@ -7,7 +8,6 @@ import {
 } from "react";
 
 import { setPositionOnPointer } from "../../lib/setPosition";
-import { type Variant } from "../../types/variants";
 import { ContextMenuContext, type MenuItem } from "./ContextMenuProvider";
 
 export const useContextMenu = () => {

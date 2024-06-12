@@ -1,3 +1,6 @@
 {
-  "recommendations": ["dbaeumer.vscode-eslint", "antfu.unocss", "astro-build.astro-vscode"]
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "astro-build.astro-vscode"
+  ]
 }

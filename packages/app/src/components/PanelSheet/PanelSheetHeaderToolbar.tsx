@@ -1,4 +1,5 @@
-import { Action, ActionProps } from "../Action";
+import { Action, type ActionProps } from "@sceneforge/ui";
+
 import { PanelSheetHeaderGroup } from "./PanelSheetHeaderGroup";
 
 type ToolbarGroup = {

@@ -1,6 +1,7 @@
+import { Variant } from "@sceneforge/ui";
+
 import { cls } from "../../lib/cls";
 import { variantBgClass } from "../../lib/variantClasses";
-import { Variant } from "../../types/variants";
 import { useTabPanel } from "../TabPanel";
 import { Toolbar, ToolbarProps } from "../Toolbar";
 
@@ -15,7 +16,7 @@ export const Topbar = ({
   title,
   toolbarEnd,
   toolbarStart,
-  variant = "default",
+  variant = Variant.Default,
 }: TopbarProps) => {
   const { tabsPosition } = useTabPanel();
 

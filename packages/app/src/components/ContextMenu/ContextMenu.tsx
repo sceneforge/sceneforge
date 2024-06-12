@@ -1,8 +1,8 @@
+import { Action } from "@sceneforge/ui";
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 
 import { cls } from "../../lib/cls";
 import { variantBgClass } from "../../lib/variantClasses";
-import { Action } from "../Action";
 import { useContextMenu } from "./useContextMenu";
 
 export const ContextMenu = () => {
@@ -85,6 +85,7 @@ export const ContextMenu = () => {
             )
             : (
               <Action
+                type="button"
                 {...item}
                 className="w-full rounded b-none bg-transparent p-2 text-start c-inherit dark:hover:bg-black:15 light:hover:bg-white:15"
                 onClick={handleItemClick(onClick)}

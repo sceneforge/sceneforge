@@ -1,6 +1,6 @@
+import { Button, Variant } from "@sceneforge/ui";
 import { useCallback, useState } from "react";
 
-import { Button } from "../Button";
 import { Dialog } from "../Dialog";
 import { Image } from "../Image";
 
@@ -36,7 +36,7 @@ export const ImageDialog = ({ alt, src, title }: ImageDialogProps) => {
           extendedClassName="w-full lg:w-80% xl:w-70% 2xl:w-60%"
           onClose={closeImageDialog}
           title={alt}
-          variant="accent"
+          variant={Variant.Accent}
         >
           <figure>
             <Image

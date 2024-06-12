@@ -1,7 +1,6 @@
 import { fixupPluginRules } from "@eslint/compat";
 import eslint from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
-import unocss from "@unocss/eslint-config/flat";
 import perfectionistNatural from "eslint-plugin-perfectionist/configs/recommended-natural";
 import react from "eslint-plugin-react";
 import eslintPluginReactCompiler from "eslint-plugin-react-compiler";
@@ -120,7 +119,6 @@ export default tseslint.config(
       },
     },
   },
-  unocss,
   {
     files: ["src/**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
     ...react.recommended,

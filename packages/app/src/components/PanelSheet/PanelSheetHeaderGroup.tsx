@@ -1,7 +1,7 @@
+import { Button } from "@sceneforge/ui";
 import { type PropsWithChildren, type ReactNode } from "react";
 
 import { Heading } from "../Heading";
-import { Popover } from "../Popover";
 
 export type PanelSheetHeaderGroupProps = PropsWithChildren<{
   description?: ReactNode;
@@ -25,12 +25,12 @@ export const PanelSheetHeaderGroup = ({
           </Heading>
         )}
         {title && description && (
-          <Popover
+          <Button
             className="m-0 hidden b-0 b-none bg-transparent p-0 text-inherit sm:block"
             label={title}
           >
             {description}
-          </Popover>
+          </Button>
         )}
         {children}
       </div>

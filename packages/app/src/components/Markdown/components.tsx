@@ -1,6 +1,6 @@
 import { type MarkdownProps } from "@simplecomponent/markdown";
 import { type Element } from "hast";
-import { type ComponentType } from "react";
+import { type ComponentType, type JSX } from "react";
 
 import { Blockquote } from "../Blockquote";
 import { Heading } from "../Heading";

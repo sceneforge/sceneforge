@@ -1,3 +1,4 @@
+import { Variant } from "@sceneforge/ui";
 import { fileOpen } from "browser-fs-access";
 import { Dispatch, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -92,43 +93,43 @@ export const ModelViewerHeader = ({
       title={model?.title ?? t("ModelViewerHeader.untitled")}
     >
       <Toolbar
-        contentVariant="default"
-        icon="menu"
-        items={[
+        actionListVariant={Variant.Default}
+        // icon="menu"
+        actions={[
           {
-            items: [
+            actions: [
               {
                 label: t("ModelViewerHeader.actions.importButton"),
                 onClick: handleImport,
-                type: "item",
+                type: "button",
               },
             ],
             label: t("ModelViewerHeader.actions.modelDropdown"),
-            type: "item",
+            type: "dropdown",
           },
           {
-            items: [
+            actions: [
               {
-                active: mode === Mode.View,
                 label: t("modes.view"),
                 onClick: handleModeChange(Mode.View),
-                type: "item",
+                pressed: mode === Mode.View,
+                type: "toggle",
               },
               {
-                active: mode === Mode.Edit,
                 label: t("modes.edit"),
                 onClick: handleModeChange(Mode.Edit),
-                type: "item",
+                pressed: mode === Mode.Edit,
+                type: "toggle",
               },
               {
-                active: mode === Mode.Material,
                 label: t("modes.material"),
                 onClick: handleModeChange(Mode.Material),
-                type: "item",
+                pressed: mode === Mode.Material,
+                type: "toggle",
               },
             ],
             label: modeLabel,
-            type: "item",
+            type: "dropdown",
           },
         ]}
       />

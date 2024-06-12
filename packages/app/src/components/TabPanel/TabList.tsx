@@ -1,8 +1,8 @@
+import { Variant } from "@sceneforge/ui";
 import { type MouseEvent, useCallback, useEffect, useRef } from "react";
 
 import { cls } from "../../lib/cls";
 import { variantBgClass } from "../../lib/variantClasses";
-import { type Variant } from "../../types/variants";
 import { useContextMenu } from "../ContextMenu";
 import { TabItem } from "./TabItem";
 import { useTabPanel } from "./useTabPanel";
@@ -11,7 +11,7 @@ export type TabListProps = {
   variant?: Variant;
 };
 
-export const TabList = ({ variant = "default" }: TabListProps) => {
+export const TabList = ({ variant = Variant.Default }: TabListProps) => {
   const { activateTab, closeTab, defaultTab, newTab, tabs, tabsPosition }
     = useTabPanel();
   const reference = useRef<HTMLUListElement>(null);
@@ -31,13 +31,13 @@ export const TabList = ({ variant = "default" }: TabListProps) => {
           event,
           header: "Tab Context Menu",
           items: [
-            {
-              label: "New Tab",
-              onClick: () => {
-                console.log("DEBUG: New Tab");
-              },
-              type: "item",
-            },
+            // {
+            //   label: "New Tab",
+            //   onClick: () => {
+            //     console.log("DEBUG: New Tab");
+            //   },
+            //   type: "item",
+            // },
           ],
         });
       }

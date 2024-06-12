@@ -1,8 +1,8 @@
+import { Button } from "@sceneforge/ui";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { cls } from "../../lib/cls";
 import { getShiftedIndex } from "../../lib/getShiftedIndex";
-import { Button } from "../Button";
 import { HighlightsItem, type HighlightsItemProps } from "./HighlightsItem";
 
 const SLIDE_INTERVAL = 5000; // 5 seconds

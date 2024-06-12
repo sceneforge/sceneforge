@@ -1,10 +1,9 @@
+import { Dropdown, Variant } from "@sceneforge/ui";
 import { type PropsWithChildren, RefObject, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import { cls } from "../../lib/cls";
 import { variantBgClass } from "../../lib/variantClasses";
-import { type Variant } from "../../types/variants";
-import { Dropdown } from "../Dropdown";
 import { usePanelSheet } from "./usePanelSheet";
 
 export type PanelSheetProps = PropsWithChildren<{
@@ -21,7 +20,7 @@ export const PanelSheet = ({
   orientation = "block",
   position = "end",
   resizable = false,
-  variant = "default",
+  variant = Variant.Default,
 }: PanelSheetProps) => {
   const { t } = useTranslation("PanelSheet");
   const panelRef = useRef<HTMLDivElement>(null);
@@ -55,12 +54,12 @@ export const PanelSheet = ({
       <div className="h-full w-full flex flex-col items-stretch justify-stretch overflow-auto text-light c-inherit">
         <div className="absolute inset-r-0 inset-t-0 sm:hidden">
           <Dropdown
-            contentVariant="default"
-            icon="dragIndicator"
-            items={[75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25].map(size => ({
+            actionListVariant={Variant.Default}
+            // icon="dragIndicator"
+            actions={[75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25].map(size => ({
               label: `${size}%`,
               onClick: () => updateSize({ size }),
-              type: "item",
+              type: "button",
             }))}
             label={t("size")}
           />

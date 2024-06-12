@@ -1,5 +1,4 @@
 import React from "@vitejs/plugin-react";
-import UnoCSS from "unocss/vite";
 import { type UserConfig, defineConfig } from "vite";
 import VitePluginBrowserSync from "vite-plugin-browser-sync";
 import i18nextLoader from "vite-plugin-i18next-loader";
@@ -61,6 +60,9 @@ export default defineConfig(async ({ command, isPreview, mode }) => {
         keep_classnames: false,
       },
     },
+    optimizeDeps: {
+      include: ["@sceneforge/ui"],
+    },
     plugins: [
       i18nextLoader({
         namespaceResolution: "basename",
@@ -72,7 +74,6 @@ export default defineConfig(async ({ command, isPreview, mode }) => {
           plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
         },
       }),
-      UnoCSS(),
       VitePWA({
         devOptions: {
           enabled: true,

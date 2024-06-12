@@ -1,3 +1,4 @@
+import { Variant } from "@sceneforge/ui";
 import { useTranslation } from "react-i18next";
 
 import { useShortcuts } from "../../hooks/useShortcuts";
@@ -24,7 +25,7 @@ export const ModelList = ({ active }: ModelListProps) => {
         icon="add"
         label={t("actions.newButton")}
         onClick={newTabScene}
-        variant="accent"
+        variant={Variant.Accent}
       />
     </Carousel>
   );

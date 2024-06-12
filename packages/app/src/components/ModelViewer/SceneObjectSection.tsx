@@ -27,6 +27,7 @@ export const SceneObjectSection = ({
           icon: "close",
           label: t("SceneObjectSection.actions.closeButton"),
           onClick: onClose,
+          type: "icon",
         },
       ]}
       title={nodeName}

@@ -1,8 +1,7 @@
+import { Dialog, Variant } from "@sceneforge/ui";
 import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useRegisterSW } from "virtual:pwa-register/react";
-
-import { Dialog } from "../Dialog";
 
 export const ReloadPrompt = () => {
   const { t } = useTranslation("ReloadPrompt");
@@ -44,17 +43,17 @@ export const ReloadPrompt = () => {
       ref={dialogReference}
       title={t("title")}
       toolbar={{
-        items: needRefresh
+        actions: needRefresh
           ? [
             {
               children: t("actions.reloadButton"),
               onClick: reload,
-              type: "item",
+              type: "button",
             },
           ]
           : undefined,
       }}
-      variant="accent"
+      variant={Variant.Accent}
     />
   );
 };

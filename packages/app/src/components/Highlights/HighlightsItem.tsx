@@ -1,7 +1,7 @@
+import { Button } from "@sceneforge/ui";
 import { useCallback } from "react";
 
 import { Highlight } from "../../lib/isWelcomeData";
-import { Button } from "../Button";
 
 export type HighlightsItemProps = Highlight;
 
