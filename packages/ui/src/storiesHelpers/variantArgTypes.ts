@@ -1,4 +1,4 @@
-import { Variant } from "../../types";
+import { Variant } from "../types";
 
 export const variantArgTypes = (prop: string) => ({
   [prop]: {

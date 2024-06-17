@@ -1,4 +1,4 @@
-import { Orientation } from "../../types";
+import { Orientation } from "../types";
 
 export const orientationArgTypes = (prop: string) => ({
   [prop]: {
