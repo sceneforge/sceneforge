@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import SplitPane from './SplitPane';
 import { Orientation, Variant } from '../../types';
 import View from '../View/View';
-import { orientationArgTypes } from '../storiesHelpers';
+import { orientationArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof SplitPane> = {
   title: 'Component/SplitPane',

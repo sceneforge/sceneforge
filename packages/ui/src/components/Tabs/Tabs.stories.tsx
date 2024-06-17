@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Tabs from './Tabs';
 import { IconEnum } from '../../types';
-import { alignArgTypes, orientationArgTypes, positionArgTypes, variantArgTypes } from '../storiesHelpers';
+import { alignArgTypes, orientationArgTypes, positionArgTypes, variantArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof Tabs> = {
   title: 'Component/Tabs',

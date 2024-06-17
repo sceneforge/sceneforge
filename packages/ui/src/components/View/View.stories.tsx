@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import View from './View';
-import { variantArgTypes } from '../storiesHelpers';
+import { variantArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof View> = {
   title: 'Component/View',

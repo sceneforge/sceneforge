@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Dialog from './Dialog';
 import { IconEnum, Variant } from '../../types';
-import { variantArgTypes } from '../storiesHelpers';
+import { variantArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof Dialog> = {
   title: 'Component/Dialog',

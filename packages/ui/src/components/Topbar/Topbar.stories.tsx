@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Topbar from './Topbar';
 import { IconEnum } from '../../types';
-import { variantArgTypes } from '../storiesHelpers';
+import { variantArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof Topbar> = {
   title: 'Component/Topbar',

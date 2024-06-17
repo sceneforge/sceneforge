@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Blockquote from './Blockquote';
-import { variantArgTypes } from '../storiesHelpers';
+import { variantArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof Blockquote> = {
   title: 'Component/Blockquote',

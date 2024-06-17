@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Card from './Card';
-import { variantArgTypes } from '../storiesHelpers';
+import { variantArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof Card> = {
   title: 'Component/Card',

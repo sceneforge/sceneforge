@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Toggle from './Toggle';
-import { variantArgTypes } from '../storiesHelpers';
+import { variantArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof Toggle> = {
   title: 'Component/Toggle',

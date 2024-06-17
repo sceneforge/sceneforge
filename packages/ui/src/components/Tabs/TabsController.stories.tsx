@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import TabsController from './TabsController';
 import { IconEnum } from '../../types';
-import { alignArgTypes, orientationArgTypes, positionArgTypes, variantArgTypes } from '../storiesHelpers';
+import { alignArgTypes, orientationArgTypes, positionArgTypes, variantArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof TabsController> = {
   title: 'Component/TabsController',

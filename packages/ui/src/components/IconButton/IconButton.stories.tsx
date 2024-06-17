@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import IconButton from './IconButton';
 import { icons } from '../tokens.stylex';
-import { variantArgTypes } from '../storiesHelpers';
+import { variantArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof IconButton> = {
   title: 'Component/IconButton',

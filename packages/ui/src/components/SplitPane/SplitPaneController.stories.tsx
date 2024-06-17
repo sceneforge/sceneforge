@@ -3,7 +3,7 @@ import SplitPaneController from './SplitPaneController';
 import { Orientation, Variant } from '../../types';
 import View from '../View/View';
 import Button from '../Button/Button';
-import { orientationArgTypes } from '../storiesHelpers';
+import { orientationArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof SplitPaneController> = {
   title: 'Component/SplitPaneController',

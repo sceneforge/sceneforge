@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Drawer from './Drawer';
 import { Variant } from '../../types';
-import { orientationArgTypes, positionArgTypes, variantArgTypes } from '../storiesHelpers';
+import { orientationArgTypes, positionArgTypes, variantArgTypes } from '../../storiesHelpers';
 
 const meta: Meta<typeof Drawer> = {
   title: 'Component/Drawer',
