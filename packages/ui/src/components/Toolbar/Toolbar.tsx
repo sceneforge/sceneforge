@@ -10,13 +10,13 @@ export type ToolbarProps = {
 const styles = stylex.create({
   container: {
     display: "flex",
+    flexShrink: 1,
     flexDirection: "row",
     margin: 0,
     padding: 0,
     listStyle: "none",
     gap: "0.5rem",
   }
-
 });
 
 const Toolbar = ({ id, actions }: ToolbarProps) => {

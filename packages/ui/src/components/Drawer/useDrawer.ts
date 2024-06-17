@@ -67,7 +67,10 @@ export const useDrawer = ({
       element.childNodes.forEach((child) => {
         if (child instanceof HTMLDivElement) {
           child.style.pointerEvents = "auto";
-          setSize(getNumber(child.style[property]));
+          const newSize = getNumber(child.style[property]);
+          if (newSize > 0) {
+            setSize(newSize);
+          }
         }
       });
     }

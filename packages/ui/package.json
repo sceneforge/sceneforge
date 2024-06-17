@@ -9,6 +9,13 @@
     "dist",
     "README.md"
   ],
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles/*": "./dist/styles/*"
+  },
   "license": "CC0",
   "repository": {
     "type": "git",

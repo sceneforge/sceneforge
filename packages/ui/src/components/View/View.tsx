@@ -12,6 +12,7 @@ export type ViewProps = Omit<AllHTMLAttributes<HTMLDivElement>, "style" | "class
 const styles = stylex.create({
   container: {
     display: "block",
+    position: "relative",
     margin: 0,
     padding: 0,
     backgroundColor: "transparent",

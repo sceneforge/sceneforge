@@ -26,8 +26,8 @@ const styles = stylex.create({
     borderBlockEndStyle: "solid",
   },
   containerBorderAndShadow: () => ({
-    borderBlockEndColor: `color-mix(in srgb, ${color.foreground} 75%, "transparent")`,
-    boxShadow: `0 4px 6px -1px color-mix(in srgb, ${color.foreground} 30%, "transparent")`
+    borderBlockEndColor: `color-mix(in srgb, ${color.foreground} 75%, transparent)`,
+    boxShadow: `0 4px 6px -1px color-mix(in srgb, ${color.foreground} 30%, transparent)`
   }),
   content: {
     display: "flex",
