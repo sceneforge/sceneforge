@@ -1,14 +1,26 @@
-import { AppLayout, Position, TabsController, Variant } from "@sceneforge/ui";
+import {
+  AppLayout,
+  Position,
+  TabsController,
+  Variant,
+} from "@sceneforge/ui";
 
-import { HomeTab, ModelViewTab } from "../../tabs";
+import type { Database } from "../../lib/Database";
+
+import {
+  HomeTab,
+  ModelViewTab,
+} from "../../tabs";
+import { AppProvider } from "./AppProvider";
 
 export interface AppProps {
   languages?: readonly string[];
+  userData?: Database<"UserData">;
 }
 
-export const App = () => {
+export const App = ({ languages }: AppProps) => {
   return (
-    <>
+    <AppProvider languages={languages}>
       <AppLayout
         topbar={{
           title: "Scene Forge",
@@ -31,6 +43,6 @@ export const App = () => {
           variant={Variant.Default}
         />
       </AppLayout>
-    </>
+    </AppProvider>
   );
 };

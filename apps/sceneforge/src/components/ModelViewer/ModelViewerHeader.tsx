@@ -7,7 +7,6 @@ import { Model } from "../../lib/isModel";
 import { loadFile } from "../../lib/loadFile";
 import { useModelContext } from "../ModelContext";
 import { PanelSheetHeader } from "../PanelSheet";
-import { useTabPanel } from "../TabPanel";
 import { Mode } from "./mode";
 
 export type ModelViewerHeaderProps = {
@@ -33,7 +32,6 @@ export const ModelViewerHeader = ({
     [t]
   );
   const { updateModel } = useModelContext(model);
-  const { activeTab, updateTabTitle } = useTabPanel();
   const modeLabel = useMemo(() => modes[mode], [modes, mode]);
 
   const handleModeChange = useCallback(
@@ -72,16 +70,13 @@ export const ModelViewerHeader = ({
       if (model && model.id) {
         try {
           await updateModel(model.id, { title: value });
-          if (activeTab) {
-            updateTabTitle(activeTab.id, value);
-          }
         }
         catch (error) {
           console.error(error);
         }
       }
     },
-    [model, updateModel, activeTab, updateTabTitle]
+    [model, updateModel]
   );
 
   return (
