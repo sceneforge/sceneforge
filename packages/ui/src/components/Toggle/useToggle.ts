@@ -38,22 +38,20 @@ export const useToggle = ({
     return;
   }, [pressed]);
 
-  const currentLabel: string | undefined = useMemo(() => {
-    return Array.isArray(label) ? label[isPressed ? 1 : 0] : label;
-  }, [label, isPressed]);
-
-  const currentVariant: Variant | undefined = useMemo(() => {
-    return Array.isArray(variant) ? variant[isPressed ? 1 : 0] : variant;
-  }, [variant, isPressed]);
-
   const [pressedState, setPressedState] = useState<boolean>(isPressed ?? false);
 
+  const currentLabel: string | undefined = useMemo(() => {
+    return Array.isArray(label) ? label[pressedState ? 1 : 0] : label;
+  }, [label, pressedState]);
+
+  const currentVariant: Variant | undefined = useMemo(() => {
+    return Array.isArray(variant) ? variant[pressedState ? 1 : 0] : variant;
+  }, [variant, pressedState]);
+
   const handleToggle = useCallback(
-    (event?: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => {
-      if (isPressed === undefined) {
-        setPressedState(previous => !previous);
-      }
-      if (onToggle) {
+    (event?: ReactMouseEvent<HTMLButtonElement, MouseEvent>, preventBubble?: boolean) => {
+      setPressedState(previous => !previous);
+      if (!preventBubble && onToggle) {
         onToggle({
           direct: !!event,
           nativeEvent: event?.nativeEvent,
@@ -77,15 +75,23 @@ export const useToggle = ({
 
   useImperativeHandle(
     ref,
-    (): ToggleComponentRef => {
-      return {
-        button: buttonRef.current ?? undefined,
-        pressed: pressedState,
-        toggle: () => {
-          handleToggle();
-        },
-      };
-    },
+    () => new (class implements ToggleComponentRef {
+      get button() {
+        return buttonRef.current ?? undefined;
+      }
+
+      get pressed() {
+        return pressedState;
+      }
+
+      set pressed(value: boolean) {
+        setPressedState(value);
+      }
+
+      toggle(event: ReactMouseEvent<HTMLButtonElement, MouseEvent>, preventBubble?: boolean) {
+        handleToggle(event, preventBubble);
+      }
+    }),
     [buttonRef, pressedState, handleToggle]
   );
 
@@ -96,7 +102,7 @@ export const useToggle = ({
     else if (isPressed === false) {
       setPressedState(false);
     }
-  }, [isPressed, setPressedState]);
+  }, [isPressed]);
 
   return {
     handleClickEvent,

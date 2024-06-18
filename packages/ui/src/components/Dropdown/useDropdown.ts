@@ -1,30 +1,25 @@
-import { useCallback, useId, useImperativeHandle, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
 import type { DropdownProps } from "./Dropdown"
-import { ToggleComponentRef, type ToggleEvent } from "../Toggle";
+import type { ToggleComponentRef, ToggleEvent } from "../Toggle";
 import { ActionProps } from "../Action";
 
 type UseDropdownProps = {
   actions?: DropdownProps["actions"],
   id?: DropdownProps["id"],
-  ref?: DropdownProps["ref"],
+  parentDropdownId?: DropdownProps["parentDropdownId"],
 };
 
-export const useDropdown = ({ ref, actions, id }: UseDropdownProps) => {
+export const useDropdown = ({ parentDropdownId, actions, id }: UseDropdownProps) => {
+  const generatedId = useId();
   const toggleRef = useRef<ToggleComponentRef>(null);
-  const [currentState, setCurrentState] = useState<"opened" | "closed">("closed");
-  const currentId = useMemo(() => id ?? useId(), [id]);
+  const actionListRef = useRef<HTMLUListElement>(null);
+  const currentId = useMemo(() => id ?? generatedId, [id, generatedId]);
   const currentListId = useMemo(() => `${currentId}-list`, [currentId]);
+  const [currentState, setCurrentState] = useState<"closed" | "opened">("closed");
 
-  const onToggle = useCallback((toggleEvent: ToggleEvent) => {
-    if (toggleEvent.state === "pressed") {
-      setCurrentState("opened");
-    } else {
-      setCurrentState("closed");
-    }
-  }, []);
-
-  const actionList = useMemo(() => {
-    return actions?.map(({ type, ...props }) => {
+  const currentActions = useMemo(() => {
+    if (!actions) return [];
+    return actions.map(({ type, ...props }) => {
       if (type === "dropdown") {
         return {
           type, ...props,
@@ -38,23 +33,45 @@ export const useDropdown = ({ ref, actions, id }: UseDropdownProps) => {
     });
   }, [actions, currentListId]);
 
-  useImperativeHandle(ref, () => ({
-    button: toggleRef.current?.button,
-    pressed: toggleRef.current?.pressed ?? false,
-    toggle: () => {
-      if (toggleRef.current?.toggle) {
-        toggleRef.current.toggle();
-        setCurrentState((currentState) => currentState === "opened" ? "closed" : "opened");
+  const triggerPrimaryToggle = useCallback(() => {
+    if (toggleRef.current) {
+      toggleRef.current.toggle(undefined, true);
+    }
+  }, [toggleRef]);
+
+  const isActionListOpen = useCallback(() => {
+    return actionListRef.current?.matches(":popover-open") ?? false;
+  }, [actionListRef]);
+
+  const handleToggleEvent = useCallback((event: ToggleEvent) => {
+    if (event.state === "pressed") {
+      if (!isActionListOpen()) {
+        setCurrentState("opened");
+      } else {
+        triggerPrimaryToggle();
       }
-    },
-  }), [toggleRef]);
+    } else {
+      if (isActionListOpen()) {
+        setCurrentState("closed");
+      } else {
+        triggerPrimaryToggle();
+      }
+    }
+  }, [isActionListOpen, triggerPrimaryToggle]);
+
+  useEffect(() => {
+    if (toggleRef.current && toggleRef.current.pressed) {
+      setCurrentState("opened");
+    }
+  }, [toggleRef]);
 
   return {
     currentState,
     currentId,
     currentListId,
     toggleRef,
-    onToggle,
-    actionList,
+    currentActions,
+    actionListRef,
+    handleToggleEvent,
   };
 };

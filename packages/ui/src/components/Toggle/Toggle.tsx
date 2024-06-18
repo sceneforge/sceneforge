@@ -14,10 +14,11 @@ export type ToggleEvent = {
   type: "toggle";
 };
 
-export type ToggleComponentRef = {
-  button?: HTMLButtonElement;
-  pressed?: boolean;
-  toggle?: () => void;
+export interface ToggleComponentRef {
+  get button(): HTMLButtonElement | undefined;
+  get pressed(): boolean;
+  set pressed(value: boolean);
+  toggle(event?: ReactMouseEvent<HTMLButtonElement, MouseEvent>, preventBubble?: boolean): void;
 };
 
 export type ToggleProps = Omit<ButtonProps, "ref" | "onToggle"> & {
