@@ -1,7 +1,6 @@
-import { Button, Variant } from "@sceneforge/ui";
+import { Button, Dialog, Variant } from "@sceneforge/ui";
 import { useCallback, useState } from "react";
 
-import { Dialog } from "../Dialog";
 import { Image } from "../Image";
 
 export type ImageDialogProps = {
@@ -21,7 +20,6 @@ export const ImageDialog = ({ alt, src, title }: ImageDialogProps) => {
   return (
     <>
       <Button
-        className="m-0 inline w-full cursor-pointer b-0 bg-transparent p-0"
         onClick={handleImageDialogClick}
       >
         <Image

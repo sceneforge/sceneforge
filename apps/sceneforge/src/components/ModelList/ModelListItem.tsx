@@ -1,8 +1,7 @@
-import { Card, Variant } from "@sceneforge/ui";
+import { Card, Dialog, IconEnum, Variant } from "@sceneforge/ui";
 import { useTranslation } from "react-i18next";
 
 import { type Model } from "../../lib/isModel";
-import { Dialog } from "../Dialog";
 import { useModelListItem } from "./useModelListItem";
 
 export type ModelListItemProps = {
@@ -29,7 +28,7 @@ export const ModelListItem = ({ model }: ModelListItemProps) => {
             variant: Variant.Accent,
           },
           {
-            icon: "delete",
+            icon: IconEnum.Delete,
             label: t("ModelListItem.actions.deleteButton"),
             onClick: openDeleteModelDialog,
             type: "icon",
@@ -63,8 +62,6 @@ export const ModelListItem = ({ model }: ModelListItemProps) => {
                 variant: Variant.Danger,
               },
             ],
-            contrast: false,
-            withDropdown: false,
           }}
           variant={Variant.Danger}
         />

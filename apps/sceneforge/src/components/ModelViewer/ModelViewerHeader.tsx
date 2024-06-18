@@ -1,4 +1,4 @@
-import { Variant } from "@sceneforge/ui";
+import { Toolbar } from "@sceneforge/ui";
 import { fileOpen } from "browser-fs-access";
 import { Dispatch, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,6 @@ import { loadFile } from "../../lib/loadFile";
 import { useModelContext } from "../ModelContext";
 import { PanelSheetHeader } from "../PanelSheet";
 import { useTabPanel } from "../TabPanel";
-import { Toolbar } from "../Toolbar";
 import { Mode } from "./mode";
 
 export type ModelViewerHeaderProps = {
@@ -93,7 +92,6 @@ export const ModelViewerHeader = ({
       title={model?.title ?? t("ModelViewerHeader.untitled")}
     >
       <Toolbar
-        actionListVariant={Variant.Default}
         // icon="menu"
         actions={[
           {

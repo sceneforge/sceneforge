@@ -5,6 +5,7 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import json from '@rollup/plugin-json';
 import stylexPlugin from '@stylexjs/rollup-plugin';
 import copy from "rollup-plugin-copy";
+import { cleandir } from "rollup-plugin-cleandir";
 
 export default {
   input: "src/index.ts",
@@ -16,13 +17,14 @@ export default {
   },
   strictDeprecations: true,
   plugins: [
+    cleandir("dist"),
     peerDepsExternal(),
     json(),
     resolve(),
     commonjs(),
     typescript({
       tsconfig: "./tsconfig.build.json",
-      exclude: ["**/*.stories.tsx", "**/*.test.tsx", "**/*.test.ts", "**/*.stories.ts", "**/*.spec.ts", "**/*.spec.tsx"],
+      exclude: ["**/*.stories.tsx", "**/*.test.tsx", "**/*.test.ts", "**/*.stories.ts", "**/*.spec.ts", "**/*.spec.tsx", "dist/**/*", "node_modules/**/*"],
     }),
     stylexPlugin({
       fileName: 'styles/components.css',

@@ -11,7 +11,7 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ["packages/**/*", "node_modules/**/*", ".yarn/**/*", "dist/**/*"],
+    ignores: ["apps/**/*", "packages/**/*", "node_modules/**/*", ".yarn/**/*", "dist/**/*"],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,

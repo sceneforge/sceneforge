@@ -1,7 +1,18 @@
+import "@sceneforge/ui/styles/main.css";
+
 import { render, withRoot, withUserData } from "./root";
-import "./styles/window-overlay.css";
 
 try {
+  await withRoot((root) => {
+    root.style.width = "100dvw";
+    root.style.height = "100dvh";
+    root.style.maxWidth = "100dvw";
+    root.style.maxHeight = "100dvh";
+    root.style.minWidth = "100dvw";
+    root.style.minHeight = "100dvh";
+    root.style.overflow = "hidden";
+  });
+
   await render();
 
   await withUserData(async (userData) => {
@@ -12,21 +23,6 @@ try {
         return;
       }
     }
-  });
-
-  await withRoot((root) => {
-    root.classList.add(
-      "h-100vh",
-      "w-100vw",
-      "flex",
-      "select-none",
-      "text-center",
-      "overflow-hidden",
-      "font-sans",
-      "bg-primary:50",
-      "dark:text-light",
-      "light:text-dark"
-    );
   });
 }
 catch (error) {

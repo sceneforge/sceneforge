@@ -9,7 +9,7 @@ type UseDropdownProps = {
   parentDropdownId?: DropdownProps["parentDropdownId"],
 };
 
-export const useDropdown = ({ parentDropdownId, actions, id }: UseDropdownProps) => {
+export const useDropdown = ({ actions, id }: UseDropdownProps) => {
   const generatedId = useId();
   const toggleRef = useRef<ToggleComponentRef>(null);
   const actionListRef = useRef<HTMLUListElement>(null);

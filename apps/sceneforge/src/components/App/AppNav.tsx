@@ -1,4 +1,4 @@
-import { type ToolbarProps, Topbar } from "@sceneforge/ui";
+import { type ToolbarProps, Topbar, Variant } from "@sceneforge/ui";
 import { useTranslation } from "react-i18next";
 
 import { useShortcuts } from "../../hooks/useShortcuts";
@@ -47,6 +47,7 @@ export const AppNav = () => {
     <Topbar
       title={appTitle ?? t("App.defaultAppTitle")}
       toolbarEnd={toolbarEnd}
+      variant={Variant.Default}
     />
   );
 };

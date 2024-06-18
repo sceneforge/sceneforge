@@ -28,12 +28,14 @@
     "url": "https://phinpho.github.io/"
   },
   "scripts": {
-    "prepack": "tsc --project tsconfig.build.json",
-    "build:css": "yarn unocss --config unocss.config.ts './dist/index.js' -o './dist/main.css'",
+    "prepack": "yarn build",
     "build": "yarn rollup --config rollup.config.mjs",
     "storybook": "storybook dev -p 6006",
     "storybook:docs": "storybook dev --docs",
     "storybook:build": "storybook build"
+  },
+  "dependencies": {
+    "@stylexjs/stylex": "^0.6.1"
   },
   "peerDependencies": {
     "react": "*",
@@ -55,7 +57,6 @@
     "@storybook/test": "^8.1.6",
     "@stylexjs/dev-runtime": "^0.6.1",
     "@stylexjs/rollup-plugin": "^0.6.1",
-    "@stylexjs/stylex": "^0.6.1",
     "@types/node": "*",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",
@@ -63,6 +64,7 @@
     "react": "*",
     "react-dom": "*",
     "rollup": "^4.18.0",
+    "rollup-plugin-cleandir": "^2.0.0",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "storybook": "^8.1.6",
