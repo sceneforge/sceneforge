@@ -1,21 +1,28 @@
 import { MouseEventHandler, useCallback, useMemo, useState } from "react";
+
 import type { TreeNodeProps } from "./TreeNode";
 
 export type UseTreeProps = {
-  nodes?: Omit<TreeNodeProps, "treeId" | "level" | "index">[] | (() => Omit<TreeNodeProps, "treeId" | "level" | "index">[]);
-  onClick?: MouseEventHandler<HTMLButtonElement>;
   initialExpanded?: boolean;
+  nodes?: (() => Omit<TreeNodeProps, "index" | "level" | "treeId">[]) | Omit<TreeNodeProps, "index" | "level" | "treeId">[];
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-export const useTree = ({ initialExpanded = false, nodes, onClick }: UseTreeProps) => {
+export const useTree = ({
+  initialExpanded = false,
+  nodes,
+  onClick,
+}: UseTreeProps) => {
   const [expanded, setExpanded] = useState(initialExpanded);
 
   const nodesArray = useMemo(() => {
     if (Array.isArray(nodes)) {
       return nodes;
-    } else if (typeof nodes === "function") {
+    }
+    else if (typeof nodes === "function") {
       return nodes();
-    } else {
+    }
+    else {
       return [];
     }
   }, [nodes]);
@@ -23,23 +30,25 @@ export const useTree = ({ initialExpanded = false, nodes, onClick }: UseTreeProp
   const hasNodes = useMemo(() => nodesArray.length > 0, [nodesArray]);
 
   const toggleExpand = useCallback(() => {
-    setExpanded((prev) => !prev);
+    setExpanded(previous => !previous);
   }, []);
 
-  const handleNodeClick: MouseEventHandler<HTMLButtonElement> = useCallback((ev) => {
+  const handleNodeClick: MouseEventHandler<
+    HTMLButtonElement
+  > = useCallback((event) => {
     if (!expanded) {
       toggleExpand();
     }
     if (onClick) {
-      return onClick(ev);
+      return onClick(event);
     }
-  }, [expanded, onClick]);
+  }, [expanded, onClick, toggleExpand]);
 
   return {
     expanded,
-    toggleExpand,
     handleNodeClick,
     hasNodes,
     nodesArray,
-  }
-}
+    toggleExpand,
+  };
+};

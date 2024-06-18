@@ -1,18 +1,18 @@
 import { Variant } from "../types";
 
-export const variantArgTypes = (prop: string) => ({
-  [prop]: {
+export const variantArgTypes = (property: string) => ({
+  [property]: {
     control: {
-      type: 'select',
       labels: {
-        "": '-- None',
-        [Variant.Default]: 'Default',
-        [Variant.Accent]: 'Accent',
-        [Variant.Danger]: 'Danger',
-        [Variant.Info]: 'Info',
-        [Variant.Success]: 'Success',
-        [Variant.Warning]: 'Warning',
-      }
+        "": "-- None",
+        [Variant.Accent]: "Accent",
+        [Variant.Danger]: "Danger",
+        [Variant.Default]: "Default",
+        [Variant.Info]: "Info",
+        [Variant.Success]: "Success",
+        [Variant.Warning]: "Warning",
+      },
+      type: "select",
     },
     options: [
       "", // This is the default value
@@ -23,5 +23,5 @@ export const variantArgTypes = (prop: string) => ({
       Variant.Success,
       Variant.Warning,
     ],
-  }
+  },
 });

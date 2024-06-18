@@ -1,4 +1,5 @@
-import { lazy, type PropsWithChildren } from "react";
+import { type PropsWithChildren, lazy } from "react";
+
 import { Orientation } from "../../types";
 import { useSplitPane } from "./useSplitPane";
 
@@ -18,8 +19,8 @@ const SplitPaneController = ({
 
   return (
     <SplitPane
-      ref={splitPaneRef}
       orientation={orientation}
+      ref={splitPaneRef}
       resizable={resizable}
     >
       {children}

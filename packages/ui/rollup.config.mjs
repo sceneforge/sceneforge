@@ -1,21 +1,20 @@
 import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import json from '@rollup/plugin-json';
-import stylexPlugin from '@stylexjs/rollup-plugin';
-import copy from "rollup-plugin-copy";
+import stylexPlugin from "@stylexjs/rollup-plugin";
 import { cleandir } from "rollup-plugin-cleandir";
+import copy from "rollup-plugin-copy";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
 export default {
   input: "src/index.ts",
   output: {
+    compact: true,
     dir: "dist",
     format: "esm",
-    compact: true,
     validate: true,
   },
-  strictDeprecations: true,
   plugins: [
     cleandir("dist"),
     peerDepsExternal(),
@@ -23,24 +22,25 @@ export default {
     resolve(),
     commonjs(),
     typescript({
-      tsconfig: "./tsconfig.build.json",
       exclude: ["**/*.stories.tsx", "**/*.test.tsx", "**/*.test.ts", "**/*.stories.ts", "**/*.spec.ts", "**/*.spec.tsx", "dist/**/*", "node_modules/**/*"],
+      tsconfig: "./tsconfig.build.json",
     }),
     stylexPlugin({
-      fileName: 'styles/components.css',
+      classNamePrefix: "sf-",
       dev: false,
-      useRemForFontSize: true,
-      classNamePrefix: 'sf-',
+      fileName: "styles/components.css",
       unstable_moduleResolution: {
-        type: 'commonJS',
-        rootDir: process.cwd(),
+        rootDir: globalThis.process.cwd(),
+        type: "commonJS",
       },
+      useRemForFontSize: true,
     }),
     copy({
       targets: [
-        { src: 'src/styles/**/*.css', dest: 'dist/styles' },
+        { dest: "dist/styles", src: "src/styles/**/*.css" },
       ],
       verbose: true,
     }),
   ],
+  strictDeprecations: true,
 };

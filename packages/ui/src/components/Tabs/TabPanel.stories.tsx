@@ -1,14 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import TabPanel from './TabPanel';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import TabPanel from "./TabPanel";
 
 const meta: Meta<typeof TabPanel> = {
-  title: 'Component/Tabs/TabPanel',
-  component: TabPanel,
   argTypes: {
     tabId: {
-      control: 'text'
+      control: "text",
     },
-  }
+  },
+  component: TabPanel,
+  title: "Component/Tabs/TabPanel",
 };
 
 type Story = StoryObj<typeof meta>;

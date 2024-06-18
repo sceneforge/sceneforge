@@ -1,13 +1,13 @@
 import { Position } from "../types";
 
-export const positionArgTypes = (prop: string) => ({
-  [prop]: {
+export const positionArgTypes = (property: string) => ({
+  [property]: {
     control: {
-      type: 'select',
       labels: {
-        [Position.Start]: 'Start',
-        [Position.End]: 'End',
+        [Position.End]: "End",
+        [Position.Start]: "Start",
       },
+      type: "select",
     },
     options: [
       Position.Start,

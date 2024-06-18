@@ -1,60 +1,64 @@
+import type { StyleXStyles } from "@stylexjs/stylex";
+
+import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren } from "react";
-import * as stylex from '@stylexjs/stylex';
-import type { StyleXStyles } from '@stylexjs/stylex';
-import { titleBar } from "../tokens.stylex";
+
 import { Topbar, type TopbarProps } from "../Topbar";
 import { View } from "../View";
+import { titleBar } from "../tokens.stylex";
 
 const styles = stylex.create({
   container: {
     boxSizing: "border-box",
+    height: stylex.firstThatWorks("100dvh", "100vh", "100%"),
     margin: 0,
+    maxHeight: stylex.firstThatWorks("100dvh", "100vh", "100%"),
+    maxWidth: stylex.firstThatWorks("100dvw", "100vw", "100%"),
+    minHeight: stylex.firstThatWorks("100dvh", "100vh", "100%"),
+    minWidth: stylex.firstThatWorks("100dvw", "100vw", "100%"),
+    overflow: "hidden",
     padding: 0,
     position: "relative",
-    overflow: "hidden",
     width: stylex.firstThatWorks("100dvw", "100vw", "100%"),
-    height: stylex.firstThatWorks("100dvh", "100vh", "100%"),
-    minWidth: stylex.firstThatWorks("100dvw", "100vw", "100%"),
-    minHeight: stylex.firstThatWorks("100dvh", "100vh", "100%"),
-    maxWidth: stylex.firstThatWorks("100dvw", "100vw", "100%"),
-    maxHeight: stylex.firstThatWorks("100dvh", "100vh", "100%"),
   },
   embedded: {
-    width: "100%",
     height: "100%",
-    minWidth: "100%",
-    minHeight: "100%",
-    maxWidth: "100%",
     maxHeight: "100%",
+    maxWidth: "100%",
+    minHeight: "100%",
+    minWidth: "100%",
+    width: "100%",
+  },
+  main: {
+    height: "100%",
+    overflow: "hidden",
+    width: "100%",
   },
   topbar: {
     paddingTop: titleBar.appTitleBarHeight,
   },
-  main: {
-    width: "100%",
-    height: "100%",
-    overflow: "hidden",
-  }
 });
 
 export type AppLayoutProps = PropsWithChildren<{
   embedded?: boolean;
-  topbar?: TopbarProps;
   style?: StyleXStyles;
+  topbar?: TopbarProps;
 }>;
 
 const AppLayout = ({
-  embedded = false,
-  topbar,
   children,
+  embedded = false,
   style,
+  topbar,
 }: AppLayoutProps) => {
   return (
     <View {...stylex.props(
       styles.container,
       embedded && styles.embedded,
-      style)
-    }>
+      style
+    )
+    }
+    >
       {topbar && (<Topbar {...topbar} />)}
       <main {...stylex.props(styles.main, !!topbar && styles.topbar)}>
         {children}

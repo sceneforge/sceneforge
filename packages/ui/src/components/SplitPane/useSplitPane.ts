@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
-import { Orientation } from "../../types";
-import { forEachChildren, updateElementsSizeByMovement, updatePointerEventStyle } from "../../helpers";
+
+import {
+  forEachChildren,
+  updateElementsSizeByMovement,
+  updatePointerEventStyle,
+} from "../../helpers";
 import { swapOrientation } from "../../helpers/swapOrientation";
+import { Orientation } from "../../types";
 
 export type UseSplitPaneProps = {
   orientation?: Orientation;
@@ -15,9 +20,9 @@ export const useSplitPane = ({
   const splitPaneRef = useRef<HTMLDivElement>(null);
   const resizeElementStart = useRef<HTMLDivElement | null>(null);
   const resizeElementEnd = useRef<HTMLDivElement | null>(null);
-  const property = useMemo(() => orientation === Orientation.Horizontal ? 'width' : 'height', [orientation]);
+  const property = useMemo(() => orientation === Orientation.Horizontal ? "width" : "height", [orientation]);
 
-  const prepareResizableElementsStyle = useCallback((pointerStyle: "none" | "" = "") => {
+  const prepareResizableElementsStyle = useCallback((pointerStyle: "" | "none" = "") => {
     updatePointerEventStyle(resizeElementStart.current, pointerStyle);
     updatePointerEventStyle(resizeElementEnd.current, pointerStyle);
     if (pointerStyle === "") {
@@ -44,35 +49,56 @@ export const useSplitPane = ({
   }, [property, splitPaneRef, resizeElementStart, resizeElementEnd]);
 
   const extractResizableElements = useCallback((target: HTMLElement) => {
-    if (splitPaneRef.current && target.dataset.resizeIdStart !== undefined && target.dataset.resizeIdEnd !== undefined) {
+    if (
+      splitPaneRef.current
+      && target.dataset.resizeIdStart !== undefined
+      && target.dataset.resizeIdEnd !== undefined
+    ) {
       forEachChildren<HTMLDivElement>(splitPaneRef.current, (child) => {
         if (child.id === target.dataset.resizeIdStart) {
           resizeElementStart.current = child;
-        } else if (child.id === target.dataset.resizeIdEnd) {
+        }
+        else if (child.id === target.dataset.resizeIdEnd) {
           resizeElementEnd.current = child;
         }
-      }, (child) => child instanceof HTMLDivElement && child.hasAttribute("id"));
+      }, child => child instanceof HTMLDivElement && child.hasAttribute("id"));
     }
   }, [splitPaneRef, resizeElementStart, resizeElementEnd]);
 
   const isGutterElement = useCallback((element: HTMLElement) => {
-    if (splitPaneRef.current && resizable && element.parentElement === splitPaneRef.current) {
-      return element.dataset.resizeIdStart !== undefined && element.dataset.resizeIdEnd !== undefined;
+    if (
+      splitPaneRef.current
+      && resizable
+      && element.parentElement === splitPaneRef.current
+    ) {
+      return (
+        element.dataset.resizeIdStart !== undefined
+        && element.dataset.resizeIdEnd !== undefined
+      );
     }
     return false;
   }, [splitPaneRef, resizable]);
 
   const updateGuttersAriaValueNow = useCallback(() => {
     if (splitPaneRef.current) {
-      const position = property === 'width' ? 'left' : 'top';
-      const { [property]: size, [position]: parentPosition } = splitPaneRef.current.getBoundingClientRect();
+      const position = property === "width" ? "left" : "top";
+      const {
+        [position]: parentPosition,
+        [property]: size,
+      } = splitPaneRef.current.getBoundingClientRect();
       forEachChildren(
         splitPaneRef.current,
         (child) => {
           const childPosition = child.getBoundingClientRect()[position];
           child.ariaValueNow = `${((childPosition - parentPosition) / size) * 100}`;
         },
-        (child) => child instanceof HTMLElement && child.dataset.resizeIdStart !== undefined && child.dataset.resizeIdEnd !== undefined
+        (child) => {
+          return (
+            child instanceof HTMLElement
+            && child.dataset.resizeIdStart !== undefined
+            && child.dataset.resizeIdEnd !== undefined
+          );
+        }
       );
     }
   }, [splitPaneRef, property]);
@@ -84,13 +110,19 @@ export const useSplitPane = ({
       updatePointerEventStyle(splitPaneRef.current, "auto");
       prepareResizableElementsStyle("none");
     }
-  }, [splitPaneRef]);
+  }, [
+    splitPaneRef,
+    adjustChildrenSize,
+    extractResizableElements,
+    isGutterElement,
+    prepareResizableElementsStyle,
+  ]);
 
   const handlePointerUp = useCallback(() => {
     updatePointerEventStyle(splitPaneRef.current, "");
     prepareResizableElementsStyle();
     updateGuttersAriaValueNow();
-  }, [splitPaneRef]);
+  }, [splitPaneRef, prepareResizableElementsStyle, updateGuttersAriaValueNow]);
 
   const handlePointerMove = useCallback((event: PointerEvent) => {
     if (
@@ -101,24 +133,30 @@ export const useSplitPane = ({
     ) {
       updateElementsSizeByMovement(
         property,
-        property === 'width' ? event.movementX : event.movementY,
+        property === "width" ? event.movementX : event.movementY,
         splitPaneRef.current,
         resizeElementStart.current,
-        resizeElementEnd.current,
+        resizeElementEnd.current
       );
     }
   }, [property, resizeElementStart, resizeElementEnd, splitPaneRef, resizable]);
 
-  const swapChildrenOrientation = useCallback((withOrientation = Orientation.Horizontal) => {
+  const swapChildrenOrientation = useCallback((
+    withOrientation = Orientation.Horizontal
+  ) => {
     if (splitPaneRef.current && resizable) {
-      forEachChildren(splitPaneRef.current,
-        (child) => swapOrientation(child, withOrientation),
-        (child) => child instanceof HTMLDivElement &&
-          child.dataset.resizeIdStart === undefined &&
-          child.dataset.resizeIdEnd === undefined
+      forEachChildren(
+        splitPaneRef.current,
+        (child) => {
+          return swapOrientation(child, withOrientation);
+        },
+        (child) => {
+          return (child instanceof HTMLDivElement
+            && child.dataset.resizeIdStart === undefined
+            && child.dataset.resizeIdEnd === undefined);
+        }
       );
     }
-
   }, [resizable, splitPaneRef]);
 
   useEffect(() => {
@@ -134,11 +172,19 @@ export const useSplitPane = ({
         element.removeEventListener("pointerdown", handlePointerDown);
         element.removeEventListener("pointerup", handlePointerUp);
         element.removeEventListener("pointermove", handlePointerMove);
-      }
+      };
     }
-  }, [resizable, splitPaneRef, orientation]);
+  }, [
+    resizable,
+    splitPaneRef,
+    orientation,
+    swapChildrenOrientation,
+    handlePointerDown,
+    handlePointerUp,
+    handlePointerMove,
+  ]);
 
   return {
-    splitPaneRef
+    splitPaneRef,
   };
 };

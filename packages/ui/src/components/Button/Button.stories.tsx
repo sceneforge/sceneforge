@@ -1,23 +1,24 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Button from './Button';
-import { variantArgTypes } from '../../storiesHelpers';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import Button from "./Button";
 
 const meta: Meta<typeof Button> = {
-  title: 'Component/Button',
-  component: Button,
   argTypes: {
     children: {
-      control: 'text',
+      control: "text",
     },
-    ...variantArgTypes('variant'),
+    ...variantArgumentTypes("variant"),
   },
+  component: Button,
   decorators: [
-    (Story) => (
+    Story => (
       <div style={{ padding: "1rem" }}>
         <Story />
       </div>
-    )
-  ]
+    ),
+  ],
+  title: "Component/Button",
 };
 
 type Story = StoryObj<typeof meta>;

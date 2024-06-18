@@ -1,30 +1,31 @@
 import * as stylex from "@stylexjs/stylex";
+
 import { ActionList, type ActionListProps } from "../ActionList";
 import { Toggle, type ToggleProps } from "../Toggle";
 import { useDropdown } from "./useDropdown";
 
-export type DropdownProps = Omit<ToggleProps, "onToggle" | "pressed"> & {
-  parentDropdownId?: string;
-  actions?: ActionListProps["actions"];
+export type DropdownProps = {
   actionListVariant?: ActionListProps["variant"];
-};
+  actions?: ActionListProps["actions"];
+  parentDropdownId?: string;
+} & Omit<ToggleProps, "onToggle" | "pressed">;
 
 const styles = stylex.create({
   container: (id: string) => ({
     anchorName: `--dropdown-anchor-${id.replaceAll(":", "-")}`,
   } as Record<string, string>),
-  popoverAnchor: (id: string) => ({
-    positionAnchor: `--dropdown-anchor-${id.replaceAll(":", "-")}`,
-  } as Record<string, string>),
-  subPopoverAnchor: {
-    top: "anchor(top)",
-    left: "anchor(right)",
-  },
   popover: {
     position: "absolute",
-    top: "anchor(bottom)",
-    left: "anchor(left)",
-  }
+  },
+  popoverAnchor: (id: string) => ({
+    left: (
+      id ? "anchor(right)" : "anchor(left)"
+    ),
+    positionAnchor: `--dropdown-anchor-${id.replaceAll(":", "-")}`,
+    top: (
+      id ? "anchor(top)" : "anchor(bottom)"
+    ),
+  } as Record<string, string>),
 });
 
 const Dropdown = ({
@@ -32,18 +33,17 @@ const Dropdown = ({
   actions,
   id,
   parentDropdownId,
-  ref,
   ...props
 }: DropdownProps) => {
   const {
+    actionListRef,
+    currentActions,
     currentId,
     currentListId,
     currentState,
-    toggleRef,
-    currentActions,
-    actionListRef,
     handleToggleEvent,
-  } = useDropdown({ parentDropdownId, id, actions });
+    toggleRef,
+  } = useDropdown({ actions, id, parentDropdownId });
 
   return (
     <>
@@ -57,17 +57,16 @@ const Dropdown = ({
         style={[styles.container(currentId)]}
       />
       <ActionList
+        actions={currentActions}
         anchor={parentDropdownId}
         id={currentListId}
         popover="auto"
-        actions={currentActions}
-        variant={actionListVariant}
         ref={actionListRef}
         style={[
           styles.popover,
-          parentDropdownId && (styles.subPopoverAnchor as any),
-          styles.popoverAnchor(currentId)
+          styles.popoverAnchor(currentId),
         ]}
+        variant={actionListVariant}
       />
     </>
   );

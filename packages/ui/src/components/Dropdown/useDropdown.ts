@@ -1,12 +1,14 @@
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
-import type { DropdownProps } from "./Dropdown"
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+
 import type { ToggleComponentRef, ToggleEvent } from "../Toggle";
+import type { DropdownProps } from "./Dropdown";
+
 import { ActionProps } from "../Action";
 
 type UseDropdownProps = {
-  actions?: DropdownProps["actions"],
-  id?: DropdownProps["id"],
-  parentDropdownId?: DropdownProps["parentDropdownId"],
+  actions?: DropdownProps["actions"];
+  id?: DropdownProps["id"];
+  parentDropdownId?: DropdownProps["parentDropdownId"];
 };
 
 export const useDropdown = ({ actions, id }: UseDropdownProps) => {
@@ -29,7 +31,7 @@ export const useDropdown = ({ actions, id }: UseDropdownProps) => {
 
       return {
         type, ...props,
-      } as ActionProps
+      } as ActionProps;
     });
   }, [actions, currentListId]);
 
@@ -45,15 +47,18 @@ export const useDropdown = ({ actions, id }: UseDropdownProps) => {
 
   const handleToggleEvent = useCallback((event: ToggleEvent) => {
     if (event.state === "pressed") {
-      if (!isActionListOpen()) {
-        setCurrentState("opened");
-      } else {
+      if (isActionListOpen()) {
         triggerPrimaryToggle();
       }
-    } else {
+      else {
+        setCurrentState("opened");
+      }
+    }
+    else {
       if (isActionListOpen()) {
         setCurrentState("closed");
-      } else {
+      }
+      else {
         triggerPrimaryToggle();
       }
     }
@@ -66,12 +71,12 @@ export const useDropdown = ({ actions, id }: UseDropdownProps) => {
   }, [toggleRef]);
 
   return {
-    currentState,
+    actionListRef,
+    currentActions,
     currentId,
     currentListId,
-    toggleRef,
-    currentActions,
-    actionListRef,
+    currentState,
     handleToggleEvent,
+    toggleRef,
   };
 };

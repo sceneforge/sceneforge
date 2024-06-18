@@ -7,7 +7,8 @@ export const swapOrientation = (
   if (orientation === Orientation.Horizontal) {
     element.style.width = element.style.height;
     element.style.height = "";
-  } else {
+  }
+  else {
     element.style.height = element.style.width;
     element.style.width = "";
   }

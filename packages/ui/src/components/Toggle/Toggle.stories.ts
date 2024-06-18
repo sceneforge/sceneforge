@@ -1,16 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Toggle from './Toggle';
-import { variantArgTypes } from '../../storiesHelpers';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import Toggle from "./Toggle";
 
 const meta: Meta<typeof Toggle> = {
-  title: 'Component/Toggle',
-  component: Toggle,
   argTypes: {
     children: {
-      control: 'text',
+      control: "text",
     },
-    ...variantArgTypes('variant'),
-  }
+    ...variantArgumentTypes("variant"),
+  },
+  component: Toggle,
+  title: "Component/Toggle",
 };
 
 type Story = StoryObj<typeof meta>;

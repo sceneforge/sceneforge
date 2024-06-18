@@ -1,57 +1,59 @@
 import * as stylex from "@stylexjs/stylex";
 import { lazy } from "react";
+
 import type { TabProps } from "./Tab";
-import { type TabPanelProps } from "./TabPanel";
+
 import { Align, Orientation, Position, Variant } from "../../types";
-import { backgroundColor, color } from "../tokens.stylex";
 import { View } from "../View";
+import { backgroundColor, color } from "../tokens.stylex";
+import { type TabPanelProps } from "./TabPanel";
 
 const TabList = lazy(() => import("./TabList"));
 const TabPanel = lazy(() => import("./TabPanel"));
 
 export type TabContent = {
-  tab: Omit<TabProps, "onTabChange" | "active">;
-  panel: Omit<TabPanelProps, "tabId" | "hidden">;
+  panel: Omit<TabPanelProps, "hidden" | "tabId">;
+  tab: Omit<TabProps, "active" | "onTabChange">;
 };
 
 export type TabsProps = {
+  activeTabId?: string;
+  align?: Align;
+  closeable?: boolean;
+  content: TabContent[];
   id?: string;
   label?: string;
-  content: TabContent[];
-  closeable?: boolean;
-  variant?: Variant;
-  orientation?: Orientation;
-  position?: Position;
-  align?: Align;
-  activeTabId?: string;
   onTabChange?: (id: string) => void;
   onTabClose?: (id: string) => void;
+  orientation?: Orientation;
+  position?: Position;
+  variant?: Variant;
 };
 
 const styles = stylex.create({
   container: {
-    width: "100%",
-    height: "100%",
     display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    justifyContent: "stretch",
     margin: 0,
     padding: 0,
-    justifyContent: "stretch",
-    flexDirection: "column",
+    width: "100%",
+  },
+  content: {
+    backgroundColor: backgroundColor.alpha75,
+    color: color.foreground,
+    display: "block",
+    flexGrow: 1,
   },
   tabsBlockEnd: {
     flexDirection: "row-reverse",
   },
-  tabsInlineStart: {
-    flexDirection: "row",
-  },
   tabsInlineEnd: {
     flexDirection: "row-reverse",
   },
-  content: {
-    display: "block",
-    flexGrow: 1,
-    color: color.foreground,
-    backgroundColor: backgroundColor.alpha75
+  tabsInlineStart: {
+    flexDirection: "row",
   },
   variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
     backgroundColor: color[background],
@@ -60,46 +62,58 @@ const styles = stylex.create({
 });
 
 const Tabs = ({
-  id,
-  label,
+  activeTabId,
+  align = Align.Start,
   closeable,
   content,
-  variant,
-  orientation = Orientation.Horizontal,
-  position = Position.Start,
-  align = Align.Start,
-  activeTabId,
+  id,
+  label,
   onTabChange,
   onTabClose,
+  orientation = Orientation.Horizontal,
+  position = Position.Start,
+  variant,
 }: TabsProps) => {
   return (
     <View
       id={id}
-      variant={variant}
       style={[
         styles.container,
-        orientation === Orientation.Horizontal && position === Position.End && styles.tabsBlockEnd,
-        orientation === Orientation.Vertical && position === Position.Start && styles.tabsInlineStart,
-        orientation === Orientation.Vertical && position === Position.End && styles.tabsInlineEnd,
+        (
+          orientation === Orientation.Horizontal
+          && position === Position.End
+          && styles.tabsBlockEnd
+        ),
+        (
+          orientation === Orientation.Vertical
+          && position === Position.Start
+          && styles.tabsInlineStart
+        ),
+        (
+          orientation === Orientation.Vertical
+          && position === Position.End
+          && styles.tabsInlineEnd
+        ),
       ]}
+      variant={variant}
     >
       <TabList
-        label={label}
-        tabs={content.map(({ tab }) => tab)}
         activeTabId={activeTabId}
+        align={align}
+        closeable={closeable}
+        label={label}
         onTabChange={onTabChange}
         onTabClose={onTabClose}
-        closeable={closeable}
         orientation={orientation}
-        align={align}
         position={position}
+        tabs={content.map(({ tab }) => tab)}
       />
       <div {...stylex.props(styles.content)}>
-        {content.map(({ tab, panel }) => (
+        {content.map(({ panel, tab }) => (
           <TabPanel
+            hidden={activeTabId !== tab.id}
             key={`${id ?? "tab"}-panel-${tab.id}`}
             tabId={tab.id}
-            hidden={activeTabId !== tab.id}
             {...panel}
           />
         ))}

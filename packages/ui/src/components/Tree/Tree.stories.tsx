@@ -1,25 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Tree from './Tree';
-import { IconEnum } from '../../types';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { IconEnum } from "../../types";
+import Tree from "./Tree";
 
 const meta: Meta<typeof Tree> = {
-  title: 'Component/Tree',
-  component: Tree,
   argTypes: {
     id: {
-      control: 'text',
+      control: "text",
     },
     nodes: {
-      control: 'object'
-    }
+      control: "object",
+    },
   },
+  component: Tree,
   decorators: [
-    (Story) => (
-      <div style={{ width: '300px', backgroundColor: "#22AAFF" }}>
+    Story => (
+      <div style={{ backgroundColor: "#22AAFF", width: "300px" }}>
         <Story />
       </div>
-    )
-  ]
+    ),
+  ],
+  title: "Component/Tree",
 };
 
 type Story = StoryObj<typeof meta>;
@@ -31,135 +32,135 @@ export const Default: Story = {
     id: "tree-id",
     nodes: [
       {
-        label: "Node 1",
-        icon: IconEnum.Add,
         expanded: true,
-        onClick: () => console.log("Node 1 clicked"),
+        icon: IconEnum.Add,
+        label: "Node 1",
         nodes: [
           {
-            label: "Node 1.1",
-            icon: IconEnum.Globe,
             expanded: true,
-            onClick: () => console.log("Node 1.1 clicked"),
+            icon: IconEnum.Globe,
+            label: "Node 1.1",
             nodes: [
               {
-                label: "Node 1.1.1",
-                icon: IconEnum.DeployedCode,
-                onClick: () => console.log("Node 1.1.1 clicked"),
                 actions: [
                   {
-                    type: "icon",
                     icon: IconEnum.Visibility,
-                    onClick: () => console.log("Visibility")
-                  }
-                ]
+                    onClick: () => console.log("Visibility"),
+                    type: "icon",
+                  },
+                ],
+                icon: IconEnum.DeployedCode,
+                label: "Node 1.1.1",
+                onClick: () => console.log("Node 1.1.1 clicked"),
               },
               {
-                label: "Node 1.1.2",
-                icon: IconEnum.DeployedCode,
-                onClick: () => console.log("Node 1.1.2 clicked"),
                 actions: [
                   {
-                    type: "icon",
                     icon: IconEnum.Visibility,
-                    onClick: () => console.log("Visibility")
-                  }
-                ]
-              }
-            ]
+                    onClick: () => console.log("Visibility"),
+                    type: "icon",
+                  },
+                ],
+                icon: IconEnum.DeployedCode,
+                label: "Node 1.1.2",
+                onClick: () => console.log("Node 1.1.2 clicked"),
+              },
+            ],
+            onClick: () => console.log("Node 1.1 clicked"),
           },
           {
             label: "Node 1.2",
-            onClick: () => console.log("Node 1.2 clicked"),
             nodes: [
               {
+                actions: [
+                  {
+                    icon: IconEnum.Visibility,
+                    onClick: () => console.log("Visibility"),
+                    type: "icon",
+                  },
+                ],
                 label: "Node 1.2.1",
                 onClick: () => console.log("Node 1.2.1 clicked"),
-                actions: [
-                  {
-                    type: "icon",
-                    icon: IconEnum.Visibility,
-                    onClick: () => console.log("Visibility")
-                  }
-                ]
               },
               {
-                label: "Node 1.2.2",
-                onClick: () => console.log("Node 1.2.2 clicked"),
                 actions: [
                   {
-                    type: "icon",
                     icon: IconEnum.Visibility,
-                    onClick: () => console.log("Visibility")
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                    onClick: () => console.log("Visibility"),
+                    type: "icon",
+                  },
+                ],
+                label: "Node 1.2.2",
+                onClick: () => console.log("Node 1.2.2 clicked"),
+              },
+            ],
+            onClick: () => console.log("Node 1.2 clicked"),
+          },
+        ],
+        onClick: () => console.log("Node 1 clicked"),
       },
       {
         label: "Node 2",
-        onClick: () => console.log("Node 2 clicked"),
         nodes: [
           {
             label: "Node 2.1",
-            onClick: () => console.log("Node 2.1 clicked"),
             nodes: [
               {
+                actions: [
+                  {
+                    icon: IconEnum.Visibility,
+                    onClick: () => console.log("Visibility"),
+                    type: "icon",
+                  },
+                ],
                 label: "Node 2.1.1",
                 onClick: () => console.log("Node 2.1.1 clicked"),
-                actions: [
-                  {
-                    type: "icon",
-                    icon: IconEnum.Visibility,
-                    onClick: () => console.log("Visibility")
-                  }
-                ]
               },
               {
-                label: "Node 2.1.2",
-                onClick: () => console.log("Node 2.1.2 clicked"),
                 actions: [
                   {
-                    type: "icon",
                     icon: IconEnum.Visibility,
-                    onClick: () => console.log("Visibility")
-                  }
-                ]
-              }
-            ]
+                    onClick: () => console.log("Visibility"),
+                    type: "icon",
+                  },
+                ],
+                label: "Node 2.1.2",
+                onClick: () => console.log("Node 2.1.2 clicked"),
+              },
+            ],
+            onClick: () => console.log("Node 2.1 clicked"),
           },
           {
             label: "Node 2.2",
-            onClick: () => console.log("Node 2.2 clicked"),
             nodes: [
               {
+                actions: [
+                  {
+                    icon: IconEnum.Visibility,
+                    onClick: () => console.log("Visibility"),
+                    type: "icon",
+                  },
+                ],
                 label: "Node 2.2.1",
                 onClick: () => console.log("Node 2.2.1 clicked"),
-                actions: [
-                  {
-                    type: "icon",
-                    icon: IconEnum.Visibility,
-                    onClick: () => console.log("Visibility")
-                  }
-                ]
               },
               {
-                label: "Node 2.2.2",
-                onClick: () => console.log("Node 2.2.2 clicked"),
                 actions: [
                   {
-                    type: "icon",
                     icon: IconEnum.Visibility,
-                    onClick: () => console.log("Visibility")
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+                    onClick: () => console.log("Visibility"),
+                    type: "icon",
+                  },
+                ],
+                label: "Node 2.2.2",
+                onClick: () => console.log("Node 2.2.2 clicked"),
+              },
+            ],
+            onClick: () => console.log("Node 2.2 clicked"),
+          },
+        ],
+        onClick: () => console.log("Node 2 clicked"),
+      },
+    ],
   },
 } as Story;

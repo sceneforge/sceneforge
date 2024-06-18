@@ -1,35 +1,34 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import IconButton from './IconButton';
-import { icons } from '../tokens.stylex';
-import { variantArgTypes } from '../../storiesHelpers';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { icons } from "../tokens.stylex";
+import IconButton from "./IconButton";
 
 const meta: Meta<typeof IconButton> = {
-  title: 'Component/IconButton',
-  component: IconButton,
   argTypes: {
     icon: {
       control: {
-        type: 'select',
+        type: "select",
       },
       options: Object.keys(icons),
     },
     size: {
       control: {
-        type: 'range',
-        min: 1,
         max: 100,
+        min: 1,
+        type: "range",
       },
+      max: 100,
+      min: 1,
       table: {
         defaultValue: {
           summary: "4",
         },
       },
-      min: 1,
-      max: 100,
     },
-    ...variantArgTypes('variant'),
+    ...variantArgumentTypes("variant"),
     inverted: {
-      control: 'boolean',
+      control: "boolean",
     },
     ref: {
       table: {
@@ -40,13 +39,15 @@ const meta: Meta<typeof IconButton> = {
   args: {
     size: 4,
   },
+  component: IconButton,
   decorators: [
-    (Story) => (
+    Story => (
       <div style={{ padding: "1rem" }}>
         <Story />
       </div>
-    )
-  ]
+    ),
+  ],
+  title: "Component/IconButton",
 };
 
 type Story = StoryObj<typeof meta>;

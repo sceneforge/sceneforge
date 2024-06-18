@@ -1,6 +1,6 @@
 import type { FormHTMLAttributes } from "react";
 
-export type FormListProps = FormHTMLAttributes<HTMLFormElement>
+export type FormListProps = FormHTMLAttributes<HTMLFormElement>;
 
 const FormList = ({ children, ...props }: FormListProps) => {
   return (

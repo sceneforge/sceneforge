@@ -4,7 +4,7 @@ export type FormListItemProps = PropsWithChildren<{
   label: string;
 }>;
 
-const FormListItem = ({ label, children }: FormListItemProps) => {
+const FormListItem = ({ children, label }: FormListItemProps) => {
   return (
     <li>
       <label>{label}</label>

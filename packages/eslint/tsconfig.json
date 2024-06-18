@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "target": "ESNext",
+    "allowJs": true,
+    "checkJs": false,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".yarn",
+    "packages",
+  ]
+}

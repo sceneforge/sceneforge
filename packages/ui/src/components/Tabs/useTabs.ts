@@ -1,58 +1,80 @@
 import {
+  type Ref,
   useCallback,
   useId,
   useImperativeHandle,
   useMemo,
   useState,
-  type Ref
 } from "react";
+
 import type { TabContent } from "./Tabs";
 
 export interface TabsHandler {
-  get activeTabId(): string | undefined;
-  set activeTabId(tabId: string | undefined);
-  closeTab(tabId: string): void;
   activateTab(tabId: string): void;
+  closeTab(tabId: string): void;
+  get activeTabId(): string | undefined;
   openTab(newContent: TabContent): void;
+  set activeTabId(tabId: string | undefined);
 };
 
 export type UseTabsProps = {
   id?: string;
-  ref?: Ref<TabsHandler>;
   initialContent?: TabContent[];
+  ref?: Ref<TabsHandler>;
 };
 
-export const useTabs = ({ id, ref, initialContent }: UseTabsProps) => {
+export const useTabs = ({ id, initialContent, ref }: UseTabsProps) => {
   const generatedId = useId();
   const currentId = id || generatedId;
   const [content, setContent] = useState<TabContent[]>(initialContent ?? []);
-  const [currentActiveTabId, setActiveTabId] = useState<string | undefined>(undefined);
+  const [currentActiveTabId, setActiveTabId] = useState<string | undefined>();
 
   const activeTabId = useMemo(() => {
     if (currentActiveTabId) {
       return currentActiveTabId;
     }
 
-    return content.length ? content[0].tab.id : undefined;
+    return content.length > 0 ? content[0].tab.id : undefined;
   }, [currentActiveTabId, content]);
 
   const handleTabChange = useCallback((tabId: string) => {
     setActiveTabId(tabId);
-  }, [content]);
+  }, []);
 
   const handleTabClose = useCallback((tabId: string) => {
-    setContent((prevContent) => prevContent.filter(({ tab }) => tab.id !== tabId));
+    setContent((previousContent) => {
+      return previousContent.filter(({ tab }) => tab.id !== tabId);
+    });
   }, []);
 
   const handleOpenTab = useCallback((newContent: TabContent) => {
-    if (content.find(({ tab }) => tab.id === newContent.tab.id)) {
-      setContent((prevContent) => prevContent.map((c) => (c.tab.id === newContent.tab.id ? newContent : c)));
-    } else {
-      setContent((prevContent) => [...prevContent, newContent]);
+    if (content.some(({ tab }) => tab.id === newContent.tab.id)) {
+      setContent((previousContent) => {
+        return previousContent.map((c) => {
+          return c.tab.id === newContent.tab.id ? newContent : c;
+        });
+      });
+    }
+    else {
+      setContent((previousContent) => {
+        return [...previousContent, newContent];
+      });
     }
   }, [content]);
 
   useImperativeHandle(ref, () => (new (class implements TabsHandler {
+    activateTab(tabId: string) {
+      handleTabChange(tabId);
+    }
+
+    closeTab(tabId: string) {
+      handleTabClose(tabId);
+    }
+
+    openTab(newContent: TabContent) {
+      handleOpenTab(newContent);
+    }
+
     get activeTabId() {
       return activeTabId;
     }
@@ -60,24 +82,12 @@ export const useTabs = ({ id, ref, initialContent }: UseTabsProps) => {
     set activeTabId(tabId: string | undefined) {
       setActiveTabId(tabId);
     }
-
-    closeTab(tabId: string) {
-      handleTabClose(tabId);
-    }
-
-    activateTab(tabId: string) {
-      handleTabChange(tabId);
-    }
-
-    openTab(newContent: TabContent) {
-      handleOpenTab(newContent);
-    }
-  })), [content]);
+  })()), [activeTabId, handleOpenTab, handleTabChange, handleTabClose]);
 
   return {
+    activeTabId,
     content,
     currentId,
-    activeTabId,
     handleTabChange,
     handleTabClose,
   };

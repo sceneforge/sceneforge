@@ -1,34 +1,36 @@
-import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
+
+import * as stylex from "@stylexjs/stylex";
 import { type AllHTMLAttributes } from "react";
+
 import { Variant } from "../../types";
 import { color } from "../tokens.stylex";
 
-export type ViewProps = Omit<AllHTMLAttributes<HTMLDivElement>, "style" | "className"> & {
-  variant?: Variant;
+export type ViewProps = {
   style?: StyleXStyles;
-}
+  variant?: Variant;
+} & Omit<AllHTMLAttributes<HTMLDivElement>, "className" | "style">;
 
 const styles = stylex.create({
   container: {
-    display: "block",
-    position: "relative",
-    margin: 0,
-    padding: 0,
     backgroundColor: "transparent",
     color: "inherit",
-    width: "100%",
+    display: "block",
     height: "100%",
+    margin: 0,
+    padding: 0,
+    position: "relative",
+    width: "100%",
   },
   variantColor: (variant: keyof typeof color, text: keyof typeof color) => ({
     backgroundColor: color[variant],
     color: color[text],
-  })
+  }),
 });
 
 const View = ({
-  variant,
   style,
+  variant,
   ...props
 }: ViewProps) => {
   return (
@@ -46,6 +48,6 @@ const View = ({
       )}
     />
   );
-}
+};
 
 export default View;

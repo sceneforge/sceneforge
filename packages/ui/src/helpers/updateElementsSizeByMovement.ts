@@ -1,7 +1,7 @@
 import { getNumber } from "./getNumber";
 
 export const updateElementsSizeByMovement = (
-  property: "width" | "height",
+  property: "height" | "width",
   movement: number,
   element?: HTMLElement | null,
   startElement?: HTMLElement | null,

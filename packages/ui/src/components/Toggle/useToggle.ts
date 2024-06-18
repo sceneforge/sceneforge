@@ -1,34 +1,36 @@
 import {
+  type MouseEvent as ReactMouseEvent,
   useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
-  type MouseEvent as ReactMouseEvent
 } from "react";
-import { Variant } from "../../types";
+
 import type {
-  ToggleProps,
   ToggleComponentRef,
+  ToggleProps,
 } from "./Toggle";
 
+import { Variant } from "../../types";
+
 export type UseToggleOptions = {
+  label?: ToggleProps["label"];
+  onClick?: ToggleProps["onClick"];
+  onToggle?: ToggleProps["onToggle"];
+  pressed?: ToggleProps["pressed"];
   ref?: ToggleProps["ref"];
   variant?: ToggleProps["variant"];
-  pressed?: ToggleProps["pressed"];
-  label?: ToggleProps["label"];
-  onToggle?: ToggleProps["onToggle"];
-  onClick?: ToggleProps["onClick"];
 };
 
 export const useToggle = ({
+  label,
+  onClick,
+  onToggle,
+  pressed,
   ref,
   variant,
-  pressed,
-  label,
-  onToggle,
-  onClick
 }: UseToggleOptions) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -49,7 +51,10 @@ export const useToggle = ({
   }, [variant, pressedState]);
 
   const handleToggle = useCallback(
-    (event?: ReactMouseEvent<HTMLButtonElement, MouseEvent>, preventBubble?: boolean) => {
+    (
+      event?: ReactMouseEvent<HTMLButtonElement, MouseEvent>,
+      preventBubble?: boolean
+    ) => {
       setPressedState(previous => !previous);
       if (!preventBubble && onToggle) {
         onToggle({
@@ -60,9 +65,8 @@ export const useToggle = ({
           type: "toggle",
         });
       }
-
     },
-    [isPressed, onToggle, pressedState]
+    [onToggle, pressedState]
   );
 
   const handleClickEvent = useCallback(
@@ -76,6 +80,13 @@ export const useToggle = ({
   useImperativeHandle(
     ref,
     () => new (class implements ToggleComponentRef {
+      toggle(
+        event: ReactMouseEvent<HTMLButtonElement, MouseEvent>,
+        preventBubble?: boolean
+      ) {
+        handleToggle(event, preventBubble);
+      }
+
       get button() {
         return buttonRef.current ?? undefined;
       }
@@ -87,11 +98,7 @@ export const useToggle = ({
       set pressed(value: boolean) {
         setPressedState(value);
       }
-
-      toggle(event: ReactMouseEvent<HTMLButtonElement, MouseEvent>, preventBubble?: boolean) {
-        handleToggle(event, preventBubble);
-      }
-    }),
+    })(),
     [buttonRef, pressedState, handleToggle]
   );
 
@@ -105,10 +112,10 @@ export const useToggle = ({
   }, [isPressed]);
 
   return {
-    handleClickEvent,
+    buttonRef,
     currentLabel,
     currentVariant,
+    handleClickEvent,
     isPressed,
-    buttonRef,
-  }
+  };
 };

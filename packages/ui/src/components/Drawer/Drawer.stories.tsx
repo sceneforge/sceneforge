@@ -1,39 +1,40 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Drawer from './Drawer';
-import { Variant } from '../../types';
-import { orientationArgTypes, positionArgTypes, variantArgTypes } from '../../storiesHelpers';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { orientationArgTypes as orientationArgumentTypes, positionArgTypes as positionArgumentTypes, variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { Variant } from "../../types";
+import Drawer from "./Drawer";
 
 const meta: Meta<typeof Drawer> = {
-  title: 'Component/Drawer',
+  argTypes: {
+    children: {
+      control: "text",
+    },
+    label: {
+      control: "text",
+    },
+    resizable: {
+      control: "boolean",
+    },
+    size: {
+      control: {
+        max: 100,
+        min: 1,
+        type: "range",
+      },
+      max: 100,
+      min: 1,
+    },
+    ...variantArgumentTypes("variant"),
+    ...orientationArgumentTypes("orientation"),
+    ...positionArgumentTypes("position"),
+  },
   component: Drawer,
-  render: (args) => (
+  render: args => (
     <div className="w-100 h-100 outline">
       <Drawer {...args} />
     </div>
   ),
-  argTypes: {
-    label: {
-      control: 'text',
-    },
-    children: {
-      control: 'text',
-    },
-    size: {
-      control: {
-        type: "range",
-        min: 1,
-        max: 100,
-      },
-      min: 1,
-      max: 100,
-    },
-    resizable: {
-      control: 'boolean',
-    },
-    ...variantArgTypes('variant'),
-    ...orientationArgTypes('orientation'),
-    ...positionArgTypes('position'),
-  }
+  title: "Component/Drawer",
 };
 
 type Story = StoryObj<typeof meta>;
@@ -42,10 +43,10 @@ export default meta;
 
 export const Default: Story = {
   args: {
+    children: (<div style={{ paddingBlock: "1rem", paddingInline: "2rem" }}>Drawer Content</div>),
     label: "Drawer Title",
-    children: (<div style={{ paddingInline: "2rem", paddingBlock: "1rem" }}>Drawer Content</div>),
+    resizable: true,
     size: 48,
     variant: Variant.Default,
-    resizable: true,
   },
 } as Story;

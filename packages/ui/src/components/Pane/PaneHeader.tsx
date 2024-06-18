@@ -1,46 +1,47 @@
 import * as stylex from "@stylexjs/stylex";
+
 import { Heading, HeadingProps } from "../Heading";
 import { Toolbar, ToolbarProps } from "../Toolbar";
 import { backgroundColor } from "../tokens.stylex";
 
 export type PaneHeaderProps = {
-  title: string;
-  level?: HeadingProps["level"];
-  toolbar?: ToolbarProps;
   inner?: boolean;
+  level?: HeadingProps["level"];
+  title: string;
+  toolbar?: ToolbarProps;
 };
 
 const styles = stylex.create({
   container: {
-    flexShrink: 1,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "stretch",
     alignItems: "center",
-    gap: "0.5rem",
     backgroundColor: backgroundColor.alpha15,
+    borderColor: backgroundColor.alpha10,
     borderStyle: "solid",
     borderWidth: "1px",
-    borderColor: backgroundColor.alpha10,
-    overflow: "clip",
+    display: "flex",
+    flexDirection: "row",
+    flexShrink: 1,
+    gap: "0.5rem",
     height: "2.5rem",
+    justifyContent: "stretch",
+    overflow: "clip",
   },
   heading: {
     flexGrow: 1,
-    padding: "0.25rem",
     fontSize: "1.125rem",
+    padding: "0.25rem",
     textOverflow: "ellipsis",
   },
   inner: {
-    borderStartStartRadius: "0.25rem",
     borderStartEndRadius: "0.25rem",
-  }
+    borderStartStartRadius: "0.25rem",
+  },
 });
 
 const PaneHeader = ({
-  title,
-  level = 2,
   inner = true,
+  level = 2,
+  title,
   toolbar,
 }: PaneHeaderProps) => {
   return (

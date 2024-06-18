@@ -1,13 +1,13 @@
 import { Orientation } from "../types";
 
-export const orientationArgTypes = (prop: string) => ({
-  [prop]: {
+export const orientationArgTypes = (property: string) => ({
+  [property]: {
     control: {
-      type: 'select',
       labels: {
-        [Orientation.Horizontal]: 'Horizontal',
-        [Orientation.Vertical]: 'Vertical',
+        [Orientation.Horizontal]: "Horizontal",
+        [Orientation.Vertical]: "Vertical",
       },
+      type: "select",
     },
     options: [
       Orientation.Horizontal,

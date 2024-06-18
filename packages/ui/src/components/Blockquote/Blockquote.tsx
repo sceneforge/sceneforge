@@ -1,33 +1,39 @@
-import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
 import type { AllHTMLAttributes } from "react";
+
+import * as stylex from "@stylexjs/stylex";
+
 import { Variant } from "../../types";
 import { color } from "../tokens.stylex";
 
-export type BlockquoteProps = Omit<AllHTMLAttributes<HTMLQuoteElement>, "style" | "className"> & {
-  variant?: Variant;
+export type BlockquoteProps = {
   style?: StyleXStyles;
-};
+  variant?: Variant;
+} & Omit<AllHTMLAttributes<HTMLQuoteElement>, "className" | "style">;
 
 const styles = stylex.create({
   container: {
-    padding: "0.5rem",
-    paddingInlineStart: "1rem",
+    borderInlineStartColor: color.foreground,
     borderInlineStartStyle: "solid",
     borderInlineStartWidth: "0.325rem",
     color: color.foreground,
-    borderInlineStartColor: color.foreground,
+    padding: "0.5rem",
+    paddingInlineStart: "1rem",
   },
   variantColor: (variant: keyof typeof color) => ({
     backgroundColor: `color-mix(in srgb, ${String(color[variant])} 15%, ${color.background})`,
-    borderInlineStartColor: variant in color ? color[variant] : color.foreground,
+    borderInlineStartColor: (
+      variant in color
+        ? color[variant]
+        : color.foreground
+    ),
   }),
 });
 
 const Blockquote = ({
   children,
-  variant,
   style,
+  variant,
   ...props
 }: BlockquoteProps) => {
   return (

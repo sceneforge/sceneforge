@@ -1,42 +1,44 @@
 import * as stylex from "@stylexjs/stylex";
-import { lazy, type PropsWithChildren } from "react"
-import { backgroundColor } from "../tokens.stylex";
-import type { PaneHeaderProps } from "./PaneHeader";
+import { type PropsWithChildren, lazy } from "react";
+
 import type { PaneBodyProps } from "./PaneBody";
+import type { PaneHeaderProps } from "./PaneHeader";
+
+import { backgroundColor } from "../tokens.stylex";
 
 const PaneHeader = lazy(() => import("./PaneHeader"));
 const PaneBody = lazy(() => import("./PaneBody"));
 
 export type PaneProps = Partial<PaneHeaderProps> & PropsWithChildren<{
-  inner?: boolean;
   actions?: PaneBodyProps["actions"];
+  inner?: boolean;
 }>;
 
 const styles = stylex.create({
   container: {
+    backgroundColor: backgroundColor.alpha10,
     display: "flex",
     flexDirection: "column",
-    width: "100%",
     height: "100%",
     overflow: "hidden",
-    backgroundColor: backgroundColor.alpha10,
+    width: "100%",
   },
   inner: {
-    padding: "0.25rem",
+    borderColor: backgroundColor.alpha10,
     borderRadius: "0.5rem",
     borderStyle: "solid",
     borderWidth: "1px",
-    borderColor: backgroundColor.alpha10,
-  }
+    padding: "0.25rem",
+  },
 });
 
 const Pane = ({
-  inner = true,
-  children,
-  title,
-  level,
-  toolbar,
   actions,
+  children,
+  inner = true,
+  level,
+  title,
+  toolbar,
 }: PaneProps) => {
   return (
     <section
@@ -45,19 +47,21 @@ const Pane = ({
         inner && styles.inner
       )}
     >
-      {title ? (
-        <>
-          <PaneHeader
-            title={title}
-            level={level}
-            toolbar={toolbar}
-            inner={inner}
-          />
-          <PaneBody actions={actions}>
-            {children}
-          </PaneBody>
-        </>
-      ) : children}
+      {title
+        ? (
+          <>
+            <PaneHeader
+              inner={inner}
+              level={level}
+              title={title}
+              toolbar={toolbar}
+            />
+            <PaneBody actions={actions}>
+              {children}
+            </PaneBody>
+          </>
+        )
+        : children}
 
     </section>
   );

@@ -1,102 +1,141 @@
-import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
-import type { Ref, PropsWithChildren } from "react";
+import type { PropsWithChildren, Ref } from "react";
+
+import * as stylex from "@stylexjs/stylex";
+
 import { Orientation, Position, Variant } from "../../types";
-import { backgroundColor, color } from "../tokens.stylex";
 import { View } from "../View";
+import { backgroundColor, color } from "../tokens.stylex";
 
 export type DrawerProps = PropsWithChildren<{
   id?: string;
   label?: string;
-  variant?: Variant;
   orientation?: Orientation;
   position?: Position;
-  size?: number;
-  resizable?: boolean;
   ref?: Ref<HTMLDivElement>;
+  resizable?: boolean;
+  size?: number;
   style?: StyleXStyles;
+  variant?: Variant;
 }>;
 
 const styles = stylex.create({
   container: {
-    flexGrow: 1,
+    backgroundColor: "transparent",
+    color: "inherit",
     display: "block",
-    position: "absolute",
-    width: "100%",
+    flexGrow: 1,
     height: "100%",
     insetBlockStart: 0,
     insetInlineStart: 0,
-    pointerEvents: "none",
-    overflow: "hidden",
-    backgroundColor: "transparent",
-    color: "inherit",
-    padding: 0,
     margin: 0,
+    overflow: "hidden",
+    padding: 0,
+    pointerEvents: "none",
+    position: "absolute",
+    width: "100%",
   },
   innerContainer: {
-    position: "absolute",
-    pointerEvents: "auto",
     overflow: "hidden",
+    pointerEvents: "auto",
+    position: "absolute",
   },
   resizableGutter: {
     "::after": {
+      backgroundColor: backgroundColor.alpha50,
       content: "''",
       display: "block",
-      position: "absolute",
       opacity: 0.5,
-      backgroundColor: backgroundColor.alpha50,
+      position: "absolute",
     },
   },
-  resizableGutterDynamic: (orientation: Orientation, position: Position, size: number) => ({
-    insetBlockStart: orientation === Orientation.Horizontal ? position === Position.Start ? 0 : null : 0,
-    insetBlockEnd: orientation === Orientation.Horizontal ? position === Position.End ? 0 : null : null,
-    insetInlineStart: orientation === Orientation.Vertical ? position === Position.Start ? 0 : null : 0,
-    insetInlineEnd: orientation === Orientation.Vertical ? position === Position.End ? 0 : null : null,
-    width: orientation === Orientation.Horizontal ? "100%" : `${size}%`,
-    height: orientation === Orientation.Vertical ? "100%" : `${size}%`,
+  resizableGutterDynamic: (
+    orientation: Orientation,
+    position: Position,
+    size: number
+  ) => ({
     "::after": {
       cursor: orientation === Orientation.Horizontal ? "row-resize" : "col-resize",
-      width: orientation === Orientation.Horizontal ? "100%" : `0.25rem`,
-      height: orientation === Orientation.Vertical ? "100%" : `0.25rem`,
-      insetBlockStart: orientation === Orientation.Horizontal ? position === Position.End ? 0 : null : 0,
-      insetBlockEnd: orientation === Orientation.Horizontal ? position === Position.Start ? 0 : null : null,
-      insetInlineStart: orientation === Orientation.Vertical ? position === Position.End ? 0 : null : 0,
-      insetInlineEnd: orientation === Orientation.Vertical ? position === Position.Start ? 0 : null : null,
-    }
+      height: orientation === Orientation.Vertical ? "100%" : "0.25rem",
+      insetBlockEnd: (
+        orientation === Orientation.Horizontal
+          ? (
+            position === Position.Start
+              ? 0
+              : null
+          )
+          : null
+      ),
+      insetBlockStart: (
+        orientation === Orientation.Horizontal
+          ? (
+            position === Position.End
+              ? 0
+              : null
+          )
+          : 0
+      ),
+      insetInlineEnd: (
+        orientation === Orientation.Vertical
+          ? (
+            position === Position.Start
+              ? 0
+              : null
+          )
+          : null
+      ),
+      insetInlineStart: (
+        orientation === Orientation.Vertical
+          ? (
+            position === Position.End
+              ? 0
+              : null
+          )
+          : 0
+      ),
+      width: orientation === Orientation.Horizontal ? "100%" : "0.25rem",
+    },
+    "height": orientation === Orientation.Vertical ? "100%" : `${size}%`,
+    "insetBlockEnd": orientation === Orientation.Horizontal ? (position === Position.End ? 0 : null) : null,
+    "insetBlockStart": orientation === Orientation.Horizontal ? (position === Position.Start ? 0 : null) : 0,
+    "insetInlineEnd": orientation === Orientation.Vertical ? (position === Position.End ? 0 : null) : null,
+    "insetInlineStart": orientation === Orientation.Vertical ? (position === Position.Start ? 0 : null) : 0,
+    "width": orientation === Orientation.Horizontal ? "100%" : `${size}%`,
   }),
   variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
     backgroundColor: color[background],
-    color: color[text]
+    color: color[text],
   }),
 });
 
 const Drawer = ({
+  children,
   id,
   label,
-  variant,
   orientation = Orientation.Horizontal,
   position = Position.End,
-  size = 48,
-  resizable = false,
-  children,
   ref,
+  resizable = false,
+  size = 48,
   style,
+  variant,
 }: DrawerProps) => {
   return (
-    <div ref={ref}
-      id={id}
+    <div
       aria-label={label}
+      id={id}
+      ref={ref}
       {...stylex.props(styles.container, style)}
     >
       <View
-        variant={variant}
         style={[
           styles.innerContainer,
           resizable && [
             styles.resizableGutter,
-            styles.resizableGutterDynamic(orientation, position, size)
+            styles.resizableGutterDynamic(orientation, position, size),
           ],
         ]}
+        variant={variant}
       >
         {children}
       </View>

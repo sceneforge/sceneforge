@@ -1,0 +1,39 @@
+{
+  "name": "@sceneforge/eslint",
+  "description": "ESLint configuration for SceneForge projects in the MonoRepo",
+  "version": "0.0.1",
+  "main": "./eslint.common.config.mjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sceneforge/sceneforge",
+    "directory": "packages/eslint"
+  },
+  "exports": {
+    ".": "./eslint.common.config.mjs",
+    "./configs": "./eslint.configs.config.mjs",
+    "./lib": "./eslint.lib.config.mjs",
+    "./react": "./eslint.react.config.mjs",
+    "./serviceworker": "./eslint.serviceworker.config.mjs"
+  },
+  "peerDependencies": {
+    "eslint": "^9.5.0"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.1.0",
+    "@eslint/js": "^9.5.0",
+    "@stylistic/eslint-plugin": "^2.2.1",
+    "eslint": "^9.5.0",
+    "eslint-plugin-perfectionist": "^2.11.0",
+    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-51a85ea-20240601",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-unicorn": "^54.0.0",
+    "globals": "^15.6.0",
+    "typescript": "*",
+    "typescript-eslint": "^7.13.1"
+  },
+  "engines": {
+    "node": ">=21.7.1 < 22",
+    "yarn": ">=4.3.0 < 5"
+  }
+}

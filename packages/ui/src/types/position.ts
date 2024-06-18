@@ -1,6 +1,6 @@
-export type PositionType = "start" | "end";
+export type PositionType = "end" | "start";
 
 export enum Position {
-  Start = "start",
   End = "end",
+  Start = "start",
 };

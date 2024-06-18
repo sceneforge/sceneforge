@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Topbar from './Topbar';
-import { IconEnum } from '../../types';
-import { variantArgTypes } from '../../storiesHelpers';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { IconEnum } from "../../types";
+import Topbar from "./Topbar";
 
 const meta: Meta<typeof Topbar> = {
-  title: 'Component/Topbar',
-  component: Topbar,
   argTypes: {
     title: {
       control: "text",
     },
-    ...variantArgTypes("variant"),
-  }
+    ...variantArgumentTypes("variant"),
+  },
+  component: Topbar,
+  title: "Component/Topbar",
 };
 
 type Story = StoryObj<typeof meta>;
@@ -27,30 +28,30 @@ export const Default: Story = {
 export const WithToolbar: Story = {
   args: {
     title: "Topbar Title With Toolbar",
-    toolbarStart: {
-      actions: [
-        {
-          type: "button",
-          label: "Button 1",
-        },
-        {
-          type: "button",
-          label: "Button 2",
-        }
-      ]
-    },
     toolbarEnd: {
       actions: [
         {
-          type: "icon",
           icon: IconEnum.Globe,
           label: "Button 3",
+          type: "icon",
         },
         {
-          type: "button",
           label: "Button 4",
-        }
-      ]
-    }
-  }
-}
+          type: "button",
+        },
+      ],
+    },
+    toolbarStart: {
+      actions: [
+        {
+          label: "Button 1",
+          type: "button",
+        },
+        {
+          label: "Button 2",
+          type: "button",
+        },
+      ],
+    },
+  },
+};

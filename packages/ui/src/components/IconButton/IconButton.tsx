@@ -1,18 +1,19 @@
 import * as stylex from "@stylexjs/stylex";
+
 import { Button, type ButtonProps } from "../Button";
 import { Icon, IconProps } from "../Icon";
 
-export type IconButtonProps = ButtonProps & {
+export type IconButtonProps = {
   icon: IconProps["icon"];
-  size?: IconProps["size"];
   inverted?: boolean;
-};
+  size?: IconProps["size"];
+} & ButtonProps;
 
 const styles = stylex.create({
   container: {
-    width: "2.5rem",
-    height: "2.5rem",
     borderRadius: "50%",
+    height: "2.5rem",
+    width: "2.5rem",
   },
   icon: {
     pointerEvents: "none",
@@ -22,23 +23,23 @@ const styles = stylex.create({
 
 const IconButton = ({
   icon,
-  size,
-  variant,
   inverted,
+  size,
   style,
+  variant,
   ...props
 }: IconButtonProps) => {
   return (
     <Button
       {...props}
-      variant={!inverted ? variant : undefined}
       style={[styles.container, style]}
+      variant={inverted ? undefined : variant}
     >
       <Icon
         icon={icon}
         size={size}
-        variant={inverted ? variant : undefined}
         style={styles.icon}
+        variant={inverted ? variant : undefined}
       />
     </Button>
   );

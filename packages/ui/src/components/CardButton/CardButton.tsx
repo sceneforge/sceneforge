@@ -1,35 +1,42 @@
 import * as stylex from "@stylexjs/stylex";
+
 import { Button, type ButtonProps } from "../Button";
 import { Card, type CardProps } from "../Card";
 
-export type CardButtonProps = Omit<CardProps, "actions"> & {
+export type CardButtonProps = {
   id?: ButtonProps["id"];
   onClick?: ButtonProps["onClick"];
-  ref?: ButtonProps["ref"];
   popovertarget?: ButtonProps["popovertarget"];
-};
+  ref?: ButtonProps["ref"];
+} & Omit<CardProps, "actions">;
 
 const styles = stylex.create({
   container: {
+    backgroundColor: "transparent",
     border: "none",
+    borderRadius: "0.5rem",
+    color: "inherit",
+    height: "100%",
     margin: 0,
     padding: 0,
     width: "100%",
-    height: "100%",
-    borderRadius: "0.5rem",
-    backgroundColor: "transparent",
-    color: "inherit",
-  }
+  },
 });
 
-const CardButton = ({ id, onClick, ref, popovertarget, ...props }: CardButtonProps) => {
+const CardButton = ({
+  id,
+  onClick,
+  popovertarget,
+  ref,
+  ...props
+}: CardButtonProps) => {
   return (
     <Button
+      clear
       id={id}
       onClick={onClick}
-      ref={ref}
       popovertarget={popovertarget}
-      clear
+      ref={ref}
       style={[styles.container]}
     >
       <Card {...props} />

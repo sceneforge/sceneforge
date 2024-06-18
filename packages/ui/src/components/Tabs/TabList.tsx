@@ -1,77 +1,80 @@
 import * as stylex from "@stylexjs/stylex";
 import { lazy, useId } from "react";
-import { type TabProps } from "./Tab";
+
 import { Align, Orientation, Position } from "../../types";
+import { type TabProps } from "./Tab";
 
 const Tab = lazy(() => import("./Tab"));
 
 export type TabListProps = {
+  activeTabId?: string;
+  align?: Align;
+  closeable?: boolean;
   id?: string;
   label?: string;
-  tabs: Omit<TabProps, "onTabChange" | "active">[];
-  activeTabId?: string;
-  closeable?: boolean;
   onTabChange?: (id: string) => void;
   onTabClose?: (id: string) => void;
   orientation?: Orientation;
-  align?: Align;
   position?: Position;
+  tabs: Omit<TabProps, "active" | "onTabChange">[];
 };
 
 const styles = stylex.create({
   container: {
-    display: "flex",
     color: "inherit",
-    flexShrink: 1,
+    display: "flex",
     flexDirection: "row",
+    flexShrink: 1,
     justifyContent: "flex-start",
-  },
-  containerVertical: {
-    flexDirection: "column",
   },
   containerCenter: {
     justifyContent: "center",
   },
   containerEnd: {
     justifyContent: "flex-end",
-  }
+  },
+  containerVertical: {
+    flexDirection: "column",
+  },
 });
 
 const TabList = ({
+  activeTabId,
+  align = Align.Start,
+  closeable,
   id,
   label,
-  tabs,
-  activeTabId,
   onTabChange,
   onTabClose,
   orientation = Orientation.Horizontal,
-  align = Align.Start,
   position = Position.Start,
-  closeable,
+  tabs,
 }: TabListProps) => {
   const generatedId = useId();
   const currentId = id || generatedId;
 
   return (
     <div
+      aria-label={label}
       id={currentId}
       role="tablist"
-      aria-label={label}
       {...stylex.props(
         styles.container,
         orientation === Orientation.Vertical && styles.containerVertical,
-        align === Align.Center ? styles.containerCenter : align === Align.End && styles.containerEnd,
+        align === Align.Center
+          ? styles.containerCenter
+          : align === Align.End && styles.containerEnd
       )}
     >
-      {tabs.map(({ id: tabId, closeable: tabClosable, ...tab }) => (
+      {tabs.map(({ closeable: tabClosable, id: tabId, ...tab }) => (
         <Tab
-          key={`${currentId}-tab-${tabId}`}
-          id={tabId}
           active={tabId === activeTabId}
+          id={tabId}
+          key={`${currentId}-tab-${tabId}`}
           {...tab}
+          closeable={tabClosable === undefined ? closeable : tabClosable}
           onTabChange={onTabChange}
           onTabClose={onTabClose}
-          closeable={typeof tabClosable !== "undefined" ? tabClosable : closeable}
           orientation={orientation}
           position={position}
         />

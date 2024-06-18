@@ -1,29 +1,42 @@
 import * as stylex from "@stylexjs/stylex";
-import { Children, Fragment, type Ref, type PropsWithChildren, useId } from "react"
-import { Orientation, IconEnum } from "../../types"
+import { Children, Fragment, type PropsWithChildren, type Ref, useId } from "react";
+
+import { IconEnum, Orientation } from "../../types";
 import { Icon } from "../Icon";
 
 export type SplitPaneProps = PropsWithChildren<{
   id?: string;
   orientation?: Orientation;
-  resizable?: boolean;
   ref?: Ref<HTMLDivElement>;
-}>
+  resizable?: boolean;
+}>;
 
 const styles = stylex.create({
-  container: {
-    display: "flex",
-    margin: 0,
-    padding: 0,
-    gap: 0,
-    flexWrap: "nowrap",
+  childrenWrapper: {
     boxSizing: "border-box",
+    display: "block",
+    flexGrow: 1,
+    height: "100%",
+    overflow: "auto",
     width: "100%",
+  },
+  childrenWrapperSize: (orientation: Orientation, size: number) => ({
+    height: orientation === Orientation.Vertical ? `${size}%` : "100%",
+    width: orientation === Orientation.Horizontal ? `${size}%` : "100%",
+  }),
+  container: {
+    alignItems: "center",
+    boxSizing: "border-box",
+    color: "inherit",
+    display: "flex",
+    flexWrap: "nowrap",
+    gap: 0,
     height: "100%",
     justifyContent: "stretch",
-    alignItems: "center",
+    margin: 0,
     overflow: "hidden",
-    color: "inherit",
+    padding: 0,
+    width: "100%",
   },
   containerHorizontal: {
     flexDirection: "row",
@@ -39,87 +52,94 @@ const styles = stylex.create({
   gutterIconVertical: {
     transform: "rotate(90deg)",
   },
-  childrenWrapper: {
-    display: "block",
-    flexGrow: 1,
-    boxSizing: "border-box",
-    width: "100%",
-    height: "100%",
-    overflow: "auto",
-  },
-  childrenWrapperSize: (orientation: Orientation, size: number) => ({
-    width: orientation === Orientation.Horizontal ? `${size}%` : "100%",
-    height: orientation === Orientation.Vertical ? `${size}%` : "100%",
-  }),
   paneGutter: {
-    margin: 0,
-    padding: 0,
-    border: "none",
-    flexShrink: 1,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "inherit",
-    opacity: 0.25,
     ":hover": {
       opacity: 0.75,
     },
-    width: null,
-    minWidth: null,
-    height: "100%",
-    minHeight: "3.75rem",
-    cursor: "col-resize",
+    "alignItems": "center",
+    "border": "none",
+    "color": "inherit",
+    "cursor": "col-resize",
+    "display": "flex",
+    "flexShrink": 1,
+    "height": "100%",
+    "justifyContent": "center",
+    "margin": 0,
+    "minHeight": "3.75rem",
+    "minWidth": null,
+    "opacity": 0.25,
+    "padding": 0,
+    "width": null,
   },
   paneGutterVertical: {
-    width: "100%",
-    minWidth: "3.75rem",
+    cursor: "row-resize",
     height: null,
     minHeight: null,
-    cursor: "row-resize",
-  }
+    minWidth: "3.75rem",
+    width: "100%",
+  },
 });
 
 const SplitPane = ({
+  children,
   id,
   orientation = Orientation.Horizontal,
-  children,
-  resizable = false,
   ref,
+  resizable = false,
 }: SplitPaneProps) => {
   const generatedId = useId();
   const currentId = id || generatedId;
   return (
     <div
-      ref={ref}
       id={currentId}
-      {...stylex.props(styles.container, orientation === Orientation.Horizontal ? styles.containerHorizontal : styles.containerVertical)}
+      ref={ref}
+      {...stylex.props(
+        styles.container,
+        orientation === Orientation.Horizontal
+          ? styles.containerHorizontal
+          : styles.containerVertical
+      )}
     >
       {Children.map(children, (child, index) => (
         <Fragment key={index}>
           <div
             id={`${currentId}-pane-${index}`}
-            {...stylex.props(styles.childrenWrapper, styles.childrenWrapperSize(orientation, 100 / Children.count(children)))}
+            {...stylex.props(
+              styles.childrenWrapper,
+              styles.childrenWrapperSize(
+                orientation,
+                100 / Children.count(children)
+              )
+            )}
           >
             {child}
           </div>
           {resizable && index < Children.count(children) - 1 && (
             <span
-              id={`${currentId}-resizer-${index}-${index + 1}`}
               aria-label={orientation === Orientation.Horizontal ? "Resize columns" : "Resize rows"}
-              role="separator"
               aria-orientation={orientation === Orientation.Horizontal ? "vertical" : "horizontal"}
-              aria-valuemin={0}
               aria-valuemax={100}
+              aria-valuemin={0}
               aria-valuenow={100 / Children.count(children)}
-              data-resize-id-start={`${currentId}-pane-${index}`}
               data-resize-id-end={`${currentId}-pane-${index + 1}`}
-              {...stylex.props(styles.paneGutter, orientation === Orientation.Vertical && styles.paneGutterVertical)}
+              data-resize-id-start={`${currentId}-pane-${index}`}
+              id={`${currentId}-resizer-${index}-${index + 1}`}
+              role="separator"
+              {...stylex.props(
+                styles.paneGutter,
+                orientation === Orientation.Vertical
+                && styles.paneGutterVertical
+              )}
             >
               <Icon
-                role="presentation"
                 icon={IconEnum.DragIndicator}
+                role="presentation"
                 size={3}
-                style={[styles.gutterIcon, orientation === Orientation.Vertical && styles.gutterIconVertical]}
+                style={[
+                  styles.gutterIcon,
+                  orientation === Orientation.Vertical
+                  && styles.gutterIconVertical,
+                ]}
               />
             </span>
           )}

@@ -1,13 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Toolbar from './Toolbar';
-import { Variant } from '../../types';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { Variant } from "../../types";
+import Toolbar from "./Toolbar";
 
 const meta: Meta<typeof Toolbar> = {
-  title: 'Component/Toolbar',
+  argTypes: {},
   component: Toolbar,
-  argTypes: {
-
-  }
+  title: "Component/Toolbar",
 };
 
 type Story = StoryObj<typeof meta>;
@@ -18,15 +17,15 @@ export const Default: Story = {
   args: {
     actions: [
       {
+        label: "Button 1",
         type: "button",
         variant: Variant.Default,
-        label: "Button 1",
       },
       {
+        label: "Button 2",
         type: "button",
         variant: Variant.Accent,
-        label: "Button 2",
-      }
-    ]
+      },
+    ],
   },
 } as Story;

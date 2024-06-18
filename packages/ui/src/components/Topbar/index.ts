@@ -1,3 +1,3 @@
-import { lazy } from 'react';
-export type { TopbarProps } from './Topbar';
-export const Topbar = lazy(() => import('./Topbar'));
+import { lazy } from "react";
+export type { TopbarProps } from "./Topbar";
+export const Topbar = lazy(() => import("./Topbar"));

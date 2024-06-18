@@ -1,14 +1,14 @@
 import { Align } from "../types";
 
-export const alignArgTypes = (prop: string) => ({
-  [prop]: {
+export const alignArgTypes = (property: string) => ({
+  [property]: {
     control: {
-      type: 'select',
       labels: {
-        [Align.Start]: 'Start',
-        [Align.Center]: 'Center',
-        [Align.End]: 'End',
+        [Align.Center]: "Center",
+        [Align.End]: "End",
+        [Align.Start]: "Start",
       },
+      type: "select",
     },
     options: [
       Align.Start,

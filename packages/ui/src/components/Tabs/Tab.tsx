@@ -1,93 +1,98 @@
 import * as stylex from "@stylexjs/stylex";
 import { type MouseEvent, useCallback } from "react";
-import { IconButton } from "../IconButton";
+
+import { IconEnum, Orientation, Position } from "../../types";
 import { Icon } from "../Icon";
-import { Orientation, Position, IconEnum } from "../../types";
+import { IconButton } from "../IconButton";
 import { backgroundColor, color } from "../tokens.stylex";
 
 export type TabProps = {
-  id: string;
   active?: boolean;
+  closeable?: boolean;
   icon?: IconEnum;
+  id: string;
   label: string;
   onTabChange?: (id: string) => void;
-  closeable?: boolean;
   onTabClose?: (id: string) => void;
   orientation?: Orientation;
   position?: Position;
 };
 
 const styles = stylex.create({
-  container: {
-    display: "flex",
-    margin: 0,
-    padding: 0,
-    flexDirection: "row",
-    justifyContent: "stretch",
-    alignItems: "center",
-    color: "inherit",
-    backgroundColor: {
-      default: "transparent",
-      ":hover": backgroundColor.alpha20,
-    },
-  },
   active: {
-    color: color.foreground,
     backgroundColor: {
-      default: backgroundColor.alpha75,
       "@media (prefers-color-scheme: dark)": backgroundColor.alpha35,
-    }
+      "default": backgroundColor.alpha75,
+    },
+    color: color.foreground,
   },
   button: {
+    alignItems: "center",
+    backgroundColor: "transparent",
+    border: "none",
+    color: "inherit",
+    cursor: "pointer",
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    gap: "0.25rem",
     flexGrow: 1,
-    backgroundColor: "transparent",
-    color: "inherit",
-    paddingInline: "1rem",
-    paddingBlock: "0.5rem",
-    border: "none",
-    cursor: "pointer",
+    gap: "0.25rem",
     outline: {
-      default: "none",
       ":focus": "none",
+      "default": "none",
     },
+    paddingBlock: "0.5rem",
+    paddingInline: "1rem",
   },
   closeButton: {
     flexShrink: 1,
     opacity: {
-      default: 0,
       ":hover": 100,
-    }
+      "default": 0,
+    },
   },
   closeButtonActive: {
     opacity: {
-      default: 50,
       ":hover": 100,
-    }
-  }
+      "default": 50,
+    },
+  },
+  container: {
+    alignItems: "center",
+    backgroundColor: {
+      ":hover": backgroundColor.alpha20,
+      "default": "transparent",
+    },
+    color: "inherit",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "stretch",
+    margin: 0,
+    padding: 0,
+  },
 });
 
 const Tab = ({
-  id,
   active,
-  label,
-  icon,
   closeable,
+  icon,
+  id,
+  label,
   // orientation = Orientation.Horizontal,
   // position = Position.Start,
   onTabChange,
-  onTabClose
+  onTabClose,
 }: TabProps) => {
-  const handleTabChange = useCallback((ev: MouseEvent<HTMLButtonElement>) => {
-    ev.preventDefault();
+  const handleTabChange = useCallback((
+    event: MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
     onTabChange?.(id);
   }, [onTabChange, id]);
 
-  const handleTabClose = useCallback((ev: MouseEvent<HTMLButtonElement>) => {
-    ev.preventDefault();
+  const handleTabClose = useCallback((
+    event: MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
     onTabClose?.(id);
   }, [onTabClose, id]);
 
@@ -95,16 +100,16 @@ const Tab = ({
     <div
       {...stylex.props(
         styles.container,
-        active && styles.active,
+        active && styles.active
       )}
     >
       <button
-        id={id}
-        role="tab"
         aria-controls={`${id}-panel`}
         aria-selected={active ? "true" : "false"}
-        tabIndex={active ? 0 : -1}
+        id={id}
         onClick={handleTabChange}
+        role="tab"
+        tabIndex={active ? 0 : -1}
         {...stylex.props(styles.button)}
       >
         {icon && <Icon icon={icon} />}
@@ -113,8 +118,11 @@ const Tab = ({
       {closeable && (
         <IconButton
           icon={IconEnum.Close}
-          style={[styles.closeButton, active && styles.closeButtonActive]}
           onClick={handleTabClose}
+          style={[
+            styles.closeButton,
+            active && styles.closeButtonActive,
+          ]}
         />
       )}
     </div>

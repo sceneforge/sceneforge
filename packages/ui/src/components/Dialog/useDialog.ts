@@ -3,9 +3,9 @@ import { Ref, useCallback, useEffect, useId, useImperativeHandle, useRef, useSta
 export type UseDialogProps = {
   open?: boolean;
   ref?: Ref<HTMLDialogElement>;
-}
+};
 
-export const useDialog = ({ ref, open, }: UseDialogProps) => {
+export const useDialog = ({ open, ref }: UseDialogProps) => {
   const [openState, setOpenState] = useState<boolean>(open ?? false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const headId = useId();
@@ -33,9 +33,9 @@ export const useDialog = ({ ref, open, }: UseDialogProps) => {
   }, [openState, dialogRef]);
 
   return {
+    descriptionId,
     dialogRef,
     handleCloseClick,
     headId,
-    descriptionId,
   };
 };

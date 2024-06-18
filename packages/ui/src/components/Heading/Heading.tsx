@@ -1,10 +1,10 @@
 import * as stylex from "@stylexjs/stylex";
 import { type HTMLAttributes, createElement } from "react";
 
-export type HeadingProps = Omit<HTMLAttributes<HTMLHeadingElement>, "style" | "className"> & {
+export type HeadingProps = {
   level: 1 | 2 | 3 | 4 | 5 | 6;
   style?: stylex.StyleXStyles;
-}
+} & Omit<HTMLAttributes<HTMLHeadingElement>, "className" | "style">;
 
 const styles = stylex.create({
   container: {

@@ -1,7 +1,8 @@
 import {
-  type Ref,
   type MouseEvent as ReactMouseEvent,
+  type Ref,
 } from "react";
+
 import { Variant } from "../../types";
 import { Button, type ButtonProps } from "../Button";
 import { useToggle } from "./useToggle";
@@ -16,46 +17,55 @@ export type ToggleEvent = {
 
 export interface ToggleComponentRef {
   get button(): HTMLButtonElement | undefined;
+
   get pressed(): boolean;
+
   set pressed(value: boolean);
-  toggle(event?: ReactMouseEvent<HTMLButtonElement, MouseEvent>, preventBubble?: boolean): void;
+
+  toggle(
+    event?: ReactMouseEvent<
+      HTMLButtonElement,
+      MouseEvent
+    >, preventBubble?: boolean
+  ): void;
 };
 
-export type ToggleProps = Omit<ButtonProps, "ref" | "onToggle"> & {
-  ref?: Ref<ToggleComponentRef>;
+export type ToggleProps = {
   label?: [string, string] | string;
-  pressed?: "false" | "true" | boolean;
-  variant?: [Variant, Variant] | Variant;
   onToggle?: (event: ToggleEvent) => void;
-};
+  pressed?: "false" | "true" | boolean;
+  ref?: Ref<ToggleComponentRef>;
+  variant?: [Variant, Variant] | Variant;
+} & Omit<ButtonProps, "onToggle" | "ref">;
 
 const Toggle = ({
-  ref,
   label,
-  pressed,
-  variant,
-  onToggle,
   onClick,
+  onToggle,
+  pressed,
+  ref,
+  variant,
   ...props
 }: ToggleProps) => {
   const {
+    buttonRef,
     currentLabel,
     currentVariant,
     handleClickEvent,
-    buttonRef,
-    isPressed
-  } = useToggle({ label, ref, variant, onToggle, onClick, pressed })
+    isPressed,
+  } = useToggle({ label, onClick, onToggle, pressed, ref, variant });
 
   return (
     <Button
-      role="switch"
       aria-pressed={isPressed}
       label={currentLabel}
-      variant={currentVariant}
       onClick={handleClickEvent}
+      role="switch"
+      variant={currentVariant}
       {...props}
       ref={buttonRef}
-    />);
+    />
+  );
 };
 
 export default Toggle;

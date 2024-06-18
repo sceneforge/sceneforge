@@ -1,23 +1,24 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Heading from './Heading';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import Heading from "./Heading";
 
 const meta: Meta<typeof Heading> = {
-  title: 'Component/Heading',
-  component: Heading,
   argTypes: {
+    children: {
+      control: "text",
+    },
     level: {
       control: {
-        type: 'range',
-        min: 1,
         max: 6,
+        min: 1,
+        type: "range",
       },
-      min: 1,
       max: 6,
+      min: 1,
     },
-    children: {
-      control: 'text',
-    },
-  }
+  },
+  component: Heading,
+  title: "Component/Heading",
 };
 
 type Story = StoryObj<typeof meta>;
@@ -26,7 +27,7 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    level: 1,
     children: "Heading Text Content",
+    level: 1,
   },
 } as Story;

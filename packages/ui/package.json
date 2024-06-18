@@ -28,11 +28,12 @@
     "url": "https://phinpho.github.io/"
   },
   "scripts": {
-    "prepack": "yarn build",
     "build": "yarn rollup --config rollup.config.mjs",
-    "storybook": "storybook dev -p 6006",
+    "lint": "eslint .",
+    "prepack": "yarn build",
+    "storybook:build": "storybook build",
     "storybook:docs": "storybook dev --docs",
-    "storybook:build": "storybook build"
+    "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
     "@stylexjs/stylex": "^0.6.1"
@@ -46,6 +47,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
+    "@sceneforge/eslint": "workspace:*",
     "@storybook/addon-docs": "^8.1.6",
     "@storybook/addon-essentials": "^8.1.6",
     "@storybook/addon-interactions": "^8.1.6",
@@ -61,6 +63,7 @@
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",
     "@types/rollup-plugin-peer-deps-external": "^2",
+    "eslint": "^9.5.0",
     "react": "*",
     "react-dom": "*",
     "rollup": "^4.18.0",
@@ -76,6 +79,5 @@
   "engines": {
     "node": ">=21.7.1 < 22",
     "yarn": ">=4.3.0 < 5"
-  },
-  "packageManager": "yarn@4.3.0"
+  }
 }

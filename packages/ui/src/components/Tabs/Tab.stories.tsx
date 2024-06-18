@@ -1,23 +1,24 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Tab from './Tab';
-import { orientationArgTypes, positionArgTypes } from '../../storiesHelpers';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { orientationArgTypes as orientationArgumentTypes, positionArgTypes as positionArgumentTypes } from "../../storiesHelpers";
+import Tab from "./Tab";
 
 const meta: Meta<typeof Tab> = {
-  title: 'Component/Tabs/Tab',
-  component: Tab,
   argTypes: {
-    label: {
-      control: 'text',
-    },
     active: {
-      control: 'boolean'
+      control: "boolean",
     },
     id: {
-      control: 'text'
+      control: "text",
     },
-    ...positionArgTypes('position'),
-    ...orientationArgTypes('orientation'),
-  }
+    label: {
+      control: "text",
+    },
+    ...positionArgumentTypes("position"),
+    ...orientationArgumentTypes("orientation"),
+  },
+  component: Tab,
+  title: "Component/Tabs/Tab",
 };
 
 type Story = StoryObj<typeof meta>;

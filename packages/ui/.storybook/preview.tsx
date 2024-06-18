@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/react";
+
 import { AppLayout } from "../src";
 import "../src/styles/reset.css";
 import "./index.css";
@@ -11,17 +12,17 @@ const preview: Preview = {
           <Story {...parameters} />
         </AppLayout>
       </>
-    )
+    ),
   ],
-  tags: ["autodocs"],
   parameters: {
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
+        date: /date$/i,
       },
     },
   },
+  tags: ["autodocs"],
 };
 
 export default preview;

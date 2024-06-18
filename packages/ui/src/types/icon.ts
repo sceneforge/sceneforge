@@ -26,7 +26,7 @@ export type IconType = "add" |
   "transform" |
   "uploadFile" |
   "visibility" |
-  "visibilityOff"
+  "visibilityOff";
 
 export enum IconEnum {
   Add = "add",

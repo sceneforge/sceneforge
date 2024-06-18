@@ -1,134 +1,138 @@
-import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
+
+import * as stylex from "@stylexjs/stylex";
 import {
   type DialogHTMLAttributes,
   type Ref,
 } from "react";
 
-import { Heading } from "../Heading";
 import { IconEnum, Variant } from "../../types";
+import { Heading } from "../Heading";
 import { IconButton } from "../IconButton";
 import { Toolbar, ToolbarProps } from "../Toolbar";
-import { useDialog } from "./useDialog";
 import { backgroundColor, color } from "../tokens.stylex";
+import { useDialog } from "./useDialog";
 
-export type DialogProps = Omit<DialogHTMLAttributes<HTMLDialogElement>, "style"> & {
+export type DialogProps = {
   description?: string;
-  extendedClassName?: string;
+  ref?: Ref<HTMLDialogElement>;
+  style?: StyleXStyles;
   title?: string;
   toolbar?: ToolbarProps;
   variant?: Variant;
-  ref?: Ref<HTMLDialogElement>;
-  style?: StyleXStyles;
-};
+} & Omit<DialogHTMLAttributes<HTMLDialogElement>, "style">;
 
 const styles = stylex.create({
+  closeButton: {
+    flexShrink: 1,
+    height: "1.25rem",
+    padding: "0.125rem",
+    width: "1.25rem",
+  },
   container: {
-    position: "fixed",
-    insetBlock: "50%",
-    insetInline: "50%",
-    margin: 0,
-    padding: 0,
-    minWidth: "16rem",
-    display: "flex",
-    flexDirection: "column",
-    transform: "translateX(-50%) translateY(-50%)",
-    overflow: "clip",
-    borderWidth: "1px",
-    borderStyle: "solid",
-    borderRadius: "0.5rem",
-    color: "inherit",
     "::backdrop": {
+      backdropFilter: "blur(2px) grayscale(60%)",
       height: "100%",
       width: "100%",
-      backdropFilter: "blur(2px) grayscale(60%)",
     },
-    borderColor: backgroundColor.alpha10,
+    "borderColor": backgroundColor.alpha10,
+    "borderRadius": "0.5rem",
+    "borderStyle": "solid",
+    "borderWidth": "1px",
+    "color": "inherit",
+    "display": "flex",
+    "flexDirection": "column",
+    "insetBlock": "50%",
+    "insetInline": "50%",
+    "margin": 0,
+    "minWidth": "16rem",
+    "overflow": "clip",
+    "padding": 0,
+    "position": "fixed",
+    "transform": "translateX(-50%) translateY(-50%)",
   },
   containerColor: () => ({
     filter: `drop-shadow(0 25px 25px color-mix(in srgb, ${color.foreground} 15%, transparent))`,
   }),
-  variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
-    backgroundColor: color[background],
-    color: color[text],
-    "::backdrop": {
-      backgroundColor: `color-mix(in srgb, ${String(color[background])} 10%, transparent)`
-    }
-  }),
-  heading: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    flexShrink: 1,
-    alignItems: "center",
-    justifyContent: "stretch",
-    gap: "0.5rem",
-    borderBlockEndWidth: "1px",
-    borderBlockEndStyle: "solid",
-    padding: "0.5rem",
-    borderBlockEndColor: backgroundColor.alpha20,
-    backgroundColor: backgroundColor.alpha10,
-  },
-  head: {
+  descriptionParagraph: {
     margin: 0,
-    padding: 0,
-    flexGrow: 1,
-    textAlign: "start",
-    textWrap: "nowrap",
-    fontSize: "1rem",
-  },
-  closeButton: {
-    flexShrink: 1,
-    width: "1.25rem",
-    height: "1.25rem",
-    padding: "0.125rem",
   },
   document: {
+    backgroundColor: backgroundColor.alpha25,
     display: "flex",
-    flexGrow: 1,
     flexDirection: "column",
+    flexGrow: 1,
+    fontSize: "0.875rem",
     justifyContent: "stretch",
     textAlign: "start",
-    fontSize: "0.875rem",
-    backgroundColor: backgroundColor.alpha25,
+  },
+  head: {
+    flexGrow: 1,
+    fontSize: "1rem",
+    margin: 0,
+    padding: 0,
+    textAlign: "start",
+    textWrap: "nowrap",
+  },
+  heading: {
+    alignItems: "center",
+    backgroundColor: backgroundColor.alpha10,
+    borderBlockEndColor: backgroundColor.alpha20,
+    borderBlockEndStyle: "solid",
+    borderBlockEndWidth: "1px",
+    display: "flex",
+    flexDirection: "row",
+    flexShrink: 1,
+    flexWrap: "nowrap",
+    gap: "0.5rem",
+    justifyContent: "stretch",
+    padding: "0.5rem",
   },
   innerContent: {
     marginBlockEnd: "1rem",
     padding: "0.5rem",
   },
-  descriptionParagraph: {
-    margin: 0,
-  },
   toolbar: {
-    width: "100%",
+    alignItems: "center",
+    backgroundColor: backgroundColor.alpha10,
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
     padding: "0.5rem",
     textAlign: "center",
-    backgroundColor: backgroundColor.alpha10,
+    width: "100%",
   },
+  variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
+    "::backdrop": {
+      backgroundColor: `color-mix(in srgb, ${String(color[background])} 10%, transparent)`,
+    },
+    "backgroundColor": color[background],
+    "color": color[text],
+  }),
 });
 
 const Dialog = (
   {
     children,
     description,
-    extendedClassName,
     onCancel,
     onClose,
     open = true,
+    ref,
+    style,
     title,
     toolbar,
     variant,
-    style,
-    ref,
     ...props
-  }: DialogProps,
+  }: DialogProps
 
 ) => {
-  const { dialogRef, handleCloseClick, headId, descriptionId } = useDialog({ open, ref });
+  const {
+    descriptionId,
+    dialogRef,
+    handleCloseClick,
+    headId,
+  } = useDialog({ open, ref });
 
   return (
     <dialog
@@ -147,7 +151,7 @@ const Dialog = (
         variant === Variant.Danger && styles.variantColor("danger", "dangerText"),
         variant === Variant.Info && styles.variantColor("info", "infoText"),
         variant === Variant.Success && styles.variantColor("success", "successText"),
-        variant === Variant.Warning && styles.variantColor("warning", "warningText"),
+        variant === Variant.Warning && styles.variantColor("warning", "warningText")
       )}
     >
       <div {...stylex.props(styles.heading, style)}>
@@ -159,19 +163,24 @@ const Dialog = (
           {title}
         </Heading>
         <IconButton
-          inverted
           autoFocus
-          style={styles.closeButton}
           icon={IconEnum.Close}
-          size={3}
+          inverted
           label="Close"
           onClick={handleCloseClick}
+          size={3}
+          style={styles.closeButton}
         />
       </div>
       <div role="document" {...stylex.props(styles.document)}>
         <div {...stylex.props(styles.innerContent)}>
           {description && (
-            <p {...stylex.props(styles.descriptionParagraph)} id={descriptionId}>
+            <p
+              {...stylex.props(
+                styles.descriptionParagraph
+              )}
+              id={descriptionId}
+            >
               {description}
             </p>
           )}

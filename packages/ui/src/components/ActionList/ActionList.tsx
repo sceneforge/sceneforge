@@ -1,29 +1,33 @@
-import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
+
+import * as stylex from "@stylexjs/stylex";
 import { type Ref, useId } from "react";
+
 import type { Variant } from "../../types";
+
 import { Action, type ActionProps } from "../Action";
 
 export type ActionListProps = {
-  id?: string;
-  anchor?: string;
   actions?: ActionProps[];
-  popover?: "manual" | "auto";
-  variant?: Variant;
+  anchor?: string;
+  id?: string;
+  popover?: "auto" | "manual";
   ref?: Ref<HTMLUListElement>;
   style?: StyleXStyles;
+  variant?: Variant;
 };
 
 const ActionList = ({
-  id,
   actions,
   anchor,
+  id,
   popover,
   ref,
   style,
 }: ActionListProps) => {
-  const currentId = id ?? useId();
-  if (!actions || actions.length < 1) return null;
+  const generatedId = useId();
+  const currentId = id ?? generatedId;
+  if (!actions || actions.length === 0) return null;
 
   return (
     <ul

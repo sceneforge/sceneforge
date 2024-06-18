@@ -31,29 +31,23 @@
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
     "@commitlint/format": "^19.0.3",
-    "@eslint/compat": "^1.0.1",
-    "@eslint/js": "^9.1.1",
-    "@stylistic/eslint-plugin": "^2.1.0",
+    "@sceneforge/eslint": "workspace:*",
     "@types/concurrently": "^7.0.0",
     "@types/node": "^20.12.7",
     "concurrently": "^8.2.2",
     "conventional-changelog-angular": "^8.0.0",
     "conventional-changelog-cli": "^5.0.0",
     "eslint": "^9.1.1",
-    "eslint-plugin-perfectionist": "^2.10.0",
-    "eslint-plugin-unicorn": "^53.0.0",
-    "globals": "^15.0.0",
     "husky": "^9.0.11",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^7.7.1"
+    "typescript": "^5.4.5"
   },
   "resolutions": {
-    "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",
-    "react": "19.0.0-rc-38e3b23483-20240529",
+    "@types/react": "npm:types-react@rc",
+    "eslint": "^9.5.0",
     "react-dom": "19.0.0-rc-38e3b23483-20240529",
-    "unocss": "0.60.4"
+    "react": "19.0.0-rc-38e3b23483-20240529"
   },
   "workspaces": [
     "apps/*",

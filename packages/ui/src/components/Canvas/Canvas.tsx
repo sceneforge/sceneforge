@@ -1,20 +1,20 @@
-import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
-
 import type {
   CanvasHTMLAttributes,
   DetailedHTMLProps,
 } from "react";
 
-export type CanvasProps = Omit<DetailedHTMLProps<CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement>, "style"> & {
-  style?: StyleXStyles
-};
+import * as stylex from "@stylexjs/stylex";
+
+export type CanvasProps = {
+  style?: StyleXStyles;
+} & Omit<DetailedHTMLProps<CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement>, "style">;
 
 const styles = stylex.create({
   container: {
     height: "100%",
-    width: "100%",
     touchAction: "none",
+    width: "100%",
   },
 });
 

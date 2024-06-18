@@ -1,10 +1,10 @@
-export const getNumber = (num?: unknown, fallback?: number): number => {
-  if (typeof num === "number") return num;
-  if (typeof num === "string" || num instanceof String) {
-    const parsed = parseFloat(num.toString().replaceAll(/[^0-9a-fA-F.,-_]/g, ""));
-    if (isNaN(parsed)) return fallback ?? 0;
+export const getNumber = (number_?: unknown, fallback?: number): number => {
+  if (typeof number_ === "number") return number_;
+  if (typeof number_ === "string" || number_ instanceof String) {
+    const parsed = Number.parseFloat(number_.toString().replaceAll(/[^\d,-_a-f]/g, ""));
+    if (Number.isNaN(parsed)) return fallback ?? 0;
     return parsed;
   }
-  if (num instanceof Number) return num.valueOf();
+  if (number_ instanceof Number) return number_.valueOf();
   return fallback ?? 0;
 };

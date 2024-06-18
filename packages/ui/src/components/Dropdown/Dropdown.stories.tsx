@@ -1,23 +1,24 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Dropdown from './Dropdown';
-import { variantArgTypes } from '../../storiesHelpers';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import Dropdown from "./Dropdown";
 
 const meta: Meta<typeof Dropdown> = {
-  title: 'Component/Dropdown',
-  component: Dropdown,
   argTypes: {
     children: {
-      control: 'text',
+      control: "text",
     },
-    ...variantArgTypes('variant'),
+    ...variantArgumentTypes("variant"),
   },
+  component: Dropdown,
   decorators: [
-    (Story) => (
+    Story => (
       <div style={{ padding: "1rem" }}>
         <Story />
       </div>
-    )
-  ]
+    ),
+  ],
+  title: "Component/Dropdown",
 };
 
 type Story = StoryObj<typeof meta>;
@@ -26,18 +27,18 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    children: "Dropdown Text Content",
     actions: [
-      { type: "button", label: "Action 1" },
-      { type: "button", label: "Action 2" },
-      { type: "button", label: "Action 3" },
+      { label: "Action 1", type: "button" },
+      { label: "Action 2", type: "button" },
+      { label: "Action 3", type: "button" },
       {
-        type: "dropdown", label: "Submenu", actions: [
-          { type: "button", label: "Submenu Action 1" },
-          { type: "button", label: "Submenu Action 2" },
-          { type: "button", label: "Submenu Action 3" },
-        ]
-      }
-    ]
+        actions: [
+          { label: "Submenu Action 1", type: "button" },
+          { label: "Submenu Action 2", type: "button" },
+          { label: "Submenu Action 3", type: "button" },
+        ], label: "Submenu", type: "dropdown",
+      },
+    ],
+    children: "Dropdown Text Content",
   },
 } as Story;

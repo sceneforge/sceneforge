@@ -1,28 +1,29 @@
 import * as stylex from "@stylexjs/stylex";
 import { useId } from "react";
+
 import { Action, ActionProps } from "../Action";
 
 export type ToolbarProps = {
-  id?: string;
   actions?: ActionProps[];
+  id?: string;
 };
 
 const styles = stylex.create({
   container: {
     display: "flex",
-    flexShrink: 1,
     flexDirection: "row",
+    flexShrink: 1,
+    gap: "0.5rem",
+    listStyle: "none",
     margin: 0,
     padding: 0,
-    listStyle: "none",
-    gap: "0.5rem",
-  }
+  },
 });
 
-const Toolbar = ({ id, actions }: ToolbarProps) => {
+const Toolbar = ({ actions, id }: ToolbarProps) => {
   const generatedId = useId();
   const currentId = id ?? generatedId;
-  if (!actions || actions.length < 1) return;
+  if (!actions || actions.length === 0) return;
 
   return (
     <ul id={currentId} {...stylex.props(styles.container)}>

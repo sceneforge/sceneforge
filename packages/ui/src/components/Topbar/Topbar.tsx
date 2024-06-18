@@ -1,76 +1,77 @@
 import * as stylex from "@stylexjs/stylex";
 import { useId } from "react";
+
+import { Variant } from "../../types";
 import { Heading } from "../Heading";
 import { Toolbar, type ToolbarProps } from "../Toolbar";
-import { Variant } from "../../types";
-import { color, titleBar } from "../tokens.stylex";
 import { View } from "../View";
+import { color, titleBar } from "../tokens.stylex";
 
 export type TopbarProps = {
   id?: string;
   title?: string;
-  toolbarStart?: ToolbarProps;
   toolbarEnd?: ToolbarProps;
+  toolbarStart?: ToolbarProps;
   variant?: Variant;
 };
 
 const styles = stylex.create({
   container: {
-    position: "fixed",
     backgroundColor: color.background,
-    width: "100%",
+    borderBlockEndStyle: "solid",
+    borderBlockEndWidth: "1px",
+    height: titleBar.appTitleBarHeight,
     insetBlockStart: titleBar.appTitleBarInsetBlockStart,
     insetInline: 0,
-    height: titleBar.appTitleBarHeight,
-    borderBlockEndWidth: "1px",
-    borderBlockEndStyle: "solid",
+    position: "fixed",
+    width: "100%",
   },
   containerBorderAndShadow: () => ({
     borderBlockEndColor: `color-mix(in srgb, ${color.foreground} 75%, transparent)`,
-    boxShadow: `0 4px 6px -1px color-mix(in srgb, ${color.foreground} 30%, transparent)`
+    boxShadow: `0 4px 6px -1px color-mix(in srgb, ${color.foreground} 30%, transparent)`,
   }),
   content: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "stretch",
     gap: "0.5rem",
-    position: "absolute",
     height: "100%",
-    paddingInline: "1rem",
     insetBlockStart: 0,
     insetInlineStart: titleBar.appTitleBarInsetInlineStart,
+    justifyContent: "stretch",
+    paddingInline: "1rem",
+    position: "absolute",
     width: titleBar.appTitleBarWidth,
   },
   heading: {
+    fontSize: "1rem",
     margin: 0,
     padding: 0,
     textWrap: "nowrap",
-    fontSize: "1rem"
   },
   toolbar: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
     height: "100%",
-    width: "100%",
     justifyContent: "flex-start",
+    width: "100%",
   },
   toolbarEnd: {
     justifyContent: "flex-end",
   },
   variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
     backgroundColor: color[background],
-    color: color[text]
+    color: color[text],
   }),
 });
 
 const Topbar = ({
   id,
   title,
-  toolbarStart,
   toolbarEnd,
-  variant
+  toolbarStart,
+  variant,
 }: TopbarProps) => {
   const generatedId = useId();
   const currentId = id ?? generatedId;

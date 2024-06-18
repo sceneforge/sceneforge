@@ -1,7 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren } from "react";
-import { Action, type ActionProps } from "../Action";
+
 import { Variant } from "../../types";
+import { Action, type ActionProps } from "../Action";
 import { backgroundColor, color } from "../tokens.stylex";
 
 export type CardProps = PropsWithChildren<{
@@ -13,20 +14,74 @@ export type CardProps = PropsWithChildren<{
 }>;
 
 const styles = stylex.create({
-  container: {
-    position: "relative",
-    height: "100%",
-    width: "100%",
-    overflow: "clip",
-    borderRadius: "0.5rem",
-    backgroundColor: color.background,
-    color: color.foreground,
-    textAlign: "start",
+  actions: {
+    color: "inherit",
+    display: "flex",
+    flexDirection: "row",
+    gap: "0.5rem",
+    justifyContent: "stretch",
+    padding: "0.75rem",
   },
-  variantColor: (background: keyof typeof color, percent: number, text?: keyof typeof color) => ({
-    backgroundColor: `color-mix(in srgb, ${String(color[background])} ${percent}%, transparent)`,
-    color: text ? color[text] : color.foreground,
-  }),
+  children: {
+    color: "inherit",
+    width: "100%",
+  },
+  container: {
+    backgroundColor: color.background,
+    borderRadius: "0.5rem",
+    color: color.foreground,
+    height: "100%",
+    overflow: "clip",
+    position: "relative",
+    textAlign: "start",
+    width: "100%",
+  },
+  image: {
+    display: "block",
+    position: "absolute",
+  },
+  imageContainer: {
+    "::after": {
+      content: "''",
+      display: "block",
+      paddingBlockEnd: "80%",
+    },
+    "backgroundColor": backgroundColor.alpha20,
+    "borderEndEndRadius": "0.5rem",
+    "borderEndStartRadius": "0.5rem",
+    "overflow": "clip",
+    "position": "relative",
+  },
+  imageZoom0: {
+    marginBlock: 0,
+    marginInline: 0,
+    maxWidth: "100%",
+    width: "100%",
+  },
+  imageZoom1: {
+    marginBlock: "-10%",
+    marginInline: "-25%",
+    maxWidth: "150%",
+    width: "150%",
+  },
+  imageZoom2: {
+    marginBlock: "-20%",
+    marginInline: "-50%",
+    maxWidth: "200%",
+    width: "200%",
+  },
+  imageZoom3: {
+    marginBlock: "-30%",
+    marginInline: "-75%",
+    maxWidth: "250%",
+    width: "250%",
+  },
+  imageZoom4: {
+    marginBlock: "-40%",
+    marginInline: "-100%",
+    maxWidth: "300%",
+    width: "300%",
+  },
   title: {
     display: "block",
     fontSize: "1rem",
@@ -34,64 +89,14 @@ const styles = stylex.create({
     paddingInline: "1rem",
     textAlign: "start",
   },
-  imageContainer: {
-    position: "relative",
-    overflow: "clip",
-    borderEndStartRadius: "0.5rem",
-    borderEndEndRadius: "0.5rem",
-    "::after": {
-      display: "block",
-      content: "''",
-      paddingBlockEnd: "80%",
-    },
-    backgroundColor: backgroundColor.alpha20,
-  },
-  image: {
-    position: "absolute",
-    display: "block",
-  },
-  imageZoom0: {
-    width: "100%",
-    maxWidth: "100%",
-    marginBlock: 0,
-    marginInline: 0,
-  },
-  imageZoom1: {
-    width: "150%",
-    maxWidth: "150%",
-    marginBlock: "-10%",
-    marginInline: "-25%",
-  },
-  imageZoom2: {
-    width: "200%",
-    maxWidth: "200%",
-    marginBlock: "-20%",
-    marginInline: "-50%",
-  },
-  imageZoom3: {
-    width: "250%",
-    maxWidth: "250%",
-    marginBlock: "-30%",
-    marginInline: "-75%",
-  },
-  imageZoom4: {
-    width: "300%",
-    maxWidth: "300%",
-    marginBlock: "-40%",
-    marginInline: "-100%",
-  },
-  children: {
-    width: "100%",
-    color: "inherit",
-  },
-  actions: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "stretch",
-    gap: "0.5rem",
-    padding: "0.75rem",
-    color: "inherit",
-  }
+  variantColor: (
+    background: keyof typeof color,
+    percent: number,
+    text?: keyof typeof color
+  ) => ({
+    backgroundColor: `color-mix(in srgb, ${String(color[background])} ${percent}%, transparent)`,
+    color: text ? color[text] : color.foreground,
+  }),
 });
 
 const Card = ({
@@ -151,7 +156,7 @@ const Card = ({
             variant === Variant.Danger && styles.variantColor("danger", 25),
             variant === Variant.Info && styles.variantColor("info", 25),
             variant === Variant.Success && styles.variantColor("success", 25),
-            variant === Variant.Warning && styles.variantColor("warning", 25),
+            variant === Variant.Warning && styles.variantColor("warning", 25)
           )}
         >
           {children}
@@ -167,7 +172,7 @@ const Card = ({
             variant === Variant.Danger && styles.variantColor("danger", 35),
             variant === Variant.Info && styles.variantColor("info", 35),
             variant === Variant.Success && styles.variantColor("success", 35),
-            variant === Variant.Warning && styles.variantColor("warning", 35),
+            variant === Variant.Warning && styles.variantColor("warning", 35)
           )}
         >
           {actions.map((props, index) => (

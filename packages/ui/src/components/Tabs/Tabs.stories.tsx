@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Tabs from './Tabs';
-import { IconEnum } from '../../types';
-import { alignArgTypes, orientationArgTypes, positionArgTypes, variantArgTypes } from '../../storiesHelpers';
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { alignArgTypes as alignArgumentTypes, orientationArgTypes as orientationArgumentTypes, positionArgTypes as positionArgumentTypes, variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { IconEnum } from "../../types";
+import Tabs from "./Tabs";
 
 const meta: Meta<typeof Tabs> = {
-  title: 'Component/Tabs',
-  component: Tabs,
   argTypes: {
-    ...variantArgTypes('variant'),
-    ...orientationArgTypes('orientation'),
-    ...positionArgTypes('position'),
-    ...alignArgTypes('align'),
-  }
+    ...variantArgumentTypes("variant"),
+    ...orientationArgumentTypes("orientation"),
+    ...positionArgumentTypes("position"),
+    ...alignArgumentTypes("align"),
+  },
+  component: Tabs,
+  title: "Component/Tabs",
 };
 
 type Story = StoryObj<typeof meta>;
@@ -22,39 +23,39 @@ export const Default: Story = {
   args: {
     activeTabId: "tab-1",
     closeable: true,
-    label: "Tabs Label",
-
     content: [
       {
-        tab: {
-          id: "tab-1",
-          label: "Tab 1",
-          icon: IconEnum.DeployedCode,
-        },
         panel: {
           component: () => "TabPanel 1 Content",
         },
+        tab: {
+          icon: IconEnum.DeployedCode,
+          id: "tab-1",
+          label: "Tab 1",
+        },
       },
       {
-        tab: {
-          id: "tab-2",
-          label: "Tab 2",
-          icon: IconEnum.Settings,
-        },
         panel: {
           component: () => "TabPanel 2 Content",
-        }
+        },
+        tab: {
+          icon: IconEnum.Settings,
+          id: "tab-2",
+          label: "Tab 2",
+        },
       },
       {
-        tab: {
-          id: "tab-3",
-          label: "Tab 3",
-          icon: IconEnum.Lightbulb,
-        },
         panel: {
           component: () => "TabPanel 3 Content",
-        }
-      }
-    ]
+        },
+        tab: {
+          icon: IconEnum.Lightbulb,
+          id: "tab-3",
+          label: "Tab 3",
+        },
+      },
+    ],
+
+    label: "Tabs Label",
   },
 } as Story;

@@ -1,47 +1,49 @@
-import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
-import type { Ref, HTMLAttributes } from "react";
+import type { HTMLAttributes, Ref } from "react";
+
+import * as stylex from "@stylexjs/stylex";
+
 import { IconEnum, Variant } from "../../types";
 import { color, icons } from "../tokens.stylex";
 
-export type IconProps = Omit<HTMLAttributes<HTMLSpanElement>, "className" | "style"> & {
+export type IconProps = {
   icon: IconEnum;
-  size?: number;
-  variant?: Variant;
   ref?: Ref<HTMLSpanElement>;
+  size?: number;
   style?: StyleXStyles;
-};
+  variant?: Variant;
+} & Omit<HTMLAttributes<HTMLSpanElement>, "className" | "style">;
 
 const styles = stylex.create({
   container: {
-    display: "block",
     backgroundColor: "currentColor",
-    width: "1em",
-    height: "1em",
-    maskSize: "100% 100%",
-    maskRepeat: "no-repeat",
     color: "inherit",
+    display: "block",
+    height: "1em",
+    maskRepeat: "no-repeat",
+    maskSize: "100% 100%",
+    width: "1em",
   },
+  icon: (iconKey: keyof typeof icons) => ({
+    mask: `${String(icons[iconKey])} no-repeat`,
+  }),
   size: (size: number) => ({
-    width: `${0.25 * size}rem`,
     height: `${0.25 * size}rem`,
-    minWidth: `${0.25 * size}rem`,
     minHeight: `${0.25 * size}rem`,
+    minWidth: `${0.25 * size}rem`,
+    width: `${0.25 * size}rem`,
   }),
   variantColor: (text: keyof typeof color) => ({
     color: color[text],
-  }),
-  icon: (iconKey: keyof typeof icons) => ({
-    mask: `${String(icons[iconKey])} no-repeat`,
   }),
 });
 
 const Icon = ({
   icon,
-  size = 4,
-  variant,
-  style,
   ref,
+  size = 4,
+  style,
+  variant,
   ...props
 }: IconProps) => {
   return (
@@ -87,7 +89,7 @@ const Icon = ({
         icon === IconEnum.Visibility && styles.icon("visibility"),
         icon === IconEnum.VisibilityOff && styles.icon("visibilityOff"),
         styles.size(size),
-        style,
+        style
       )}
     />
   );
