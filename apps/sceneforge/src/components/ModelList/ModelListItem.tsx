@@ -13,7 +13,6 @@ export const ModelListItem = ({ model }: ModelListItemProps) => {
   const {
     closeDeleteModelDialog,
     handleDeleteModel,
-    handleOpenModel,
     openDeleteModelDialog,
     showDeleteDialog,
   } = useModelListItem(model);
@@ -23,7 +22,7 @@ export const ModelListItem = ({ model }: ModelListItemProps) => {
         actions={[
           {
             label: t("ModelListItem.actions.openButton"),
-            onClick: handleOpenModel,
+            onClick: () => void 0,
             type: "button",
             variant: Variant.Accent,
           },
