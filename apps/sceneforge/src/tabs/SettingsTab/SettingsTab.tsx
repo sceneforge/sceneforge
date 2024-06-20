@@ -7,7 +7,6 @@ import { InputList, InputListItem } from "../../components/InputList";
 import { usePanel } from "../../components/Panel";
 import { SafeArea } from "../../components/SafeArea";
 import { Section } from "../../components/Section";
-import { useTabPanel } from "../../components/TabPanel";
 
 export const SettingsTab = () => {
   const { t } = useTranslation("tabs");
@@ -25,16 +24,15 @@ export const SettingsTab = () => {
     languageList,
     setUserData,
   } = usePanel();
-  const { setTabsPosition, tabsPosition } = useTabPanel();
   const [showWelcome, setShowWelcome] = useState(true);
 
   const changeTabsPosition = useCallback(
     (event: ChangeEvent<HTMLSelectElement>): void => {
       if (event.target.value === "top" || event.target.value === "bottom") {
-        const position = event.target.value;
+        // const position = event.target.value;
         setUserData("settings", "tabs-position", event.target.value)
           .then(() => {
-            setTabsPosition(position);
+            // setTabsPosition(position);
           })
           .catch((error: unknown) => {
             throw new Error("Failed to set tabs position", { cause: error });
@@ -43,14 +41,14 @@ export const SettingsTab = () => {
       else {
         setUserData("settings", "tabs-position", "bottom")
           .then(() => {
-            setTabsPosition("bottom");
+            // setTabsPosition("bottom");
           })
           .catch((error: unknown) => {
             throw new Error("Failed to set tabs position", { cause: error });
           });
       }
     },
-    [setTabsPosition, setUserData]
+    [setUserData]
   );
 
   const changeShowWelcomeStartup = useCallback(
@@ -64,14 +62,15 @@ export const SettingsTab = () => {
   useEffect(() => {
     getUserData("settings", "tabs-position", (position) => {
       if (position && typeof position === "string") {
-        if (position === "top" || position === "bottom")
-          setTabsPosition(position);
+        if (position === "top" || position === "bottom") {
+          // setTabsPosition(position);
+        }
       }
       else {
-        setTabsPosition("bottom");
+        // setTabsPosition("bottom");
       }
     });
-  }, [getUserData, setTabsPosition]);
+  }, [getUserData]);
 
   useEffect(() => {
     getUserData("settings", "welcome", (show) => {
@@ -132,7 +131,6 @@ export const SettingsTab = () => {
                 },
               ]}
               type="select"
-              value={tabsPosition}
             />
           </InputList>
         </Card>

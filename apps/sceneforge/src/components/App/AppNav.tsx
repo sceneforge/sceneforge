@@ -1,14 +1,12 @@
 import { type ToolbarProps, Topbar, Variant } from "@sceneforge/ui";
 import { useTranslation } from "react-i18next";
 
-import { useShortcuts } from "../../hooks/useShortcuts";
 import { useAppInstall } from "../AppInstall";
 import { usePanel } from "../Panel";
 
 export const AppNav = () => {
   const { t } = useTranslation("App");
   const { appTitle } = usePanel();
-  const { openTabAbout, openTabHome, openTabSettings } = useShortcuts();
   const { openInstallDialog, showInstall }
     = useAppInstall();
 
@@ -16,17 +14,17 @@ export const AppNav = () => {
     actions: [
       {
         label: t("AppNav.toolbarEnd.homeButton"),
-        onClick: openTabHome,
+        onClick: () => void 0,
         type: "button",
       },
       {
         label: t("AppNav.toolbarEnd.aboutButton"),
-        onClick: openTabAbout,
+        onClick: () => void 0,
         type: "button",
       },
       {
         label: t("AppNav.toolbarEnd.settingsButton"),
-        onClick: openTabSettings,
+        onClick: () => void 0,
         type: "button",
       },
     ],

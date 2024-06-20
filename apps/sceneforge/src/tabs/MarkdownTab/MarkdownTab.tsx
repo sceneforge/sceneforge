@@ -1,13 +1,17 @@
-import { Markdown, type MarkdownProps } from "../../components/Markdown";
+import type { TabComponentType } from "@sceneforge/ui";
+
+import { Markdown } from "../../components/Markdown";
 import { SafeArea } from "../../components/SafeArea";
-import { type TabProps } from "../../components/TabPanel";
 
-export type MarkdownTabProps = TabProps<MarkdownProps>;
+const getHrefByTabId = (...args: unknown[]): string => {
+  console.log("DEBUG: getHrefByTabId", args);
+  throw new Error("Not implemented");
+};
 
-export const MarkdownTab = ({ href, value }: MarkdownTabProps) => {
+export const MarkdownTab: TabComponentType = ({ tabId }) => {
   return (
     <SafeArea horizonal vertical>
-      <Markdown href={href} value={value} />
+      <Markdown href={getHrefByTabId(tabId)} />
     </SafeArea>
   );
 };
