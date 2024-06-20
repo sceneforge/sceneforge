@@ -1,3 +1,4 @@
+import { IconEnum } from "@sceneforge/ui";
 import { MouseEventHandler, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -24,7 +25,7 @@ export const SceneObjectSection = ({
     <PanelSheetSection
       actions={[
         {
-          icon: "close",
+          icon: IconEnum.Close,
           label: t("SceneObjectSection.actions.closeButton"),
           onClick: onClose,
           type: "icon",

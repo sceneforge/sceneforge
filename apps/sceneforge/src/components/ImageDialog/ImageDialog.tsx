@@ -31,7 +31,6 @@ export const ImageDialog = ({ alt, src, title }: ImageDialogProps) => {
       </Button>
       {isOpen && (
         <Dialog
-          extendedClassName="w-full lg:w-80% xl:w-70% 2xl:w-60%"
           onClose={closeImageDialog}
           title={alt}
           variant={Variant.Accent}
