@@ -10,14 +10,12 @@ import { useTranslation } from "react-i18next";
 import { AppInstallProvider } from "../AppInstall";
 import { ContextMenuProvider } from "../ContextMenu";
 import { ModelContextProvider } from "../ModelContext";
-import { PanelProvider, type PanelProviderProps } from "../Panel";
-import { type TabComponent, TabPanelProvider } from "../TabPanel";
+import { type PanelProviderProps } from "../Panel";
 import { AppShortcuts } from "./AppShortcuts";
 
 export type AppProviderProps = PropsWithChildren<{
-  homeComponent?: TabComponent;
   languages?: readonly string[];
-  userData: PanelProviderProps["userData"];
+  userData?: PanelProviderProps["userData"];
 }>;
 
 export type AppContextType = {
@@ -42,9 +40,7 @@ export const AppContext = createContext<AppContextType>({
 
 export const AppProvider = ({
   children,
-  homeComponent,
   languages,
-  userData,
 }: AppProviderProps) => {
   const {
     i18n: { dir: i18nDir, resolvedLanguage: i18nResolvedLanguage },
@@ -82,24 +78,12 @@ export const AppProvider = ({
       }}
     >
       <AppInstallProvider>
-        <PanelProvider title={name} userData={userData}>
-          <ModelContextProvider>
-            <ContextMenuProvider>
-              <TabPanelProvider
-                defaultTab={
-                  homeComponent && {
-                    component: homeComponent,
-                    id: "home",
-                    title: name,
-                  }
-                }
-              >
-                {children}
-                <AppShortcuts />
-              </TabPanelProvider>
-            </ContextMenuProvider>
-          </ModelContextProvider>
-        </PanelProvider>
+        <ModelContextProvider>
+          <ContextMenuProvider>
+            {children}
+            <AppShortcuts />
+          </ContextMenuProvider>
+        </ModelContextProvider>
       </AppInstallProvider>
     </AppContext.Provider>
   );
