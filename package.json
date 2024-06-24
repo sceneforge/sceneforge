@@ -40,14 +40,15 @@
     "eslint": "^9.1.1",
     "husky": "^9.0.11",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   },
   "resolutions": {
     "@types/react-dom": "npm:types-react-dom@rc",
     "@types/react": "npm:types-react@rc",
     "eslint": "^9.5.0",
-    "react-dom": "19.0.0-rc-38e3b23483-20240529",
-    "react": "19.0.0-rc-38e3b23483-20240529"
+    "react-dom": "rc",
+    "react": "rc",
+    "typescript": "^5.5.2"
   },
   "workspaces": [
     "apps/*",
@@ -57,5 +58,5 @@
     "node": ">=21.7.1 < 22",
     "yarn": ">=4.3.0 < 5"
   },
-  "packageManager": "yarn@4.3.0"
+  "packageManager": "yarn@4.3.1"
 }
