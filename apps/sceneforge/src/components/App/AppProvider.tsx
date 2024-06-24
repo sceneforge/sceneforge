@@ -1,3 +1,4 @@
+import { DatabaseProvider } from "@sceneforge/data";
 import {
   type Dispatch,
   type PropsWithChildren,
@@ -77,14 +78,16 @@ export const AppProvider = ({
         version,
       }}
     >
-      <AppInstallProvider>
-        <ModelContextProvider>
-          <ContextMenuProvider>
-            {children}
-            <AppShortcuts />
-          </ContextMenuProvider>
-        </ModelContextProvider>
-      </AppInstallProvider>
+      <DatabaseProvider>
+        <AppInstallProvider>
+          <ModelContextProvider>
+            <ContextMenuProvider>
+              {children}
+              <AppShortcuts />
+            </ContextMenuProvider>
+          </ModelContextProvider>
+        </AppInstallProvider>
+      </DatabaseProvider>
     </AppContext.Provider>
   );
 };

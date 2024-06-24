@@ -10,24 +10,24 @@
     ],
     "module": "ESNext",
     "skipLibCheck": true,
-    "inlineSourceMap": true,
     "declaration": true,
+    "outDir": "./dist",
     /* Bundler mode */
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
+    "inlineSourceMap": true,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
     "types": [
       "node"
     ]
   },
   "include": [
     "./src/**/*",
-    ".storybook/**/*",
-    "*.config.ts",
   ],
 }

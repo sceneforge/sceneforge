@@ -1,6 +1,6 @@
 import "@sceneforge/ui/styles/main.css";
 
-import { render, withRoot, withUserData } from "./root";
+import { render, withRoot } from "./root";
 
 try {
   await withRoot((root) => {
@@ -14,16 +14,6 @@ try {
   });
 
   await render();
-
-  await withUserData(async (userData) => {
-    if (userData) {
-      const value = await userData.get("settings", "welcome");
-      if (value === undefined) {
-        await userData.set("settings", "welcome", true);
-        return;
-      }
-    }
-  });
 }
 catch (error) {
   throw new Error("Failed to render app", { cause: error });

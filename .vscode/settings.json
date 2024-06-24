@@ -4,17 +4,15 @@
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
     "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit"
   },
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  // "eslint.validate": [
+  //   "javascript",
+  //   "typescript",
+  // ],
   "search.exclude": {
     "**/.yarn": true
   },

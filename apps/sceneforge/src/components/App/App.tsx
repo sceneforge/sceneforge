@@ -1,17 +1,12 @@
 import {
   AppLayout,
-  Position,
-  TabsController,
   Variant,
 } from "@sceneforge/ui";
 
 import type { Database } from "../../lib/Database";
 
-import {
-  HomeTab,
-  ModelViewTab,
-} from "../../tabs";
 import { AppProvider } from "./AppProvider";
+import { AppTabs } from "./AppTabs";
 
 export interface AppProps {
   languages?: readonly string[];
@@ -27,21 +22,7 @@ export const App = ({ languages }: AppProps) => {
           variant: Variant.Default,
         }}
       >
-        <TabsController
-          closeable
-          initialContent={[
-            {
-              panel: { component: HomeTab },
-              tab: { id: "home", label: "Home" },
-            },
-            {
-              panel: { component: ModelViewTab },
-              tab: { id: "model", label: "Model Viewer" },
-            },
-          ]}
-          position={Position.Start}
-          variant={Variant.Default}
-        />
+        <AppTabs />
       </AppLayout>
     </AppProvider>
   );

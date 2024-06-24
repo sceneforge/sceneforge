@@ -47,7 +47,7 @@ const styles = stylex.create({
     flexGrow: 1,
   },
   tabsBlockEnd: {
-    flexDirection: "row-reverse",
+    flexDirection: "column-reverse",
   },
   tabsInlineEnd: {
     flexDirection: "row-reverse",

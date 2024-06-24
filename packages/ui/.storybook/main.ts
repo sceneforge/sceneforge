@@ -6,7 +6,8 @@ import path from "node:path";
  * It is needed in projects that use Yarn PnP or are set up within a monorepo.
  */
 function getAbsolutePath(value: string) {
-  return path.dirname(globalThis.require.resolve(path.join(value, "package.json")));
+  // eslint-disable-next-line unicorn/prefer-module
+  return path.dirname(require.resolve(path.join(value, "package.json")));
 }
 
 const config: StorybookConfig = {

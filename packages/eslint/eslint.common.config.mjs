@@ -115,6 +115,7 @@ export default tseslint.config(
             Props: true,
             ref: true,
             Ref: true,
+            db: true,
           },
         },
       ],

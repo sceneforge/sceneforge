@@ -7,6 +7,8 @@ import { Variant } from "../../types";
 import { color } from "../tokens.stylex";
 
 export type ViewProps = {
+  margin?: number;
+  padding?: number;
   style?: StyleXStyles;
   variant?: Variant;
 } & Omit<AllHTMLAttributes<HTMLDivElement>, "className" | "style">;
@@ -22,6 +24,10 @@ const styles = stylex.create({
     position: "relative",
     width: "100%",
   },
+  spacing: (padding: number, margin: number) => ({
+    margin,
+    padding,
+  }),
   variantColor: (variant: keyof typeof color, text: keyof typeof color) => ({
     backgroundColor: color[variant],
     color: color[text],
@@ -29,6 +35,8 @@ const styles = stylex.create({
 });
 
 const View = ({
+  margin = 0,
+  padding = 0,
   style,
   variant,
   ...props
@@ -44,6 +52,7 @@ const View = ({
         variant === Variant.Info && styles.variantColor("info", "infoText"),
         variant === Variant.Success && styles.variantColor("success", "successText"),
         variant === Variant.Warning && styles.variantColor("warning", "warningText"),
+        styles.spacing(padding, margin),
         style
       )}
     />
