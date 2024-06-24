@@ -36,6 +36,8 @@ export * from "./Pane";
 export type * from "./Pane";
 export * from "./Section";
 export type * from "./Section";
+export * from "./Select";
+export type * from "./Select";
 export * from "./SplitPane";
 export type * from "./SplitPane";
 export * from "./Tabs";
