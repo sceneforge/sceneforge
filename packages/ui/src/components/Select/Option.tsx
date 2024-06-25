@@ -47,6 +47,7 @@ const Option = ({
         popoverTarget={popoverId}
         popoverTargetAction="hide"
         style={[styles.container, selected && styles.selected]}
+        tabIndex={selected ? 0 : -1}
         variant={variant}
       >
         {label ?? value}

@@ -1,3 +1,5 @@
+import type { StyleXStyles } from "@stylexjs/stylex";
+
 import * as stylex from "@stylexjs/stylex";
 import { type AllHTMLAttributes, type Ref, lazy } from "react";
 
@@ -16,9 +18,11 @@ export type Option = Omit<OptionProps, "onClick" | "popoverId" | "selected">;
 export type SelectProps = {
   onChange?: (previous?: Option, next?: Option) => void;
   options?: Option[];
+  popoverStyle?: StyleXStyles;
   ref?: Ref<HTMLSelectElement>;
+  style?: StyleXStyles;
   variant?: ButtonProps["variant"];
-} & Omit<AllHTMLAttributes<HTMLSelectElement>, "onChange">;
+} & Omit<AllHTMLAttributes<HTMLSelectElement>, "onChange" | "style">;
 
 const styles = stylex.create({
   anchor: (id: string) => ({
@@ -47,11 +51,9 @@ const styles = stylex.create({
     color: color.foreground,
     insetArea: "span-block-end",
     insetBlockStart: "anchor(bottom)",
-    minWidth: "anchor-size(inline)",
     overflow: "clip",
     padding: 0,
     position: "absolute",
-    positionVisibility: "no-overflow",
   },
   popover: (id: string) => ({
     positionAnchor: `--select-anchor-${id.replaceAll(":", "-")}`,
@@ -66,7 +68,9 @@ const Select = ({
   id,
   onChange,
   options,
+  popoverStyle,
   ref,
+  style,
   variant,
   ...props
 }: SelectProps) => {
@@ -92,6 +96,7 @@ const Select = ({
         style={[
           styles.container,
           styles.anchor(currentId),
+          style,
         ]}
         variant={variant}
       >
@@ -103,7 +108,8 @@ const Select = ({
         popover="auto"
         {...stylex.props(
           styles.list,
-          styles.popover(currentId)
+          styles.popover(currentId),
+          popoverStyle
         )}
       >
         {options && options.map((option, index) => (

@@ -3896,11 +3896,11 @@ __metadata:
   linkType: hard
 
 "@storybook/csf@npm:^0.1.7":
-  version: 0.1.8
-  resolution: "@storybook/csf@npm:0.1.8"
+  version: 0.1.9
+  resolution: "@storybook/csf@npm:0.1.9"
   dependencies:
     type-fest: "npm:^2.19.0"
-  checksum: 10c0/4fd08bd65205395aba693f053706d5c880db5102543744c4e13768902a615df9a479ac03f80fe33297bd5457a0d0ef655cd33d41a0e379764dd6f0c6b9a7d88c
+  checksum: 10c0/f94765d671d80fabbf6b372c82ab80cc2960027bfab0dc2f47001fe49d78caab90f32abab372aa27ab7b67b4a8f39d3dc0c5c43b7c83ce9f60d238e9fb1f0499
   languageName: node
   linkType: hard
 
