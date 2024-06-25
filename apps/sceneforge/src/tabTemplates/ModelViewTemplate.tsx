@@ -1,6 +1,3 @@
-// import { useTranslation } from "react-i18next";
-
-// import { ModelViewer } from "../../components/ModelViewer";
 import {
   Canvas,
   DrawerController,
@@ -8,13 +5,15 @@ import {
   Pane,
   Position,
   SplitPaneController,
-  TabComponentType,
   Variant,
   View,
 } from "@sceneforge/ui";
 
-const ModelViewTab: TabComponentType = () => {
-  // const { t } = useTranslation("tabs");
+export type ModelViewTemplateProps = {
+  title: string;
+};
+
+const ModelViewTemplate = ({ title }: ModelViewTemplateProps) => {
   return (
     <View>
       <Canvas />
@@ -25,7 +24,7 @@ const ModelViewTab: TabComponentType = () => {
         resizable
         variant={Variant.Accent}
       >
-        <Pane inner={false} title="Model Title">
+        <Pane inner={false} title={title}>
           <SplitPaneController orientation={Orientation.Horizontal} resizable>
             <Pane
               actions={[
@@ -49,13 +48,6 @@ const ModelViewTab: TabComponentType = () => {
       </DrawerController>
     </View>
   );
-  // return (
-  // <ModelViewer
-  //   active={!hidden}
-  //   id={tabId}
-  //   title={t("ModelViewTab.untitledModel")}
-  // />
-  // );
 };
 
-export default ModelViewTab;
+export default ModelViewTemplate;

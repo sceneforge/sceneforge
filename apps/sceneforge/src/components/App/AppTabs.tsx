@@ -1,25 +1,28 @@
 import { useSettings } from "@sceneforge/data";
 import { Position, TabsController, Variant } from "@sceneforge/ui";
+import { useEffect } from "react";
 
-import { HomeTab, ModelViewTab } from "../../tabs";
+import { useShortcuts } from "../../shortcuts";
+import { useAppContext } from "./useAppContext";
+import { useAppTabs } from "./useAppTabs";
 
 export const AppTabs = () => {
+  const { tabsHandlerRef } = useAppContext();
+  const { activeTabId } = useAppTabs();
+  const { openHome } = useShortcuts();
   const [tabsPosition] = useSettings<Position>("mainTabPosition", Position.Start);
+
+  useEffect(() => {
+    if (tabsHandlerRef && tabsHandlerRef.current && !activeTabId) {
+      void openHome();
+    }
+  }, [tabsHandlerRef, activeTabId, openHome]);
 
   return (
     <TabsController
       closeable
-      initialContent={[
-        {
-          panel: { component: HomeTab },
-          tab: { id: "home", label: "Home" },
-        },
-        {
-          panel: { component: ModelViewTab },
-          tab: { id: "model", label: "Model Viewer" },
-        },
-      ]}
       position={tabsPosition}
+      ref={tabsHandlerRef}
       variant={Variant.Default}
     />
   );

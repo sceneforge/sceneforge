@@ -1,29 +1,35 @@
 import {
   AppLayout,
+  IconEnum,
   Variant,
 } from "@sceneforge/ui";
+import { useTranslation } from "react-i18next";
 
-import type { Database } from "../../lib/Database";
-
-import { AppProvider } from "./AppProvider";
+import { useShortcuts } from "../../shortcuts";
 import { AppTabs } from "./AppTabs";
 
-export interface AppProps {
-  languages?: readonly string[];
-  userData?: Database<"UserData">;
-}
+export const App = () => {
+  const { t } = useTranslation("tabs");
+  const { openSettings } = useShortcuts();
 
-export const App = ({ languages }: AppProps) => {
   return (
-    <AppProvider languages={languages}>
-      <AppLayout
-        topbar={{
-          title: "Scene Forge",
-          variant: Variant.Default,
-        }}
-      >
-        <AppTabs />
-      </AppLayout>
-    </AppProvider>
+    <AppLayout
+      topbar={{
+        title: "Scene Forge",
+        toolbarEnd: {
+          actions: [
+            {
+              icon: IconEnum.Settings,
+              label: t("SettingsTab.title"),
+              onClick: () => openSettings,
+              type: "icon",
+            },
+          ],
+        },
+        variant: Variant.Default,
+      }}
+    >
+      <AppTabs />
+    </AppLayout>
   );
 };

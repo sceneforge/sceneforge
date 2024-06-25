@@ -15,6 +15,7 @@ export const useAppContext = () => {
     repository,
     resolvedLanguage,
     setResolvedLanguage,
+    tabsHandlerRef,
     version,
   } = useContext(AppContext);
 
@@ -30,6 +31,7 @@ export const useAppContext = () => {
     repository,
     resolvedLanguage,
     setResolvedLanguage,
+    tabsHandlerRef,
     version,
   };
 };

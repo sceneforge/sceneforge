@@ -1,22 +1,18 @@
 import { DatabaseProvider } from "@sceneforge/data";
+import { TabsHandler } from "@sceneforge/ui";
 import {
   type Dispatch,
   type PropsWithChildren,
+  type RefObject,
   type SetStateAction,
   createContext,
+  useRef,
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 
-import { AppInstallProvider } from "../AppInstall";
-import { ContextMenuProvider } from "../ContextMenu";
-import { ModelContextProvider } from "../ModelContext";
-import { type PanelProviderProps } from "../Panel";
-import { AppShortcuts } from "./AppShortcuts";
-
 export type AppProviderProps = PropsWithChildren<{
   languages?: readonly string[];
-  userData?: PanelProviderProps["userData"];
 }>;
 
 export type AppContextType = {
@@ -32,6 +28,7 @@ export type AppContextType = {
   resolvedLanguage?: string;
   setDirection?: Dispatch<SetStateAction<string | undefined>>;
   setResolvedLanguage?: Dispatch<SetStateAction<string | undefined>>;
+  tabsHandlerRef?: RefObject<TabsHandler | null>;
   version?: string;
 };
 
@@ -43,6 +40,7 @@ export const AppProvider = ({
   children,
   languages,
 }: AppProviderProps) => {
+  const tabsHandlerRef = useRef<TabsHandler | null>(null);
   const {
     i18n: { dir: i18nDir, resolvedLanguage: i18nResolvedLanguage },
   } = useTranslation();
@@ -75,18 +73,12 @@ export const AppProvider = ({
         resolvedLanguage,
         setDirection,
         setResolvedLanguage,
+        tabsHandlerRef,
         version,
       }}
     >
       <DatabaseProvider>
-        <AppInstallProvider>
-          <ModelContextProvider>
-            <ContextMenuProvider>
-              {children}
-              <AppShortcuts />
-            </ContextMenuProvider>
-          </ModelContextProvider>
-        </AppInstallProvider>
+        {children}
       </DatabaseProvider>
     </AppContext.Provider>
   );
