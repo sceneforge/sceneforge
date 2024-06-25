@@ -9,10 +9,17 @@ import { View } from "../View";
 
 export type CarouselProps = {
   division?: number;
-  group?: number;
+  gap?: number;
   id?: string;
   items?: ReactNode[];
   level?: SectionProps["level"];
+  paddingBlock?: number;
+  paddingBlockEnd?: number;
+  paddingBlockStart?: number;
+  paddingInline?: number;
+  paddingInlineEnd?: number;
+  paddingInlineStart?: number;
+  shadow?: boolean;
   style?: StyleXStyles;
   title?: SectionProps["title"];
   variant?: Variant;
@@ -20,31 +27,31 @@ export type CarouselProps = {
 
 const styles = stylex.create({
   division: (division: number) => ({
-    gridAutoColumns: `calc(100% / ${division})`,
+    gridAutoColumns: division > 0 ? `calc(100% / ${division})` : "1fr",
+  }),
+  gap: (value: number) => ({
+    gap: value > 0 ? `${value}rem` : 0,
   }),
   grid: {
     display: "grid",
-    gap: "0.5rem",
     gridAutoColumns: "calc(100% / 3)",
     gridAutoFlow: "column",
   },
   heading: {
     display: "block",
-    paddingInline: "1rem",
   },
   item: {
     color: "inherit",
     scrollSnapAlign: "start",
   },
+  scrollPaddingInline: (value: number) => ({
+    scrollPaddingInline: value > 0 ? `${value}rem` : null,
+  }),
   scroller: {
     margin: 0,
     overflowX: "auto",
     overflowY: "hidden",
-    paddingBlock: "0.5rem",
-    paddingBlockEnd: "1rem",
-    paddingInline: "1rem",
     scrollBehavior: "smooth",
-    scrollPaddingInline: "1rem",
     scrollSnapType: "x proximity",
     whiteSpace: "nowrap",
   },
@@ -52,9 +59,17 @@ const styles = stylex.create({
 
 const Carousel = ({
   division = 3,
+  gap = 0.5,
   id,
   items,
   level = 2,
+  paddingBlock = 0.5,
+  paddingBlockEnd = 1,
+  paddingBlockStart,
+  paddingInline = 1,
+  paddingInlineEnd,
+  paddingInlineStart,
+  shadow = true,
   style,
   title,
   variant,
@@ -64,21 +79,35 @@ const Carousel = ({
 
   return (
     <Section
+      headingPaddingInline={paddingInline}
+      headingPaddingInlineEnd={paddingInlineEnd}
+      headingPaddingInlineStart={paddingInlineStart}
       level={level}
-      style={styles.heading}
+      shadow={shadow}
+      style={[
+        styles.heading,
+      ]}
       title={title}
       variant={variant}
     >
       <View
+        paddingBlock={paddingBlock}
+        paddingBlockEnd={paddingBlockEnd}
+        paddingBlockStart={paddingBlockStart}
+        paddingInline={paddingInline}
+        paddingInlineEnd={paddingInlineEnd}
+        paddingInlineStart={paddingInlineStart}
         style={[
           styles.scroller as Record<string, string>,
+          styles.scrollPaddingInline(paddingInline),
           style,
         ]}
       >
         <View
           style={[
             styles.grid,
-            division > 0 && styles.division(division),
+            styles.gap(gap),
+            typeof division === "number" && styles.division(division),
           ]}
         >
           {items && items.map((child, index) => (

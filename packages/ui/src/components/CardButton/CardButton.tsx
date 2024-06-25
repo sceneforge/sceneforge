@@ -6,8 +6,10 @@ import { Card, type CardProps } from "../Card";
 export type CardButtonProps = {
   id?: ButtonProps["id"];
   onClick?: ButtonProps["onClick"];
-  popovertarget?: ButtonProps["popovertarget"];
+  popoverTarget?: ButtonProps["popoverTarget"];
+  popoverTargetAction?: ButtonProps["popoverTargetAction"];
   ref?: ButtonProps["ref"];
+  tabIndex?: ButtonProps["tabIndex"];
 } & Omit<CardProps, "actions">;
 
 const styles = stylex.create({
@@ -16,6 +18,7 @@ const styles = stylex.create({
     border: "none",
     borderRadius: "0.5rem",
     color: "inherit",
+    cursor: "pointer",
     height: "100%",
     margin: 0,
     padding: 0,
@@ -26,8 +29,10 @@ const styles = stylex.create({
 const CardButton = ({
   id,
   onClick,
-  popovertarget,
+  popoverTarget,
+  popoverTargetAction,
   ref,
+  tabIndex = 0,
   ...props
 }: CardButtonProps) => {
   return (
@@ -35,9 +40,11 @@ const CardButton = ({
       clear
       id={id}
       onClick={onClick}
-      popovertarget={popovertarget}
+      popoverTarget={popoverTarget}
+      popoverTargetAction={popoverTargetAction}
       ref={ref}
       style={[styles.container]}
+      tabIndex={tabIndex}
     >
       <Card {...props} />
     </Button>

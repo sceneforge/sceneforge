@@ -46,6 +46,10 @@ const styles = stylex.create({
     display: "block",
     flexGrow: 1,
   },
+  noVariant: {
+    backgroundColor: "ButtonFace",
+    color: "ButtonText",
+  },
   tabsBlockEnd: {
     flexDirection: "column-reverse",
   },
@@ -94,6 +98,7 @@ const Tabs = ({
           && position === Position.End
           && styles.tabsInlineEnd
         ),
+        !variant && styles.noVariant,
       ]}
       variant={variant}
     >
@@ -107,6 +112,7 @@ const Tabs = ({
         orientation={orientation}
         position={position}
         tabs={content.map(({ tab }) => tab)}
+        variant={variant}
       />
       <div {...stylex.props(styles.content)}>
         {content.map(({ panel, tab }) => (

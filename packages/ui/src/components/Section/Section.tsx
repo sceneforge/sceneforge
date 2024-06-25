@@ -8,40 +8,40 @@ import {
 } from "react";
 
 import { Variant } from "../../types";
-import { Heading } from "../Heading";
-import { color } from "../tokens.stylex";
+import { Heading, HeadingProps } from "../Heading";
+import { backgroundTextColorVariantStyle, color } from "../tokens.stylex";
 
 const styles = stylex.create({
   container: {
-    color: color.background,
     margin: 0,
     padding: 0,
     textAlign: "start",
   },
-  content: {
-    color: "inherit",
-    marginInline: "auto",
-    width: "100%",
-  },
   heading: {
-    color: "inherit",
-    marginBlockEnd: "4rem",
-    marginBlockStart: 0,
+    display: "block",
+    marginBlock: 0,
     marginInline: "auto",
+    padding: 0,
     textAlign: "start",
-    textShadow: `1px 1px 3px ${color.foreground}, 2px 4px 7px ${color.foreground}`,
     width: "100%",
   },
-  variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
-    backgroundColor: color[background],
-    color: color[text],
-  }),
+  headingWithShadow: {
+    color: color.background,
+  },
 });
 
 export type SectionProps = Omit<HTMLAttributes<HTMLElement>, "style"> &
   PropsWithChildren<{
+    headingPadding?: HeadingProps["padding"];
+    headingPaddingBlock?: HeadingProps["paddingBlock"];
+    headingPaddingBlockEnd?: HeadingProps["paddingBlockEnd"];
+    headingPaddingBlockStart?: HeadingProps["paddingBlockStart"];
+    headingPaddingInline?: HeadingProps["paddingInline"];
+    headingPaddingInlineEnd?: HeadingProps["paddingInlineEnd"];
+    headingPaddingInlineStart?: HeadingProps["paddingInlineStart"];
     level?: 1 | 2 | 3 | 4 | 5 | 6;
     ref?: Ref<HTMLElement>;
+    shadow?: boolean;
     style?: StyleXStyles;
     title?: string;
     variant?: Variant;
@@ -49,8 +49,16 @@ export type SectionProps = Omit<HTMLAttributes<HTMLElement>, "style"> &
 
 const Section = ({
   children,
+  headingPadding,
+  headingPaddingBlock,
+  headingPaddingBlockEnd,
+  headingPaddingBlockStart,
+  headingPaddingInline,
+  headingPaddingInlineEnd,
+  headingPaddingInlineStart,
   level = 2,
   ref,
+  shadow,
   style,
   title,
   variant,
@@ -60,22 +68,30 @@ const Section = ({
       ref={ref}
       {...stylex.props(
         styles.container,
-        variant === Variant.Accent && styles.variantColor("accent", "accentText"),
-        variant === Variant.Default && styles.variantColor("primary", "primaryText"),
-        variant === Variant.Danger && styles.variantColor("danger", "dangerText"),
-        variant === Variant.Info && styles.variantColor("info", "infoText"),
-        variant === Variant.Success && styles.variantColor("success", "successText"),
-        variant === Variant.Warning && styles.variantColor("warning", "warningText")
+        ...backgroundTextColorVariantStyle(variant)
       )}
     >
       {title && (
-        <Heading level={level} {...stylex.props(styles.heading, style)}>
+        <Heading
+          level={level}
+          padding={headingPadding}
+          paddingBlock={headingPaddingBlock}
+          paddingBlockEnd={headingPaddingBlockEnd}
+          paddingBlockStart={headingPaddingBlockStart}
+          paddingInline={headingPaddingInline}
+          paddingInlineEnd={headingPaddingInlineEnd}
+          paddingInlineStart={headingPaddingInlineStart}
+          shadow={shadow}
+          style={[
+            styles.heading,
+            shadow && styles.headingWithShadow,
+            style,
+          ]}
+        >
           {title}
         </Heading>
       )}
-      <div {...stylex.props(styles.container)}>
-        {children}
-      </div>
+      {children && (children)}
     </section>
   );
 };

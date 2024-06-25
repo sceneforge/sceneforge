@@ -10,9 +10,17 @@ export type SwitchProps = {
 } & Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "style" | "type">;
 
 const styles = stylex.create({
+  colorVariant: (
+    background: keyof typeof color,
+    foreground: keyof typeof color
+  ) => ({
+    ":has(input:checked)": {
+      backgroundColor: color[background],
+      color: color[foreground],
+    },
+  }),
   container: {
     "::before": {
-      backgroundColor: "currentColor",
       borderRadius: "100vw",
       content: "''",
       inset: 0,
@@ -24,10 +32,10 @@ const styles = stylex.create({
       width: "55%",
     },
     ":has(input:checked)": {
-      backgroundColor: color.foreground,
-      color: color.background,
+      backgroundColor: "AccentColor",
     },
     ":has(input:checked)::before": {
+      backgroundColor: "Canvas",
       transform: "translateX(60%)",
     },
     ":has(input:disabled)": {
@@ -36,6 +44,9 @@ const styles = stylex.create({
     },
     ":has(input:focus)": {
       boxShadow: "0 0 0.125rem 0.125rem color-mix(in srgb, currentColor 75%, transparent)",
+    },
+    ":has(input:not(:checked))::before": {
+      backgroundColor: "currentColor",
     },
     "backgroundColor": backgroundColor.alpha50,
     "borderColor": backgroundColor.alpha75,
@@ -56,20 +67,10 @@ const styles = stylex.create({
     margin: 0,
     opacity: 0,
     padding: 0,
-    pointer: "cursor",
     pointerEvents: "auto",
     touchAction: "auto",
     width: "100%",
   },
-  variantColor: (
-    background: keyof typeof color,
-    foreground: keyof typeof color
-  ) => ({
-    ":has(input:checked)": {
-      backgroundColor: color[background],
-      color: color[foreground],
-    },
-  }),
 });
 
 const Switch = ({
@@ -82,12 +83,12 @@ const Switch = ({
       tabIndex={-1}
       {...stylex.props(
         styles.container,
-        variant === Variant.Accent && styles.variantColor("accent", "accentText"),
-        variant === Variant.Default && styles.variantColor("primary", "primaryText"),
-        variant === Variant.Danger && styles.variantColor("danger", "dangerText"),
-        variant === Variant.Info && styles.variantColor("info", "infoText"),
-        variant === Variant.Success && styles.variantColor("success", "successText"),
-        variant === Variant.Warning && styles.variantColor("warning", "warningText")
+        variant === Variant.Accent && styles.colorVariant("accent", "accentText"),
+        variant === Variant.Default && styles.colorVariant("primary", "primaryText"),
+        variant === Variant.Danger && styles.colorVariant("danger", "dangerText"),
+        variant === Variant.Info && styles.colorVariant("info", "infoText"),
+        variant === Variant.Success && styles.colorVariant("success", "successText"),
+        variant === Variant.Warning && styles.colorVariant("warning", "warningText")
       )}
     >
       <input

@@ -11,6 +11,10 @@ export type InputTextProps = {
 } & Omit<AllHTMLAttributes<HTMLInputElement>, "checked" | "defaultChecked" | "type">;
 
 const styles = stylex.create({
+  colorVariant: (border: keyof typeof color) => ({
+    borderBlockEndColor: color[border],
+    color: color[border],
+  }),
   container: {
     ":focus": {
       boxShadow: "0 0.125rem 0.25rem 0.0125rem color-mix(in srgb, currentColor 75%, transparent)",
@@ -31,10 +35,6 @@ const styles = stylex.create({
     "transitionProperty": "box-shadow padding",
     "width": "100%",
   },
-  variantColor: (border: keyof typeof color) => ({
-    borderBlockEndColor: color[border],
-    color: color[border],
-  }),
 });
 
 const InputText = ({ ref, variant, ...props }: InputTextProps) => {
@@ -45,12 +45,12 @@ const InputText = ({ ref, variant, ...props }: InputTextProps) => {
       ref={ref}
       {...stylex.props(
         styles.container,
-        variant === Variant.Accent && styles.variantColor("accent"),
-        variant === Variant.Default && styles.variantColor("primary"),
-        variant === Variant.Danger && styles.variantColor("danger"),
-        variant === Variant.Info && styles.variantColor("info"),
-        variant === Variant.Success && styles.variantColor("success"),
-        variant === Variant.Warning && styles.variantColor("warning")
+        variant === Variant.Accent && styles.colorVariant("accent"),
+        variant === Variant.Default && styles.colorVariant("primary"),
+        variant === Variant.Danger && styles.colorVariant("danger"),
+        variant === Variant.Info && styles.colorVariant("info"),
+        variant === Variant.Success && styles.colorVariant("success"),
+        variant === Variant.Warning && styles.colorVariant("warning")
       )}
     />
   );

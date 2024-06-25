@@ -17,6 +17,7 @@ const meta: Meta<typeof Section> = {
       max: 6,
       min: 1,
     },
+    shadow: { control: "boolean" },
     title: { control: "text" },
   },
   component: Section,
@@ -38,6 +39,7 @@ export const Default: Story = {
   args: {
     children: "Section Content",
     level: 1,
+    shadow: true,
     title: "Section Title",
   },
 } as Story;

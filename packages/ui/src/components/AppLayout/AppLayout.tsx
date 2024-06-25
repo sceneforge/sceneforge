@@ -8,8 +8,12 @@ import { View } from "../View";
 import { titleBar } from "../tokens.stylex";
 
 const styles = stylex.create({
+  colorScheme: (colorScheme: "dark" | "light dark" | "light") => ({
+    colorScheme: colorScheme,
+  }),
   container: {
     boxSizing: "border-box",
+    colorScheme: "light dark",
     height: stylex.firstThatWorks("100dvh", "100vh", "100%"),
     margin: 0,
     maxHeight: stylex.firstThatWorks("100dvh", "100vh", "100%"),
@@ -17,6 +21,7 @@ const styles = stylex.create({
     minHeight: stylex.firstThatWorks("100dvh", "100vh", "100%"),
     minWidth: stylex.firstThatWorks("100dvw", "100vw", "100%"),
     overflow: "hidden",
+    overscrollBehavior: "none",
     padding: 0,
     position: "relative",
     width: stylex.firstThatWorks("100dvw", "100vw", "100%"),
@@ -40,6 +45,7 @@ const styles = stylex.create({
 });
 
 export type AppLayoutProps = PropsWithChildren<{
+  colorScheme?: "dark" | "light dark" | "light";
   embedded?: boolean;
   style?: StyleXStyles;
   topbar?: TopbarProps;
@@ -47,17 +53,19 @@ export type AppLayoutProps = PropsWithChildren<{
 
 const AppLayout = ({
   children,
+  colorScheme,
   embedded = false,
   style,
   topbar,
 }: AppLayoutProps) => {
   return (
-    <View {...stylex.props(
-      styles.container,
-      embedded && styles.embedded,
-      style
-    )
-    }
+    <View
+      {...stylex.props(
+        styles.container,
+        embedded && styles.embedded,
+        colorScheme && styles.colorScheme(colorScheme),
+        style
+      )}
     >
       {topbar && (<Topbar {...topbar} />)}
       <main {...stylex.props(styles.main, !!topbar && styles.topbar)}>

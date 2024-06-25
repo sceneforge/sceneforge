@@ -10,6 +10,7 @@ export type ToolbarProps = {
 
 const styles = stylex.create({
   container: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     flexShrink: 1,

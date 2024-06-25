@@ -9,6 +9,7 @@ import { color, titleBar } from "../tokens.stylex";
 
 export type TopbarProps = {
   id?: string;
+  shadow?: boolean;
   title?: string;
   toolbarEnd?: ToolbarProps;
   toolbarStart?: ToolbarProps;
@@ -17,19 +18,22 @@ export type TopbarProps = {
 
 const styles = stylex.create({
   container: {
-    backgroundColor: color.background,
+    backgroundColor: "AccentColor",
+    borderBlockEndColor: "transparent",
     borderBlockEndStyle: "solid",
-    borderBlockEndWidth: "1px",
+    borderBlockEndWidth: 0,
+    color: "AccentColorText",
     height: titleBar.appTitleBarHeight,
     insetBlockStart: titleBar.appTitleBarInsetBlockStart,
     insetInline: 0,
     position: "fixed",
     width: "100%",
   },
-  containerBorderAndShadow: () => ({
+  containerBorderAndShadow: {
     borderBlockEndColor: `color-mix(in srgb, ${color.foreground} 75%, transparent)`,
+    borderBlockEndWidth: "0.0125rem",
     boxShadow: `0 4px 6px -1px color-mix(in srgb, ${color.foreground} 30%, transparent)`,
-  }),
+  },
   content: {
     alignItems: "center",
     display: "flex",
@@ -45,8 +49,6 @@ const styles = stylex.create({
   },
   heading: {
     fontSize: "1rem",
-    margin: 0,
-    padding: 0,
     textWrap: "nowrap",
   },
   toolbar: {
@@ -60,14 +62,11 @@ const styles = stylex.create({
   toolbarEnd: {
     justifyContent: "flex-end",
   },
-  variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
-    backgroundColor: color[background],
-    color: color[text],
-  }),
 });
 
 const Topbar = ({
   id,
+  shadow,
   title,
   toolbarEnd,
   toolbarStart,
@@ -79,10 +78,19 @@ const Topbar = ({
   return (
     <header
       id={currentId}
-      {...stylex.props(styles.container, styles.containerBorderAndShadow())}
+      {...stylex.props(
+        styles.container,
+        shadow && styles.containerBorderAndShadow
+      )}
     >
       <View style={[styles.content]} variant={variant}>
-        <Heading level={1} style={[styles.heading]}>{title}</Heading>
+        <Heading
+          level={1}
+          paddingInline={1}
+          style={[styles.heading]}
+        >
+          {title}
+        </Heading>
         <div {...stylex.props(styles.toolbar)}>
           {toolbarStart && <Toolbar key={`${currentId}-toolbar-start`} {...toolbarStart} />}
         </div>

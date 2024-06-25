@@ -45,6 +45,7 @@ export const WithToolbar: Story = {
         },
         {
           icon: IconEnum.Delete,
+          inverted: true,
           label: "Delete",
           type: "icon",
           variant: Variant.Danger,

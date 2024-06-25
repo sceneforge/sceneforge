@@ -1,7 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 import { lazy, useId } from "react";
 
-import { Align, Orientation, Position } from "../../types";
+import { Align, Orientation, Position, Variant } from "../../types";
 import { type TabProps } from "./Tab";
 
 const Tab = lazy(() => import("./Tab"));
@@ -17,6 +17,7 @@ export type TabListProps = {
   orientation?: Orientation;
   position?: Position;
   tabs: Omit<TabProps, "active" | "onTabChange">[];
+  variant?: Variant;
 };
 
 const styles = stylex.create({
@@ -49,6 +50,7 @@ const TabList = ({
   orientation = Orientation.Horizontal,
   position = Position.Start,
   tabs,
+  variant,
 }: TabListProps) => {
   const generatedId = useId();
   const currentId = id || generatedId;
@@ -77,6 +79,7 @@ const TabList = ({
           onTabClose={onTabClose}
           orientation={orientation}
           position={position}
+          variant={variant}
         />
       ))}
     </div>

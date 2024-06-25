@@ -1,7 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 import { type MouseEvent, useCallback } from "react";
 
-import { IconEnum, Orientation, Position } from "../../types";
+import { IconEnum, Orientation, Position, Variant } from "../../types";
 import { Icon } from "../Icon";
 import { IconButton } from "../IconButton";
 import { backgroundColor, color } from "../tokens.stylex";
@@ -16,6 +16,7 @@ export type TabProps = {
   onTabClose?: (id: string) => void;
   orientation?: Orientation;
   position?: Position;
+  variant?: Variant;
 };
 
 const styles = stylex.create({
@@ -69,6 +70,10 @@ const styles = stylex.create({
     margin: 0,
     padding: 0,
   },
+  noVariantActive: {
+    backgroundColor: "SelectedItem",
+    color: "SelectedItemText",
+  },
 });
 
 const Tab = ({
@@ -77,10 +82,9 @@ const Tab = ({
   icon,
   id,
   label,
-  // orientation = Orientation.Horizontal,
-  // position = Position.Start,
   onTabChange,
   onTabClose,
+  variant,
 }: TabProps) => {
   const handleTabChange = useCallback((
     event: MouseEvent<HTMLButtonElement>
@@ -100,7 +104,8 @@ const Tab = ({
     <div
       {...stylex.props(
         styles.container,
-        active && styles.active
+        active && styles.active,
+        (!variant && active) && styles.noVariantActive
       )}
     >
       <button

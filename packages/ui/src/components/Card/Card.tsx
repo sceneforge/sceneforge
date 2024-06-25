@@ -23,13 +23,22 @@ const styles = stylex.create({
     padding: "0.75rem",
   },
   children: {
+    backgroundColor: "color-mix(in srgb, ButtonFace 50%, transparent)",
     color: "inherit",
     width: "100%",
   },
+  colorVariant: (
+    background: keyof typeof color,
+    percent: number,
+    text?: keyof typeof color
+  ) => ({
+    backgroundColor: `color-mix(in srgb, ${String(color[background])} ${percent}%, transparent)`,
+    color: text ? color[text] : color.foreground,
+  }),
   container: {
-    backgroundColor: color.background,
+    backgroundColor: "Canvas",
     borderRadius: "0.5rem",
-    color: color.foreground,
+    color: "CanvasText",
     height: "100%",
     overflow: "clip",
     position: "relative",
@@ -83,20 +92,14 @@ const styles = stylex.create({
     width: "300%",
   },
   title: {
+    backgroundColor: "ButtonFace",
+    color: "ButtonText",
     display: "block",
-    fontSize: "1rem",
-    paddingBlock: "0.75rem",
+    fontSize: "0.85rem",
+    paddingBlock: "0.5rem",
     paddingInline: "1rem",
     textAlign: "start",
   },
-  variantColor: (
-    background: keyof typeof color,
-    percent: number,
-    text?: keyof typeof color
-  ) => ({
-    backgroundColor: `color-mix(in srgb, ${String(color[background])} ${percent}%, transparent)`,
-    color: text ? color[text] : color.foreground,
-  }),
 });
 
 const Card = ({
@@ -113,13 +116,12 @@ const Card = ({
         <span
           {...stylex.props(
             styles.title,
-            styles.variantColor("foreground", 75, "background"),
-            variant === Variant.Accent && styles.variantColor("accent", 75, "accentText"),
-            variant === Variant.Default && styles.variantColor("primary", 75, "primaryText"),
-            variant === Variant.Danger && styles.variantColor("danger", 75, "dangerText"),
-            variant === Variant.Info && styles.variantColor("info", 75, "infoText"),
-            variant === Variant.Success && styles.variantColor("success", 75, "successText"),
-            variant === Variant.Warning && styles.variantColor("warning", 75, "warningText")
+            variant === Variant.Accent && styles.colorVariant("accent", 75, "accentText"),
+            variant === Variant.Default && styles.colorVariant("primary", 75, "primaryText"),
+            variant === Variant.Danger && styles.colorVariant("danger", 75, "dangerText"),
+            variant === Variant.Info && styles.colorVariant("info", 75, "infoText"),
+            variant === Variant.Success && styles.colorVariant("success", 75, "successText"),
+            variant === Variant.Warning && styles.colorVariant("warning", 75, "warningText")
           )}
         >
           {title}
@@ -128,13 +130,13 @@ const Card = ({
       {img && (
         <div
           {...stylex.props(
-            styles.variantColor("foreground", 35, "background"),
-            variant === Variant.Accent && styles.variantColor("accent", 35),
-            variant === Variant.Default && styles.variantColor("primary", 35),
-            variant === Variant.Danger && styles.variantColor("danger", 35),
-            variant === Variant.Info && styles.variantColor("info", 35),
-            variant === Variant.Success && styles.variantColor("success", 35),
-            variant === Variant.Warning && styles.variantColor("warning", 35)
+            styles.colorVariant("foreground", 35, "background"),
+            variant === Variant.Accent && styles.colorVariant("accent", 35),
+            variant === Variant.Default && styles.colorVariant("primary", 35),
+            variant === Variant.Danger && styles.colorVariant("danger", 35),
+            variant === Variant.Info && styles.colorVariant("info", 35),
+            variant === Variant.Success && styles.colorVariant("success", 35),
+            variant === Variant.Warning && styles.colorVariant("warning", 35)
           )}
         >
           <div {...stylex.props(styles.imageContainer)}>
@@ -150,13 +152,12 @@ const Card = ({
         <div
           {...stylex.props(
             styles.children,
-            styles.variantColor("foreground", 25, "foreground"),
-            variant === Variant.Accent && styles.variantColor("accent", 25),
-            variant === Variant.Default && styles.variantColor("primary", 25),
-            variant === Variant.Danger && styles.variantColor("danger", 25),
-            variant === Variant.Info && styles.variantColor("info", 25),
-            variant === Variant.Success && styles.variantColor("success", 25),
-            variant === Variant.Warning && styles.variantColor("warning", 25)
+            variant === Variant.Accent && styles.colorVariant("accent", 25),
+            variant === Variant.Default && styles.colorVariant("primary", 25),
+            variant === Variant.Danger && styles.colorVariant("danger", 25),
+            variant === Variant.Info && styles.colorVariant("info", 25),
+            variant === Variant.Success && styles.colorVariant("success", 25),
+            variant === Variant.Warning && styles.colorVariant("warning", 25)
           )}
         >
           {children}
@@ -166,13 +167,13 @@ const Card = ({
         <div
           {...stylex.props(
             styles.actions,
-            styles.variantColor("foreground", 35, "background"),
-            variant === Variant.Accent && styles.variantColor("accent", 35),
-            variant === Variant.Default && styles.variantColor("primary", 35),
-            variant === Variant.Danger && styles.variantColor("danger", 35),
-            variant === Variant.Info && styles.variantColor("info", 35),
-            variant === Variant.Success && styles.variantColor("success", 35),
-            variant === Variant.Warning && styles.variantColor("warning", 35)
+            styles.colorVariant("foreground", 35, "background"),
+            variant === Variant.Accent && styles.colorVariant("accent", 35),
+            variant === Variant.Default && styles.colorVariant("primary", 35),
+            variant === Variant.Danger && styles.colorVariant("danger", 35),
+            variant === Variant.Info && styles.colorVariant("info", 35),
+            variant === Variant.Success && styles.colorVariant("success", 35),
+            variant === Variant.Warning && styles.colorVariant("warning", 35)
           )}
         >
           {actions.map((props, index) => (

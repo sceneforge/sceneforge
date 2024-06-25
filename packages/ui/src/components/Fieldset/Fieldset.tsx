@@ -3,7 +3,7 @@ import { type PropsWithChildren, useId } from "react";
 
 import { Variant } from "../../types";
 import { FieldItem, type FieldItemProps } from "../Field";
-import { color } from "../tokens.stylex";
+import { backgroundTextColorVariantStyle, color } from "../tokens.stylex";
 
 export type FieldsetProps = PropsWithChildren<{
   fields?: FieldItemProps[];
@@ -14,28 +14,28 @@ export type FieldsetProps = PropsWithChildren<{
 
 const styles = stylex.create({
   container: {
-    backgroundColor: color.background,
+    backgroundColor: `color-mix(in srgb, currentColor 10%, ${color.background})`,
     border: 0,
-    borderColor: "transparent",
-    borderEndEndRadius: "1rem",
-    borderEndStartRadius: "1rem",
-    borderWidth: "0px",
+    borderRadius: "1rem",
     color: color.foreground,
     display: "flex",
     flexDirection: "column",
     margin: 0,
+    outlineColor: "color-mix(in srgb, currentColor 35%, transparent)",
+    outlineStyle: "solid",
+    outlineWidth: "0.0125rem",
     overflow: "clip",
     paddingBlockEnd: "0",
     paddingBlockStart: 0,
     paddingInline: 0,
   },
   legend: {
-    borderBlockEndWidth: 0,
-    borderColor: "currentColor",
+    backgroundColor: color.background,
+    borderBlockEndColor: "color-mix(in srgb, currentColor 35%, transparent)",
+    borderBlockEndStyle: "solid",
+    borderBlockEndWidth: "0.0125rem",
     borderStartEndRadius: "1rem",
     borderStartStartRadius: "1rem",
-    borderStyle: "solid",
-    borderWidth: "0.0125rem",
     color: color.foreground,
     margin: 0,
     paddingBlock: "0.75rem",
@@ -50,10 +50,13 @@ const styles = stylex.create({
     borderColor: color[text],
     color: color[background],
   }),
-  variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
-    backgroundColor: color[background],
-    color: color[text],
-  }),
+  withVariant: {
+    borderStartEndRadius: 0,
+    borderStartStartRadius: 0,
+    outlineColor: "transparent",
+    outlineStyle: "none",
+    outlineWidth: 0,
+  },
 });
 
 const Fieldset = ({ children, fields, id, legend, variant }: FieldsetProps) => {
@@ -65,12 +68,8 @@ const Fieldset = ({ children, fields, id, legend, variant }: FieldsetProps) => {
       id={currentId}
       {...stylex.props(
         styles.container,
-        variant === Variant.Accent && styles.variantColor("accent", "accentText"),
-        variant === Variant.Default && styles.variantColor("primary", "primaryText"),
-        variant === Variant.Danger && styles.variantColor("danger", "dangerText"),
-        variant === Variant.Info && styles.variantColor("info", "infoText"),
-        variant === Variant.Success && styles.variantColor("success", "successText"),
-        variant === Variant.Warning && styles.variantColor("warning", "warningText")
+        ...backgroundTextColorVariantStyle(variant),
+        variant && styles.withVariant
       )}
     >
       {legend && (

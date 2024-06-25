@@ -10,7 +10,7 @@ import { IconEnum, Variant } from "../../types";
 import { Heading } from "../Heading";
 import { IconButton } from "../IconButton";
 import { Toolbar, ToolbarProps } from "../Toolbar";
-import { backgroundColor, color } from "../tokens.stylex";
+import { backgroundColor, backgroundTextColorVariantStyle, color } from "../tokens.stylex";
 import { useDialog } from "./useDialog";
 
 export type DialogProps = {
@@ -32,14 +32,16 @@ const styles = stylex.create({
   container: {
     "::backdrop": {
       backdropFilter: "blur(2px) grayscale(60%)",
+      backgroundColor: `color-mix(in srgb, ${color.foreground} 10%, transparent)`,
       height: "100%",
       width: "100%",
     },
+    "backgroundColor": "ButtonFace",
     "borderColor": backgroundColor.alpha10,
     "borderRadius": "0.5rem",
     "borderStyle": "solid",
     "borderWidth": "1px",
-    "color": "inherit",
+    "color": "ButtonText",
     "display": "flex",
     "flexDirection": "column",
     "insetBlock": "50%",
@@ -102,13 +104,6 @@ const styles = stylex.create({
     textAlign: "center",
     width: "100%",
   },
-  variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
-    "::backdrop": {
-      backgroundColor: `color-mix(in srgb, ${String(color[background])} 10%, transparent)`,
-    },
-    "backgroundColor": color[background],
-    "color": color[text],
-  }),
 });
 
 const Dialog = (
@@ -145,13 +140,7 @@ const Dialog = (
       {...stylex.props(
         styles.container,
         styles.containerColor(),
-        styles.variantColor("foreground", "background"),
-        variant === Variant.Default && styles.variantColor("primary", "primaryText"),
-        variant === Variant.Accent && styles.variantColor("accent", "accentText"),
-        variant === Variant.Danger && styles.variantColor("danger", "dangerText"),
-        variant === Variant.Info && styles.variantColor("info", "infoText"),
-        variant === Variant.Success && styles.variantColor("success", "successText"),
-        variant === Variant.Warning && styles.variantColor("warning", "warningText")
+        backgroundTextColorVariantStyle(variant)
       )}
     >
       <div {...stylex.props(styles.heading, style)}>
