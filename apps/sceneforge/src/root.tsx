@@ -3,9 +3,8 @@ import { createRoot } from "react-dom/client";
 import { App, AppProvider } from "./components/App";
 import { i18nInit } from "./lib/i18n";
 
-const rootElement = document.createElement("div");
+const rootElement = document.body as HTMLBodyElement;
 const root = createRoot(rootElement);
-document.body.append(rootElement);
 
 export const render = async () => {
   const { languages } = await i18nInit();
@@ -18,5 +17,5 @@ export const render = async () => {
 };
 
 export const withRoot = (
-  callback: (root: HTMLDivElement) => Promise<void> | void
+  callback: (root: HTMLBodyElement) => Promise<void> | void
 ) => callback(rootElement);

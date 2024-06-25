@@ -4,7 +4,7 @@ import { useId } from "react";
 export type FormViewTemplateProps = {
   fieldsets?: FieldsetProps[];
   id?: string;
-  title: string;
+  title?: string;
 };
 
 const FormViewTemplate = ({ fieldsets, id, title }: FormViewTemplateProps) => {
@@ -12,8 +12,8 @@ const FormViewTemplate = ({ fieldsets, id, title }: FormViewTemplateProps) => {
   const currentId = id ?? generatedId;
 
   return (
-    <Container>
-      <Section level={1} title={title}>
+    <Container paddingBlock={1}>
+      <Section level={1} shadow title={title}>
         <form id={currentId}>
           {fieldsets && fieldsets.map((fieldset, index) => (
             <Fieldset

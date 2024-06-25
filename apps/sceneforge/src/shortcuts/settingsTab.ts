@@ -42,5 +42,4 @@ export const settingsTab: ShortcutProps<typeof FormViewTemplate> = (
     },
   ],
   id: "settings-tab",
-  title: t("SettingsTab.title"),
 });

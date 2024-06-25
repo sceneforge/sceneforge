@@ -1,22 +1,19 @@
-import { Button, Container, Section, Variant } from "@sceneforge/ui";
-
-import { useShortcuts } from "../shortcuts";
+import { Carousel, type CarouselProps } from "@sceneforge/ui";
 
 export type DashboardViewTemplateProps = {
-  title: string;
+  carousel?: CarouselProps;
+  title?: string;
 };
 
-const DashboardViewTemplate = ({ title }: DashboardViewTemplateProps) => {
-  const { openSettings } = useShortcuts();
+const DashboardViewTemplate = ({
+  carousel,
+}: DashboardViewTemplateProps) => {
   return (
-    <Container>
-      <Section level={1} title={title}>
-        Dashboard Content
-        <Button onClick={() => void openSettings()} variant={Variant.Default}>
-          Settings
-        </Button>
-      </Section>
-    </Container>
+    <>
+      {carousel && (
+        <Carousel {...carousel} level={1} />
+      )}
+    </>
   );
 };
 

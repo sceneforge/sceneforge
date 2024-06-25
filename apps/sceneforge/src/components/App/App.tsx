@@ -10,18 +10,25 @@ import { AppTabs } from "./AppTabs";
 
 export const App = () => {
   const { t } = useTranslation("tabs");
-  const { openSettings } = useShortcuts();
+  const { openHome, openSettings } = useShortcuts();
 
   return (
     <AppLayout
+      colorScheme="dark"
       topbar={{
         title: "Scene Forge",
         toolbarEnd: {
           actions: [
             {
+              icon: IconEnum.Home,
+              label: t("HomeTab.title"),
+              onClick: () => void openHome(),
+              type: "icon",
+            },
+            {
               icon: IconEnum.Settings,
               label: t("SettingsTab.title"),
-              onClick: () => openSettings,
+              onClick: () => void openSettings(),
               type: "icon",
             },
           ],

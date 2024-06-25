@@ -10,7 +10,7 @@ import {
 } from "@sceneforge/ui";
 
 export type ModelViewTemplateProps = {
-  title: string;
+  title?: string;
 };
 
 const ModelViewTemplate = ({ title }: ModelViewTemplateProps) => {
@@ -24,7 +24,51 @@ const ModelViewTemplate = ({ title }: ModelViewTemplateProps) => {
         resizable
         variant={Variant.Accent}
       >
-        <Pane inner={false} title={title}>
+        <Pane
+          inner={false}
+          title={title}
+          toolbar={{
+            actions: [
+              {
+                actions: [
+                  {
+                    label: "Import...",
+                    onClick: () => console.log("Import..."),
+                    type: "button",
+                  },
+                ],
+                label: "Model",
+                type: "dropdown",
+                variant: Variant.Accent,
+              },
+              {
+                actions: [
+                  {
+                    label: "View",
+                    onClick: () => console.log("View Mode"),
+                    type: "toggle",
+                    variant: Variant.Accent,
+                  },
+                  {
+                    label: "Edit",
+                    onClick: () => console.log("Edit Mode"),
+                    type: "toggle",
+                    variant: Variant.Accent,
+                  },
+                  {
+                    label: "Material",
+                    onClick: () => console.log("Material Mode"),
+                    type: "toggle",
+                    variant: Variant.Accent,
+                  },
+                ],
+                label: "Mode",
+                type: "dropdown",
+                variant: Variant.Accent,
+              },
+            ],
+          }}
+        >
           <SplitPaneController orientation={Orientation.Horizontal} resizable>
             <Pane
               actions={[

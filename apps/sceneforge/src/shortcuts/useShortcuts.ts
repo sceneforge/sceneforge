@@ -1,3 +1,4 @@
+import { IconEnum } from "@sceneforge/ui";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -12,12 +13,24 @@ export const useShortcuts = () => {
 
   const openHome = useCallback(async () => {
     const props = await homeTab(i18n, t);
-    openTab("home-tab", t("HomeTab.title"), DashboardViewTemplate, props);
+    openTab(
+      "home-tab",
+      t("HomeTab.title"),
+      IconEnum.Home,
+      DashboardViewTemplate,
+      props
+    );
   }, [i18n, t, openTab]);
 
   const openSettings = useCallback(async () => {
     const props = await settingsTab(i18n, t);
-    openTab("settings-tab", t("SettingsTab.title"), FormViewTemplate, props);
+    openTab(
+      "settings-tab",
+      t("SettingsTab.title"),
+      IconEnum.Settings,
+      FormViewTemplate,
+      props
+    );
   }, [i18n, t, openTab]);
 
   return {
