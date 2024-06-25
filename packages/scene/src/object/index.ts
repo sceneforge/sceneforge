@@ -1,4 +1,5 @@
 export { compare } from "./compare";
+export { getNodeChildren } from "./getNodeChildren";
 export { hasChildren } from "./hasChildren";
 export { hideNode } from "./hideNode";
 export { id } from "./id";

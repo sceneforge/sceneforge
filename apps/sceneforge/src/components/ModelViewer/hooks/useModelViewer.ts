@@ -2,10 +2,10 @@ import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 import { AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
 import { Mesh } from "@babylonjs/core/Meshes/mesh";
 import "@babylonjs/loaders/glTF/2.0";
+import { select } from "@sceneforge/scene";
 import { type RefObject, useCallback, useEffect, useState } from "react";
 
 import { Model } from "../../../lib/isModel";
-import { select } from "../../../lib/sceneHandler";
 import { useModelContext } from "../../ModelContext";
 import { Mode } from "./../mode";
 import { useArcRotateCamera } from "./useArcRotateCamera";

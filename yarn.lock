@@ -3206,6 +3206,7 @@ __metadata:
     "@jest/globals": "npm:^29.7.0"
     "@sceneforge/data": "workspace:*"
     "@sceneforge/eslint": "workspace:*"
+    "@sceneforge/scene": "workspace:*"
     "@sceneforge/ui": "workspace:*"
     "@simplecomponent/markdown": "npm:^0.0.2"
     "@types/hast": "npm:^3.0.4"
@@ -3283,6 +3284,19 @@ __metadata:
     typescript-eslint: "npm:^7.13.1"
   peerDependencies:
     eslint: ^9.5.0
+  languageName: unknown
+  linkType: soft
+
+"@sceneforge/scene@workspace:*, @sceneforge/scene@workspace:packages/scene":
+  version: 0.0.0-use.local
+  resolution: "@sceneforge/scene@workspace:packages/scene"
+  dependencies:
+    "@babylonjs/core": "npm:^7.7.0"
+    "@sceneforge/eslint": "workspace:*"
+    eslint: "npm:^9.5.0"
+    typescript: "npm:*"
+  peerDependencies:
+    "@babylonjs/core": ^7.7.0
   languageName: unknown
   linkType: soft
 

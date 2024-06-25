@@ -1,4 +1,16 @@
 import {
+  SceneObjectType,
+  compare,
+  getNodeChildren,
+  hasChildren,
+  hideNode,
+  id,
+  isVisible,
+  name,
+  showNode,
+  typeOf,
+} from "@sceneforge/scene";
+import {
   Button,
   Icon,
   IconButton,
@@ -7,19 +19,6 @@ import {
   type ToggleEvent,
 } from "@sceneforge/ui";
 import { useCallback, useEffect, useId, useMemo, useState } from "react";
-
-import {
-  SceneObjectType,
-  compare,
-  hasChildren,
-  hideNode,
-  id,
-  isVisible,
-  name,
-  showNode,
-  typeOf,
-} from "../../lib/sceneObject";
-import { getNodeChildren } from "../../lib/sceneObject/getNodeChildren";
 
 export type SceneNodeProps = {
   clearMeshSelectionPath?: () => void;
@@ -53,8 +52,17 @@ export const SceneNode = ({
 
   const nodeHasChildren = useMemo(() => hasChildren(node), [node]);
 
-  const childrenNodes: unknown[]
-    = open && nodeHasChildren ? getNodeChildren(node).sort(compare) : [];
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const childrenNodes: unknown[] = useMemo(
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    () => open && nodeHasChildren
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      ? getNodeChildren(node)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        .sort(compare)
+      : []
+    , [nodeHasChildren, node, open]
+  );
 
   const expandNode = useCallback(() => {
     if (open) {

@@ -37,6 +37,7 @@
     "@babylonjs/loaders": "^7.7.0",
     "@babylonjs/materials": "^7.7.0",
     "@sceneforge/data": "workspace:*",
+    "@sceneforge/scene": "workspace:*",
     "@sceneforge/ui": "workspace:*",
     "@simplecomponent/markdown": "^0.0.2",
     "babylonjs-gltf2interface": "^7.7.0",

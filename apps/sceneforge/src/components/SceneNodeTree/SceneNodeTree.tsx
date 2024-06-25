@@ -1,9 +1,9 @@
 import type { Scene } from "@babylonjs/core/scene";
 import type { Nullable } from "@babylonjs/core/types";
 
+import { compare } from "@sceneforge/scene";
 import { useId } from "react";
 
-import { compare } from "../../lib/sceneObject";
 import { SceneNode } from "./SceneNode";
 
 export type SceneNodeTreeProps = {

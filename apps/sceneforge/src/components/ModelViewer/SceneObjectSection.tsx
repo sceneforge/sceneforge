@@ -1,8 +1,8 @@
+import { id, name, typeOf } from "@sceneforge/scene";
 import { IconEnum } from "@sceneforge/ui";
 import { MouseEventHandler, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { id, name, typeOf } from "../../lib/sceneObject";
 import { PanelSheetSection } from "../PanelSheet";
 
 export interface SceneObjectSectionProps {
