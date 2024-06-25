@@ -1,16 +1,16 @@
 import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
 
 import Icon from './Icon';
-import { icons } from '../tokens.stylex';
+import { IconEnum } from '../../types';
 
 <Meta title="Component/Icon/Iconography" />
 
 # Iconography
 
 <IconGallery>
-  {Object.keys(icons).map((name) => (
-    <IconItem key={`icon-${name}`} name={name}>
-      <Icon icon={name} />
+  {Object.keys(IconEnum).map((icon) => (
+    <IconItem key={`icon-${icon}`} name={icon}>
+      <Icon icon={IconEnum[icon]} />
     </IconItem>
   ))}
 </IconGallery>

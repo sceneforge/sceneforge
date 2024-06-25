@@ -1,5 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 
+import { IconEnum, Variant } from "../types";
+
 export const MEDIA_DARK = "@media (prefers-color-scheme: dark)";
 export const MEDIA_CONTROL_OVERLAY = "@media (display-mode: window-controls-overlay)";
 export const FROM_SM = "@media only screen and (min-width: 576px)";
@@ -30,25 +32,25 @@ export const typography = stylex.defineVars({
 });
 
 export const color = stylex.defineVars({
-  accent: "rgb(0 110 80 / 1)",
+  accent: "#006e50",
   accentText: "#fff",
   background: {
     [MEDIA_DARK]: "#000",
     default: "#fff",
   },
-  danger: "rgb(179 15 15 / 1)",
+  danger: "#b30f0f",
   dangerText: "#fff",
   foreground: {
     [MEDIA_DARK]: "#fff",
     default: "#000",
   },
-  info: "rgb(28 69 173 / 1)",
+  info: "#1c45ad",
   infoText: "#fff",
   primary: "#86159d",
   primaryText: "#fff",
-  success: "rgb(19 172 19 / 1)",
+  success: "#13ac13",
   successText: "#fff",
-  warning: "rgb(209 165 18 / 1)",
+  warning: "#d1a512",
   warningText: "#000",
 });
 
@@ -95,33 +97,122 @@ export const titleBar = stylex.defineVars({
 });
 
 export const icons = stylex.defineVars({
-  add: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z'/%3E%3C/svg%3E\")",
-  addCircle: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M11 17h2v-4h4v-2h-4V7h-2v4H7v2h4zm1 5q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22'/%3E%3C/svg%3E\")",
-  arrowSelectorTool: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='m13.775 22l-3.625-7.8L6 20V2l14 11h-7.1l3.6 7.725z'/%3E%3C/svg%3E\")",
-  camera: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='m11.2 8.375l3.5-6q2.275.6 4.038 2.2t2.562 3.8zm-2.775 2.5L5 4.875q1.35-1.325 3.138-2.1T12 2q.325 0 .75.038t.775.087zm-6.1 3.625q-.15-.6-.238-1.225T2 12q0-1.775.575-3.35T4.2 5.775L9.25 14.5zm7 7.125q-2.275-.6-4.05-2.2t-2.575-3.8h10.075zM12 22q-.375 0-.763-.05t-.737-.1l5.075-8.725l3.425 6q-1.35 1.325-3.137 2.1T12 22m7.8-3.775L14.75 9.5h6.925q.15.6.238 1.225T22 12q0 1.75-.612 3.35T19.8 18.225'/%3E%3C/svg%3E\")",
-  cameraSwitch: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M8 17q-.825 0-1.412-.587T6 15V9q0-.825.588-1.412T8 7h1l1-1h4l1 1h1q.825 0 1.413.588T18 9v6q0 .825-.587 1.413T16 17zm4-3q.825 0 1.413-.587T14 12t-.587-1.412T12 10t-1.412.588T10 12t.588 1.413T12 14M8.55.5Q9.4.225 10.263.113T12 0q2.35 0 4.438.838t3.7 2.325t2.637 3.5T24 11h-2q-.175-1.8-.95-3.363t-1.988-2.762t-2.787-1.937T12.9 2.05l1.55 1.55l-1.4 1.4zm6.9 23q-.85.275-1.712.388T12 24q-2.35 0-4.437-.837t-3.7-2.325t-2.638-3.5T0 13h2q.2 1.8.963 3.363t1.975 2.762t2.787 1.938t3.375.887L9.55 20.4l1.4-1.4z'/%3E%3C/svg%3E\")",
-  close: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z'/%3E%3C/svg%3E\")",
-  delete: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z'/%3E%3C/svg%3E\")",
-  deployedCode: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M11 21.725L4 17.7q-.475-.275-.737-.725t-.263-1v-7.95q0-.55.263-1T4 6.3l7-4.025Q11.475 2 12 2t1 .275L20 6.3q.475.275.738.725t.262 1v7.95q0 .55-.262 1T20 17.7l-7 4.025Q12.525 22 12 22t-1-.275m0-9.15v6.85L12 20l1-.575v-6.85L19 9.1V8.05l-1.075-.625L12 10.85L6.075 7.425L5 8.05V9.1z'/%3E%3C/svg%3E\")",
-  deployedCodeSharp: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='m12 22.3l-9-5.175V6.875L12 1.7l9 5.175v10.25zm-1-9.725v6.85L12 20l1-.575v-6.85L19 9.1V8.05l-1.075-.625L12 10.85L6.075 7.425L5 8.05V9.1z'/%3E%3C/svg%3E\")",
-  dragIndicator: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M9 20q-.825 0-1.412-.587T7 18t.588-1.412T9 16t1.413.588T11 18t-.587 1.413T9 20m6 0q-.825 0-1.412-.587T13 18t.588-1.412T15 16t1.413.588T17 18t-.587 1.413T15 20m-6-6q-.825 0-1.412-.587T7 12t.588-1.412T9 10t1.413.588T11 12t-.587 1.413T9 14m6 0q-.825 0-1.412-.587T13 12t.588-1.412T15 10t1.413.588T17 12t-.587 1.413T15 14M9 8q-.825 0-1.412-.587T7 6t.588-1.412T9 4t1.413.588T11 6t-.587 1.413T9 8m6 0q-.825 0-1.412-.587T13 6t.588-1.412T15 4t1.413.588T17 6t-.587 1.413T15 8'/%3E%3C/svg%3E\")",
-  expandLess: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='m12 10.775l-3.9 3.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.6-4.6q.15-.15.325-.213T12 8.4t.375.063t.325.212l4.6 4.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275z'/%3E%3C/svg%3E\")",
-  expandMore: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M12 14.95q-.2 0-.375-.062t-.325-.213l-4.6-4.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l3.9 3.9l3.9-3.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-4.6 4.6q-.15.15-.325.213T12 14.95'/%3E%3C/svg%3E\")",
-  fileMap: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21zm7-3q2.425-2.05 3.613-3.812t1.187-3.263q0-2.275-1.45-3.6T12 6T8.65 7.325t-1.45 3.6q0 1.5 1.188 3.263T12 18m0-5.75q-.525 0-.888-.363T10.75 11t.363-.888T12 9.75t.888.363t.362.887t-.363.888t-.887.362'/%3E%3C/svg%3E\")",
-  globe: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-.175-.012-.363t-.013-.312q-.125.725-.675 1.2T18 13h-2q-.825 0-1.412-.587T14 11v-1h-4V8q0-.825.588-1.412T12 6h1q0-.575.313-1.012t.762-.713q-.5-.125-1.012-.2T12 4Q8.65 4 6.325 6.325T4 12h5q1.65 0 2.825 1.175T13 16v1h-3v2.75q.5.125.988.188T12 20'/%3E%3C/svg%3E\")",
-  lightbulb: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-4-3v-2h8v2zm.25-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2t5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16z'/%3E%3C/svg%3E\")",
-  lightbulbRounded: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M12 19q.625 0 1.063-.437T13.5 17.5h-3q0 .625.438 1.063T12 19m-2.25-2.5h4.5q.325 0 .538-.213T15 15.75t-.213-.537T14.25 15h-4.5q-.325 0-.537.213T9 15.75t.213.538t.537.212M9.025 14h5.95q.925-.675 1.475-1.713T17 10q0-2.075-1.462-3.537T12 5T8.463 6.463T7 10q0 1.25.55 2.288T9.025 14m.55-1.5q-.5-.5-.787-1.137T8.5 10q0-1.45 1.025-2.475T12 6.5t2.475 1.025T15.5 10q0 .725-.288 1.363t-.787 1.137zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22'/%3E%3C/svg%3E\")",
-  menu: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M3 18v-2h18v2zm0-5v-2h18v2zm0-5V6h18v2z'/%3E%3C/svg%3E\")",
-  moreVert: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M12 20q-.825 0-1.412-.587T10 18t.588-1.412T12 16t1.413.588T14 18t-.587 1.413T12 20m0-6q-.825 0-1.412-.587T10 12t.588-1.412T12 10t1.413.588T14 12t-.587 1.413T12 14m0-6q-.825 0-1.412-.587T10 6t.588-1.412T12 4t1.413.588T14 6t-.587 1.413T12 8'/%3E%3C/svg%3E\")",
-  moveSelectionUp: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M6 14V2h12v12zm10 4v-2h2v2zM6 18v-2h2v2zm10 4v-2h2v2zm-5 0v-2h2v2zm-5 0v-2h2v2z'/%3E%3C/svg%3E\")",
-  questionMark: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M10.6 16q0-2.025.363-2.912T12.5 11.15q1.025-.9 1.563-1.562t.537-1.513q0-1.025-.687-1.7T12 5.7q-1.275 0-1.937.775T9.125 8.05L6.55 6.95q.525-1.6 1.925-2.775T12 3q2.625 0 4.038 1.463t1.412 3.512q0 1.25-.537 2.138t-1.688 2.012Q14 13.3 13.738 13.913T13.475 16zm1.4 6q-.825 0-1.412-.587T10 20t.588-1.412T12 18t1.413.588T14 20t-.587 1.413T12 22'/%3E%3C/svg%3E\")",
-  select: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M5 19v2q-.825 0-1.412-.587T3 19zm-2-2v-2h2v2zm0-4v-2h2v2zm0-4V7h2v2zm2-4H3q0-.825.588-1.412T5 3zm2 16v-2h2v2zM7 5V3h2v2zm4 16v-2h2v2zm0-16V3h2v2zm4 16v-2h2v2zm0-16V3h2v2zm4 14h2q0 .825-.587 1.413T19 21zm0-2v-2h2v2zm0-4v-2h2v2zm0-4V7h2v2zm0-4V3q.825 0 1.413.588T21 5z'/%3E%3C/svg%3E\")",
-  settings: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='m9.25 22l-.4-3.2q-.325-.125-.612-.3t-.563-.375L4.7 19.375l-2.75-4.75l2.575-1.95Q4.5 12.5 4.5 12.338v-.675q0-.163.025-.338L1.95 9.375l2.75-4.75l2.975 1.25q.275-.2.575-.375t.6-.3l.4-3.2h5.5l.4 3.2q.325.125.613.3t.562.375l2.975-1.25l2.75 4.75l-2.575 1.95q.025.175.025.338v.674q0 .163-.05.338l2.575 1.95l-2.75 4.75l-2.95-1.25q-.275.2-.575.375t-.6.3l-.4 3.2zm2.8-6.5q1.45 0 2.475-1.025T15.55 12t-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12t1.013 2.475T12.05 15.5'/%3E%3C/svg%3E\")",
-  square: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M3 21V3h18v18z'/%3E%3C/svg%3E\")",
-  squareRounded: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21z'/%3E%3C/svg%3E\")",
-  sunny: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M11 5V1h2v4zm6.65 2.75l-1.375-1.375l2.8-2.875l1.4 1.425zM19 13v-2h4v2zm-8 10v-4h2v4zM6.35 7.7L3.5 4.925l1.425-1.4L7.75 6.35zm12.7 12.8l-2.775-2.875l1.35-1.35l2.85 2.75zM1 13v-2h4v2zm3.925 7.5l-1.4-1.425l2.8-2.8l.725.675l.725.7zM12 18q-2.5 0-4.25-1.75T6 12t1.75-4.25T12 6t4.25 1.75T18 12t-1.75 4.25T12 18'/%3E%3C/svg%3E\")",
-  transform: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='m16 23l-4-4l1.4-1.45l1.6 1.6V17H9q-.825 0-1.412-.587T7 15V9H2V7h5V4.85l-1.6 1.6L4 5l4-4l4 4l-1.4 1.45L9 4.85V15h13v2h-5v2.15l1.6-1.6L20 19zm-1-10V9h-4V7h4q.825 0 1.413.588T17 9v4z'/%3E%3C/svg%3E\")",
-  uploadFile: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M11 19h2v-4.175l1.6 1.6L16 15l-4-4l-4 4l1.425 1.4L11 14.825zm-5 3q-.825 0-1.412-.587T4 20V4q0-.825.588-1.412T6 2h8l6 6v12q0 .825-.587 1.413T18 22zm7-13h5l-5-5z'/%3E%3C/svg%3E\")",
-  visibility: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M12 16q1.875 0 3.188-1.312T16.5 11.5t-1.312-3.187T12 7T8.813 8.313T7.5 11.5t1.313 3.188T12 16m0-1.8q-1.125 0-1.912-.788T9.3 11.5t.788-1.912T12 8.8t1.913.788t.787 1.912t-.787 1.913T12 14.2m0 4.8q-3.65 0-6.65-2.037T1 11.5q1.35-3.425 4.35-5.462T12 4t6.65 2.038T23 11.5q-1.35 3.425-4.35 5.463T12 19'/%3E%3C/svg%3E\")",
-  visibilityOff: "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='m19.8 22.6l-4.2-4.15q-.875.275-1.762.413T12 19q-3.775 0-6.725-2.087T1 11.5q.525-1.325 1.325-2.463T4.15 7L1.4 4.2l1.4-1.4l18.4 18.4zM12 16q.275 0 .513-.025t.512-.1l-5.4-5.4q-.075.275-.1.513T7.5 11.5q0 1.875 1.313 3.188T12 16m7.3.45l-3.175-3.15q.175-.425.275-.862t.1-.938q0-1.875-1.312-3.187T12 7q-.5 0-.937.1t-.863.3L7.65 4.85q1.025-.425 2.1-.637T12 4q3.775 0 6.725 2.088T23 11.5q-.575 1.475-1.513 2.738T19.3 16.45m-4.625-4.6l-3-3q.7-.125 1.288.113t1.012.687t.613 1.038t.087 1.162'/%3E%3C/svg%3E\")",
+  add: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTExIDEzSDV2LTJoNlY1aDJ2Nmg2djJoLTZ2NmgtMnoiLz48L3N2Zz4=)",
+  addCircle: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTExIDE3aDJ2LTRoNHYtMmgtNFY3aC0ydjRIN3YyaDR6bTEgNXEtMi4wNzUgMC0zLjktLjc4OHQtMy4xNzUtMi4xMzdxLTEuMzUtMS4zNS0yLjEzNy0zLjE3NVQyIDEycTAtMi4wNzUuNzg4LTMuOXQyLjEzNy0zLjE3NXExLjM1LTEuMzUgMy4xNzUtMi4xMzdUMTIgMnEyLjA3NSAwIDMuOS43ODh0My4xNzUgMi4xMzdxMS4zNSAxLjM1IDIuMTM4IDMuMTc1VDIyIDEycTAgMi4wNzUtLjc4OCAzLjl0LTIuMTM3IDMuMTc1cS0xLjM1IDEuMzUtMy4xNzUgMi4xMzhUMTIgMjIiLz48L3N2Zz4=)",
+  arrowSelectorTool: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0ibTEzLjc3NSAyMmwtMy42MjUtNy44TDYgMjBWMmwxNCAxMWgtNy4xbDMuNiA3LjcyNXoiLz48L3N2Zz4=)",
+  camera: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0ibTExLjIgOC4zNzVsMy41LTZxMi4yNzUuNiA0LjAzOCAyLjJ0Mi41NjIgMy44em0tMi43NzUgMi41TDUgNC44NzVxMS4zNS0xLjMyNSAzLjEzOC0yLjFUMTIgMnEuMzI1IDAgLjc1LjAzOHQuNzc1LjA4N3ptLTYuMSAzLjYyNXEtLjE1LS42LS4yMzgtMS4yMjVUMiAxMnEwLTEuNzc1LjU3NS0zLjM1VDQuMiA1Ljc3NUw5LjI1IDE0LjV6bTcgNy4xMjVxLTIuMjc1LS42LTQuMDUtMi4ydC0yLjU3NS0zLjhoMTAuMDc1ek0xMiAyMnEtLjM3NSAwLS43NjMtLjA1dC0uNzM3LS4xbDUuMDc1LTguNzI1bDMuNDI1IDZxLTEuMzUgMS4zMjUtMy4xMzcgMi4xVDEyIDIybTcuOC0zLjc3NUwxNC43NSA5LjVoNi45MjVxLjE1LjYuMjM4IDEuMjI1VDIyIDEycTAgMS43NS0uNjEyIDMuMzVUMTkuOCAxOC4yMjUiLz48L3N2Zz4=)",
+  cameraSwitch: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTggMTdxLS44MjUgMC0xLjQxMi0uNTg3VDYgMTVWOXEwLS44MjUuNTg4LTEuNDEyVDggN2gxbDEtMWg0bDEgMWgxcS44MjUgMCAxLjQxMy41ODhUMTggOXY2cTAgLjgyNS0uNTg3IDEuNDEzVDE2IDE3em00LTNxLjgyNSAwIDEuNDEzLS41ODdUMTQgMTJxMC0uODI1LS41ODctMS40MTJUMTIgMTBxLS44MjUgMC0xLjQxMi41ODhUMTAgMTJxMCAuODI1LjU4OCAxLjQxM1QxMiAxNE04LjU1LjVROS40LjIyNSAxMC4yNjMuMTEzVDEyIDBxMi4zNSAwIDQuNDM4LjgzOHQzLjcgMi4zMjVxMS42MTIgMS40ODcgMi42MzcgMy41VDI0IDExaC0ycS0uMTc1LTEuOC0uOTUtMy4zNjN0LTEuOTg4LTIuNzYycS0xLjIxMi0xLjItMi43ODctMS45MzdUMTIuOSAyLjA1bDEuNTUgMS41NWwtMS40IDEuNHptNi45IDIzcS0uODUuMjc1LTEuNzEyLjM4OFQxMiAyNHEtMi4zNSAwLTQuNDM3LS44Mzd0LTMuNy0yLjMyNXEtMS42MTMtMS40ODgtMi42MzgtMy41VDAgMTNoMnEuMiAxLjguOTYzIDMuMzYzdDEuOTc1IDIuNzYycTEuMjEyIDEuMiAyLjc4NyAxLjkzOHQzLjM3NS44ODdMOS41NSAyMC40bDEuNC0xLjR6Ii8+PC9zdmc+)",
+  close: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTYuNCAxOUw1IDE3LjZsNS42LTUuNkw1IDYuNEw2LjQgNWw1LjYgNS42TDE3LjYgNUwxOSA2LjRMMTMuNCAxMmw1LjYgNS42bC0xLjQgMS40bC01LjYtNS42eiIvPjwvc3ZnPg==)",
+  delete: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTcgMjFxLS44MjUgMC0xLjQxMi0uNTg3VDUgMTlWNkg0VjRoNVYzaDZ2MWg1djJoLTF2MTNxMCAuODI1LS41ODcgMS40MTNUMTcgMjF6bTItNGgyVjhIOXptNCAwaDJWOGgtMnoiLz48L3N2Zz4=)",
+  deployedCode: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTExIDIxLjcyNUw0IDE3LjdxLS40NzUtLjI3NS0uNzM3LS43MjV0LS4yNjMtMXYtNy45NXEwLS41NS4yNjMtMVQ0IDYuM2w3LTQuMDI1UTExLjQ3NSAyIDEyIDJ0MSAuMjc1TDIwIDYuM3EuNDc1LjI3NS43MzguNzI1dC4yNjIgMXY3Ljk1cTAgLjU1LS4yNjIgMVQyMCAxNy43bC03IDQuMDI1UTEyLjUyNSAyMiAxMiAyMnQtMS0uMjc1bTAtOS4xNXY2Ljg1TDEyIDIwbDEtLjU3NXYtNi44NUwxOSA5LjFWOC4wNWwtMS4wNzUtLjYyNUwxMiAxMC44NUw2LjA3NSA3LjQyNUw1IDguMDVWOS4xeiIvPjwvc3ZnPg==)",
+  deployedCodeOutline: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTExIDE5LjQyNXYtNi44NUw1IDkuMXY2Ljg1em0yIDBsNi0zLjQ3NVY5LjFsLTYgMy40NzV6bS0xLTguNTc1bDUuOTI1LTMuNDI1TDEyIDRMNi4wNzUgNy40MjV6TTQgMTcuN3EtLjQ3NS0uMjc1LS43MzctLjcyNXQtLjI2My0xdi03Ljk1cTAtLjU1LjI2My0xVDQgNi4zbDctNC4wMjVRMTEuNDc1IDIgMTIgMnQxIC4yNzVMMjAgNi4zcS40NzUuMjc1LjczOC43MjV0LjI2MiAxdjcuOTVxMCAuNTUtLjI2MiAxVDIwIDE3LjdsLTcgNC4wMjVRMTIuNTI1IDIyIDEyIDIydC0xLS4yNzV6bTgtNS43Ii8+PC9zdmc+)",
+  deployedCodeSharp: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0ibTEyIDIyLjNsLTktNS4xNzVWNi44NzVMMTIgMS43bDkgNS4xNzV2MTAuMjV6bS0xLTkuNzI1djYuODVMMTIgMjBsMS0uNTc1di02Ljg1TDE5IDkuMVY4LjA1bC0xLjA3NS0uNjI1TDEyIDEwLjg1TDYuMDc1IDcuNDI1TDUgOC4wNVY5LjF6Ii8+PC9zdmc+)",
+  dragIndicator: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTkgMjBxLS44MjUgMC0xLjQxMi0uNTg3VDcgMThxMC0uODI1LjU4OC0xLjQxMlQ5IDE2cS44MjUgMCAxLjQxMy41ODhUMTEgMThxMCAuODI1LS41ODcgMS40MTNUOSAyMG02IDBxLS44MjUgMC0xLjQxMi0uNTg3VDEzIDE4cTAtLjgyNS41ODgtMS40MTJUMTUgMTZxLjgyNSAwIDEuNDEzLjU4OFQxNyAxOHEwIC44MjUtLjU4NyAxLjQxM1QxNSAyMG0tNi02cS0uODI1IDAtMS40MTItLjU4N1Q3IDEycTAtLjgyNS41ODgtMS40MTJUOSAxMHEuODI1IDAgMS40MTMuNTg4VDExIDEycTAgLjgyNS0uNTg3IDEuNDEzVDkgMTRtNiAwcS0uODI1IDAtMS40MTItLjU4N1QxMyAxMnEwLS44MjUuNTg4LTEuNDEyVDE1IDEwcS44MjUgMCAxLjQxMy41ODhUMTcgMTJxMCAuODI1LS41ODcgMS40MTNUMTUgMTRNOSA4cS0uODI1IDAtMS40MTItLjU4N1Q3IDZxMC0uODI1LjU4OC0xLjQxMlQ5IDRxLjgyNSAwIDEuNDEzLjU4OFQxMSA2cTAgLjgyNS0uNTg3IDEuNDEzVDkgOG02IDBxLS44MjUgMC0xLjQxMi0uNTg3VDEzIDZxMC0uODI1LjU4OC0xLjQxMlQxNSA0cS44MjUgMCAxLjQxMy41ODhUMTcgNnEwIC44MjUtLjU4NyAxLjQxM1QxNSA4Ii8+PC9zdmc+)",
+  expandLess: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0ibTcuNCAxNS4zNzVsLTEuNC0xLjRsNi02bDYgNmwtMS40IDEuNGwtNC42LTQuNnoiLz48L3N2Zz4=)",
+  expandMore: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0ibTEyIDE1LjM3NWwtNi02bDEuNC0xLjRsNC42IDQuNmw0LjYtNC42bDEuNCAxLjR6Ii8+PC9zdmc+)",
+  fileMap: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTUgMjFxLS44MjUgMC0xLjQxMi0uNTg3VDMgMTlWNXEwLS44MjUuNTg4LTEuNDEyVDUgM2gxNHEuODI1IDAgMS40MTMuNTg4VDIxIDV2MTRxMCAuODI1LS41ODcgMS40MTNUMTkgMjF6bTctM3EyLjQyNS0yLjA1IDMuNjEzLTMuODEydDEuMTg3LTMuMjYzcTAtMi4yNzUtMS40NS0zLjZUMTIgNnEtMS45IDAtMy4zNSAxLjMyNXQtMS40NSAzLjZxMCAxLjUgMS4xODggMy4yNjNUMTIgMThtMC01Ljc1cS0uNTI1IDAtLjg4OC0uMzYzVDEwLjc1IDExcTAtLjUyNS4zNjMtLjg4OFQxMiA5Ljc1cS41MjUgMCAuODg4LjM2M3QuMzYyLjg4N3EwIC41MjUtLjM2My44ODhUMTIgMTIuMjUiLz48L3N2Zz4=)",
+  globe: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTEyIDIycS0yLjA3NSAwLTMuOS0uNzg4dC0zLjE3NS0yLjEzN3EtMS4zNS0xLjM1LTIuMTM3LTMuMTc1VDIgMTJxMC0yLjA3NS43ODgtMy45dDIuMTM3LTMuMTc1cTEuMzUtMS4zNSAzLjE3NS0yLjEzN1QxMiAycTIuMDc1IDAgMy45Ljc4OHQzLjE3NSAyLjEzN3ExLjM1IDEuMzUgMi4xMzggMy4xNzVUMjIgMTJxMCAyLjA3NS0uNzg4IDMuOXQtMi4xMzcgMy4xNzVxLTEuMzUgMS4zNS0zLjE3NSAyLjEzOFQxMiAyMm0wLTJxMy4zNSAwIDUuNjc1LTIuMzI1VDIwIDEycTAtLjE3NS0uMDEyLS4zNjN0LS4wMTMtLjMxMnEtLjEyNS43MjUtLjY3NSAxLjJUMTggMTNoLTJxLS44MjUgMC0xLjQxMi0uNTg3VDE0IDExdi0xaC00VjhxMC0uODI1LjU4OC0xLjQxMlQxMiA2aDFxMC0uNTc1LjMxMy0xLjAxMnQuNzYyLS43MTNxLS41LS4xMjUtMS4wMTItLjJUMTIgNFE4LjY1IDQgNi4zMjUgNi4zMjVUNCAxMmg1cTEuNjUgMCAyLjgyNSAxLjE3NVQxMyAxNnYxaC0zdjIuNzVxLjUuMTI1Ljk4OC4xODhUMTIgMjAiLz48L3N2Zz4=)",
+  home: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTQgMjFWOWw4LTZsOCA2djEyaC02di03aC00djd6Ii8+PC9zdmc+)",
+  lightbulb: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTEyIDIycS0uODI1IDAtMS40MTItLjU4N1QxMCAyMGg0cTAgLjgyNS0uNTg3IDEuNDEzVDEyIDIybS00LTN2LTJoOHYyem0uMjUtM3EtMS43MjUtMS4wMjUtMi43MzgtMi43NVQ0LjUgOS41cTAtMy4xMjUgMi4xODgtNS4zMTJUMTIgMnEzLjEyNSAwIDUuMzEzIDIuMTg4VDE5LjUgOS41cTAgMi4wMjUtMS4wMTIgMy43NVQxNS43NSAxNnoiLz48L3N2Zz4=)",
+  lightbulbOutline: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTEyIDIycS0uODI1IDAtMS40MTItLjU4N1QxMCAyMGg0cTAgLjgyNS0uNTg3IDEuNDEzVDEyIDIybS00LTN2LTJoOHYyem0uMjUtM3EtMS43MjUtMS4wMjUtMi43MzgtMi43NVQ0LjUgOS41cTAtMy4xMjUgMi4xODgtNS4zMTJUMTIgMnEzLjEyNSAwIDUuMzEzIDIuMTg4VDE5LjUgOS41cTAgMi4wMjUtMS4wMTIgMy43NVQxNS43NSAxNnptLjYtMmg2LjNxMS4xMjUtLjggMS43MzgtMS45NzVUMTcuNSA5LjVxMC0yLjMtMS42LTMuOVQxMiA0UTkuNyA0IDguMSA1LjZUNi41IDkuNXEwIDEuMzUuNjEzIDIuNTI1VDguODUgMTRNMTIgMTQiLz48L3N2Zz4=)",
+  menu: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTMgMTh2LTJoMTh2MnptMC01di0yaDE4djJ6bTAtNVY2aDE4djJ6Ii8+PC9zdmc+)",
+  moreHoriz: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTYgMTRxLS44MjUgMC0xLjQxMi0uNTg3VDQgMTJxMC0uODI1LjU4OC0xLjQxMlQ2IDEwcS44MjUgMCAxLjQxMy41ODhUOCAxMnEwIC44MjUtLjU4NyAxLjQxM1Q2IDE0bTYgMHEtLjgyNSAwLTEuNDEyLS41ODdUMTAgMTJxMC0uODI1LjU4OC0xLjQxMlQxMiAxMHEuODI1IDAgMS40MTMuNTg4VDE0IDEycTAgLjgyNS0uNTg3IDEuNDEzVDEyIDE0bTYgMHEtLjgyNSAwLTEuNDEyLS41ODdUMTYgMTJxMC0uODI1LjU4OC0xLjQxMlQxOCAxMHEuODI1IDAgMS40MTMuNTg4VDIwIDEycTAgLjgyNS0uNTg3IDEuNDEzVDE4IDE0Ii8+PC9zdmc+)",
+  moreVert: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTEyIDIwcS0uODI1IDAtMS40MTItLjU4N1QxMCAxOHEwLS44MjUuNTg4LTEuNDEyVDEyIDE2cS44MjUgMCAxLjQxMy41ODhUMTQgMThxMCAuODI1LS41ODcgMS40MTNUMTIgMjBtMC02cS0uODI1IDAtMS40MTItLjU4N1QxMCAxMnEwLS44MjUuNTg4LTEuNDEyVDEyIDEwcS44MjUgMCAxLjQxMy41ODhUMTQgMTJxMCAuODI1LS41ODcgMS40MTNUMTIgMTRtMC02cS0uODI1IDAtMS40MTItLjU4N1QxMCA2cTAtLjgyNS41ODgtMS40MTJUMTIgNHEuODI1IDAgMS40MTMuNTg4VDE0IDZxMCAuODI1LS41ODcgMS40MTNUMTIgOCIvPjwvc3ZnPg==)",
+  moveSelectionUp: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTYgMTRWMmgxMnYxMnptMTAgNHYtMmgydjJ6TTYgMTh2LTJoMnYyem0xMCA0di0yaDJ2MnptLTUgMHYtMmgydjJ6bS01IDB2LTJoMnYyeiIvPjwvc3ZnPg==)",
+  questionMark: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTEwLjYgMTZxMC0yLjAyNS4zNjMtMi45MTJUMTIuNSAxMS4xNXExLjAyNS0uOSAxLjU2My0xLjU2MnQuNTM3LTEuNTEzcTAtMS4wMjUtLjY4Ny0xLjdUMTIgNS43cS0xLjI3NSAwLTEuOTM3Ljc3NVQ5LjEyNSA4LjA1TDYuNTUgNi45NXEuNTI1LTEuNiAxLjkyNS0yLjc3NVQxMiAzcTIuNjI1IDAgNC4wMzggMS40NjN0MS40MTIgMy41MTJxMCAxLjI1LS41MzcgMi4xMzh0LTEuNjg4IDIuMDEyUTE0IDEzLjMgMTMuNzM4IDEzLjkxM1QxMy40NzUgMTZ6bTEuNCA2cS0uODI1IDAtMS40MTItLjU4N1QxMCAyMHEwLS44MjUuNTg4LTEuNDEyVDEyIDE4cS44MjUgMCAxLjQxMy41ODhUMTQgMjBxMCAuODI1LS41ODcgMS40MTNUMTIgMjIiLz48L3N2Zz4=)",
+  select: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTUgMTl2MnEtLjgyNSAwLTEuNDEyLS41ODdUMyAxOXptLTItMnYtMmgydjJ6bTAtNHYtMmgydjJ6bTAtNFY3aDJ2MnptMi00SDNxMC0uODI1LjU4OC0xLjQxMlQ1IDN6bTIgMTZ2LTJoMnYyek03IDVWM2gydjJ6bTQgMTZ2LTJoMnYyem0wLTE2VjNoMnYyem00IDE2di0yaDJ2MnptMC0xNlYzaDJ2MnptNCAxNGgycTAgLjgyNS0uNTg3IDEuNDEzVDE5IDIxem0wLTJ2LTJoMnYyem0wLTR2LTJoMnYyem0wLTRWN2gydjJ6bTAtNFYzcS44MjUgMCAxLjQxMy41ODhUMjEgNXoiLz48L3N2Zz4=)",
+  settings: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0ibTkuMjUgMjJsLS40LTMuMnEtLjMyNS0uMTI1LS42MTItLjN0LS41NjMtLjM3NUw0LjcgMTkuMzc1bC0yLjc1LTQuNzVsMi41NzUtMS45NVE0LjUgMTIuNSA0LjUgMTIuMzM4di0uNjc1cTAtLjE2My4wMjUtLjMzOEwxLjk1IDkuMzc1bDIuNzUtNC43NWwyLjk3NSAxLjI1cS4yNzUtLjIuNTc1LS4zNzV0LjYtLjNsLjQtMy4yaDUuNWwuNCAzLjJxLjMyNS4xMjUuNjEzLjN0LjU2Mi4zNzVsMi45NzUtMS4yNWwyLjc1IDQuNzVsLTIuNTc1IDEuOTVxLjAyNS4xNzUuMDI1LjMzOHYuNjc0cTAgLjE2My0uMDUuMzM4bDIuNTc1IDEuOTVsLTIuNzUgNC43NWwtMi45NS0xLjI1cS0uMjc1LjItLjU3NS4zNzV0LS42LjNsLS40IDMuMnptMi44LTYuNXExLjQ1IDAgMi40NzUtMS4wMjVUMTUuNTUgMTJxMC0xLjQ1LTEuMDI1LTIuNDc1VDEyLjA1IDguNXEtMS40NzUgMC0yLjQ4OCAxLjAyNVQ4LjU1IDEycTAgMS40NSAxLjAxMyAyLjQ3NVQxMi4wNSAxNS41Ii8+PC9zdmc+)",
+  square: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTMgMjFWM2gxOHYxOHoiLz48L3N2Zz4=)",
+  squareOutline: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTMgMjFWM2gxOHYxOHptMi0yaDE0VjVINXptMCAwVjV6Ii8+PC9zdmc+)",
+  squareOutlineRounded: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTUgMjFxLS44MjUgMC0xLjQxMi0uNTg3VDMgMTlWNXEwLS44MjUuNTg4LTEuNDEyVDUgM2gxNHEuODI1IDAgMS40MTMuNTg4VDIxIDV2MTRxMCAuODI1LS41ODcgMS40MTNUMTkgMjF6bTAtMmgxNFY1SDV6bTAgMFY1eiIvPjwvc3ZnPg==)",
+  squareRounded: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTUgMjFxLS44MjUgMC0xLjQxMi0uNTg3VDMgMTlWNXEwLS44MjUuNTg4LTEuNDEyVDUgM2gxNHEuODI1IDAgMS40MTMuNTg4VDIxIDV2MTRxMCAuODI1LS41ODcgMS40MTNUMTkgMjF6Ii8+PC9zdmc+)",
+  sunny: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTExIDVWMWgydjR6bTYuNjUgMi43NWwtMS4zNzUtMS4zNzVsMi44LTIuODc1bDEuNCAxLjQyNXpNMTkgMTN2LTJoNHYyem0tOCAxMHYtNGgydjR6TTYuMzUgNy43TDMuNSA0LjkyNWwxLjQyNS0xLjRMNy43NSA2LjM1em0xMi43IDEyLjhsLTIuNzc1LTIuODc1bDEuMzUtMS4zNWwyLjg1IDIuNzV6TTEgMTN2LTJoNHYyem0zLjkyNSA3LjVsLTEuNC0xLjQyNWwyLjgtMi44bC43MjUuNjc1bC43MjUuN3pNMTIgMThxLTIuNSAwLTQuMjUtMS43NVQ2IDEycTAtMi41IDEuNzUtNC4yNVQxMiA2cTIuNSAwIDQuMjUgMS43NVQxOCAxMnEwIDIuNS0xLjc1IDQuMjVUMTIgMTgiLz48L3N2Zz4=)",
+  transform: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0ibTE2IDIzbC00LTRsMS40LTEuNDVsMS42IDEuNlYxN0g5cS0uODI1IDAtMS40MTItLjU4N1Q3IDE1VjlIMlY3aDVWNC44NWwtMS42IDEuNkw0IDVsNC00bDQgNGwtMS40IDEuNDVMOSA0Ljg1VjE1aDEzdjJoLTV2Mi4xNWwxLjYtMS42TDIwIDE5em0tMS0xMFY5aC00VjdoNHEuODI1IDAgMS40MTMuNTg4VDE3IDl2NHoiLz48L3N2Zz4=)",
+  uploadFile: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTExIDE5aDJ2LTQuMTc1bDEuNiAxLjZMMTYgMTVsLTQtNGwtNCA0bDEuNDI1IDEuNEwxMSAxNC44MjV6bS01IDNxLS44MjUgMC0xLjQxMi0uNTg3VDQgMjBWNHEwLS44MjUuNTg4LTEuNDEyVDYgMmg4bDYgNnYxMnEwIC44MjUtLjU4NyAxLjQxM1QxOCAyMnptNy0xM2g1bC01LTV6Ii8+PC9zdmc+)",
+  visibility: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTEyIDE2cTEuODc1IDAgMy4xODgtMS4zMTJUMTYuNSAxMS41cTAtMS44NzUtMS4zMTItMy4xODdUMTIgN3EtMS44NzUgMC0zLjE4NyAxLjMxM1Q3LjUgMTEuNXEwIDEuODc1IDEuMzEzIDMuMTg4VDEyIDE2bTAtMS44cS0xLjEyNSAwLTEuOTEyLS43ODhUOS4zIDExLjVxMC0xLjEyNS43ODgtMS45MTJUMTIgOC44cTEuMTI1IDAgMS45MTMuNzg4VDE0LjcgMTEuNXEwIDEuMTI1LS43ODcgMS45MTNUMTIgMTQuMm0wIDQuOHEtMy42NSAwLTYuNjUtMi4wMzdUMSAxMS41cTEuMzUtMy40MjUgNC4zNS01LjQ2MlQxMiA0cTMuNjUgMCA2LjY1IDIuMDM4VDIzIDExLjVxLTEuMzUgMy40MjUtNC4zNSA1LjQ2M1QxMiAxOSIvPjwvc3ZnPg==)",
+  visibilityOff: "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0ibTE5LjggMjIuNmwtNC4yLTQuMTVxLS44NzUuMjc1LTEuNzYyLjQxM1QxMiAxOXEtMy43NzUgMC02LjcyNS0yLjA4N1QxIDExLjVxLjUyNS0xLjMyNSAxLjMyNS0yLjQ2M1Q0LjE1IDdMMS40IDQuMmwxLjQtMS40bDE4LjQgMTguNHpNMTIgMTZxLjI3NSAwIC41MTMtLjAyNXQuNTEyLS4xbC01LjQtNS40cS0uMDc1LjI3NS0uMS41MTNUNy41IDExLjVxMCAxLjg3NSAxLjMxMyAzLjE4OFQxMiAxNm03LjMuNDVsLTMuMTc1LTMuMTVxLjE3NS0uNDI1LjI3NS0uODYydC4xLS45MzhxMC0xLjg3NS0xLjMxMi0zLjE4N1QxMiA3cS0uNSAwLS45MzcuMXQtLjg2My4zTDcuNjUgNC44NXExLjAyNS0uNDI1IDIuMS0uNjM3VDEyIDRxMy43NzUgMCA2LjcyNSAyLjA4OFQyMyAxMS41cS0uNTc1IDEuNDc1LTEuNTEzIDIuNzM4VDE5LjMgMTYuNDVtLTQuNjI1LTQuNmwtMy0zcS43LS4xMjUgMS4yODguMTEzdDEuMDEyLjY4N3EuNDI1LjQ1LjYxMyAxLjAzOHQuMDg3IDEuMTYyIi8+PC9zdmc+)",
 });
+
+export const common = stylex.create({
+  background: (background?: keyof typeof color) => ({
+    backgroundColor: background ? color[background] : undefined,
+  }),
+  icon: (iconKey?: keyof typeof icons) => ({
+    maskImage: iconKey ? icons[iconKey] : null,
+  }),
+  text: (text?: keyof typeof color) => ({
+    color: text ? color[text] : undefined,
+  }),
+});
+
+export const backgroundColorVariantStyle = (variant?: Variant) => {
+  return [
+    variant === Variant.Accent && common.background("accent"),
+    variant === Variant.Danger && common.background("danger"),
+    variant === Variant.Info && common.background("info"),
+    variant === Variant.Default && common.background("primary"),
+    variant === Variant.Success && common.background("success"),
+    variant === Variant.Warning && common.background("warning"),
+  ];
+};
+
+export const backgroundTextColorVariantStyle = (variant?: Variant) => {
+  return [
+    variant === Variant.Accent && [common.background("accent"), common.text("accentText")],
+    variant === Variant.Danger && [common.background("danger"), common.text("dangerText")],
+    variant === Variant.Info && [common.background("info"), common.text("infoText")],
+    variant === Variant.Default && [common.background("primary"), common.text("primaryText")],
+    variant === Variant.Success && [common.background("success"), common.text("successText")],
+    variant === Variant.Warning && [common.background("warning"), common.text("warningText")],
+  ];
+};
+
+export const textColorVariantStyle = (variant?: Variant) => {
+  return [
+    variant === Variant.Accent && common.text("accent"),
+    variant === Variant.Danger && common.text("danger"),
+    variant === Variant.Info && common.text("info"),
+    variant === Variant.Default && common.text("primary"),
+    variant === Variant.Success && common.text("success"),
+    variant === Variant.Warning && common.text("warning"),
+  ];
+};
+
+export const iconStyle = (icon?: IconEnum) => {
+  return [
+    icon === IconEnum.Add && common.icon("add"),
+    icon === IconEnum.AddCircle && common.icon("addCircle"),
+    icon === IconEnum.ArrowSelectorTool && common.icon("arrowSelectorTool"),
+    icon === IconEnum.Camera && common.icon("camera"),
+    icon === IconEnum.CameraSwitch && common.icon("cameraSwitch"),
+    icon === IconEnum.Close && common.icon("close"),
+    icon === IconEnum.Delete && common.icon("delete"),
+    icon === IconEnum.DeployedCode && common.icon("deployedCode"),
+    icon === IconEnum.DeployedCodeOutline && common.icon("deployedCodeOutline"),
+    icon === IconEnum.DeployedCodeSharp && common.icon("deployedCodeSharp"),
+    icon === IconEnum.DragIndicator && common.icon("dragIndicator"),
+    icon === IconEnum.ExpandLess && common.icon("expandLess"),
+    icon === IconEnum.ExpandMore && common.icon("expandMore"),
+    icon === IconEnum.FileMap && common.icon("fileMap"),
+    icon === IconEnum.Globe && common.icon("globe"),
+    icon === IconEnum.Home && common.icon("home"),
+    icon === IconEnum.Lightbulb && common.icon("lightbulb"),
+    icon === IconEnum.LightbulbOutline && common.icon("lightbulbOutline"),
+    icon === IconEnum.Menu && common.icon("menu"),
+    icon === IconEnum.MoreHoriz && common.icon("moreHoriz"),
+    icon === IconEnum.MoreVert && common.icon("moreVert"),
+    icon === IconEnum.MoveSelectionUp && common.icon("moveSelectionUp"),
+    icon === IconEnum.QuestionMark && common.icon("questionMark"),
+    icon === IconEnum.Select && common.icon("select"),
+    icon === IconEnum.Settings && common.icon("settings"),
+    icon === IconEnum.Square && common.icon("square"),
+    icon === IconEnum.SquareOutline && common.icon("squareOutline"),
+    icon === IconEnum.SquareOutlineRounded && common.icon("squareOutlineRounded"),
+    icon === IconEnum.SquareRounded && common.icon("squareRounded"),
+    icon === IconEnum.Sunny && common.icon("sunny"),
+    icon === IconEnum.Transform && common.icon("transform"),
+    icon === IconEnum.UploadFile && common.icon("uploadFile"),
+    icon === IconEnum.Visibility && common.icon("visibility"),
+    icon === IconEnum.VisibilityOff && common.icon("visibilityOff"),
+  ];
+};

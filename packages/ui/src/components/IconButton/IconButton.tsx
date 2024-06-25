@@ -11,9 +11,17 @@ export type IconButtonProps = {
 
 const styles = stylex.create({
   container: {
-    borderRadius: "50%",
-    height: "2.5rem",
-    width: "2.5rem",
+    ":hover": {
+      transform: "scale(1.2)",
+    },
+    "alignItems": "center",
+    "aspectRatio": 1,
+    "borderRadius": "100vw",
+    "display": "flex",
+    "justifyContent": "center",
+    "margin": 0,
+    "padding": "calc(inherit / 2)",
+    "transition": "transform 0.2s ease-in-out",
   },
   icon: {
     pointerEvents: "none",

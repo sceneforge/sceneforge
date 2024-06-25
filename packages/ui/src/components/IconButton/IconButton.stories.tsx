@@ -1,17 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
-import { icons } from "../tokens.stylex";
+import { iconArgTypes, variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { IconEnum } from "../../types";
 import IconButton from "./IconButton";
 
 const meta: Meta<typeof IconButton> = {
   argTypes: {
-    icon: {
-      control: {
-        type: "select",
-      },
-      options: Object.keys(icons),
-    },
     size: {
       control: {
         max: 100,
@@ -27,6 +21,7 @@ const meta: Meta<typeof IconButton> = {
       },
     },
     ...variantArgumentTypes("variant"),
+    ...iconArgTypes("icon"),
     inverted: {
       control: "boolean",
     },
@@ -56,7 +51,7 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    icon: "add",
+    icon: IconEnum.Add,
     inverted: false,
     size: 4,
   },
