@@ -16,8 +16,23 @@ export type TabPanelProps<Props = Record<string, unknown>> = {
 };
 
 const styles = stylex.create({
+  container: {
+    height: 0,
+    maxHeight: "100%",
+    maxWidth: "100%",
+    minHeight: "100%",
+    minWidth: "100%",
+    overflow: "hidden",
+    position: "relative",
+    width: 0,
+  },
   hidden: {
     display: "none",
+  },
+  scrollable: {
+    height: "100%",
+    overflow: "auto",
+    width: "100%",
   },
 });
 
@@ -33,18 +48,20 @@ const TabPanel = <Props = Record<string, unknown>>({
       hidden={hidden}
       id={`${tabId}-panel`}
       role="tabpanel"
-      style={[hidden && styles.hidden]}
+      style={[styles.container, hidden && styles.hidden]}
       tabIndex={0}
     >
-      {
-        TabComponent && (
-          <TabComponent
-            {...props}
-            hidden={hidden ?? true}
-            tabId={tabId}
-          />
-        )
-      }
+      <View style={[styles.scrollable]}>
+        {
+          TabComponent && (
+            <TabComponent
+              {...props}
+              hidden={hidden ?? true}
+              tabId={tabId}
+            />
+          )
+        }
+      </View>
     </View>
   );
 };
