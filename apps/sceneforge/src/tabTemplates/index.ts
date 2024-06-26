@@ -2,13 +2,16 @@ import { lazy } from "react";
 
 export const DashboardViewTemplate = lazy(() => import("./DashboardViewTemplate"));
 export const FormViewTemplate = lazy(() => import("./FormViewTemplate"));
-export const ModelViewTemplate = lazy(() => import("./ModelViewTemplate"));
+export const MarkdownViewTemplate = lazy(() => import("./MarkdownViewTemplate"));
+export const SceneViewTemplate = lazy(() => import("./SceneViewTemplate"));
 
 export type { DashboardViewTemplateProps } from "./DashboardViewTemplate";
 export type { FormViewTemplateProps } from "./FormViewTemplate";
-export type { ModelViewTemplateProps } from "./ModelViewTemplate";
+export type { MarkdownViewTemplateProps } from "./MarkdownViewTemplate";
+export type { SceneViewTemplateProps } from "./SceneViewTemplate";
 
 export type TabTemplates =
   | typeof DashboardViewTemplate
   | typeof FormViewTemplate
-  | typeof ModelViewTemplate;
+  | typeof MarkdownViewTemplate
+  | typeof SceneViewTemplate;

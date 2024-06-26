@@ -9,11 +9,11 @@ import {
   View,
 } from "@sceneforge/ui";
 
-export type ModelViewTemplateProps = {
+export type SceneViewTemplateProps = {
   title?: string;
 };
 
-const ModelViewTemplate = ({ title }: ModelViewTemplateProps) => {
+const SceneViewTemplate = ({ title }: SceneViewTemplateProps) => {
   return (
     <View>
       <Canvas />
@@ -37,7 +37,7 @@ const ModelViewTemplate = ({ title }: ModelViewTemplateProps) => {
                     type: "button",
                   },
                 ],
-                label: "Model",
+                label: "Scene",
                 type: "dropdown",
                 variant: Variant.Accent,
               },
@@ -94,4 +94,4 @@ const ModelViewTemplate = ({ title }: ModelViewTemplateProps) => {
   );
 };
 
-export default ModelViewTemplate;
+export default SceneViewTemplate;

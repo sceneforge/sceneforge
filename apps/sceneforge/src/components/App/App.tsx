@@ -10,7 +10,7 @@ import { AppTabs } from "./AppTabs";
 
 export const App = () => {
   const { t } = useTranslation("tabs");
-  const { openHome, openSettings } = useShortcuts();
+  const { openAbout, openHome, openSettings } = useShortcuts();
 
   return (
     <AppLayout
@@ -23,6 +23,12 @@ export const App = () => {
               icon: IconEnum.Home,
               label: t("HomeTab.title"),
               onClick: () => void openHome(),
+              type: "icon",
+            },
+            {
+              icon: IconEnum.QuestionMark,
+              label: t("AboutTab.title"),
+              onClick: () => void openAbout(),
               type: "icon",
             },
             {

@@ -3,7 +3,12 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAppTabs } from "../components/App";
-import { DashboardViewTemplate, FormViewTemplate } from "../tabTemplates";
+import {
+  DashboardViewTemplate,
+  FormViewTemplate,
+  MarkdownViewTemplate,
+} from "../tabTemplates";
+import { aboutTab } from "./aboutTab";
 import { homeTab } from "./homeTab";
 import { settingsTab } from "./settingsTab";
 
@@ -33,7 +38,19 @@ export const useShortcuts = () => {
     );
   }, [i18n, t, openTab]);
 
+  const openAbout = useCallback(async () => {
+    const props = await aboutTab(i18n, t);
+    openTab(
+      "about-tab",
+      t("AboutTab.title"),
+      IconEnum.QuestionMark,
+      MarkdownViewTemplate,
+      props
+    );
+  }, [i18n, t, openTab]);
+
   return {
+    openAbout,
     openHome,
     openSettings,
   };

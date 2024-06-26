@@ -5,8 +5,11 @@
   "general": {
     "undefinedTab": "Undefined Tab"
   },
-  "ModelViewTab": {
-    "untitledModel": "Untitled Model"
+  "SceneTab": {
+    "untitledScene": "Untitled Scene"
+  },
+  "AboutTab": {
+    "title": "About"
   },
   "SettingsTab": {
     "title": "Settings",

@@ -1,5 +1,6 @@
 import { DatabaseProvider } from "@sceneforge/data";
 import { TabsHandler } from "@sceneforge/ui";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   type Dispatch,
   type PropsWithChildren,
@@ -35,6 +36,8 @@ export type AppContextType = {
 export const AppContext = createContext<AppContextType>({
   basePath: "/",
 });
+
+const queryClient = new QueryClient();
 
 export const AppProvider = ({
   children,
@@ -77,9 +80,11 @@ export const AppProvider = ({
         version,
       }}
     >
-      <DatabaseProvider>
-        {children}
-      </DatabaseProvider>
+      <QueryClientProvider client={queryClient}>
+        <DatabaseProvider>
+          {children}
+        </DatabaseProvider>
+      </QueryClientProvider>
     </AppContext.Provider>
   );
 };

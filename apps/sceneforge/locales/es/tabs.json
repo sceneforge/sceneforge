@@ -5,8 +5,11 @@
   "general": {
     "untitledTab": "Sin título"
   },
-  "ModelViewTab": {
-    "untitledModel": "Modelo sin título"
+  "SceneTab": {
+    "untitledScene": "Escena sin título"
+  },
+  "AboutTab": {
+    "title": "Acerca de Scene Forge"
   },
   "SettingsTab": {
     "title": "Ajustes",
