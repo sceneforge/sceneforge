@@ -15,7 +15,7 @@ export type ButtonProps = {
   popovertarget?: string;
   style?: StyleXStyles;
   variant?: Variant;
-} & Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "className" | "style" | "type">;
+} & Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "className" | "style">;
 
 const styles = stylex.create({
   container: {

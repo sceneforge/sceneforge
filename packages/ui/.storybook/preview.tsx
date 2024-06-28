@@ -1,19 +1,9 @@
 import type { Preview } from "@storybook/react";
 
-import { AppLayout } from "../src";
 import "../src/styles/reset.css";
 import "./index.css";
 
 const preview: Preview = {
-  decorators: [
-    (Story, { parameters }) => (
-      <>
-        <AppLayout embedded>
-          <Story {...parameters} />
-        </AppLayout>
-      </>
-    ),
-  ],
   parameters: {
     controls: {
       matchers: {
@@ -21,6 +11,7 @@ const preview: Preview = {
         date: /date$/i,
       },
     },
+    layout: "centered",
   },
   tags: ["autodocs"],
 };

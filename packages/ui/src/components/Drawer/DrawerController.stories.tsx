@@ -20,11 +20,19 @@ const meta: Meta<typeof DrawerController> = {
     ...positionArgumentTypes("position"),
   },
   component: DrawerController,
-  render: args => (
-    <div className="w-100 h-100 outline">
-      <DrawerController {...args} />
-    </div>
-  ),
+  decorators: [
+    Story => (
+      <div
+        style={{
+          aspectRatio: "1.85",
+          display: "block",
+          minWidth: "18rem",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
   title: "Component/DrawerController",
 };
 

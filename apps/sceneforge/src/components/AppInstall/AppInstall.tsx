@@ -18,6 +18,7 @@ export const AppInstall = () => {
       toolbar={{
         actions: [
           {
+            kind: "button",
             label: t("actions.installButton"),
             onClick: () => {
               installPrompt()
@@ -28,7 +29,6 @@ export const AppInstall = () => {
                   closeInstallDialog();
                 });
             },
-            type: "button",
           },
         ],
       }}

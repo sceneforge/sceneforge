@@ -3,10 +3,10 @@ import { Dropdown, type DropdownProps } from "../Dropdown";
 import { IconButton, type IconButtonProps } from "../IconButton";
 import { Toggle, type ToggleProps } from "../Toggle";
 
-type ButtonActionProps = { type: "button" } & ButtonProps;
-type DropdownActionProps = { type: "dropdown" } & DropdownProps;
-type IconButtonActionProps = { type: "icon" } & IconButtonProps;
-type ToggleActionProps = { type: "toggle" } & ToggleProps;
+type ButtonActionProps = { kind: "button" | undefined } & ButtonProps;
+type DropdownActionProps = { kind: "dropdown" } & DropdownProps;
+type IconButtonActionProps = { kind: "icon" } & IconButtonProps;
+type ToggleActionProps = { kind: "toggle" } & ToggleProps;
 
 export type ActionProps =
   | ButtonActionProps
@@ -14,8 +14,8 @@ export type ActionProps =
   | IconButtonActionProps
   | ToggleActionProps;
 
-const Action = ({ type, ...props }: ActionProps) => {
-  switch (type) {
+const Action = ({ kind, ...props }: ActionProps) => {
+  switch (kind) {
     case "dropdown":
       return (<Dropdown {...props as DropdownProps} />);
     case "icon":

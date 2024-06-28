@@ -13,19 +13,19 @@ export const AppNav = () => {
   const toolbarEnd: ToolbarProps = {
     actions: [
       {
+        kind: "button",
         label: t("AppNav.toolbarEnd.homeButton"),
         onClick: () => void 0,
-        type: "button",
       },
       {
+        kind: "button",
         label: t("AppNav.toolbarEnd.aboutButton"),
         onClick: () => void 0,
-        type: "button",
       },
       {
+        kind: "button",
         label: t("AppNav.toolbarEnd.settingsButton"),
         onClick: () => void 0,
-        type: "button",
       },
     ],
   };
@@ -33,9 +33,9 @@ export const AppNav = () => {
   if (showInstall) {
     toolbarEnd.actions = [
       {
+        kind: "button",
         label: t("AppNav.toolbarEnd.installButton"),
         onClick: openInstallDialog,
-        type: "button",
       },
       ...(toolbarEnd?.actions ?? []),
     ];

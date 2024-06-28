@@ -21,21 +21,21 @@ export const App = () => {
           actions: [
             {
               icon: IconEnum.Home,
+              kind: "icon",
               label: t("HomeTab.title"),
               onClick: () => void openHome(),
-              type: "icon",
             },
             {
               icon: IconEnum.QuestionMark,
+              kind: "icon",
               label: t("AboutTab.title"),
               onClick: () => void openAbout(),
-              type: "icon",
             },
             {
               icon: IconEnum.Settings,
+              kind: "icon",
               label: t("SettingsTab.title"),
               onClick: () => void openSettings(),
-              type: "icon",
             },
           ],
         },

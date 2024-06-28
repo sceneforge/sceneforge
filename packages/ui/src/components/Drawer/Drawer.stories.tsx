@@ -29,11 +29,19 @@ const meta: Meta<typeof Drawer> = {
     ...positionArgumentTypes("position"),
   },
   component: Drawer,
-  render: args => (
-    <div className="w-100 h-100 outline">
-      <Drawer {...args} />
-    </div>
-  ),
+  decorators: [
+    Story => (
+      <div
+        style={{
+          aspectRatio: "1.85",
+          display: "block",
+          minWidth: "18rem",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
   title: "Component/Drawer",
 };
 
@@ -43,7 +51,15 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    children: (<div style={{ paddingBlock: "1rem", paddingInline: "2rem" }}>Drawer Content</div>),
+    children: (
+      <div
+        style={{
+          padding: "1rem 2rem",
+        }}
+      >
+        Drawer Content
+      </div>
+    ),
     label: "Drawer Title",
     resizable: true,
     size: 48,

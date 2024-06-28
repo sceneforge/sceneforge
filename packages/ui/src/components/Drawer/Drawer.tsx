@@ -5,7 +5,7 @@ import * as stylex from "@stylexjs/stylex";
 
 import { Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
-import { backgroundColor, color } from "../tokens.stylex";
+import { color } from "../tokens.stylex";
 
 export type DrawerProps = PropsWithChildren<{
   id?: string;
@@ -25,24 +25,24 @@ const styles = stylex.create({
     color: "inherit",
     display: "block",
     flexGrow: 1,
-    height: "100%",
-    insetBlockStart: 0,
-    insetInlineStart: 0,
+    inset: 0,
     margin: 0,
     overflow: "hidden",
     padding: 0,
     pointerEvents: "none",
     position: "absolute",
-    width: "100%",
   },
   innerContainer: {
     overflow: "hidden",
     pointerEvents: "auto",
     position: "absolute",
   },
+  noVariantInnerContainer: {
+    backgroundColor: "color-mix(in srgb, currentColor 5%, transparent)",
+  },
   resizableGutter: {
     "::after": {
-      backgroundColor: backgroundColor.alpha50,
+      backgroundColor: "color-mix(in srgb, currentColor 50%, transparent)",
       content: "''",
       display: "block",
       opacity: 0.5,
@@ -134,6 +134,7 @@ const Drawer = ({
             styles.resizableGutter,
             styles.resizableGutterDynamic(orientation, position, size),
           ],
+          !variant && styles.noVariantInnerContainer,
         ]}
         variant={variant}
       >

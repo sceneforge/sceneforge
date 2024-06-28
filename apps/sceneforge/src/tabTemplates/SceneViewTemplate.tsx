@@ -32,38 +32,38 @@ const SceneViewTemplate = ({ title }: SceneViewTemplateProps) => {
               {
                 actions: [
                   {
+                    kind: "button",
                     label: "Import...",
                     onClick: () => console.log("Import..."),
-                    type: "button",
                   },
                 ],
+                kind: "dropdown",
                 label: "Scene",
-                type: "dropdown",
                 variant: Variant.Accent,
               },
               {
                 actions: [
                   {
+                    kind: "toggle",
                     label: "View",
                     onClick: () => console.log("View Mode"),
-                    type: "toggle",
                     variant: Variant.Accent,
                   },
                   {
+                    kind: "toggle",
                     label: "Edit",
                     onClick: () => console.log("Edit Mode"),
-                    type: "toggle",
                     variant: Variant.Accent,
                   },
                   {
+                    kind: "toggle",
                     label: "Material",
                     onClick: () => console.log("Material Mode"),
-                    type: "toggle",
                     variant: Variant.Accent,
                   },
                 ],
+                kind: "dropdown",
                 label: "Mode",
-                type: "dropdown",
                 variant: Variant.Accent,
               },
             ],
@@ -73,9 +73,9 @@ const SceneViewTemplate = ({ title }: SceneViewTemplateProps) => {
             <Pane
               actions={[
                 {
+                  kind: "button",
                   label: "Action 1",
                   onClick: () => console.log("Action 1"),
-                  type: "button",
                   variant: Variant.Accent,
                 },
               ]}

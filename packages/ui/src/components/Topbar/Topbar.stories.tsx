@@ -6,12 +6,28 @@ import Topbar from "./Topbar";
 
 const meta: Meta<typeof Topbar> = {
   argTypes: {
+    shadow: {
+      control: "boolean",
+    },
     title: {
       control: "text",
     },
     ...variantArgumentTypes("variant"),
   },
   component: Topbar,
+  decorators: [
+    Story => (
+      <div
+        style={{
+          aspectRatio: "21 / 3",
+          display: "block",
+          minWidth: "75dvw",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
   title: "Component/Topbar",
 };
 
@@ -21,35 +37,37 @@ export default meta;
 
 export const Default: Story = {
   args: {
+    shadow: true,
     title: "Topbar Title",
   },
 } as Story;
 
 export const WithToolbar: Story = {
   args: {
+    shadow: true,
     title: "Topbar Title With Toolbar",
     toolbarEnd: {
       actions: [
         {
           icon: IconEnum.Globe,
+          kind: "icon",
           label: "Button 3",
-          type: "icon",
         },
         {
+          kind: "button",
           label: "Button 4",
-          type: "button",
         },
       ],
     },
     toolbarStart: {
       actions: [
         {
+          kind: "button",
           label: "Button 1",
-          type: "button",
         },
         {
+          kind: "button",
           label: "Button 2",
-          type: "button",
         },
       ],
     },
