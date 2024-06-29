@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
-import { Variant } from "../../types";
-import View from "../View/View";
 import Switch from "./Switch";
 
 const meta: Meta<typeof Switch> = {
@@ -27,13 +25,6 @@ const meta: Meta<typeof Switch> = {
     ...variantArgumentTypes("variant"),
   },
   component: Switch,
-  decorators: [
-    Story => (
-      <View padding={10} variant={Variant.Default}>
-        <Story />
-      </View>
-    ),
-  ],
   title: "Component/Switch",
 };
 

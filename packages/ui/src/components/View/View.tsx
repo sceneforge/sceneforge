@@ -31,8 +31,6 @@ const styles = stylex.create({
     color: "inherit",
     display: "block",
     height: "100%",
-    margin: 0,
-    padding: 0,
     position: "relative",
     width: "100%",
   },

@@ -9,6 +9,7 @@ export type CardButtonProps = {
   popoverTarget?: ButtonProps["popoverTarget"];
   popoverTargetAction?: ButtonProps["popoverTargetAction"];
   ref?: ButtonProps["ref"];
+  scale?: boolean;
   tabIndex?: ButtonProps["tabIndex"];
 } & Omit<CardProps, "actions">;
 
@@ -24,6 +25,14 @@ const styles = stylex.create({
     padding: 0,
     width: "100%",
   },
+  scale: {
+    scale: {
+      ":focus-visible": 1.1,
+      ":hover": 1.1,
+      "default": 1,
+    },
+    transition: "scale 0.12s ease-in-out",
+  },
 });
 
 const CardButton = ({
@@ -32,6 +41,7 @@ const CardButton = ({
   popoverTarget,
   popoverTargetAction,
   ref,
+  scale = true,
   tabIndex = 0,
   ...props
 }: CardButtonProps) => {
@@ -43,7 +53,10 @@ const CardButton = ({
       popoverTarget={popoverTarget}
       popoverTargetAction={popoverTargetAction}
       ref={ref}
-      style={[styles.container]}
+      style={[
+        styles.container,
+        scale && styles.scale,
+      ]}
       tabIndex={tabIndex}
     >
       <Card {...props} />

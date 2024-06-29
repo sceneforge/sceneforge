@@ -18,13 +18,21 @@ const meta: Meta<typeof SplitPane> = {
     },
   },
   component: SplitPane,
-  render: (args) => {
-    return (
-      <div style={{ minHeight: "30rem", minWidth: "80rem" }}>
-        <SplitPane {...args} />
+  decorators: [
+    Story => (
+      <div
+        style={{
+          aspectRatio: "1.85",
+          display: "block",
+          isolation: "isolate",
+          minWidth: "18rem",
+          position: "relative",
+        }}
+      >
+        <Story />
       </div>
-    );
-  },
+    ),
+  ],
   title: "Component/SplitPane",
 };
 

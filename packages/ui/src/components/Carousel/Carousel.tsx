@@ -32,14 +32,6 @@ const styles = stylex.create({
   gap: (value: number) => ({
     gap: value > 0 ? `${value}rem` : 0,
   }),
-  grid: {
-    display: "grid",
-    gridAutoColumns: "calc(100% / 3)",
-    gridAutoFlow: "column",
-  },
-  heading: {
-    display: "block",
-  },
   item: {
     color: "inherit",
     scrollSnapAlign: "start",
@@ -48,11 +40,15 @@ const styles = stylex.create({
     scrollPaddingInline: value > 0 ? `${value}rem` : null,
   }),
   scroller: {
+    display: "grid",
+    gridAutoFlow: "column",
     margin: 0,
     overflowX: "auto",
     overflowY: "hidden",
+    overscrollBehaviorInline: "contain",
     scrollBehavior: "smooth",
-    scrollSnapType: "x proximity",
+    scrollSnapType: "inline proximity",
+    touchAction: "pan-x",
     whiteSpace: "nowrap",
   },
 });
@@ -63,8 +59,8 @@ const Carousel = ({
   id,
   items,
   level = 2,
-  paddingBlock = 0.5,
-  paddingBlockEnd = 1,
+  paddingBlock = 1,
+  paddingBlockEnd = 1.5,
   paddingBlockStart,
   paddingInline = 1,
   paddingInlineEnd,
@@ -84,9 +80,6 @@ const Carousel = ({
       headingPaddingInlineStart={paddingInlineStart}
       level={level}
       shadow={shadow}
-      style={[
-        styles.heading,
-      ]}
       title={title}
       variant={variant}
     >
@@ -100,25 +93,20 @@ const Carousel = ({
         style={[
           styles.scroller as Record<string, string>,
           styles.scrollPaddingInline(paddingInline),
+          styles.gap(gap),
+          typeof division === "number" && styles.division(division),
           style,
         ]}
       >
-        <View
-          style={[
-            styles.grid,
-            styles.gap(gap),
-            typeof division === "number" && styles.division(division),
-          ]}
-        >
-          {items && items.map((child, index) => (
-            <View
-              key={`${currentId}-item-${index}`}
-              style={styles.item}
-            >
-              {child}
-            </View>
-          ))}
-        </View>
+        {items && items.map((child, index) => (
+          <View
+            key={`${currentId}-item-${index}`}
+            marginInline={1}
+            style={styles.item}
+          >
+            {child}
+          </View>
+        ))}
       </View>
     </Section>
   );

@@ -15,6 +15,8 @@ export type IconType =
   | "fileMap"
   | "globe"
   | "home"
+  | "landscape"
+  | "landscape2"
   | "lightbulb"
   | "lightbulbOutline"
   | "menu"
@@ -22,6 +24,7 @@ export type IconType =
   | "moreVert"
   | "moveSelectionUp"
   | "questionMark"
+  | "scene"
   | "select"
   | "settings"
   | "square"
@@ -31,6 +34,7 @@ export type IconType =
   | "sunny"
   | "transform"
   | "uploadFile"
+  | "videoStable"
   | "visibility"
   | "visibilityOff";
 
@@ -51,6 +55,8 @@ export enum IconEnum {
   FileMap = "fileMap",
   Globe = "globe",
   Home = "home",
+  Landscape = "landscape",
+  Landscape2 = "landscape2",
   Lightbulb = "lightbulb",
   LightbulbOutline = "lightbulbOutline",
   Menu = "menu",
@@ -58,6 +64,7 @@ export enum IconEnum {
   MoreVert = "moreVert",
   MoveSelectionUp = "moveSelectionUp",
   QuestionMark = "questionMark",
+  Scene = "scene",
   Select = "select",
   Settings = "settings",
   Square = "square",
@@ -67,6 +74,7 @@ export enum IconEnum {
   Sunny = "sunny",
   Transform = "transform",
   UploadFile = "uploadFile",
+  VideoStable = "videoStable",
   Visibility = "visibility",
   VisibilityOff = "visibilityOff",
 };

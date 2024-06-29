@@ -21,7 +21,7 @@ const meta: Meta<typeof Topbar> = {
         style={{
           aspectRatio: "21 / 3",
           display: "block",
-          minWidth: "75dvw",
+          minWidth: "50dvw",
         }}
       >
         <Story />
