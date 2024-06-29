@@ -1,17 +1,12 @@
 import * as stylex from "@stylexjs/stylex";
 import { type HTMLAttributes, createElement } from "react";
 
-import { color } from "../tokens.stylex";
+import { type SpacerStyleProps, color, marginStyle, paddingStyle } from "../tokens.stylex";
 
 export type HeadingProps = {
   level: 1 | 2 | 3 | 4 | 5 | 6;
-  padding?: number;
-  paddingBlock?: number;
-  paddingBlockEnd?: number;
-  paddingBlockStart?: number;
-  paddingInline?: number;
-  paddingInlineEnd?: number;
-  paddingInlineStart?: number;
+  margin?: SpacerStyleProps;
+  padding?: SpacerStyleProps;
   shadow?: boolean;
   style?: stylex.StyleXStyles;
   textAlign?: "center" | "end" | "start";
@@ -21,18 +16,6 @@ const styles = stylex.create({
   container: {
     display: "block",
   },
-  paddingBlockEnd: (value: number) => ({
-    paddingBlockEnd: value > 0 ? `${value}rem` : undefined,
-  }),
-  paddingBlockStart: (value: number) => ({
-    paddingBlockStart: value > 0 ? `${value}rem` : undefined,
-  }),
-  paddingInlineEnd: (value: number) => ({
-    paddingInlineEnd: value > 0 ? `${value}rem` : undefined,
-  }),
-  paddingInlineStart: (value: number) => ({
-    paddingInlineStart: value > 0 ? `${value}rem` : undefined,
-  }),
   shadow: {
     textShadow: `1px 1px 3px ${color.foreground}, 2px 4px 7px ${color.foreground}`,
   },
@@ -43,13 +26,8 @@ const styles = stylex.create({
 
 const Heading = ({
   level,
+  margin = 0,
   padding = 0,
-  paddingBlock,
-  paddingBlockEnd,
-  paddingBlockStart,
-  paddingInline,
-  paddingInlineEnd,
-  paddingInlineStart,
   shadow,
   style,
   textAlign = "start",
@@ -60,24 +38,8 @@ const Heading = ({
       styles.container,
       shadow && styles.shadow,
       styles.textAlign(textAlign),
-      typeof padding === "number" && [
-        styles.paddingBlockEnd(padding),
-        styles.paddingBlockStart(padding),
-        styles.paddingInlineEnd(padding),
-        styles.paddingInlineStart(padding),
-      ],
-      typeof paddingBlock === "number" && [
-        styles.paddingBlockEnd(paddingBlock),
-        styles.paddingBlockStart(paddingBlock),
-      ],
-      typeof paddingBlockEnd === "number" && styles.paddingBlockEnd(paddingBlockEnd),
-      typeof paddingBlockStart === "number" && styles.paddingBlockStart(paddingBlockStart),
-      typeof paddingInline === "number" && [
-        styles.paddingInlineEnd(paddingInline),
-        styles.paddingInlineStart(paddingInline),
-      ],
-      typeof paddingInlineEnd === "number" && styles.paddingInlineEnd(paddingInlineEnd),
-      typeof paddingInlineStart === "number" && styles.paddingInlineStart(paddingInlineStart),
+      ...(margin === undefined ? [] : marginStyle(margin)),
+      ...(padding === undefined ? [] : paddingStyle(padding)),
       style
     ),
     ...props,

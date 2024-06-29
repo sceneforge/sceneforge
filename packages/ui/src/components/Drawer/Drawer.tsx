@@ -31,6 +31,7 @@ const styles = stylex.create({
     padding: 0,
     pointerEvents: "none",
     position: "absolute",
+    touchAction: "none",
   },
   innerContainer: {
     overflow: "hidden",
@@ -128,6 +129,28 @@ const Drawer = ({
       {...stylex.props(styles.container, style)}
     >
       <View
+        padding={{
+          blockEnd:
+            orientation === Orientation.Horizontal
+            && position === Position.Start
+              ? 0.25
+              : undefined,
+          blockStart:
+            orientation === Orientation.Horizontal
+            && position === Position.End
+              ? 0.25
+              : undefined,
+          inlineEnd:
+            orientation === Orientation.Vertical
+            && position === Position.Start
+              ? 0.25
+              : undefined,
+          inlineStart:
+            orientation === Orientation.Vertical
+            && position === Position.End
+              ? 0.25
+              : undefined,
+        }}
         style={[
           styles.innerContainer,
           resizable && [

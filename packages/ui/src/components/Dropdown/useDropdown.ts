@@ -9,28 +9,39 @@ type UseDropdownProps = {
   actions?: DropdownProps["actions"];
   id?: DropdownProps["id"];
   parentDropdownId?: DropdownProps["parentDropdownId"];
+  variant?: DropdownProps["variant"];
 };
 
-export const useDropdown = ({ actions, id }: UseDropdownProps) => {
+export const useDropdown = ({ actions, id, variant }: UseDropdownProps) => {
   const generatedId = useId();
   const toggleRef = useRef<ToggleComponentRef>(null);
-  const actionListRef = useRef<HTMLUListElement>(null);
+  const actionListRef = useRef<HTMLDivElement>(null);
   const currentId = useMemo(() => id ?? generatedId, [id, generatedId]);
   const currentListId = useMemo(() => `${currentId}-list`, [currentId]);
   const [currentState, setCurrentState] = useState<"closed" | "opened">("closed");
 
+  const currentVariant = useMemo(() => {
+    if (Array.isArray(variant)) {
+      if (currentState === "opened") {
+        return variant[1];
+      }
+      return variant[0];
+    }
+    return variant;
+  }, [variant, currentState]);
+
   const currentActions = useMemo(() => {
     if (!actions) return [];
-    return actions.map(({ type, ...props }) => {
-      if (type === "dropdown") {
+    return actions.map(({ kind, ...props }) => {
+      if (kind === "dropdown") {
         return {
-          type, ...props,
+          kind, ...props,
           parentDropdownId: currentListId,
         } as ActionProps;
       }
 
       return {
-        type, ...props,
+        kind, ...props,
       } as ActionProps;
     });
   }, [actions, currentListId]);
@@ -76,6 +87,7 @@ export const useDropdown = ({ actions, id }: UseDropdownProps) => {
     currentId,
     currentListId,
     currentState,
+    currentVariant,
     handleToggleEvent,
     toggleRef,
   };

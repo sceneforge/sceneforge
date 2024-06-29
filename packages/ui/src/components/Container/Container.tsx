@@ -8,12 +8,6 @@ import { View, ViewProps } from "../View";
 
 export type ContainerProps = PropsWithChildren<{
   padding?: ViewProps["padding"];
-  paddingBlock?: ViewProps["paddingBlock"];
-  paddingBlockEnd?: ViewProps["paddingBlockEnd"];
-  paddingBlockStart?: ViewProps["paddingBlockStart"];
-  paddingInline?: ViewProps["paddingInline"];
-  paddingInlineEnd?: ViewProps["paddingInlineEnd"];
-  paddingInlineStart?: ViewProps["paddingInlineStart"];
   style?: StyleXStyles;
   variant?: Variant;
 }>;
@@ -33,24 +27,12 @@ const styles = stylex.create({
 const Container = ({
   children,
   padding = 0,
-  paddingBlock,
-  paddingBlockEnd,
-  paddingBlockStart,
-  paddingInline,
-  paddingInlineEnd,
-  paddingInlineStart,
   style,
   variant,
 }: ContainerProps) => {
   return (
     <View
       padding={padding}
-      paddingBlock={paddingBlock}
-      paddingBlockEnd={paddingBlockEnd}
-      paddingBlockStart={paddingBlockStart}
-      paddingInline={paddingInline}
-      paddingInlineEnd={paddingInlineEnd}
-      paddingInlineStart={paddingInlineStart}
       style={[
         styles.container,
         style,

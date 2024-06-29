@@ -8,7 +8,23 @@ const meta: Meta<typeof Dropdown> = {
     children: {
       control: "text",
     },
+    dense: {
+      control: "boolean",
+    },
+    disabled: {
+      control: "boolean",
+    },
+    margin: {
+      control: "number",
+    },
+    padding: {
+      control: "number",
+    },
+    scale: {
+      control: "boolean",
+    },
     ...variantArgumentTypes("variant"),
+    ...variantArgumentTypes("actionListVariant"),
   },
   component: Dropdown,
   decorators: [
@@ -28,17 +44,21 @@ export default meta;
 export const Default: Story = {
   args: {
     actions: [
-      { label: "Action 1", type: "button" },
-      { label: "Action 2", type: "button" },
-      { label: "Action 3", type: "button" },
+      { kind: "button", label: "Action 1" },
+      { kind: "divider", label: "Short" },
+      { kind: "button", label: "Action 2" },
+      { kind: "button", label: "Action 3" },
+      { kind: "divider", label: "Divider Label too big to be truth" },
       {
         actions: [
-          { label: "Submenu Action 1", type: "button" },
-          { label: "Submenu Action 2", type: "button" },
-          { label: "Submenu Action 3", type: "button" },
-        ], label: "Submenu", type: "dropdown",
+          { kind: "button", label: "Submenu Action 1" },
+          { kind: "button", label: "Submenu Action 2" },
+          { kind: "divider" },
+          { kind: "button", label: "Submenu Action 3" },
+        ], kind: "dropdown", label: "Submenu",
       },
     ],
     children: "Dropdown Text Content",
+    scale: true,
   },
 } as Story;

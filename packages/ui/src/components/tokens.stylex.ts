@@ -144,10 +144,112 @@ export const common = stylex.create({
   icon: (iconKey?: keyof typeof icons) => ({
     maskImage: iconKey ? icons[iconKey] : null,
   }),
+  marginBlockEnd: (value: number) => ({
+    marginBlockEnd: value > 0 ? `${value}rem` : 0,
+  }),
+  marginBlockStart: (value: number) => ({
+    marginBlockStart: value > 0 ? `${value}rem` : 0,
+  }),
+  marginInlineEnd: (value: number) => ({
+    marginInlineEnd: value > 0 ? `${value}rem` : 0,
+  }),
+  marginInlineStart: (value: number) => ({
+    marginInlineStart: value > 0 ? `${value}rem` : 0,
+  }),
+  paddingBlockEnd: (value: number) => ({
+    paddingBlockEnd: value > 0 ? `${value}rem` : 0,
+  }),
+  paddingBlockStart: (value: number) => ({
+    paddingBlockStart: value > 0 ? `${value}rem` : 0,
+  }),
+  paddingInlineEnd: (value: number) => ({
+    paddingInlineEnd: value > 0 ? `${value}rem` : 0,
+  }),
+  paddingInlineStart: (value: number) => ({
+    paddingInlineStart: value > 0 ? `${value}rem` : 0,
+  }),
   text: (text?: keyof typeof color) => ({
     color: text ? color[text] : undefined,
   }),
 });
+
+export type SpacerStyleProps = {
+  block?: number;
+  blockEnd?: number;
+  blockStart?: number;
+  default?: number;
+  inline?: number;
+  inlineEnd?: number;
+  inlineStart?: number;
+} | number;
+
+const extractSpacerStyleProps = (value?: SpacerStyleProps) => {
+  return typeof value === "number" ? { default: value } : value ?? {};
+};
+
+export const marginStyle = (value?: SpacerStyleProps) => {
+  const {
+    block,
+    blockEnd,
+    blockStart,
+    default: defaultValue,
+    inline,
+    inlineEnd,
+    inlineStart,
+  } = extractSpacerStyleProps(value);
+  return [
+    typeof defaultValue === "number" && [
+      common.marginBlockEnd(defaultValue),
+      common.marginBlockStart(defaultValue),
+      common.marginInlineEnd(defaultValue),
+      common.marginInlineStart(defaultValue),
+    ],
+    typeof block === "number" && [
+      common.marginBlockEnd(block),
+      common.marginBlockStart(block),
+    ],
+    typeof blockEnd === "number" && common.marginBlockEnd(blockEnd),
+    typeof blockStart === "number" && common.marginBlockStart(blockStart),
+    typeof inline === "number" && [
+      common.marginInlineEnd(inline),
+      common.marginInlineStart(inline),
+    ],
+    typeof inlineEnd === "number" && common.marginInlineEnd(inlineEnd),
+    typeof inlineStart === "number" && common.marginInlineStart(inlineStart),
+  ];
+};
+
+export const paddingStyle = (value?: SpacerStyleProps) => {
+  const {
+    block,
+    blockEnd,
+    blockStart,
+    default: defaultValue,
+    inline,
+    inlineEnd,
+    inlineStart,
+  } = extractSpacerStyleProps(value);
+  return [
+    typeof defaultValue === "number" && [
+      common.paddingBlockEnd(defaultValue),
+      common.paddingBlockStart(defaultValue),
+      common.paddingInlineEnd(defaultValue),
+      common.paddingInlineStart(defaultValue),
+    ],
+    typeof block === "number" && [
+      common.paddingBlockEnd(block),
+      common.paddingBlockStart(block),
+    ],
+    typeof blockEnd === "number" && common.paddingBlockEnd(blockEnd),
+    typeof blockStart === "number" && common.paddingBlockStart(blockStart),
+    typeof inline === "number" && [
+      common.paddingInlineEnd(inline),
+      common.paddingInlineStart(inline),
+    ],
+    typeof inlineEnd === "number" && common.paddingInlineEnd(inlineEnd),
+    typeof inlineStart === "number" && common.paddingInlineStart(inlineStart),
+  ];
+};
 
 export const backgroundColorVariantStyle = (variant?: Variant) => {
   return [

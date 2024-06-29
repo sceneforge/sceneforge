@@ -14,17 +14,23 @@ const styles = stylex.create({
   container: (id: string) => ({
     anchorName: `--dropdown-anchor-${id.replaceAll(":", "-")}`,
   } as Record<string, string>),
+  noVariantPopover: {
+    backgroundColor: "ButtonFace",
+    color: "ButtonText",
+  },
   popover: {
+    borderColor: "color-mix(in srgb, currentColor 25%, Canvas)",
+    borderRadius: "0.5rem",
+    borderStyle: "solid",
+    borderWidth: "1px",
+    overflow: "clip",
     position: "absolute",
   },
   popoverAnchor: (id: string) => ({
-    left: (
-      id ? "anchor(right)" : "anchor(left)"
-    ),
+    left: "auto",
     positionAnchor: `--dropdown-anchor-${id.replaceAll(":", "-")}`,
-    top: (
-      id ? "anchor(top)" : "anchor(bottom)"
-    ),
+    right: "anchor(right)",
+    top: "anchor(bottom)",
   } as Record<string, string>),
 });
 
@@ -33,6 +39,8 @@ const Dropdown = ({
   actions,
   id,
   parentDropdownId,
+  style,
+  variant,
   ...props
 }: DropdownProps) => {
   const {
@@ -41,20 +49,28 @@ const Dropdown = ({
     currentId,
     currentListId,
     currentState,
+    currentVariant,
     handleToggleEvent,
     toggleRef,
-  } = useDropdown({ actions, id, parentDropdownId });
+  } = useDropdown({ actions, id, parentDropdownId, variant });
 
   return (
     <>
       <Toggle
+        aria-controls={currentListId}
+        aria-haspopup="menu"
         id={currentId}
-        {...props}
         onToggle={handleToggleEvent}
         popoverTarget={currentListId}
         popoverTargetAction={currentState === "closed" ? "hide" : "show"}
+        style={[
+          styles.container(currentId),
+          style,
+        ]}
+        variant={currentVariant}
+        {...props}
         ref={toggleRef}
-        style={[styles.container(currentId)]}
+        role={undefined}
       />
       <ActionList
         actions={currentActions}
@@ -63,10 +79,12 @@ const Dropdown = ({
         popover="auto"
         ref={actionListRef}
         style={[
-          styles.popover,
+          styles.popover as Record<string, string>,
+          !(actionListVariant || variant) && styles.noVariantPopover,
           styles.popoverAnchor(currentId),
         ]}
-        variant={actionListVariant}
+        toggleId={currentId}
+        variant={actionListVariant ?? currentVariant}
       />
     </>
   );

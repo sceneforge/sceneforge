@@ -39,7 +39,6 @@ const styles = stylex.create({
       height: "min-content",
       insetBlockStart: "15dvh",
       insetInlineStart: "50%",
-      margin: 0,
       maxHeight: "85dvh",
       maxWidth: "85dvw",
       overflow: "clip",

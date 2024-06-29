@@ -5,7 +5,6 @@ import { Icon, IconProps } from "../Icon";
 
 export type IconButtonProps = {
   icon: IconProps["icon"];
-  inverted?: boolean;
   size?: IconProps["size"];
 } & ButtonProps;
 
@@ -16,14 +15,6 @@ const styles = stylex.create({
     borderRadius: "100vw",
     display: "flex",
     justifyContent: "center",
-    margin: 0,
-    padding: "calc(inherit / 2)",
-    scale: {
-      ":focus-visible": 1.05,
-      ":hover": 1.1,
-      "default": 1,
-    },
-    transition: "scale 0.12s ease-in-out",
   },
   icon: {
     pointerEvents: "none",
@@ -33,23 +24,23 @@ const styles = stylex.create({
 
 const IconButton = ({
   icon,
-  inverted,
+  padding = 0.5,
+  scale = true,
   size,
   style,
-  variant,
   ...props
 }: IconButtonProps) => {
   return (
     <Button
       {...props}
+      padding={padding}
+      scale={scale}
       style={[styles.container, style]}
-      variant={inverted ? undefined : variant}
     >
       <Icon
         icon={icon}
         size={size}
         style={styles.icon}
-        variant={inverted ? variant : undefined}
       />
     </Button>
   );

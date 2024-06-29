@@ -36,7 +36,7 @@ export type ToggleProps = {
   pressed?: "false" | "true" | boolean;
   ref?: Ref<ToggleComponentRef>;
   variant?: [Variant, Variant] | Variant;
-} & Omit<ButtonProps, "onToggle" | "ref">;
+} & Omit<ButtonProps, "label" | "onToggle" | "ref" | "variant">;
 
 const Toggle = ({
   label,

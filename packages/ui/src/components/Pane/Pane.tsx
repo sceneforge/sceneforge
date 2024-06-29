@@ -10,8 +10,8 @@ const PaneHeader = lazy(() => import("./PaneHeader"));
 const PaneBody = lazy(() => import("./PaneBody"));
 
 export type PaneProps = Partial<PaneHeaderProps> & PropsWithChildren<{
-  actions?: PaneBodyProps["actions"];
   inner?: boolean;
+  paneActions?: PaneBodyProps["actions"];
 }>;
 
 const styles = stylex.create({
@@ -35,10 +35,18 @@ const styles = stylex.create({
 const Pane = ({
   actions,
   children,
+  headingPadding = {
+    inline: 0.25,
+  },
   inner = true,
   level,
+  paneActions,
   title,
-  toolbar,
+  toolbarPadding = {
+    block: 0.25,
+    inline: 0.5,
+  },
+  ...props
 }: PaneProps) => {
   return (
     <section
@@ -51,12 +59,15 @@ const Pane = ({
         ? (
           <>
             <PaneHeader
+              actions={actions}
+              headingPadding={headingPadding}
               inner={inner}
               level={level}
               title={title}
-              toolbar={toolbar}
+              toolbarPadding={toolbarPadding}
+              {...props}
             />
-            <PaneBody actions={actions}>
+            <PaneBody actions={paneActions}>
               {children}
             </PaneBody>
           </>

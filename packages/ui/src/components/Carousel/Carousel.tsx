@@ -6,6 +6,7 @@ import { type ReactNode, useId } from "react";
 import { Variant } from "../../types";
 import { Section, type SectionProps } from "../Section";
 import { View } from "../View";
+import { type SpacerStyleProps } from "../tokens.stylex";
 
 export type CarouselProps = {
   division?: number;
@@ -13,12 +14,7 @@ export type CarouselProps = {
   id?: string;
   items?: ReactNode[];
   level?: SectionProps["level"];
-  paddingBlock?: number;
-  paddingBlockEnd?: number;
-  paddingBlockStart?: number;
-  paddingInline?: number;
-  paddingInlineEnd?: number;
-  paddingInlineStart?: number;
+  padding: SpacerStyleProps;
   shadow?: boolean;
   style?: StyleXStyles;
   title?: SectionProps["title"];
@@ -33,8 +29,12 @@ const styles = stylex.create({
     gap: value > 0 ? `${value}rem` : 0,
   }),
   item: {
-    color: "inherit",
     scrollSnapAlign: "start",
+    zIndex: {
+      ":focus-within": 1,
+      ":hover": 1,
+      "default": -1,
+    },
   },
   scrollPaddingInline: (value: number) => ({
     scrollPaddingInline: value > 0 ? `${value}rem` : null,
@@ -42,6 +42,7 @@ const styles = stylex.create({
   scroller: {
     display: "grid",
     gridAutoFlow: "column",
+    isolation: "isolate",
     margin: 0,
     overflowX: "auto",
     overflowY: "hidden",
@@ -59,12 +60,11 @@ const Carousel = ({
   id,
   items,
   level = 2,
-  paddingBlock = 1,
-  paddingBlockEnd = 1.5,
-  paddingBlockStart,
-  paddingInline = 1,
-  paddingInlineEnd,
-  paddingInlineStart,
+  padding = {
+    block: 1,
+    blockEnd: 1.5,
+    inline: 1,
+  },
   shadow = true,
   style,
   title,
@@ -72,27 +72,23 @@ const Carousel = ({
 }: CarouselProps) => {
   const generatedId = useId();
   const currentId = id || generatedId;
+  const paddingInline = typeof padding === "object" ? padding.inline : padding;
 
   return (
     <Section
-      headingPaddingInline={paddingInline}
-      headingPaddingInlineEnd={paddingInlineEnd}
-      headingPaddingInlineStart={paddingInlineStart}
+      headingPadding={{
+        inline: paddingInline,
+      }}
       level={level}
       shadow={shadow}
       title={title}
       variant={variant}
     >
       <View
-        paddingBlock={paddingBlock}
-        paddingBlockEnd={paddingBlockEnd}
-        paddingBlockStart={paddingBlockStart}
-        paddingInline={paddingInline}
-        paddingInlineEnd={paddingInlineEnd}
-        paddingInlineStart={paddingInlineStart}
+        padding={padding}
         style={[
           styles.scroller as Record<string, string>,
-          styles.scrollPaddingInline(paddingInline),
+          typeof paddingInline === "number" && styles.scrollPaddingInline(paddingInline),
           styles.gap(gap),
           typeof division === "number" && styles.division(division),
           style,
@@ -101,7 +97,6 @@ const Carousel = ({
         {items && items.map((child, index) => (
           <View
             key={`${currentId}-item-${index}`}
-            marginInline={1}
             style={styles.item}
           >
             {child}

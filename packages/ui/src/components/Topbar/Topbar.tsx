@@ -61,6 +61,7 @@ const styles = stylex.create({
   },
   toolbarEnd: {
     justifyContent: "flex-end",
+    paddingInlineEnd: "1rem",
   },
 });
 
@@ -86,7 +87,9 @@ const Topbar = ({
       <View style={[styles.content]} variant={variant}>
         <Heading
           level={1}
-          paddingInline={1}
+          padding={{
+            inline: 1,
+          }}
           style={[styles.heading]}
         >
           {title}

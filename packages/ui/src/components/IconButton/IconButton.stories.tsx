@@ -6,6 +6,21 @@ import IconButton from "./IconButton";
 
 const meta: Meta<typeof IconButton> = {
   argTypes: {
+    dense: {
+      control: "boolean",
+    },
+    disabled: {
+      control: "boolean",
+    },
+    margin: {
+      control: "number",
+    },
+    padding: {
+      control: "number",
+    },
+    scale: {
+      control: "boolean",
+    },
     size: {
       control: {
         max: 100,

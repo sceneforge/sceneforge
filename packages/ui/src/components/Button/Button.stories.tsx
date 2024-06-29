@@ -8,16 +8,24 @@ const meta: Meta<typeof Button> = {
     children: {
       control: "text",
     },
+    dense: {
+      control: "boolean",
+    },
+    disabled: {
+      control: "boolean",
+    },
+    margin: {
+      control: "number",
+    },
+    padding: {
+      control: "number",
+    },
+    scale: {
+      control: "boolean",
+    },
     ...variantArgumentTypes("variant"),
   },
   component: Button,
-  decorators: [
-    Story => (
-      <div style={{ padding: "1rem" }}>
-        <Story />
-      </div>
-    ),
-  ],
   title: "Component/Button",
 };
 

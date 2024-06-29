@@ -20,6 +20,8 @@ export * from "./Container";
 export type * from "./Container";
 export * from "./Dialog";
 export type * from "./Dialog";
+export * from "./Divider";
+export type * from "./Divider";
 export * from "./Drawer";
 export type * from "./Drawer";
 export * from "./Dropdown";

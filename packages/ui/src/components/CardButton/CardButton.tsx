@@ -5,11 +5,12 @@ import { Card, type CardProps } from "../Card";
 
 export type CardButtonProps = {
   id?: ButtonProps["id"];
+  margin?: ButtonProps["margin"];
   onClick?: ButtonProps["onClick"];
   popoverTarget?: ButtonProps["popoverTarget"];
   popoverTargetAction?: ButtonProps["popoverTargetAction"];
   ref?: ButtonProps["ref"];
-  scale?: boolean;
+  scale?: ButtonProps["scale"];
   tabIndex?: ButtonProps["tabIndex"];
 } & Omit<CardProps, "actions">;
 
@@ -19,47 +20,38 @@ const styles = stylex.create({
     border: "none",
     borderRadius: "0.5rem",
     color: "inherit",
-    cursor: "pointer",
     height: "100%",
-    margin: 0,
-    padding: 0,
     width: "100%",
-  },
-  scale: {
-    scale: {
-      ":focus-visible": 1.1,
-      ":hover": 1.1,
-      "default": 1,
-    },
-    transition: "scale 0.12s ease-in-out",
   },
 });
 
 const CardButton = ({
   id,
+  margin = 0,
   onClick,
   popoverTarget,
   popoverTargetAction,
   ref,
   scale = true,
-  tabIndex = 0,
+  tabIndex,
+  variant,
   ...props
 }: CardButtonProps) => {
   return (
     <Button
-      clear
       id={id}
+      margin={margin}
       onClick={onClick}
+      padding={0}
       popoverTarget={popoverTarget}
       popoverTargetAction={popoverTargetAction}
       ref={ref}
-      style={[
-        styles.container,
-        scale && styles.scale,
-      ]}
+      scale={scale}
+      style={styles.container}
       tabIndex={tabIndex}
+      variant={variant}
     >
-      <Card {...props} />
+      <Card {...props} variant={variant} />
     </Button>
   );
 };

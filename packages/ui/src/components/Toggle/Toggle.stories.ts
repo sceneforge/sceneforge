@@ -1,12 +1,28 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { Variant } from "../../types";
 import Toggle from "./Toggle";
 
 const meta: Meta<typeof Toggle> = {
   argTypes: {
     children: {
       control: "text",
+    },
+    dense: {
+      control: "boolean",
+    },
+    disabled: {
+      control: "boolean",
+    },
+    margin: {
+      control: "number",
+    },
+    padding: {
+      control: "number",
+    },
+    scale: {
+      control: "boolean",
     },
     ...variantArgumentTypes("variant"),
   },
@@ -20,6 +36,13 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    children: "Toggle Text Content",
+    label: [
+      "Toggle Off",
+      "Toggle On",
+    ],
+    variant: [
+      Variant.Default,
+      Variant.Accent,
+    ],
   },
 } as Story;

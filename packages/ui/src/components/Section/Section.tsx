@@ -9,7 +9,7 @@ import {
 
 import { Variant } from "../../types";
 import { Heading, HeadingProps } from "../Heading";
-import { backgroundTextColorVariantStyle, color } from "../tokens.stylex";
+import { type SpacerStyleProps, backgroundTextColorVariantStyle, color, marginStyle, paddingStyle } from "../tokens.stylex";
 
 const styles = stylex.create({
   container: {
@@ -33,13 +33,9 @@ const styles = stylex.create({
 export type SectionProps = Omit<HTMLAttributes<HTMLElement>, "style"> &
   PropsWithChildren<{
     headingPadding?: HeadingProps["padding"];
-    headingPaddingBlock?: HeadingProps["paddingBlock"];
-    headingPaddingBlockEnd?: HeadingProps["paddingBlockEnd"];
-    headingPaddingBlockStart?: HeadingProps["paddingBlockStart"];
-    headingPaddingInline?: HeadingProps["paddingInline"];
-    headingPaddingInlineEnd?: HeadingProps["paddingInlineEnd"];
-    headingPaddingInlineStart?: HeadingProps["paddingInlineStart"];
     level?: 1 | 2 | 3 | 4 | 5 | 6;
+    margin?: SpacerStyleProps;
+    padding?: SpacerStyleProps;
     ref?: Ref<HTMLElement>;
     shadow?: boolean;
     style?: StyleXStyles;
@@ -50,13 +46,9 @@ export type SectionProps = Omit<HTMLAttributes<HTMLElement>, "style"> &
 const Section = ({
   children,
   headingPadding,
-  headingPaddingBlock,
-  headingPaddingBlockEnd,
-  headingPaddingBlockStart,
-  headingPaddingInline,
-  headingPaddingInlineEnd,
-  headingPaddingInlineStart,
   level = 2,
+  margin,
+  padding,
   ref,
   shadow,
   style,
@@ -68,6 +60,8 @@ const Section = ({
       ref={ref}
       {...stylex.props(
         styles.container,
+        ...(margin === undefined ? [] : marginStyle(margin)),
+        ...(padding === undefined ? [] : paddingStyle(padding)),
         ...backgroundTextColorVariantStyle(variant)
       )}
     >
@@ -75,12 +69,6 @@ const Section = ({
         <Heading
           level={level}
           padding={headingPadding}
-          paddingBlock={headingPaddingBlock}
-          paddingBlockEnd={headingPaddingBlockEnd}
-          paddingBlockStart={headingPaddingBlockStart}
-          paddingInline={headingPaddingInline}
-          paddingInlineEnd={headingPaddingInlineEnd}
-          paddingInlineStart={headingPaddingInlineStart}
           shadow={shadow}
           style={[
             styles.heading,
