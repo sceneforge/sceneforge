@@ -2,17 +2,46 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
 import { IconEnum, Variant } from "../../types";
-import CardButton from "../CardButton/CardButton";
-import IconButton from "../IconButton/IconButton";
 import Carousel from "./Carousel";
 
 const meta: Meta<typeof Carousel> = {
   argTypes: {
     items: {
-      control: "text",
+      table: {
+        type: {
+          summary: "CarouselItemProps[]",
+        },
+      },
+    },
+    ...variantArgumentTypes("variant"),
+    level: {
+      control: {
+        max: 6,
+        min: 1,
+        type: "range",
+      },
+      range: {
+        max: 6,
+        min: 1,
+      },
+      table: {
+        type: {
+          summary: "1 | 2 | 3 | 4 | 5 | 6",
+        },
+      },
+    },
+    style: {
+      table: {
+        disable: true,
+      },
     },
     title: {
       control: "text",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     ...variantArgumentTypes("variant"),
   },
@@ -41,28 +70,22 @@ export default meta;
 export const Default: Story = {
   args: {
     items: [
-      <CardButton img="https://picsum.photos/seed/201/500" key="carousel-1" title="Content 1" />,
-      <CardButton img="https://picsum.photos/seed/202/500" key="carousel-2" title="Content 2" />,
-      <CardButton img="https://picsum.photos/seed/203/500" key="carousel-3" title="Content 3" />,
-      <CardButton img="https://picsum.photos/seed/204/500" key="carousel-4" title="Content 4" />,
-      <CardButton img="https://picsum.photos/seed/205/500" key="carousel-5" title="Content 5" />,
-      <CardButton img="https://picsum.photos/seed/206/500" key="carousel-6" title="Content 6" />,
+      { img: "https://picsum.photos/seed/201/500", kind: "button", label: "Content 1" },
+      { img: "https://picsum.photos/seed/202/500", kind: "button", label: "Content 2" },
+      { img: "https://picsum.photos/seed/203/500", kind: "button", label: "Content 3" },
+      { img: "https://picsum.photos/seed/204/500", kind: "button", label: "Content 4" },
+      { img: "https://picsum.photos/seed/205/500", kind: "button", label: "Content 5" },
+      { img: "https://picsum.photos/seed/206/500", kind: "button", label: "Content 6" },
+      { img: "https://picsum.photos/seed/204/500", kind: "button", label: "Content 7" },
+      { img: "https://picsum.photos/seed/205/500", kind: "button", label: "Content 8" },
+      {
+        icon: IconEnum.Add,
+        kind: "icon",
+        label: "Add",
+        size: 20,
+      },
     ],
-    title: "Carousel Title",
-  },
-} as Story;
-
-export const WithIconButton: Story = {
-  args: {
-    items: [
-      <IconButton
-        icon={IconEnum.Add}
-        key="carousel-7"
-        label="Add"
-        size={20}
-        variant={Variant.Accent}
-      />,
-    ],
+    itemsVariant: Variant.Accent,
     title: "Carousel Title",
   },
 } as Story;

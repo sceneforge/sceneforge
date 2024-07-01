@@ -10,7 +10,7 @@ export const iconArgTypes = (property: string) => ({
           ...accumulator,
           ...value,
         }), {}),
-      type: "select",
+      type: "select" as const,
     },
     options: Object.values(IconEnum),
   },

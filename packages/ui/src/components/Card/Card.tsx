@@ -1,3 +1,5 @@
+import type { StyleXStyles } from "@stylexjs/stylex";
+
 import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren } from "react";
 
@@ -7,8 +9,10 @@ import { backgroundColor, color } from "../tokens.stylex";
 
 export type CardProps = PropsWithChildren<{
   actions?: ActionProps[];
+  id?: string;
   img?: string;
-  title?: string;
+  label?: string;
+  style?: StyleXStyles;
   variant?: Variant;
   zoom?: 0 | 1 | 2 | 3 | 4;
 }>;
@@ -91,7 +95,7 @@ const styles = stylex.create({
     maxWidth: "300%",
     width: "300%",
   },
-  title: {
+  label: {
     backgroundColor: "ButtonFace",
     color: "ButtonText",
     display: "block",
@@ -105,17 +109,25 @@ const styles = stylex.create({
 const Card = ({
   actions,
   children,
+  id,
   img,
-  title,
+  label,
+  style,
   variant,
   zoom = 0,
 }: CardProps) => {
   return (
-    <div {...stylex.props(styles.container)}>
-      {title && (
+    <div
+      id={id}
+      {...stylex.props(
+        styles.container,
+        style
+      )}
+    >
+      {label && (
         <span
           {...stylex.props(
-            styles.title,
+            styles.label,
             variant === Variant.Accent && styles.colorVariant("accent", 75, "accentText"),
             variant === Variant.Default && styles.colorVariant("primary", 75, "primaryText"),
             variant === Variant.Danger && styles.colorVariant("danger", 75, "dangerText"),
@@ -124,7 +136,7 @@ const Card = ({
             variant === Variant.Warning && styles.colorVariant("warning", 75, "warningText")
           )}
         >
-          {title}
+          {label}
         </span>
       )}
       {img && (
@@ -141,7 +153,7 @@ const Card = ({
         >
           <div {...stylex.props(styles.imageContainer)}>
             <img
-              alt={`Image of ${title}`}
+              alt={`Image of ${label}`}
               src={img}
               {...stylex.props(styles.image, styles[`imageZoom${zoom}`])}
             />

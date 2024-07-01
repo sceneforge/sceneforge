@@ -16,6 +16,8 @@ export * from "./CardButton";
 export type * from "./CardButton";
 export * from "./Carousel";
 export type * from "./Carousel";
+export * from "./CarouselItem";
+export type * from "./CarouselItem";
 export * from "./Container";
 export type * from "./Container";
 export * from "./Dialog";

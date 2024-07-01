@@ -4,7 +4,6 @@ import { Button, type ButtonProps } from "../Button";
 import { Card, type CardProps } from "../Card";
 
 export type CardButtonProps = {
-  id?: ButtonProps["id"];
   margin?: ButtonProps["margin"];
   onClick?: ButtonProps["onClick"];
   popoverTarget?: ButtonProps["popoverTarget"];

@@ -9,7 +9,9 @@ export type IconType =
   | "deployedCode"
   | "deployedCodeOutline"
   | "deployedCodeSharp"
+  | "doneAll"
   | "dragIndicator"
+  | "edit"
   | "expandLess"
   | "expandMore"
   | "fileMap"
@@ -49,7 +51,9 @@ export enum IconEnum {
   DeployedCode = "deployedCode",
   DeployedCodeOutline = "deployedCodeOutline",
   DeployedCodeSharp = "deployedCodeSharp",
+  DoneAll = "doneAll",
   DragIndicator = "dragIndicator",
+  Edit = "edit",
   ExpandLess = "expandLess",
   ExpandMore = "expandMore",
   FileMap = "fileMap",

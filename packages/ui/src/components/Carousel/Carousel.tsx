@@ -1,9 +1,10 @@
 import type { StyleXStyles } from "@stylexjs/stylex";
 
 import * as stylex from "@stylexjs/stylex";
-import { type ReactNode, useId } from "react";
+import { useId } from "react";
 
 import { Variant } from "../../types";
+import { CarouselItem, type CarouselItemProps } from "../CarouselItem";
 import { Section, type SectionProps } from "../Section";
 import { View } from "../View";
 import { type SpacerStyleProps } from "../tokens.stylex";
@@ -12,9 +13,10 @@ export type CarouselProps = {
   division?: number;
   gap?: number;
   id?: string;
-  items?: ReactNode[];
+  items?: CarouselItemProps[];
+  itemsVariant?: Variant;
   level?: SectionProps["level"];
-  padding: SpacerStyleProps;
+  padding?: SpacerStyleProps;
   shadow?: boolean;
   style?: StyleXStyles;
   title?: SectionProps["title"];
@@ -28,14 +30,6 @@ const styles = stylex.create({
   gap: (value: number) => ({
     gap: value > 0 ? `${value}rem` : 0,
   }),
-  item: {
-    scrollSnapAlign: "start",
-    zIndex: {
-      ":focus-within": 1,
-      ":hover": 1,
-      "default": -1,
-    },
-  },
   scrollPaddingInline: (value: number) => ({
     scrollPaddingInline: value > 0 ? `${value}rem` : null,
   }),
@@ -59,6 +53,7 @@ const Carousel = ({
   gap = 0.5,
   id,
   items,
+  itemsVariant,
   level = 2,
   padding = {
     block: 1,
@@ -95,12 +90,12 @@ const Carousel = ({
         ]}
       >
         {items && items.map((child, index) => (
-          <View
-            key={`${currentId}-item-${index}`}
-            style={styles.item}
-          >
-            {child}
-          </View>
+          <CarouselItem
+            id={`${currentId}-carousel-item-${index}`}
+            key={`${currentId}-carousel-item-${index}`}
+            variant={itemsVariant ?? variant}
+            {...child}
+          />
         ))}
       </View>
     </Section>

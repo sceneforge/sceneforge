@@ -11,7 +11,7 @@ const meta: Meta<typeof Card> = {
     img: {
       control: "text",
     },
-    title: {
+    label: {
       control: "text",
     },
     zoom: {
@@ -38,11 +38,6 @@ export const Default: Story = {
   args: {
     children: (<div className="p-block-2 p-inline-4">Card Content</div>),
     img: "https://picsum.photos/seed/random/1200",
-    title: "Card Title",
+    label: "Card Title",
   },
-  render: args => (
-    <div className="w-100 p-10 hover:ring:10 rounded-2xl">
-      <Card {...args} />
-    </div>
-  ),
 } as Story;
