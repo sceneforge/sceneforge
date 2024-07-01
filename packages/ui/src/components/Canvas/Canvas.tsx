@@ -2,11 +2,13 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 import type {
   CanvasHTMLAttributes,
   DetailedHTMLProps,
+  Ref,
 } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
 export type CanvasProps = {
+  ref?: Ref<HTMLCanvasElement>;
   style?: StyleXStyles;
 } & Omit<DetailedHTMLProps<CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement>, "style">;
 
@@ -18,9 +20,13 @@ const styles = stylex.create({
   },
 });
 
-const Canvas = ({ style, ...props }: CanvasProps) => {
+const Canvas = ({ ref, style, ...props }: CanvasProps) => {
   return (
-    <canvas {...props} {...stylex.props(styles.container, style)} />
+    <canvas
+      {...props}
+      {...stylex.props(styles.container, style)}
+      ref={ref}
+    />
   );
 };
 
