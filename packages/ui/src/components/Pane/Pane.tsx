@@ -5,12 +5,20 @@ import type { PaneBodyProps } from "./PaneBody";
 import type { PaneHeaderProps } from "./PaneHeader";
 
 import { backgroundColor } from "../tokens.stylex";
+import { usePane } from "./usePane";
 
 const PaneHeader = lazy(() => import("./PaneHeader"));
 const PaneBody = lazy(() => import("./PaneBody"));
 
-export type PaneProps = Partial<PaneHeaderProps> & PropsWithChildren<{
-  inner?: boolean;
+export type PaneProps = Omit<
+  PaneHeaderProps,
+  | "inputRef"
+  | "onTitleEditClick"
+  | "onTitleSaveClick"
+  | "ref"
+  | "titleEditing"
+> & PropsWithChildren<{
+  onTitleChange?: (currentTitle?: string, previousTitle?: string) => void;
   paneActions?: PaneBodyProps["actions"];
 }>;
 
@@ -35,11 +43,10 @@ const styles = stylex.create({
 const Pane = ({
   actions,
   children,
-  headingPadding = {
-    inline: 0.25,
-  },
-  inner = true,
+  headingPadding,
   level,
+  onTitleChange,
+  outer,
   paneActions,
   title,
   toolbarPadding = {
@@ -48,11 +55,23 @@ const Pane = ({
   },
   ...props
 }: PaneProps) => {
+  const {
+    currentTitle,
+    currentTitleEditing,
+    handleTitleEditClick,
+    handleTitleSaveClick,
+    headingRef,
+    inputRef,
+  } = usePane({
+    onTitleChange,
+    title,
+  });
+
   return (
     <section
       {...stylex.props(
         styles.container,
-        inner && styles.inner
+        !outer && styles.inner
       )}
     >
       {title
@@ -61,11 +80,16 @@ const Pane = ({
             <PaneHeader
               actions={actions}
               headingPadding={headingPadding}
-              inner={inner}
               level={level}
-              title={title}
+              onTitleEditClick={handleTitleEditClick}
+              onTitleSaveClick={handleTitleSaveClick}
+              outer={outer}
+              title={currentTitle}
+              titleEditing={currentTitleEditing}
               toolbarPadding={toolbarPadding}
               {...props}
+              inputRef={inputRef}
+              ref={headingRef}
             />
             <PaneBody actions={paneActions}>
               {children}

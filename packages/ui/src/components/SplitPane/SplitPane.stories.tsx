@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { orientationArgTypes as orientationArgumentTypes } from "../../storiesHelpers";
+import { orientationArgTypes as orientationArgumentTypes, variantArgTypes } from "../../storiesHelpers";
 import { Orientation, Variant } from "../../types";
 import View from "../View/View";
 import SplitPane from "./SplitPane";
@@ -16,6 +16,7 @@ const meta: Meta<typeof SplitPane> = {
         disable: true,
       },
     },
+    ...variantArgTypes("variant"),
   },
   component: SplitPane,
   decorators: [

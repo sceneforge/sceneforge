@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { orientationArgTypes as orientationArgumentTypes } from "../../storiesHelpers";
+import { orientationArgTypes as orientationArgumentTypes, variantArgTypes } from "../../storiesHelpers";
 import { Orientation, Variant } from "../../types";
 import Button from "../Button/Button";
 import View from "../View/View";
@@ -17,6 +17,7 @@ const meta: Meta<typeof SplitPaneController> = {
         disable: true,
       },
     },
+    ...variantArgTypes("variant"),
   },
   component: SplitPaneController,
   decorators: [Story => (
@@ -35,10 +36,10 @@ export const Default: Story = {
   args: {
     children:
       [
-        (<View key="child-1" variant={Variant.Default}>Split Pane Text Content One</View>),
-        (<View key="child-2" variant={Variant.Accent}>Split Pane Text Content Two</View>),
+        (<View key="child-1">Split Pane Text Content One</View>),
+        (<View key="child-2">Split Pane Text Content Two</View>),
         (
-          <View key="child-3" variant={Variant.Info}>
+          <View key="child-3">
             Split Pane Text Content
             <Button variant={Variant.Danger}>Three</Button>
           </View>
