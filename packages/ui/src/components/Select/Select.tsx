@@ -16,7 +16,7 @@ const Option = lazy(() => import("./Option"));
 export type Option = Omit<OptionProps, "onClick" | "popoverId" | "selected">;
 
 export type SelectProps = {
-  onChange?: (previous?: Option, next?: Option) => void;
+  onChange?: (next?: Option["value"], previous?: Option["value"]) => void;
   options?: Option[];
   popoverStyle?: StyleXStyles;
   ref?: Ref<HTMLSelectElement>;

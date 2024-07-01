@@ -6,7 +6,7 @@ import type { Option } from "./Select";
 export type UseSelectProps = {
   defaultValue?: OptionProps["value"];
   id?: string;
-  onChange?: (previous?: Option, next?: Option) => void;
+  onChange?: (next?: Option["value"], previous?: Option["value"]) => void;
   options?: Option[];
 };
 
@@ -26,8 +26,8 @@ export const useSelect = ({
 
   const updateCurrentOption = useCallback((next: Option) => {
     setCurrentOption((previous) => {
-      if (onChange) {
-        onChange(previous, next);
+      if (onChange && previous?.value !== next?.value) {
+        onChange(next?.value, previous?.value);
       }
       return next;
     });
