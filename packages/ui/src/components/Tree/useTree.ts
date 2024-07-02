@@ -1,18 +1,23 @@
-import { MouseEventHandler, useCallback, useMemo, useState } from "react";
+import { MouseEventHandler, useCallback, useId, useMemo, useState } from "react";
 
 import type { TreeNodeProps } from "./TreeNode";
 
 export type UseTreeProps = {
+  id?: string;
   initialExpanded?: boolean;
   nodes?: (() => Omit<TreeNodeProps, "index" | "level" | "treeId">[]) | Omit<TreeNodeProps, "index" | "level" | "treeId">[];
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 export const useTree = ({
+  id,
   initialExpanded = false,
   nodes,
   onClick,
 }: UseTreeProps) => {
+  const generatedId = useId();
+  const currentId = useMemo(() => id || generatedId, [generatedId, id]);
+
   const [expanded, setExpanded] = useState(initialExpanded);
 
   const nodesArray = useMemo(() => {
@@ -45,6 +50,7 @@ export const useTree = ({
   }, [expanded, onClick, toggleExpand]);
 
   return {
+    currentId,
     expanded,
     handleNodeClick,
     hasNodes,
