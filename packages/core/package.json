@@ -1,0 +1,38 @@
+{
+  "name": "@sceneforge/core",
+  "version": "0.0.1",
+  "description": "Core Application Library for SceneForge",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sceneforge/sceneforge",
+    "directory": "packages/core"
+  },
+  "author": {
+    "name": "Rodolfo Pereira",
+    "email": "phinpho@gmail.com",
+    "url": "https://phinpho.github.io"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "prepack": "yarn build"
+  },
+  "dependencies": {
+    "browser-fs-access": "^0.35.0"
+  },
+  "devDependencies": {
+    "@sceneforge/eslint": "workspace:*",
+    "eslint": "^9.5.0",
+    "typescript": "*"
+  },
+  "engines": {
+    "node": ">=21.7.1 < 22",
+    "yarn": ">=4.3.0 < 5"
+  }
+}
