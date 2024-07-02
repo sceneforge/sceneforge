@@ -4,6 +4,10 @@
   "description": "Scene Node Object Handlers",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/sceneforge/sceneforge",
@@ -13,6 +17,10 @@
     "name": "Rodolfo Pereira",
     "email": "phinpho@gmail.com",
     "url": "https://phinpho.github.io"
+  },
+  "dependencies": {
+    "@babylonjs/loaders": "^7.7.0",
+    "@sceneforge/core": "workspace:*"
   },
   "peerDependencies": {
     "@babylonjs/core": "^7.7.0"

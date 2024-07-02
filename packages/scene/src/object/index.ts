@@ -5,5 +5,7 @@ export { hideNode } from "./hideNode";
 export { id } from "./id";
 export { isVisible } from "./isVisible";
 export { name } from "./name";
+export { sceneNodeTree } from "./sceneNodeTree";
+export type { SceneNode } from "./sceneNodeTree";
 export { showNode } from "./showNode";
 export { SceneObjectType, typeOf } from "./typeOf";

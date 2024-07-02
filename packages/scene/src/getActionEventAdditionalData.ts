@@ -1,5 +1,5 @@
-import { type ActionEvent } from "@babylonjs/core/Actions/actionEvent";
-import { Vector3 } from "@babylonjs/core/Maths/math.vector";
+import type { ActionEvent } from "@babylonjs/core/Actions/actionEvent";
+import type { Vector3 } from "@babylonjs/core/Maths/math.vector";
 
 export type AdditionalData = {
   faceId?: number;

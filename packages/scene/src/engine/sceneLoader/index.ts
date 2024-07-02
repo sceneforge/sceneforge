@@ -1,0 +1,1 @@
+export { sceneLoader } from "./sceneLoader";
