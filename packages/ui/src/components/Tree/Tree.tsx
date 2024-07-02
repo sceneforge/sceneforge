@@ -10,7 +10,7 @@ const TreeNode = lazy(() => import("./TreeNode"));
 export type TreeProps = {
   id?: string;
   nodes: (() => Omit<TreeNodeProps, "index" | "level" | "treeId">[]) | Omit<TreeNodeProps, "index" | "level" | "treeId">[];
-  style: StyleXStyles;
+  style?: StyleXStyles;
 };
 
 const styles = stylex.create({
