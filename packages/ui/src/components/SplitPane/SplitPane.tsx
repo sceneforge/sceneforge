@@ -3,6 +3,7 @@ import { Children, Fragment, useId } from "react";
 
 import { Orientation } from "../../types";
 import { View, type ViewProps } from "../View";
+import { currentColor } from "../tokens.stylex";
 
 export type SplitPaneProps = {
   initialSize?: number[];
@@ -12,12 +13,7 @@ export type SplitPaneProps = {
 
 const styles = stylex.create({
   childrenWrapper: {
-    boxSizing: "border-box",
-    display: "block",
     flexGrow: 1,
-    height: "100%",
-    overflow: "auto",
-    width: "100%",
   },
   childrenWrapperSize: (orientation: Orientation, size: number) => ({
     height: orientation === Orientation.Vertical ? `${size}%` : "100%",
@@ -27,10 +23,7 @@ const styles = stylex.create({
     alignItems: "center",
     display: "flex",
     flexWrap: "nowrap",
-    height: "100%",
     justifyContent: "stretch",
-    overflow: "hidden",
-    width: "100%",
   },
   containerHorizontal: {
     flexDirection: "row",
@@ -40,17 +33,17 @@ const styles = stylex.create({
   },
   paneGutter: {
     backgroundColor: {
-      ":hover": "color-mix(in srgb, currentColor 50%, transparent)",
-      "default": "transparent",
+      ":hover": currentColor.alpha50,
+      "default": currentColor.alpha15,
     },
     boxShadow: {
-      ":hover": "0 0 0 0.125rem color-mix(in srgb, currentColor 50%, transparent)",
+      ":hover": `0 0 0 0.125rem ${currentColor.alpha50}`,
       "default": null,
     },
     cursor: "col-resize",
     flexShrink: 1,
     height: "100%",
-    transition: "box-shadow 0.2s ease-in-out",
+    transition: "box-shadow 0.1s, background-color 0.2s",
     width: "0.25rem",
   },
   paneGutterVertical: {
@@ -86,22 +79,23 @@ const SplitPane = ({
     >
       {Children.map(children, (child, index) => (
         <Fragment key={index}>
-          <div
+          <View
             id={`${currentId}-pane-${index}`}
-            {...stylex.props(
+            scrollable
+            style={[
               styles.childrenWrapper,
               styles.childrenWrapperSize(
                 orientation,
                 (initialSize && initialSize[index] !== undefined)
                   ? initialSize[index]
                   : originalSize
-              )
-            )}
+              ),
+            ]}
           >
             {child}
-          </div>
+          </View>
           {resizable && index < Children.count(children) - 1 && (
-            <span
+            <View
               aria-label={orientation === Orientation.Horizontal ? "Resize columns" : "Resize rows"}
               aria-orientation={orientation === Orientation.Horizontal ? "vertical" : "horizontal"}
               aria-valuemax={100}
@@ -111,13 +105,13 @@ const SplitPane = ({
               data-resize-id-start={`${currentId}-pane-${index}`}
               id={`${currentId}-resizer-${index}-${index + 1}`}
               role="separator"
-              {...stylex.props(
+              style={[
                 styles.paneGutter,
                 orientation === Orientation.Vertical
-                && styles.paneGutterVertical
-              )}
+                && styles.paneGutterVertical,
+              ]}
             >
-            </span>
+            </View>
           )}
         </Fragment>
       ))}

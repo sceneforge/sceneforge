@@ -2,6 +2,7 @@ import * as stylex from "@stylexjs/stylex";
 import { lazy, useId } from "react";
 
 import { Align, Orientation, Position, Variant } from "../../types";
+import { View } from "../View";
 import { type TabProps } from "./Tab";
 
 const Tab = lazy(() => import("./Tab"));
@@ -22,7 +23,6 @@ export type TabListProps = {
 
 const styles = stylex.create({
   container: {
-    color: "inherit",
     display: "flex",
     flexDirection: "row",
     flexShrink: 1,
@@ -56,17 +56,17 @@ const TabList = ({
   const currentId = id || generatedId;
 
   return (
-    <div
+    <View
       aria-label={label}
       id={currentId}
       role="tablist"
-      {...stylex.props(
+      style={[
         styles.container,
         orientation === Orientation.Vertical && styles.containerVertical,
         align === Align.Center
           ? styles.containerCenter
-          : align === Align.End && styles.containerEnd
-      )}
+          : align === Align.End && styles.containerEnd,
+      ]}
     >
       {tabs.map(({ closeable: tabClosable, id: tabId, ...tab }) => (
         <Tab
@@ -82,7 +82,7 @@ const TabList = ({
           variant={variant}
         />
       ))}
-    </div>
+    </View>
   );
 };
 

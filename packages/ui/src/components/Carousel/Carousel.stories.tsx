@@ -13,7 +13,7 @@ const meta: Meta<typeof Carousel> = {
         },
       },
     },
-    ...variantArgumentTypes("variant"),
+    ...variantArgumentTypes("itemsVariant"),
     level: {
       control: {
         max: 6,

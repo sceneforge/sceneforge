@@ -5,6 +5,7 @@ import { IconEnum } from "../../types";
 import { Heading, type HeadingProps } from "../Heading";
 import { IconButton } from "../IconButton";
 import { Toolbar, type ToolbarProps } from "../Toolbar";
+import { View } from "../View";
 import { backgroundColor } from "../tokens.stylex";
 
 export type PaneHeaderProps = {
@@ -37,7 +38,6 @@ const styles = stylex.create({
     gap: "0.5rem",
     height: "2.5rem",
     justifyContent: "stretch",
-    overflow: "clip",
   },
   heading: {
     fontSize: "1.125rem",
@@ -99,12 +99,12 @@ const PaneHeader = ({
   const currentId = id ?? generatedId;
 
   return (
-    <div
+    <View
       id={currentId}
-      {...stylex.props(
+      style={[
         styles.container,
-        !outer && styles.inner
-      )}
+        !outer && styles.inner,
+      ]}
     >
       <span {...stylex.props(styles.headingWrapper)}>
         <Heading
@@ -174,7 +174,7 @@ const PaneHeader = ({
           scaleActions={scaleActions}
         />
       )}
-    </div>
+    </View>
   );
 };
 

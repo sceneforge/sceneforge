@@ -23,9 +23,6 @@ const meta: Meta<typeof CommandBar> = {
     label: {
       control: "text",
     },
-    open: {
-      control: "boolean",
-    },
     ...variantArgumentTypes("variant"),
   },
   component: CommandBar,

@@ -1,112 +1,72 @@
 import * as stylex from "@stylexjs/stylex";
-import { type RefObject } from "react";
+import { type Ref } from "react";
 
 import { IconEnum, Variant } from "../../types";
 import { Button } from "../Button";
+import { Dialog } from "../Dialog";
+import { Divider } from "../Divider";
 import { IconButton } from "../IconButton";
-import { backgroundColor, backgroundTextColorVariantStyle, color } from "../tokens.stylex";
+import { View } from "../View";
+import { color, foregroundColor } from "../tokens.stylex";
 
 export type CommandBarProps = {
   label?: string;
   name?: string;
-  open?: boolean;
   placeholder?: string;
-  ref?: RefObject<HTMLDialogElement | null>;
+  ref?: Ref<HTMLDialogElement>;
   variant?: Variant;
 };
 
 const styles = stylex.create({
   closeButton: {
-    "@media only screen and (min-width: 768px)": {
-      display: "none",
+    display: {
+      "@media only screen and (min-width: 768px)": "none",
+      "default": null,
     },
-    "flexShrink": 1,
-  },
-  container: {
-    "::backdrop": {
-      backdropFilter: "blur(5rem)",
-      backgroundColor: `color-mix(in srgb, ${color.foreground} 25%, transparent)`,
-      inset: 0,
-      position: "absolute",
-    },
-    "@media only screen and (min-width: 768px)": {
-      backgroundColor: backgroundColor.alpha75,
-      borderColor: `color-mix(in srgb, ${color.foreground} 25%, transparent)`,
-      borderRadius: "0.75rem",
-      borderStyle: "solid",
-      borderWidth: "0.0625rem",
-      boxContent: "border-box",
-      height: "min-content",
-      insetBlockStart: "15dvh",
-      insetInlineStart: "50%",
-      maxHeight: "85dvh",
-      maxWidth: "85dvw",
-      overflow: "clip",
-      padding: "0.5rem",
-      position: "fixed",
-      transform: "translateX(-50%)",
-    },
-    "height": "100dvh",
-    "width": "100dvw",
-  },
-  detailList: {
-    display: "grid",
-    gridAutoFlow: "row",
+    flexShrink: 1,
   },
   input: {
-    "@media only screen and (min-width: 768px)": {
-      width: "40dvw",
+    backgroundColor: color.background,
+    borderColor: foregroundColor.alpha25,
+    borderRadius: "0.5rem",
+    borderStyle: "solid",
+    borderWidth: "0.0625rem",
+    color: color.foreground,
+    flexGrow: 1,
+    height: "2.5rem",
+    paddingInline: "0.5rem",
+    width: {
+      "@media only screen and (min-width: 768px)": "40dvw",
+      "default": "100%",
     },
-    "backgroundColor": color.background,
-    "borderColor": `color-mix(in srgb, ${color.foreground} 25%, transparent)`,
-    "borderRadius": "0.5rem",
-    "borderStyle": "solid",
-    "borderWidth": "0.0625rem",
-    "color": color.foreground,
-    "flexGrow": 1,
-    "height": "2.5rem",
-    "paddingInline": "0.5rem",
-    "width": "100%",
   },
-  inputView: {
-    display: "flex",
-    flexFlow: "row",
-    flexWrap: "nowrap",
-    height: "min-content",
-    justifyContent: "stretch",
-    width: "100%",
+  list: {
+    display: "grid",
+    gridAutoFlow: "row",
+    listStyleType: "none",
+    margin: 0,
+    padding: 0,
   },
   listOption: {
-    color: color.foreground,
     textAlign: "start",
     width: "100%",
-  },
-  listTitle: {
-    color: `color-mix(in srgb, ${color.foreground} 75%, ${color.background})`,
-    fontSize: "0.65rem",
-    fontWeight: "bold",
-    paddingBlockStart: "0.5rem",
-    textAlign: "start",
   },
 });
 
 const CommandBar = ({
+  label,
   name,
-  open,
   placeholder = "Type a command...",
   ref,
   variant,
 }: CommandBarProps) => {
   return (
-    <dialog
-      open={open}
-      {...stylex.props(
-        styles.container,
-        backgroundTextColorVariantStyle(variant)
-      )}
+    <Dialog
+      aria-label={label}
       ref={ref}
+      variant={variant}
     >
-      <form {...stylex.props(styles.inputView)} method="dialog">
+      <form method="dialog">
         <input
           autoFocus
           name={name}
@@ -119,51 +79,59 @@ const CommandBar = ({
         <IconButton
           icon={IconEnum.Close}
           label="Close"
-          style={[styles.closeButton]}
+          style={styles.closeButton}
           type="submit"
         />
       </form>
-      <dl
-        {...stylex.props(
-          styles.detailList
-        )}
-      >
-        <dt
-          {...stylex.props(styles.listTitle)}
-        >
-          Latest Input
-        </dt>
-        <dd>
-          <Button style={[styles.listOption]}>Command 1</Button>
-        </dd>
-        <dd>
-          <Button style={[styles.listOption]}>Command 2</Button>
-        </dd>
-        <dd>
-          <Button style={[styles.listOption]}>Command 3</Button>
-        </dd>
-        <dd>
-          <Button style={[styles.listOption]}>Command 4</Button>
-        </dd>
-        <dt
-          {...stylex.props(styles.listTitle)}
-        >
-          Suggest
-        </dt>
-        <dd>
-          <Button style={[styles.listOption]}>Suggested Command 1</Button>
-        </dd>
-        <dd>
-          <Button style={[styles.listOption]}>Suggested Command 2</Button>
-        </dd>
-        <dd>
-          <Button style={[styles.listOption]}>Suggested Command 3</Button>
-        </dd>
-        <dd>
-          <Button style={[styles.listOption]}>Suggested Command 4</Button>
-        </dd>
-      </dl>
-    </dialog>
+      <View padding={0.25}>
+        <Divider label="Latest Input" />
+        <ul {...stylex.props(styles.list)}>
+          <li>
+            <Button style={styles.listOption}>
+              Command 1
+            </Button>
+          </li>
+          <li>
+            <Button style={styles.listOption}>
+              Command 2
+            </Button>
+          </li>
+          <li>
+            <Button style={styles.listOption}>
+              Command 3
+            </Button>
+          </li>
+          <li>
+            <Button style={styles.listOption}>
+              Command 4
+            </Button>
+          </li>
+        </ul>
+        <Divider label="Suggest" />
+        <ul {...stylex.props(styles.list)}>
+          <li>
+            <Button style={styles.listOption}>
+              Suggested Command 1
+            </Button>
+          </li>
+          <li>
+            <Button style={styles.listOption}>
+              Suggested Command 2
+            </Button>
+          </li>
+          <li>
+            <Button style={styles.listOption}>
+              Suggested Command 3
+            </Button>
+          </li>
+          <li>
+            <Button style={styles.listOption}>
+              Suggested Command 4
+            </Button>
+          </li>
+        </ul>
+      </View>
+    </Dialog>
   );
 };
 

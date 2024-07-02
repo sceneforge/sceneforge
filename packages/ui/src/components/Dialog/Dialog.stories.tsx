@@ -34,23 +34,21 @@ export const Default: Story = {
 
 export const WithToolbar: Story = {
   args: {
+    actions: [
+      {
+        kind: "button",
+        label: "Button 1",
+        variant: Variant.Default,
+      },
+      {
+        icon: IconEnum.Delete,
+        inverted: true,
+        kind: "icon",
+        label: "Delete",
+        variant: Variant.Danger,
+      },
+    ],
     children: "Dialog Content",
     title: "Dialog Title",
-    toolbar: {
-      actions: [
-        {
-          label: "Button 1",
-          type: "button",
-          variant: Variant.Default,
-        },
-        {
-          icon: IconEnum.Delete,
-          inverted: true,
-          label: "Delete",
-          type: "icon",
-          variant: Variant.Danger,
-        },
-      ],
-    },
   },
 };

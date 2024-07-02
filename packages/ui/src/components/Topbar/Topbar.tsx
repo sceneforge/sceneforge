@@ -39,7 +39,6 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "row",
     gap: "0.5rem",
-    height: "100%",
     insetBlockStart: 0,
     insetInlineStart: titleBar.appTitleBarInsetInlineStart,
     justifyContent: "stretch",
@@ -55,9 +54,7 @@ const styles = stylex.create({
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    height: "100%",
     justifyContent: "flex-start",
-    width: "100%",
   },
   toolbarEnd: {
     justifyContent: "flex-end",
@@ -84,7 +81,7 @@ const Topbar = ({
         shadow && styles.containerBorderAndShadow
       )}
     >
-      <View style={[styles.content]} variant={variant}>
+      <View style={styles.content} variant={variant}>
         <Heading
           level={1}
           padding={{
@@ -94,12 +91,12 @@ const Topbar = ({
         >
           {title}
         </Heading>
-        <div {...stylex.props(styles.toolbar)}>
+        <View style={styles.toolbar}>
           {toolbarStart && <Toolbar key={`${currentId}-toolbar-start`} {...toolbarStart} />}
-        </div>
-        <div {...stylex.props(styles.toolbar, styles.toolbarEnd)}>
+        </View>
+        <View style={[styles.toolbar, styles.toolbarEnd]}>
           {toolbarEnd && <Toolbar key={`${currentId}-toolbar-end`} {...toolbarEnd} />}
-        </div>
+        </View>
       </View>
     </header>
   );

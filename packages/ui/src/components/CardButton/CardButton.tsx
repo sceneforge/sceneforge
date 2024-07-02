@@ -9,7 +9,6 @@ export type CardButtonProps = {
   popoverTarget?: ButtonProps["popoverTarget"];
   popoverTargetAction?: ButtonProps["popoverTargetAction"];
   ref?: ButtonProps["ref"];
-  scale?: ButtonProps["scale"];
   tabIndex?: ButtonProps["tabIndex"];
 } & Omit<CardProps, "actions">;
 
@@ -31,7 +30,6 @@ const CardButton = ({
   popoverTarget,
   popoverTargetAction,
   ref,
-  scale = true,
   tabIndex,
   variant,
   ...props
@@ -45,7 +43,6 @@ const CardButton = ({
       popoverTarget={popoverTarget}
       popoverTargetAction={popoverTargetAction}
       ref={ref}
-      scale={scale}
       style={styles.container}
       tabIndex={tabIndex}
       variant={variant}

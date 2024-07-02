@@ -22,17 +22,8 @@ const styles = stylex.create({
     maxWidth: "100%",
     minHeight: "100%",
     minWidth: "100%",
-    overflow: "hidden",
     position: "relative",
     width: 0,
-  },
-  hidden: {
-    display: "none",
-  },
-  scrollable: {
-    height: "100%",
-    overflow: "auto",
-    width: "100%",
   },
 });
 
@@ -48,10 +39,9 @@ const TabPanel = <Props = Record<string, unknown>>({
       hidden={hidden}
       id={`${tabId}-panel`}
       role="tabpanel"
-      style={[styles.container, hidden && styles.hidden]}
-      tabIndex={0}
+      style={styles.container}
     >
-      <View style={[styles.scrollable]}>
+      <View scrollable>
         {
           TabComponent && (
             <TabComponent

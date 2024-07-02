@@ -3,9 +3,15 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Orientation } from "../../types";
+import { View } from "../View";
+import { currentColor } from "../tokens.stylex";
 
 export type DividerProps = {
   label?: string;
+  margin?: {
+    end?: number;
+    start?: number;
+  } | number;
   orientation?: Orientation;
   scale?: boolean;
   style?: StyleXStyles;
@@ -13,18 +19,13 @@ export type DividerProps = {
 
 const styles = stylex.create({
   container: {
-    borderBlockStartColor: "color-mix(in srgb, currentColor 50%, transparent)",
+    borderBlockStartColor: currentColor.alpha50,
     borderBlockStartStyle: "solid",
-    borderBlockStartWidth: 1,
-    color: "color-mix(in srgb, currentColor 25%, transparent)",
-    display: "block",
+    borderBlockStartWidth: "0.0625rem",
+    color: currentColor.alpha25,
     fontSize: "smaller",
     fontStretch: "semi-condensed",
-    margin: 0,
-    overflow: "hidden",
-    padding: "0 0.75rem",
     textOverflow: "ellipsis",
-    textSizeAdjust: "0.45rem",
     textWrap: "nowrap",
     touchAction: "none",
     userSelect: "none",
@@ -45,23 +46,41 @@ const styles = stylex.create({
 
 const Divider = ({
   label,
+  margin = 0,
   orientation = Orientation.Horizontal,
   style,
 }: DividerProps) => {
   return (
-    <div
+    <View
       aria-orientation={orientation === Orientation.Vertical ? "vertical" : "horizontal"}
+      margin={
+        orientation === Orientation.Vertical
+          ? {
+            inline: typeof margin === "number" ? margin : undefined,
+            inlineEnd: typeof margin === "object" && "end" in margin ? margin.end : undefined,
+            inlineStart: typeof margin === "object" && "start" in margin ? margin.start : undefined,
+          }
+          : {
+            block: typeof margin === "number" ? margin : undefined,
+            blockEnd: typeof margin === "object" && "end" in margin ? margin.end : undefined,
+            blockStart: typeof margin === "object" && "start" in margin ? margin.start : undefined,
+          }
+      }
+      padding={{
+        block: 0,
+        inline: 0.75,
+      }}
       role="separator"
-      {...stylex.props(
+      style={[
         styles.container,
         orientation === Orientation.Vertical
           ? styles.vertical
           : styles.horizontal,
-        style
-      )}
+        style,
+      ]}
     >
       {label && (<span role="presentation">{label}</span>)}
-    </div>
+    </View>
   );
 };
 

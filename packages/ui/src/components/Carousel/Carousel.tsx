@@ -37,10 +37,6 @@ const styles = stylex.create({
     display: "grid",
     gridAutoFlow: "column",
     isolation: "isolate",
-    margin: 0,
-    overflowX: "auto",
-    overflowY: "hidden",
-    overscrollBehaviorInline: "contain",
     scrollBehavior: "smooth",
     scrollSnapType: "inline proximity",
     touchAction: "pan-x",
@@ -81,6 +77,7 @@ const Carousel = ({
     >
       <View
         padding={padding}
+        scrollable="inline"
         style={[
           styles.scroller as Record<string, string>,
           typeof paddingInline === "number" && styles.scrollPaddingInline(paddingInline),

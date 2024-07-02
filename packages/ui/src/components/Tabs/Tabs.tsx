@@ -34,16 +34,11 @@ const styles = stylex.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    height: "100%",
     justifyContent: "stretch",
-    margin: 0,
     maxHeight: "100%",
     maxWidth: "100%",
     minHeight: "100%",
     minWidth: "100%",
-    overflow: "hidden",
-    padding: 0,
-    width: "100%",
   },
   content: {
     backgroundColor: backgroundColor.alpha75,
@@ -121,7 +116,7 @@ const Tabs = ({
         tabs={content.map(({ tab }) => tab)}
         variant={variant}
       />
-      <div {...stylex.props(styles.content)}>
+      <View style={styles.content}>
         {content.map(({ panel, tab }) => (
           <TabPanel
             hidden={activeTabId !== tab.id}
@@ -130,7 +125,7 @@ const Tabs = ({
             {...panel}
           />
         ))}
-      </div>
+      </View>
     </View>
   );
 };

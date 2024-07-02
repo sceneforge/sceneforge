@@ -1,10 +1,12 @@
 import * as stylex from "@stylexjs/stylex";
-import { type MouseEvent, useCallback } from "react";
 
 import { IconEnum, Orientation, Position, Variant } from "../../types";
+import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { IconButton } from "../IconButton";
+import { View } from "../View";
 import { backgroundColor, color } from "../tokens.stylex";
+import { useTab } from "./useTab";
 
 export type TabProps = {
   active?: boolean;
@@ -30,19 +32,16 @@ const styles = stylex.create({
   button: {
     alignItems: "center",
     backgroundColor: "transparent",
-    border: "none",
-    color: "inherit",
-    cursor: "pointer",
     display: "flex",
     flexDirection: "row",
     flexGrow: 1,
+    flexWrap: "nowrap",
     gap: "0.25rem",
     outline: {
       ":focus": "none",
       "default": "none",
     },
-    paddingBlock: "0.5rem",
-    paddingInline: "1rem",
+    textWrap: "nowrap",
   },
   closeButton: {
     flexShrink: 1,
@@ -86,40 +85,34 @@ const Tab = ({
   onTabClose,
   variant,
 }: TabProps) => {
-  const handleTabChange = useCallback((
-    event: MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-    onTabChange?.(id);
-  }, [onTabChange, id]);
-
-  const handleTabClose = useCallback((
-    event: MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-    onTabClose?.(id);
-  }, [onTabClose, id]);
+  const { handleTabChange, handleTabClose } = useTab({
+    id, onTabChange, onTabClose,
+  });
 
   return (
-    <div
-      {...stylex.props(
+    <View
+      style={[
         styles.container,
         active && styles.active,
-        (!variant && active) && styles.noVariantActive
-      )}
+        (!variant && active) && styles.noVariantActive,
+      ]}
     >
-      <button
+      <Button
         aria-controls={`${id}-panel`}
         aria-selected={active ? "true" : "false"}
         id={id}
         onClick={handleTabChange}
+        padding={{
+          block: 0.5,
+          inline: 1,
+        }}
         role="tab"
+        style={styles.button}
         tabIndex={active ? 0 : -1}
-        {...stylex.props(styles.button)}
       >
         {icon && <Icon icon={icon} />}
         {label}
-      </button>
+      </Button>
       {closeable && (
         <IconButton
           icon={IconEnum.Close}
@@ -130,7 +123,7 @@ const Tab = ({
           ]}
         />
       )}
-    </div>
+    </View>
   );
 };
 

@@ -8,6 +8,7 @@ import { View, ViewProps } from "../View";
 
 export type ContainerProps = PropsWithChildren<{
   padding?: ViewProps["padding"];
+  scrollable?: ViewProps["scrollable"];
   style?: StyleXStyles;
   variant?: Variant;
 }>;
@@ -27,12 +28,14 @@ const styles = stylex.create({
 const Container = ({
   children,
   padding = 0,
+  scrollable = true,
   style,
   variant,
 }: ContainerProps) => {
   return (
     <View
       padding={padding}
+      scrollable={scrollable}
       style={[
         styles.container,
         style,

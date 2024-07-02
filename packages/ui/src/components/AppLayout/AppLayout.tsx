@@ -12,17 +12,12 @@ const styles = stylex.create({
     colorScheme: colorScheme,
   }),
   container: {
-    boxSizing: "border-box",
     colorScheme: "light dark",
     height: stylex.firstThatWorks("100dvh", "100vh", "100%"),
-    margin: 0,
     maxHeight: stylex.firstThatWorks("100dvh", "100vh", "100%"),
     maxWidth: stylex.firstThatWorks("100dvw", "100vw", "100%"),
     minHeight: stylex.firstThatWorks("100dvh", "100vh", "100%"),
     minWidth: stylex.firstThatWorks("100dvw", "100vw", "100%"),
-    overflow: "hidden",
-    overscrollBehavior: "none",
-    padding: 0,
     position: "relative",
     width: stylex.firstThatWorks("100dvw", "100vw", "100%"),
   },
@@ -60,12 +55,12 @@ const AppLayout = ({
 }: AppLayoutProps) => {
   return (
     <View
-      {...stylex.props(
+      style={[
         styles.container,
         embedded && styles.embedded,
         colorScheme && styles.colorScheme(colorScheme),
-        style
-      )}
+        style,
+      ]}
     >
       {topbar && (<Topbar {...topbar} />)}
       <main {...stylex.props(styles.main, !!topbar && styles.topbar)}>

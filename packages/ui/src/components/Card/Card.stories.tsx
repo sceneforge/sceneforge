@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { IconEnum, Variant } from "../../types";
 import Card from "./Card";
 
 const meta: Meta<typeof Card> = {
@@ -14,16 +15,6 @@ const meta: Meta<typeof Card> = {
     label: {
       control: "text",
     },
-    zoom: {
-      control: {
-        max: 4,
-        min: 0,
-        type: "range",
-      },
-      if: { arg: "img", truthy: true },
-      max: 4,
-      min: 0,
-    },
     ...variantArgumentTypes("variant"),
   },
   component: Card,
@@ -36,7 +27,20 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    children: (<div className="p-block-2 p-inline-4">Card Content</div>),
+    actions: [
+      {
+        kind: "button",
+        label: "Open",
+        variant: Variant.Default,
+      },
+      {
+        icon: IconEnum.Delete,
+        kind: "icon",
+        label: "Delete",
+        variant: Variant.Danger,
+      },
+    ],
+    children: "Card Content Body",
     img: "https://picsum.photos/seed/random/1200",
     label: "Card Title",
   },

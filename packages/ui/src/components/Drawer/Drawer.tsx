@@ -3,9 +3,10 @@ import type { PropsWithChildren, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
+import { isBlockEnd, isBlockStart, isInlineEnd, isInlineStart } from "../../helpers";
 import { Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
-import { color } from "../tokens.stylex";
+import { currentColor } from "../tokens.stylex";
 
 export type DrawerProps = PropsWithChildren<{
   id?: string;
@@ -21,29 +22,22 @@ export type DrawerProps = PropsWithChildren<{
 
 const styles = stylex.create({
   container: {
-    backgroundColor: "transparent",
-    color: "inherit",
-    display: "block",
     flexGrow: 1,
     inset: 0,
-    margin: 0,
-    overflow: "hidden",
-    padding: 0,
     pointerEvents: "none",
     position: "absolute",
     touchAction: "none",
   },
   innerContainer: {
-    overflow: "hidden",
     pointerEvents: "auto",
     position: "absolute",
   },
   noVariantInnerContainer: {
-    backgroundColor: "color-mix(in srgb, currentColor 5%, transparent)",
+    backgroundColor: currentColor.alpha05,
   },
   resizableGutter: {
     "::after": {
-      backgroundColor: "color-mix(in srgb, currentColor 50%, transparent)",
+      backgroundColor: currentColor.alpha50,
       content: "''",
       display: "block",
       opacity: 0.5,
@@ -103,10 +97,6 @@ const styles = stylex.create({
     "insetInlineStart": orientation === Orientation.Vertical ? (position === Position.Start ? 0 : null) : 0,
     "width": orientation === Orientation.Horizontal ? "100%" : `${size}%`,
   }),
-  variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
-    backgroundColor: color[background],
-    color: color[text],
-  }),
 });
 
 const Drawer = ({
@@ -122,34 +112,20 @@ const Drawer = ({
   variant,
 }: DrawerProps) => {
   return (
-    <div
+    <View
       aria-label={label}
       id={id}
       ref={ref}
-      {...stylex.props(styles.container, style)}
+      style={[
+        styles.container, style,
+      ]}
     >
       <View
         padding={{
-          blockEnd:
-            orientation === Orientation.Horizontal
-            && position === Position.Start
-              ? 0.25
-              : undefined,
-          blockStart:
-            orientation === Orientation.Horizontal
-            && position === Position.End
-              ? 0.25
-              : undefined,
-          inlineEnd:
-            orientation === Orientation.Vertical
-            && position === Position.Start
-              ? 0.25
-              : undefined,
-          inlineStart:
-            orientation === Orientation.Vertical
-            && position === Position.End
-              ? 0.25
-              : undefined,
+          blockEnd: isBlockStart(orientation, position) ? 0.25 : undefined,
+          blockStart: isBlockEnd(orientation, position) ? 0.25 : undefined,
+          inlineEnd: isInlineStart(orientation, position) ? 0.25 : undefined,
+          inlineStart: isInlineEnd(orientation, position) ? 0.25 : undefined,
         }}
         style={[
           styles.innerContainer,
@@ -163,7 +139,7 @@ const Drawer = ({
       >
         {children}
       </View>
-    </div>
+    </View>
   );
 };
 
