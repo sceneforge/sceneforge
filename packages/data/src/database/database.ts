@@ -13,8 +13,8 @@ export type Database = {
 const database = new Dexie("SceneForge") as Database;
 
 database.version(1).stores({
-  model: "++id, sceneId, name",
-  scene: "++id, name",
+  model: "++id, sceneId, name, createdAt, updatedAt",
+  scene: "++id, name, createdAt, updatedAt",
   settings: "&key",
 });
 
