@@ -12,7 +12,7 @@ const FormViewTemplate = ({ fieldsets, id, title }: FormViewTemplateProps) => {
   const currentId = id ?? generatedId;
 
   return (
-    <Container paddingBlock={1}>
+    <Container padding={{ block: 1 }}>
       <Section level={1} shadow title={title}>
         <form id={currentId}>
           {fieldsets && fieldsets.map((fieldset, index) => (

@@ -1,16 +1,17 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { v4 as uuid } from "uuid";
+// import { useTranslation } from "react-i18next";
+// import { v4 as uuid } from "uuid";
 
-import { Model, isModel } from "../../lib/isModel";
-import { usePanel } from "../Panel";
+import { Model } from "../../lib/isModel";
+// import { usePanel } from "../Panel";
 import { ModelContext } from "./ModelContextProvider";
 
 export const useModelContext = ({ capture, id }: Partial<Model> = {}) => {
-  const { t } = useTranslation("common");
-  const { loadState, loaded, models, setLoadState, setLoaded, setModels }
+  // const { t } = useTranslation("common");
+  // const { loadState, loaded, models, setLoadState, setLoaded, setModels }
+  const { loadState, loaded, models, setLoadState, setModels }
     = useContext(ModelContext);
-  const { getAllUserData, removeUserData, setUserData } = usePanel();
+  // const { getAllUserData, removeUserData, setUserData } = usePanel();
 
   const [currentID, setCurrentID] = useState<string | undefined>(id);
   const [captureSaveState, setCaptureSaveState] = useState<boolean | undefined>(
@@ -19,34 +20,35 @@ export const useModelContext = ({ capture, id }: Partial<Model> = {}) => {
 
   const loadModels = useCallback((): Promise<Model[]> => {
     setLoadState("loading");
-    return new Promise((resolve, reject) => {
-      getAllUserData(
-        "models",
-        (data) => {
-          setModels([]);
-          if (Array.isArray(data)) {
-            for (const model of data) {
-              if (isModel(model)) {
-                setModels(previous => [...previous, model]);
-              }
-            }
-          }
-          setLoaded(true);
-          setLoadState("loaded");
-          resolve(models);
-        },
-        (error) => {
-          setLoadState("error");
-          if (error instanceof Error) {
-            reject(error);
-          }
-          else {
-            reject(new Error("Failed to load models", { cause: error }));
-          }
-        }
-      );
+    return new Promise(() => {
+      // getAllUserData(
+      //   "models",
+      //   (data) => {
+      //     setModels([]);
+      //     if (Array.isArray(data)) {
+      //       for (const model of data) {
+      //         if (isModel(model)) {
+      //           setModels(previous => [...previous, model]);
+      //         }
+      //       }
+      //     }
+      //     setLoaded(true);
+      //     setLoadState("loaded");
+      //     resolve(models);
+      //   },
+      //   (error) => {
+      //     setLoadState("error");
+      //     if (error instanceof Error) {
+      //       reject(error);
+      //     }
+      //     else {
+      //       reject(new Error("Failed to load models", { cause: error }));
+      //     }
+      //   }
+      // );
     });
-  }, [setLoadState, getAllUserData, setModels, setLoaded, models]);
+    // }, [setLoadState, getAllUserData, setModels, setLoaded, models]);
+  }, [setLoadState]);
 
   const getModel = useCallback(
     async (givenID?: string): Promise<Model | undefined> => {
@@ -83,53 +85,56 @@ export const useModelContext = ({ capture, id }: Partial<Model> = {}) => {
       model: Partial<Omit<Model, "updatedAt">>,
       create: boolean = true
     ): Promise<Model> => {
-      const now = new Date();
-      const withId = model.id ?? currentID ?? uuid();
+      // const now = new Date();
+      // const withId = model.id ?? currentID ?? uuid();
       const storedModel: Partial<Model> | undefined = await getModel(model.id);
 
       if (!create && !storedModel) {
         throw new Error(`Model with the ID "${model.id}" is not found`);
       }
 
-      const title
-        = model.title ?? storedModel?.title ?? t("tabs.untitledModel");
-      const gltf = model.gltf ?? storedModel?.gltf ?? undefined;
-      const withCapture
-        = withId === id && capture
-          ? capture
-          : model.capture ?? storedModel?.capture ?? undefined;
-      const createdAt = model.createdAt ?? storedModel?.createdAt ?? now;
-      const updatedAt = now;
-      const modelToSave: Model = {
-        capture: withCapture,
-        createdAt,
-        gltf,
-        id: withId,
-        title,
-        updatedAt,
-      };
+      // const title
+      //   = model.title ?? storedModel?.title ?? t("tabs.untitledModel");
+      // const gltf = model.gltf ?? storedModel?.gltf ?? undefined;
+      // const withCapture
+      //   = withId === id && capture
+      //     ? capture
+      //     : model.capture ?? storedModel?.capture ?? undefined;
+      // const createdAt = model.createdAt ?? storedModel?.createdAt ?? now;
+      // const updatedAt = now;
+      // const modelToSave: Model = {
+      //   capture: withCapture,
+      //   createdAt,
+      //   gltf,
+      //   id: withId,
+      //   title,
+      //   updatedAt,
+      // };
 
-      try {
-        await setUserData("models", modelToSave.id, modelToSave);
-        setModels(previous => [
-          ...previous.filter(m => m.id !== modelToSave.id),
-          modelToSave,
-        ]);
-        return modelToSave;
-      }
-      catch (error) {
-        throw new Error("Failed to save model", { cause: error });
-      }
+      // try {
+      //   await setUserData("models", modelToSave.id, modelToSave);
+      //   setModels(previous => [
+      //     ...previous.filter(m => m.id !== modelToSave.id),
+      //     modelToSave,
+      //   ]);
+      //   return modelToSave;
+      // }
+      // catch (error) {
+      //   throw new Error("Failed to save model", { cause: error });
+      // }
+      return model as Model;
     },
-    [id, capture, currentID, getModel, setModels, setUserData, t]
+    // [id, capture, currentID, getModel, setModels, setUserData, t]
+    [getModel]
   );
 
   const deleteModel = useCallback(
     (givenID: string) => {
       setModels(previous => previous.filter(m => m.id !== givenID));
-      removeUserData("models", givenID);
+      // removeUserData("models", givenID);
     },
-    [setModels, removeUserData]
+    // [setModels, removeUserData]
+    [setModels]
   );
 
   const updateModelID = useCallback(

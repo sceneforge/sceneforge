@@ -2,6 +2,7 @@ import { Container } from "@sceneforge/ui";
 import { Markdown as SimpleMarkdown } from "@simplecomponent/markdown";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useAppContext } from "../components/App";
 import { markdownComponents } from "../lib/markdownComponents";
@@ -14,7 +15,8 @@ export type MarkdownViewTemplateProps = {
 const MarkdownViewTemplate = ({
   href,
 }: MarkdownViewTemplateProps) => {
-  const { basePath, resolvedLanguage } = useAppContext();
+  const { i18n: { resolvedLanguage } } = useTranslation();
+  const { basePath } = useAppContext();
 
   const i18nHref = useMemo(() => {
     return href && href.startsWith("/docs")

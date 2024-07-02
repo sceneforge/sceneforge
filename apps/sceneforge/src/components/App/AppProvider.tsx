@@ -2,15 +2,11 @@ import { DatabaseProvider } from "@sceneforge/data";
 import { TabsHandler } from "@sceneforge/ui";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
-  type Dispatch,
   type PropsWithChildren,
   type RefObject,
-  type SetStateAction,
   createContext,
   useRef,
-  useState,
 } from "react";
-import { useTranslation } from "react-i18next";
 
 export type AppProviderProps = PropsWithChildren<{
   languages?: readonly string[];
@@ -23,12 +19,8 @@ export type AppContextType = {
   development?: boolean;
   direction?: string;
   keywords?: string;
-  languages?: readonly string[];
   name?: string;
   repository?: string;
-  resolvedLanguage?: string;
-  setDirection?: Dispatch<SetStateAction<string | undefined>>;
-  setResolvedLanguage?: Dispatch<SetStateAction<string | undefined>>;
   tabsHandlerRef?: RefObject<TabsHandler | null>;
   version?: string;
 };
@@ -41,17 +33,9 @@ const queryClient = new QueryClient();
 
 export const AppProvider = ({
   children,
-  languages,
 }: AppProviderProps) => {
   const tabsHandlerRef = useRef<TabsHandler | null>(null);
-  const {
-    i18n: { dir: i18nDir, resolvedLanguage: i18nResolvedLanguage },
-  } = useTranslation();
 
-  const [resolvedLanguage, setResolvedLanguage] = useState<string | undefined>(
-    i18nResolvedLanguage
-  );
-  const [direction, setDirection] = useState<string | undefined>(i18nDir());
   const name = import.meta.env.VITE_APP_NAME ?? "";
   const description = import.meta.env.VITE_APP_DESCRIPTION ?? "";
   const keywords = import.meta.env.VITE_APP_KEYWORDS ?? "";
@@ -62,20 +46,15 @@ export const AppProvider = ({
   const repository = import.meta.env.VITE_APP_REPOSITORY ?? "";
 
   return (
-    <AppContext.Provider
+    <AppContext
       value={{
         author,
         basePath,
         description,
         development,
-        direction,
         keywords,
-        languages,
         name,
         repository,
-        resolvedLanguage,
-        setDirection,
-        setResolvedLanguage,
         tabsHandlerRef,
         version,
       }}
@@ -85,6 +64,6 @@ export const AppProvider = ({
           {children}
         </DatabaseProvider>
       </QueryClientProvider>
-    </AppContext.Provider>
+    </AppContext>
   );
 };

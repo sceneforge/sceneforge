@@ -13,7 +13,6 @@ import {
 import { type Database } from "../../lib/Database";
 import { dataset } from "../../lib/dataset";
 import { ReloadPrompt } from "../ReloadPrompt";
-import { Welcome } from "../Welcome";
 
 type EventListenerCallback = (
   type: string,
@@ -135,7 +134,6 @@ export const PanelProvider = ({
     >
       <title>{appTitle || title}</title>
       {children}
-      {showWelcome && <Welcome />}
       <ReloadPrompt />
     </PanelContext.Provider>
   );

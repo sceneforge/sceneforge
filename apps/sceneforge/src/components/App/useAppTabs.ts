@@ -5,6 +5,19 @@ import type { TabTemplates } from "../../tabTemplates";
 
 import { useAppContext } from "./useAppContext";
 
+export type OpenTabFunction<
+  T extends TabTemplates = TabTemplates,
+  TemplateProps extends Parameters<T>[0] = Parameters<T>[0],
+> = (
+  id: string,
+  label: string,
+  icon: IconEnum | undefined,
+  template: T,
+  props: TemplateProps
+) => void;
+
+export type RemoveTabFunction = (id: string) => void;
+
 export const useAppTabs = () => {
   const { tabsHandlerRef } = useAppContext();
 
@@ -18,15 +31,19 @@ export const useAppTabs = () => {
     return;
   }, [tabsHandlerRef]);
 
-  const openTab = useCallback(<
-    Template extends TabTemplates = TabTemplates,
-    TemplateProps extends Parameters<Template>[0] = Parameters<Template>[0],
-  >(
-    id: string,
-    label: string,
-    icon: IconEnum | undefined,
-    template: Template,
-    props: TemplateProps
+  const removeTab: RemoveTabFunction = useCallback((id) => {
+    if (tabsHandlerRef && tabsHandlerRef.current) {
+      const tabsHandler = tabsHandlerRef.current;
+      tabsHandler.closeTab(id);
+    }
+  }, [tabsHandlerRef]);
+
+  const openTab: OpenTabFunction = useCallback((
+    id,
+    label,
+    icon,
+    template,
+    props
   ) => {
     if (tabsHandlerRef && tabsHandlerRef.current) {
       const tabsHandler = tabsHandlerRef.current;
@@ -50,5 +67,6 @@ export const useAppTabs = () => {
   return {
     activeTabId,
     openTab,
+    removeTab,
   };
 };

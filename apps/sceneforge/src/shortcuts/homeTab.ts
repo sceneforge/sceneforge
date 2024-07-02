@@ -1,35 +1,68 @@
-import { CardButton, type CardButtonProps, Variant } from "@sceneforge/ui";
-import { createElement } from "react";
+import { database } from "@sceneforge/data";
+import { type CarouselItemProps, IconEnum, Variant } from "@sceneforge/ui";
 
 import type { DashboardViewTemplate } from "../tabTemplates";
+import type { ShortcutProps } from "./ShortcutProps";
 
-import { ShortcutProps } from "./ShortcutProps";
-
-const generateSampleCardButtons = (count: number) => {
-  const cardButtons: CardButtonProps[] = [];
-  for (let index = 0; index < count; index++) {
-    cardButtons.push({
-      img: `https://picsum.photos/seed/${501 + index}/500`,
-      onClick: () => {
-        console.log(`DEBUG: onClick Scene ${index + 1}`);
-      },
-      title: `Scene ${index + 1}`,
-      variant: Variant.Accent,
+export const homeTab: ShortcutProps<typeof DashboardViewTemplate> = async ({
+  openScene,
+  t,
+}) => {
+  const createNewScene = async () => {
+    const now = new Date();
+    const id = await database.scene.add({
+      createdAt: now,
+      name: "New Scene",
+      updatedAt: now,
     });
-  }
-  return cardButtons;
-};
 
-export const homeTab: ShortcutProps<typeof DashboardViewTemplate> = (
-  _i18n,
-  t
-) => ({
-  carousel: {
-    division: 5,
-    items: generateSampleCardButtons(10).map((props) => {
-      return createElement(CardButton, props);
-    }),
-    title: "Latest Scenes",
-  },
-  title: t("HomeTab.title"),
-});
+    if (id) {
+      openScene(Number(id).toString(), "New Scene", {
+        id: Number(id).toString(),
+        title: "New Scene",
+      });
+    }
+
+    return;
+  };
+  const scenes = await database.scene.toArray();
+
+  const items = scenes.map(({
+    id,
+    name,
+    thumbnail,
+  }) => {
+    const carouselItem: CarouselItemProps = {
+      img: thumbnail,
+      kind: "button",
+      label: name,
+      onClick: () => openScene(Number(id).toString(), name, {
+        id: Number(id).toString(),
+        title: name,
+      }),
+    };
+
+    return carouselItem;
+  });
+
+  return {
+    carousel: {
+      division: 5,
+      items: [
+        ...items,
+        {
+          icon: IconEnum.Add,
+          kind: "icon",
+          label: "Create New Scene",
+          onClick: () => {
+            void createNewScene();
+          },
+          size: 20,
+        },
+      ],
+      itemsVariant: Variant.Accent,
+      title: "Latest Scenes",
+    },
+    title: t("HomeTab.title"),
+  };
+};

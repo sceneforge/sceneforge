@@ -1,45 +1,73 @@
+import { database } from "@sceneforge/data";
 import { Variant } from "@sceneforge/ui";
 
 import type { FormViewTemplate } from "../tabTemplates";
 
 import { ShortcutProps } from "./ShortcutProps";
 
-export const settingsTab: ShortcutProps<typeof FormViewTemplate> = (
+export const settingsTab: ShortcutProps<typeof FormViewTemplate> = async ({
   i18n,
-  t
-) => ({
-  fieldsets: [
-    {
-      fields: [
-        {
-          label: "Tabs Position",
-          name: "tabsPosition",
-          options: [
-            { label: "Top", value: "top" },
-            { label: "Bottom", value: "bottom" },
-          ],
-          type: "select",
-        },
-        {
-          label: "Language",
-          name: "language",
-          options: i18n.languages.map((locale) => {
-            return {
-              label: t(`locales.${locale}`, {
-                defaultValue: locale,
-                lng: locale,
+  t,
+}) => {
+  const currentMainTabPosition = await database.settings.get("mainTabPosition");
+  const currentLanguage = await database.settings.get("language");
+
+  return {
+    fieldsets: [
+      {
+        fields: [
+          {
+            defaultValue: currentMainTabPosition?.value as string | undefined,
+            label: "Tabs Position",
+            name: "mainTabPosition",
+            onChange: (next) => {
+              if (next === "start") {
+                void database.settings.put({
+                  key: "mainTabPosition",
+                  value: "start",
+                }, "tabsPosition");
+              }
+              else if (next === "end") {
+                void database.settings.put({
+                  key: "mainTabPosition",
+                  value: "end",
+                }, "mainTabPosition");
+              }
+            },
+            options: [
+              { label: "Top", value: "start" },
+              { label: "Bottom", value: "end" },
+            ],
+            type: "select",
+          },
+          {
+            defaultValue: currentLanguage?.value as string | undefined,
+            label: "Language",
+            name: "language",
+            onChange: (next) => {
+              if (typeof next === "string") {
+                void database.settings.put({
+                  key: "language",
+                  value: next,
+                }, "language");
+              }
+            },
+            options: i18n.languages.map(value => ({
+              label: t(`locales.${value}`, {
+                defaultValue: value,
+                lng: value,
                 ns: "common",
               }),
-              value: locale,
-            };
-          }),
-          type: "select",
-          value: i18n.language,
-        },
-      ],
-      legend: "General",
-      variant: Variant.Default,
-    },
-  ],
-  id: "settings-tab",
-});
+              value,
+            })),
+            type: "select",
+            value: i18n.language,
+          },
+        ],
+        legend: "General",
+        variant: Variant.Default,
+      },
+    ],
+    id: "settings-tab",
+  };
+};
