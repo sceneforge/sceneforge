@@ -4,7 +4,11 @@ import perfectionistNatural from "eslint-plugin-perfectionist/configs/recommende
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
+/**
+ * @param {string | string[] | boolean | null | undefined} project
+ * @return {tseslint.Linter.Config}
+ */
+export default (project = true) => tseslint.config(
   {
     plugins: {
       "@stylistic": stylistic,
@@ -35,7 +39,7 @@ export default tseslint.config(
     ],
     languageOptions: {
       parserOptions: {
-        project: true,
+        project,
         tsconfigRootDir: import.meta.dirname,
       },
     },

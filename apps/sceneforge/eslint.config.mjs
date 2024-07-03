@@ -5,9 +5,9 @@ import react from "@sceneforge/eslint/react";
 import serviceworker from "@sceneforge/eslint/serviceworker";
 
 export default [
-  ...common,
-  ...react,
-  ...lib,
-  ...configs,
-  ...serviceworker,
+  ...common("../../apps/sceneforge/tsconfig.json"),
+  ...react(),
+  ...lib("../../apps/sceneforge/tsconfig.node.json"),
+  ...configs("../../apps/sceneforge/tsconfig.node.json"),
+  ...serviceworker("../../apps/sceneforge/src/sw/tsconfig.json"),
 ];

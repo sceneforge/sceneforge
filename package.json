@@ -55,7 +55,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=21.7.1 < 22",
+    "node": ">=22.4.0 < 23",
     "yarn": ">=4.3.0 < 5"
   },
   "packageManager": "yarn@4.3.1"

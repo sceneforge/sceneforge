@@ -4,7 +4,7 @@ import eslintPluginReactCompiler from "eslint-plugin-react-compiler";
 import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
+export default () => tseslint.config(
   {
     plugins: {
       "react-compiler": fixupPluginRules(eslintPluginReactCompiler),
