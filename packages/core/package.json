@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@sceneforge/eslint": "workspace:*",
-    "eslint": "^9.5.0",
-    "typescript": "*"
+    "eslint": "^9.6.0",
+    "typescript": "^5.5.3"
   },
   "engines": {
     "node": ">=21.7.1 < 22",

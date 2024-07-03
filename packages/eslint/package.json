@@ -16,21 +16,21 @@
     "./serviceworker": "./eslint.serviceworker.config.mjs"
   },
   "peerDependencies": {
-    "eslint": "^9.5.0"
+    "eslint": "^9.6.0"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.0",
-    "@eslint/js": "^9.5.0",
-    "@stylistic/eslint-plugin": "^2.2.1",
-    "eslint": "^9.5.0",
+    "@eslint/js": "^9.6.0",
+    "@stylistic/eslint-plugin": "^2.3.0",
+    "eslint": "^9.6.0",
     "eslint-plugin-perfectionist": "^2.11.0",
-    "eslint-plugin-react": "^7.34.2",
-    "eslint-plugin-react-compiler": "0.0.0-experimental-51a85ea-20240601",
+    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-0998c1e-20240625",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-unicorn": "^54.0.0",
-    "globals": "^15.6.0",
-    "typescript": "*",
-    "typescript-eslint": "^7.13.1"
+    "globals": "^15.8.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.15.0"
   },
   "engines": {
     "node": ">=21.7.1 < 22",

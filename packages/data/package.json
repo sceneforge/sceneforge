@@ -26,10 +26,10 @@
     "@sceneforge/eslint": "workspace:*",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react@rc",
-    "eslint": "^9.5.0",
+    "eslint": "^9.6.0",
     "react": "^19.0.0-beta",
     "react-dom": "^19.0.0-beta",
-    "typescript": "*"
+    "typescript": "^5.5.3"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

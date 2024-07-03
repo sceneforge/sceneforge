@@ -10,9 +10,11 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 export default {
   input: "src/index.ts",
   output: {
+    chunkFileNames: "chunks/[name].js",
     compact: true,
     dir: "dist",
     format: "esm",
+    sourcemap: true,
     validate: true,
   },
   plugins: [

@@ -43,17 +43,20 @@ export default defineConfig(async ({ command, isPreview, mode }) => {
     base: metaEnvironment.VITE_APP_BASE_PATH,
     build: {
       chunkSizeWarningLimit: 40 * 1024,
-      manifest: isProduction ? ".vite/manifest.json" : false,
+      manifest: ".vite/manifest.json",
       minify: isProduction ? "terser" : (isDevelopment ? false : "esbuild"),
       rollupOptions: {
         output: {
+          assetFileNames: "assets/[hash][extname]",
+          chunkFileNames: "assets/[hash].js",
           compact: true,
+          hashCharacters: "hex",
         },
         treeshake: {
           preset: "safest",
         },
       },
-      sourcemap: isProduction ? "hidden" : "inline",
+      sourcemap: isProduction ? true : "inline",
       ssr: false,
       target: "esnext",
       terserOptions: {
@@ -61,7 +64,12 @@ export default defineConfig(async ({ command, isPreview, mode }) => {
       },
     },
     optimizeDeps: {
-      include: ["@sceneforge/ui"],
+      include: [
+        "@sceneforge/core",
+        "@sceneforge/data",
+        "@sceneforge/scene",
+        "@sceneforge/ui",
+      ],
     },
     plugins: [
       i18nextLoader({

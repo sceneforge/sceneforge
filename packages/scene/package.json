@@ -19,17 +19,17 @@
     "url": "https://phinpho.github.io"
   },
   "dependencies": {
-    "@babylonjs/loaders": "^7.7.0",
+    "@babylonjs/loaders": "^7.13.1",
     "@sceneforge/core": "workspace:*"
   },
   "peerDependencies": {
-    "@babylonjs/core": "^7.7.0"
+    "@babylonjs/core": "^7.13.1"
   },
   "devDependencies": {
-    "@babylonjs/core": "^7.7.0",
+    "@babylonjs/core": "^7.13.1",
     "@sceneforge/eslint": "workspace:*",
-    "eslint": "^9.5.0",
-    "typescript": "*"
+    "eslint": "^9.6.0",
+    "typescript": "^5.5.3"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
