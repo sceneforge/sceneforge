@@ -65,9 +65,9 @@ const styles = stylex.create({
     color: "inherit",
     display: "flex",
     flexDirection: "row",
+    height: null,
     justifyContent: "stretch",
-    margin: 0,
-    padding: 0,
+    width: null,
   },
   noVariantActive: {
     backgroundColor: "SelectedItem",

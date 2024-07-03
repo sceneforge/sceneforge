@@ -6,7 +6,7 @@ import * as stylex from "@stylexjs/stylex";
 import { isBlockEnd, isBlockStart, isInlineEnd, isInlineStart } from "../../helpers";
 import { Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
-import { currentColor } from "../tokens.stylex";
+import { backgroundColor, currentColor } from "../tokens.stylex";
 
 export type DrawerProps = PropsWithChildren<{
   id?: string;
@@ -37,7 +37,7 @@ const styles = stylex.create({
   },
   resizableGutter: {
     "::after": {
-      backgroundColor: currentColor.alpha50,
+      backgroundColor: backgroundColor.alpha50,
       content: "''",
       display: "block",
       opacity: 0.5,

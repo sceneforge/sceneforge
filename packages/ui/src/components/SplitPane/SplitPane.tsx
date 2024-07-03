@@ -3,7 +3,7 @@ import { Children, Fragment, useId } from "react";
 
 import { Orientation } from "../../types";
 import { View, type ViewProps } from "../View";
-import { currentColor } from "../tokens.stylex";
+import { backgroundColor } from "../tokens.stylex";
 
 export type SplitPaneProps = {
   initialSize?: number[];
@@ -33,11 +33,11 @@ const styles = stylex.create({
   },
   paneGutter: {
     backgroundColor: {
-      ":hover": currentColor.alpha50,
-      "default": currentColor.alpha15,
+      ":hover": backgroundColor.alpha30,
+      "default": backgroundColor.alpha05,
     },
     boxShadow: {
-      ":hover": `0 0 0 0.125rem ${currentColor.alpha50}`,
+      ":hover": `0 0 0 0.125rem ${backgroundColor.alpha30}`,
       "default": null,
     },
     cursor: "col-resize",

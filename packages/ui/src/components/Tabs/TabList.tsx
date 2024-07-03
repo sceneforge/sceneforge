@@ -26,7 +26,9 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "row",
     flexShrink: 1,
+    height: null,
     justifyContent: "flex-start",
+    width: null,
   },
   containerCenter: {
     justifyContent: "center",

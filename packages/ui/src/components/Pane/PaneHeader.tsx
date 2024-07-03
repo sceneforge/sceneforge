@@ -10,6 +10,7 @@ import { backgroundColor } from "../tokens.stylex";
 
 export type PaneHeaderProps = {
   actions?: ToolbarProps["actions"];
+  actionsPadding?: ToolbarProps["padding"];
   headingPadding?: HeadingProps["padding"];
   id?: string;
   inputRef?: Ref<HTMLInputElement>;
@@ -22,7 +23,6 @@ export type PaneHeaderProps = {
   title?: string;
   titleEditable?: boolean;
   titleEditing?: boolean;
-  toolbarPadding?: ToolbarProps["padding"];
 };
 
 const styles = stylex.create({
@@ -38,6 +38,8 @@ const styles = stylex.create({
     gap: "0.5rem",
     height: "2.5rem",
     justifyContent: "stretch",
+    maxHeight: "2.5rem",
+    minHeight: "2.5rem",
   },
   heading: {
     fontSize: "1.125rem",
@@ -81,6 +83,7 @@ const styles = stylex.create({
 
 const PaneHeader = ({
   actions,
+  actionsPadding = 0,
   headingPadding = 0,
   id,
   inputRef,
@@ -93,7 +96,6 @@ const PaneHeader = ({
   title,
   titleEditable,
   titleEditing,
-  toolbarPadding = 0,
 }: PaneHeaderProps) => {
   const generatedId = useId();
   const currentId = id ?? generatedId;
@@ -170,7 +172,7 @@ const PaneHeader = ({
           actions={actions}
           id={`${currentId}-toolbar`}
           margin={0}
-          padding={toolbarPadding}
+          padding={actionsPadding}
           scaleActions={scaleActions}
         />
       )}

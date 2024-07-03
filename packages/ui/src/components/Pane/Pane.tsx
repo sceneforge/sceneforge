@@ -20,6 +20,7 @@ export type PaneProps = Omit<
 > & PropsWithChildren<{
   onTitleChange?: (currentTitle?: string, previousTitle?: string) => void;
   paneActions?: PaneBodyProps["actions"];
+  paneActionsPadding?: PaneBodyProps["actionsPadding"];
 }>;
 
 const styles = stylex.create({
@@ -42,17 +43,21 @@ const styles = stylex.create({
 
 const Pane = ({
   actions,
+  actionsPadding = {
+    block: 0.25,
+    inline: 0.5,
+  },
   children,
   headingPadding,
   level,
   onTitleChange,
   outer,
   paneActions,
-  title,
-  toolbarPadding = {
+  paneActionsPadding = {
     block: 0.25,
     inline: 0.5,
   },
+  title,
   ...props
 }: PaneProps) => {
   const {
@@ -79,6 +84,7 @@ const Pane = ({
           <>
             <PaneHeader
               actions={actions}
+              actionsPadding={actionsPadding}
               headingPadding={headingPadding}
               level={level}
               onTitleEditClick={handleTitleEditClick}
@@ -86,12 +92,14 @@ const Pane = ({
               outer={outer}
               title={currentTitle}
               titleEditing={currentTitleEditing}
-              toolbarPadding={toolbarPadding}
               {...props}
               inputRef={inputRef}
               ref={headingRef}
             />
-            <PaneBody actions={paneActions}>
+            <PaneBody
+              actions={paneActions}
+              actionsPadding={paneActionsPadding}
+            >
               {children}
             </PaneBody>
           </>

@@ -3,12 +3,15 @@ import type { PropsWithChildren } from "react";
 import * as stylex from "@stylexjs/stylex";
 
 import { Toolbar, type ToolbarProps } from "../Toolbar";
-import { View } from "../View";
+import { View, type ViewProps } from "../View";
 import { backgroundColor } from "../tokens.stylex";
 
 export type PaneBodyProps = PropsWithChildren<{
   actions?: ToolbarProps["actions"];
+  actionsPadding?: ToolbarProps["padding"];
   id?: string;
+  margin?: ViewProps["margin"];
+  padding?: ViewProps["padding"];
 }>;
 
 const styles = stylex.create({
@@ -18,7 +21,9 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "row",
     flexShrink: 1,
+    height: null,
     justifyContent: "center",
+    width: null,
   },
   blockEnd: {
     borderEndEndRadius: "0.25rem",
@@ -34,10 +39,19 @@ const styles = stylex.create({
   },
 });
 
-const PaneBody = ({ actions, children, id }: PaneBodyProps) => {
+const PaneBody = ({
+  actions,
+  actionsPadding,
+  children,
+  id,
+  margin,
+  padding,
+}: PaneBodyProps) => {
   return (
     <>
       <View
+        margin={margin}
+        padding={padding}
         scrollable
         style={[
           styles.container,
@@ -48,9 +62,6 @@ const PaneBody = ({ actions, children, id }: PaneBodyProps) => {
       </View>
       {actions && (
         <View
-          padding={{
-            block: 0.25,
-          }}
           style={[
             styles.actions,
             styles.blockEnd,
@@ -59,6 +70,7 @@ const PaneBody = ({ actions, children, id }: PaneBodyProps) => {
           <Toolbar
             actions={actions}
             id={id ? `${id}-pane-body-actions` : undefined}
+            padding={actionsPadding}
           />
         </View>
       )}
