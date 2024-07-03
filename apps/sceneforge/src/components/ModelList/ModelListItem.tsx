@@ -21,47 +21,44 @@ export const ModelListItem = ({ model }: ModelListItemProps) => {
       <Card
         actions={[
           {
+            kind: "button",
             label: t("ModelListItem.actions.openButton"),
             onClick: () => void 0,
-            type: "button",
             variant: Variant.Accent,
           },
           {
             icon: IconEnum.Delete,
+            kind: "icon",
             label: t("ModelListItem.actions.deleteButton"),
             onClick: openDeleteModelDialog,
-            type: "icon",
             variant: Variant.Danger,
           },
         ]}
         img={model.capture}
-        title={model.title}
+        label={model.title}
         variant={Variant.Accent}
-        zoom={2}
       />
       {showDeleteDialog && (
         <Dialog
+          actions={[
+            {
+              kind: "button",
+              label: t("ModelListItem.deleteDialog.actions.cancelButton"),
+              onClick: closeDeleteModelDialog,
+              variant: Variant.Default,
+            },
+            {
+              kind: "button",
+              label: t("ModelListItem.deleteDialog.actions.deleteButton"),
+              onClick: handleDeleteModel,
+              variant: Variant.Danger,
+            },
+          ]}
           description={t("ModelListItem.deleteDialog.description", {
             title: model.title,
           })}
           onClose={closeDeleteModelDialog}
           title={t("ModelListItem.deleteDialog.title")}
-          toolbar={{
-            actions: [
-              {
-                label: t("ModelListItem.deleteDialog.actions.cancelButton"),
-                onClick: closeDeleteModelDialog,
-                type: "button",
-                variant: Variant.Default,
-              },
-              {
-                label: t("ModelListItem.deleteDialog.actions.deleteButton"),
-                onClick: handleDeleteModel,
-                type: "button",
-                variant: Variant.Danger,
-              },
-            ],
-          }}
           variant={Variant.Danger}
         />
       )}

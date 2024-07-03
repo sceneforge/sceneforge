@@ -32,6 +32,15 @@ export const ReloadPrompt = () => {
 
   return (
     <Dialog
+      actions={needRefresh
+        ? [
+          {
+            children: t("actions.reloadButton"),
+            kind: "button",
+            onClick: reload,
+          },
+        ]
+        : undefined}
       description={
         offlineReady
           ? t("description.offlineReady")
@@ -42,17 +51,6 @@ export const ReloadPrompt = () => {
       onClose={close}
       ref={dialogReference}
       title={t("title")}
-      toolbar={{
-        actions: needRefresh
-          ? [
-            {
-              children: t("actions.reloadButton"),
-              onClick: reload,
-              type: "button",
-            },
-          ]
-          : undefined,
-      }}
       variant={Variant.Accent}
     />
   );

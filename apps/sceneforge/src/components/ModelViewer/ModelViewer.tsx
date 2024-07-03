@@ -1,11 +1,10 @@
-import { Canvas, Variant } from "@sceneforge/ui";
+import { Canvas, View } from "@sceneforge/ui";
 import { useRef } from "react";
 
 import { Model } from "../../lib/isModel";
-import { PanelSheet, PanelSheetBody } from "../PanelSheet";
 import { ModelViewerHeader } from "./ModelViewerHeader";
 import { SceneNodesSection } from "./SceneNodesSection";
-import { SceneObjectSection } from "./SceneObjectSection";
+// import { SceneObjectSection } from "./SceneObjectSection";
 import { useModelViewer } from "./hooks/useModelViewer";
 
 export type ModelProps = Model;
@@ -19,9 +18,9 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const {
     clearMeshSelectionPath,
-    clearSelectedNode,
+    // clearSelectedNode,
     currentModel,
-    currentNode,
+    // currentNode,
     meshSelectionPath,
     mode,
     onImported,
@@ -33,23 +32,28 @@ export const ModelViewer = ({ active, ...props }: ModelViewerProps) => {
   return (
     <>
       <Canvas ref={canvasRef} />
-      <PanelSheet orientation="block" position="end" resizable variant={Variant.Accent}>
+      <View>
         <ModelViewerHeader
           mode={mode}
           model={currentModel}
           onImported={onImported}
           setMode={setMode}
         />
-        <PanelSheetBody>
+        <View>
           <SceneNodesSection
             clearMeshSelectionPath={clearMeshSelectionPath}
             meshSelectionPath={meshSelectionPath}
             onNodeSelect={onNodeSelect}
             scene={sceneRef.current}
           />
-          <SceneObjectSection node={currentNode} onClose={clearSelectedNode} />
-        </PanelSheetBody>
-      </PanelSheet>
+          {/*
+            <SceneObjectSection
+              node={currentNode}
+              onClose={clearSelectedNode}
+            />
+          */}
+        </View>
+      </View>
     </>
   );
 };

@@ -1,5 +1,7 @@
+import { View } from "@sceneforge/ui";
 import { Markdown as SimpleMarkdown } from "@simplecomponent/markdown";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useAppContext } from "../App";
 import { components } from "./components";
@@ -10,7 +12,8 @@ export type MarkdownProps = {
 };
 
 export const Markdown = ({ href, value, ...props }: MarkdownProps) => {
-  const { basePath, resolvedLanguage } = useAppContext();
+  const { i18n: { resolvedLanguage } } = useTranslation();
+  const { basePath } = useAppContext();
   const [
     currentDocument,
     setCurrentDocument,
@@ -46,13 +49,13 @@ export const Markdown = ({ href, value, ...props }: MarkdownProps) => {
   }, [i18nHref, setCurrentDocument]);
 
   return (
-    <div className="m-inline-auto select-text p-b-2xl text-start c-inherit lg:w-3xl sm:w-lg xl:w-6xl">
+    <View>
       <SimpleMarkdown
         components={components}
         key={contentUrl}
         {...props}
         value={currentDocument}
       />
-    </div>
+    </View>
   );
 };

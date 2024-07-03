@@ -106,23 +106,27 @@ const SceneViewTemplate = ({ hidden, id, title }: SceneViewTemplateProps) => {
                         orientation={Orientation.Horizontal}
                         resizable
                       >
-                        <Pane
-                          level={3}
-                          paneActions={[
-                            {
-                              kind: "button",
-                              label: "Action 1",
-                              onClick: () => console.log("Action 1"),
-                              variant: Variant.Accent,
-                            },
-                          ]}
-                          title="Left pane"
-                        >
-                          Left content
-                        </Pane>
-                        <Pane level={3} title="Right pane">
-                          Right content
-                        </Pane>
+                        <View padding={0.25}>
+                          <Pane
+                            level={3}
+                            paneActions={[
+                              {
+                                kind: "button",
+                                label: "Action 1",
+                                onClick: () => console.log("Action 1"),
+                                variant: Variant.Accent,
+                              },
+                            ]}
+                            title="Left pane"
+                          >
+                            Left content
+                          </Pane>
+                        </View>
+                        <View padding={0.25}>
+                          <Pane level={3} title="Right pane">
+                            Right content
+                          </Pane>
+                        </View>
                       </SplitPaneController>
                     </Pane>
                   </DrawerController>

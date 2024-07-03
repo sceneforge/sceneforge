@@ -12,26 +12,24 @@ export const AppInstall = () => {
 
   return (
     <Dialog
+      actions={[
+        {
+          kind: "button",
+          label: t("actions.installButton"),
+          onClick: () => {
+            installPrompt()
+              ?.then(() => {
+                closeInstallDialog();
+              })
+              .catch(() => {
+                closeInstallDialog();
+              });
+          },
+        },
+      ]}
       description={t("description")}
       onClose={closeInstallDialog}
       title={t("title")}
-      toolbar={{
-        actions: [
-          {
-            kind: "button",
-            label: t("actions.installButton"),
-            onClick: () => {
-              installPrompt()
-                ?.then(() => {
-                  closeInstallDialog();
-                })
-                .catch(() => {
-                  closeInstallDialog();
-                });
-            },
-          },
-        ],
-      }}
       variant={Variant.Default}
     />
   );

@@ -1,5 +1,5 @@
 import { Action } from "@sceneforge/ui";
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import { type MouseEventHandler, useCallback, useEffect, useLayoutEffect, useRef } from "react";
 
 import { useContextMenu } from "./useContextMenu";
 
@@ -76,9 +76,15 @@ export const ContextMenu = () => {
               )
               : (
                 <Action
-                  type="button"
+                  kind="button"
                   {...item}
-                  onClick={handleItemClick(onClick)}
+                  onClick={
+                    onClick
+                      ? handleItemClick(
+                        onClick as MouseEventHandler<HTMLButtonElement>
+                      )
+                      : undefined
+                  }
                 />
               )}
           </li>

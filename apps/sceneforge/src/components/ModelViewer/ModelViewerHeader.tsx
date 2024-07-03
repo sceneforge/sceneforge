@@ -5,8 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { Model } from "../../lib/isModel";
 import { loadFile } from "../../lib/loadFile";
-import { useModelContext } from "../ModelContext";
-import { PanelSheetHeader } from "../PanelSheet";
+// import { useModelContext } from "../ModelContext";
 import { Mode } from "./mode";
 
 export type ModelViewerHeaderProps = {
@@ -31,7 +30,7 @@ export const ModelViewerHeader = ({
     }),
     [t]
   );
-  const { updateModel } = useModelContext(model);
+  // const { updateModel } = useModelContext(model);
   const modeLabel = useMemo(() => modes[mode], [modes, mode]);
 
   const handleModeChange = useCallback(
@@ -65,67 +64,60 @@ export const ModelViewerHeader = ({
     });
   }, [doImport]);
 
-  const handleModelNameChange = useCallback(
-    async (value: string): Promise<void> => {
-      if (model && model.id) {
-        try {
-          await updateModel(model.id, { title: value });
-        }
-        catch (error) {
-          console.error(error);
-        }
-      }
-    },
-    [model, updateModel]
-  );
+  // const handleModelNameChange = useCallback(
+  //   async (value: string): Promise<void> => {
+  //     if (model && model.id) {
+  //       try {
+  //         await updateModel(model.id, { title: value });
+  //       }
+  //       catch (error) {
+  //         console.error(error);
+  //       }
+  //     }
+  //   },
+  //   [model, updateModel]
+  // );
 
   return (
-    <PanelSheetHeader
-      editable={mode === Mode.Edit}
-      name="model-name"
-      onUpdate={handleModelNameChange}
-      title={model?.title ?? t("ModelViewerHeader.untitled")}
-    >
-      <Toolbar
-        // icon="menu"
-        actions={[
-          {
-            actions: [
-              {
-                label: t("ModelViewerHeader.actions.importButton"),
-                onClick: handleImport,
-                type: "button",
-              },
-            ],
-            label: t("ModelViewerHeader.actions.modelDropdown"),
-            type: "dropdown",
-          },
-          {
-            actions: [
-              {
-                label: t("modes.view"),
-                onClick: handleModeChange(Mode.View),
-                pressed: mode === Mode.View,
-                type: "toggle",
-              },
-              {
-                label: t("modes.edit"),
-                onClick: handleModeChange(Mode.Edit),
-                pressed: mode === Mode.Edit,
-                type: "toggle",
-              },
-              {
-                label: t("modes.material"),
-                onClick: handleModeChange(Mode.Material),
-                pressed: mode === Mode.Material,
-                type: "toggle",
-              },
-            ],
-            label: modeLabel,
-            type: "dropdown",
-          },
-        ]}
-      />
-    </PanelSheetHeader>
+    <Toolbar
+      // icon="menu"
+      actions={[
+        {
+          actions: [
+            {
+              kind: "button",
+              label: t("ModelViewerHeader.actions.importButton"),
+              onClick: handleImport,
+            },
+          ],
+          kind: "dropdown",
+          label: t("ModelViewerHeader.actions.modelDropdown"),
+        },
+        {
+          actions: [
+            {
+              kind: "toggle",
+              label: t("modes.view"),
+              onClick: handleModeChange(Mode.View),
+              pressed: mode === Mode.View,
+            },
+            {
+              kind: "toggle",
+              label: t("modes.edit"),
+              onClick: handleModeChange(Mode.Edit),
+              pressed: mode === Mode.Edit,
+            },
+            {
+              kind: "toggle",
+              label: t("modes.material"),
+              onClick: handleModeChange(Mode.Material),
+              pressed: mode === Mode.Material,
+            },
+          ],
+          kind: "dropdown",
+          label: modeLabel,
+        },
+      ]}
+    />
   );
 };
