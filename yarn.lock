@@ -1531,28 +1531,28 @@ __metadata:
   linkType: hard
 
 "@babylonjs/core@npm:^7.13.1":
-  version: 7.13.1
-  resolution: "@babylonjs/core@npm:7.13.1"
-  checksum: 10c0/4a8b5d3bf8761d354bb5128a272fcc1ef1ddad95c53b212fc53d8c38719182151f3084bd3bb316f226dc4dc64d8555c8679c5d0bf968e994f567ee40c03de31a
+  version: 7.14.0
+  resolution: "@babylonjs/core@npm:7.14.0"
+  checksum: 10c0/f14f465e5701960dde5b7a5c24fc926fddb7f4e65d397ccb63859dda11fd6279c60b8479db78fec64b771d2d641b0691e94f20178c489c0933010700a8d56481
   languageName: node
   linkType: hard
 
 "@babylonjs/loaders@npm:^7.13.1":
-  version: 7.13.1
-  resolution: "@babylonjs/loaders@npm:7.13.1"
+  version: 7.14.0
+  resolution: "@babylonjs/loaders@npm:7.14.0"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
     babylonjs-gltf2interface: ^7.0.0
-  checksum: 10c0/eac7f48433d542713004fef6d8a859bec559d7145fc96f7276009d7003d681b842efbf68a327c7fca984c503c202cbee29892295728f5bb7c620f767d37fabb5
+  checksum: 10c0/fe158f1b310d78e57a3e553424fe8b1491bb1addb0870b96b9e22ff3586ac91c37962db73a75a23aae3089bbcd3633055ac1507798138269f6835979368e98b9
   languageName: node
   linkType: hard
 
 "@babylonjs/materials@npm:^7.13.1":
-  version: 7.13.1
-  resolution: "@babylonjs/materials@npm:7.13.1"
+  version: 7.14.0
+  resolution: "@babylonjs/materials@npm:7.14.0"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
-  checksum: 10c0/36c97687a9b597a2a6859bf149d8173f0d7d31be7f100a7d6a105172cdc09119d6ee8bbc3bdbc9839f557adb00eeae939a0421b05d83ae1dbf5fcce37c2bc9f5
+  checksum: 10c0/c15bb00bb7112b38a1ff5dc8141059a9c621623ad6cc20f266ad21737cffa89e8cabb681b8bc52a90156a13740e0a81d2f1839abb3417c5aacfa0db89312fbf5
   languageName: node
   linkType: hard
 
@@ -8544,9 +8544,9 @@ __metadata:
   linkType: hard
 
 "flow-parser@npm:0.*":
-  version: 0.238.3
-  resolution: "flow-parser@npm:0.238.3"
-  checksum: 10c0/29169c2b17fb55e42f3533b79f68a0258287e730e107dab5abb3a7888e477cec3c515516bb58c08f5c059e131792f2872e2e80b66482e178de7c373b7e333b25
+  version: 0.239.0
+  resolution: "flow-parser@npm:0.239.0"
+  checksum: 10c0/2417373567248921d60436c898a1742641112af9cbcf4a8bd3596e84c185887a98288520d3d722ce38c9502dbada516050dcc202f8d2f9ffb8cd0b2477e3a3db
   languageName: node
   linkType: hard
 
@@ -15948,8 +15948,8 @@ __metadata:
   linkType: hard
 
 "vite-plugin-stylex@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "vite-plugin-stylex@npm:0.10.0"
+  version: 0.10.1
+  resolution: "vite-plugin-stylex@npm:0.10.1"
   dependencies:
     "@babel/core": "npm:^7.24.7"
     "@babel/plugin-syntax-flow": "npm:^7.24.7"
@@ -15963,7 +15963,7 @@ __metadata:
   peerDependenciesMeta:
     react-strict-dom:
       optional: true
-  checksum: 10c0/0250555467daec1af6d53c44ee10a9c6359a27d0d8169d0d038c5f06d13e909ae46bca6d04e151335bffd7da7d28c9caa1d4f9247f9252d0648de58ade76a8c0
+  checksum: 10c0/637cad1c1826be65391a9eb28a52c86a45eff17a129f5de211e503241bba0cb14db6770ee1b8513fa7e923dd770f6c14175c309ae2f10a5eaf766b2b15fc59e8
   languageName: node
   linkType: hard
 
@@ -16443,7 +16443,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.2.3, ws@npm:~8.17.1":
+"ws@npm:^8.2.3":
+  version: 8.18.0
+  resolution: "ws@npm:8.18.0"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 10c0/25eb33aff17edcb90721ed6b0eb250976328533ad3cd1a28a274bd263682e7296a6591ff1436d6cbc50fa67463158b062f9d1122013b361cec99a05f84680e06
+  languageName: node
+  linkType: hard
+
+"ws@npm:~8.17.1":
   version: 8.17.1
   resolution: "ws@npm:8.17.1"
   peerDependencies:
