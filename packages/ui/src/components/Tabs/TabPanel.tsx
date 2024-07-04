@@ -21,7 +21,7 @@ export type TabPanelProps<Props = Record<string, unknown>> = {
 
 export type TabComponentProps<
   Props = Record<string, unknown>,
-> = Props & TabPanelCoreProps;
+> = Partial<TabPanelCoreProps> & Props;
 
 const styles = stylex.create({
   container: {
