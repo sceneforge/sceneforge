@@ -5,7 +5,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useAppTabs } from "../components/App";
 
-export const useScene = (id?: string, hidden?: boolean) => {
+export const useScene = (
+  id?: string,
+  hidden?: boolean,
+  registerBeforeClose?: (callback?: () => Promise<void> | void) => void
+) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const engineController = useRef<EngineController>(null);
   const [isImporting, setIsImporting] = useState(false);
@@ -67,6 +71,13 @@ export const useScene = (id?: string, hidden?: boolean) => {
         const controller = new EngineController(canvasRef.current, true);
         controller.start();
         engineController.current = controller;
+        if (registerBeforeClose) {
+          registerBeforeClose(() => {
+            if (engineController.current) {
+              engineController.current.stop();
+            }
+          });
+        }
       }
       else if (hidden === false && engineController.current) {
         engineController.current.start();
@@ -78,7 +89,7 @@ export const useScene = (id?: string, hidden?: boolean) => {
     else if (!canvasRef.current && engineController.current) {
       engineController.current.stop();
     }
-  }, [canvasRef, engineController, hidden]);
+  }, [canvasRef, engineController, hidden, registerBeforeClose]);
 
   const sceneNodes = useMemo(() => {
     if (!isImporting && engineController.current) {

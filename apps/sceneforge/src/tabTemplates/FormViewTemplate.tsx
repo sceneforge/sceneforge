@@ -1,11 +1,11 @@
-import { Container, Fieldset, FieldsetProps, Section } from "@sceneforge/ui";
+import { Container, Fieldset, FieldsetProps, Section, type TabComponentProps } from "@sceneforge/ui";
 import { useId } from "react";
 
-export type FormViewTemplateProps = {
+export type FormViewTemplateProps = TabComponentProps<{
   fieldsets?: FieldsetProps[];
   id?: string;
   title?: string;
-};
+}>;
 
 const FormViewTemplate = ({ fieldsets, id, title }: FormViewTemplateProps) => {
   const generatedId = useId();

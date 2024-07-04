@@ -5,6 +5,7 @@ import {
   Pane,
   Position,
   SplitPaneController,
+  type TabComponentProps,
   TabsController,
   Tree,
   Variant,
@@ -13,20 +14,24 @@ import {
 
 import { useScene } from "../hooks";
 
-export type SceneViewTemplateProps = {
-  hidden?: boolean;
+export type SceneViewTemplateProps = TabComponentProps<{
   id?: string;
   title?: string;
-};
+}>;
 
-const SceneViewTemplate = ({ hidden, id, title }: SceneViewTemplateProps) => {
+const SceneViewTemplate = ({
+  hidden,
+  id,
+  registerBeforeClose,
+  title,
+}: SceneViewTemplateProps) => {
   const {
     canvasRef,
     changeSceneTitle,
     openFileClickHandler,
     removeScene,
     sceneNodes,
-  } = useScene(id, hidden);
+  } = useScene(id, hidden, registerBeforeClose);
 
   return (
     <SplitPaneController

@@ -1,4 +1,4 @@
-import { Container } from "@sceneforge/ui";
+import { Container, type TabComponentProps } from "@sceneforge/ui";
 import { Markdown as SimpleMarkdown } from "@simplecomponent/markdown";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
@@ -7,10 +7,10 @@ import { useTranslation } from "react-i18next";
 import { useAppContext } from "../components/App";
 import { markdownComponents } from "../lib/markdownComponents";
 
-export type MarkdownViewTemplateProps = {
+export type MarkdownViewTemplateProps = TabComponentProps<{
   href?: string;
   title?: string;
-};
+}>;
 
 const MarkdownViewTemplate = ({
   href,

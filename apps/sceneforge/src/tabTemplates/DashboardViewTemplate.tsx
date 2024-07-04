@@ -1,9 +1,9 @@
-import { Carousel, type CarouselProps } from "@sceneforge/ui";
+import { Carousel, type CarouselProps, type TabComponentProps } from "@sceneforge/ui";
 
-export type DashboardViewTemplateProps = {
+export type DashboardViewTemplateProps = TabComponentProps<{
   carousel?: CarouselProps;
   title?: string;
-};
+}>;
 
 const DashboardViewTemplate = ({
   carousel,
