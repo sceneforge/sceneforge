@@ -2,17 +2,17 @@ import * as stylex from "@stylexjs/stylex";
 import { lazy } from "react";
 
 import type { TabProps } from "./Tab";
+import type { TabCloseCallback, TabPanelProps } from "./TabPanel";
 
 import { Align, Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
 import { backgroundColor, color } from "../tokens.stylex";
-import { type TabPanelProps } from "./TabPanel";
 
 const TabList = lazy(() => import("./TabList"));
 const TabPanel = lazy(() => import("./TabPanel"));
 
 export type TabContent = {
-  panel: Omit<TabPanelProps, "hidden" | "tabId">;
+  panel: Omit<TabPanelProps, "hidden" | "registerBeforeClose" | "tabId">;
   tab: Omit<TabProps, "active" | "onTabChange">;
 };
 
@@ -27,6 +27,9 @@ export type TabsProps = {
   onTabClose?: (id: string) => void;
   orientation?: Orientation;
   position?: Position;
+  registerBeforeClose?: (tabId: string) => (
+    (callback?: TabCloseCallback) => void
+  );
   variant?: Variant;
 };
 
@@ -67,6 +70,9 @@ const styles = stylex.create({
   }),
 });
 
+const noopInner = () => void 0;
+const noop = () => noopInner();
+
 const Tabs = ({
   activeTabId,
   align = Align.Start,
@@ -78,6 +84,7 @@ const Tabs = ({
   onTabClose,
   orientation = Orientation.Horizontal,
   position = Position.Start,
+  registerBeforeClose = () => noop,
   variant,
 }: TabsProps) => {
   return (
@@ -121,6 +128,7 @@ const Tabs = ({
           <TabPanel
             hidden={activeTabId !== tab.id}
             key={`${id ?? "tab"}-panel-${tab.id}`}
+            registerBeforeClose={registerBeforeClose(tab.id)}
             tabId={tab.id}
             {...panel}
           />

@@ -12,6 +12,13 @@ const meta: Meta<typeof Tabs> = {
     ...alignArgumentTypes("align"),
   },
   component: Tabs,
+  decorators: [
+    Story => (
+      <div style={{ height: "80vh", width: "80vw" }}>
+        <Story />
+      </div>
+    ),
+  ],
   title: "Component/Tabs",
 };
 

@@ -1,5 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 
+import type { TabCloseCallback } from "./TabPanel";
+
 import { IconEnum, Orientation, Position, Variant } from "../../types";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
@@ -10,6 +12,8 @@ import { useTab } from "./useTab";
 
 export type TabProps = {
   active?: boolean;
+  afterClose?: TabCloseCallback;
+  beforeClose?: TabCloseCallback;
   closeable?: boolean;
   icon?: IconEnum;
   id: string;
@@ -77,6 +81,8 @@ const styles = stylex.create({
 
 const Tab = ({
   active,
+  afterClose,
+  beforeClose,
   closeable,
   icon,
   id,
@@ -85,8 +91,15 @@ const Tab = ({
   onTabClose,
   variant,
 }: TabProps) => {
-  const { handleTabChange, handleTabClose } = useTab({
-    id, onTabChange, onTabClose,
+  const {
+    handleTabChange,
+    handleTabClose,
+  } = useTab({
+    afterClose,
+    beforeClose,
+    id,
+    onTabChange,
+    onTabClose,
   });
 
   return (

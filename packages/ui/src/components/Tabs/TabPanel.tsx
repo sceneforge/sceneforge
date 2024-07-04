@@ -3,17 +3,25 @@ import { type ComponentType } from "react";
 
 import { View } from "../View";
 
-export type TabComponentType = ComponentType<{
+export type TabCloseCallback = () => (Promise<void> | void);
+
+export type TabPanelCoreProps = {
+  beforeClose?: TabCloseCallback;
   hidden: boolean;
+  registerBeforeClose: (callback?: TabCloseCallback) => void;
   tabId: string;
-}>;
+};
+
+export type TabComponentType = ComponentType<TabPanelCoreProps>;
 
 export type TabPanelProps<Props = Record<string, unknown>> = {
   component?: TabComponentType;
-  hidden?: boolean;
   props?: Props;
-  tabId: string;
-};
+} & TabPanelCoreProps;
+
+export type TabComponentProps<
+  Props = Record<string, unknown>,
+> = Props & TabPanelCoreProps;
 
 const styles = stylex.create({
   container: {
@@ -31,6 +39,7 @@ const TabPanel = <Props = Record<string, unknown>>({
   component: TabComponent,
   hidden,
   props,
+  registerBeforeClose,
   tabId,
 }: TabPanelProps<Props>) => {
   return (
@@ -47,6 +56,7 @@ const TabPanel = <Props = Record<string, unknown>>({
             <TabComponent
               {...props}
               hidden={hidden ?? true}
+              registerBeforeClose={registerBeforeClose}
               tabId={tabId}
             />
           )

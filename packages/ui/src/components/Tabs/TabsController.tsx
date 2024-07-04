@@ -1,7 +1,8 @@
 import { type Ref, lazy } from "react";
 
+import type { TabContent } from "./Tabs";
+
 import { Align, Orientation, Position, Variant } from "../../types";
-import { type TabContent } from "./Tabs";
 import { type TabsHandler, useTabs } from "./useTabs";
 
 const Tabs = lazy(() => import("./Tabs"));
@@ -11,6 +12,7 @@ export type TabsControllerProps = {
   closeable?: boolean;
   id?: string;
   initialContent?: TabContent[];
+  onTabClose?: (props: TabContent) => void;
   orientation?: Orientation;
   position?: Position;
   ref?: Ref<TabsHandler>;
@@ -22,6 +24,7 @@ const TabsController = ({
   closeable,
   id,
   initialContent,
+  onTabClose,
   orientation,
   position,
   ref,
@@ -33,7 +36,8 @@ const TabsController = ({
     currentId,
     handleTabChange,
     handleTabClose,
-  } = useTabs({ id, initialContent, ref });
+    registerBeforeClose,
+  } = useTabs({ id, initialContent, onTabClose, ref });
 
   return (
     <Tabs
@@ -46,6 +50,7 @@ const TabsController = ({
       onTabClose={handleTabClose}
       orientation={orientation}
       position={position}
+      registerBeforeClose={registerBeforeClose}
       variant={variant}
     />
   );

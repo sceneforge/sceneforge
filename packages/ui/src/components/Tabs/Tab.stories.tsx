@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { orientationArgTypes as orientationArgumentTypes, positionArgTypes as positionArgumentTypes } from "../../storiesHelpers";
+import {
+  orientationArgTypes,
+  positionArgTypes,
+} from "../../storiesHelpers";
 import Tab from "./Tab";
 
 const meta: Meta<typeof Tab> = {
@@ -14,8 +17,13 @@ const meta: Meta<typeof Tab> = {
     label: {
       control: "text",
     },
-    ...positionArgumentTypes("position"),
-    ...orientationArgumentTypes("orientation"),
+    variant: {
+      table: {
+        disable: true,
+      },
+    },
+    ...positionArgTypes("position"),
+    ...orientationArgTypes("orientation"),
   },
   component: Tab,
   title: "Component/Tabs/Tab",

@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 
+import type { TabCloseCallback } from "./TabPanel";
 import type { TabContent } from "./Tabs";
 
 export interface TabsHandler {
@@ -20,10 +21,16 @@ export interface TabsHandler {
 export type UseTabsProps = {
   id?: string;
   initialContent?: TabContent[];
+  onTabClose?: (content: TabContent) => void;
   ref?: Ref<TabsHandler>;
 };
 
-export const useTabs = ({ id, initialContent, ref }: UseTabsProps) => {
+export const useTabs = ({
+  id,
+  initialContent,
+  onTabClose,
+  ref,
+}: UseTabsProps) => {
   const generatedId = useId();
   const currentId = id || generatedId;
   const [content, setContent] = useState<TabContent[]>(initialContent ?? []);
@@ -41,11 +48,50 @@ export const useTabs = ({ id, initialContent, ref }: UseTabsProps) => {
     setActiveTabId(tabId);
   }, []);
 
-  const handleTabClose = useCallback((tabId: string) => {
+  const closeTab = useCallback((tabId: string) => {
     setContent((previousContent) => {
-      return previousContent.filter(({ tab }) => tab.id !== tabId);
+      const result = previousContent.filter(({ tab }) => tab.id !== tabId);
+      if (activeTabId === tabId && result.length > 0) {
+        setActiveTabId(result[0].tab.id);
+      }
+      return result;
     });
-  }, []);
+  }, [activeTabId]);
+
+  const handleEdgeCloses = useCallback((
+    tabId: string,
+    closeCallback: (tabId: string) => void
+  ) => {
+    const tabContent = content.find(({ tab }) => tab.id === tabId);
+    if (!tabContent) return;
+    if (onTabClose) {
+      onTabClose(tabContent);
+    }
+    if (tabContent.panel.beforeClose) {
+      Promise.resolve(tabContent.panel.beforeClose()).then(() => {
+        closeCallback(tabId);
+      })
+        .catch((error: unknown) => {
+          const errorResult = error instanceof Error
+            ? error
+            : new Error(`Tab ${currentId}: Error closing tab ${tabId}`, {
+              cause: {
+                error,
+                id: currentId,
+                tabId,
+              },
+            });
+          throw errorResult;
+        });
+    }
+    else {
+      closeCallback(tabId);
+    }
+  }, [content, currentId, onTabClose]);
+
+  const handleTabClose = useCallback((tabId: string) => {
+    handleEdgeCloses(tabId, closeTab);
+  }, [handleEdgeCloses, closeTab]);
 
   const handleOpenTab = useCallback((newContent: TabContent) => {
     if (content.some(({ tab }) => tab.id === newContent.tab.id)) {
@@ -84,11 +130,31 @@ export const useTabs = ({ id, initialContent, ref }: UseTabsProps) => {
     }
   })()), [activeTabId, handleOpenTab, handleTabChange, handleTabClose]);
 
+  const registerBeforeClose = useCallback((tabId: string) => {
+    return (callback?: TabCloseCallback) => {
+      setContent((previousContent) => {
+        return previousContent.map((c) => {
+          if (c.tab.id === tabId) {
+            return {
+              ...c,
+              panel: {
+                ...c.panel,
+                beforeClose: callback,
+              },
+            };
+          }
+          return c;
+        });
+      });
+    };
+  }, [setContent]);
+
   return {
     activeTabId,
     content,
     currentId,
     handleTabChange,
     handleTabClose,
+    registerBeforeClose,
   };
 };

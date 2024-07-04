@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { alignArgTypes as alignArgumentTypes, orientationArgTypes as orientationArgumentTypes, positionArgTypes as positionArgumentTypes, variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import {
+  alignArgTypes,
+  orientationArgTypes,
+  positionArgTypes,
+  variantArgTypes,
+} from "../../storiesHelpers";
 import { IconEnum } from "../../types";
 import TabsController from "./TabsController";
 
@@ -9,12 +14,24 @@ const meta: Meta<typeof TabsController> = {
     closeable: {
       control: "boolean",
     },
-    ...variantArgumentTypes("variant"),
-    ...positionArgumentTypes("position"),
-    ...orientationArgumentTypes("orientation"),
-    ...alignArgumentTypes("align"),
+    onTabClose: {
+      table: {
+        disable: true,
+      },
+    },
+    ...variantArgTypes("variant"),
+    ...positionArgTypes("position"),
+    ...orientationArgTypes("orientation"),
+    ...alignArgTypes("align"),
   },
   component: TabsController,
+  decorators: [
+    Story => (
+      <div style={{ height: "80vh", width: "80vw" }}>
+        <Story />
+      </div>
+    ),
+  ],
   title: "Component/TabsController",
 };
 

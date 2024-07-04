@@ -1,7 +1,13 @@
 import { lazy } from "react";
 export type { TabProps } from "./Tab";
 export type { TabListProps } from "./TabList";
-export type { TabComponentType, TabPanelProps } from "./TabPanel";
+export type {
+  TabCloseCallback,
+  TabComponentProps,
+  TabComponentType,
+  TabPanelCoreProps,
+  TabPanelProps,
+} from "./TabPanel";
 export type { TabContent, TabsProps } from "./Tabs";
 export type { TabsControllerProps } from "./TabsController";
 export { useTabs } from "./useTabs";
