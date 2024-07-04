@@ -1,3 +1,3 @@
-# Core Application Library for SceneForge
+# @sceneforge/core
 
 [TBD]

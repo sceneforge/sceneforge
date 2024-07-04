@@ -1,3 +1,3 @@
-# Scene Forge UI Package
+# @sceneforge/ui
 
-TBD
+[TBD]

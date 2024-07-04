@@ -1,7 +1,3 @@
-# Scene Forge ESLint Configuration
+# @sceneforge/eslint
 
-## Installation
-
-```bash
-yarn add --dev @sceneforge/eslint@workspace:*
-```
+[TBD]
