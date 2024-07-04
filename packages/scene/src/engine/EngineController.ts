@@ -20,23 +20,21 @@ export class EngineController {
     this._canvas = canvas;
 
     this._engine = new Engine(canvas, true, {
-      preserveDrawingBuffer: true,
       stencil: true,
     });
 
-    this._scene = new Scene(this._engine, {
-      useGeometryUniqueIdsMap: true,
-      useMaterialMeshMap: true,
-    });
+    this._scene = new Scene(this._engine);
 
     if (commonNodes) {
       const { camera, light } = buildCommonNodes(this._scene);
       this._camera = camera;
       this._light = light;
+
+      this._camera.attachControl(this._canvas, true);
     }
 
     this._resizeObserver = new ResizeObserver(() => {
-      this._scene.render();
+      this._engine.resize();
     });
   }
 
