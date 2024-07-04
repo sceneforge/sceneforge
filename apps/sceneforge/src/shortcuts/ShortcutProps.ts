@@ -1,7 +1,7 @@
 import type { TFunction, i18n } from "i18next";
 
 import type { OpenTabFunction } from "../components/App/useAppTabs";
-import type { SceneViewTemplateProps, TabTemplates } from "../tabTemplates";
+import type { SceneViewTemplateProps, TabTemplateProps, TabTemplates } from "../tabTemplates";
 
 export type OpenSceneFunction = (
   id: string,
@@ -18,4 +18,4 @@ export type ShortcutPropsProps = {
 
 export type ShortcutProps<T extends TabTemplates = TabTemplates> = (
   props: ShortcutPropsProps
-) => Parameters<T>[0] | Promise<Parameters<T>[0]>;
+) => Promise<TabTemplateProps<T>> | TabTemplateProps<T>;

@@ -15,3 +15,5 @@ export type TabTemplates =
   | typeof FormViewTemplate
   | typeof MarkdownViewTemplate
   | typeof SceneViewTemplate;
+
+export type TabTemplateProps<T extends TabTemplates> = Parameters<T>[0];
