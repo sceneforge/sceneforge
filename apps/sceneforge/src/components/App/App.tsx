@@ -16,29 +16,27 @@ export const App = () => {
     <AppLayout
       colorScheme="dark"
       topbar={{
+        actionsEnd: [
+          {
+            icon: IconEnum.Home,
+            kind: "icon",
+            label: t("HomeTab.title"),
+            onClick: () => void openHome(),
+          },
+          {
+            icon: IconEnum.QuestionMark,
+            kind: "icon",
+            label: t("AboutTab.title"),
+            onClick: () => void openAbout(),
+          },
+          {
+            icon: IconEnum.Settings,
+            kind: "icon",
+            label: t("SettingsTab.title"),
+            onClick: () => void openSettings(),
+          },
+        ],
         title: "Scene Forge",
-        toolbarEnd: {
-          actions: [
-            {
-              icon: IconEnum.Home,
-              kind: "icon",
-              label: t("HomeTab.title"),
-              onClick: () => void openHome(),
-            },
-            {
-              icon: IconEnum.QuestionMark,
-              kind: "icon",
-              label: t("AboutTab.title"),
-              onClick: () => void openAbout(),
-            },
-            {
-              icon: IconEnum.Settings,
-              kind: "icon",
-              label: t("SettingsTab.title"),
-              onClick: () => void openSettings(),
-            },
-          ],
-        },
         variant: Variant.Default,
       }}
     >

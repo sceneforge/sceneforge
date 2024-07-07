@@ -1,10 +1,9 @@
-import { Blockquote, Heading } from "@sceneforge/ui";
+import { Blockquote, Heading, Link } from "@sceneforge/ui";
 import { type MarkdownProps } from "@simplecomponent/markdown";
 import { type Element } from "hast";
 import { type ComponentType, type JSX, createElement } from "react";
 
 import { Image } from "../components/Image";
-import { Link } from "../components/Link";
 
 type IntrinsicElement<
   T extends keyof JSX.IntrinsicElements = keyof JSX.IntrinsicElements,

@@ -5,8 +5,8 @@ import "@babylonjs/loaders/glTF/2.0";
 import { select } from "@sceneforge/scene";
 import { type RefObject, useCallback, useEffect, useState } from "react";
 
-import { Model } from "../../../lib/isModel";
-import { useModelContext } from "../../ModelContext";
+// import { Model } from "../../../lib/isModel";
+// import { useModelContext } from "../../ModelContext";
 import { Mode } from "./../mode";
 import { useArcRotateCamera } from "./useArcRotateCamera";
 import { useEngine } from "./useEngine";
@@ -14,11 +14,11 @@ import { useGLTFLoader } from "./useGLTFLoader";
 import { useHemisphericLight } from "./useHemiphericLight";
 
 export const useModelViewer = (
-  canvasRef: RefObject<HTMLCanvasElement | null>,
-  active: boolean,
-  props: Partial<Model>
+  canvasRef: RefObject<HTMLCanvasElement | null>
+  // active: boolean,
+  // props: Partial<Model>
 ) => {
-  const [loaded, setLoaded] = useState(false);
+  // const [loaded, setLoaded] = useState(false);
   const [ready, setReady] = useState(false);
   const [initiate, setInitiate] = useState(false);
   const [currentNode, setCurrentNode] = useState<unknown>(null);
@@ -81,11 +81,11 @@ export const useModelViewer = (
     stopRenderSceneLoop,
   ]);
 
-  const { currentID, currentModel, loadModels, loadState, saveModel }
-    = useModelContext({
-      ...props,
-      capture,
-    });
+  // const { currentID, currentModel, loadModels, loadState, saveModel }
+  //   = useModelContext({
+  //     ...props,
+  //     capture,
+  //   });
 
   const clearMeshSelectionPath = useCallback(() => {
     setMeshSelectionPath([]);
@@ -103,33 +103,33 @@ export const useModelViewer = (
     setCurrentNode(null);
   }, [setCurrentNode]);
 
-  useEffect(() => {
-    if (currentID) {
-      startAll();
+  // useEffect(() => {
+  //   if (currentID) {
+  //     startAll();
 
-      return () => {
-        disposeAll();
-      };
-    }
-  }, [currentID, startAll, disposeAll]);
+  //     return () => {
+  //       disposeAll();
+  //     };
+  //   }
+  // }, [currentID, startAll, disposeAll]);
 
-  useEffect(() => {
-    if (loadState === "none") {
-      loadModels().catch((error: unknown) => {
-        throw new Error("Failed to load models", { cause: error });
-      });
-    }
-    else if (loadState === "loaded") {
-      setReady(active);
-    }
-  }, [loadState, active, loadModels, setReady]);
+  // useEffect(() => {
+  //   if (loadState === "none") {
+  //     loadModels().catch((error: unknown) => {
+  //       throw new Error("Failed to load models", { cause: error });
+  //     });
+  //   }
+  //   else if (loadState === "loaded") {
+  //     setReady(active);
+  //   }
+  // }, [loadState, active, loadModels, setReady]);
 
-  useEffect(() => {
-    if (!loaded && ready && currentModel?.gltf) {
-      openGLTFBlob(currentModel.gltf);
-      setLoaded(true);
-    }
-  }, [loaded, ready, currentModel, openGLTFBlob]);
+  // useEffect(() => {
+  //   if (!loaded && ready && currentModel?.gltf) {
+  //     openGLTFBlob(currentModel.gltf);
+  //     setLoaded(true);
+  //   }
+  // }, [loaded, ready, currentModel, openGLTFBlob]);
 
   useEffect(() => {
     if (ready && !initiate) {
@@ -206,40 +206,40 @@ export const useModelViewer = (
     }
   }, [ready, mode, sceneRef, onMeshSelect, onHotspotSelect]);
 
-  const onImported = useCallback(
-    async (model: Partial<Model>): Promise<Model> => {
-      if (model.id && model.id !== currentID) {
-        throw new Error("Model ID is not matched");
-      }
-      const id = model.id ?? currentID;
+  // const onImported = useCallback(
+  //   async (model: Partial<Model>): Promise<Model> => {
+  //     if (model.id && model.id !== currentID) {
+  //       throw new Error("Model ID is not matched");
+  //     }
+  //     const id = model.id ?? currentID;
 
-      if (!id) {
-        throw new Error("Model ID is not defined");
-      }
+  //     if (!id) {
+  //       throw new Error("Model ID is not defined");
+  //     }
 
-      return await saveModel({
-        ...model,
-        id,
-      });
-    },
-    [currentID, saveModel]
-  );
+  //     return await saveModel({
+  //       ...model,
+  //       id,
+  //     });
+  //   },
+  //   [currentID, saveModel]
+  // );
 
   return {
     cameraRef,
     capture,
     clearMeshSelectionPath,
     clearSelectedNode,
-    currentModel,
+    // currentModel,
     currentNode,
     disposeAll,
     engineRef,
     loadResult,
-    loadState,
-    loaded,
+    // loadState,
+    // loaded,
     meshSelectionPath,
     mode,
-    onImported,
+    // onImported,
     onNodeSelect,
     openGLTFBlob,
     renderSceneLoop,

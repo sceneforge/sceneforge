@@ -35,8 +35,8 @@ export const ReloadPrompt = () => {
       actions={needRefresh
         ? [
           {
-            children: t("actions.reloadButton"),
             kind: "button",
+            label: t("actions.reloadButton"),
             onClick: reload,
           },
         ]

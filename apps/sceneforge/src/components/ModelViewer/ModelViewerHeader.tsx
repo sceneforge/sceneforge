@@ -1,4 +1,4 @@
-import { Toolbar } from "@sceneforge/ui";
+import { ActionList, Orientation } from "@sceneforge/ui";
 import { fileOpen } from "browser-fs-access";
 import { Dispatch, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -79,7 +79,7 @@ export const ModelViewerHeader = ({
   // );
 
   return (
-    <Toolbar
+    <ActionList
       // icon="menu"
       actions={[
         {
@@ -118,6 +118,7 @@ export const ModelViewerHeader = ({
           label: modeLabel,
         },
       ]}
+      orientation={Orientation.Horizontal}
     />
   );
 };
