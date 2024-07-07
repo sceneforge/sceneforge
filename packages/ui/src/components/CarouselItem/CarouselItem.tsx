@@ -3,7 +3,7 @@ import * as stylex from "@stylexjs/stylex";
 import { Card, type CardProps } from "../Card";
 import { CardButton, type CardButtonProps } from "../CardButton";
 import { IconButton, type IconButtonProps } from "../IconButton";
-import { View } from "../View";
+import { View, ViewProps } from "../View";
 
 type CarouselItemCardButtonProps = {
   description?: string;
@@ -27,10 +27,14 @@ type CarouselItemIconButtonProps = {
   zoom?: never;
 } & IconButtonProps;
 
-export type CarouselItemProps =
+type CarouselAllItemsProps =
   | CarouselItemCardButtonProps
   | CarouselItemCardProps
   | CarouselItemIconButtonProps;
+
+export type CarouselItemProps = {
+  hidden?: ViewProps["hidden"];
+} & Omit<CarouselAllItemsProps, "hidden">;
 
 const styles = stylex.create({
   container: {
@@ -47,11 +51,16 @@ const styles = stylex.create({
 
 const CarouselItem = ({
   description,
+  hidden,
   kind,
   ...props
 }: CarouselItemProps) => {
   return (
-    <View style={styles.container}>
+    <View
+      hidden={hidden}
+      padding={1}
+      style={styles.container}
+    >
       {kind === "icon" && (
         <IconButton {...props as IconButtonProps} />
       )}

@@ -28,11 +28,15 @@ const styles = stylex.create({
   headingWithShadow: {
     color: color.background,
   },
+  hidden: {
+    display: "none",
+  },
 });
 
 export type SectionProps = Omit<HTMLAttributes<HTMLElement>, "style"> &
   PropsWithChildren<{
     headingPadding?: HeadingProps["padding"];
+    hidden?: boolean;
     level?: 1 | 2 | 3 | 4 | 5 | 6;
     margin?: SpacerStyleProps;
     padding?: SpacerStyleProps;
@@ -46,6 +50,7 @@ export type SectionProps = Omit<HTMLAttributes<HTMLElement>, "style"> &
 const Section = ({
   children,
   headingPadding,
+  hidden,
   level = 2,
   margin,
   padding,
@@ -62,7 +67,8 @@ const Section = ({
         styles.container,
         ...(margin === undefined ? [] : marginStyle(margin)),
         ...(padding === undefined ? [] : paddingStyle(padding)),
-        ...backgroundTextColorVariantStyle(variant)
+        ...backgroundTextColorVariantStyle(variant),
+        hidden && styles.hidden
       )}
     >
       {title && (

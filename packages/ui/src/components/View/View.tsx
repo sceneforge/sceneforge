@@ -65,8 +65,8 @@ const View = ({
         ...backgroundTextColorVariantStyle(variant),
         ...(margin === undefined ? [] : marginStyle(margin)),
         ...(padding === undefined ? [] : paddingStyle(padding)),
-        hidden && styles.hidden,
-        style
+        style,
+        hidden && styles.hidden
       )}
       ref={ref}
     />

@@ -4,15 +4,20 @@ import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren } from "react";
 
 import { Variant } from "../../types";
-import { type ActionProps } from "../Action";
-import { Pane } from "../Pane";
-import { View } from "../View";
+import { Pane, type PaneProps } from "../Pane";
+import { View, ViewProps } from "../View";
 
 export type CardProps = PropsWithChildren<{
-  actions?: ActionProps[];
+  actions?: PaneProps["paneActions"];
+  actionsGap?: PaneProps["paneActionsGap"];
+  actionsMargin?: PaneProps["paneActionsMargin"];
+  actionsPadding?: PaneProps["paneActionsPadding"];
+  actionsStyle?: PaneProps["paneActionsStyle"];
+  hidden?: ViewProps["hidden"];
   id?: string;
   img?: string;
   label?: string;
+  popover?: ViewProps["popover"];
   style?: StyleXStyles;
   variant?: Variant;
 }>;
@@ -33,16 +38,24 @@ const styles = stylex.create({
 
 const Card = ({
   actions,
+  actionsGap,
+  actionsMargin,
+  actionsPadding,
+  actionsStyle,
   children,
+  hidden,
   id,
   img,
   label,
+  popover,
   style,
   variant,
 }: CardProps) => {
   return (
     <View
+      hidden={hidden}
       id={id}
+      popover={popover}
       style={[
         styles.container,
         style,
@@ -50,12 +63,13 @@ const Card = ({
       variant={variant}
     >
       <Pane
-        headingPadding={{
-          inline: 0.5,
-        }}
         level={3}
         outer
         paneActions={actions}
+        paneActionsGap={actionsGap}
+        paneActionsMargin={actionsMargin}
+        paneActionsPadding={actionsPadding}
+        paneActionsStyle={actionsStyle}
         title={label}
       >
         {img && (

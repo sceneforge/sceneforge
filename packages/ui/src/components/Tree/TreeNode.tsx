@@ -2,14 +2,14 @@ import * as stylex from "@stylexjs/stylex";
 import { type MouseEventHandler, lazy } from "react";
 
 import type { IconEnum } from "../../types";
+import type { ActionListProps } from "../ActionList";
 
-import { type ActionProps } from "../Action";
 import { useTree } from "./useTree";
 
 const TreeNodeItem = lazy(() => import("./TreeNodeItem"));
 
 export type TreeNodeProps = {
-  actions?: ActionProps[];
+  actions?: ActionListProps["actions"];
   expanded?: boolean;
   icon?: IconEnum;
   id?: string;

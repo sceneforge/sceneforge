@@ -1,27 +1,30 @@
 import * as stylex from "@stylexjs/stylex";
 import { useId } from "react";
 
-import { Variant } from "../../types";
+import { Orientation, Variant } from "../../types";
+import { ActionList, ActionListProps } from "../ActionList";
 import { Heading } from "../Heading";
-import { Toolbar, type ToolbarProps } from "../Toolbar";
 import { View } from "../View";
-import { color, titleBar } from "../tokens.stylex";
+import { foregroundColor, titleBar } from "../tokens.stylex";
 
 export type TopbarProps = {
+  actionsEnd?: ActionListProps["actions"];
+  actionsEndDense?: ActionListProps["actionsDense"];
+  actionsEndGap?: ActionListProps["gap"];
+  actionsEndScale?: ActionListProps["actionsScale"];
+  actionsStart?: ActionListProps["actions"];
+  actionsStartDense?: ActionListProps["actionsDense"];
+  actionsStartGap?: ActionListProps["gap"];
+  actionsStartScale?: ActionListProps["actionsScale"];
   id?: string;
   shadow?: boolean;
   title?: string;
-  toolbarEnd?: ToolbarProps;
-  toolbarStart?: ToolbarProps;
   variant?: Variant;
 };
 
 const styles = stylex.create({
   container: {
     backgroundColor: "AccentColor",
-    borderBlockEndColor: "transparent",
-    borderBlockEndStyle: "solid",
-    borderBlockEndWidth: 0,
     color: "AccentColorText",
     height: titleBar.appTitleBarHeight,
     insetBlockStart: titleBar.appTitleBarInsetBlockStart,
@@ -30,19 +33,18 @@ const styles = stylex.create({
     width: "100%",
   },
   containerBorderAndShadow: {
-    borderBlockEndColor: `color-mix(in srgb, ${color.foreground} 75%, transparent)`,
+    borderBlockEndColor: foregroundColor.alpha75,
+    borderBlockEndStyle: "solid",
     borderBlockEndWidth: "0.0125rem",
-    boxShadow: `0 4px 6px -1px color-mix(in srgb, ${color.foreground} 30%, transparent)`,
+    boxShadow: `0 4px 6px -1px ${foregroundColor.alpha30}`,
   },
   content: {
     alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
+    display: "grid",
     gap: "0.5rem",
+    gridTemplateColumns: "min-content max-content auto max-content",
     insetBlockStart: 0,
     insetInlineStart: titleBar.appTitleBarInsetInlineStart,
-    justifyContent: "stretch",
-    paddingInline: "1rem",
     position: "absolute",
     width: titleBar.appTitleBarWidth,
   },
@@ -50,24 +52,20 @@ const styles = stylex.create({
     fontSize: "1rem",
     textWrap: "nowrap",
   },
-  toolbar: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-  },
-  toolbarEnd: {
-    justifyContent: "flex-end",
-    paddingInlineEnd: "1rem",
-  },
 });
 
 const Topbar = ({
+  actionsEnd,
+  actionsEndDense,
+  actionsEndGap,
+  actionsEndScale,
+  actionsStart,
+  actionsStartDense,
+  actionsStartGap,
+  actionsStartScale,
   id,
   shadow,
   title,
-  toolbarEnd,
-  toolbarStart,
   variant,
 }: TopbarProps) => {
   const generatedId = useId();
@@ -91,12 +89,21 @@ const Topbar = ({
         >
           {title}
         </Heading>
-        <View style={styles.toolbar}>
-          {toolbarStart && <Toolbar key={`${currentId}-toolbar-start`} {...toolbarStart} />}
-        </View>
-        <View style={[styles.toolbar, styles.toolbarEnd]}>
-          {toolbarEnd && <Toolbar key={`${currentId}-toolbar-end`} {...toolbarEnd} />}
-        </View>
+        <ActionList
+          actions={actionsStart}
+          actionsDense={actionsStartDense}
+          actionsScale={actionsStartScale}
+          gap={actionsStartGap}
+          orientation={Orientation.Horizontal}
+        />
+        <View />
+        <ActionList
+          actions={actionsEnd}
+          actionsDense={actionsEndDense}
+          actionsScale={actionsEndScale}
+          gap={actionsEndGap}
+          orientation={Orientation.Horizontal}
+        />
       </View>
     </header>
   );

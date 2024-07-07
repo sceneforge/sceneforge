@@ -7,6 +7,7 @@ import { View } from "../View";
 import { currentColor } from "../tokens.stylex";
 
 export type DividerProps = {
+  dense?: boolean;
   label?: string;
   margin?: {
     end?: number;
@@ -19,9 +20,6 @@ export type DividerProps = {
 
 const styles = stylex.create({
   container: {
-    borderBlockStartColor: currentColor.alpha50,
-    borderBlockStartStyle: "solid",
-    borderBlockStartWidth: "0.0625rem",
     color: currentColor.alpha25,
     fontSize: "smaller",
     fontStretch: "semi-condensed",
@@ -31,14 +29,26 @@ const styles = stylex.create({
     userSelect: "none",
   },
   horizontal: {
+    borderBlockStartColor: currentColor.alpha50,
+    borderBlockStartStyle: "solid",
+    borderBlockStartWidth: "0.0625rem",
+    borderInlineStartColor: null,
+    borderInlineStartStyle: null,
+    borderInlineStartWidth: null,
     height: {
       ":empty": 0,
       "default": null,
     },
   },
   vertical: {
+    borderBlockStartColor: null,
+    borderBlockStartStyle: null,
+    borderBlockStartWidth: null,
+    borderInlineStartColor: currentColor.alpha50,
+    borderInlineStartStyle: "solid",
+    borderInlineStartWidth: "0.0625rem",
     width: {
-      ":empty": 0,
+      ":empty": 1,
       "default": null,
     },
   },
@@ -67,8 +77,7 @@ const Divider = ({
           }
       }
       padding={{
-        block: 0,
-        inline: 0.75,
+        inline: orientation === Orientation.Horizontal ? 0.75 : 0,
       }}
       role="separator"
       style={[

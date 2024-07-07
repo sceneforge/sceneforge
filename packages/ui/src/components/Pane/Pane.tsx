@@ -20,7 +20,13 @@ export type PaneProps = Omit<
 > & PropsWithChildren<{
   onTitleChange?: (currentTitle?: string, previousTitle?: string) => void;
   paneActions?: PaneBodyProps["actions"];
+  paneActionsDense?: PaneBodyProps["actionsDense"];
+  paneActionsGap?: PaneBodyProps["actionsGap"];
+  paneActionsHidden?: PaneBodyProps["actionsHidden"];
+  paneActionsMargin?: PaneBodyProps["actionsMargin"];
   paneActionsPadding?: PaneBodyProps["actionsPadding"];
+  paneActionsScale?: PaneBodyProps["actionsScale"];
+  paneActionsStyle?: PaneBodyProps["actionsStyle"];
 }>;
 
 const styles = stylex.create({
@@ -42,21 +48,18 @@ const styles = stylex.create({
 });
 
 const Pane = ({
-  actions,
-  actionsPadding = {
-    block: 0.25,
-    inline: 0.5,
-  },
   children,
-  headingPadding,
   level,
   onTitleChange,
   outer,
   paneActions,
-  paneActionsPadding = {
-    block: 0.25,
-    inline: 0.5,
-  },
+  paneActionsDense,
+  paneActionsGap,
+  paneActionsHidden,
+  paneActionsMargin,
+  paneActionsPadding,
+  paneActionsScale,
+  paneActionsStyle,
   title,
   ...props
 }: PaneProps) => {
@@ -83,9 +86,6 @@ const Pane = ({
         ? (
           <>
             <PaneHeader
-              actions={actions}
-              actionsPadding={actionsPadding}
-              headingPadding={headingPadding}
               level={level}
               onTitleEditClick={handleTitleEditClick}
               onTitleSaveClick={handleTitleSaveClick}
@@ -98,14 +98,19 @@ const Pane = ({
             />
             <PaneBody
               actions={paneActions}
+              actionsDense={paneActionsDense}
+              actionsGap={paneActionsGap}
+              actionsHidden={paneActionsHidden}
+              actionsMargin={paneActionsMargin}
               actionsPadding={paneActionsPadding}
+              actionsScale={paneActionsScale}
+              actionsStyle={paneActionsStyle}
             >
               {children}
             </PaneBody>
           </>
         )
         : children}
-
     </section>
   );
 };

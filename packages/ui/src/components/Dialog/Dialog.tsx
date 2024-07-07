@@ -4,17 +4,20 @@ import {
   type Ref,
 } from "react";
 
-import type { ActionProps } from "../Action";
-
 import { IconEnum, Variant } from "../../types";
 import { Divider } from "../Divider";
-import { Pane } from "../Pane";
+import { Pane, type PaneProps } from "../Pane";
 import { View } from "../View";
 import { backgroundColor, backgroundTextColorVariantStyle, foregroundColor, foregroundToBackgroundColor } from "../tokens.stylex";
 import { useDialog } from "./useDialog";
 
 export type DialogProps = {
-  actions?: ActionProps[];
+  actions?: PaneProps["paneActions"];
+  actionsGap?: PaneProps["paneActionsGap"];
+  actionsHidden?: PaneProps["paneActionsHidden"];
+  actionsMargin?: PaneProps["paneActionsMargin"];
+  actionsPadding?: PaneProps["paneActionsPadding"];
+  actionsStyle?: PaneProps["paneActionsStyle"];
   description?: string;
   ref?: Ref<HTMLDialogElement>;
   title?: string;
@@ -55,21 +58,23 @@ const styles = stylex.create({
   },
 });
 
-const Dialog = (
-  {
-    actions,
-    children,
-    description,
-    onCancel,
-    onClose,
-    open,
-    ref,
-    title,
-    variant,
-    ...props
-  }: DialogProps
-
-) => {
+const Dialog = ({
+  actions,
+  actionsGap,
+  actionsHidden,
+  actionsMargin,
+  actionsPadding,
+  actionsStyle,
+  children,
+  description,
+  onCancel,
+  onClose,
+  open,
+  ref,
+  title,
+  variant,
+  ...props
+}: DialogProps) => {
   const {
     descriptionId,
     dialogRef,
@@ -107,6 +112,11 @@ const Dialog = (
         }}
         outer
         paneActions={actions}
+        paneActionsGap={actionsGap}
+        paneActionsHidden={actionsHidden}
+        paneActionsMargin={actionsMargin}
+        paneActionsPadding={actionsPadding}
+        paneActionsStyle={actionsStyle}
         title={title}
       >
         <View

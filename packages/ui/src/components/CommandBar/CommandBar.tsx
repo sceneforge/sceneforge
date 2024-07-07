@@ -1,8 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import { type Ref } from "react";
 
-import { IconEnum, Variant } from "../../types";
-import { Button } from "../Button";
+import { IconEnum, Orientation, Variant } from "../../types";
+import { ActionList, type ActionListProps } from "../ActionList";
 import { Dialog } from "../Dialog";
 import { Divider } from "../Divider";
 import { IconButton } from "../IconButton";
@@ -11,13 +11,19 @@ import { color, foregroundColor } from "../tokens.stylex";
 
 export type CommandBarProps = {
   label?: string;
+  latestCommands?: ActionListProps["actions"];
   name?: string;
   placeholder?: string;
   ref?: Ref<HTMLDialogElement>;
+  suggestedCommands?: ActionListProps["actions"];
   variant?: Variant;
 };
 
 const styles = stylex.create({
+  actions: {
+    textAlign: "start",
+    width: "100%",
+  },
   closeButton: {
     display: {
       "@media only screen and (min-width: 768px)": "none",
@@ -40,24 +46,15 @@ const styles = stylex.create({
       "default": "100%",
     },
   },
-  list: {
-    display: "grid",
-    gridAutoFlow: "row",
-    listStyleType: "none",
-    margin: 0,
-    padding: 0,
-  },
-  listOption: {
-    textAlign: "start",
-    width: "100%",
-  },
 });
 
 const CommandBar = ({
   label,
+  latestCommands,
   name,
   placeholder = "Type a command...",
   ref,
+  suggestedCommands,
   variant,
 }: CommandBarProps) => {
   return (
@@ -83,54 +80,26 @@ const CommandBar = ({
           type="submit"
         />
       </form>
-      <View padding={0.25}>
-        <Divider label="Latest Input" />
-        <ul {...stylex.props(styles.list)}>
-          <li>
-            <Button style={styles.listOption}>
-              Command 1
-            </Button>
-          </li>
-          <li>
-            <Button style={styles.listOption}>
-              Command 2
-            </Button>
-          </li>
-          <li>
-            <Button style={styles.listOption}>
-              Command 3
-            </Button>
-          </li>
-          <li>
-            <Button style={styles.listOption}>
-              Command 4
-            </Button>
-          </li>
-        </ul>
-        <Divider label="Suggest" />
-        <ul {...stylex.props(styles.list)}>
-          <li>
-            <Button style={styles.listOption}>
-              Suggested Command 1
-            </Button>
-          </li>
-          <li>
-            <Button style={styles.listOption}>
-              Suggested Command 2
-            </Button>
-          </li>
-          <li>
-            <Button style={styles.listOption}>
-              Suggested Command 3
-            </Button>
-          </li>
-          <li>
-            <Button style={styles.listOption}>
-              Suggested Command 4
-            </Button>
-          </li>
-        </ul>
-      </View>
+      {latestCommands && (
+        <View padding={0.25}>
+          <Divider label="Latest Input" />
+          <ActionList
+            actions={latestCommands}
+            actionsStyle={styles.actions}
+            orientation={Orientation.Vertical}
+          />
+        </View>
+      )}
+      {suggestedCommands && (
+        <View padding={0.25}>
+          <Divider label="Suggested commands" />
+          <ActionList
+            actions={suggestedCommands}
+            actionsStyle={styles.actions}
+            orientation={Orientation.Vertical}
+          />
+        </View>
+      )}
     </Dialog>
   );
 };

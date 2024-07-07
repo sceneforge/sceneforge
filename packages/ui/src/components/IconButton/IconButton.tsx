@@ -6,7 +6,7 @@ import { Icon, IconProps } from "../Icon";
 export type IconButtonProps = {
   icon: IconProps["icon"];
   size?: IconProps["size"];
-} & ButtonProps;
+} & Omit<ButtonProps, "children">;
 
 const styles = stylex.create({
   container: {

@@ -9,7 +9,12 @@ import { View, ViewProps } from "../View";
 
 export type ActionListProps = {
   actions?: ActionProps[];
+  actionsDense?: ActionProps["dense"];
+  actionsScale?: ActionProps["scale"];
+  actionsStyle?: ActionProps["style"];
   anchor?: string;
+  gap?: number;
+  hidden?: ViewProps["hidden"];
   id?: string;
   label?: string;
   margin?: ViewProps["margin"];
@@ -30,28 +35,42 @@ const styles = stylex.create({
   container: {
     alignItems: "center",
     display: null,
+    flexShrink: 1,
     height: null,
     width: null,
   },
+  gap: (value?: number) => ({
+    gap: value ? `${value}rem` : 0,
+  }),
   horizontal: {
-    flexDirection: "row",
+    gridAutoFlow: "column",
   },
   item: {
-    flexShrink: 1,
+    alignItems: "center",
+    display: "grid",
+    gridAutoFlow: "column",
+    justifyContent: "center",
   },
   list: {
-    display: "flex",
-    flexDirection: "column",
+    display: "grid",
+    gridAutoFlow: "row",
+    height: "100%",
     justifyContent: "stretch",
     listStyleType: "none",
     margin: 0,
     padding: 0,
+    width: "100%",
   },
 });
 
 const ActionList = ({
   actions,
+  actionsDense,
+  actionsScale,
+  actionsStyle,
   anchor,
+  gap,
+  hidden,
   id,
   margin,
   orientation = Orientation.Vertical,
@@ -70,6 +89,7 @@ const ActionList = ({
     <View
       anchor={anchor}
       aria-labelledby={popover ? toggleId : undefined}
+      hidden={hidden}
       id={currentId}
       margin={margin}
       padding={padding}
@@ -83,18 +103,25 @@ const ActionList = ({
         role="presentation"
         {...stylex.props(
           styles.list,
+          styles.gap(gap),
           orientation === Orientation.Horizontal && styles.horizontal
         )}
       >
-        {actions.map((actionProps, index) => (
+        {actions && actions.length > 0 && actions.map((actionProps, index) => (
           <li
             key={`${currentId}-action-${index}`}
             role="presentation"
             {...stylex.props(styles.item)}
           >
             <Action
+              dense={actionsDense}
+              listOrientation={orientation}
               role="menuitem"
-              style={styles.action}
+              scale={actionsScale}
+              style={[
+                styles.action,
+                actionsStyle,
+              ]}
               variant={variant}
               {...actionProps}
             />

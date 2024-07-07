@@ -1,8 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import { MouseEventHandler, lazy } from "react";
 
-import { IconEnum } from "../../types";
-import { Action, type ActionProps } from "../Action";
+import { IconEnum, Orientation } from "../../types";
+import { ActionList, type ActionListProps } from "../ActionList";
 import { IconButton } from "../IconButton";
 import { View } from "../View";
 import { backgroundColor } from "../tokens.stylex";
@@ -10,7 +10,7 @@ import { backgroundColor } from "../tokens.stylex";
 const TreeNodeLabel = lazy(() => import("./TreeNodeLabel"));
 
 export type TreeNodeItemProps = {
-  actions?: ActionProps[];
+  actions?: ActionListProps["actions"];
   expanded?: boolean;
   hasNodes?: boolean;
   icon?: IconEnum;
@@ -88,13 +88,11 @@ const TreeNodeItem = ({
         label={label}
         onClick={onClick}
       />
-      {actions && actions.length > 0 && (
-        <View style={styles.actions}>
-          {actions.map(action => (
-            <Action {...action} style={styles.actionItem} />
-          ))}
-        </View>
-      )}
+      <ActionList
+        actions={actions}
+        actionsStyle={styles.actionItem}
+        orientation={Orientation.Horizontal}
+      />
     </View>
   );
 };

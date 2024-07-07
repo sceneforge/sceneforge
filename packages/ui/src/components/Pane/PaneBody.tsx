@@ -2,13 +2,20 @@ import type { PropsWithChildren } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
-import { Toolbar, type ToolbarProps } from "../Toolbar";
+import { Orientation } from "../../types";
+import { ActionList, ActionListProps } from "../ActionList";
 import { View, type ViewProps } from "../View";
 import { backgroundColor } from "../tokens.stylex";
 
 export type PaneBodyProps = PropsWithChildren<{
-  actions?: ToolbarProps["actions"];
-  actionsPadding?: ToolbarProps["padding"];
+  actions?: ActionListProps["actions"];
+  actionsDense?: ActionListProps["actionsDense"];
+  actionsGap?: ActionListProps["gap"];
+  actionsHidden?: ActionListProps["hidden"];
+  actionsMargin?: ActionListProps["margin"];
+  actionsPadding?: ActionListProps["padding"];
+  actionsScale?: ActionListProps["actionsScale"];
+  actionsStyle?: ActionListProps["style"];
   id?: string;
   margin?: ViewProps["margin"];
   padding?: ViewProps["padding"];
@@ -16,14 +23,9 @@ export type PaneBodyProps = PropsWithChildren<{
 
 const styles = stylex.create({
   actions: {
-    alignItems: "center",
     backgroundColor: backgroundColor.alpha15,
-    display: "flex",
-    flexDirection: "row",
     flexShrink: 1,
-    height: null,
     justifyContent: "center",
-    width: null,
   },
   blockEnd: {
     borderEndEndRadius: "0.25rem",
@@ -41,7 +43,16 @@ const styles = stylex.create({
 
 const PaneBody = ({
   actions,
+  actionsDense,
+  actionsGap = 0.5,
+  actionsHidden,
+  actionsMargin = {
+    block: 0.25,
+    inline: 0.5,
+  },
   actionsPadding,
+  actionsScale,
+  actionsStyle,
   children,
   id,
   margin,
@@ -60,20 +71,22 @@ const PaneBody = ({
       >
         {children}
       </View>
-      {actions && (
-        <View
-          style={[
-            styles.actions,
-            styles.blockEnd,
-          ]}
-        >
-          <Toolbar
-            actions={actions}
-            id={id ? `${id}-pane-body-actions` : undefined}
-            padding={actionsPadding}
-          />
-        </View>
-      )}
+      <ActionList
+        actions={actions}
+        actionsDense={actionsDense}
+        actionsScale={actionsScale}
+        gap={actionsGap}
+        hidden={actionsHidden}
+        id={id ? `${id}-pane-body-actions` : undefined}
+        margin={actionsMargin}
+        orientation={Orientation.Horizontal}
+        padding={actionsPadding}
+        style={[
+          styles.actions,
+          styles.blockEnd,
+          actionsStyle,
+        ]}
+      />
     </>
   );
 };

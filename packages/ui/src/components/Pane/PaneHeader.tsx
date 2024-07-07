@@ -1,16 +1,22 @@
 import * as stylex from "@stylexjs/stylex";
 import { type MouseEventHandler, type Ref, useId } from "react";
 
-import { IconEnum } from "../../types";
+import { Orientation } from "../../types";
+import { ActionList, type ActionListProps } from "../ActionList";
 import { Heading, type HeadingProps } from "../Heading";
-import { IconButton } from "../IconButton";
-import { Toolbar, type ToolbarProps } from "../Toolbar";
 import { View } from "../View";
 import { backgroundColor } from "../tokens.stylex";
+import PaneHeaderInput from "./PaneHeaderInput";
 
 export type PaneHeaderProps = {
-  actions?: ToolbarProps["actions"];
-  actionsPadding?: ToolbarProps["padding"];
+  actions?: ActionListProps["actions"];
+  actionsDense?: ActionListProps["actionsDense"];
+  actionsGap?: ActionListProps["gap"];
+  actionsHidden?: ActionListProps["hidden"];
+  actionsMargin?: ActionListProps["margin"];
+  actionsPadding?: ActionListProps["padding"];
+  actionsScale?: ActionListProps["actionsScale"];
+  actionsStyle?: ActionListProps["style"];
   headingPadding?: HeadingProps["padding"];
   id?: string;
   inputRef?: Ref<HTMLInputElement>;
@@ -19,7 +25,6 @@ export type PaneHeaderProps = {
   onTitleSaveClick?: MouseEventHandler<HTMLButtonElement>;
   outer?: boolean;
   ref?: Ref<HTMLHeadingElement>;
-  scaleActions?: ToolbarProps["scaleActions"];
   title?: string;
   titleEditable?: boolean;
   titleEditing?: boolean;
@@ -44,13 +49,7 @@ const styles = stylex.create({
   heading: {
     fontSize: "1.125rem",
     textOverflow: "ellipsis",
-  },
-  headingButton: {
-    opacity: {
-      ":focus-within": 1,
-      ":hover": 1,
-      "default": 0.5,
-    },
+    textWrap: "nowrap",
   },
   headingWrapper: {
     alignItems: "center",
@@ -60,31 +59,27 @@ const styles = stylex.create({
     gap: "0.25rem",
     paddingInline: "0.25rem",
   },
-  hidden: {
-    display: "none",
-  },
   inner: {
     borderStartEndRadius: "0.25rem",
     borderStartStartRadius: "0.25rem",
-  },
-  input: {
-    background: "color-mix(in srgb, Canvas 15%, transparent)",
-    border: "none",
-    borderRadius: "0.125rem",
-    color: "inherit",
-    display: "inline",
-    maxWidth: "fit-content",
-    minWidth: "min-content",
-    outline: "none",
-    paddingBlock: "0.25rem",
-    paddingInline: "0.5rem",
   },
 });
 
 const PaneHeader = ({
   actions,
-  actionsPadding = 0,
-  headingPadding = 0,
+  actionsDense = true,
+  actionsGap = 0.5,
+  actionsHidden,
+  actionsMargin = 0,
+  actionsPadding = {
+    block: 0.25,
+    inline: 0.5,
+  },
+  actionsScale = true,
+  actionsStyle,
+  headingPadding = {
+    inline: 0.5,
+  },
   id,
   inputRef,
   level = 2,
@@ -92,7 +87,6 @@ const PaneHeader = ({
   onTitleSaveClick,
   outer,
   ref,
-  scaleActions = true,
   title,
   titleEditable,
   titleEditing,
@@ -116,66 +110,34 @@ const PaneHeader = ({
           margin={0}
           padding={headingPadding}
           ref={ref}
-          style={[
-            styles.heading,
-            (titleEditable && titleEditing) && styles.hidden,
-          ]}
+          style={styles.heading}
         >
           {title}
         </Heading>
         {titleEditable && (
-          <input
-            autoFocus={titleEditing}
+          <PaneHeaderInput
             defaultValue={title}
-            hidden={!titleEditing}
+            editing={titleEditing}
             id={`${currentId}-heading-input`}
-            type="text"
-            {...stylex.props(
-              styles.heading,
-              styles.input,
-              (!titleEditing) && styles.hidden
-            )}
-            autoComplete="off"
-            enterKeyHint="done"
-            inert={!titleEditing}
+            onEditClick={onTitleEditClick}
+            onSaveClick={onTitleSaveClick}
             ref={inputRef}
+            style={styles.heading}
           />
         )}
-        {titleEditable && (
-          <>
-            {titleEditing
-              ? (
-                <IconButton
-                  icon={IconEnum.DoneAll}
-                  label="Save Title"
-                  onClick={onTitleSaveClick}
-                  padding={0.25}
-                  scale
-                  style={styles.headingButton}
-                />
-              )
-              : (
-                <IconButton
-                  icon={IconEnum.Edit}
-                  label="Edit Title"
-                  onClick={onTitleEditClick}
-                  padding={0.25}
-                  scale
-                  style={styles.headingButton}
-                />
-              )}
-          </>
-        )}
       </span>
-      {actions && (
-        <Toolbar
-          actions={actions}
-          id={`${currentId}-toolbar`}
-          margin={0}
-          padding={actionsPadding}
-          scaleActions={scaleActions}
-        />
-      )}
+      <ActionList
+        actions={actions}
+        actionsDense={actionsDense}
+        actionsScale={actionsScale}
+        gap={actionsGap}
+        hidden={actionsHidden}
+        id={`${currentId}-toolbar`}
+        margin={actionsMargin}
+        orientation={Orientation.Horizontal}
+        padding={actionsPadding}
+        style={actionsStyle}
+      />
     </View>
   );
 };

@@ -67,5 +67,41 @@ export default meta;
 export const Default: Story = {
   args: {
     label: "CommandBar Title",
+    latestCommands: [
+      {
+        kind: "button",
+        label: "Latest Command 1",
+      },
+      {
+        kind: "button",
+        label: "Latest Command 2",
+      },
+      {
+        kind: "button",
+        label: "Latest Command 3",
+      },
+      {
+        kind: "button",
+        label: "Latest Command 4",
+      },
+    ],
+    suggestedCommands: [
+      {
+        kind: "button",
+        label: "Suggested Command 1",
+      },
+      {
+        kind: "button",
+        label: "Suggested Command 2",
+      },
+      {
+        kind: "button",
+        label: "Suggested Command 3",
+      },
+      {
+        kind: "button",
+        label: "Suggested Command 4",
+      },
+    ],
   },
 } as Story;

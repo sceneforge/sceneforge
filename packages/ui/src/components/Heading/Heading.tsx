@@ -4,6 +4,7 @@ import { type HTMLAttributes, type Ref, createElement } from "react";
 import { type SpacerStyleProps, color, marginStyle, paddingStyle } from "../tokens.stylex";
 
 export type HeadingProps = {
+  hidden?: boolean;
   level: 1 | 2 | 3 | 4 | 5 | 6;
   margin?: SpacerStyleProps;
   padding?: SpacerStyleProps;
@@ -17,6 +18,9 @@ const styles = stylex.create({
   container: {
     display: "block",
   },
+  hidden: {
+    display: "none",
+  },
   shadow: {
     textShadow: `1px 1px 3px ${color.foreground}, 2px 4px 7px ${color.foreground}`,
   },
@@ -26,6 +30,7 @@ const styles = stylex.create({
 });
 
 const Heading = ({
+  hidden,
   level,
   margin = 0,
   padding = 0,
@@ -43,7 +48,8 @@ const Heading = ({
       styles.textAlign(textAlign),
       ...(margin === undefined ? [] : marginStyle(margin)),
       ...(padding === undefined ? [] : paddingStyle(padding)),
-      style
+      style,
+      hidden && styles.hidden
     ),
     ...props,
   });

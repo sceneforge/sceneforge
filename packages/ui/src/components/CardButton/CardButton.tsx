@@ -4,13 +4,22 @@ import { Button, type ButtonProps } from "../Button";
 import { Card, type CardProps } from "../Card";
 
 export type CardButtonProps = {
+  hidden?: ButtonProps["hidden"];
   margin?: ButtonProps["margin"];
   onClick?: ButtonProps["onClick"];
   popoverTarget?: ButtonProps["popoverTarget"];
   popoverTargetAction?: ButtonProps["popoverTargetAction"];
   ref?: ButtonProps["ref"];
   tabIndex?: ButtonProps["tabIndex"];
-} & Omit<CardProps, "actions">;
+} & Omit<
+  CardProps,
+  | "actions"
+  | "actionsMargin"
+  | "actionsPadding"
+  | "actionsStyle"
+  | "hidden"
+  | "popover"
+>;
 
 const styles = stylex.create({
   container: {
@@ -24,6 +33,7 @@ const styles = stylex.create({
 });
 
 const CardButton = ({
+  hidden,
   id,
   margin = 0,
   onClick,
@@ -36,6 +46,7 @@ const CardButton = ({
 }: CardButtonProps) => {
   return (
     <Button
+      hidden={hidden}
       id={id}
       margin={margin}
       onClick={onClick}

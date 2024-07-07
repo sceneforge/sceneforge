@@ -13,6 +13,7 @@ import { type SpacerStyleProps, color, marginStyle, paddingStyle } from "../toke
 export type ButtonProps = {
   clear?: boolean;
   dense?: boolean;
+  hidden?: boolean;
   inverted?: boolean;
   label?: string;
   margin?: SpacerStyleProps;
@@ -83,6 +84,9 @@ const styles = stylex.create({
     cursor: "default",
     filter: "grayscale(0.5)",
   },
+  hidden: {
+    display: "none",
+  },
   scale: {
     scale: {
       ":focus-visible": 1.05,
@@ -99,6 +103,7 @@ const Button = ({
   clear = false,
   dense,
   disabled,
+  hidden,
   inverted,
   label,
   margin = 0,
@@ -171,7 +176,8 @@ const Button = ({
         dense && styles.dense,
         ...(margin === undefined ? [] : marginStyle(margin)),
         ...(padding === undefined ? [] : paddingStyle(currentPadding)),
-        style
+        style,
+        hidden && styles.hidden
       )}
     >
       {label && !children ? label : children}

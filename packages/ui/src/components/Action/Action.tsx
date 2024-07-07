@@ -5,10 +5,10 @@ import { Dropdown, type DropdownProps } from "../Dropdown";
 import { IconButton, type IconButtonProps } from "../IconButton";
 import { Toggle, type ToggleProps } from "../Toggle";
 
-type ButtonActionProps = { kind: "button" | undefined } & ButtonProps;
-type DropdownActionProps = { kind: "dropdown" } & DropdownProps;
+type ButtonActionProps = { kind: "button" | undefined } & Omit<ButtonProps, "children">;
+type DropdownActionProps = { kind: "dropdown" } & Omit<DropdownProps, "children">;
 type IconButtonActionProps = { kind: "icon" } & IconButtonProps;
-type ToggleActionProps = { kind: "toggle" } & ToggleProps;
+type ToggleActionProps = { kind: "toggle" } & Omit<ToggleProps, "children">;
 
 type DividerActionProps = {
   [key: string]: unknown;
