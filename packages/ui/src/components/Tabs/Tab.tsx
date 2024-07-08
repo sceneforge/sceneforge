@@ -33,15 +33,37 @@ const styles = stylex.create({
     },
     color: color.foreground,
   },
+  borderHorizontalEnd: {
+    borderEndEndRadius: "0.5rem",
+    borderEndStartRadius: "0.5rem",
+  },
+  borderHorizontalStart: {
+    borderStartEndRadius: "0.5rem",
+    borderStartStartRadius: "0.5rem",
+  },
+  borderVerticalEnd: {
+    borderEndEndRadius: "0.5rem",
+    borderStartEndRadius: "0.5rem",
+  },
+  borderVerticalStart: {
+    borderEndStartRadius: "0.5rem",
+    borderStartStartRadius: "0.5rem",
+  },
   button: {
     alignItems: "center",
     backgroundColor: "transparent",
+    boxShadow: {
+      ":active": null,
+      ":focus": null,
+      "default": null,
+    },
     display: "flex",
     flexDirection: "row",
     flexGrow: 1,
     flexWrap: "nowrap",
     gap: "0.25rem",
     outline: {
+      ":active": "none",
       ":focus": "none",
       "default": "none",
     },
@@ -69,8 +91,11 @@ const styles = stylex.create({
     color: "inherit",
     display: "flex",
     flexDirection: "row",
+    flexWrap: "nowrap",
     height: null,
     justifyContent: "stretch",
+    scrollSnapAlign: "start",
+    scrollSnapStop: "always",
     width: null,
   },
   noVariantActive: {
@@ -89,6 +114,8 @@ const Tab = ({
   label,
   onTabChange,
   onTabClose,
+  orientation,
+  position,
   variant,
 }: TabProps) => {
   const {
@@ -108,6 +135,17 @@ const Tab = ({
         styles.container,
         active && styles.active,
         (!variant && active) && styles.noVariantActive,
+        orientation === Orientation.Horizontal
+        && (
+          position === Position.End
+            ? styles.borderHorizontalEnd
+            : styles.borderHorizontalStart
+        ),
+        orientation === Orientation.Vertical && (
+          position === Position.End
+            ? styles.borderVerticalEnd
+            : styles.borderVerticalStart
+        ),
       ]}
     >
       <Button
@@ -130,10 +168,13 @@ const Tab = ({
         <IconButton
           icon={IconEnum.Close}
           onClick={handleTabClose}
+          scale={false}
+          size={3}
           style={[
             styles.closeButton,
             active && styles.closeButtonActive,
           ]}
+          tabIndex={-1}
         />
       )}
     </View>

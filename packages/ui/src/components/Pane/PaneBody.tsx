@@ -25,7 +25,6 @@ const styles = stylex.create({
   actions: {
     backgroundColor: backgroundColor.alpha15,
     flexShrink: 1,
-    justifyContent: "center",
   },
   blockEnd: {
     borderEndEndRadius: "0.25rem",
@@ -38,6 +37,10 @@ const styles = stylex.create({
     borderStyle: "solid",
     borderWidth: "0.0625rem",
     flexGrow: 1,
+  },
+  list: {
+    justifyContent: "center",
+    width: null,
   },
 });
 
@@ -78,6 +81,7 @@ const PaneBody = ({
         gap={actionsGap}
         hidden={actionsHidden}
         id={id ? `${id}-pane-body-actions` : undefined}
+        listStyle={styles.list}
         margin={actionsMargin}
         orientation={Orientation.Horizontal}
         padding={actionsPadding}

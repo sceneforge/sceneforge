@@ -14,7 +14,7 @@ const meta: Meta<typeof Tabs> = {
   component: Tabs,
   decorators: [
     Story => (
-      <div style={{ height: "80vh", width: "80vw" }}>
+      <div style={{ height: "200px", width: "400px" }}>
         <Story />
       </div>
     ),

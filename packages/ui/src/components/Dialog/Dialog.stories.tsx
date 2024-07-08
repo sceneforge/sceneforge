@@ -32,7 +32,7 @@ export const Default: Story = {
   },
 } as Story;
 
-export const WithToolbar: Story = {
+export const WithActions: Story = {
   args: {
     actions: [
       {

@@ -8,7 +8,27 @@ const meta: Meta<typeof View> = {
     children: {
       control: "text",
     },
+    margin: {
+      control: "number",
+    },
+    padding: {
+      control: "number",
+    },
+    scrollable: {
+      control: "inline-radio",
+      options: [true, false, "inline", "block"],
+    },
     ...variantArgumentTypes("variant"),
+    ref: {
+      table: {
+        disable: true,
+      },
+    },
+    style: {
+      table: {
+        disable: true,
+      },
+    },
   },
   component: View,
   title: "Component/View",

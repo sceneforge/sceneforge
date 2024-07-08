@@ -58,7 +58,6 @@ const CarouselItem = ({
   return (
     <View
       hidden={hidden}
-      padding={1}
       style={styles.container}
     >
       {kind === "icon" && (

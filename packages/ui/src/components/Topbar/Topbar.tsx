@@ -42,11 +42,20 @@ const styles = stylex.create({
     alignItems: "center",
     display: "grid",
     gap: "0.5rem",
-    gridTemplateColumns: "min-content max-content auto max-content",
+    gridTemplateColumns: "min-content auto",
     insetBlockStart: 0,
     insetInlineStart: titleBar.appTitleBarInsetInlineStart,
     position: "absolute",
     width: titleBar.appTitleBarWidth,
+  },
+  contentActions: {
+    gridTemplateColumns: "min-content max-content auto max-content",
+  },
+  contentActionsOnlyEnd: {
+    gridTemplateColumns: "min-content auto max-content",
+  },
+  contentActionsOnlyStart: {
+    gridTemplateColumns: "min-content max-content auto",
   },
   heading: {
     fontSize: "1rem",
@@ -79,7 +88,15 @@ const Topbar = ({
         shadow && styles.containerBorderAndShadow
       )}
     >
-      <View style={styles.content} variant={variant}>
+      <View
+        style={[
+          styles.content,
+          actionsStart && actionsEnd && styles.contentActions,
+          actionsStart && !actionsEnd && styles.contentActionsOnlyStart,
+          !actionsStart && actionsEnd && styles.contentActionsOnlyEnd,
+        ]}
+        variant={variant}
+      >
         <Heading
           level={1}
           padding={{

@@ -70,7 +70,7 @@ export default meta;
 export const Default: Story = {
   args: {
     items: [
-      { img: "https://picsum.photos/seed/201/500", kind: "button", label: "Content 1" },
+      { img: "https://picsum.photos/seed/201/500", kind: "button", label: "Content 1 with a very long heading title that should break the thing" },
       { img: "https://picsum.photos/seed/202/500", kind: "button", label: "Content 2" },
       { img: "https://picsum.photos/seed/203/500", kind: "button", label: "Content 3" },
       { img: "https://picsum.photos/seed/204/500", kind: "button", label: "Content 4" },

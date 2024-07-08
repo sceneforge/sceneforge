@@ -17,6 +17,7 @@ export type ActionListProps = {
   hidden?: ViewProps["hidden"];
   id?: string;
   label?: string;
+  listStyle?: StyleXStyles;
   margin?: ViewProps["margin"];
   orientation?: Orientation;
   padding?: ViewProps["padding"];
@@ -49,7 +50,7 @@ const styles = stylex.create({
     alignItems: "center",
     display: "grid",
     gridAutoFlow: "column",
-    justifyContent: "center",
+    justifyContent: "stretch",
   },
   list: {
     display: "grid",
@@ -72,6 +73,8 @@ const ActionList = ({
   gap,
   hidden,
   id,
+  label,
+  listStyle,
   margin,
   orientation = Orientation.Vertical,
   padding = 0.25,
@@ -88,6 +91,7 @@ const ActionList = ({
   return (
     <View
       anchor={anchor}
+      aria-label={label}
       aria-labelledby={popover ? toggleId : undefined}
       hidden={hidden}
       id={currentId}
@@ -99,35 +103,38 @@ const ActionList = ({
       style={[styles.container, style]}
       variant={variant}
     >
-      <ul
-        role="presentation"
-        {...stylex.props(
-          styles.list,
-          styles.gap(gap),
-          orientation === Orientation.Horizontal && styles.horizontal
-        )}
-      >
-        {actions && actions.length > 0 && actions.map((actionProps, index) => (
-          <li
-            key={`${currentId}-action-${index}`}
-            role="presentation"
-            {...stylex.props(styles.item)}
-          >
-            <Action
-              dense={actionsDense}
-              listOrientation={orientation}
-              role="menuitem"
-              scale={actionsScale}
-              style={[
-                styles.action,
-                actionsStyle,
-              ]}
-              variant={variant}
-              {...actionProps}
-            />
-          </li>
-        ))}
-      </ul>
+      {actions && actions.length > 0 && (
+        <ul
+          role="presentation"
+          {...stylex.props(
+            styles.list,
+            styles.gap(gap),
+            orientation === Orientation.Horizontal && styles.horizontal,
+            listStyle
+          )}
+        >
+          {actions.map((actionProps, index) => (
+            <li
+              key={`${currentId}-action-${index}`}
+              role="presentation"
+              {...stylex.props(styles.item)}
+            >
+              <Action
+                dense={actionsDense}
+                listOrientation={orientation}
+                role="menuitem"
+                scale={actionsScale}
+                style={[
+                  styles.action,
+                  actionsStyle,
+                ]}
+                variant={variant}
+                {...actionProps}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
     </View>
   );
 };

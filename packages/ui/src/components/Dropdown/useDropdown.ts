@@ -6,13 +6,19 @@ import type { DropdownProps } from "./Dropdown";
 import { ActionProps } from "../Action";
 
 type UseDropdownProps = {
+  actionListVariant?: DropdownProps["actionListVariant"];
   actions?: DropdownProps["actions"];
   id?: DropdownProps["id"];
   parentDropdownId?: DropdownProps["parentDropdownId"];
   variant?: DropdownProps["variant"];
 };
 
-export const useDropdown = ({ actions, id, variant }: UseDropdownProps) => {
+export const useDropdown = ({
+  actionListVariant,
+  actions,
+  id,
+  variant,
+}: UseDropdownProps) => {
   const generatedId = useId();
   const toggleRef = useRef<ToggleComponentRef>(null);
   const actionListRef = useRef<HTMLDivElement>(null);
@@ -29,6 +35,13 @@ export const useDropdown = ({ actions, id, variant }: UseDropdownProps) => {
     }
     return variant;
   }, [variant, currentState]);
+
+  const currentActionListVariant = useMemo(() => {
+    if (actionListVariant) {
+      return actionListVariant;
+    }
+    return currentVariant;
+  }, [actionListVariant, currentVariant]);
 
   const currentActions = useMemo(() => {
     if (!actions) return [];
@@ -83,6 +96,7 @@ export const useDropdown = ({ actions, id, variant }: UseDropdownProps) => {
 
   return {
     actionListRef,
+    currentActionListVariant,
     currentActions,
     currentId,
     currentListId,

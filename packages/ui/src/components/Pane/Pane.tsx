@@ -3,12 +3,14 @@ import { type PropsWithChildren, lazy } from "react";
 
 import type { PaneBodyProps } from "./PaneBody";
 import type { PaneHeaderProps } from "./PaneHeader";
+import type { PaneImageProps } from "./PaneImage";
 
 import { backgroundColor } from "../tokens.stylex";
 import { usePane } from "./usePane";
 
-const PaneHeader = lazy(() => import("./PaneHeader"));
 const PaneBody = lazy(() => import("./PaneBody"));
+const PaneHeader = lazy(() => import("./PaneHeader"));
+const PaneImage = lazy(() => import("./PaneImage"));
 
 export type PaneProps = Omit<
   PaneHeaderProps,
@@ -18,6 +20,9 @@ export type PaneProps = Omit<
   | "ref"
   | "titleEditing"
 > & PropsWithChildren<{
+  image?: PaneImageProps["src"];
+  imageAlt?: PaneImageProps["alt"];
+  imageStyle?: PaneImageProps["style"];
   onTitleChange?: (currentTitle?: string, previousTitle?: string) => void;
   paneActions?: PaneBodyProps["actions"];
   paneActionsDense?: PaneBodyProps["actionsDense"];
@@ -32,10 +37,10 @@ export type PaneProps = Omit<
 const styles = stylex.create({
   container: {
     backgroundColor: backgroundColor.alpha10,
-    display: "flex",
-    flexDirection: "column",
+    display: "grid",
+    gridAutoFlow: "row",
+    gridTemplateRows: "min-content 1fr",
     height: "100%",
-    overflow: "hidden",
     width: "100%",
   },
   inner: {
@@ -49,6 +54,9 @@ const styles = stylex.create({
 
 const Pane = ({
   children,
+  image,
+  imageAlt,
+  imageStyle,
   level,
   onTitleChange,
   outer,
@@ -96,6 +104,13 @@ const Pane = ({
               inputRef={inputRef}
               ref={headingRef}
             />
+            {image && (
+              <PaneImage
+                alt={imageAlt}
+                src={image}
+                style={imageStyle}
+              />
+            )}
             <PaneBody
               actions={paneActions}
               actionsDense={paneActionsDense}

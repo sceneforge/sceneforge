@@ -11,6 +11,10 @@ export type DropdownProps = {
 } & Omit<ToggleProps, "onToggle" | "pressed">;
 
 const styles = stylex.create({
+  action: {
+    textAlign: "start",
+    width: "100%",
+  },
   container: (id: string) => ({
     anchorName: `--dropdown-anchor-${id.replaceAll(":", "-")}`,
   } as Record<string, string>),
@@ -45,6 +49,7 @@ const Dropdown = ({
 }: DropdownProps) => {
   const {
     actionListRef,
+    currentActionListVariant,
     currentActions,
     currentId,
     currentListId,
@@ -52,7 +57,13 @@ const Dropdown = ({
     currentVariant,
     handleToggleEvent,
     toggleRef,
-  } = useDropdown({ actions, id, parentDropdownId, variant });
+  } = useDropdown({
+    actionListVariant,
+    actions,
+    id,
+    parentDropdownId,
+    variant,
+  });
 
   return (
     <>
@@ -74,17 +85,18 @@ const Dropdown = ({
       />
       <ActionList
         actions={currentActions}
+        actionsStyle={styles.action}
         anchor={parentDropdownId}
         id={currentListId}
         popover="auto"
         ref={actionListRef}
         style={[
           styles.popover as Record<string, string>,
-          !(actionListVariant || variant) && styles.noVariantPopover,
+          !currentActionListVariant && styles.noVariantPopover,
           styles.popoverAnchor(currentId),
         ]}
         toggleId={currentId}
-        variant={actionListVariant ?? currentVariant}
+        variant={currentActionListVariant}
       />
     </>
   );

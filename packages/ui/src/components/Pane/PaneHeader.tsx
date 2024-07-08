@@ -18,6 +18,7 @@ export type PaneHeaderProps = {
   actionsScale?: ActionListProps["actionsScale"];
   actionsStyle?: ActionListProps["style"];
   headingPadding?: HeadingProps["padding"];
+  headingStyle?: HeadingProps["style"];
   id?: string;
   inputRef?: Ref<HTMLInputElement>;
   level?: HeadingProps["level"];
@@ -80,6 +81,7 @@ const PaneHeader = ({
   headingPadding = {
     inline: 0.5,
   },
+  headingStyle,
   id,
   inputRef,
   level = 2,
@@ -110,7 +112,10 @@ const PaneHeader = ({
           margin={0}
           padding={headingPadding}
           ref={ref}
-          style={styles.heading}
+          style={[
+            styles.heading,
+            headingStyle,
+          ]}
         >
           {title}
         </Heading>

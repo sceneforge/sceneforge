@@ -28,6 +28,12 @@ const styles = stylex.create({
     position: "relative",
     textAlign: "start",
   },
+  heading: {
+    fontSize: "1rem",
+    fontWeight: 500,
+    textOverflow: "ellipsis",
+    width: "100%",
+  },
   image: {
     aspectRatio: "4 / 3",
     height: "100%",
@@ -63,6 +69,9 @@ const Card = ({
       variant={variant}
     >
       <Pane
+        headingStyle={styles.heading}
+        image={img}
+        imageAlt={label}
         level={3}
         outer
         paneActions={actions}
@@ -72,7 +81,7 @@ const Card = ({
         paneActionsStyle={actionsStyle}
         title={label}
       >
-        {img && (
+        {/* {img && (
           <img
             alt={`Image of ${label}`}
             src={img}
@@ -80,7 +89,7 @@ const Card = ({
               styles.image
             )}
           />
-        )}
+        )} */}
         {children}
       </Pane>
     </View>

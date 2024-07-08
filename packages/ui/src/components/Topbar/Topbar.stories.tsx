@@ -70,7 +70,42 @@ export const Default: Story = {
   },
 } as Story;
 
-export const WithToolbar: Story = {
+export const WithActionsStart: Story = {
+  args: {
+    actionsStart: [
+      {
+        icon: IconEnum.Globe,
+        kind: "icon",
+        label: "Button 1",
+      },
+      {
+        kind: "button",
+        label: "Button 2",
+      },
+    ],
+    shadow: true,
+    title: "Topbar Title With Actions Start",
+  },
+};
+
+export const WithActionsEnd: Story = {
+  args: {
+    actionsEnd: [
+      {
+        kind: "button",
+        label: "Button 1",
+      },
+      {
+        kind: "button",
+        label: "Button 2",
+      },
+    ],
+    shadow: true,
+    title: "Topbar Title With Actions End",
+  },
+};
+
+export const WithActionsStartAndEnd: Story = {
   args: {
     actionsEnd: [
       {

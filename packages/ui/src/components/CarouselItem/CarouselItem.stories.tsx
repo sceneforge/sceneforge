@@ -29,17 +29,6 @@ const meta: Meta<typeof CarouselItem> = {
     label: {
       control: "text",
     },
-    zoom: {
-      control: {
-        max: 4,
-        min: 0,
-        type: "range",
-      },
-      if: { arg: "kind", neq: "icon" },
-      table: {
-        category: "Cards",
-      },
-    },
     ...variantArgumentTypes("variant"),
     icon: {
       ...iconArgTypes("icon")["icon"],

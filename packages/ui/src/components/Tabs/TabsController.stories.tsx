@@ -27,7 +27,7 @@ const meta: Meta<typeof TabsController> = {
   component: TabsController,
   decorators: [
     Story => (
-      <div style={{ height: "80vh", width: "80vw" }}>
+      <div style={{ height: "200px", width: "400px" }}>
         <Story />
       </div>
     ),
@@ -51,7 +51,7 @@ export const Default: Story = {
         tab: {
           icon: IconEnum.DeployedCode,
           id: "tab-1",
-          label: "Tab 1",
+          label: "Tab Label Long 1",
         },
       },
       {
@@ -61,7 +61,7 @@ export const Default: Story = {
         tab: {
           icon: IconEnum.Settings,
           id: "tab-2",
-          label: "Tab 2",
+          label: "Tab Medium 2",
         },
       },
       {
@@ -72,6 +72,46 @@ export const Default: Story = {
           icon: IconEnum.Lightbulb,
           id: "tab-3",
           label: "Tab 3",
+        },
+      },
+      {
+        panel: {
+          component: () => "TabPanel 4 Content",
+        },
+        tab: {
+          icon: IconEnum.Globe,
+          id: "tab-4",
+          label: "Tab 4",
+        },
+      },
+      {
+        panel: {
+          component: () => "TabPanel 5 Content",
+        },
+        tab: {
+          icon: IconEnum.Camera,
+          id: "tab-5",
+          label: "Tab 5",
+        },
+      },
+      {
+        panel: {
+          component: () => "TabPanel 6 Content",
+        },
+        tab: {
+          icon: IconEnum.Transform,
+          id: "tab-6",
+          label: "Tab 6",
+        },
+      },
+      {
+        panel: {
+          component: () => "TabPanel 7 Content",
+        },
+        tab: {
+          icon: IconEnum.FileMap,
+          id: "tab-7",
+          label: "Tab 7",
         },
       },
     ],

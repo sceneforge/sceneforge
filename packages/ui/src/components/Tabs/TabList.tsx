@@ -3,6 +3,7 @@ import { lazy, useId } from "react";
 
 import { Align, Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
+import { currentColor } from "../tokens.stylex";
 import { type TabProps } from "./Tab";
 
 const Tab = lazy(() => import("./Tab"));
@@ -23,21 +24,81 @@ export type TabListProps = {
 
 const styles = stylex.create({
   container: {
-    display: "flex",
-    flexDirection: "row",
     flexShrink: 1,
     height: null,
-    justifyContent: "flex-start",
+    scrollBehavior: "smooth",
+    scrollbarColor: `${currentColor.alpha20} ${currentColor.alpha05}`,
+    scrollbarWidth: "thin",
     width: null,
   },
   containerCenter: {
-    justifyContent: "center",
+    alignContent: "center",
   },
   containerEnd: {
-    justifyContent: "flex-end",
+    alignContent: "end",
+  },
+  containerHorizontal: {
+    maxWidth: null,
+    minHeight: "min-content",
+    paddingBlockEnd: "0.5rem",
+    paddingInlineEnd: null,
+    scrollPaddingBlockEnd: "0.5rem",
+    scrollPaddingInlineEnd: null,
+    scrollSnapType: "x mandatory",
+    touchAction: "pan-x",
+  },
+  containerScrollbar: {
+    "::-webkit-scrollbar": {
+      height: "0.25rem",
+      width: "0.25rem",
+    },
+    "::-webkit-scrollbar-thumb": {
+      backgroundColor: currentColor.alpha40,
+      borderRadius: 0,
+      //   default: currentColor.alpha40,
+      //   hover: currentColor.alpha60,
+      // },
+    },
+    "::-webkit-scrollbar-track": {
+      backgroundColor: "transparent",
+    },
+  },
+  containerStart: {
+    alignContent: "start",
   },
   containerVertical: {
-    flexDirection: "column",
+    maxHeight: null,
+    minWidth: "min-content",
+    paddingBlockEnd: null,
+    scrollPaddingBlockEnd: null,
+    scrollSnapType: "y mandatory",
+    touchAction: "pan-y",
+  },
+  tabs: {
+    alignContent: "start",
+    display: "grid",
+    gridAutoColumns: null,
+    gridAutoFlow: "column",
+    gridAutoRows: "max-content",
+    height: null,
+    isolation: "isolate",
+    justifyContent: "start",
+    minWidth: "max-content",
+    width: null,
+  },
+  tabsCenter: {
+    justifyContent: "center",
+  },
+  tabsEnd: {
+    justifyContent: "end",
+  },
+  tabsStart: {
+    justifyContent: "start",
+  },
+  tabsVertical: {
+    gridAutoColumns: "max-content",
+    gridAutoFlow: "row",
+    gridAutoRows: null,
   },
 });
 
@@ -59,31 +120,54 @@ const TabList = ({
 
   return (
     <View
-      aria-label={label}
       id={currentId}
-      role="tablist"
+      role="presentation"
+      scrollable={orientation === Orientation.Vertical ? "block" : "inline"}
       style={[
         styles.container,
-        orientation === Orientation.Vertical && styles.containerVertical,
-        align === Align.Center
-          ? styles.containerCenter
-          : align === Align.End && styles.containerEnd,
+        styles.containerScrollbar,
+        orientation === Orientation.Horizontal
+          ? styles.containerHorizontal
+          : styles.containerVertical,
+        orientation === Orientation.Vertical && (
+          align === Align.Center
+            ? styles.containerCenter
+            : (align === Align.End
+              ? styles.containerEnd
+              : styles.containerStart)
+        ),
       ]}
     >
-      {tabs.map(({ closeable: tabClosable, id: tabId, ...tab }) => (
-        <Tab
-          active={tabId === activeTabId}
-          id={tabId}
-          key={`${currentId}-tab-${tabId}`}
-          {...tab}
-          closeable={tabClosable === undefined ? closeable : tabClosable}
-          onTabChange={onTabChange}
-          onTabClose={onTabClose}
-          orientation={orientation}
-          position={position}
-          variant={variant}
-        />
-      ))}
+      <View
+        aria-label={label}
+        role="tablist"
+        scrollable
+        style={[
+          styles.tabs,
+          orientation === Orientation.Vertical && styles.tabsVertical,
+          orientation === Orientation.Horizontal && (
+            align === Align.Center
+              ? styles.tabsCenter
+              : (align === Align.End
+                ? styles.tabsEnd
+                : styles.tabsStart)),
+        ]}
+      >
+        {tabs.map(({ closeable: tabClosable, id: tabId, ...tab }) => (
+          <Tab
+            active={tabId === activeTabId}
+            id={tabId}
+            key={`${currentId}-tab-${tabId}`}
+            {...tab}
+            closeable={tabClosable === undefined ? closeable : tabClosable}
+            onTabChange={onTabChange}
+            onTabClose={onTabClose}
+            orientation={orientation}
+            position={position}
+            variant={variant}
+          />
+        ))}
+      </View>
     </View>
   );
 };
