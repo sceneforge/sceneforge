@@ -4,11 +4,16 @@ import {
   type Ref,
 } from "react";
 
+import {
+  backgroundColor,
+  colorStyles,
+  foregroundBackgroundColor,
+  foregroundColor,
+} from "../../colors.stylex";
 import { IconEnum, Variant } from "../../types";
 import { Divider } from "../Divider";
 import { Pane, type PaneProps } from "../Pane";
 import { View } from "../View";
-import { backgroundColor, backgroundTextColorVariantStyle, foregroundColor, foregroundToBackgroundColor } from "../tokens.stylex";
 import { useDialog } from "./useDialog";
 
 export type DialogProps = {
@@ -34,7 +39,7 @@ const styles = stylex.create({
     },
   },
   container: {
-    backgroundColor: foregroundToBackgroundColor.alpha10,
+    backgroundColor: foregroundBackgroundColor.alpha10,
     borderColor: backgroundColor.alpha10,
     borderRadius: "0.5rem",
     borderStyle: "solid",
@@ -94,7 +99,8 @@ const Dialog = ({
       {...stylex.props(
         styles.container,
         styles.backdrop,
-        backgroundTextColorVariantStyle(variant)
+        variant && colorStyles.backgroundVariant(variant),
+        variant && colorStyles.foregroundBackgroundVariant(variant)
       )}
     >
       <Pane

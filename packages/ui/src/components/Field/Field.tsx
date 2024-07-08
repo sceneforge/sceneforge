@@ -1,7 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren } from "react";
 
-import { backgroundColor } from "../tokens.stylex";
+import { backgroundColor } from "../../colors.stylex";
 
 export type FieldProps = PropsWithChildren<{
   id?: string;

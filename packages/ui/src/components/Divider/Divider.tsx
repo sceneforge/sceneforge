@@ -2,9 +2,9 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 
 import * as stylex from "@stylexjs/stylex";
 
+import { currentColor } from "../../colors.stylex";
 import { Orientation } from "../../types";
 import { View } from "../View";
-import { currentColor } from "../tokens.stylex";
 
 export type DividerProps = {
   dense?: boolean;

@@ -1,12 +1,14 @@
 import * as stylex from "@stylexjs/stylex";
 import { type MouseEventHandler, type Ref, useId } from "react";
+import { lazy } from "react";
 
+import { backgroundColor } from "../../colors.stylex";
 import { Orientation } from "../../types";
 import { ActionList, type ActionListProps } from "../ActionList";
 import { Heading, type HeadingProps } from "../Heading";
 import { View } from "../View";
-import { backgroundColor } from "../tokens.stylex";
-import PaneHeaderInput from "./PaneHeaderInput";
+
+const PaneHeaderInput = lazy(() => import("./PaneHeaderInput"));
 
 export type PaneHeaderProps = {
   actions?: ActionListProps["actions"];

@@ -81,15 +81,6 @@ const Card = ({
         paneActionsStyle={actionsStyle}
         title={label}
       >
-        {/* {img && (
-          <img
-            alt={`Image of ${label}`}
-            src={img}
-            {...stylex.props(
-              styles.image
-            )}
-          />
-        )} */}
         {children}
       </Pane>
     </View>

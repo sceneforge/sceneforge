@@ -3,6 +3,7 @@ export type VariantType =
   | "danger"
   | "default"
   | "info"
+  | "primary"
   | "success"
   | "warning";
 
@@ -11,6 +12,7 @@ export enum Variant {
   Danger = "danger",
   Default = "default",
   Info = "info",
+  Primary = "primary",
   Success = "success",
   Warning = "warning",
 };

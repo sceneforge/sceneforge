@@ -3,8 +3,8 @@ import type { AllHTMLAttributes, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
+import { colorStyles } from "../../colors.stylex";
 import { Variant } from "../../types";
-import { textColorVariantStyle } from "../tokens.stylex";
 
 export type LinkProps = {
   hidden?: boolean;
@@ -30,7 +30,7 @@ const Link = ({
     <a
       {...props}
       {...stylex.props(
-        ...textColorVariantStyle(variant),
+        variant && colorStyles.foregroundVariant(variant),
         style,
         hidden && styles.hidden
       )}

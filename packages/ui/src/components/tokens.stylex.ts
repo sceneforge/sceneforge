@@ -1,6 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 
-import { IconEnum, Variant } from "../types";
+import { IconEnum } from "../types";
 
 export const MEDIA_DARK = "@media (prefers-color-scheme: dark)";
 export const MEDIA_CONTROL_OVERLAY = "@media (display-mode: window-controls-overlay)";
@@ -29,121 +29,6 @@ export const FROM_LG_TO_XXL = "@media only screen and (min-width: 992px) and (ma
 export const typography = stylex.defineVars({
   fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
   fontSizeDefault: "1rem",
-});
-
-export const color = stylex.defineVars({
-  accent: "#006e50",
-  accentText: "#fff",
-  background: {
-    [MEDIA_DARK]: "#000",
-    default: "#fff",
-  },
-  danger: "#b30f0f",
-  dangerText: "#fff",
-  foreground: {
-    [MEDIA_DARK]: "#fff",
-    default: "#000",
-  },
-  info: "#1c45ad",
-  infoText: "#fff",
-  primary: "#86159d",
-  primaryText: "#fff",
-  success: "#13ac13",
-  successText: "#fff",
-  warning: "#d1a512",
-  warningText: "#000",
-});
-
-export const backgroundColor = stylex.defineVars({
-  alpha05: `color-mix(in srgb, ${color.background} 5%, transparent)`,
-  alpha10: `color-mix(in srgb, ${color.background} 10%, transparent)`,
-  alpha15: `color-mix(in srgb, ${color.background} 15%, transparent)`,
-  alpha20: `color-mix(in srgb, ${color.background} 20%, transparent)`,
-  alpha25: `color-mix(in srgb, ${color.background} 25%, transparent)`,
-  alpha30: `color-mix(in srgb, ${color.background} 30%, transparent)`,
-  alpha35: `color-mix(in srgb, ${color.background} 35%, transparent)`,
-  alpha40: `color-mix(in srgb, ${color.background} 40%, transparent)`,
-  alpha45: `color-mix(in srgb, ${color.background} 45%, transparent)`,
-  alpha50: `color-mix(in srgb, ${color.background} 50%, transparent)`,
-  alpha55: `color-mix(in srgb, ${color.background} 55%, transparent)`,
-  alpha60: `color-mix(in srgb, ${color.background} 60%, transparent)`,
-  alpha65: `color-mix(in srgb, ${color.background} 65%, transparent)`,
-  alpha70: `color-mix(in srgb, ${color.background} 70%, transparent)`,
-  alpha75: `color-mix(in srgb, ${color.background} 75%, transparent)`,
-  alpha80: `color-mix(in srgb, ${color.background} 80%, transparent)`,
-  alpha85: `color-mix(in srgb, ${color.background} 85%, transparent)`,
-  alpha90: `color-mix(in srgb, ${color.background} 90%, transparent)`,
-  alpha95: `color-mix(in srgb, ${color.background} 95%, transparent)`,
-  default: color.background,
-});
-
-export const currentColor = stylex.defineVars({
-  alpha05: "color-mix(in srgb, currentColor 5%, transparent)",
-  alpha10: "color-mix(in srgb, currentColor 10%, transparent)",
-  alpha15: "color-mix(in srgb, currentColor 15%, transparent)",
-  alpha20: "color-mix(in srgb, currentColor 20%, transparent)",
-  alpha25: "color-mix(in srgb, currentColor 25%, transparent)",
-  alpha30: "color-mix(in srgb, currentColor 30%, transparent)",
-  alpha35: "color-mix(in srgb, currentColor 35%, transparent)",
-  alpha40: "color-mix(in srgb, currentColor 40%, transparent)",
-  alpha45: "color-mix(in srgb, currentColor 45%, transparent)",
-  alpha50: "color-mix(in srgb, currentColor 50%, transparent)",
-  alpha55: "color-mix(in srgb, currentColor 55%, transparent)",
-  alpha60: "color-mix(in srgb, currentColor 60%, transparent)",
-  alpha65: "color-mix(in srgb, currentColor 65%, transparent)",
-  alpha70: "color-mix(in srgb, currentColor 70%, transparent)",
-  alpha75: "color-mix(in srgb, currentColor 75%, transparent)",
-  alpha80: "color-mix(in srgb, currentColor 80%, transparent)",
-  alpha85: "color-mix(in srgb, currentColor 85%, transparent)",
-  alpha90: "color-mix(in srgb, currentColor 90%, transparent)",
-  alpha95: "color-mix(in srgb, currentColor 95%, transparent)",
-  default: "currentColor",
-});
-
-export const foregroundColor = stylex.defineVars({
-  alpha05: `color-mix(in srgb, ${color.foreground} 5%, transparent)`,
-  alpha10: `color-mix(in srgb, ${color.foreground} 10%, transparent)`,
-  alpha15: `color-mix(in srgb, ${color.foreground} 15%, transparent)`,
-  alpha20: `color-mix(in srgb, ${color.foreground} 20%, transparent)`,
-  alpha25: `color-mix(in srgb, ${color.foreground} 25%, transparent)`,
-  alpha30: `color-mix(in srgb, ${color.foreground} 30%, transparent)`,
-  alpha35: `color-mix(in srgb, ${color.foreground} 35%, transparent)`,
-  alpha40: `color-mix(in srgb, ${color.foreground} 40%, transparent)`,
-  alpha45: `color-mix(in srgb, ${color.foreground} 45%, transparent)`,
-  alpha50: `color-mix(in srgb, ${color.foreground} 50%, transparent)`,
-  alpha55: `color-mix(in srgb, ${color.foreground} 55%, transparent)`,
-  alpha60: `color-mix(in srgb, ${color.foreground} 60%, transparent)`,
-  alpha65: `color-mix(in srgb, ${color.foreground} 65%, transparent)`,
-  alpha70: `color-mix(in srgb, ${color.foreground} 70%, transparent)`,
-  alpha75: `color-mix(in srgb, ${color.foreground} 75%, transparent)`,
-  alpha80: `color-mix(in srgb, ${color.foreground} 80%, transparent)`,
-  alpha85: `color-mix(in srgb, ${color.foreground} 85%, transparent)`,
-  alpha90: `color-mix(in srgb, ${color.foreground} 90%, transparent)`,
-  alpha95: `color-mix(in srgb, ${color.foreground} 95%, transparent)`,
-  default: color.foreground,
-});
-
-export const foregroundToBackgroundColor = stylex.defineVars({
-  alpha05: `color-mix(in srgb, ${color.foreground} 5%, ${color.background})`,
-  alpha10: `color-mix(in srgb, ${color.foreground} 10%, ${color.background})`,
-  alpha15: `color-mix(in srgb, ${color.foreground} 15%, ${color.background})`,
-  alpha20: `color-mix(in srgb, ${color.foreground} 20%, ${color.background})`,
-  alpha25: `color-mix(in srgb, ${color.foreground} 25%, ${color.background})`,
-  alpha30: `color-mix(in srgb, ${color.foreground} 30%, ${color.background})`,
-  alpha35: `color-mix(in srgb, ${color.foreground} 35%, ${color.background})`,
-  alpha40: `color-mix(in srgb, ${color.foreground} 40%, ${color.background})`,
-  alpha45: `color-mix(in srgb, ${color.foreground} 45%, ${color.background})`,
-  alpha50: `color-mix(in srgb, ${color.foreground} 50%, ${color.background})`,
-  alpha55: `color-mix(in srgb, ${color.foreground} 55%, ${color.background})`,
-  alpha60: `color-mix(in srgb, ${color.foreground} 60%, ${color.background})`,
-  alpha65: `color-mix(in srgb, ${color.foreground} 65%, ${color.background})`,
-  alpha70: `color-mix(in srgb, ${color.foreground} 70%, ${color.background})`,
-  alpha75: `color-mix(in srgb, ${color.foreground} 75%, ${color.background})`,
-  alpha80: `color-mix(in srgb, ${color.foreground} 80%, ${color.background})`,
-  alpha85: `color-mix(in srgb, ${color.foreground} 85%, ${color.background})`,
-  alpha90: `color-mix(in srgb, ${color.foreground} 90%, ${color.background})`,
-  alpha95: `color-mix(in srgb, ${color.foreground} 95%, ${color.background})`,
-  default: color.foreground,
 });
 
 export const titleBar = stylex.defineVars({
@@ -209,9 +94,6 @@ export const icons = stylex.defineVars({
 });
 
 export const common = stylex.create({
-  background: (background?: keyof typeof color) => ({
-    backgroundColor: background ? color[background] : undefined,
-  }),
   icon: (iconKey?: keyof typeof icons) => ({
     maskImage: iconKey ? icons[iconKey] : null,
   }),
@@ -238,9 +120,6 @@ export const common = stylex.create({
   }),
   paddingInlineStart: (value: number) => ({
     paddingInlineStart: value > 0 ? `${value}rem` : 0,
-  }),
-  text: (text?: keyof typeof color) => ({
-    color: text ? color[text] : undefined,
   }),
 });
 
@@ -319,39 +198,6 @@ export const paddingStyle = (value?: SpacerStyleProps) => {
     ],
     typeof inlineEnd === "number" && common.paddingInlineEnd(inlineEnd),
     typeof inlineStart === "number" && common.paddingInlineStart(inlineStart),
-  ];
-};
-
-export const backgroundColorVariantStyle = (variant?: Variant) => {
-  return [
-    variant === Variant.Accent && common.background("accent"),
-    variant === Variant.Danger && common.background("danger"),
-    variant === Variant.Info && common.background("info"),
-    variant === Variant.Default && common.background("primary"),
-    variant === Variant.Success && common.background("success"),
-    variant === Variant.Warning && common.background("warning"),
-  ];
-};
-
-export const backgroundTextColorVariantStyle = (variant?: Variant) => {
-  return [
-    variant === Variant.Accent && [common.background("accent"), common.text("accentText")],
-    variant === Variant.Danger && [common.background("danger"), common.text("dangerText")],
-    variant === Variant.Info && [common.background("info"), common.text("infoText")],
-    variant === Variant.Default && [common.background("primary"), common.text("primaryText")],
-    variant === Variant.Success && [common.background("success"), common.text("successText")],
-    variant === Variant.Warning && [common.background("warning"), common.text("warningText")],
-  ];
-};
-
-export const textColorVariantStyle = (variant?: Variant) => {
-  return [
-    variant === Variant.Accent && common.text("accent"),
-    variant === Variant.Danger && common.text("danger"),
-    variant === Variant.Info && common.text("info"),
-    variant === Variant.Default && common.text("primary"),
-    variant === Variant.Success && common.text("success"),
-    variant === Variant.Warning && common.text("warning"),
   ];
 };
 

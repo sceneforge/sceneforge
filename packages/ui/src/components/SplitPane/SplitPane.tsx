@@ -1,9 +1,9 @@
 import * as stylex from "@stylexjs/stylex";
 import { Children, Fragment, useId } from "react";
 
+import { backgroundColor } from "../../colors.stylex";
 import { Orientation } from "../../types";
 import { View, type ViewProps } from "../View";
-import { backgroundColor } from "../tokens.stylex";
 
 export type SplitPaneProps = {
   initialSize?: number[];

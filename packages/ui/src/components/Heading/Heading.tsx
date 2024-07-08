@@ -1,7 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import { type HTMLAttributes, type Ref, createElement } from "react";
 
-import { type SpacerStyleProps, color, marginStyle, paddingStyle } from "../tokens.stylex";
+import { foregroundColor } from "../../colors.stylex";
+import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
 
 export type HeadingProps = {
   hidden?: boolean;
@@ -22,7 +23,7 @@ const styles = stylex.create({
     display: "none",
   },
   shadow: {
-    textShadow: `1px 1px 3px ${color.foreground}, 2px 4px 7px ${color.foreground}`,
+    textShadow: `1px 1px 3px ${foregroundColor.default}, 2px 4px 7px ${foregroundColor.default}`,
   },
   textAlign: (value?: "center" | "end" | "start") => ({
     textAlign: value || "start",

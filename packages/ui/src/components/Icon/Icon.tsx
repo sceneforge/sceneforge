@@ -3,8 +3,9 @@ import type { HTMLAttributes, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
+import { colorStyles } from "../../colors.stylex";
 import { IconEnum, Variant } from "../../types";
-import { iconStyle, textColorVariantStyle } from "../tokens.stylex";
+import { iconStyle } from "../tokens.stylex";
 
 export type IconProps = {
   icon: IconEnum;
@@ -50,7 +51,7 @@ const Icon = ({
       ref={ref}
       {...stylex.props(
         styles.container,
-        ...textColorVariantStyle(variant),
+        variant && colorStyles.foregroundVariant(variant),
         ...iconStyle(icon),
         styles.size(size),
         style

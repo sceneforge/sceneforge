@@ -1,9 +1,9 @@
 import * as stylex from "@stylexjs/stylex";
 import { lazy, useId } from "react";
 
+import { currentColor } from "../../colors.stylex";
 import { Align, Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
-import { currentColor } from "../tokens.stylex";
 import { type TabProps } from "./Tab";
 
 const Tab = lazy(() => import("./Tab"));
@@ -55,9 +55,6 @@ const styles = stylex.create({
     "::-webkit-scrollbar-thumb": {
       backgroundColor: currentColor.alpha40,
       borderRadius: 0,
-      //   default: currentColor.alpha40,
-      //   hover: currentColor.alpha60,
-      // },
     },
     "::-webkit-scrollbar-track": {
       backgroundColor: "transparent",

@@ -3,8 +3,9 @@ import type { AllHTMLAttributes, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
+import { colorStyles } from "../../colors.stylex";
 import { Variant } from "../../types";
-import { type SpacerStyleProps, backgroundTextColorVariantStyle, marginStyle, paddingStyle } from "../tokens.stylex";
+import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
 
 export type ViewProps = {
   hidden?: boolean;
@@ -62,9 +63,10 @@ const View = ({
           styles.scrollableBlock,
           styles.scrollableInline,
         ],
-        ...backgroundTextColorVariantStyle(variant),
         ...(margin === undefined ? [] : marginStyle(margin)),
         ...(padding === undefined ? [] : paddingStyle(padding)),
+        variant && colorStyles.backgroundVariant(variant),
+        variant && colorStyles.foregroundBackgroundVariant(variant),
         style,
         hidden && styles.hidden
       )}

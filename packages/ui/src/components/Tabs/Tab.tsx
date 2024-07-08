@@ -2,12 +2,12 @@ import * as stylex from "@stylexjs/stylex";
 
 import type { TabCloseCallback } from "./TabPanel";
 
+import { backgroundColor, foregroundColor } from "../../colors.stylex";
 import { IconEnum, Orientation, Position, Variant } from "../../types";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { IconButton } from "../IconButton";
 import { View } from "../View";
-import { backgroundColor, color } from "../tokens.stylex";
 import { useTab } from "./useTab";
 
 export type TabProps = {
@@ -31,7 +31,7 @@ const styles = stylex.create({
       "@media (prefers-color-scheme: dark)": backgroundColor.alpha35,
       "default": backgroundColor.alpha75,
     },
-    color: color.foreground,
+    color: foregroundColor.default,
   },
   borderHorizontalEnd: {
     borderEndEndRadius: "0.5rem",

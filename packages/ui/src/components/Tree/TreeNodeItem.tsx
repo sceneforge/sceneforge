@@ -1,11 +1,11 @@
 import * as stylex from "@stylexjs/stylex";
 import { MouseEventHandler, lazy } from "react";
 
+import { backgroundColor } from "../../colors.stylex";
 import { IconEnum, Orientation } from "../../types";
 import { ActionList, type ActionListProps } from "../ActionList";
 import { IconButton } from "../IconButton";
 import { View } from "../View";
-import { backgroundColor } from "../tokens.stylex";
 
 const TreeNodeLabel = lazy(() => import("./TreeNodeLabel"));
 

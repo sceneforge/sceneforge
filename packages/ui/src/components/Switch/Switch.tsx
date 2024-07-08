@@ -1,8 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import { type InputHTMLAttributes, type Ref } from "react";
 
-import { Variant } from "../../types";
-import { backgroundColor, color } from "../tokens.stylex";
+import { backgroundColor, colorVariables } from "../../colors.stylex";
+import { Variant, VariantType } from "../../types";
 
 export type SwitchProps = {
   ref?: Ref<HTMLInputElement | null>;
@@ -10,25 +10,38 @@ export type SwitchProps = {
 } & Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "style" | "type">;
 
 const styles = stylex.create({
-  colorVariant: (
-    background: keyof typeof color,
-    foreground: keyof typeof color
-  ) => ({
-    ":has(input:checked)": {
-      backgroundColor: color[background],
-      color: color[foreground],
+  colorVariant: (variant: VariantType) => ({
+    "::before": {
+      borderColor: colorVariables[`--theme-color-foreground-${variant}`],
+    },
+    ":has(input:checked)::before": {
+      backgroundColor: colorVariables[`--theme-color-foreground-${variant}`],
+    },
+    ":has(input:not(:checked))::before": {
+      backgroundColor: colorVariables[`--theme-color-background-${variant}`],
+    },
+    "backgroundColor": {
+      ":has(input:checked)": colorVariables[`--theme-color-background-${variant}`],
+      "default": colorVariables[`--theme-color-foreground-${variant}`],
+    },
+    "color": {
+      ":has(input:checked)": colorVariables[`--theme-color-background-${variant}`],
+      "default": colorVariables[`--theme-color-foreground-${variant}`],
     },
   }),
   container: {
     "::before": {
+      borderColor: "transparent",
       borderRadius: "100vw",
+      borderStyle: "solid",
+      borderWidth: "0.125rem",
       content: "''",
       inset: 0,
       margin: "5%",
       pointerEvents: "none",
       position: "absolute",
       touchAction: "none",
-      transition: "transform 0.125s",
+      transition: "transform 0.125s, background-color 0.125s",
       width: "55%",
     },
     ":has(input:checked)": {
@@ -83,12 +96,7 @@ const Switch = ({
       tabIndex={-1}
       {...stylex.props(
         styles.container,
-        variant === Variant.Accent && styles.colorVariant("accent", "accentText"),
-        variant === Variant.Default && styles.colorVariant("primary", "primaryText"),
-        variant === Variant.Danger && styles.colorVariant("danger", "dangerText"),
-        variant === Variant.Info && styles.colorVariant("info", "infoText"),
-        variant === Variant.Success && styles.colorVariant("success", "successText"),
-        variant === Variant.Warning && styles.colorVariant("warning", "warningText")
+        variant && styles.colorVariant(variant)
       )}
     >
       <input

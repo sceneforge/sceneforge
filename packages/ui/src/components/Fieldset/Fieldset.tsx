@@ -1,9 +1,9 @@
 import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren, useId } from "react";
 
-import { Variant } from "../../types";
+import { backgroundColor, colorStyles, colorVariables, currentColor, foregroundColor } from "../../colors.stylex";
+import { Variant, VariantType } from "../../types";
 import { FieldItem, type FieldItemProps } from "../Field";
-import { backgroundTextColorVariantStyle, color } from "../tokens.stylex";
 
 export type FieldsetProps = PropsWithChildren<{
   fields?: FieldItemProps[];
@@ -14,14 +14,14 @@ export type FieldsetProps = PropsWithChildren<{
 
 const styles = stylex.create({
   container: {
-    backgroundColor: `color-mix(in srgb, currentColor 10%, ${color.background})`,
+    backgroundColor: backgroundColor.alpha15,
     border: 0,
     borderRadius: "1rem",
-    color: color.foreground,
+    color: foregroundColor.default,
     display: "flex",
     flexDirection: "column",
     margin: 0,
-    outlineColor: "color-mix(in srgb, currentColor 35%, transparent)",
+    outlineColor: currentColor.alpha35,
     outlineStyle: "solid",
     outlineWidth: "0.0125rem",
     overflow: "clip",
@@ -30,25 +30,22 @@ const styles = stylex.create({
     paddingInline: 0,
   },
   legend: {
-    backgroundColor: color.background,
-    borderBlockEndColor: "color-mix(in srgb, currentColor 35%, transparent)",
+    backgroundColor: backgroundColor.default,
+    borderBlockEndColor: currentColor.alpha35,
     borderBlockEndStyle: "solid",
     borderBlockEndWidth: "0.0125rem",
     borderStartEndRadius: "1rem",
     borderStartStartRadius: "1rem",
-    color: color.foreground,
+    color: foregroundColor.default,
     margin: 0,
     paddingBlock: "0.75rem",
     paddingInline: "0.5rem",
     width: "100%",
   },
-  legendVariantColor: (
-    background: keyof typeof color,
-    text: keyof typeof color
-  ) => ({
-    backgroundColor: `color-mix(in srgb, ${String(color[text])} 50%, ${color.background})`,
-    borderColor: color[text],
-    color: color[background],
+  legendVariantColor: (variant: VariantType) => ({
+    backgroundColor: `color-mix(in srgb, ${String(colorVariables[`--theme-color-foreground-${variant}`])} 75%, ${colorVariables[`--theme-color-background-${variant}`]})`,
+    borderColor: `color-mix(in srgb, ${String(colorVariables[`--theme-color-foreground-${variant}`])} 25%, ${colorVariables[`--theme-color-background-${variant}`]})`,
+    color: colorVariables[`--theme-color-background-${variant}`],
   }),
   withVariant: {
     borderStartEndRadius: 0,
@@ -68,7 +65,8 @@ const Fieldset = ({ children, fields, id, legend, variant }: FieldsetProps) => {
       id={currentId}
       {...stylex.props(
         styles.container,
-        ...backgroundTextColorVariantStyle(variant),
+        variant && colorStyles.backgroundVariant(variant),
+        variant && colorStyles.foregroundBackgroundVariant(variant),
         variant && styles.withVariant
       )}
     >
@@ -76,12 +74,7 @@ const Fieldset = ({ children, fields, id, legend, variant }: FieldsetProps) => {
         <legend
           {...stylex.props(
             styles.legend,
-            variant === Variant.Accent && styles.legendVariantColor("accentText", "accent"),
-            variant === Variant.Default && styles.legendVariantColor("primaryText", "primary"),
-            variant === Variant.Danger && styles.legendVariantColor("dangerText", "danger"),
-            variant === Variant.Info && styles.legendVariantColor("infoText", "info"),
-            variant === Variant.Success && styles.legendVariantColor("successText", "success"),
-            variant === Variant.Warning && styles.legendVariantColor("warningText", "warning")
+            variant && styles.legendVariantColor(variant)
           )}
         >
           {legend}

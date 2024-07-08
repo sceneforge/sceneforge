@@ -1,12 +1,13 @@
 import type { Preview } from "@storybook/react";
 
+import { ThemeProvider } from "../src/providers";
 import "../src/styles/reset.css";
 import "./index.css";
 
 const preview: Preview = {
   decorators: [
     Story => (
-      <>
+      <ThemeProvider>
         <div
           style={{
             alignContent: "center",
@@ -25,7 +26,7 @@ const preview: Preview = {
           }}
         />
         <Story />
-      </>
+      </ThemeProvider>
     ),
   ],
   parameters: {

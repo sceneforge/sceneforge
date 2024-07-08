@@ -5,7 +5,7 @@ import type { PaneBodyProps } from "./PaneBody";
 import type { PaneHeaderProps } from "./PaneHeader";
 import type { PaneImageProps } from "./PaneImage";
 
-import { backgroundColor } from "../tokens.stylex";
+import { backgroundColor } from "../../colors.stylex";
 import { usePane } from "./usePane";
 
 const PaneBody = lazy(() => import("./PaneBody"));

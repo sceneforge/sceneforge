@@ -1,11 +1,12 @@
 import * as stylex from "@stylexjs/stylex";
 import { useId } from "react";
 
+import { colorVariables, foregroundColor } from "../../colors.stylex";
 import { Orientation, Variant } from "../../types";
 import { ActionList, ActionListProps } from "../ActionList";
 import { Heading } from "../Heading";
 import { View } from "../View";
-import { foregroundColor, titleBar } from "../tokens.stylex";
+import { titleBar } from "../tokens.stylex";
 
 export type TopbarProps = {
   actionsEnd?: ActionListProps["actions"];
@@ -24,8 +25,8 @@ export type TopbarProps = {
 
 const styles = stylex.create({
   container: {
-    backgroundColor: "AccentColor",
-    color: "AccentColorText",
+    backgroundColor: colorVariables["--theme-color-background-accent"],
+    color: colorVariables["--theme-color-foreground-accent"],
     height: titleBar.appTitleBarHeight,
     insetBlockStart: titleBar.appTitleBarInsetBlockStart,
     insetInline: 0,

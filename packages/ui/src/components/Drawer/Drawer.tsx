@@ -3,10 +3,10 @@ import type { PropsWithChildren, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
+import { backgroundColor, currentColor } from "../../colors.stylex";
 import { isBlockEnd, isBlockStart, isInlineEnd, isInlineStart } from "../../helpers";
 import { Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
-import { backgroundColor, currentColor } from "../tokens.stylex";
 
 export type DrawerProps = PropsWithChildren<{
   id?: string;

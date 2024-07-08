@@ -5,10 +5,10 @@ import { type AllHTMLAttributes, type Ref, lazy } from "react";
 
 import type { OptionProps } from "./Option";
 
+import { backgroundColor, foregroundColor } from "../../colors.stylex";
 import { IconEnum } from "../../types";
 import { Button, type ButtonProps } from "../Button";
 import { Icon } from "../Icon";
-import { color } from "../tokens.stylex";
 import { useSelect } from "./useSelect";
 
 const Option = lazy(() => import("./Option"));
@@ -42,13 +42,13 @@ const styles = stylex.create({
     flexShrink: 1,
   },
   list: {
-    background: color.background,
+    background: backgroundColor.default,
     border: 0,
-    borderColor: `color-mix(in srgb, currentColor 25%, ${color.background})`,
+    borderColor: backgroundColor.alpha75,
     borderRadius: "0.5rem",
     borderStyle: "solid",
     borderWidth: "1px",
-    color: color.foreground,
+    color: foregroundColor.default,
     insetArea: "span-block-end",
     insetBlockStart: "anchor(bottom)",
     overflow: "clip",

@@ -9,6 +9,9 @@ const meta: Meta<typeof Pane> = {
     actions: {
       control: "object",
     },
+    actionsScale: {
+      control: "boolean",
+    },
     children: {
       control: "text",
     },
@@ -22,9 +25,6 @@ const meta: Meta<typeof Pane> = {
     outer: {
       control: "boolean",
     },
-    scaleActions: {
-      control: "boolean",
-    },
     title: {
       control: "text",
     },
@@ -34,7 +34,7 @@ const meta: Meta<typeof Pane> = {
   },
   component: Pane,
   render: props => (
-    <View padding={1} variant={Variant.Default}>
+    <View padding={1} variant={Variant.Primary}>
       <Pane {...props} />
     </View>
   ),

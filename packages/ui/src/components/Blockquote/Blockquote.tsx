@@ -3,8 +3,8 @@ import type { AllHTMLAttributes, RefObject } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
-import { Variant } from "../../types";
-import { color } from "../tokens.stylex";
+import { colorVariables, foregroundColor } from "../../colors.stylex";
+import { Variant, VariantType } from "../../types";
 
 export type BlockquoteProps = {
   ref?: RefObject<HTMLQuoteElement>;
@@ -13,20 +13,16 @@ export type BlockquoteProps = {
 } & Omit<AllHTMLAttributes<HTMLQuoteElement>, "className" | "style">;
 
 const styles = stylex.create({
-  colorVariant: (variant: keyof typeof color) => ({
-    backgroundColor: `color-mix(in srgb, ${String(color[variant])} 15%, Canvas)`,
-    borderInlineStartColor: (
-      variant in color
-        ? color[variant]
-        : "CanvasText"
-    ),
+  colorVariant: (variant: VariantType) => ({
+    backgroundColor: `color-mix(in srgb, ${String(colorVariables[`--theme-color-background-${variant}`])} 15%, transparent)`,
+    borderInlineStartColor: colorVariables[`--theme-color-background-${variant}`],
   }),
   container: {
-    backgroundColor: "color-mix(in srgb, CanvasText 15%, Canvas)",
-    borderInlineStartColor: "CanvasText",
+    backgroundColor: foregroundColor.alpha15,
+    borderInlineStartColor: foregroundColor.default,
     borderInlineStartStyle: "solid",
     borderInlineStartWidth: "0.325rem",
-    color: "CanvasText",
+    color: foregroundColor.default,
     padding: "0.5rem",
     paddingInlineStart: "1rem",
   },
@@ -44,12 +40,7 @@ const Blockquote = ({
       {...props}
       {...stylex.props(
         styles.container,
-        variant === Variant.Accent && styles.colorVariant("accent"),
-        variant === Variant.Default && styles.colorVariant("primary"),
-        variant === Variant.Danger && styles.colorVariant("danger"),
-        variant === Variant.Info && styles.colorVariant("info"),
-        variant === Variant.Success && styles.colorVariant("success"),
-        variant === Variant.Warning && styles.colorVariant("warning"),
+        variant && styles.colorVariant(variant),
         style
       )}
       ref={ref}

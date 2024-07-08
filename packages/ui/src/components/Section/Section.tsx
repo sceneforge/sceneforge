@@ -7,9 +7,10 @@ import {
   type Ref,
 } from "react";
 
+import { colorStyles, colorVariables } from "../../colors.stylex";
 import { Variant } from "../../types";
 import { Heading, HeadingProps } from "../Heading";
-import { type SpacerStyleProps, backgroundTextColorVariantStyle, color, marginStyle, paddingStyle } from "../tokens.stylex";
+import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
 
 const styles = stylex.create({
   container: {
@@ -26,7 +27,7 @@ const styles = stylex.create({
     width: "100%",
   },
   headingWithShadow: {
-    color: color.background,
+    color: colorVariables["--theme-color-background-default"],
   },
   hidden: {
     display: "none",
@@ -67,7 +68,8 @@ const Section = ({
         styles.container,
         ...(margin === undefined ? [] : marginStyle(margin)),
         ...(padding === undefined ? [] : paddingStyle(padding)),
-        ...backgroundTextColorVariantStyle(variant),
+        variant && colorStyles.backgroundVariant(variant),
+        variant && colorStyles.foregroundBackgroundVariant(variant),
         hidden && styles.hidden
       )}
     >

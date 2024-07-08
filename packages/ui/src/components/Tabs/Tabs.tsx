@@ -4,9 +4,9 @@ import { lazy } from "react";
 import type { TabProps } from "./Tab";
 import type { TabCloseCallback, TabPanelProps } from "./TabPanel";
 
+import { backgroundColor, foregroundColor } from "../../colors.stylex";
 import { Align, Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
-import { backgroundColor, color } from "../tokens.stylex";
 
 const TabList = lazy(() => import("./TabList"));
 const TabPanel = lazy(() => import("./TabPanel"));
@@ -45,7 +45,7 @@ const styles = stylex.create({
   },
   content: {
     backgroundColor: backgroundColor.alpha75,
-    color: color.foreground,
+    color: foregroundColor.default,
     display: "grid",
     flexGrow: 1,
     gridAutoFlow: "column",
@@ -64,10 +64,6 @@ const styles = stylex.create({
   tabsInlineStart: {
     flexDirection: "row",
   },
-  variantColor: (background: keyof typeof color, text: keyof typeof color) => ({
-    backgroundColor: color[background],
-    color: color[text],
-  }),
 });
 
 const noopInner = () => void 0;

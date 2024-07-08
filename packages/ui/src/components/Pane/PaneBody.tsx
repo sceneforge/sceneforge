@@ -2,10 +2,10 @@ import type { PropsWithChildren } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
+import { backgroundColor } from "../../colors.stylex";
 import { Orientation } from "../../types";
 import { ActionList, ActionListProps } from "../ActionList";
 import { View, type ViewProps } from "../View";
-import { backgroundColor } from "../tokens.stylex";
 
 export type PaneBodyProps = PropsWithChildren<{
   actions?: ActionListProps["actions"];

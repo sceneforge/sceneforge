@@ -7,8 +7,9 @@ import {
   useMemo,
 } from "react";
 
-import { Variant } from "../../types";
-import { type SpacerStyleProps, color, marginStyle, paddingStyle } from "../tokens.stylex";
+import { colorVariables } from "../../colors.stylex";
+import { Variant, VariantType } from "../../types";
+import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
 
 export type ButtonProps = {
   clear?: boolean;
@@ -25,17 +26,17 @@ export type ButtonProps = {
 } & Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "className" | "style">;
 
 const styles = stylex.create({
-  colorVariant: (background: keyof typeof color, text: keyof typeof color) => ({
-    backgroundColor: color[background],
+  colorVariant: (variant: VariantType, inverted?: boolean) => ({
+    backgroundColor: colorVariables[`--theme-color-${inverted ? "foreground" : "background"}-${variant}`],
     boxShadow: {
-      ":active": `0 0 0.2rem ${String(color[text])}`,
-      ":focus-visible": `0 0 0.1rem ${String(color[text])}`,
-      ":has(+ :popover-open)": `0 0 0.2rem ${String(color[text])}`,
+      ":active": `0 0 0.2rem ${String(colorVariables[`--theme-color-${inverted ? "background" : "foreground"}-${variant}`])}`,
+      ":focus-visible": `0 0 0.1rem ${String(colorVariables[`--theme-color-${inverted ? "background" : "foreground"}-${variant}`])}`,
+      ":has(+ :popover-open)": `0 0 0.2rem ${String(colorVariables[`--theme-color-${inverted ? "background" : "foreground"}-${variant}`])}`,
       "default": null,
     },
-    color: color[text],
+    color: colorVariables[`--theme-color-${inverted ? "background" : "foreground"}-${variant}`],
     outlineColor: {
-      ":focus-visible": `color-mix(in srgb, ${String(color[text])} 75%, transparent)`,
+      ":focus-visible": `color-mix(in srgb, ${String(colorVariables[`--theme-color-${inverted ? "foreground" : "background"}-${variant}`])} 75%, transparent)`,
       "default": "transparent",
     },
   }),
@@ -159,18 +160,7 @@ const Button = ({
           : [
             styles.defaultContainer,
             disabled && styles.disabled,
-            !inverted && variant === Variant.Accent && styles.colorVariant("accent", "accentText"),
-            !inverted && variant === Variant.Default && styles.colorVariant("primary", "primaryText"),
-            !inverted && variant === Variant.Danger && styles.colorVariant("danger", "dangerText"),
-            !inverted && variant === Variant.Info && styles.colorVariant("info", "infoText"),
-            !inverted && variant === Variant.Success && styles.colorVariant("success", "successText"),
-            !inverted && variant === Variant.Warning && styles.colorVariant("warning", "warningText"),
-            inverted && variant === Variant.Accent && styles.colorVariant("accentText", "accent"),
-            inverted && variant === Variant.Default && styles.colorVariant("primaryText", "primary"),
-            inverted && variant === Variant.Danger && styles.colorVariant("dangerText", "danger"),
-            inverted && variant === Variant.Info && styles.colorVariant("infoText", "info"),
-            inverted && variant === Variant.Success && styles.colorVariant("successText", "success"),
-            inverted && variant === Variant.Warning && styles.colorVariant("warningText", "warning"),
+            variant && styles.colorVariant(variant, inverted),
           ],
         scale && !disabled && styles.scale,
         dense && styles.dense,

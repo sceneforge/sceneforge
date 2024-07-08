@@ -3,11 +3,12 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 import * as stylex from "@stylexjs/stylex";
 import { useId } from "react";
 
+import { currentColor } from "../../colors.stylex";
 import { Variant } from "../../types";
 import { CarouselItem, type CarouselItemProps } from "../CarouselItem";
 import { Section, type SectionProps } from "../Section";
 import { View } from "../View";
-import { type SpacerStyleProps, currentColor } from "../tokens.stylex";
+import { type SpacerStyleProps } from "../tokens.stylex";
 
 export type CarouselProps = {
   gap?: number;
