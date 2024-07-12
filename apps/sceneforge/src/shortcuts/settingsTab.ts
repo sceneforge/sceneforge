@@ -1,3 +1,4 @@
+import { getThemeList } from "@sceneforge/core";
 import { database } from "@sceneforge/data";
 import { Variant } from "@sceneforge/ui";
 
@@ -11,6 +12,7 @@ export const settingsTab: ShortcutProps<typeof FormViewTemplate> = async ({
 }) => {
   const currentMainTabPosition = await database.settings.get("mainTabPosition");
   const currentLanguage = await database.settings.get("language");
+  const themeList = await getThemeList();
 
   const props: FormViewTemplateProps = {
     fieldsets: [
@@ -70,17 +72,26 @@ export const settingsTab: ShortcutProps<typeof FormViewTemplate> = async ({
       {
         fields: [
           {
-            label: "Mode",
+            label: "Color Scheme",
             name: "color-scheme",
             options: [
-              { label: "Dark", value: "dark" },
-              { label: "Light", value: "light" },
-              { label: "System", value: "auto" },
+              { label: "Dark Mode", value: "dark" },
+              { label: "Light Mode", value: "light" },
+              { label: "Automatic", value: "auto" },
             ],
             type: "select",
           },
+          {
+            label: "Theme",
+            name: "theme",
+            options: themeList.themes.map(({ id, name }) => ({
+              label: name,
+              value: id,
+            })),
+            type: "select",
+          },
         ],
-        legend: "Color Scheme",
+        legend: "Appearance",
         variant: Variant.Primary,
       },
     ],

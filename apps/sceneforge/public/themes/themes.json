@@ -1,0 +1,9 @@
+{
+  "themes": [
+    {
+      "id": "default",
+      "name": "Scene Forge Default",
+      "url": "/themes/default.json"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "colors": {
+    "accent": {
+      "background": {
+        "dark": "#006e50",
+        "light": "#00a98f"
+      },
+      "foreground": {
+        "dark": "#ffffff",
+        "light": "#ffffff"
+      }
+    },
+    "danger": {
+      "background": {
+        "dark": "#cc2244",
+        "light": "#aa2244"
+      },
+      "foreground": {
+        "dark": "#ffffff",
+        "light": "#ffffff"
+      }
+    },
+    "default": {
+      "background": {
+        "dark": "#000000",
+        "light": "#ffffff"
+      },
+      "foreground": {
+        "dark": "#ffffff",
+        "light": "#000000"
+      }
+    },
+    "info": {
+      "background": {
+        "dark": "#0044cc",
+        "light": "#0066cc"
+      },
+      "foreground": {
+        "dark": "#ffffff",
+        "light": "#ffffff"
+      }
+    },
+    "primary": {
+      "background": {
+        "dark": "#75048c",
+        "light": "#86159d"
+      },
+      "foreground": {
+        "dark": "#ffffff",
+        "light": "#ffffff"
+      }
+    },
+    "success": {
+      "background": {
+        "dark": "#007f00",
+        "light": "#009f00"
+      },
+      "foreground": {
+        "dark": "#ffffff",
+        "light": "#ffffff"
+      }
+    },
+    "warning": {
+      "background": {
+        "dark": "#ff8c00",
+        "light": "#ff9f00"
+      },
+      "foreground": {
+        "dark": "#000000",
+        "light": "#000000"
+      }
+    }
+  }
+}

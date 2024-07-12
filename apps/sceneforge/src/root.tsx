@@ -1,3 +1,4 @@
+import { getThemeById } from "@sceneforge/core";
 import { createRoot } from "react-dom/client";
 
 import { App, AppProvider } from "./components/App";
@@ -8,8 +9,13 @@ const root = createRoot(rootElement);
 
 export const render = async () => {
   const { languages } = await i18nInit();
+  const defaultTheme = await getThemeById("default");
+
   root.render(
-    <AppProvider languages={languages}>
+    <AppProvider
+      languages={languages}
+      theme={defaultTheme}
+    >
       <App />
     </AppProvider>
   );
