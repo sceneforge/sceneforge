@@ -17,16 +17,20 @@
     "lint": "eslint .",
     "lint:all": "yarn workspaces foreach -Api run lint",
     "dev": "yarn workspace @sceneforge/app dev",
-    "build": "yarn build:packages && yarn workspace @sceneforge/app build && yarn build:finish",
+    "build": "yarn build:packages && yarn build:apps && yarn build:finish",
+    "build:apps": "yarn workspace @sceneforge/docs build && yarn workspace @sceneforge/app build",
     "build:packages": "yarn workspaces foreach --from @sceneforge/app -Rt --exclude @sceneforge/app run build",
     "postinstall": "husky",
+    "docs:dev": "yarn workspace @sceneforge/docs dev",
+    "docs:build": "yarn workspace @sceneforge/docs build",
     "storybook": "yarn workspace @sceneforge/ui storybook",
     "storybook:docs": "yarn workspace @sceneforge/ui storybook:docs",
     "storybook:build": "yarn workspace @sceneforge/ui storybook:build",
     "build:finish": "yarn ts-node ./scripts/buildFinish.ts"
   },
   "dependencies": {
-    "@sceneforge/app": "workspace:*"
+    "@sceneforge/app": "workspace:*",
+    "@sceneforge/docs": "workspace:*"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
