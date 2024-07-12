@@ -46,8 +46,8 @@ jobs:
           name: sceneforge-app
           path: ./apps/sceneforge/dist
 
-      - name: Trigger Docs Publish
-        run: gh workflow run publish.yml -R $GH_REPO -F run-id=${{ github.run_id }}
-        env:
-          GH_REPO: ${{ github.repository_owner }}/docs
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Trigger Docs Publish
+      #   run: gh workflow run publish.yml -R $GH_REPO -F run-id=${{ github.run_id }}
+      #   env:
+      #     GH_REPO: ${{ github.repository_owner }}/docs
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
