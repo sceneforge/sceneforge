@@ -17,6 +17,7 @@ export type IconType =
   | "fileMap"
   | "globe"
   | "home"
+  | "info"
   | "landscape"
   | "landscape2"
   | "lightbulb"
@@ -59,6 +60,7 @@ export enum IconEnum {
   FileMap = "fileMap",
   Globe = "globe",
   Home = "home",
+  Info = "info",
   Landscape = "landscape",
   Landscape2 = "landscape2",
   Lightbulb = "lightbulb",
