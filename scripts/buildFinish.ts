@@ -1,3 +1,7 @@
 import { cleanupCss } from "./cleaupCss";
 
-void cleanupCss();
+const buildFinish = async () => {
+  await cleanupCss();
+};
+
+void buildFinish();
