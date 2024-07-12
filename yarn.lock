@@ -2801,6 +2801,35 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@sceneforge/docs@workspace:*, @sceneforge/docs@workspace:apps/docs":
+  version: 0.0.0-use.local
+  resolution: "@sceneforge/docs@workspace:apps/docs"
+  dependencies:
+    "@sceneforge/ui": "workspace:*"
+    "@storybook/addon-docs": "npm:^8.1.11"
+    "@storybook/addon-essentials": "npm:^8.1.11"
+    "@storybook/addon-interactions": "npm:^8.1.11"
+    "@storybook/addon-links": "npm:^8.1.11"
+    "@storybook/blocks": "npm:^8.1.11"
+    "@storybook/builder-vite": "npm:^8.1.11"
+    "@storybook/manager-api": "npm:^8.2.2"
+    "@storybook/react": "npm:^8.1.11"
+    "@storybook/react-vite": "npm:^8.1.11"
+    "@storybook/test": "npm:^8.1.11"
+    "@storybook/theming": "npm:^8.2.2"
+    "@types/node": "npm:^20.14.9"
+    "@types/react": "npm:types-react@rc"
+    "@types/react-dom": "npm:types-react-dom@rc"
+    eslint: "npm:^9.6.0"
+    react: "npm:^19.0.0-beta"
+    react-dom: "npm:^19.0.0-beta"
+    storybook: "npm:^8.1.11"
+    ts-node: "npm:^10.9.2"
+    typescript: "npm:^5.5.3"
+    vite: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
+
 "@sceneforge/eslint@workspace:*, @sceneforge/eslint@workspace:packages/eslint":
   version: 0.0.0-use.local
   resolution: "@sceneforge/eslint@workspace:packages/eslint"
@@ -3264,6 +3293,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/manager-api@npm:^8.2.2":
+  version: 8.2.2
+  resolution: "@storybook/manager-api@npm:8.2.2"
+  peerDependencies:
+    storybook: ^8.2.2
+  checksum: 10c0/a02a4869151cf61d113b08ad8e830d3ddf7e19307ce50263e9b07bbe8557eff79c414968ef7cc81b4e7c687a1e05202c4e3381211647173b1d48ec97d2853a1b
+  languageName: node
+  linkType: hard
+
 "@storybook/react-dom-shim@npm:8.2.2":
   version: 8.2.2
   resolution: "@storybook/react-dom-shim@npm:8.2.2"
@@ -3345,6 +3383,15 @@ __metadata:
   peerDependencies:
     storybook: ^8.2.2
   checksum: 10c0/8983ca0326cb6540adda68145aec0e5d8d46babb8fd13530d462306815ad190d1cf6a128941472bd9d3c3938e08f6ebb4ba9b3a5cd357ed7886ee977fa1e35ed
+  languageName: node
+  linkType: hard
+
+"@storybook/theming@npm:^8.2.2":
+  version: 8.2.2
+  resolution: "@storybook/theming@npm:8.2.2"
+  peerDependencies:
+    storybook: ^8.2.2
+  checksum: 10c0/2f0a9798b5d4462ec5f4d54134e1bdf260605c9d1b487fbf27a04d60cdac6eaa7a29f587967c0d138f3e5125246f080fc2099ec3f49a303a1d23c62042743698
   languageName: node
   linkType: hard
 
@@ -12539,6 +12586,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:^19.2.2"
     "@commitlint/format": "npm:^19.3.0"
     "@sceneforge/app": "workspace:*"
+    "@sceneforge/docs": "workspace:*"
     "@sceneforge/eslint": "workspace:*"
     "@types/node": "npm:^20.14.9"
     concurrently: "npm:^8.2.2"
