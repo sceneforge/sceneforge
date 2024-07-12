@@ -1,6 +1,6 @@
 import {
   Container,
-  type FieldItemProps,
+  type FieldsetProps,
   Form,
   Section,
   type TabComponentProps,
@@ -10,7 +10,7 @@ import { useId } from "react";
 
 export type FormViewTemplateProps = TabComponentProps<{
   columns?: number;
-  fieldsets?: FieldItemProps[];
+  fieldsets?: FieldsetProps[];
   gap?: number;
   title?: string;
   variant?: Variant;

@@ -1,7 +1,7 @@
 import { database } from "@sceneforge/data";
 import { Variant } from "@sceneforge/ui";
 
-import type { FormViewTemplate } from "../tabTemplates";
+import type { FormViewTemplate, FormViewTemplateProps } from "../tabTemplates";
 
 import { ShortcutProps } from "./ShortcutProps";
 
@@ -12,7 +12,7 @@ export const settingsTab: ShortcutProps<typeof FormViewTemplate> = async ({
   const currentMainTabPosition = await database.settings.get("mainTabPosition");
   const currentLanguage = await database.settings.get("language");
 
-  return {
+  const props: FormViewTemplateProps = {
     fieldsets: [
       {
         fields: [
@@ -83,23 +83,7 @@ export const settingsTab: ShortcutProps<typeof FormViewTemplate> = async ({
         legend: "Color Scheme",
         variant: Variant.Primary,
       },
-      {
-        fields: [
-          {
-            label: "Primary Color",
-            name: "primary-color",
-            type: "text",
-          },
-          {
-            label: "Accent Color",
-            name: "accent-color",
-            type: "text",
-          },
-        ],
-        legend: "Color Theme",
-        variant: Variant.Accent,
-      },
     ],
-    id: "settings-tab",
   };
+  return props;
 };
