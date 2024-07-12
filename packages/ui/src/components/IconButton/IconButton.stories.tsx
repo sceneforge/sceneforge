@@ -12,6 +12,9 @@ const meta: Meta<typeof IconButton> = {
     disabled: {
       control: "boolean",
     },
+    glossy: {
+      control: "boolean",
+    },
     margin: {
       control: "number",
     },

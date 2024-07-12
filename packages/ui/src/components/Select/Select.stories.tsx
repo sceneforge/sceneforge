@@ -10,7 +10,16 @@ const meta: Meta<typeof Select> = {
     defaultValue: {
       control: "text",
     },
+    dense: {
+      control: "boolean",
+    },
     disabled: {
+      control: "boolean",
+    },
+    glossy: {
+      control: "boolean",
+    },
+    inverted: {
       control: "boolean",
     },
     name: {

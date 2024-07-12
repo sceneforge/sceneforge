@@ -15,6 +15,12 @@ const meta: Meta<typeof Toggle> = {
     disabled: {
       control: "boolean",
     },
+    glossy: {
+      control: "boolean",
+    },
+    inverted: {
+      control: "boolean",
+    },
     margin: {
       control: "number",
     },

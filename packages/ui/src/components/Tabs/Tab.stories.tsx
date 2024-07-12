@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import {
+  iconArgTypes,
   orientationArgTypes,
   positionArgTypes,
+  variantArgTypes,
 } from "../../storiesHelpers";
 import Tab from "./Tab";
 
@@ -24,6 +26,8 @@ const meta: Meta<typeof Tab> = {
     },
     ...positionArgTypes("position"),
     ...orientationArgTypes("orientation"),
+    ...iconArgTypes("icon"),
+    ...variantArgTypes("variant"),
   },
   component: Tab,
   title: "Component/Tabs/Tab",

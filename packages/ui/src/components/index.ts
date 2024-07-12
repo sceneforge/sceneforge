@@ -32,6 +32,8 @@ export * from "./Field";
 export type * from "./Field";
 export * from "./Fieldset";
 export type * from "./Fieldset";
+export * from "./Form";
+export type * from "./Form";
 export * from "./Heading";
 export type * from "./Heading";
 export * from "./Icon";

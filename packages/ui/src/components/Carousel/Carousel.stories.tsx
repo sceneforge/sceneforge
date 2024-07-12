@@ -79,7 +79,9 @@ export const Default: Story = {
       { img: "https://picsum.photos/seed/204/500", kind: "button", label: "Content 7" },
       { img: "https://picsum.photos/seed/205/500", kind: "button", label: "Content 8" },
       {
+        glossy: true,
         icon: IconEnum.Add,
+        inverted: true,
         kind: "icon",
         label: "Add",
         size: 20,

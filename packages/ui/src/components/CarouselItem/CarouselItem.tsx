@@ -6,17 +6,25 @@ import { IconButton, type IconButtonProps } from "../IconButton";
 import { View, ViewProps } from "../View";
 
 type CarouselItemCardButtonProps = {
+  dense?: never;
   description?: string;
+  glossy?: never;
   icon?: never;
+  inverted?: never;
   kind: "button";
+  scale?: never;
   size?: never;
 } & Omit<CardButtonProps, "children">;
 
 type CarouselItemCardProps = {
+  dense?: never;
   description?: string;
+  glossy?: never;
   icon?: never;
+  inverted?: never;
   kind: "card";
   onClick?: never;
+  scale?: never;
   size?: never;
 } & Omit<CardProps, "children">;
 

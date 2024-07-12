@@ -11,7 +11,7 @@ const FieldText = lazy(() => import("./FieldText"));
 export type FieldItemProps =
   | ({ type: "select" } & FieldSelectProps)
   | ({ type: "switch" } & FieldSwitchProps)
-  | ({ type: "text" } & FieldTextProps);
+  | ({ type?: "text" } & FieldTextProps);
 
 const FieldItem = ({ type, ...props }: FieldItemProps) => {
   switch (type) {
@@ -19,10 +19,8 @@ const FieldItem = ({ type, ...props }: FieldItemProps) => {
       return <FieldSelect {...props as FieldSelectProps} />;
     case "switch":
       return <FieldSwitch {...props as FieldSwitchProps} />;
-    case "text":
-      return <FieldText {...props as FieldTextProps} />;
     default:
-      return null;
+      return <FieldText {...props as FieldTextProps} />;
   }
 };
 

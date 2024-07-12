@@ -14,6 +14,9 @@ const meta: Meta<typeof Button> = {
     disabled: {
       control: "boolean",
     },
+    glossy: {
+      control: "boolean",
+    },
     margin: {
       control: "number",
     },

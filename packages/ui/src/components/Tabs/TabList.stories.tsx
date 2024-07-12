@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { alignArgTypes as alignArgumentTypes, orientationArgTypes as orientationArgumentTypes, positionArgTypes as positionArgumentTypes } from "../../storiesHelpers";
+import { alignArgTypes as alignArgumentTypes, orientationArgTypes as orientationArgumentTypes, positionArgTypes as positionArgumentTypes, variantArgTypes } from "../../storiesHelpers";
 import { IconEnum } from "../../types";
 import TabList from "./TabList";
 
@@ -15,6 +15,7 @@ const meta: Meta<typeof TabList> = {
     ...orientationArgumentTypes("orientation"),
     ...positionArgumentTypes("position"),
     ...alignArgumentTypes("align"),
+    ...variantArgTypes("variant"),
   },
   component: TabList,
   title: "Component/Tabs/TabList",

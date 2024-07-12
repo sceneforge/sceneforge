@@ -42,6 +42,7 @@ const styles = stylex.create({
 export type AppLayoutProps = PropsWithChildren<{
   colorScheme?: "dark" | "light dark" | "light";
   embedded?: boolean;
+  label?: string;
   style?: StyleXStyles;
   topbar?: TopbarProps;
 }>;
@@ -50,11 +51,14 @@ const AppLayout = ({
   children,
   colorScheme,
   embedded = false,
+  label,
   style,
   topbar,
 }: AppLayoutProps) => {
   return (
     <View
+      aria-label={label}
+      role="application"
       style={[
         styles.container,
         embedded && styles.embedded,

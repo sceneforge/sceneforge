@@ -16,6 +16,9 @@ const Option = lazy(() => import("./Option"));
 export type Option = Omit<OptionProps, "onClick" | "popoverId" | "selected">;
 
 export type SelectProps = {
+  dense?: ButtonProps["dense"];
+  glossy?: ButtonProps["glossy"];
+  inverted?: ButtonProps["inverted"];
   onChange?: (next?: Option["value"], previous?: Option["value"]) => void;
   options?: Option[];
   popoverStyle?: StyleXStyles;
@@ -65,7 +68,10 @@ const styles = stylex.create({
 
 const Select = ({
   defaultValue,
+  dense,
+  glossy,
   id,
+  inverted,
   onChange,
   options,
   popoverStyle,
@@ -90,7 +96,10 @@ const Select = ({
   return (
     <>
       <Button
+        dense={dense}
+        glossy={glossy}
         id={currentId}
+        inverted={inverted}
         popoverTarget={popoverOptionsId}
         popoverTargetAction="toggle"
         style={[

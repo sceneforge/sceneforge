@@ -30,6 +30,20 @@ const meta: Meta<typeof CarouselItem> = {
       control: "text",
     },
     ...variantArgumentTypes("variant"),
+    dense: {
+      control: "boolean",
+      if: { arg: "kind", eq: "icon" },
+      table: {
+        category: "Icon",
+      },
+    },
+    glossy: {
+      control: "boolean",
+      if: { arg: "kind", eq: "icon" },
+      table: {
+        category: "Icon",
+      },
+    },
     icon: {
       ...iconArgTypes("icon")["icon"],
       if: { arg: "kind", eq: "icon" },

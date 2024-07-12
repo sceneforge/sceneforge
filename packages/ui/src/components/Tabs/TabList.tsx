@@ -2,6 +2,7 @@ import * as stylex from "@stylexjs/stylex";
 import { lazy, useId } from "react";
 
 import { currentColor } from "../../colors.stylex";
+import { effects } from "../../effect.stylex";
 import { Align, Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
 import { type TabProps } from "./Tab";
@@ -133,6 +134,7 @@ const TabList = ({
               ? styles.containerEnd
               : styles.containerStart)
         ),
+        variant && effects.glossy(variant),
       ]}
     >
       <View

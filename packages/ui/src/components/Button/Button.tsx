@@ -8,12 +8,14 @@ import {
 } from "react";
 
 import { colorVariables } from "../../colors.stylex";
+import { effects } from "../../effect.stylex";
 import { Variant, VariantType } from "../../types";
 import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
 
 export type ButtonProps = {
   clear?: boolean;
   dense?: boolean;
+  glossy?: boolean;
   hidden?: boolean;
   inverted?: boolean;
   label?: string;
@@ -104,6 +106,7 @@ const Button = ({
   clear = false,
   dense,
   disabled,
+  glossy,
   hidden,
   inverted,
   label,
@@ -161,6 +164,10 @@ const Button = ({
             styles.defaultContainer,
             disabled && styles.disabled,
             variant && styles.colorVariant(variant, inverted),
+            (variant && !inverted && glossy)
+            && effects.glossyInteractive(variant),
+            (variant && inverted && glossy)
+            && effects.glossyInvertedInteractive(variant),
           ],
         scale && !disabled && styles.scale,
         dense && styles.dense,

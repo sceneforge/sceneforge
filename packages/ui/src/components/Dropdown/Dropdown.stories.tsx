@@ -14,6 +14,12 @@ const meta: Meta<typeof Dropdown> = {
     disabled: {
       control: "boolean",
     },
+    glossy: {
+      control: "boolean",
+    },
+    inverted: {
+      control: "boolean",
+    },
     margin: {
       control: "number",
     },

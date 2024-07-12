@@ -11,6 +11,7 @@ export type FieldTextProps = {
 const FieldText = ({ id, label, ...props }: FieldTextProps) => {
   const generatedId = useId();
   const currentId = id ?? generatedId;
+
   return (
     <Field id={currentId} label={label}>
       <InputText id={currentId} {...props} />

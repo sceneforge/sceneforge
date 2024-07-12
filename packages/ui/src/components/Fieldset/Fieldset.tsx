@@ -1,8 +1,10 @@
 import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren, useId } from "react";
 
-import { backgroundColor, colorStyles, colorVariables, currentColor, foregroundColor } from "../../colors.stylex";
-import { Variant, VariantType } from "../../types";
+import type { Variant } from "../../types";
+
+import { backgroundColor, colorStyles, currentColor, foregroundColor } from "../../colors.stylex";
+import { effects } from "../../effect.stylex";
 import { FieldItem, type FieldItemProps } from "../Field";
 
 export type FieldsetProps = PropsWithChildren<{
@@ -33,7 +35,7 @@ const styles = stylex.create({
     backgroundColor: backgroundColor.default,
     borderBlockEndColor: currentColor.alpha35,
     borderBlockEndStyle: "solid",
-    borderBlockEndWidth: "0.0125rem",
+    borderBlockEndWidth: "0.0625rem",
     borderStartEndRadius: "1rem",
     borderStartStartRadius: "1rem",
     color: foregroundColor.default,
@@ -42,11 +44,6 @@ const styles = stylex.create({
     paddingInline: "0.5rem",
     width: "100%",
   },
-  legendVariantColor: (variant: VariantType) => ({
-    backgroundColor: `color-mix(in srgb, ${String(colorVariables[`--theme-color-foreground-${variant}`])} 75%, ${colorVariables[`--theme-color-background-${variant}`]})`,
-    borderColor: `color-mix(in srgb, ${String(colorVariables[`--theme-color-foreground-${variant}`])} 25%, ${colorVariables[`--theme-color-background-${variant}`]})`,
-    color: colorVariables[`--theme-color-background-${variant}`],
-  }),
   withVariant: {
     borderStartEndRadius: 0,
     borderStartStartRadius: 0,
@@ -74,7 +71,7 @@ const Fieldset = ({ children, fields, id, legend, variant }: FieldsetProps) => {
         <legend
           {...stylex.props(
             styles.legend,
-            variant && styles.legendVariantColor(variant)
+            variant && effects.glossyInverted(variant)
           )}
         >
           {legend}

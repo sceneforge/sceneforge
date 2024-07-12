@@ -3,7 +3,7 @@ import type { AllHTMLAttributes, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
-import { colorStyles } from "../../colors.stylex";
+import { colorStyles, currentColor } from "../../colors.stylex";
 import { Variant } from "../../types";
 import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
 
@@ -27,6 +27,8 @@ const styles = stylex.create({
     overflowY: "hidden",
     overscrollBehavior: "none",
     position: "relative",
+    scrollbarColor: `${currentColor.alpha35} transparent`,
+    scrollbarWidth: "thin",
     width: "100%",
   },
   hidden: {

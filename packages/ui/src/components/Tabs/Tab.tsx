@@ -3,6 +3,7 @@ import * as stylex from "@stylexjs/stylex";
 import type { TabCloseCallback } from "./TabPanel";
 
 import { backgroundColor, foregroundColor } from "../../colors.stylex";
+import { effects } from "../../effect.stylex";
 import { IconEnum, Orientation, Position, Variant } from "../../types";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
@@ -146,6 +147,7 @@ const Tab = ({
             ? styles.borderVerticalEnd
             : styles.borderVerticalStart
         ),
+        active && variant && effects.glossyInvertedInteractive(variant),
       ]}
     >
       <Button
