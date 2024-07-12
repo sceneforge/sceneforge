@@ -47,5 +47,3 @@ jobs:
   publish:
     uses: sceneforge/docs/.github/workflows/publish.yml@main
     needs: build
-    with:
-      run_id: ${{ github.run_id }}
