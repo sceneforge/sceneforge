@@ -24,7 +24,7 @@ export const App = () => {
             onClick: () => void openHome(),
           },
           {
-            icon: IconEnum.QuestionMark,
+            icon: IconEnum.Info,
             kind: "icon",
             label: t("AboutTab.title"),
             onClick: () => void openAbout(),
