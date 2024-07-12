@@ -36,7 +36,8 @@
     "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
-    "@stylexjs/stylex": "^0.7.5"
+    "@stylexjs/stylex": "^0.7.5",
+    "zod": "^3.24.0-canary.20240701T200529"
   },
   "peerDependencies": {
     "react": "^19.0.0-beta",

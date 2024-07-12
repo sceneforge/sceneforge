@@ -5,15 +5,7 @@ import { ThemeContext } from "./ThemeProvider";
 
 export const useTheme = () => {
   const {
-    colors: {
-      [Variant.Accent]: colorAccent,
-      [Variant.Danger]: colorDanger,
-      [Variant.Default]: colorDefault,
-      [Variant.Info]: colorInfo,
-      [Variant.Primary]: colorPrimary,
-      [Variant.Success]: colorSuccess,
-      [Variant.Warning]: colorWarning,
-    },
+    colors,
     setColors: {
       [Variant.Accent]: setColorAccent,
       [Variant.Danger]: setColorDanger,
@@ -24,6 +16,16 @@ export const useTheme = () => {
       [Variant.Warning]: setColorWarning,
     },
   } = useContext(ThemeContext);
+
+  const {
+    [Variant.Accent]: colorAccent,
+    [Variant.Danger]: colorDanger,
+    [Variant.Default]: colorDefault,
+    [Variant.Info]: colorInfo,
+    [Variant.Primary]: colorPrimary,
+    [Variant.Success]: colorSuccess,
+    [Variant.Warning]: colorWarning,
+  } = colors ?? {};
 
   return {
     colorAccent,

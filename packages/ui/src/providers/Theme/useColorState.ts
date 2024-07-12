@@ -1,20 +1,22 @@
 import { useCallback, useMemo, useState } from "react";
 
-import type { ColorPlacementType, ColorValueType } from "../../types";
+import type { ThemeColorPlacementType, ThemeColorType } from "../../schemas";
 
 import { getColorObject } from "../../helpers";
 
 export type SetColorStateType = (
-  value?: ((previous: ColorPlacementType) => ColorValueType) | (ColorValueType)
+  value?: (
+    (previous: ThemeColorPlacementType) => ThemeColorPlacementType
+  ) | (ThemeColorPlacementType | ThemeColorType | string)
 ) => void;
 
 export type ColorStateType = [
-  ColorPlacementType,
+  ThemeColorPlacementType,
   SetColorStateType,
 ];
 
 export const useColorState = (
-  value?: ColorValueType
+  value?: ThemeColorPlacementType | ThemeColorType | string
 ): ColorStateType => {
   const [
     colorBackgroundDark,
@@ -33,7 +35,7 @@ export const useColorState = (
     setColorForegroundLight,
   ] = useState<string | undefined>(getColorObject(value)?.foreground?.light);
 
-  const color = useMemo(() => ({
+  const color = useMemo((): ThemeColorPlacementType => ({
     background: {
       dark: colorBackgroundDark,
       light: colorBackgroundLight,
@@ -49,7 +51,9 @@ export const useColorState = (
     colorForegroundLight,
   ]);
 
-  const updateColor = useCallback((value?: ColorValueType) => {
+  const updateColor = useCallback((
+    value?: ThemeColorPlacementType | ThemeColorType | string
+  ) => {
     const colorObject = getColorObject(value);
     setColorBackgroundDark(colorObject?.background?.dark);
     setColorBackgroundLight(colorObject?.background?.light);

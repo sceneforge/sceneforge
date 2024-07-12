@@ -1,6 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 
-import { ColorPlacementType, VariantType } from "./types";
+import type { ThemeColorPlacementType } from "./schemas";
+import type { VariantType } from "./types";
 
 export const MEDIA_DARK = "@media (prefers-color-scheme: dark)";
 export const MEDIA_LIGHT = "@media (prefers-color-scheme: light)";
@@ -171,7 +172,7 @@ export const foregroundBackgroundColor = stylex.defineVars({
 });
 
 export const themeColors = stylex.create({
-  setColorAccent: (color: ColorPlacementType) => ({
+  setColorAccent: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-accent": {
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
@@ -183,7 +184,7 @@ export const themeColors = stylex.create({
       default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
-  setColorDanger: (color: ColorPlacementType) => ({
+  setColorDanger: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-danger": {
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
@@ -195,7 +196,7 @@ export const themeColors = stylex.create({
       default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
-  setColorDefault: (color: ColorPlacementType) => ({
+  setColorDefault: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-default": {
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
@@ -207,7 +208,7 @@ export const themeColors = stylex.create({
       default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
-  setColorInfo: (color: ColorPlacementType) => ({
+  setColorInfo: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-info": {
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
@@ -219,7 +220,7 @@ export const themeColors = stylex.create({
       default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
-  setColorPrimary: (color: ColorPlacementType) => ({
+  setColorPrimary: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-primary": {
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
@@ -231,7 +232,7 @@ export const themeColors = stylex.create({
       default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
-  setColorSuccess: (color: ColorPlacementType) => ({
+  setColorSuccess: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-success": {
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
@@ -243,7 +244,7 @@ export const themeColors = stylex.create({
       default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
-  setColorWarning: (color: ColorPlacementType) => ({
+  setColorWarning: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-warning": {
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,

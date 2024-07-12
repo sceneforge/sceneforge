@@ -1,23 +1,16 @@
 import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren, createContext } from "react";
 
+import type { ThemeType } from "../../schemas";
+
 import { themeColors } from "../../colors.stylex";
 import { getColorObject } from "../../helpers";
-import { type ColorValueType, Variant } from "../../types";
+import { Variant } from "../../types";
 import { type SetColorStateType, useColorState } from "./useColorState";
 
-export type ThemeColorsType = {
-  [variant in Variant]: ColorValueType;
-};
-
-export type ThemeSetColorsType = {
-  [variant in Variant]: SetColorStateType;
-};
-
 export type ThemeContextType = {
-  colors: ThemeColorsType;
-  setColors: ThemeSetColorsType;
-};
+  setColors: { [key in Variant]: SetColorStateType };
+} & ThemeType;
 
 export const ThemeContext = createContext<ThemeContextType>({
   colors: {

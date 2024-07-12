@@ -1,11 +1,5 @@
 export { Align } from "./align";
 export type { AlignType } from "./align";
-export type {
-  ColorPlacementType,
-  ColorPlacementValueType,
-  ColorSchemeType,
-  ColorValueType,
-} from "./color";
 export { IconEnum } from "./icon";
 export type { IconType } from "./icon";
 export { Orientation } from "./orientation";
