@@ -23,7 +23,7 @@ export const AppTabs = () => {
       closeable
       position={tabsPosition}
       ref={tabsHandlerRef}
-      variant={Variant.Default}
+      variant={Variant.Primary}
     />
   );
 };

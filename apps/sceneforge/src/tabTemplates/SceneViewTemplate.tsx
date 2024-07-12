@@ -38,7 +38,7 @@ const SceneViewTemplate = ({
       initialSize={[15, 85]}
       orientation={Orientation.Horizontal}
       resizable
-      variant={Variant.Default}
+      variant={Variant.Primary}
     >
       <Pane outer title="Scene">
         <Tree id={`scene-${id}-tree`} nodes={sceneNodes} />
@@ -67,11 +67,19 @@ const SceneViewTemplate = ({
                               onClick: openFileClickHandler,
                             },
                             {
+                              kind: "divider",
+                              spacing: 1,
+                            },
+                            {
+                              glossy: true,
+                              inverted: true,
                               kind: "button",
                               label: "Delete",
                               onClick: () => void removeScene(),
+                              variant: Variant.Danger,
                             },
                           ],
+                          glossy: true,
                           kind: "dropdown",
                           label: "Scene",
                           variant: Variant.Accent,
@@ -97,6 +105,7 @@ const SceneViewTemplate = ({
                               variant: Variant.Accent,
                             },
                           ],
+                          glossy: true,
                           kind: "dropdown",
                           label: "Mode",
                           variant: Variant.Accent,
@@ -157,7 +166,7 @@ const SceneViewTemplate = ({
         ]}
         orientation={Orientation.Horizontal}
         position={Position.End}
-        variant={Variant.Default}
+        variant={Variant.Primary}
       />
     </SplitPaneController>
   );

@@ -65,7 +65,39 @@ export const settingsTab: ShortcutProps<typeof FormViewTemplate> = async ({
           },
         ],
         legend: "General",
-        variant: Variant.Default,
+        variant: Variant.Primary,
+      },
+      {
+        fields: [
+          {
+            label: "Mode",
+            name: "color-scheme",
+            options: [
+              { label: "Dark", value: "dark" },
+              { label: "Light", value: "light" },
+              { label: "System", value: "auto" },
+            ],
+            type: "select",
+          },
+        ],
+        legend: "Color Scheme",
+        variant: Variant.Primary,
+      },
+      {
+        fields: [
+          {
+            label: "Primary Color",
+            name: "primary-color",
+            type: "text",
+          },
+          {
+            label: "Accent Color",
+            name: "accent-color",
+            type: "text",
+          },
+        ],
+        legend: "Color Theme",
+        variant: Variant.Accent,
       },
     ],
     id: "settings-tab",

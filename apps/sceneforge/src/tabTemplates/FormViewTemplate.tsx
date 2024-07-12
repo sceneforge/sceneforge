@@ -1,28 +1,42 @@
-import { Container, Fieldset, FieldsetProps, Section, type TabComponentProps } from "@sceneforge/ui";
+import {
+  Container,
+  type FieldItemProps,
+  Form,
+  Section,
+  type TabComponentProps,
+  type Variant,
+} from "@sceneforge/ui";
 import { useId } from "react";
 
 export type FormViewTemplateProps = TabComponentProps<{
-  fieldsets?: FieldsetProps[];
-  id?: string;
+  columns?: number;
+  fieldsets?: FieldItemProps[];
+  gap?: number;
   title?: string;
+  variant?: Variant;
 }>;
 
-const FormViewTemplate = ({ fieldsets, id, title }: FormViewTemplateProps) => {
+const FormViewTemplate = ({
+  columns,
+  fieldsets,
+  gap,
+  tabId,
+  title,
+  variant,
+}: FormViewTemplateProps) => {
   const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = tabId ?? generatedId;
 
   return (
     <Container padding={{ block: 1 }}>
       <Section level={1} shadow title={title}>
-        <form id={currentId}>
-          {fieldsets && fieldsets.map((fieldset, index) => (
-            <Fieldset
-              id={`${currentId}-fieldset-${index}`}
-              key={`${currentId}-fieldset-${index}`}
-              {...fieldset}
-            />
-          ))}
-        </form>
+        <Form
+          columns={columns}
+          fieldsets={fieldsets}
+          gap={gap}
+          id={`${currentId}-form`}
+          variant={variant}
+        />
       </Section>
     </Container>
   );

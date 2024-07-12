@@ -37,7 +37,7 @@ export const App = () => {
           },
         ],
         title: "Scene Forge",
-        variant: Variant.Default,
+        variant: Variant.Primary,
       }}
     >
       <AppTabs />

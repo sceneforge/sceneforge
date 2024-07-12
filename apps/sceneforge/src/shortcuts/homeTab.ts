@@ -51,7 +51,9 @@ export const homeTab: ShortcutProps<typeof DashboardViewTemplate> = async ({
       items: [
         ...items,
         {
+          glossy: true,
           icon: IconEnum.Add,
+          inverted: true,
           kind: "icon",
           label: "Create New Scene",
           onClick: () => {
