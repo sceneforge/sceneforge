@@ -9,13 +9,6 @@ export type IconButtonProps = {
 } & Omit<ButtonProps, "children">;
 
 const styles = stylex.create({
-  container: {
-    alignItems: "center",
-    aspectRatio: 1,
-    borderRadius: "100vw",
-    display: "flex",
-    justifyContent: "center",
-  },
   icon: {
     pointerEvents: "none",
     touchAction: "none",
@@ -27,6 +20,7 @@ const IconButton = ({
   padding = 0.5,
   scale = true,
   size,
+  squircle = true,
   style,
   ...props
 }: IconButtonProps) => {
@@ -35,7 +29,8 @@ const IconButton = ({
       {...props}
       padding={padding}
       scale={scale}
-      style={[styles.container, style]}
+      squircle={squircle}
+      style={style}
     >
       <Icon
         icon={icon}

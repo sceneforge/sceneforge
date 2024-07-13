@@ -15,6 +15,9 @@ const meta: Meta<typeof IconButton> = {
     glossy: {
       control: "boolean",
     },
+    inverted: {
+      control: "boolean",
+    },
     margin: {
       control: "number",
     },
@@ -38,16 +41,11 @@ const meta: Meta<typeof IconButton> = {
         },
       },
     },
-    ...variantArgumentTypes("variant"),
-    ...iconArgTypes("icon"),
-    inverted: {
+    squircle: {
       control: "boolean",
     },
-    ref: {
-      table: {
-        disable: true,
-      },
-    },
+    ...iconArgTypes("icon"),
+    ...variantArgumentTypes("variant"),
   },
   args: {
     size: 4,

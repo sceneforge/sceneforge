@@ -26,6 +26,9 @@ const meta: Meta<typeof Button> = {
     scale: {
       control: "boolean",
     },
+    squircle: {
+      control: "boolean",
+    },
     ...variantArgumentTypes("variant"),
   },
   component: Button,

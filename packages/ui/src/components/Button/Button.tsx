@@ -23,6 +23,7 @@ export type ButtonProps = {
   padding?: SpacerStyleProps;
   popovertarget?: string;
   scale?: boolean;
+  squircle?: boolean;
   style?: StyleXStyles;
   variant?: Variant;
 } & Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "className" | "style">;
@@ -99,6 +100,18 @@ const styles = stylex.create({
     },
     transition: "scale 0.12s ease-in-out",
   },
+  squircleContainer: {
+    alignItems: "center",
+    aspectRatio: "1 / 1",
+    display: "flex",
+    justifyContent: "center",
+    maskImage: "url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNIDAsIDUwIEMgMCwgNiA2LCAwIDUwLCAwIFMgMTAwLCA2IDEwMCwgNTAgOTQsIDEwMCA1MCwgMTAwIDAsIDk0IDAsIDUwIFoiIC8+PC9zdmc+)",
+    maskPosition: "center center",
+    maskRepeat: "no-repeat",
+    maskSize: "auto auto",
+    maskType: "alpha",
+    textAlign: "center",
+  },
 });
 
 const Button = ({
@@ -117,6 +130,7 @@ const Button = ({
   },
   ref,
   scale,
+  squircle,
   style,
   variant,
   ...props
@@ -169,6 +183,7 @@ const Button = ({
             (variant && inverted && glossy)
             && effects.glossyInvertedInteractive(variant),
           ],
+        squircle && styles.squircleContainer,
         scale && !disabled && styles.scale,
         dense && styles.dense,
         ...(margin === undefined ? [] : marginStyle(margin)),

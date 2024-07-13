@@ -13,6 +13,7 @@ export type ViewProps = {
   padding?: SpacerStyleProps;
   ref?: Ref<HTMLDivElement>;
   scrollable?: "block" | "inline" | boolean;
+  squircle?: boolean;
   style?: StyleXStyles;
   variant?: Variant;
 } & Omit<AllHTMLAttributes<HTMLDivElement>, "className" | "hidden" | "style">;
@@ -42,6 +43,16 @@ const styles = stylex.create({
     overflowX: "auto",
     overscrollBehaviorInline: "contain",
   },
+  squircleContainer: {
+    alignContent: "center",
+    aspectRatio: "1 / 1",
+    maskImage: "url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNIDAsIDUwIEMgMCwgNiA2LCAwIDUwLCAwIFMgMTAwLCA2IDEwMCwgNTAgOTQsIDEwMCA1MCwgMTAwIDAsIDk0IDAsIDUwIFoiIC8+PC9zdmc+)",
+    maskPosition: "center center",
+    maskRepeat: "no-repeat",
+    maskSize: "auto auto",
+    maskType: "alpha",
+    textAlign: "center",
+  },
 });
 
 const View = ({
@@ -50,6 +61,7 @@ const View = ({
   padding = 0,
   ref,
   scrollable = false,
+  squircle,
   style,
   variant,
   ...props
@@ -69,6 +81,7 @@ const View = ({
         ...(padding === undefined ? [] : paddingStyle(padding)),
         variant && colorStyles.backgroundVariant(variant),
         variant && colorStyles.foregroundBackgroundVariant(variant),
+        squircle && styles.squircleContainer,
         style,
         hidden && styles.hidden
       )}
