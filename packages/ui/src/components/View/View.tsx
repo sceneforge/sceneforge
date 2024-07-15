@@ -4,6 +4,7 @@ import type { AllHTMLAttributes, Ref } from "react";
 import * as stylex from "@stylexjs/stylex";
 
 import { colorStyles, currentColor } from "../../colors.stylex";
+import { scrollShadowsStyles } from "../../scrollShadows.stylex";
 import { Variant } from "../../types";
 import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
 
@@ -71,8 +72,14 @@ const View = ({
       {...props}
       {...stylex.props(
         styles.container,
-        scrollable === "block" && styles.scrollableBlock,
-        scrollable === "inline" && styles.scrollableInline,
+        scrollable === "block" && [
+          styles.scrollableBlock,
+          scrollShadowsStyles.block,
+        ],
+        scrollable === "inline" && [
+          styles.scrollableInline,
+          scrollShadowsStyles.inline,
+        ],
         scrollable === true && [
           styles.scrollableBlock,
           styles.scrollableInline,
