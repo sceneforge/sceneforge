@@ -3142,7 +3142,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/blocks@npm:8.2.2, @storybook/blocks@npm:^8.1.11":
+"@storybook/blocks@npm:8.2.2":
   version: 8.2.2
   resolution: "@storybook/blocks@npm:8.2.2"
   dependencies:
@@ -3170,6 +3170,37 @@ __metadata:
     react-dom:
       optional: true
   checksum: 10c0/41055cf9904e10139d6160526316490b9eaad01b790348ada53cb03132b164086fdbc76970d4fec2f64b25506dc60e70bb21298d928c6dca4f1bef8222f3eb7b
+  languageName: node
+  linkType: hard
+
+"@storybook/blocks@npm:^8.1.11":
+  version: 8.2.3
+  resolution: "@storybook/blocks@npm:8.2.3"
+  dependencies:
+    "@storybook/csf": "npm:0.1.11"
+    "@storybook/global": "npm:^5.0.0"
+    "@storybook/icons": "npm:^1.2.5"
+    "@types/lodash": "npm:^4.14.167"
+    color-convert: "npm:^2.0.1"
+    dequal: "npm:^2.0.2"
+    lodash: "npm:^4.17.21"
+    markdown-to-jsx: "npm:^7.4.5"
+    memoizerific: "npm:^1.11.3"
+    polished: "npm:^4.2.2"
+    react-colorful: "npm:^5.1.2"
+    telejson: "npm:^7.2.0"
+    ts-dedent: "npm:^2.0.0"
+    util-deprecate: "npm:^1.0.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    storybook: ^8.2.3
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 10c0/bd52613f2683b27d347d2590235b0cf6176bc7687ea263225761541361b92dfe408a227cec9f6e3b11b34f03fb33103803be6fb496cbc6be13c83ba18b0f161e
   languageName: node
   linkType: hard
 
