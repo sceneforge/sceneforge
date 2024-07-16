@@ -1,4 +1,4 @@
-import { Container, type TabComponentProps } from "@sceneforge/ui";
+import { Container, type TabComponentProps, View } from "@sceneforge/ui";
 import { Markdown as SimpleMarkdown } from "@simplecomponent/markdown";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
@@ -40,19 +40,23 @@ const MarkdownViewTemplate = ({
   }
 
   return (
-    <Container>
-      {
-        isPending
-          ? (<p>Loading...</p>)
-          : (
-            <SimpleMarkdown
-              components={markdownComponents}
-              key={i18nHref}
-              value={data}
-            />
-          )
-      }
-    </Container>
+    <View
+      scrollable
+    >
+      <Container>
+        {
+          isPending
+            ? (<p>Loading...</p>)
+            : (
+              <SimpleMarkdown
+                components={markdownComponents}
+                key={i18nHref}
+                value={data}
+              />
+            )
+        }
+      </Container>
+    </View>
   );
 };
 
