@@ -1,49 +1,42 @@
-import type { StyleXStyles } from "@stylexjs/stylex";
-import type { PropsWithChildren } from "react";
-
 import * as stylex from "@stylexjs/stylex";
 
-import { Variant } from "../../types";
-import { View, ViewProps } from "../View";
+import { View, type ViewProps } from "../View";
 
-export type ContainerProps = PropsWithChildren<{
-  padding?: ViewProps["padding"];
-  scrollable?: ViewProps["scrollable"];
-  style?: StyleXStyles;
-  variant?: Variant;
-}>;
+export type ContainerProps = Omit<ViewProps, "margin" | "scrollable" | "variant">;
 
 const styles = stylex.create({
   container: {
-    display: "block",
+    height: null,
+    marginBlock: 0,
     marginInline: "auto",
     maxWidth: {
       "@media only screen and (min-width: 768px)": "760px",
       "@media only screen and (min-width: 992px)": "900px",
       "default": "calc(100% - 2rem)",
     },
+    overflowX: null,
+    overflowY: null,
+    overscrollBehavior: null,
+    scrollbarColor: null,
+    scrollbarWidth: null,
   },
 });
 
 const Container = ({
-  children,
-  padding = 0,
-  scrollable = true,
   style,
-  variant,
+  ...props
 }: ContainerProps) => {
   return (
     <View
-      padding={padding}
-      scrollable={scrollable}
       style={[
         styles.container,
         style,
       ]}
-      variant={variant}
-    >
-      {children}
-    </View>
+      {...props}
+      margin={undefined}
+      scrollable={undefined}
+      variant={undefined}
+    />
   );
 };
 
