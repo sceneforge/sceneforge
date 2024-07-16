@@ -2,8 +2,9 @@ import * as stylex from "@stylexjs/stylex";
 
 import type { TabCloseCallback } from "./TabPanel";
 
+import { roundedStyles } from "../../borders.stylex";
 import { backgroundColor, foregroundColor } from "../../colors.stylex";
-import { effects } from "../../effect.stylex";
+import { glossyInteractiveStyles } from "../../effect.stylex";
 import { IconEnum, Orientation, Position, Variant } from "../../types";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
@@ -33,22 +34,6 @@ const styles = stylex.create({
       "default": backgroundColor.alpha75,
     },
     color: foregroundColor.default,
-  },
-  borderHorizontalEnd: {
-    borderEndEndRadius: "0.5rem",
-    borderEndStartRadius: "0.5rem",
-  },
-  borderHorizontalStart: {
-    borderStartEndRadius: "0.5rem",
-    borderStartStartRadius: "0.5rem",
-  },
-  borderVerticalEnd: {
-    borderEndEndRadius: "0.5rem",
-    borderStartEndRadius: "0.5rem",
-  },
-  borderVerticalStart: {
-    borderEndStartRadius: "0.5rem",
-    borderStartStartRadius: "0.5rem",
   },
   button: {
     alignItems: "center",
@@ -139,15 +124,15 @@ const Tab = ({
         orientation === Orientation.Horizontal
         && (
           position === Position.End
-            ? styles.borderHorizontalEnd
-            : styles.borderHorizontalStart
+            ? roundedStyles.roundedBlockEnd(2)
+            : roundedStyles.roundedBlockStart(2)
         ),
         orientation === Orientation.Vertical && (
           position === Position.End
-            ? styles.borderVerticalEnd
-            : styles.borderVerticalStart
+            ? roundedStyles.roundedInlineEnd(2)
+            : roundedStyles.roundedInlineStart(2)
         ),
-        active && variant && effects.glossyInvertedInteractive(variant),
+        active && variant && glossyInteractiveStyles.inverted(variant),
       ]}
     >
       <Button

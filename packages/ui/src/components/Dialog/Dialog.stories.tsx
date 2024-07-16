@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { variantArgTypes } from "../../storiesHelpers";
 import { IconEnum, Variant } from "../../types";
 import Dialog from "./Dialog";
 
@@ -15,7 +15,7 @@ const meta: Meta<typeof Dialog> = {
     title: {
       control: "text",
     },
-    ...variantArgumentTypes("variant"),
+    ...variantArgTypes("variant"),
   },
   component: Dialog,
   title: "Component/Dialog",
@@ -30,7 +30,7 @@ export const Default: Story = {
     children: "Dialog Content",
     title: "Dialog Title",
   },
-} as Story;
+};
 
 export const WithActions: Story = {
   args: {
@@ -38,7 +38,7 @@ export const WithActions: Story = {
       {
         kind: "button",
         label: "Button 1",
-        variant: Variant.Default,
+        variant: Variant.Primary,
       },
       {
         icon: IconEnum.Delete,

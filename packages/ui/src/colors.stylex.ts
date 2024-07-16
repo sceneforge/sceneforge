@@ -77,7 +77,7 @@ export const colorVariables = stylex.defineVars({
     [MEDIA_LIGHT]: "#000000",
     default: "#000000",
   },
-});
+} as const);
 
 export const backgroundColor = stylex.defineVars({
   alpha05: `color-mix(in srgb, ${colorVariables["--theme-color-background-default"]} 5%, transparent)`,
@@ -196,18 +196,6 @@ export const themeColors = stylex.create({
       default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
-  setColorDefault: (color: ThemeColorPlacementType) => ({
-    "--theme-color-background-default": {
-      [MEDIA_DARK]: color.background?.dark,
-      [MEDIA_LIGHT]: color.background?.light,
-      default: color.background?.light,
-    },
-    "--theme-color-foreground-default": {
-      [MEDIA_DARK]: color.foreground?.dark,
-      [MEDIA_LIGHT]: color.foreground?.light,
-      default: color.foreground?.light,
-    },
-  } as Record<string, Record<string, string>>),
   setColorInfo: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-info": {
       [MEDIA_DARK]: color.background?.dark,
@@ -258,23 +246,83 @@ export const themeColors = stylex.create({
   } as Record<string, Record<string, string>>),
 });
 
-export const colorStyles = stylex.create({
-  background: {
-    backgroundColor: colorVariables["--theme-color-background-default"],
-  },
-  backgroundTransparent: {
-    backgroundColor: "transparent",
-  },
-  backgroundVariant: (variant: VariantType) => ({
-    backgroundColor: colorVariables[`--theme-color-background-${variant}`],
+export const backgroundStyles = stylex.create({
+  default: (opacity: number) => ({
+    backgroundColor: `color-mix(in srgb, ${colorVariables["--theme-color-background-default"]} ${opacity}%, transparent)`,
   }),
-  foregroundBackground: {
+  defaultInverted: (opacity: number) => ({
+    backgroundColor: `color-mix(in srgb, ${colorVariables["--theme-color-foreground-default"]} ${opacity}%, transparent)`,
+  }),
+  inverted: (variant: VariantType, opacity: number) => ({
+    backgroundColor: `color-mix(in srgb, ${colorVariables[`--theme-color-foreground-${variant}`]} ${opacity}%, transparent)`,
+  }),
+  variant: (variant: VariantType, opacity: number) => ({
+    backgroundColor: `color-mix(in srgb, ${colorVariables[`--theme-color-background-${variant}`]} ${opacity}%, transparent)`,
+  }),
+});
+
+export const textColorStyles = stylex.create({
+  default: {
+    color: colorVariables["--theme-color-background-default"],
+  },
+  defaultInverted: {
     color: colorVariables["--theme-color-foreground-default"],
   },
-  foregroundBackgroundVariant: (variant: VariantType) => ({
+  inverted: (variant: VariantType) => ({
     color: colorVariables[`--theme-color-foreground-${variant}`],
   }),
-  foregroundVariant: (variant: VariantType) => ({
+  variant: (variant: VariantType) => ({
     color: colorVariables[`--theme-color-background-${variant}`],
+  }),
+});
+
+export const colorStyles = stylex.create({
+  background: (variant: VariantType) => ({
+    backgroundColor: colorVariables[`--theme-color-background-${variant}`],
+  }),
+  color: (variant: VariantType) => ({
+    color: colorVariables[`--theme-color-background-${variant}`],
+  }),
+  default: {
+    backgroundColor: colorVariables["--theme-color-background-default"],
+    color: colorVariables["--theme-color-foreground-default"],
+  },
+  foreground: (variant: VariantType) => ({
+    color: colorVariables[`--theme-color-background-${variant}`],
+  }),
+  inverted: (variant: VariantType) => ({
+    backgroundColor: colorVariables[`--theme-color-foreground-${variant}`],
+    color: colorVariables[`--theme-color-background-${variant}`],
+  }),
+  variant: (variant: VariantType) => ({
+    backgroundColor: colorVariables[`--theme-color-background-${variant}`],
+    color: colorVariables[`--theme-color-foreground-${variant}`],
+  }),
+});
+
+export const textShadowStyles = stylex.create({
+  default: (size: number) => ({
+    textShadow: [
+      `${(size * 0.0625)}rem ${(size * 0.0625)}rem ${(size * 3 * 0.0625)}rem ${colorVariables["--theme-color-foreground-default"]}`,
+      `${(size * 2 * 0.0625)}rem ${(size * 4 * 0.0625)}rem ${(size * 7 * 0.0625)}rem ${colorVariables["--theme-color-foreground-default"]}`,
+    ].join(", "),
+  }),
+  defaultInverted: (size: number) => ({
+    textShadow: [
+      `${(size * 0.0625)}rem ${(size * 0.0625)}rem ${(size * 3 * 0.0625)}rem ${colorVariables["--theme-color-background-default"]}`,
+      `${(size * 2 * 0.0625)}rem ${(size * 4 * 0.0625)}rem ${(size * 7 * 0.0625)}rem ${colorVariables["--theme-color-background-default"]}`,
+    ].join(", "),
+  }),
+  inverted: (variant: VariantType, size: number) => ({
+    textShadow: [
+      `${(size * 0.0625)}rem ${(size * 0.0625)}rem ${(size * 3 * 0.0625)}rem ${colorVariables[`--theme-color-background-${variant}`]}`,
+      `${(size * 2 * 0.0625)}rem ${(size * 4 * 0.0625)}rem ${(size * 7 * 0.0625)}rem ${colorVariables[`--theme-color-background-${variant}`]}`,
+    ].join(", "),
+  }),
+  variant: (variant: VariantType, size: number) => ({
+    textShadow: [
+      `${(size * 0.0625)}rem ${(size * 0.0625)}rem ${(size * 3 * 0.0625)}rem ${colorVariables[`--theme-color-foreground-${variant}`]}`,
+      `${(size * 2 * 0.0625)}rem ${(size * 4 * 0.0625)}rem ${(size * 7 * 0.0625)}rem ${colorVariables[`--theme-color-foreground-${variant}`]}`,
+    ].join(", "),
   }),
 });

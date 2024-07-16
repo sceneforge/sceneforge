@@ -4,10 +4,9 @@ import {
   type Ref,
 } from "react";
 
+import { borderStyles, roundedStyles } from "../../borders.stylex";
 import {
-  backgroundColor,
   colorStyles,
-  foregroundBackgroundColor,
   foregroundColor,
 } from "../../colors.stylex";
 import { IconEnum, Variant } from "../../types";
@@ -39,17 +38,11 @@ const styles = stylex.create({
     },
   },
   container: {
-    backgroundColor: foregroundBackgroundColor.alpha10,
-    borderColor: backgroundColor.alpha10,
-    borderRadius: "0.5rem",
-    borderStyle: "solid",
-    borderWidth: "0.0625rem",
     boxShadow: [
       `0 0.25rem 0.625rem 0.25rem ${foregroundColor.alpha35}`,
       `0 0.5rem 4rem 3rem ${foregroundColor.alpha15}`,
       `0 1rem 6rem 8rem ${foregroundColor.alpha05}`,
     ].join(", "),
-    color: foregroundColor.default,
     display: "flex",
     flexDirection: "column",
     insetBlock: "50%",
@@ -97,10 +90,15 @@ const Dialog = ({
       {...props}
       ref={dialogRef}
       {...stylex.props(
-        styles.container,
+        borderStyles.border,
+        borderStyles.borderDefault(25),
+        borderStyles.borderSize(1),
+        colorStyles.default,
+        roundedStyles.rounded(2),
         styles.backdrop,
-        variant && colorStyles.backgroundVariant(variant),
-        variant && colorStyles.foregroundBackgroundVariant(variant)
+        styles.container,
+        variant && borderStyles.borderVariant(variant, 100),
+        variant && colorStyles.variant(variant)
       )}
     >
       <Pane

@@ -38,7 +38,7 @@ export const WithActions: Story = {
       {
         kind: "button",
         label: "Button 1",
-        variant: Variant.Default,
+        variant: Variant.Primary,
       },
       {
         icon: IconEnum.Delete,

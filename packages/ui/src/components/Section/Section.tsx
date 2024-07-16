@@ -7,7 +7,7 @@ import {
   type Ref,
 } from "react";
 
-import { colorStyles, colorVariables } from "../../colors.stylex";
+import { colorStyles } from "../../colors.stylex";
 import { Variant } from "../../types";
 import { Heading, HeadingProps } from "../Heading";
 import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
@@ -25,9 +25,6 @@ const styles = stylex.create({
     padding: 0,
     textAlign: "start",
     width: "100%",
-  },
-  headingWithShadow: {
-    color: colorVariables["--theme-color-background-default"],
   },
   hidden: {
     display: "none",
@@ -68,21 +65,21 @@ const Section = ({
         styles.container,
         ...(margin === undefined ? [] : marginStyle(margin)),
         ...(padding === undefined ? [] : paddingStyle(padding)),
-        variant && colorStyles.backgroundVariant(variant),
-        variant && colorStyles.foregroundBackgroundVariant(variant),
+        variant && colorStyles.variant(variant),
         hidden && styles.hidden
       )}
     >
       {title && (
         <Heading
+          inverted={variant ? true : false}
           level={level}
           padding={headingPadding}
           shadow={shadow}
           style={[
             styles.heading,
-            shadow && styles.headingWithShadow,
             style,
           ]}
+          variant={variant}
         >
           {title}
         </Heading>

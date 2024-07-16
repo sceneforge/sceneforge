@@ -2,8 +2,9 @@ import type { AllHTMLAttributes, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
-import { colorVariables } from "../../colors.stylex";
-import { Variant, VariantType } from "../../types";
+import { borderStyles, roundedStyles } from "../../borders.stylex";
+import { colorStyles } from "../../colors.stylex";
+import { Variant } from "../../types";
 
 export type InputTextProps = {
   ref?: Ref<HTMLInputElement>;
@@ -11,24 +12,11 @@ export type InputTextProps = {
 } & Omit<AllHTMLAttributes<HTMLInputElement>, "checked" | "defaultChecked" | "type">;
 
 const styles = stylex.create({
-  colorVariant: (variant: VariantType) => ({
-    borderBlockEndColor: colorVariables[`--theme-color-background-${variant}`],
-    color: colorVariables[`--theme-color-foreground-${variant}`],
-  }),
   container: {
-    backgroundColor: colorVariables["--theme-color-background-default"],
-    borderBlockEndColor: colorVariables["--theme-color-background-default"],
-    borderBlockEndStyle: "solid",
-    borderBlockEndWidth: "0.125rem",
-    borderBlockStart: "none",
-    borderInline: "none",
-    borderStartEndRadius: "0.25rem",
-    borderStartStartRadius: "0.25rem",
     boxShadow: {
       ":focus": "0 0.125rem 0.25rem 0.0125rem color-mix(in srgb, currentColor 75%, transparent)",
       "default": "none",
     },
-    outline: "none",
     paddingBlock: "0.25rem",
     paddingInline: {
       ":focus": "0.25rem",
@@ -48,7 +36,15 @@ const InputText = ({ ref, variant, ...props }: InputTextProps) => {
       ref={ref}
       {...stylex.props(
         styles.container,
-        variant && styles.colorVariant(variant)
+        colorStyles.default,
+        borderStyles.noBorder,
+        borderStyles.borderBlockEnd,
+        borderStyles.borderBlockEndSize(3),
+        borderStyles.borderBlockEndCurrentColor(100),
+        borderStyles.noOutline,
+        roundedStyles.roundedBlockStart(1),
+        variant && borderStyles.borderBlockEndVariant(variant, 100),
+        variant && colorStyles.inverted(variant)
       )}
     />
   );

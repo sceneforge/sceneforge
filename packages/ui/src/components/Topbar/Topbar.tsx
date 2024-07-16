@@ -1,7 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import { useId } from "react";
 
-import { colorVariables, foregroundColor } from "../../colors.stylex";
+import { borderStyles } from "../../borders.stylex";
+import { foregroundColor } from "../../colors.stylex";
 import { Orientation, Variant } from "../../types";
 import { ActionList, ActionListProps } from "../ActionList";
 import { Heading } from "../Heading";
@@ -18,6 +19,7 @@ export type TopbarProps = {
   actionsStartGap?: ActionListProps["gap"];
   actionsStartScale?: ActionListProps["actionsScale"];
   id?: string;
+  inverted?: boolean;
   shadow?: boolean;
   title?: string;
   variant?: Variant;
@@ -25,8 +27,6 @@ export type TopbarProps = {
 
 const styles = stylex.create({
   container: {
-    backgroundColor: colorVariables["--theme-color-background-accent"],
-    color: colorVariables["--theme-color-foreground-accent"],
     height: titleBar.appTitleBarHeight,
     insetBlockStart: titleBar.appTitleBarInsetBlockStart,
     insetInline: 0,
@@ -34,9 +34,6 @@ const styles = stylex.create({
     width: "100%",
   },
   containerBorderAndShadow: {
-    borderBlockEndColor: foregroundColor.alpha75,
-    borderBlockEndStyle: "solid",
-    borderBlockEndWidth: "0.0125rem",
     boxShadow: `0 4px 6px -1px ${foregroundColor.alpha30}`,
   },
   content: {
@@ -74,9 +71,10 @@ const Topbar = ({
   actionsStartGap,
   actionsStartScale,
   id,
+  inverted,
   shadow,
   title,
-  variant,
+  variant = Variant.Accent,
 }: TopbarProps) => {
   const generatedId = useId();
   const currentId = id ?? generatedId;
@@ -86,10 +84,17 @@ const Topbar = ({
       id={currentId}
       {...stylex.props(
         styles.container,
-        shadow && styles.containerBorderAndShadow
+        borderStyles.noBorder,
+        shadow && styles.containerBorderAndShadow,
+        shadow && [
+          borderStyles.borderBlockEnd,
+          borderStyles.borderBlockEndSize(1),
+          borderStyles.borderBlockEndDefault(65),
+        ]
       )}
     >
       <View
+        inverted={inverted}
         style={[
           styles.content,
           actionsStart && actionsEnd && styles.contentActions,

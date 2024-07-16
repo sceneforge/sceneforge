@@ -9,7 +9,6 @@ export const useTheme = () => {
     setColors: {
       [Variant.Accent]: setColorAccent,
       [Variant.Danger]: setColorDanger,
-      [Variant.Default]: setColorDefault,
       [Variant.Info]: setColorInfo,
       [Variant.Primary]: setColorPrimary,
       [Variant.Success]: setColorSuccess,
@@ -20,7 +19,6 @@ export const useTheme = () => {
   const {
     [Variant.Accent]: colorAccent,
     [Variant.Danger]: colorDanger,
-    [Variant.Default]: colorDefault,
     [Variant.Info]: colorInfo,
     [Variant.Primary]: colorPrimary,
     [Variant.Success]: colorSuccess,
@@ -30,14 +28,12 @@ export const useTheme = () => {
   return {
     colorAccent,
     colorDanger,
-    colorDefault,
     colorInfo,
     colorPrimary,
     colorSuccess,
     colorWarning,
     setColorAccent,
     setColorDanger,
-    setColorDefault,
     setColorInfo,
     setColorPrimary,
     setColorSuccess,

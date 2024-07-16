@@ -51,7 +51,7 @@ const Icon = ({
       ref={ref}
       {...stylex.props(
         styles.container,
-        variant && colorStyles.foregroundVariant(variant),
+        variant && colorStyles.color(variant),
         ...iconStyle(icon),
         styles.size(size),
         style

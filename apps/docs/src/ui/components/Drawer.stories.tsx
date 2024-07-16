@@ -63,6 +63,6 @@ export const Default: Story = {
     label: "Drawer Title",
     resizable: true,
     size: 48,
-    variant: Variant.Default,
+    variant: Variant.Primary,
   },
 };

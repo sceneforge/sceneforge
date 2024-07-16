@@ -40,7 +40,7 @@ export const Default: Story = {
     children:
       [
         (<View key="child-1" variant={Variant.Accent}>Split Pane Text Content 1</View>),
-        (<View key="child-2" variant={Variant.Default}>Split Pane Text Content 2</View>),
+        (<View key="child-2" variant={Variant.Primary}>Split Pane Text Content 2</View>),
       ],
     orientation: Orientation.Horizontal,
     resizable: false,

@@ -4,7 +4,7 @@ import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren, useId } from "react";
 
 import { colorStyles } from "../../colors.stylex";
-import { effects } from "../../effect.stylex";
+import { glossyInteractiveStyles } from "../../effect.stylex";
 import { IconEnum, type Variant } from "../../types";
 import { Icon } from "../Icon";
 import { View, ViewProps } from "../View";
@@ -94,8 +94,7 @@ const Collapsible = ({
       open={open}
       {...stylex.props(
         styles.container,
-        variant && colorStyles.backgroundVariant(variant),
-        variant && colorStyles.foregroundBackgroundVariant(variant),
+        variant && colorStyles.variant(variant),
         styles.containerState,
         style
       )}
@@ -103,7 +102,7 @@ const Collapsible = ({
       <summary
         {...stylex.props(
           styles.summary,
-          variant && effects.glossyInteractive(variant)
+          variant && glossyInteractiveStyles.variant(variant)
         )}
       >
         {icon && (<Icon icon={icon} style={styles.icon} />)}

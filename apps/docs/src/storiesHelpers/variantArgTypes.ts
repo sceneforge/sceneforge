@@ -7,7 +7,6 @@ export const variantArgTypes = (property: string) => ({
         "": "-- None",
         [Variant.Accent]: "Accent",
         [Variant.Danger]: "Danger",
-        [Variant.Default]: "Default",
         [Variant.Info]: "Info",
         [Variant.Primary]: "Primary",
         [Variant.Success]: "Success",
@@ -17,7 +16,6 @@ export const variantArgTypes = (property: string) => ({
     },
     options: [
       "", // This is the default value
-      Variant.Default,
       Variant.Accent,
       Variant.Danger,
       Variant.Info,

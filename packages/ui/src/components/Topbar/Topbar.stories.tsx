@@ -34,6 +34,9 @@ const meta: Meta<typeof Topbar> = {
     actionsStartScale: {
       control: "boolean",
     },
+    inverted: {
+      boolean: "boolean",
+    },
     shadow: {
       control: "boolean",
     },

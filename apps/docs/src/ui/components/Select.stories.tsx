@@ -54,6 +54,6 @@ export const Default: Story = {
       { label: "Option 2", value: "2" },
       { label: "Option 3", value: "3" },
     ],
-    variant: Variant.Default,
+    variant: Variant.Primary,
   },
 };

@@ -16,7 +16,6 @@ export const ThemeContext = createContext<ThemeContextType>({
   colors: {
     [Variant.Accent]: getColorObject(),
     [Variant.Danger]: getColorObject(),
-    [Variant.Default]: getColorObject(),
     [Variant.Info]: getColorObject(),
     [Variant.Primary]: getColorObject(),
     [Variant.Success]: getColorObject(),
@@ -25,7 +24,6 @@ export const ThemeContext = createContext<ThemeContextType>({
   setColors: {
     [Variant.Accent]: () => void 0,
     [Variant.Danger]: () => void 0,
-    [Variant.Default]: () => void 0,
     [Variant.Info]: () => void 0,
     [Variant.Primary]: () => void 0,
     [Variant.Success]: () => void 0,
@@ -60,19 +58,6 @@ const ThemeProvider = ({ children, colors }: ThemeProviderProps) => {
       foreground: {
         dark: "#ffffff",
         light: "#ffffff",
-      },
-    }
-  );
-
-  const [colorDefault, setColorDefault] = useColorState(
-    colors?.[Variant.Default] ?? {
-      background: {
-        dark: "#000000",
-        light: "#ffffff",
-      },
-      foreground: {
-        dark: "#ffffff",
-        light: "#000000",
       },
     }
   );
@@ -134,7 +119,6 @@ const ThemeProvider = ({ children, colors }: ThemeProviderProps) => {
       colors: {
         [Variant.Accent]: colorAccent,
         [Variant.Danger]: colorDanger,
-        [Variant.Default]: colorDefault,
         [Variant.Info]: colorInfo,
         [Variant.Primary]: colorPrimary,
         [Variant.Success]: colorSuccess,
@@ -143,7 +127,6 @@ const ThemeProvider = ({ children, colors }: ThemeProviderProps) => {
       setColors: {
         [Variant.Accent]: setColorAccent,
         [Variant.Danger]: setColorDanger,
-        [Variant.Default]: setColorDefault,
         [Variant.Info]: setColorInfo,
         [Variant.Primary]: setColorPrimary,
         [Variant.Success]: setColorSuccess,
@@ -155,7 +138,6 @@ const ThemeProvider = ({ children, colors }: ThemeProviderProps) => {
         {...stylex.props(
           themeColors.setColorAccent(colorAccent),
           themeColors.setColorDanger(colorDanger),
-          themeColors.setColorDefault(colorDefault),
           themeColors.setColorInfo(colorInfo),
           themeColors.setColorPrimary(colorPrimary),
           themeColors.setColorSuccess(colorSuccess),

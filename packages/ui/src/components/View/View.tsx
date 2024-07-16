@@ -10,6 +10,7 @@ import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.styl
 
 export type ViewProps = {
   hidden?: boolean;
+  inverted?: boolean;
   margin?: SpacerStyleProps;
   padding?: SpacerStyleProps;
   ref?: Ref<HTMLDivElement>;
@@ -58,6 +59,7 @@ const styles = stylex.create({
 
 const View = ({
   hidden,
+  inverted,
   margin = 0,
   padding = 0,
   ref,
@@ -86,8 +88,8 @@ const View = ({
         ],
         ...(margin === undefined ? [] : marginStyle(margin)),
         ...(padding === undefined ? [] : paddingStyle(padding)),
-        variant && colorStyles.backgroundVariant(variant),
-        variant && colorStyles.foregroundBackgroundVariant(variant),
+        variant && !inverted && colorStyles.variant(variant),
+        variant && inverted && colorStyles.inverted(variant),
         squircle && styles.squircleContainer,
         style,
         hidden && styles.hidden

@@ -7,9 +7,10 @@ import {
   useMemo,
 } from "react";
 
-import { colorVariables } from "../../colors.stylex";
-import { effects } from "../../effect.stylex";
-import { Variant, VariantType } from "../../types";
+import { borderStyles, roundedStyles } from "../../borders.stylex";
+import { colorStyles } from "../../colors.stylex";
+import { boxShadowInteractiveStyles, glossyInteractiveStyles, outlineInteractiveStyles } from "../../effect.stylex";
+import { Variant } from "../../types";
 import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
 
 export type ButtonProps = {
@@ -29,24 +30,8 @@ export type ButtonProps = {
 } & Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "className" | "style">;
 
 const styles = stylex.create({
-  colorVariant: (variant: VariantType, inverted?: boolean) => ({
-    backgroundColor: colorVariables[`--theme-color-${inverted ? "foreground" : "background"}-${variant}`],
-    boxShadow: {
-      ":active": `0 0 0.2rem ${String(colorVariables[`--theme-color-${inverted ? "background" : "foreground"}-${variant}`])}`,
-      ":focus-visible": `0 0 0.1rem ${String(colorVariables[`--theme-color-${inverted ? "background" : "foreground"}-${variant}`])}`,
-      ":has(+ :popover-open)": `0 0 0.2rem ${String(colorVariables[`--theme-color-${inverted ? "background" : "foreground"}-${variant}`])}`,
-      "default": null,
-    },
-    color: colorVariables[`--theme-color-${inverted ? "background" : "foreground"}-${variant}`],
-    outlineColor: {
-      ":focus-visible": `color-mix(in srgb, ${String(colorVariables[`--theme-color-${inverted ? "foreground" : "background"}-${variant}`])} 75%, transparent)`,
-      "default": "transparent",
-    },
-  }),
   container: {
     backgroundColor: "transparent",
-    border: "none",
-    borderRadius: "0.5rem",
     color: "inherit",
     cursor: "pointer",
     display: "inline-block",
@@ -60,13 +45,6 @@ const styles = stylex.create({
       ":hover:not(:has(+ :popover-open))": "color-mix(in srgb, Canvas 25%, transparent)",
       "default": "transparent",
     },
-    boxShadow: {
-      ":active": "0 0 0.2rem SelectedItem",
-      ":focus-visible": "0 0 0.1rem SelectedItem",
-      ":has(+ :popover-open)": "0 0 0.2rem SelectedItem",
-      ":hover:not(:has(+ :popover-open))": null,
-      "default": null,
-    },
     filter: {
       ":active": "brightness(1.1)",
       ":focus-visible": "brightness(1.05)",
@@ -74,12 +52,6 @@ const styles = stylex.create({
       ":hover:not(:has(+ :popover-open))": "brightness(1.2)",
       "default": null,
     },
-    outlineColor: {
-      ":focus-visible": "color-mix(in srgb, SelectedItem 75%, transparent)",
-      "default": "transparent",
-    },
-    outlineStyle: "solid",
-    outlineWidth: "0.125rem",
   },
   dense: {
     fontSize: "0.875rem",
@@ -93,6 +65,7 @@ const styles = stylex.create({
   },
   scale: {
     scale: {
+      ":active": 1.075,
       ":focus-visible": 1.05,
       ":has(+ :popover-open)": 1.1,
       ":hover": 1.1,
@@ -177,11 +150,21 @@ const Button = ({
           : [
             styles.defaultContainer,
             disabled && styles.disabled,
-            variant && styles.colorVariant(variant, inverted),
-            (variant && !inverted && glossy)
-            && effects.glossyInteractive(variant),
-            (variant && inverted && glossy)
-            && effects.glossyInvertedInteractive(variant),
+            borderStyles.noBorder,
+            borderStyles.outline,
+            borderStyles.outlineSize(3),
+            borderStyles.outlineOffset(2),
+            roundedStyles.rounded(2),
+            boxShadowInteractiveStyles.default,
+            outlineInteractiveStyles.currentColor(50),
+            variant && outlineInteractiveStyles.variant(variant, 50),
+            variant && boxShadowInteractiveStyles.variant(variant),
+            variant && !inverted && colorStyles.variant(variant),
+            variant && inverted && colorStyles.inverted(variant),
+            (variant && glossy && !inverted)
+            && glossyInteractiveStyles.variant(variant),
+            (variant && glossy && inverted)
+            && glossyInteractiveStyles.inverted(variant),
           ],
         squircle && styles.squircleContainer,
         scale && !disabled && styles.scale,

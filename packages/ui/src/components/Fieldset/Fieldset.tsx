@@ -4,7 +4,7 @@ import { type PropsWithChildren, useId } from "react";
 import type { Variant } from "../../types";
 
 import { backgroundColor, colorStyles, currentColor, foregroundColor } from "../../colors.stylex";
-import { effects } from "../../effect.stylex";
+import { glossyStyles } from "../../effect.stylex";
 import { FieldItem, type FieldItemProps } from "../Field";
 
 export type FieldsetProps = PropsWithChildren<{
@@ -62,16 +62,15 @@ const Fieldset = ({ children, fields, id, legend, variant }: FieldsetProps) => {
       id={currentId}
       {...stylex.props(
         styles.container,
-        variant && colorStyles.backgroundVariant(variant),
-        variant && colorStyles.foregroundBackgroundVariant(variant),
-        variant && styles.withVariant
+        variant && styles.withVariant,
+        variant && colorStyles.variant(variant)
       )}
     >
       {legend && (
         <legend
           {...stylex.props(
             styles.legend,
-            variant && effects.glossyInverted(variant)
+            variant && glossyStyles.inverted(variant)
           )}
         >
           {legend}

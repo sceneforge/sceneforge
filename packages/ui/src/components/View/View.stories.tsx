@@ -187,7 +187,7 @@ export const ScrollableBoth: Story = {
     ),
     padding: 1,
     scrollable: true,
-    variant: Variant.Default,
+    variant: Variant.Primary,
   },
   decorators: [
     Story => (

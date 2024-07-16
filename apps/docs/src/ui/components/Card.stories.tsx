@@ -31,7 +31,7 @@ export const Default: Story = {
       {
         kind: "button",
         label: "Open",
-        variant: Variant.Default,
+        variant: Variant.Primary,
       },
       {
         icon: IconEnum.Delete,
