@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { orientationArgTypes as orientationArgumentTypes, positionArgTypes as positionArgumentTypes, variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { orientationArgTypes, positionArgTypes, variantArgTypes } from "../../storiesHelpers";
 import { Variant } from "../../types";
 import Drawer from "./Drawer";
 
@@ -24,9 +24,9 @@ const meta: Meta<typeof Drawer> = {
       max: 100,
       min: 1,
     },
-    ...variantArgumentTypes("variant"),
-    ...orientationArgumentTypes("orientation"),
-    ...positionArgumentTypes("position"),
+    ...orientationArgTypes("orientation"),
+    ...positionArgTypes("position"),
+    ...variantArgTypes("variant"),
   },
   component: Drawer,
   decorators: [
@@ -54,7 +54,8 @@ export const Default: Story = {
     children: (
       <div
         style={{
-          padding: "1rem 2rem",
+          paddingBlock: "1rem",
+          paddingInline: "2rem",
         }}
       >
         Drawer Content
@@ -65,4 +66,4 @@ export const Default: Story = {
     size: 48,
     variant: Variant.Primary,
   },
-} as Story;
+};
