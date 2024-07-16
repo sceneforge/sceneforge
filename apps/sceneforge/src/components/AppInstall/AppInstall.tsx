@@ -30,7 +30,7 @@ export const AppInstall = () => {
       description={t("description")}
       onClose={closeInstallDialog}
       title={t("title")}
-      variant={Variant.Default}
+      variant={Variant.Accent}
     />
   );
 };

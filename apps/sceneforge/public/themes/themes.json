@@ -4,6 +4,11 @@
       "id": "default",
       "name": "Scene Forge Default",
       "url": "/themes/default.json"
+    },
+    {
+      "id": "monochrome",
+      "name": "Scene Forge Monochrome",
+      "url": "/themes/monochrome.json"
     }
   ]
 }

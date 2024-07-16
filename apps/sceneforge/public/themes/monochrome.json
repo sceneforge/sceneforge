@@ -2,11 +2,11 @@
   "colors": {
     "accent": {
       "background": {
-        "dark": "#006e50",
-        "light": "#00a98f"
+        "dark": "#aaaaaa",
+        "light": "#555555"
       },
       "foreground": {
-        "dark": "#ffffff",
+        "dark": "#000000",
         "light": "#ffffff"
       }
     },
@@ -32,12 +32,12 @@
     },
     "primary": {
       "background": {
-        "dark": "#75048c",
-        "light": "#86159d"
+        "dark": "#111111",
+        "light": "#dddddd"
       },
       "foreground": {
         "dark": "#ffffff",
-        "light": "#ffffff"
+        "light": "#000000"
       }
     },
     "success": {

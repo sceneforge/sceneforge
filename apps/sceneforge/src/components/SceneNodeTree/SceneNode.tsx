@@ -52,13 +52,9 @@ export const SceneNode = ({
 
   const nodeHasChildren = useMemo(() => hasChildren(node), [node]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const childrenNodes: unknown[] = useMemo(
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     () => open && nodeHasChildren
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       ? getNodeChildren(node)
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         .sort(compare)
       : []
     , [nodeHasChildren, node, open]
@@ -113,8 +109,8 @@ export const SceneNode = ({
   }, [clearMeshSelectionPath, expandNode]);
 
   return (
-    <li className="list-none p-l-5 c-inherit" data-open={open} id={genId}>
-      <div className="relative flex flex-row flex-nowrap items-center justify-stretch c-inherit dark:focus-within:bg-black:10 dark:hover:bg-white:10 light:focus-within:bg-white:10 light:hover:bg-black:10">
+    <li data-open={open} id={genId}>
+      <div>
         {nodeHasChildren && (
           <IconButton
             aria-controls={`${genId}-children`}
@@ -127,7 +123,7 @@ export const SceneNode = ({
           <Icon icon={nodeTypeIconMap[nodeType]} />
           <span>{nodeName}</span>
         </Button>
-        <div className="m-block--2 flex flex-shrink flex-row items-center justify-stretch c-inherit">
+        <div>
           <Toggle onToggle={handleVisibility} pressed={!visible}>
             <Icon
               icon={visible ? IconEnum.Visibility : IconEnum.VisibilityOff}
@@ -138,12 +134,10 @@ export const SceneNode = ({
 
       {nodeHasChildren && (
         <ul
-          className="m-0 list-none p-0 c-inherit"
           hidden={!open}
           id={`${genId}-children`}
         >
-          {open
-          && childrenNodes.map((node, index) => (
+          {open && childrenNodes.map((node, index) => (
             <SceneNode
               clearMeshSelectionPath={clearMeshSelectionPath}
               key={`${genId}-${index}`}
