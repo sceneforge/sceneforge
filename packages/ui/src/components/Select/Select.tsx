@@ -7,7 +7,7 @@ import type { OptionProps } from "./Option";
 
 import { borderStyles, roundedStyles } from "../../borders.stylex";
 import { colorStyles } from "../../colors.stylex";
-import { IconEnum } from "../../types";
+import { IconEnum, Shape } from "../../types";
 import { Button, type ButtonProps } from "../Button";
 import { Icon } from "../Icon";
 import { Unlisted } from "../Unlisted";
@@ -98,6 +98,7 @@ const Select = ({
         inverted={inverted}
         popoverTarget={popoverOptionsId}
         popoverTargetAction="toggle"
+        shape={Shape.Rounded}
         style={[
           styles.container,
           styles.anchor(currentId),

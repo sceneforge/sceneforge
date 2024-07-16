@@ -1,5 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 
+import { Shape } from "../../types";
 import { Button, type ButtonProps } from "../Button";
 import { Card, type CardProps } from "../Card";
 
@@ -25,7 +26,6 @@ const styles = stylex.create({
   container: {
     backgroundColor: "transparent",
     border: "none",
-    borderRadius: "0.5rem",
     color: "inherit",
     height: "100%",
     width: "100%",
@@ -54,6 +54,7 @@ const CardButton = ({
       popoverTarget={popoverTarget}
       popoverTargetAction={popoverTargetAction}
       ref={ref}
+      shape={Shape.Rounded}
       style={styles.container}
       tabIndex={tabIndex}
       variant={variant}

@@ -3,7 +3,7 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren } from "react";
 
-import { Variant } from "../../types";
+import { Shape, Variant } from "../../types";
 import { Pane, type PaneProps } from "../Pane";
 import { View, ViewProps } from "../View";
 
@@ -24,7 +24,6 @@ export type CardProps = PropsWithChildren<{
 
 const styles = stylex.create({
   container: {
-    borderRadius: "0.5rem",
     position: "relative",
     textAlign: "start",
   },
@@ -62,6 +61,7 @@ const Card = ({
       hidden={hidden}
       id={id}
       popover={popover}
+      shape={Shape.Rounded}
       style={[
         styles.container,
         style,

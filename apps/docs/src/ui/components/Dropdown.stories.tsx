@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Dropdown } from "@sceneforge/ui";
 
-import { variantArgTypes } from "../../storiesHelpers";
+import { shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
 
 const meta: Meta<typeof Dropdown> = {
   argTypes: {
@@ -30,6 +30,7 @@ const meta: Meta<typeof Dropdown> = {
     scale: {
       control: "boolean",
     },
+    ...shapeArgTypes("shape"),
     ...variantArgTypes("variant"),
     ...variantArgTypes("actionListVariant"),
   },

@@ -9,9 +9,14 @@ export const iconArgTypes = (property: string) => ({
         .reduce((accumulator, value) => ({
           ...accumulator,
           ...value,
-        }), {}),
+        }), {
+          "": "-- None",
+        }),
       type: "select" as const,
     },
-    options: Object.values(IconEnum),
+    options: [
+      "", // This is the default value,
+      ...Object.values(IconEnum),
+    ],
   },
 });

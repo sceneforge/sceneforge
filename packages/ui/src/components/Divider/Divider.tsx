@@ -3,7 +3,7 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { currentColor } from "../../colors.stylex";
-import { Orientation } from "../../types";
+import { Orientation, type Shape } from "../../types";
 import { View } from "../View";
 
 export type DividerProps = {
@@ -15,6 +15,7 @@ export type DividerProps = {
   } | number;
   orientation?: Orientation;
   scale?: boolean;
+  shape?: Shape;
   style?: StyleXStyles;
 };
 

@@ -12,6 +12,7 @@ export type ActionListProps = {
   actions?: ActionProps[];
   actionsDense?: ActionProps["dense"];
   actionsScale?: ActionProps["scale"];
+  actionsShape?: ActionProps["shape"];
   actionsStyle?: ActionProps["style"];
   anchor?: string;
   gap?: number;
@@ -61,6 +62,7 @@ const ActionList = ({
   actions,
   actionsDense,
   actionsScale,
+  actionsShape,
   actionsStyle,
   anchor,
   gap,
@@ -118,6 +120,7 @@ const ActionList = ({
                 listOrientation={orientation}
                 role="menuitem"
                 scale={actionsScale}
+                shape={actionsShape}
                 style={[
                   styles.action,
                   actionsStyle,

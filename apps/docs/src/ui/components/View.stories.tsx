@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { View } from "@sceneforge/ui";
 
-import { variantArgTypes } from "../../storiesHelpers";
+import { shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
 
 const meta: Meta<typeof View> = {
   argTypes: {
@@ -19,6 +19,7 @@ const meta: Meta<typeof View> = {
       control: "inline-radio",
       options: [true, false, "inline", "block"],
     },
+    ...shapeArgTypes("shape"),
     ...variantArgTypes("variant"),
   },
   component: View,

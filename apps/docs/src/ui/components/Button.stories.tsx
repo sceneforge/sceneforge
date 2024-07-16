@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from "@sceneforge/ui";
 
-import { variantArgTypes } from "../../storiesHelpers";
+import { shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
 
 const meta: Meta<typeof Button> = {
   argTypes: {
@@ -27,6 +27,7 @@ const meta: Meta<typeof Button> = {
     scale: {
       control: "boolean",
     },
+    ...shapeArgTypes("shape"),
     ...variantArgTypes("variant"),
   },
   component: Button,

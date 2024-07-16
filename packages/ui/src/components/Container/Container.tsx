@@ -2,7 +2,7 @@ import * as stylex from "@stylexjs/stylex";
 
 import { View, type ViewProps } from "../View";
 
-export type ContainerProps = Omit<ViewProps, "margin" | "scrollable" | "variant">;
+export type ContainerProps = Omit<ViewProps, "margin" | "scrollable" | "shape" | "variant">;
 
 const styles = stylex.create({
   container: {
@@ -35,6 +35,7 @@ const Container = ({
       {...props}
       margin={undefined}
       scrollable={undefined}
+      shape={undefined}
       variant={undefined}
     />
   );

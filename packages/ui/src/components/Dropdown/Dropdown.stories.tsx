@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
 import Dropdown from "./Dropdown";
 
 const meta: Meta<typeof Dropdown> = {
@@ -29,8 +29,9 @@ const meta: Meta<typeof Dropdown> = {
     scale: {
       control: "boolean",
     },
-    ...variantArgumentTypes("variant"),
-    ...variantArgumentTypes("actionListVariant"),
+    ...shapeArgTypes("shape"),
+    ...variantArgTypes("variant"),
+    ...variantArgTypes("actionListVariant"),
   },
   component: Dropdown,
   decorators: [

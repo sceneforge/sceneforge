@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
 import Button from "./Button";
 
 const meta: Meta<typeof Button> = {
@@ -26,10 +26,8 @@ const meta: Meta<typeof Button> = {
     scale: {
       control: "boolean",
     },
-    squircle: {
-      control: "boolean",
-    },
-    ...variantArgumentTypes("variant"),
+    ...shapeArgTypes("shape"),
+    ...variantArgTypes("variant"),
   },
   component: Button,
   title: "Component/Button",
@@ -43,4 +41,4 @@ export const Default: Story = {
   args: {
     children: "Button Text Content",
   },
-} as Story;
+};

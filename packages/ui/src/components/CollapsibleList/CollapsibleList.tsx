@@ -1,6 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 import { useId } from "react";
 
+import { roundedStyles } from "../../borders.stylex";
 import { Variant } from "../../types";
 import { Collapsible, type CollapsibleProps } from "../Collapsible";
 import { View } from "../View";
@@ -13,7 +14,6 @@ export type CollapsibleListProps = {
 
 const styles = stylex.create({
   collapsible: {
-    borderRadius: 0,
     flexGrow: {
       ":is([open])": 1,
       "default": 0,
@@ -26,7 +26,6 @@ const styles = stylex.create({
     transition: "flex-grow 0.125s ease-in-out, flex-shrink 0.125s ease-in-out",
   },
   container: {
-    borderRadius: "0.25rem",
     display: "flex",
     flexDirection: "column",
     justifyContent: "stretch",
@@ -47,7 +46,10 @@ const CollapsibleList = ({
       id={currentId}
       margin={0}
       padding={0}
-      style={styles.container}
+      style={[
+        styles.container,
+        roundedStyles.rounded(1),
+      ]}
       variant={variant}
     >
       {items?.map((item, index) => (
@@ -56,7 +58,10 @@ const CollapsibleList = ({
           variant={variant}
           {...item}
           id={`${currentId}-collapsible-${index}`}
-          style={styles.collapsible}
+          style={[
+            styles.collapsible,
+            roundedStyles.noRounded,
+          ]}
         />
       ))}
     </View>

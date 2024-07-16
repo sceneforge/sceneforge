@@ -6,6 +6,8 @@ export { Orientation } from "./orientation";
 export type { OrientationType } from "./orientation";
 export { Position } from "./position";
 export type { PositionType } from "./position";
+export { Shape } from "./shape";
+export type { ShapeType } from "./shape";
 export { Size } from "./size";
 export type { SizeType } from "./size";
 export { Variant } from "./variant";

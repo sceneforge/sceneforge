@@ -1,6 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 
-import { roundedStyles } from "../../borders.stylex";
+import { Shape } from "../../types";
 import { Button, type ButtonProps } from "../Button";
 import { Icon, IconProps } from "../Icon";
 
@@ -23,8 +23,8 @@ const IconButton = ({
   icon,
   padding = 0.5,
   scale = true,
+  shape = Shape.Squircle,
   size,
-  squircle = true,
   style,
   ...props
 }: IconButtonProps) => {
@@ -33,10 +33,9 @@ const IconButton = ({
       {...props}
       padding={padding}
       scale={scale}
-      squircle={squircle}
+      shape={shape}
       style={[
         styles.container,
-        !squircle && roundedStyles.circle,
         style,
       ]}
     >

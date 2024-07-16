@@ -3,9 +3,10 @@ import type { AllHTMLAttributes, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
 
+import { roundedStyles } from "../../borders.stylex";
 import { colorStyles, currentColor } from "../../colors.stylex";
 import { scrollShadowsStyles } from "../../scrollShadows.stylex";
-import { Variant } from "../../types";
+import { Shape, Variant } from "../../types";
 import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
 
 export type ViewProps = {
@@ -15,7 +16,7 @@ export type ViewProps = {
   padding?: SpacerStyleProps;
   ref?: Ref<HTMLDivElement>;
   scrollable?: "block" | "inline" | boolean;
-  squircle?: boolean;
+  shape?: Shape;
   style?: StyleXStyles;
   variant?: Variant;
 } & Omit<AllHTMLAttributes<HTMLDivElement>, "className" | "hidden" | "style">;
@@ -45,16 +46,6 @@ const styles = stylex.create({
     overflowX: "auto",
     overscrollBehaviorInline: "contain",
   },
-  squircleContainer: {
-    alignContent: "center",
-    aspectRatio: "1 / 1",
-    maskImage: "url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNIDAsIDUwIEMgMCwgNiA2LCAwIDUwLCAwIFMgMTAwLCA2IDEwMCwgNTAgOTQsIDEwMCA1MCwgMTAwIDAsIDk0IDAsIDUwIFoiIC8+PC9zdmc+)",
-    maskPosition: "center center",
-    maskRepeat: "no-repeat",
-    maskSize: "auto auto",
-    maskType: "alpha",
-    textAlign: "center",
-  },
 });
 
 const View = ({
@@ -64,7 +55,7 @@ const View = ({
   padding = 0,
   ref,
   scrollable = false,
-  squircle,
+  shape,
   style,
   variant,
   ...props
@@ -90,7 +81,9 @@ const View = ({
         ...(padding === undefined ? [] : paddingStyle(padding)),
         variant && !inverted && colorStyles.variant(variant),
         variant && inverted && colorStyles.inverted(variant),
-        squircle && styles.squircleContainer,
+        shape === Shape.Rounded && roundedStyles.rounded(2),
+        shape === Shape.Circle && roundedStyles.circle,
+        shape === Shape.Squircle && roundedStyles.squircle,
         style,
         hidden && styles.hidden
       )}

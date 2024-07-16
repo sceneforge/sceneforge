@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
-import { Variant } from "../../types";
+import { shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
+import { Shape, Variant } from "../../types";
 import Heading from "../Heading/Heading";
 import View from "./View";
 
@@ -20,17 +20,8 @@ const meta: Meta<typeof View> = {
       control: "inline-radio",
       options: [true, false, "inline", "block"],
     },
-    ...variantArgumentTypes("variant"),
-    ref: {
-      table: {
-        disable: true,
-      },
-    },
-    style: {
-      table: {
-        disable: true,
-      },
-    },
+    ...shapeArgTypes("shape"),
+    ...variantArgTypes("variant"),
   },
   component: View,
   title: "Component/View",
@@ -46,10 +37,40 @@ export const Default: Story = {
   },
 };
 
+export const Circle: Story = {
+  args: {
+    children: "View Text Content",
+    shape: Shape.Circle,
+    variant: Variant.Success,
+  },
+  decorators: [
+    Story => (
+      <div style={{ height: "200px", width: "200px" }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export const Rounded: Story = {
+  args: {
+    children: "View Text Content",
+    shape: Shape.Rounded,
+    variant: Variant.Info,
+  },
+  decorators: [
+    Story => (
+      <div style={{ height: "200px", width: "200px" }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
 export const Squircle: Story = {
   args: {
     children: "View Text Content",
-    squircle: true,
+    shape: Shape.Squircle,
     variant: Variant.Accent,
   },
   decorators: [
@@ -187,7 +208,6 @@ export const ScrollableBoth: Story = {
     ),
     padding: 1,
     scrollable: true,
-    variant: Variant.Primary,
   },
   decorators: [
     Story => (

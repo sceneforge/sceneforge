@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Action } from "@sceneforge/ui";
 
-import { iconArgTypes, variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { iconArgTypes, shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
 
 const meta: Meta<typeof Action> = {
   argTypes: {
@@ -15,6 +15,9 @@ const meta: Meta<typeof Action> = {
       control: "boolean",
     },
     disabled: {
+      control: "boolean",
+    },
+    inverted: {
       control: "boolean",
     },
     kind: {
@@ -32,16 +35,14 @@ const meta: Meta<typeof Action> = {
     scale: {
       control: "boolean",
     },
-    ...iconArgTypes("icon"),
-    inverted: {
-      control: "boolean",
-    },
     size: {
       control: {
         type: "number",
       },
     },
-    ...variantArgumentTypes("variant"),
+    ...shapeArgTypes("shape"),
+    ...iconArgTypes("icon"),
+    ...variantArgTypes("variant"),
   },
   component: Action,
   title: "@sceneforge|ui/Components/Action",
@@ -56,4 +57,4 @@ export const Default: Story = {
     kind: "button",
     label: "Action Text Content",
   },
-} as Story;
+};

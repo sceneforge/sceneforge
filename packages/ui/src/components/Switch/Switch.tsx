@@ -1,7 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import { type InputHTMLAttributes, type Ref } from "react";
 
-import { backgroundColor, colorVariables } from "../../colors.stylex";
+import { borderStyles, roundedStyles } from "../../borders.stylex";
+import { backgroundStyles, colorVariables } from "../../colors.stylex";
 import { Variant, VariantType } from "../../types";
 
 export type SwitchProps = {
@@ -61,11 +62,6 @@ const styles = stylex.create({
     ":has(input:not(:checked))::before": {
       backgroundColor: "currentColor",
     },
-    "backgroundColor": backgroundColor.alpha50,
-    "borderColor": backgroundColor.alpha75,
-    "borderRadius": "100vw",
-    "borderStyle": "solid",
-    "borderWidth": "1px",
     "box-sizing": "border-box",
     "cursor": "pointer",
     "display": "inline-block",
@@ -96,6 +92,11 @@ const Switch = ({
       tabIndex={-1}
       {...stylex.props(
         styles.container,
+        backgroundStyles.default(50),
+        roundedStyles.pill,
+        borderStyles.border,
+        borderStyles.borderSize(1),
+        borderStyles.borderCurrentColor(25),
         variant && styles.colorVariant(variant)
       )}
     >

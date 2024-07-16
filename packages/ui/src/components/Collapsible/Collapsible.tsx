@@ -3,11 +3,12 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren, useId } from "react";
 
+import { roundedStyles } from "../../borders.stylex";
 import { colorStyles } from "../../colors.stylex";
 import { glossyInteractiveStyles } from "../../effect.stylex";
 import { IconEnum, type Variant } from "../../types";
 import { Icon } from "../Icon";
-import { View, ViewProps } from "../View";
+import { View, type ViewProps } from "../View";
 
 export type CollapsibleProps = PropsWithChildren<{
   contentMargin?: ViewProps["margin"];
@@ -27,7 +28,6 @@ const styles = stylex.create({
     transition: "rotate 0.125s ease-in-out",
   },
   container: {
-    borderRadius: "0.25rem",
     height: {
       ":is([open])": "100%",
       "default": "auto",
@@ -94,6 +94,7 @@ const Collapsible = ({
       open={open}
       {...stylex.props(
         styles.container,
+        roundedStyles.rounded(1),
         variant && colorStyles.variant(variant),
         styles.containerState,
         style

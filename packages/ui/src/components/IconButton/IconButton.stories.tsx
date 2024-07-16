@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { iconArgTypes, variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
+import { iconArgTypes, shapeArgTypes, variantArgTypes as variantArgumentTypes } from "../../storiesHelpers";
 import { IconEnum } from "../../types";
 import IconButton from "./IconButton";
 
@@ -41,10 +41,8 @@ const meta: Meta<typeof IconButton> = {
         },
       },
     },
-    squircle: {
-      control: "boolean",
-    },
     ...iconArgTypes("icon"),
+    ...shapeArgTypes("shape"),
     ...variantArgumentTypes("variant"),
   },
   args: {

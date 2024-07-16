@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Toggle, Variant } from "@sceneforge/ui";
 
-import { variantArgTypes } from "../../storiesHelpers";
+import { shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
 
 const meta: Meta<typeof Toggle> = {
   argTypes: {
@@ -30,6 +30,7 @@ const meta: Meta<typeof Toggle> = {
     scale: {
       control: "boolean",
     },
+    ...shapeArgTypes("shape"),
     ...variantArgTypes("variant"),
   },
   component: Toggle,
@@ -47,7 +48,7 @@ export const Default: Story = {
       "Toggle On",
     ],
     variant: [
-      Variant.Default,
+      Variant.Primary,
       Variant.Accent,
     ],
   },

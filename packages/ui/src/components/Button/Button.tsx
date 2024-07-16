@@ -10,7 +10,7 @@ import {
 import { borderStyles, roundedStyles } from "../../borders.stylex";
 import { colorStyles } from "../../colors.stylex";
 import { boxShadowInteractiveStyles, glossyInteractiveStyles, outlineInteractiveStyles } from "../../effect.stylex";
-import { Variant } from "../../types";
+import { Shape, Variant } from "../../types";
 import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
 
 export type ButtonProps = {
@@ -24,7 +24,7 @@ export type ButtonProps = {
   padding?: SpacerStyleProps;
   popovertarget?: string;
   scale?: boolean;
-  squircle?: boolean;
+  shape?: Shape;
   style?: StyleXStyles;
   variant?: Variant;
 } & Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "className" | "style">;
@@ -73,18 +73,6 @@ const styles = stylex.create({
     },
     transition: "scale 0.12s ease-in-out",
   },
-  squircleContainer: {
-    alignItems: "center",
-    aspectRatio: "1 / 1",
-    display: "flex",
-    justifyContent: "center",
-    maskImage: "url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNIDAsIDUwIEMgMCwgNiA2LCAwIDUwLCAwIFMgMTAwLCA2IDEwMCwgNTAgOTQsIDEwMCA1MCwgMTAwIDAsIDk0IDAsIDUwIFoiIC8+PC9zdmc+)",
-    maskPosition: "center center",
-    maskRepeat: "no-repeat",
-    maskSize: "auto auto",
-    maskType: "alpha",
-    textAlign: "center",
-  },
 });
 
 const Button = ({
@@ -103,7 +91,7 @@ const Button = ({
   },
   ref,
   scale,
-  squircle,
+  shape = Shape.Rounded,
   style,
   variant,
   ...props
@@ -154,7 +142,6 @@ const Button = ({
             borderStyles.outline,
             borderStyles.outlineSize(3),
             borderStyles.outlineOffset(2),
-            roundedStyles.rounded(2),
             boxShadowInteractiveStyles.default,
             outlineInteractiveStyles.currentColor(50),
             variant && outlineInteractiveStyles.variant(variant, 50),
@@ -166,7 +153,9 @@ const Button = ({
             (variant && glossy && inverted)
             && glossyInteractiveStyles.inverted(variant),
           ],
-        squircle && styles.squircleContainer,
+        shape === Shape.Rounded && roundedStyles.rounded(2),
+        shape === Shape.Circle && roundedStyles.circle,
+        shape === Shape.Squircle && roundedStyles.squircle,
         scale && !disabled && styles.scale,
         dense && styles.dense,
         ...(margin === undefined ? [] : marginStyle(margin)),

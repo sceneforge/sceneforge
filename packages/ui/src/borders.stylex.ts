@@ -194,10 +194,13 @@ export const borderStyles = stylex.create({
 
 export const roundedStyles = stylex.create({
   circle: {
+    alignContent: "center",
+    aspectRatio: "1 / 1",
     borderEndEndRadius: "100vh",
     borderEndStartRadius: "100vh",
     borderStartEndRadius: "100vh",
     borderStartStartRadius: "100vh",
+    textAlign: "center",
   },
   endEnd: (size: number) => ({
     borderEndEndRadius: (size * 0.25) + "rem",
@@ -205,6 +208,20 @@ export const roundedStyles = stylex.create({
   endStart: (size: number) => ({
     borderEndStartRadius: (size * 0.25) + "rem",
   }),
+  noRounded: {
+    borderEndEndRadius: 0,
+    borderEndStartRadius: 0,
+    borderStartEndRadius: 0,
+    borderStartStartRadius: 0,
+  },
+  pill: {
+    alignContent: "center",
+    borderEndEndRadius: "100vh",
+    borderEndStartRadius: "100vh",
+    borderStartEndRadius: "100vh",
+    borderStartStartRadius: "100vh",
+    textAlign: "center",
+  },
   rounded: (size: number) => ({
     borderEndEndRadius: (size * 0.25) + "rem",
     borderEndStartRadius: (size * 0.25) + "rem",
@@ -227,6 +244,16 @@ export const roundedStyles = stylex.create({
     borderEndStartRadius: (size * 0.25) + "rem",
     borderStartStartRadius: (size * 0.25) + "rem",
   }),
+  squircle: {
+    alignContent: "center",
+    aspectRatio: "1 / 1",
+    maskImage: "url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNIDAsIDUwIEMgMCwgNiA2LCAwIDUwLCAwIFMgMTAwLCA2IDEwMCwgNTAgOTQsIDEwMCA1MCwgMTAwIDAsIDk0IDAsIDUwIFoiIC8+PC9zdmc+)",
+    maskPosition: "center center",
+    maskRepeat: "no-repeat",
+    maskSize: "auto auto",
+    maskType: "alpha",
+    textAlign: "center",
+  },
   startEnd: (size: number) => ({
     borderStartEndRadius: (size * 0.25) + "rem",
   }),

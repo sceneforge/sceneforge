@@ -1,5 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 
+import { Shape } from "../../types";
 import { Card, type CardProps } from "../Card";
 import { CardButton, type CardButtonProps } from "../CardButton";
 import { IconButton, type IconButtonProps } from "../IconButton";
@@ -70,7 +71,10 @@ const CarouselItem = ({
       style={styles.container}
     >
       {kind === "icon" && (
-        <IconButton {...props as IconButtonProps} />
+        <IconButton
+          shape={Shape.Squircle}
+          {...props as IconButtonProps}
+        />
       )}
       {kind === "button" && (
         <CardButton {...props as CardButtonProps}>

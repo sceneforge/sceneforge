@@ -1,7 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import { type Ref } from "react";
 
-import { backgroundColor, foregroundColor } from "../../colors.stylex";
+import { borderStyles, roundedStyles } from "../../borders.stylex";
+import { colorStyles } from "../../colors.stylex";
 import { IconEnum, Orientation, Variant } from "../../types";
 import { ActionList, type ActionListProps } from "../ActionList";
 import { Dialog } from "../Dialog";
@@ -32,12 +33,6 @@ const styles = stylex.create({
     flexShrink: 1,
   },
   input: {
-    backgroundColor: backgroundColor.default,
-    borderColor: foregroundColor.alpha25,
-    borderRadius: "0.5rem",
-    borderStyle: "solid",
-    borderWidth: "0.0625rem",
-    color: foregroundColor.default,
     flexGrow: 1,
     height: "2.5rem",
     paddingInline: "0.5rem",
@@ -70,7 +65,12 @@ const CommandBar = ({
           placeholder={placeholder}
           type="text"
           {...stylex.props(
-            styles.input
+            styles.input,
+            colorStyles.default,
+            borderStyles.border,
+            borderStyles.borderSize(1),
+            borderStyles.borderCurrentColor(25),
+            roundedStyles.rounded(2)
           )}
         />
         <IconButton

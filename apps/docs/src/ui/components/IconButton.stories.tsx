@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { IconButton, IconEnum } from "@sceneforge/ui";
 
-import { iconArgTypes, variantArgTypes } from "../../storiesHelpers";
+import { iconArgTypes, shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
 
 const meta: Meta<typeof IconButton> = {
   argTypes: {
@@ -13,6 +13,9 @@ const meta: Meta<typeof IconButton> = {
       control: "boolean",
     },
     glossy: {
+      control: "boolean",
+    },
+    inverted: {
       control: "boolean",
     },
     margin: {
@@ -38,11 +41,9 @@ const meta: Meta<typeof IconButton> = {
         },
       },
     },
+    ...shapeArgTypes("shape"),
     ...variantArgTypes("variant"),
     ...iconArgTypes("icon"),
-    inverted: {
-      control: "boolean",
-    },
   },
   args: {
     size: 4,
