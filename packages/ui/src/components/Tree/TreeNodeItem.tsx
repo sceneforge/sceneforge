@@ -1,6 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 import { MouseEventHandler, lazy } from "react";
 
+import { roundedStyles } from "../../borders.stylex";
 import { backgroundColor } from "../../colors.stylex";
 import { IconEnum, Orientation } from "../../types";
 import { ActionList, type ActionListProps } from "../ActionList";
@@ -25,7 +26,6 @@ const styles = stylex.create({
     border: "none",
     cursor: "pointer",
     height: "1rem",
-    width: "min-content",
   },
   actions: {
     alignItems: "center",
@@ -35,7 +35,6 @@ const styles = stylex.create({
     gap: "0.25rem",
     height: null,
     justifyContent: "flex-end",
-    width: null,
   },
   container: {
     alignItems: "center",
@@ -44,7 +43,6 @@ const styles = stylex.create({
       ":hover": backgroundColor.alpha15,
       "default": "transparent",
     },
-    borderRadius: "0.5rem",
     display: "flex",
     flexDirection: "row",
     flexWrap: "nowrap",
@@ -70,9 +68,15 @@ const TreeNodeItem = ({
   toggleExpand,
 }: TreeNodeItemProps) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        roundedStyles.rounded(2),
+      ]}
+    >
       {hasNodes && (
         <IconButton
+          dense
           icon={IconEnum.ExpandMore}
           onClick={toggleExpand}
           padding={0.125}
@@ -90,6 +94,7 @@ const TreeNodeItem = ({
       />
       <ActionList
         actions={actions}
+        actionsDense
         actionsStyle={styles.actionItem}
         orientation={Orientation.Horizontal}
       />

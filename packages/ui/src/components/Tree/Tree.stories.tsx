@@ -25,12 +25,12 @@ export const Default: Story = {
     id: "tree-id",
     nodes: [
       {
-        expanded: true,
+        expanded: false,
         icon: IconEnum.Add,
         label: "Node 1",
         nodes: [
           {
-            expanded: true,
+            expanded: false,
             icon: IconEnum.Globe,
             label: "Node 1.1",
             nodes: [

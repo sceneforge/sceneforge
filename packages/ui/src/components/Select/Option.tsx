@@ -3,6 +3,7 @@ import type { AllHTMLAttributes } from "react";
 import * as stylex from "@stylexjs/stylex";
 
 import { Button, type ButtonProps } from "../Button";
+import { UnlistedItem } from "../Unlisted";
 
 export type OptionProps = {
   divider?: boolean;
@@ -37,11 +38,11 @@ const Option = ({
 }: OptionProps) => {
   if (divider) {
     return (
-      <li />
+      <UnlistedItem />
     );
   }
   return (
-    <li>
+    <UnlistedItem>
       <Button
         onClick={onClick}
         popoverTarget={popoverId}
@@ -52,7 +53,7 @@ const Option = ({
       >
         {label ?? value}
       </Button>
-    </li>
+    </UnlistedItem>
   );
 };
 

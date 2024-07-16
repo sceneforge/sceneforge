@@ -1,13 +1,10 @@
-import type { StyleXStyles } from "@stylexjs/stylex";
-
 import * as stylex from "@stylexjs/stylex";
 import { useId } from "react";
 
-import { currentColor } from "../../colors.stylex";
-import { Variant } from "../../types";
+import { Orientation, Variant } from "../../types";
 import { CarouselItem, type CarouselItemProps } from "../CarouselItem";
 import { Section, type SectionProps } from "../Section";
-import { View } from "../View";
+import { Unlisted, type UnlistedProps } from "../Unlisted";
 import { type SpacerStyleProps } from "../tokens.stylex";
 
 export type CarouselProps = {
@@ -18,7 +15,7 @@ export type CarouselProps = {
   level?: SectionProps["level"];
   padding?: SpacerStyleProps;
   shadow?: boolean;
-  style?: StyleXStyles;
+  style?: UnlistedProps["style"];
   title?: SectionProps["title"];
   variant?: Variant;
 };
@@ -37,15 +34,11 @@ const styles = stylex.create({
     scrollPaddingInline: value > 0 ? `${value}rem` : null,
   }),
   scroller: {
-    display: "grid",
     gridAutoColumns: "50%",
-    gridAutoFlow: "column",
     height: null,
     isolation: "isolate",
     scrollBehavior: "smooth",
     scrollSnapType: "inline proximity",
-    scrollbarColor: `${currentColor.alpha35} transparent`,
-    scrollbarWidth: "thin",
     touchAction: "pan-x",
     whiteSpace: "nowrap",
   },
@@ -81,13 +74,14 @@ const Carousel = ({
       title={title}
       variant={variant}
     >
-      <View
+      <Unlisted
+        gap={gap}
+        orientation={Orientation.Horizontal}
         padding={padding}
-        scrollable="inline"
+        scrollable
         style={[
           styles.scroller as Record<string, string>,
           typeof paddingInline === "number" && styles.scrollPaddingInline(paddingInline),
-          styles.gap(gap),
           style,
         ]}
       >
@@ -99,7 +93,7 @@ const Carousel = ({
             {...child}
           />
         ))}
-      </View>
+      </Unlisted>
     </Section>
   );
 };

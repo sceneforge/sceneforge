@@ -9,7 +9,7 @@ import { IconEnum, Orientation, Position, Variant } from "../../types";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { IconButton } from "../IconButton";
-import { View } from "../View";
+import { UnlistedItem } from "../Unlisted";
 import { useTab } from "./useTab";
 
 export type TabProps = {
@@ -78,11 +78,9 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "row",
     flexWrap: "nowrap",
-    height: null,
     justifyContent: "stretch",
     scrollSnapAlign: "start",
     scrollSnapStop: "always",
-    width: null,
   },
   noVariantActive: {
     backgroundColor: "SelectedItem",
@@ -116,7 +114,7 @@ const Tab = ({
   });
 
   return (
-    <View
+    <UnlistedItem
       style={[
         styles.container,
         active && styles.active,
@@ -164,7 +162,7 @@ const Tab = ({
           tabIndex={-1}
         />
       )}
-    </View>
+    </UnlistedItem>
   );
 };
 

@@ -5,6 +5,7 @@ import { type Ref, useId } from "react";
 
 import { Orientation, Variant } from "../../types";
 import { Action, type ActionProps } from "../Action";
+import { Unlisted, UnlistedItem } from "../Unlisted";
 import { View, ViewProps } from "../View";
 
 export type ActionListProps = {
@@ -40,9 +41,6 @@ const styles = stylex.create({
     height: null,
     width: null,
   },
-  gap: (value?: number) => ({
-    gap: value ? `${value}rem` : 0,
-  }),
   horizontal: {
     gridAutoFlow: "column",
   },
@@ -53,13 +51,8 @@ const styles = stylex.create({
     justifyContent: "stretch",
   },
   list: {
-    display: "grid",
-    gridAutoFlow: "row",
     height: "100%",
     justifyContent: "stretch",
-    listStyleType: "none",
-    margin: 0,
-    padding: 0,
     width: "100%",
   },
 });
@@ -104,20 +97,21 @@ const ActionList = ({
       variant={variant}
     >
       {actions && actions.length > 0 && (
-        <ul
+        <Unlisted
+          gap={gap}
+          id={`${currentId}-list`}
+          orientation={orientation}
           role="presentation"
-          {...stylex.props(
+          style={[
             styles.list,
-            styles.gap(gap),
-            orientation === Orientation.Horizontal && styles.horizontal,
-            listStyle
-          )}
+            listStyle,
+          ]}
         >
           {actions.map((actionProps, index) => (
-            <li
-              key={`${currentId}-action-${index}`}
+            <UnlistedItem
+              key={`${currentId}-list-${index}`}
               role="presentation"
-              {...stylex.props(styles.item)}
+              style={styles.item}
             >
               <Action
                 dense={actionsDense}
@@ -131,9 +125,9 @@ const ActionList = ({
                 variant={variant}
                 {...actionProps}
               />
-            </li>
+            </UnlistedItem>
           ))}
-        </ul>
+        </Unlisted>
       )}
     </View>
   );

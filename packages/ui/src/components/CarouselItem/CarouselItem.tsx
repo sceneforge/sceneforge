@@ -3,7 +3,8 @@ import * as stylex from "@stylexjs/stylex";
 import { Card, type CardProps } from "../Card";
 import { CardButton, type CardButtonProps } from "../CardButton";
 import { IconButton, type IconButtonProps } from "../IconButton";
-import { View, ViewProps } from "../View";
+import { UnlistedItem, type UnlistedItemProps } from "../Unlisted";
+import { View } from "../View";
 
 type CarouselItemCardButtonProps = {
   dense?: never;
@@ -41,7 +42,7 @@ type CarouselAllItemsProps =
   | CarouselItemIconButtonProps;
 
 export type CarouselItemProps = {
-  hidden?: ViewProps["hidden"];
+  hidden?: UnlistedItemProps["hidden"];
 } & Omit<CarouselAllItemsProps, "hidden">;
 
 const styles = stylex.create({
@@ -64,7 +65,7 @@ const CarouselItem = ({
   ...props
 }: CarouselItemProps) => {
   return (
-    <View
+    <UnlistedItem
       hidden={hidden}
       style={styles.container}
     >
@@ -89,7 +90,7 @@ const CarouselItem = ({
           )}
         </Card>
       )}
-    </View>
+    </UnlistedItem>
   );
 };
 

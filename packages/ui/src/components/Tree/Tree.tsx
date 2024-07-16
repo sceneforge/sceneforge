@@ -1,23 +1,25 @@
-import type { StyleXStyles } from "@stylexjs/stylex";
-
 import * as stylex from "@stylexjs/stylex";
 import { lazy, useId, useMemo } from "react";
 
 import type { TreeNodeProps } from "./TreeNode";
+
+import { Orientation } from "../../types";
+import { Unlisted } from "../Unlisted";
+import { View, type ViewProps } from "../View";
 
 const TreeNode = lazy(() => import("./TreeNode"));
 
 export type TreeProps = {
   id?: string;
   nodes: (() => Omit<TreeNodeProps, "index" | "level" | "treeId">[]) | Omit<TreeNodeProps, "index" | "level" | "treeId">[];
-  style?: StyleXStyles;
+  style?: ViewProps["style"];
 };
 
 const styles = stylex.create({
   container: {
-    listStyle: "none",
-    margin: 0,
-    padding: 0,
+    alignContent: "start",
+    height: null,
+    width: null,
   },
 });
 
@@ -30,13 +32,31 @@ const Tree = ({ id, nodes, style }: TreeProps) => {
   }, [nodes]);
 
   return (
-    <div id={treeId} {...stylex.props(style)}>
-      <ul id={`${treeId}-node-0`} {...stylex.props(styles.container)}>
+    <View
+      id={treeId}
+      scrollable
+      style={[
+        style,
+      ]}
+    >
+      <Unlisted
+        id={`${treeId}-node-0`}
+        margin={0}
+        orientation={Orientation.Vertical}
+        padding={0}
+        style={styles.container}
+      >
         {nodesArray.map((node, index) => (
-          <TreeNode id={treeId} index={index} key={`${treeId}-node-0-${index}`} level={0} {...node} />
+          <TreeNode
+            id={treeId}
+            index={index}
+            key={`${treeId}-node-0-${index}`}
+            level={0}
+            {...node}
+          />
         ))}
-      </ul>
-    </div>
+      </Unlisted>
+    </View>
   );
 };
 

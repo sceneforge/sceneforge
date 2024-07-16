@@ -1,9 +1,10 @@
 import * as stylex from "@stylexjs/stylex";
 import { type MouseEventHandler, lazy } from "react";
 
-import type { IconEnum } from "../../types";
 import type { ActionListProps } from "../ActionList";
 
+import { type IconEnum, Orientation } from "../../types";
+import { Unlisted, UnlistedItem } from "../Unlisted";
 import { useTree } from "./useTree";
 
 const TreeNodeItem = lazy(() => import("./TreeNodeItem"));
@@ -22,13 +23,12 @@ export type TreeNodeProps = {
 
 const styles = stylex.create({
   container: {
-    listStyle: "none",
+    alignContent: "start",
+    display: "grid",
   },
-  nodes: {
-    listStyle: "none",
-    margin: 0,
-    paddingBlock: 0,
-    paddingInlineStart: "1rem",
+  list: {
+    height: null,
+    width: null,
   },
 });
 
@@ -53,9 +53,9 @@ const TreeNode = ({
   } = useTree({ id, initialExpanded, nodes, onClick });
 
   return (
-    <li
+    <UnlistedItem
       id={`${currentId}-node-${level}-${index}`}
-      {...stylex.props(styles.container)}
+      style={styles.container}
     >
       <TreeNodeItem
         actions={actions}
@@ -67,9 +67,16 @@ const TreeNode = ({
         toggleExpand={toggleExpand}
       />
       {hasNodes && expanded && (
-        <ul
+        <Unlisted
           id={`${currentId}-node-${level + 1}`}
-          {...stylex.props(styles.nodes)}
+          margin={0}
+          orientation={Orientation.Vertical}
+          padding={{
+            block: 0,
+            inlineEnd: 0,
+            inlineStart: 1,
+          }}
+          style={styles.list}
         >
           {nodesArray.map((node, nodeIndex) => (
             <TreeNode
@@ -80,9 +87,9 @@ const TreeNode = ({
               {...node}
             />
           ))}
-        </ul>
+        </Unlisted>
       )}
-    </li>
+    </UnlistedItem>
   );
 };
 

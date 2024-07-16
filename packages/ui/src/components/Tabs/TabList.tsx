@@ -4,6 +4,7 @@ import { lazy, useId } from "react";
 import { currentColor } from "../../colors.stylex";
 import { glossyStyles } from "../../effect.stylex";
 import { Align, Orientation, Position, Variant } from "../../types";
+import { Unlisted } from "../Unlisted";
 import { View } from "../View";
 import { type TabProps } from "./Tab";
 
@@ -73,10 +74,7 @@ const styles = stylex.create({
     touchAction: "pan-y",
   },
   tabs: {
-    alignContent: "start",
-    display: "grid",
     gridAutoColumns: null,
-    gridAutoFlow: "column",
     gridAutoRows: "max-content",
     height: null,
     isolation: "isolate",
@@ -95,7 +93,6 @@ const styles = stylex.create({
   },
   tabsVertical: {
     gridAutoColumns: "max-content",
-    gridAutoFlow: "row",
     gridAutoRows: null,
   },
 });
@@ -137,10 +134,10 @@ const TabList = ({
         variant && glossyStyles.variant(variant),
       ]}
     >
-      <View
+      <Unlisted
         aria-label={label}
+        orientation={orientation}
         role="tablist"
-        scrollable
         style={[
           styles.tabs,
           orientation === Orientation.Vertical && styles.tabsVertical,
@@ -166,7 +163,7 @@ const TabList = ({
             variant={variant}
           />
         ))}
-      </View>
+      </Unlisted>
     </View>
   );
 };

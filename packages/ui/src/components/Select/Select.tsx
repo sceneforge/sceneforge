@@ -5,10 +5,12 @@ import { type AllHTMLAttributes, type Ref, lazy } from "react";
 
 import type { OptionProps } from "./Option";
 
-import { backgroundColor, foregroundColor } from "../../colors.stylex";
+import { borderStyles, roundedStyles } from "../../borders.stylex";
+import { colorStyles } from "../../colors.stylex";
 import { IconEnum } from "../../types";
 import { Button, type ButtonProps } from "../Button";
 import { Icon } from "../Icon";
+import { Unlisted } from "../Unlisted";
 import { useSelect } from "./useSelect";
 
 const Option = lazy(() => import("./Option"));
@@ -45,22 +47,16 @@ const styles = stylex.create({
     flexShrink: 1,
   },
   list: {
-    background: backgroundColor.default,
-    border: 0,
-    borderColor: backgroundColor.alpha75,
-    borderRadius: "0.5rem",
-    borderStyle: "solid",
-    borderWidth: "1px",
-    color: foregroundColor.default,
+    height: null,
     insetArea: "span-block-end",
     insetBlockStart: "anchor(bottom)",
     overflow: "clip",
-    padding: 0,
     position: "absolute",
+    width: null,
   },
   popover: (id: string) => ({
     positionAnchor: `--select-anchor-${id.replaceAll(":", "-")}`,
-  }),
+  } as Record<string, string>),
   select: {
     display: "none",
   },
@@ -112,14 +108,19 @@ const Select = ({
         {currentOption?.label ?? currentOption?.value}
         <Icon icon={IconEnum.ExpandMore} style={styles.icon} />
       </Button>
-      <ul
+      <Unlisted
         id={popoverOptionsId}
         popover="auto"
-        {...stylex.props(
+        style={[
           styles.list,
           styles.popover(currentId),
-          popoverStyle
-        )}
+          colorStyles.default,
+          roundedStyles.rounded(2),
+          borderStyles.border,
+          borderStyles.borderSize(1),
+          borderStyles.borderDefault(25),
+          popoverStyle,
+        ]}
       >
         {options && options.map((option, index) => (
           <Option
@@ -131,7 +132,7 @@ const Select = ({
             selected={currentOption?.value === option.value}
           />
         ))}
-      </ul>
+      </Unlisted>
       <select
         id={hiddenSelectId}
         ref={ref}

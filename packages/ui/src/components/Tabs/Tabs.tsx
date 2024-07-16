@@ -4,7 +4,7 @@ import { lazy } from "react";
 import type { TabProps } from "./Tab";
 import type { TabCloseCallback, TabPanelProps } from "./TabPanel";
 
-import { backgroundColor, foregroundColor } from "../../colors.stylex";
+import { backgroundStyles, textColorStyles } from "../../colors.stylex";
 import { Align, Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
 
@@ -44,8 +44,6 @@ const styles = stylex.create({
     minWidth: "100%",
   },
   content: {
-    backgroundColor: backgroundColor.alpha75,
-    color: foregroundColor.default,
     display: "grid",
     flexGrow: 1,
     gridAutoFlow: "column",
@@ -119,7 +117,13 @@ const Tabs = ({
         tabs={content.map(({ tab }) => tab)}
         variant={variant}
       />
-      <View style={styles.content}>
+      <View
+        style={[
+          styles.content,
+          backgroundStyles.default(85),
+          textColorStyles.defaultInverted,
+        ]}
+      >
         {content.map(({ panel, tab }) => (
           <TabPanel
             hidden={activeTabId !== tab.id}
