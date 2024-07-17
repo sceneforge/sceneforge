@@ -1,0 +1,34 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|ui/Types/Shape" />
+
+# Shape Type
+
+`Shape` is an enum with the following options:
+
+<table>
+  <thead>
+    <tr><th> Key       </th><th> Value    </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> Circle    </td><td> `circle`    </td></tr>
+    <tr><td> Pill      </td><td> `pill`      </td></tr>
+    <tr><td> Rectangle </td><td> `rectangle` </td></tr>
+    <tr><td> Rounded   </td><td> `rounded`   </td></tr>
+    <tr><td> Squircle  </td><td> `squircle`  </td></tr>
+  </tbody>
+</table>
+
+## Import
+
+```ts
+import { Shape } from "@sceneforge/ui";
+```
+
+## Usage
+
+```ts
+import { Shape } from "@sceneforge/ui";
+
+const circleShape = Shape.Circle;
+```

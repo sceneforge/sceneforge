@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import Figure from "@sceneforge/ui";
+
 import { shapeArgTypes } from "../../storiesHelpers";
-import Figure from "./Figure";
 
 const meta: Meta<typeof Figure> = {
   argTypes: {
@@ -38,7 +39,7 @@ const meta: Meta<typeof Figure> = {
     ...shapeArgTypes("shape"),
   },
   component: Figure,
-  title: "Component/Figure",
+  title: "@sceneforge|ui/Components/Figure",
 };
 
 type Story = StoryObj<typeof meta>;

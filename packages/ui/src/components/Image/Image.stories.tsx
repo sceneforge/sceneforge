@@ -33,6 +33,6 @@ export default meta;
 export const Default: Story = {
   args: {
     alt: "A random image from Picsum.photos",
-    src: "https://picsum.photos/seed/123054/500/500",
+    src: "https://picsum.photos/seed/123054/400/280",
   },
 };

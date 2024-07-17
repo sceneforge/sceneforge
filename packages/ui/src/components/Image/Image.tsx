@@ -15,8 +15,8 @@ export type ImageProps = {
 
 const styles = stylex.create({
   container: {
-    display: "block",
-    maxWidth: "100%",
+    height: "auto",
+    width: "100%",
   },
 });
 
@@ -32,6 +32,7 @@ const Image = ({
       ref={ref}
       {...stylex.props(
         styles.container,
+        shape === Shape.Pill && roundedStyles.pill,
         shape === Shape.Rounded && roundedStyles.rounded(2),
         shape === Shape.Circle && roundedStyles.circle,
         shape === Shape.Squircle && roundedStyles.squircle,

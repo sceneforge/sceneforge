@@ -195,7 +195,7 @@ export const borderStyles = stylex.create({
 export const roundedStyles = stylex.create({
   circle: {
     alignContent: "center",
-    aspectRatio: "1 / 1",
+    aspectRatio: 1,
     borderEndEndRadius: "100vh",
     borderEndStartRadius: "100vh",
     borderStartEndRadius: "100vh",

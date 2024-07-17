@@ -153,6 +153,7 @@ const Button = ({
             (variant && glossy && inverted)
             && glossyInteractiveStyles.inverted(variant),
           ],
+        shape === Shape.Pill && roundedStyles.pill,
         shape === Shape.Rounded && roundedStyles.rounded(2),
         shape === Shape.Circle && roundedStyles.circle,
         shape === Shape.Squircle && roundedStyles.squircle,

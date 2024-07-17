@@ -6,8 +6,9 @@ export const shapeArgTypes = (property: string) => ({
       labels: {
         "": "-- None",
         [Shape.Circle]: "Circle",
+        [Shape.Pill]: "Pill",
+        [Shape.Rectangle]: "Rectangle",
         [Shape.Rounded]: "Rounded",
-        [Shape.Square]: "Square",
         [Shape.Squircle]: "Squircle",
       },
       type: "select",
@@ -15,7 +16,8 @@ export const shapeArgTypes = (property: string) => ({
     options: [
       "", // This is the default value
       Shape.Circle,
-      Shape.Square,
+      Shape.Pill,
+      Shape.Rectangle,
       Shape.Rounded,
       Shape.Squircle,
     ],
