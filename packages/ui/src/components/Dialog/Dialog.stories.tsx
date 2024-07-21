@@ -28,6 +28,7 @@ export default meta;
 export const Default: Story = {
   args: {
     children: "Dialog Content",
+    open: true,
     title: "Dialog Title",
   },
 };
@@ -49,6 +50,7 @@ export const WithActions: Story = {
       },
     ],
     children: "Dialog Content",
+    open: true,
     title: "Dialog Title",
   },
 };

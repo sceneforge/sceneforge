@@ -25,14 +25,10 @@ export const useDialog = ({ open, ref }: UseDialogProps) => {
   useEffect(() => {
     const dialog = dialogRef.current;
     if (openState && dialog) {
-      console.log("DEBUG: dialog.openState", openState);
       dialog.showModal();
       return () => {
         dialog.close();
       };
-    }
-    else {
-      console.log("DEBUG: dialog.openState", openState);
     }
   }, [openState, dialogRef]);
 

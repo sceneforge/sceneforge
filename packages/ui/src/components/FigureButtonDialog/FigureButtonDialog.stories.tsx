@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Figure } from "@sceneforge/ui";
+import { shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
+import { Variant } from "../../types";
+import FigureButtonDialog from "./FigureButtonDialog";
 
-import { shapeArgTypes } from "../../storiesHelpers";
-
-const meta: Meta<typeof Figure> = {
+const meta: Meta<typeof FigureButtonDialog> = {
   argTypes: {
     alt: {
       control: {
@@ -16,12 +16,12 @@ const meta: Meta<typeof Figure> = {
         type: "text",
       },
     },
-    frame: {
+    disabled: {
       control: {
         type: "boolean",
       },
     },
-    inset: {
+    scale: {
       control: {
         type: "boolean",
       },
@@ -36,10 +36,11 @@ const meta: Meta<typeof Figure> = {
         type: "text",
       },
     },
+    ...variantArgTypes("variant"),
     ...shapeArgTypes("shape"),
   },
-  component: Figure,
-  title: "@sceneforge|ui/Components/Figure",
+  component: FigureButtonDialog,
+  title: "Component/FigureButtonDialog",
 };
 
 type Story = StoryObj<typeof meta>;
@@ -49,7 +50,9 @@ export default meta;
 export const Default: Story = {
   args: {
     alt: "A random image from Picsum.photos",
-    caption: "The figure caption",
+    caption: "The Figure Button Dialog caption",
     src: "https://picsum.photos/seed/90716898/400/280",
+    title: "The Figure Button Dialog title",
+    variant: Variant.Accent,
   },
 };

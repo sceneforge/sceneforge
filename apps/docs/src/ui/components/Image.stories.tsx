@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Image from "@sceneforge/ui";
+import { Image } from "@sceneforge/ui";
 
 import { shapeArgTypes } from "../../storiesHelpers";
 

@@ -1,3 +1,5 @@
+import type { StyleXStyles } from "@stylexjs/stylex";
+
 import * as stylex from "@stylexjs/stylex";
 import {
   type DialogHTMLAttributes,
@@ -24,9 +26,10 @@ export type DialogProps = {
   actionsStyle?: PaneProps["paneActionsStyle"];
   description?: string;
   ref?: Ref<HTMLDialogElement>;
+  style?: StyleXStyles;
   title?: string;
   variant?: Variant;
-} & Omit<DialogHTMLAttributes<HTMLDialogElement>, "style">;
+} & Omit<DialogHTMLAttributes<HTMLDialogElement>, "className" | "style">;
 
 const styles = stylex.create({
   backdrop: {
@@ -43,8 +46,6 @@ const styles = stylex.create({
       `0 0.5rem 4rem 3rem ${foregroundColor.alpha15}`,
       `0 1rem 6rem 8rem ${foregroundColor.alpha05}`,
     ].join(", "),
-    display: "flex",
-    flexDirection: "column",
     insetBlock: "50%",
     insetInline: "50%",
     margin: 0,
@@ -53,6 +54,9 @@ const styles = stylex.create({
     padding: 0,
     position: "fixed",
     translate: "-50% -50%",
+  },
+  hidden: {
+    display: "none",
   },
 });
 
@@ -65,10 +69,12 @@ const Dialog = ({
   actionsStyle,
   children,
   description,
+  hidden,
   onCancel,
   onClose,
   open,
   ref,
+  style,
   title,
   variant,
   ...props
@@ -86,7 +92,6 @@ const Dialog = ({
       aria-labelledby={headId}
       onCancel={onCancel}
       onClose={onClose}
-      open={open}
       {...props}
       ref={dialogRef}
       {...stylex.props(
@@ -98,13 +103,16 @@ const Dialog = ({
         styles.backdrop,
         styles.container,
         variant && borderStyles.borderVariant(variant, 100),
-        variant && colorStyles.variant(variant)
+        variant && colorStyles.variant(variant),
+        style,
+        hidden && styles.hidden
       )}
     >
       <Pane
         actions={[
           {
             autoFocus: true,
+            dense: true,
             icon: IconEnum.Close,
             kind: "icon",
             label: "Close",
