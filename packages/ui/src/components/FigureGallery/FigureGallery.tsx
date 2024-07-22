@@ -9,7 +9,7 @@ export type FigureGalleryProps = {
   columns?: GridProps["columns"];
   columnsSize?: GridProps["columnsSize"];
   columnsTrack?: GridProps["columnsTrack"];
-  figures: Omit<FigureButtonDialogProps, "id">[];
+  figures?: Omit<FigureButtonDialogProps, "id">[];
   gap?: GridProps["gap"];
   id?: string;
   level?: SectionProps["level"];
@@ -71,7 +71,7 @@ const FigureGallery = ({
         rowsTrack={rowsTrack}
         style={styles.container}
       >
-        {figures.map((figure, index) => (
+        {figures && figures.map((figure, index) => (
           <FigureButtonDialog
             key={`${currentId}-grid-figure-${index}`}
             scale={scale}
