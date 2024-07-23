@@ -27,7 +27,7 @@ const styles = stylex.create({
     borderRadius: "0.5rem",
     borderStyle: "solid",
     borderWidth: "1px",
-    overflow: "clip",
+    display: null,
     position: "absolute",
   },
   popoverAnchor: (id: string) => ({

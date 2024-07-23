@@ -47,6 +47,7 @@ const styles = stylex.create({
     flexShrink: 1,
   },
   list: {
+    display: null,
     height: null,
     insetArea: "span-block-end",
     insetBlockStart: "anchor(bottom)",
