@@ -1,4 +1,4 @@
-import { ReactNode, isValidElement } from "react";
+import { type ReactNode, isValidElement } from "react";
 
 export type UnorderedList = {
   [key: string]: unknown;

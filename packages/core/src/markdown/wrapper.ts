@@ -1,5 +1,5 @@
 import { type Element } from "hast";
-import { ComponentType, type JSX, createElement } from "react";
+import { type ComponentType, type JSX, createElement } from "react";
 
 type IntrinsicElement<
   T extends keyof JSX.IntrinsicElements = keyof JSX.IntrinsicElements,
