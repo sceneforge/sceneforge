@@ -5,8 +5,8 @@ import {
   Section,
   type TabComponentProps,
   type Variant,
+  useCurrentId,
 } from "@sceneforge/ui";
-import { useId } from "react";
 
 export type FormViewTabProps = TabComponentProps<{
   columns?: number;
@@ -24,8 +24,7 @@ const FormViewTab = ({
   title,
   variant,
 }: FormViewTabProps) => {
-  const generatedId = useId();
-  const currentId = tabId ?? generatedId;
+  const currentId = useCurrentId(tabId);
 
   return (
     <Container padding={{ block: 1 }}>
