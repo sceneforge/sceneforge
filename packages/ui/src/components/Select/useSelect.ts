@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useId, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import type { OptionProps } from "./Option";
 import type { Option } from "./Select";
+
+import { useCurrentId } from "../../hooks";
 
 export type UseSelectProps = {
   defaultValue?: OptionProps["value"];
@@ -16,8 +18,7 @@ export const useSelect = ({
   onChange,
   options,
 }: UseSelectProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   const hiddenSelectId = useMemo(() => `${currentId}-hidden`, [currentId]);
   const popoverOptionsId = useMemo(() => `${currentId}-popover`, [currentId]);

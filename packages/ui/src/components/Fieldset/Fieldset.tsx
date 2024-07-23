@@ -1,10 +1,12 @@
+import type { PropsWithChildren } from "react";
+
 import * as stylex from "@stylexjs/stylex";
-import { type PropsWithChildren, useId } from "react";
 
 import type { Variant } from "../../types";
 
 import { backgroundColor, colorStyles, currentColor, foregroundColor } from "../../colors.stylex";
 import { glossyStyles } from "../../effect.stylex";
+import { useCurrentId } from "../../hooks";
 import { FieldItem, type FieldItemProps } from "../Field";
 
 export type FieldsetProps = PropsWithChildren<{
@@ -54,8 +56,7 @@ const styles = stylex.create({
 });
 
 const Fieldset = ({ children, fields, id, legend, variant }: FieldsetProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <fieldset

@@ -1,8 +1,9 @@
 import type { StyleXStyles } from "@stylexjs/stylex";
+import type { Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
-import { type Ref, useId } from "react";
 
+import { useCurrentId } from "../../hooks";
 import { Orientation, Variant } from "../../types";
 import { Action, type ActionProps } from "../Action";
 import { Unlisted, UnlistedItem } from "../Unlisted";
@@ -79,8 +80,8 @@ const ActionList = ({
   toggleId,
   variant,
 }: ActionListProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
+
   if (!actions || actions.length === 0) return null;
 
   return (

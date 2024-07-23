@@ -1,8 +1,9 @@
 import * as stylex from "@stylexjs/stylex";
-import { lazy, useId } from "react";
+import { lazy } from "react";
 
 import { currentColor } from "../../colors.stylex";
 import { glossyStyles } from "../../effect.stylex";
+import { useCurrentId } from "../../hooks";
 import { Align, Orientation, Position, Variant } from "../../types";
 import { Unlisted } from "../Unlisted";
 import { View } from "../View";
@@ -110,8 +111,7 @@ const TabList = ({
   tabs,
   variant,
 }: TabListProps) => {
-  const generatedId = useId();
-  const currentId = id || generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <View

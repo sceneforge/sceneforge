@@ -1,6 +1,8 @@
-import { MouseEventHandler, useCallback, useId, useMemo, useState } from "react";
+import { MouseEventHandler, useCallback, useMemo, useState } from "react";
 
 import type { TreeNodeProps } from "./TreeNode";
+
+import { useCurrentId } from "../../hooks";
 
 export type UseTreeProps = {
   id?: string;
@@ -15,8 +17,7 @@ export const useTree = ({
   nodes,
   onClick,
 }: UseTreeProps) => {
-  const generatedId = useId();
-  const currentId = useMemo(() => id || generatedId, [generatedId, id]);
+  const currentId = useCurrentId(id);
 
   const [expanded, setExpanded] = useState(initialExpanded);
 

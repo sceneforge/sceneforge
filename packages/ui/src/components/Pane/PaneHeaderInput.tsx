@@ -1,8 +1,9 @@
 import type { StyleXStyles } from "@stylexjs/stylex";
+import type { MouseEventHandler, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
-import { type MouseEventHandler, type Ref, useId } from "react";
 
+import { useCurrentId } from "../../hooks";
 import { IconEnum } from "../../types";
 import { IconButton, type IconButtonProps } from "../IconButton";
 import { View } from "../View";
@@ -62,8 +63,7 @@ const PaneHeaderInput = ({
   ref,
   style,
 }: PaneHeaderInputProps) => {
-  const generatedId = useId();
-  const currentId = id || generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <View style={styles.container}>

@@ -1,7 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
-import { Children, Fragment, useId } from "react";
+import { Children, Fragment } from "react";
 
 import { backgroundColor } from "../../colors.stylex";
+import { useCurrentId } from "../../hooks";
 import { Orientation } from "../../types";
 import { View, type ViewProps } from "../View";
 
@@ -62,9 +63,10 @@ const SplitPane = ({
   resizable = false,
   ...props
 }: SplitPaneProps) => {
-  const generatedId = useId();
-  const currentId = id || generatedId;
+  const currentId = useCurrentId(id);
+
   const originalSize = 100 / Children.count(children);
+
   return (
     <View
       {...props}

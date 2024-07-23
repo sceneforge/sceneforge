@@ -1,12 +1,8 @@
-import type { StyleXStyles } from "@stylexjs/stylex";
-
 import * as stylex from "@stylexjs/stylex";
 
-export type PaneImageProps = {
-  alt?: string;
-  src: string;
-  style?: StyleXStyles;
-};
+import { Image, ImageProps } from "../Image";
+
+export type PaneImageProps = ImageProps;
 
 const styles = stylex.create({
   container: {
@@ -17,12 +13,14 @@ const styles = stylex.create({
   },
 });
 
-const PaneImage = ({ alt, src }: PaneImageProps) => {
+const PaneImage = ({ style, ...props }: PaneImageProps) => {
   return (
-    <img
-      alt={alt}
-      src={src}
-      {...stylex.props(styles.container)}
+    <Image
+      {...props}
+      style={[
+        styles.container,
+        style,
+      ]}
     />
   );
 };

@@ -1,5 +1,6 @@
-import { lazy, useId } from "react";
+import { lazy } from "react";
 
+import { useCurrentId } from "../../hooks";
 import { Switch, type SwitchProps } from "../Switch";
 
 const Field = lazy(() => import("./Field"));
@@ -9,8 +10,7 @@ export type FieldSwitchProps = {
 } & SwitchProps;
 
 const FieldSwitch = ({ id, label, ...props }: FieldSwitchProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <Field id={currentId} label={label}>

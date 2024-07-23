@@ -1,11 +1,12 @@
 import type { StyleXStyles } from "@stylexjs/stylex";
+import type { PropsWithChildren } from "react";
 
 import * as stylex from "@stylexjs/stylex";
-import { type PropsWithChildren, useId } from "react";
 
 import { roundedStyles } from "../../borders.stylex";
 import { colorStyles } from "../../colors.stylex";
 import { glossyInteractiveStyles } from "../../effect.stylex";
+import { useCurrentId } from "../../hooks";
 import { IconEnum, type Variant } from "../../types";
 import { Icon } from "../Icon";
 import { View, type ViewProps } from "../View";
@@ -85,8 +86,7 @@ const Collapsible = ({
   title,
   variant,
 }: CollapsibleProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <details

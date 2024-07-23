@@ -1,8 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
-import { type MouseEventHandler, type Ref, useId } from "react";
-import { lazy } from "react";
+import { type MouseEventHandler, type Ref, lazy } from "react";
 
 import { backgroundColor } from "../../colors.stylex";
+import { useCurrentId } from "../../hooks";
 import { Orientation } from "../../types";
 import { ActionList, type ActionListProps } from "../ActionList";
 import { Heading, type HeadingProps } from "../Heading";
@@ -95,8 +95,7 @@ const PaneHeader = ({
   titleEditable,
   titleEditing,
 }: PaneHeaderProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <View

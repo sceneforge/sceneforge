@@ -1,8 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
-import { useId } from "react";
 
 import { borderStyles } from "../../borders.stylex";
 import { foregroundColor } from "../../colors.stylex";
+import { useCurrentId } from "../../hooks";
 import { Orientation, Variant } from "../../types";
 import { ActionList, ActionListProps } from "../ActionList";
 import { Heading } from "../Heading";
@@ -76,8 +76,7 @@ const Topbar = ({
   title,
   variant = Variant.Accent,
 }: TopbarProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <header

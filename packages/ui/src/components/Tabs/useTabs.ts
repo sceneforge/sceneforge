@@ -1,7 +1,6 @@
 import {
   type Ref,
   useCallback,
-  useId,
   useImperativeHandle,
   useMemo,
   useState,
@@ -9,6 +8,8 @@ import {
 
 import type { TabCloseCallback } from "./TabPanel";
 import type { TabContent } from "./Tabs";
+
+import { useCurrentId } from "../../hooks";
 
 export interface TabsHandler {
   activateTab(tabId: string): void;
@@ -31,8 +32,7 @@ export const useTabs = ({
   onTabClose,
   ref,
 }: UseTabsProps) => {
-  const generatedId = useId();
-  const currentId = id || generatedId;
+  const currentId = useCurrentId(id);
   const [content, setContent] = useState<TabContent[]>(initialContent ?? []);
   const [currentActiveTabId, setActiveTabId] = useState<string | undefined>();
 

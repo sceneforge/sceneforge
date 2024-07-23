@@ -1,0 +1,1 @@
+export { useCurrentId } from "./useCurrentId";

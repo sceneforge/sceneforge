@@ -1,9 +1,10 @@
 import type { StyleXStyles } from "@stylexjs/stylex";
+import type { AllHTMLAttributes, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
-import { type AllHTMLAttributes, type Ref, useId } from "react";
 
 import { currentColor } from "../../colors.stylex";
+import { useCurrentId } from "../../hooks";
 import { scrollShadowsStyles } from "../../scrollShadows.stylex";
 import { Orientation } from "../../types";
 import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
@@ -69,8 +70,7 @@ const Unlisted = ({
   style,
   ...props
 }: UnlistedProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <ul

@@ -1,7 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
-import { useId } from "react";
 
 import { roundedStyles } from "../../borders.stylex";
+import { useCurrentId } from "../../hooks";
 import { Variant } from "../../types";
 import { Collapsible, type CollapsibleProps } from "../Collapsible";
 import { View } from "../View";
@@ -38,8 +38,7 @@ const CollapsibleList = ({
   items,
   variant,
 }: CollapsibleListProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <View

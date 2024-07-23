@@ -1,7 +1,4 @@
-import {
-  type MouseEvent as ReactMouseEvent,
-  type Ref,
-} from "react";
+import type { MouseEvent as ReactMouseEvent, Ref } from "react";
 
 import { Variant } from "../../types";
 import { Button, type ButtonProps } from "../Button";

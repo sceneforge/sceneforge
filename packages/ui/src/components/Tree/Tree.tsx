@@ -1,8 +1,9 @@
 import * as stylex from "@stylexjs/stylex";
-import { lazy, useId, useMemo } from "react";
+import { lazy, useMemo } from "react";
 
 import type { TreeNodeProps } from "./TreeNode";
 
+import { useCurrentId } from "../../hooks";
 import { Orientation } from "../../types";
 import { Unlisted } from "../Unlisted";
 import { View, type ViewProps } from "../View";
@@ -24,8 +25,7 @@ const styles = stylex.create({
 });
 
 const Tree = ({ id, nodes, style }: TreeProps) => {
-  const generatedId = useId();
-  const treeId = id || generatedId;
+  const currentId = useCurrentId(id);
 
   const nodesArray = useMemo(() => {
     return Array.isArray(nodes) ? nodes : nodes();
@@ -33,14 +33,14 @@ const Tree = ({ id, nodes, style }: TreeProps) => {
 
   return (
     <View
-      id={treeId}
+      id={currentId}
       scrollable
       style={[
         style,
       ]}
     >
       <Unlisted
-        id={`${treeId}-node-0`}
+        id={`${currentId}-node-0`}
         margin={0}
         orientation={Orientation.Vertical}
         padding={0}
@@ -48,9 +48,9 @@ const Tree = ({ id, nodes, style }: TreeProps) => {
       >
         {nodesArray.map((node, index) => (
           <TreeNode
-            id={treeId}
+            id={currentId}
             index={index}
-            key={`${treeId}-node-0-${index}`}
+            key={`${currentId}-node-0-${index}`}
             level={0}
             {...node}
           />

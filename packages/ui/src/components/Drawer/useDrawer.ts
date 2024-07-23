@@ -1,6 +1,7 @@
-import { type RefObject, useCallback, useEffect, useId, useImperativeHandle, useMemo, useState } from "react";
+import { type RefObject, useCallback, useEffect, useImperativeHandle, useState } from "react";
 
 import { getNumber } from "../../helpers";
+import { useCurrentId } from "../../hooks";
 import { Orientation, Position } from "../../types";
 
 export interface ResizableHandler {
@@ -27,8 +28,7 @@ export const useDrawer = ({
   ref,
   resizable,
 }: UseDrawerProps = {}) => {
-  const generatedId = useId();
-  const currentId = useMemo(() => id || generatedId, [id, generatedId]);
+  const currentId = useCurrentId(id);
 
   const [size, setSize] = useState<number>(initialSize);
 

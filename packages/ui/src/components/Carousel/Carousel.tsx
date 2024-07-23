@@ -1,6 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
-import { useId } from "react";
 
+import { useCurrentId } from "../../hooks";
 import { Orientation, Variant } from "../../types";
 import { CarouselItem, type CarouselItemProps } from "../CarouselItem";
 import { Section, type SectionProps } from "../Section";
@@ -60,8 +60,7 @@ const Carousel = ({
   title,
   variant,
 }: CarouselProps) => {
-  const generatedId = useId();
-  const currentId = id || generatedId;
+  const currentId = useCurrentId(id);
   const paddingInline = typeof padding === "object" ? padding.inline : padding;
 
   return (

@@ -5,6 +5,7 @@ import type { TabProps } from "./Tab";
 import type { TabCloseCallback, TabPanelProps } from "./TabPanel";
 
 import { backgroundStyles, textColorStyles } from "../../colors.stylex";
+import { useCurrentId } from "../../hooks";
 import { Align, Orientation, Position, Variant } from "../../types";
 import { View } from "../View";
 
@@ -81,9 +82,10 @@ const Tabs = ({
   registerBeforeClose = () => noop,
   variant,
 }: TabsProps) => {
+  const currentId = useCurrentId(id);
   return (
     <View
-      id={id}
+      id={currentId}
       style={[
         styles.container,
         (
@@ -127,7 +129,7 @@ const Tabs = ({
         {content.map(({ panel, tab }) => (
           <TabPanel
             hidden={activeTabId !== tab.id}
-            key={`${id ?? "tab"}-panel-${tab.id}`}
+            key={`${currentId}-panel-${tab.id}`}
             registerBeforeClose={registerBeforeClose(tab.id)}
             tabId={tab.id}
             {...panel}

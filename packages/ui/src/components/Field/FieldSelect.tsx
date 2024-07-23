@@ -1,6 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
-import { lazy, useId } from "react";
+import { lazy } from "react";
 
+import { useCurrentId } from "../../hooks";
 import { Select, type SelectProps } from "../Select";
 
 const Field = lazy(() => import("./Field"));
@@ -17,12 +18,18 @@ const styles = stylex.create({
 });
 
 const FieldSelect = ({ id, label, ...props }: FieldSelectProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   return (
-    <Field id={currentId} label={label}>
-      <Select {...props} id={currentId} popoverStyle={styles.popover} />
+    <Field
+      id={currentId}
+      label={label}
+    >
+      <Select
+        {...props}
+        id={currentId}
+        popoverStyle={styles.popover}
+      />
     </Field>
   );
 };

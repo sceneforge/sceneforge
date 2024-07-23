@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import type { ToggleComponentRef, ToggleEvent } from "../Toggle";
 import type { DropdownProps } from "./Dropdown";
 
+import { useCurrentId } from "../../hooks";
 import { ActionProps } from "../Action";
 
 type UseDropdownProps = {
@@ -19,10 +20,9 @@ export const useDropdown = ({
   id,
   variant,
 }: UseDropdownProps) => {
-  const generatedId = useId();
+  const currentId = useCurrentId(id);
   const toggleRef = useRef<ToggleComponentRef>(null);
   const actionListRef = useRef<HTMLDivElement>(null);
-  const currentId = useMemo(() => id ?? generatedId, [id, generatedId]);
   const currentListId = useMemo(() => `${currentId}-list`, [currentId]);
   const [currentState, setCurrentState] = useState<"closed" | "opened">("closed");
 

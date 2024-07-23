@@ -1,8 +1,9 @@
 import type { StyleXStyles } from "@stylexjs/stylex";
+import type { AllHTMLAttributes, Ref } from "react";
 
 import * as stylex from "@stylexjs/stylex";
-import { type AllHTMLAttributes, type Ref, useId } from "react";
 
+import { useCurrentId } from "../../hooks";
 import { Variant } from "../../types";
 import { Button, ButtonProps } from "../Button";
 import { Fieldset, type FieldsetProps } from "../Fieldset";
@@ -55,8 +56,7 @@ const Form = ({
   variant,
   ...props
 }: FormProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <form

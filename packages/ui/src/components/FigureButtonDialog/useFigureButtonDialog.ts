@@ -1,4 +1,6 @@
-import { useCallback, useId, useMemo, useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
+
+import { useCurrentId } from "../../hooks";
 
 export type UseFigureButtonDialogProps = {
   id?: string;
@@ -7,8 +9,7 @@ export type UseFigureButtonDialogProps = {
 export const useFigureButtonDialog = ({
   id,
 }: UseFigureButtonDialogProps) => {
-  const generatedId = useId();
-  const currentId = id || generatedId;
+  const currentId = useCurrentId(id);
 
   const dialogRef = useRef<HTMLDialogElement>(null);
 

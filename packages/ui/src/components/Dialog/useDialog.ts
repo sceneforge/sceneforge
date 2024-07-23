@@ -1,15 +1,19 @@
-import { Ref, useCallback, useEffect, useId, useImperativeHandle, useRef, useState } from "react";
+import { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
+
+import { useCurrentId } from "../../hooks";
 
 export type UseDialogProps = {
+  id?: string;
   open?: boolean;
   ref?: Ref<HTMLDialogElement>;
 };
 
-export const useDialog = ({ open, ref }: UseDialogProps) => {
+export const useDialog = ({ id, open, ref }: UseDialogProps) => {
   const [openState, setOpenState] = useState<boolean>(open ?? false);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const headId = useId();
-  const descriptionId = useId();
+  const currentId = useCurrentId(id);
+  const headId = useMemo(() => `${currentId}-dialog-head`, [currentId]);
+  const descriptionId = useMemo(() => `${currentId}-dialog-description`, [currentId]);
 
   useImperativeHandle(ref, () => dialogRef.current as HTMLDialogElement, [
     dialogRef,
@@ -33,6 +37,7 @@ export const useDialog = ({ open, ref }: UseDialogProps) => {
   }, [openState, dialogRef]);
 
   return {
+    currentId,
     descriptionId,
     dialogRef,
     handleCloseClick,

@@ -1,6 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
-import { useId } from "react";
 
+import { useCurrentId } from "../../hooks";
 import { FigureButtonDialog, type FigureButtonDialogProps } from "../FigureButtonDialog";
 import { Grid, type GridProps } from "../Grid";
 import { Section, type SectionProps } from "../Section";
@@ -50,8 +50,7 @@ const FigureGallery = ({
   shape,
   title,
 }: FigureGalleryProps) => {
-  const generatedId = useId();
-  const currentId = id ?? generatedId;
+  const currentId = useCurrentId(id);
 
   return (
     <Section
