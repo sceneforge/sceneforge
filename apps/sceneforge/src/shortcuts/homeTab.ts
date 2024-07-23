@@ -2,9 +2,9 @@ import { database } from "@sceneforge/data";
 import { type CarouselItemProps, IconEnum, Variant } from "@sceneforge/ui";
 
 import type { ShortcutProps } from "../hooks";
-import type { DashboardViewTemplate } from "../templates";
+import type { DashboardViewTab } from "../templates";
 
-export const homeTab: ShortcutProps<typeof DashboardViewTemplate> = async ({
+export const homeTab: ShortcutProps<typeof DashboardViewTab> = async ({
   openScene,
   t,
 }) => {

@@ -1,7 +1,7 @@
 import type { ShortcutProps } from "../hooks";
-import type { MarkdownViewTemplate } from "../templates";
+import type { MarkdownViewTab } from "../templates";
 
-export const aboutTab: ShortcutProps<typeof MarkdownViewTemplate> = ({
+export const aboutTab: ShortcutProps<typeof MarkdownViewTab> = ({
   t,
 }) => ({
   href: "/docs/about.md",

@@ -7,14 +7,14 @@ import { useTranslation } from "react-i18next";
 
 import { useAppContext } from "../hooks";
 
-export type MarkdownViewTemplateProps = TabComponentProps<{
+export type MarkdownViewTabProps = TabComponentProps<{
   href?: string;
   title?: string;
 }>;
 
-const MarkdownViewTemplate = ({
+const MarkdownViewTab = ({
   href,
-}: MarkdownViewTemplateProps) => {
+}: MarkdownViewTabProps) => {
   const { i18n: { resolvedLanguage } } = useTranslation();
   const { basePath } = useAppContext();
 
@@ -67,4 +67,4 @@ const MarkdownViewTemplate = ({
   );
 };
 
-export default MarkdownViewTemplate;
+export default MarkdownViewTab;

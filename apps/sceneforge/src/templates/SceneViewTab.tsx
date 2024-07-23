@@ -14,17 +14,17 @@ import {
 
 import { useScene } from "../hooks";
 
-export type SceneViewTemplateProps = TabComponentProps<{
+export type SceneViewTabProps = TabComponentProps<{
   id?: string;
   title?: string;
 }>;
 
-const SceneViewTemplate = ({
+const SceneViewTab = ({
   hidden,
   id,
   registerBeforeClose,
   title,
-}: SceneViewTemplateProps) => {
+}: SceneViewTabProps) => {
   const {
     canvasRef,
     changeSceneTitle,
@@ -172,4 +172,4 @@ const SceneViewTemplate = ({
   );
 };
 
-export default SceneViewTemplate;
+export default SceneViewTab;

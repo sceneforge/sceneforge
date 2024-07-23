@@ -3,9 +3,9 @@ import { database } from "@sceneforge/data";
 import { Variant } from "@sceneforge/ui";
 
 import type { ShortcutProps } from "../hooks";
-import type { FormViewTemplate, FormViewTemplateProps } from "../templates";
+import type { FormViewTab } from "../templates";
 
-export const settingsTab: ShortcutProps<typeof FormViewTemplate> = async ({
+export const settingsTab: ShortcutProps<typeof FormViewTab> = async ({
   i18n,
   t,
 }) => {
@@ -13,7 +13,7 @@ export const settingsTab: ShortcutProps<typeof FormViewTemplate> = async ({
   const currentLanguage = await database.settings.get("language");
   const themeList = await getThemeList();
 
-  const props: FormViewTemplateProps = {
+  return {
     fieldsets: [
       {
         fields: [
@@ -95,5 +95,4 @@ export const settingsTab: ShortcutProps<typeof FormViewTemplate> = async ({
       },
     ],
   };
-  return props;
 };

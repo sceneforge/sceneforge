@@ -1,19 +1,19 @@
 import { lazy } from "react";
 
-export const DashboardViewTemplate = lazy(() => import("./DashboardViewTemplate"));
-export const FormViewTemplate = lazy(() => import("./FormViewTemplate"));
-export const MarkdownViewTemplate = lazy(() => import("./MarkdownViewTemplate"));
-export const SceneViewTemplate = lazy(() => import("./SceneViewTemplate"));
+export const DashboardViewTab = lazy(() => import("./DashboardViewTab"));
+export const FormViewTab = lazy(() => import("./FormViewTab"));
+export const MarkdownViewTab = lazy(() => import("./MarkdownViewTab"));
+export const SceneViewTab = lazy(() => import("./SceneViewTab"));
 
-export type { DashboardViewTemplateProps } from "./DashboardViewTemplate";
-export type { FormViewTemplateProps } from "./FormViewTemplate";
-export type { MarkdownViewTemplateProps } from "./MarkdownViewTemplate";
-export type { SceneViewTemplateProps } from "./SceneViewTemplate";
+export type { DashboardViewTabProps } from "./DashboardViewTab";
+export type { FormViewTabProps } from "./FormViewTab";
+export type { MarkdownViewTabProps } from "./MarkdownViewTab";
+export type { SceneViewTabProps } from "./SceneViewTab";
 
 export type TabTemplates =
-  | typeof DashboardViewTemplate
-  | typeof FormViewTemplate
-  | typeof MarkdownViewTemplate
-  | typeof SceneViewTemplate;
+  | typeof DashboardViewTab
+  | typeof FormViewTab
+  | typeof MarkdownViewTab
+  | typeof SceneViewTab;
 
 export type TabTemplateProps<T extends TabTemplates> = Parameters<T>[0];

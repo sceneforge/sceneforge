@@ -8,7 +8,7 @@ import {
 } from "@sceneforge/ui";
 import { useId } from "react";
 
-export type FormViewTemplateProps = TabComponentProps<{
+export type FormViewTabProps = TabComponentProps<{
   columns?: number;
   fieldsets?: FieldsetProps[];
   gap?: number;
@@ -16,14 +16,14 @@ export type FormViewTemplateProps = TabComponentProps<{
   variant?: Variant;
 }>;
 
-const FormViewTemplate = ({
+const FormViewTab = ({
   columns,
   fieldsets,
   gap,
   tabId,
   title,
   variant,
-}: FormViewTemplateProps) => {
+}: FormViewTabProps) => {
   const generatedId = useId();
   const currentId = tabId ?? generatedId;
 
@@ -42,4 +42,4 @@ const FormViewTemplate = ({
   );
 };
 
-export default FormViewTemplate;
+export default FormViewTab;

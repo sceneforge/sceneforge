@@ -6,11 +6,11 @@ import { useTranslation } from "react-i18next";
 
 import { aboutTab, homeTab, settingsTab } from "../shortcuts";
 import {
-  DashboardViewTemplate,
-  FormViewTemplate,
-  MarkdownViewTemplate,
-  SceneViewTemplate,
-  type SceneViewTemplateProps,
+  DashboardViewTab,
+  FormViewTab,
+  MarkdownViewTab,
+  SceneViewTab,
+  type SceneViewTabProps,
   type TabTemplateProps,
   type TabTemplates,
 } from "../templates";
@@ -19,7 +19,7 @@ import { type OpenTabFunction, useTabs } from "./useTabs";
 export type OpenSceneFunction = (
   id: string,
   label: string,
-  props: SceneViewTemplateProps
+  props: SceneViewTabProps
 ) => void;
 
 export type ShortcutPropsProps = {
@@ -48,12 +48,12 @@ export const useShortcuts = () => {
   const { i18n, t } = useTranslation("tabs");
 
   const openScene = useCallback(
-    (id: string, label: string, props: SceneViewTemplateProps) => {
+    (id: string, label: string, props: SceneViewTabProps) => {
       return openTab(
         `scene-${id}`,
         label,
         IconEnum.Landscape2,
-        SceneViewTemplate,
+        SceneViewTab,
         props
       );
     },
@@ -78,7 +78,7 @@ export const useShortcuts = () => {
 
   const openHome = useMemo(() => createOpenTabShortcut(
     homeTab,
-    DashboardViewTemplate,
+    DashboardViewTab,
     {
       icon: IconEnum.Home,
       id: "home-tab",
@@ -88,7 +88,7 @@ export const useShortcuts = () => {
 
   const openSettings = useMemo(() => createOpenTabShortcut(
     settingsTab,
-    FormViewTemplate,
+    FormViewTab,
     {
       icon: IconEnum.Settings,
       id: "settings-tab",
@@ -98,7 +98,7 @@ export const useShortcuts = () => {
 
   const openAbout = useMemo(() => createOpenTabShortcut(
     aboutTab,
-    MarkdownViewTemplate,
+    MarkdownViewTab,
     {
       icon: IconEnum.QuestionMark,
       id: "about-tab",

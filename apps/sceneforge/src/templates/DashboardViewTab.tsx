@@ -1,13 +1,13 @@
 import { Carousel, type CarouselProps, type TabComponentProps } from "@sceneforge/ui";
 
-export type DashboardViewTemplateProps = TabComponentProps<{
+export type DashboardViewTabProps = TabComponentProps<{
   carousel?: CarouselProps;
   title?: string;
 }>;
 
-const DashboardViewTemplate = ({
+const DashboardViewTab = ({
   carousel,
-}: DashboardViewTemplateProps) => {
+}: DashboardViewTabProps) => {
   return (
     <>
       {carousel && (
@@ -17,4 +17,4 @@ const DashboardViewTemplate = ({
   );
 };
 
-export default DashboardViewTemplate;
+export default DashboardViewTab;
