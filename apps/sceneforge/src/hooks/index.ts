@@ -3,7 +3,7 @@ export { useAppContext } from "./useAppContext";
 export { useAppInstall } from "./useAppInstall";
 export { useAppInstallContext } from "./useAppInstallContext";
 export { useScene } from "./useScene";
-export { useShortcuts } from "./useShortcuts";
+export { ShortcutName, useShortcuts } from "./useShortcuts";
 export type {
   CreateOpenTabShortcut,
   OpenSceneFunction,

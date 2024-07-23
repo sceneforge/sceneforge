@@ -16,6 +16,13 @@ import {
 } from "../templates";
 import { type OpenTabFunction, useTabs } from "./useTabs";
 
+export enum ShortcutName {
+  About = "about",
+  Home = "home",
+  Scene = "scene",
+  Settings = "settings",
+};
+
 export type OpenSceneFunction = (
   id: string,
   label: string,
@@ -106,7 +113,25 @@ export const useShortcuts = () => {
     }
   ), [createOpenTabShortcut, t]);
 
+  const open = useCallback((name: ShortcutName) => {
+    switch (name) {
+      case ShortcutName.About:
+        return openAbout();
+      case ShortcutName.Home:
+        return openHome();
+      case ShortcutName.Settings:
+        return openSettings();
+      default:
+        throw new Error(`Unknown shortcut: ${name}`);
+    }
+  }, [
+    openAbout,
+    openHome,
+    openSettings,
+  ]);
+
   return {
+    open,
     openAbout,
     openHome,
     openScene,

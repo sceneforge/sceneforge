@@ -19,7 +19,7 @@ export const settingsTab: ShortcutProps<typeof FormViewTab> = async ({
         fields: [
           {
             defaultValue: currentMainTabPosition?.value as string | undefined,
-            label: "Tabs Position",
+            label: t("SettingsTab.sections.general.mainTabPosition.fieldLabel"),
             name: "mainTabPosition",
             onChange: (next) => {
               if (next === "start") {
@@ -36,14 +36,20 @@ export const settingsTab: ShortcutProps<typeof FormViewTab> = async ({
               }
             },
             options: [
-              { label: "Top", value: "start" },
-              { label: "Bottom", value: "end" },
+              {
+                label: t("SettingsTab.sections.general.mainTabPosition.fieldOptions.start"),
+                value: "start",
+              },
+              {
+                label: t("SettingsTab.sections.general.mainTabPosition.fieldOptions.end"),
+                value: "end",
+              },
             ],
             type: "select",
           },
           {
             defaultValue: currentLanguage?.value as string | undefined,
-            label: "Language",
+            label: t("SettingsTab.sections.general.language.fieldLabel"),
             name: "language",
             onChange: (next) => {
               if (typeof next === "string") {
@@ -65,32 +71,43 @@ export const settingsTab: ShortcutProps<typeof FormViewTab> = async ({
             value: i18n.language,
           },
         ],
-        legend: "General",
+        legend: t("SettingsTab.sections.general.title"),
         variant: Variant.Primary,
       },
       {
         fields: [
           {
-            label: "Color Scheme",
+            label: t("SettingsTab.sections.appearance.colorScheme.fieldLabel"),
             name: "color-scheme",
             options: [
-              { label: "Dark Mode", value: "dark" },
-              { label: "Light Mode", value: "light" },
-              { label: "Automatic", value: "auto" },
+              {
+                label: t("SettingsTab.sections.appearance.colorScheme.fieldOptions.dark"),
+                value: "dark",
+              },
+              {
+                label: t("SettingsTab.sections.appearance.colorScheme.fieldOptions.light"),
+                value: "light",
+              },
+              {
+                label: t("SettingsTab.sections.appearance.colorScheme.fieldOptions.auto"),
+                value: "auto",
+              },
             ],
             type: "select",
           },
           {
-            label: "Theme",
+            label: t("SettingsTab.sections.appearance.theme.fieldLabel"),
             name: "theme",
             options: themeList.themes.map(({ id, name }) => ({
-              label: name,
+              label: name ?? t(`SettingsTab.sections.appearance.theme.fieldOptions.${id}`, {
+                defaultValue: id,
+              }),
               value: id,
             })),
             type: "select",
           },
         ],
-        legend: "Appearance",
+        legend: t("SettingsTab.sections.appearance.title"),
         variant: Variant.Primary,
       },
     ],

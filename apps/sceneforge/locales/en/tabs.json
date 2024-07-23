@@ -1,11 +1,18 @@
 {
   "HomeTab": {
-    "title": "Home"
+    "title": "Home",
+    "sections": {
+      "latestScenes": {
+        "title": "Latest Scenes",
+        "createNewSceneLabel": "Create New Scene"
+      }
+    }
   },
   "general": {
     "undefinedTab": "Undefined Tab"
   },
   "SceneTab": {
+    "newSceneTitle": "New Scene",
     "untitledScene": "Untitled Scene"
   },
   "AboutTab": {
@@ -16,14 +23,34 @@
     "sections": {
       "general": {
         "title": "General",
-        "languageLabel": "Language",
-        "showWelcomeLabel": "Show Welcome on startup"
+        "mainTabPosition": {
+          "fieldLabel": "Tabs Position",
+          "fieldOptions": {
+            "start": "Top",
+            "end": "Bottom"
+          }
+        },
+        "language": {
+          "fieldLabel": "Language"
+        }
       },
-      "tabs": {
-        "title": "Tabs",
-        "positionLabel": "Position",
-        "positionTopOption": "Top",
-        "positionBottomOption": "Bottom"
+      "appearance": {
+        "title": "Appearance",
+        "colorScheme": {
+          "fieldLabel": "Color Scheme",
+          "fieldOptions": {
+            "auto": "Automatic",
+            "dark": "Dark mode",
+            "light": "Light mode"
+          }
+        },
+        "theme": {
+          "fieldLabel": "Theme",
+          "fieldOptions": {
+            "default": "Default",
+            "monochrome": "Monochrome"
+          }
+        }
       }
     }
   }

@@ -1,29 +1,56 @@
 {
   "HomeTab": {
-    "title": "Home"
+    "title": "Home",
+    "sections": {
+      "latestScenes": {
+        "title": "Últimas Cenas",
+        "createNewSceneLabel": "Criar Nova Cena"
+      }
+    }
   },
   "general": {
-    "untitledTab": "Sem Título"
+    "undefinedTab": "Aba Sem Título"
   },
   "SceneTab": {
-    "untitledScene": "Cena sem título"
+    "newSceneTitle": "Nova Cena",
+    "untitledScene": "Cena Sem Título"
   },
   "AboutTab": {
-    "title": "Sobre o Scene Forge"
+    "title": "Sobre"
   },
   "SettingsTab": {
     "title": "Ajustes",
     "sections": {
       "general": {
         "title": "Geral",
-        "languageLabel": "Idioma",
-        "showWelcomeLabel": "Mostrar tela de boas-vindas ao iniciar"
+        "mainTabPosition": {
+          "fieldLabel": "Posição das Abas",
+          "fieldOptions": {
+            "start": "Topo",
+            "end": "Fundo"
+          }
+        },
+        "language": {
+          "fieldLabel": "Idioma"
+        }
       },
-      "tabs": {
-        "title": "Abas",
-        "positionLabel": "Posição",
-        "positionTopOption": "Topo",
-        "positionBottomOption": "Fundo"
+      "appearance": {
+        "title": "Aparência",
+        "colorScheme": {
+          "fieldLabel": "Esquema de Cores",
+          "fieldOptions": {
+            "auto": "Automático",
+            "dark": "Modo escuro",
+            "light": "Modo claro"
+          }
+        },
+        "theme": {
+          "fieldLabel": "Tema",
+          "fieldOptions": {
+            "default": "Padrão",
+            "monochrome": "Monocromático"
+          }
+        }
       }
     }
   }

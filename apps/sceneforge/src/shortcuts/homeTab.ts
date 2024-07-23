@@ -12,14 +12,14 @@ export const homeTab: ShortcutProps<typeof DashboardViewTab> = async ({
     const now = new Date();
     const id = await database.scene.add({
       createdAt: now,
-      name: "New Scene",
+      name: t("SceneTab.newSceneTitle"),
       updatedAt: now,
     });
 
     if (id) {
-      openScene(Number(id).toString(), "New Scene", {
+      openScene(Number(id).toString(), t("SceneTab.newSceneTitle"), {
         id: Number(id).toString(),
-        title: "New Scene",
+        title: t("SceneTab.newSceneTitle"),
       });
     }
 
@@ -55,7 +55,7 @@ export const homeTab: ShortcutProps<typeof DashboardViewTab> = async ({
           icon: IconEnum.Add,
           inverted: true,
           kind: "icon",
-          label: "Create New Scene",
+          label: t("HomeTab.sections.latestScenes.createNewSceneLabel"),
           onClick: () => {
             void createNewScene();
           },
@@ -63,7 +63,7 @@ export const homeTab: ShortcutProps<typeof DashboardViewTab> = async ({
         },
       ],
       itemsVariant: Variant.Accent,
-      title: "Latest Scenes",
+      title: t("HomeTab.sections.latestScenes.title"),
     },
     title: t("HomeTab.title"),
   };

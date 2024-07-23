@@ -6,15 +6,16 @@ import {
 import { lazy } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useApp, useShortcuts } from "../hooks";
+import { ShortcutName, useApp, useAppContext, useShortcuts } from "../hooks";
 
 const Tabs = lazy(() => import("./Tabs"));
 
 const App = () => {
   useApp();
+  const { name } = useAppContext();
 
   const { t } = useTranslation("tabs");
-  const { openAbout, openHome, openSettings } = useShortcuts();
+  const { open } = useShortcuts();
 
   return (
     <AppLayout
@@ -25,22 +26,22 @@ const App = () => {
             icon: IconEnum.Home,
             kind: "icon",
             label: t("HomeTab.title"),
-            onClick: () => void openHome(),
+            onClick: () => void open(ShortcutName.Home),
           },
           {
             icon: IconEnum.Info,
             kind: "icon",
             label: t("AboutTab.title"),
-            onClick: () => void openAbout(),
+            onClick: () => void open(ShortcutName.About),
           },
           {
             icon: IconEnum.Settings,
             kind: "icon",
             label: t("SettingsTab.title"),
-            onClick: () => void openSettings(),
+            onClick: () => void open(ShortcutName.Settings),
           },
         ],
-        title: "Scene Forge",
+        title: name,
         variant: Variant.Primary,
       }}
     >
