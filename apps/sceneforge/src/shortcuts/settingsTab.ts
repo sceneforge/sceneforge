@@ -2,9 +2,8 @@ import { getThemeList } from "@sceneforge/core";
 import { database } from "@sceneforge/data";
 import { Variant } from "@sceneforge/ui";
 
-import type { FormViewTemplate, FormViewTemplateProps } from "../tabTemplates";
-
-import { ShortcutProps } from "./ShortcutProps";
+import type { ShortcutProps } from "../hooks";
+import type { FormViewTemplate, FormViewTemplateProps } from "../templates";
 
 export const settingsTab: ShortcutProps<typeof FormViewTemplate> = async ({
   i18n,

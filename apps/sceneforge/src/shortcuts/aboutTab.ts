@@ -1,5 +1,5 @@
-import type { MarkdownViewTemplate } from "../tabTemplates";
-import type { ShortcutProps } from "./ShortcutProps";
+import type { ShortcutProps } from "../hooks";
+import type { MarkdownViewTemplate } from "../templates";
 
 export const aboutTab: ShortcutProps<typeof MarkdownViewTemplate> = ({
   t,

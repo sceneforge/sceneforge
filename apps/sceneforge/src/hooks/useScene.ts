@@ -3,7 +3,7 @@ import { database } from "@sceneforge/data";
 import { EngineController, EngineState, sceneLoader, sceneNodeTree } from "@sceneforge/scene";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { useAppTabs } from "../components/App";
+import { useTabs } from "./useTabs";
 
 export const useScene = (
   id?: string,
@@ -14,7 +14,7 @@ export const useScene = (
   const engineController = useRef<EngineController>(null);
   const [isImporting, setIsImporting] = useState(false);
 
-  const { removeTab } = useAppTabs();
+  const { removeTab } = useTabs();
 
   const currentScene = useMemo(() => {
     if (!id) return;
