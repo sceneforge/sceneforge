@@ -3,7 +3,7 @@ import { z } from "zod";
 export const ThemeListItemSchema = z.object({
   description: z.string().optional(),
   id: z.string().regex(/^[\da-z-]+$/),
-  name: z.string(),
+  name: z.string().optional(),
   url: z.string(),
 });
 
