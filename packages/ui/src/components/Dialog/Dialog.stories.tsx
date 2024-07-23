@@ -1,8 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { createRef } from "react";
+
 import { variantArgTypes } from "../../storiesHelpers";
 import { IconEnum, Variant } from "../../types";
+import Button from "../Button/Button";
 import Dialog from "./Dialog";
+
+const dialogRef = createRef<HTMLDialogElement | null>();
+
+const openDialog = () => {
+  if (
+    dialogRef.current
+    && dialogRef.current instanceof HTMLDialogElement
+  ) {
+    dialogRef.current.showModal();
+  }
+};
 
 const meta: Meta<typeof Dialog> = {
   argTypes: {
@@ -18,6 +32,36 @@ const meta: Meta<typeof Dialog> = {
     ...variantArgTypes("variant"),
   },
   component: Dialog,
+  decorators: [
+    Story => (
+      <div
+        style={{
+          aspectRatio: "1.85",
+          display: "block",
+          isolation: "isolate",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  render: function MyComponent(args) {
+    return (
+      <>
+        <Button
+          autoFocus
+          onClick={openDialog}
+          variant={Variant.Primary}
+        >
+          Open Dialog
+        </Button>
+        <Dialog
+          {...args}
+          ref={dialogRef}
+        />
+      </>
+    );
+  },
   title: "Component/Dialog",
 };
 
@@ -28,7 +72,6 @@ export default meta;
 export const Default: Story = {
   args: {
     children: "Dialog Content",
-    open: true,
     title: "Dialog Title",
   },
 };
@@ -50,7 +93,6 @@ export const WithActions: Story = {
       },
     ],
     children: "Dialog Content",
-    open: true,
     title: "Dialog Title",
   },
 };

@@ -1,8 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Dialog, IconEnum, Variant } from "@sceneforge/ui";
+import { Button, Dialog, IconEnum, Variant } from "@sceneforge/ui";
+import { createRef } from "react";
 
 import { variantArgTypes } from "../../storiesHelpers";
+
+const dialogRef = createRef<HTMLDialogElement | null>();
+
+const openDialog = () => {
+  if (
+    dialogRef.current
+    && dialogRef.current instanceof HTMLDialogElement
+  ) {
+    dialogRef.current.showModal();
+  }
+};
 
 const meta: Meta<typeof Dialog> = {
   argTypes: {
@@ -18,6 +30,36 @@ const meta: Meta<typeof Dialog> = {
     ...variantArgTypes("variant"),
   },
   component: Dialog,
+  decorators: [
+    Story => (
+      <div
+        style={{
+          aspectRatio: "1.85",
+          display: "block",
+          isolation: "isolate",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  render: function MyComponent(args) {
+    return (
+      <>
+        <Button
+          autoFocus
+          onClick={openDialog}
+          variant={Variant.Primary}
+        >
+          Open Dialog
+        </Button>
+        <Dialog
+          {...args}
+          ref={dialogRef}
+        />
+      </>
+    );
+  },
   title: "@sceneforge|ui/Components/Dialog",
 };
 
@@ -30,7 +72,7 @@ export const Default: Story = {
     children: "Dialog Content",
     title: "Dialog Title",
   },
-} as Story;
+};
 
 export const WithActions: Story = {
   args: {
