@@ -1520,28 +1520,28 @@ __metadata:
   linkType: hard
 
 "@babylonjs/core@npm:^7.13.1":
-  version: 7.16.1
-  resolution: "@babylonjs/core@npm:7.16.1"
-  checksum: 10c0/6b35f0cd5983ed4c3adb5f27049cdc246e9cf7fffeee25d5f1cd513007b85fbad8dbf64c3931ed4cb6dd2bccadee47ce68f80e990c3b256ac5dcb79c08205138
+  version: 7.17.0
+  resolution: "@babylonjs/core@npm:7.17.0"
+  checksum: 10c0/cf3186c6991195aa9f98117cec7756a3da95b6c275ef8b06d017e367a24d2767f9aacb62d7500e7a3abbfadf4d052f52e7454e1f50a657fb199de5ea046ab45d
   languageName: node
   linkType: hard
 
 "@babylonjs/loaders@npm:^7.13.1":
-  version: 7.16.1
-  resolution: "@babylonjs/loaders@npm:7.16.1"
+  version: 7.17.0
+  resolution: "@babylonjs/loaders@npm:7.17.0"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
     babylonjs-gltf2interface: ^7.0.0
-  checksum: 10c0/aa4a9b8f0efdb4c2ef71f1ee03f5448857ac13dceb6603f7a7eeb3ec6d409df0d98f6e80c86ce24d6ca60632cabc75b68c396929c21b59419749770a42d43f7c
+  checksum: 10c0/822bceb8f07e3a0fb2f57536228de003ac6c8371d059333ce67d7d5411796e62c670f9a07a36d8e0af6bd2683d9db5647cfa5bd9b719460bc20f840702292105
   languageName: node
   linkType: hard
 
 "@babylonjs/materials@npm:^7.13.1":
-  version: 7.16.1
-  resolution: "@babylonjs/materials@npm:7.16.1"
+  version: 7.17.0
+  resolution: "@babylonjs/materials@npm:7.17.0"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
-  checksum: 10c0/a00d1aadc5239a4f6a84bfd39e0287f20f9c1cf557af97c7dae8af5c9a52cad1f807f1dd47a9dbffae697eb7190d6736e394a773966ef6927d8551a6d8161b60
+  checksum: 10c0/a964f340320efa2c0f5a76e0168cc45693c124981347be8dd6acfe4002e3465922f8fd86e4501628566bc11dc7d5281bdd0c262fc60ca6b46f8b887513984624
   languageName: node
   linkType: hard
 
@@ -4950,9 +4950,9 @@ __metadata:
   linkType: hard
 
 "babylonjs-gltf2interface@npm:^7.13.1":
-  version: 7.16.1
-  resolution: "babylonjs-gltf2interface@npm:7.16.1"
-  checksum: 10c0/2c529c71c041606f25e424dee3acb73870b326c88d59cffc64112a5a68eb6d7a97d35e970ef9002921bc4160f71d34038d1fd5e81ce5cdae242763dfafd61fdb
+  version: 7.17.0
+  resolution: "babylonjs-gltf2interface@npm:7.17.0"
+  checksum: 10c0/dacf19da95b8b82fe883e843d915ede522e7d5797b3301950769d1caa93abfb4d59b01abe43373208fc678bbf407abe92031eb685d18107e6417e8302fa5e510
   languageName: node
   linkType: hard
 
@@ -5274,8 +5274,8 @@ __metadata:
   linkType: hard
 
 "chai@npm:^4.3.10":
-  version: 4.4.1
-  resolution: "chai@npm:4.4.1"
+  version: 4.5.0
+  resolution: "chai@npm:4.5.0"
   dependencies:
     assertion-error: "npm:^1.1.0"
     check-error: "npm:^1.0.3"
@@ -5283,8 +5283,8 @@ __metadata:
     get-func-name: "npm:^2.0.2"
     loupe: "npm:^2.3.6"
     pathval: "npm:^1.1.1"
-    type-detect: "npm:^4.0.8"
-  checksum: 10c0/91590a8fe18bd6235dece04ccb2d5b4ecec49984b50924499bdcd7a95c02cb1fd2a689407c19bb854497bde534ef57525cfad6c7fdd2507100fd802fbc2aefbd
+    type-detect: "npm:^4.1.0"
+  checksum: 10c0/b8cb596bd1aece1aec659e41a6e479290c7d9bee5b3ad63d2898ad230064e5b47889a3bc367b20100a0853b62e026e2dc514acf25a3c9385f936aa3614d4ab4d
   languageName: node
   linkType: hard
 
@@ -6688,13 +6688,13 @@ __metadata:
   linkType: hard
 
 "esbuild-register@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "esbuild-register@npm:3.5.0"
+  version: 3.6.0
+  resolution: "esbuild-register@npm:3.6.0"
   dependencies:
     debug: "npm:^4.3.4"
   peerDependencies:
     esbuild: ">=0.12 <1"
-  checksum: 10c0/9ccd0573cb66018e4cce3c1416eed0f5f3794c7026ce469a94e2f8761335abed8e363fc8e8bb036ab9ad7e579bb4296b8568a04ae5626596c123576b0d9c9bde
+  checksum: 10c0/77193b7ca32ba9f81b35ddf3d3d0138efb0b1429d71b39480cfee932e1189dd2e492bd32bf04a4d0bc3adfbc7ec7381ceb5ffd06efe35f3e70904f1f686566d5
   languageName: node
   linkType: hard
 
@@ -7289,6 +7289,18 @@ __metadata:
   dependencies:
     walk-up-path: "npm:^3.0.1"
   checksum: 10c0/712a78a12bd8ec8482867b26bbcb2ff1dca9b096a416150c138e1512f1879c6d23dfb41b03b8e9226afc1e58a35df4738e9f9ae57032ff1dbbae75acfb70343b
+  languageName: node
+  linkType: hard
+
+"fdir@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "fdir@npm:6.2.0"
+  peerDependencies:
+    picomatch: ^3 || ^4
+  peerDependenciesMeta:
+    picomatch:
+      optional: true
+  checksum: 10c0/9f7dad7d3c9c0bc5ce3df61fe2d6d75950e0ad585dee2df26d36edfbd81c63db31eca4cf281d9399a1054618de41030b1911fd5145486b07e2e698553f49c261
   languageName: node
   linkType: hard
 
@@ -8213,11 +8225,11 @@ __metadata:
   linkType: hard
 
 "husky@npm:^9.0.11":
-  version: 9.1.1
-  resolution: "husky@npm:9.1.1"
+  version: 9.1.2
+  resolution: "husky@npm:9.1.2"
   bin:
     husky: bin.js
-  checksum: 10c0/56394f5a08201badece23a8599bd76fe8c41e4510a956022fe54897645900c5c5a96a740ffb0604e99e808dffc3714bae982f1cbda4a069082cc713414f17ad3
+  checksum: 10c0/7e25c31ef98ac35d357147005d6e5d87db2abca7297e7c5aac931de3699acd32a3f1a9f8e53f101daeab818f0cfe9d18fa7e34f7cf5c9c4437c3665123456dea
   languageName: node
   linkType: hard
 
@@ -13608,6 +13620,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tinyglobby@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "tinyglobby@npm:0.2.0"
+  dependencies:
+    fdir: "npm:^6.2.0"
+    picomatch: "npm:^4.0.2"
+  checksum: 10c0/ce2ca79006926adabd7ca79339d33a04cc7c22069ad6f714c6ce39f75bdb4f09ade1c59e4c7d37ed35e32734e747c388a5d3371e6903311c665e31c80179afc0
+  languageName: node
+  linkType: hard
+
 "tinyspy@npm:^2.2.0":
   version: 2.2.1
   resolution: "tinyspy@npm:2.2.1"
@@ -13816,10 +13838,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-detect@npm:4.0.8, type-detect@npm:^4.0.0, type-detect@npm:^4.0.8":
+"type-detect@npm:4.0.8":
   version: 4.0.8
   resolution: "type-detect@npm:4.0.8"
   checksum: 10c0/8fb9a51d3f365a7de84ab7f73b653534b61b622aa6800aecdb0f1095a4a646d3f5eb295322127b6573db7982afcd40ab492d038cf825a42093a58b1e1353e0bd
+  languageName: node
+  linkType: hard
+
+"type-detect@npm:^4.0.0, type-detect@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "type-detect@npm:4.1.0"
+  checksum: 10c0/df8157ca3f5d311edc22885abc134e18ff8ffbc93d6a9848af5b682730ca6a5a44499259750197250479c5331a8a75b5537529df5ec410622041650a7f293e2a
   languageName: node
   linkType: hard
 
@@ -14405,12 +14434,12 @@ __metadata:
   linkType: hard
 
 "vite-plugin-pwa@npm:^0.20.0":
-  version: 0.20.0
-  resolution: "vite-plugin-pwa@npm:0.20.0"
+  version: 0.20.1
+  resolution: "vite-plugin-pwa@npm:0.20.1"
   dependencies:
     debug: "npm:^4.3.4"
-    fast-glob: "npm:^3.3.2"
     pretty-bytes: "npm:^6.1.1"
+    tinyglobby: "npm:^0.2.0"
     workbox-build: "npm:^7.1.0"
     workbox-window: "npm:^7.1.0"
   peerDependencies:
@@ -14421,7 +14450,7 @@ __metadata:
   peerDependenciesMeta:
     "@vite-pwa/assets-generator":
       optional: true
-  checksum: 10c0/6bffcfedd75b61ff8cf6768447b42db677658dba7d8ee706393c7927c4e25a593db126ae84785a10826720deb4f69a25832f20d6be5e876e73ad0eb0f49189b2
+  checksum: 10c0/febd7d7ebb2f31825b6e73b07d1a3c98bc9c2934722e6da914d099630f718d54c2b4a92eb618e29ef2f004a3121f99d4a28998c23ca200eff469e4f65f7958ff
   languageName: node
   linkType: hard
 
@@ -14446,8 +14475,8 @@ __metadata:
   linkType: hard
 
 "vite@npm:^5.3.3":
-  version: 5.3.4
-  resolution: "vite@npm:5.3.4"
+  version: 5.3.5
+  resolution: "vite@npm:5.3.5"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -14481,7 +14510,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/604a1c8698bcf09d6889533c552f20137c80cb5027e9e7ddf6215d51e3df763414f8712168c22b3c8c16383aff9447094c05f21d7cca3c115874ff9d12e1538e
+  checksum: 10c0/795c7e0dbc94b96c4a0aff0d5d4b349dd28ad8b7b70979c1010f96b4d83f7d6c1700ebd6fed91de2e021b0a3689b9abc2d8017f6dfa8c9a6ca5c7af637d6afc6
   languageName: node
   linkType: hard
 
