@@ -70,6 +70,11 @@ export const Default: Story = {
             label: "Switch Field Label",
             type: "switch",
           },
+          {
+            defaultValue: "#22AAFF",
+            label: "Color Field Label",
+            type: "color",
+          },
         ],
         legend: "Fieldset 1 Legend",
       },
