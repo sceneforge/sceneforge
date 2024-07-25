@@ -29,20 +29,7 @@ export const webManifest = ({
           accept: {
             "application/json": [".scfg", ".sceneforge"],
           },
-          action: "/index.html#!action=new-tab&tab=new-scene",
-          // icons: [
-          //   {
-          //     src: "icons/file-512x740.png",
-          //     sizes: "512x740",
-          //     type: "image/png",
-          //   },
-          //   {
-          //     src: "icons/file-256x370.png",
-          //     sizes: "256x370",
-          //     type: "image/png",
-          //   },
-          // ],
-          // launch_type: "single-client",
+          action: "/",
         },
       ],
       handle_links: "preferred",
@@ -106,7 +93,7 @@ export const webManifest = ({
       protocol_handlers: [
         {
           protocol: "web+sceneforge",
-          url: "/index.html#!%s",
+          url: "/?url=%s",
         },
       ],
       screenshots: [
@@ -149,7 +136,7 @@ export const webManifest = ({
           ],
           name: "New Scene",
           short_name: "New",
-          url: "/index.html#!action=new-tab&tab=new-scene",
+          url: "/",
         },
         {
           description: "Open the settings",
@@ -163,7 +150,7 @@ export const webManifest = ({
           ],
           name: "Settings",
           short_name: "Settings",
-          url: "/index.html#!action=open-tab&tab=settings",
+          url: "/",
         },
         {
           description: "About Scene Forge",
@@ -177,10 +164,10 @@ export const webManifest = ({
           ],
           name: "About Scene Forge",
           short_name: "About",
-          url: "/index.html#!action=open-tab&tab=about",
+          url: "/",
         },
       ],
-      start_url: "/index.html",
+      start_url: "/",
       theme_color: "#86159d",
       ...(isProd
         ? {
