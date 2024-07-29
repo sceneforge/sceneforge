@@ -3,6 +3,7 @@ import {
   DrawerController,
   Orientation,
   Pane,
+  Popover,
   Position,
   SplitPaneController,
   type TabComponentProps,
@@ -28,9 +29,16 @@ const SceneViewTab = ({
   const {
     canvasRef,
     changeSceneTitle,
+    editToggleRef,
+    hotspotPopoverRef,
+    materialToggleRef,
     openFileClickHandler,
     removeScene,
     sceneNodes,
+    toggleSceneEditMode,
+    toggleSceneMaterialMode,
+    toggleSceneViewMode,
+    viewToggleRef,
   } = useScene(id, hidden, registerBeforeClose);
 
   return (
@@ -50,6 +58,9 @@ const SceneViewTab = ({
               component: () => (
                 <View>
                   <Canvas id={`scene-${id}-canvas`} ref={canvasRef} />
+                  <Popover ref={hotspotPopoverRef}>
+                    Hotspot
+                  </Popover>
                   <DrawerController
                     initialSize={48}
                     orientation={Orientation.Horizontal}
@@ -87,21 +98,31 @@ const SceneViewTab = ({
                         {
                           actions: [
                             {
+                              glossy: [false, true],
+                              inverted: [false, true],
                               kind: "toggle",
                               label: "View",
-                              onClick: () => console.log("View Mode"),
+                              onToggle: toggleSceneViewMode,
+                              pressed: true,
+                              ref: viewToggleRef,
                               variant: Variant.Accent,
                             },
                             {
+                              glossy: [false, true],
+                              inverted: [false, true],
                               kind: "toggle",
                               label: "Edit",
-                              onClick: () => console.log("Edit Mode"),
+                              onToggle: toggleSceneEditMode,
+                              ref: editToggleRef,
                               variant: Variant.Accent,
                             },
                             {
+                              glossy: [false, true],
+                              inverted: [false, true],
                               kind: "toggle",
                               label: "Material",
-                              onClick: () => console.log("Material Mode"),
+                              onToggle: toggleSceneMaterialMode,
+                              ref: materialToggleRef,
                               variant: Variant.Accent,
                             },
                           ],
