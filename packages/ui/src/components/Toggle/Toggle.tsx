@@ -1,6 +1,5 @@
 import type { MouseEvent as ReactMouseEvent, Ref } from "react";
 
-import { Variant } from "../../types";
 import { Button, type ButtonProps } from "../Button";
 import { useToggle } from "./useToggle";
 
@@ -27,15 +26,24 @@ export interface ToggleComponentRef {
   ): void;
 };
 
+type ToggleProperty<
+  T extends object,
+  K extends keyof T,
+> = [Required<T>[K], Required<T>[K]] | Required<T>[K];
+
 export type ToggleProps = {
-  label?: [string, string] | string;
+  glossy?: ToggleProperty<ButtonProps, "glossy">;
+  inverted?: ToggleProperty<ButtonProps, "inverted">;
+  label?: ToggleProperty<ButtonProps, "label">;
   onToggle?: (event: ToggleEvent) => void;
   pressed?: "false" | "true" | boolean;
   ref?: Ref<ToggleComponentRef>;
-  variant?: [Variant, Variant] | Variant;
-} & Omit<ButtonProps, "label" | "onToggle" | "ref" | "variant">;
+  variant?: ToggleProperty<ButtonProps, "variant">;
+} & Omit<ButtonProps, "glossy" | "inverted" | "label" | "onToggle" | "ref" | "variant">;
 
 const Toggle = ({
+  glossy,
+  inverted,
   label,
   onClick,
   onToggle,
@@ -46,15 +54,28 @@ const Toggle = ({
 }: ToggleProps) => {
   const {
     buttonRef,
+    currentGlossy,
+    currentInverted,
     currentLabel,
     currentVariant,
     handleClickEvent,
     isPressed,
-  } = useToggle({ label, onClick, onToggle, pressed, ref, variant });
+  } = useToggle({
+    glossy,
+    inverted,
+    label,
+    onClick,
+    onToggle,
+    pressed,
+    ref,
+    variant,
+  });
 
   return (
     <Button
       aria-pressed={isPressed}
+      glossy={currentGlossy}
+      inverted={currentInverted}
       label={currentLabel}
       onClick={handleClickEvent}
       role="switch"

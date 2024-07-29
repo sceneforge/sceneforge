@@ -8,14 +8,15 @@ import {
   useState,
 } from "react";
 
+import type { ButtonProps } from "../Button";
 import type {
   ToggleComponentRef,
   ToggleProps,
 } from "./Toggle";
 
-import { Variant } from "../../types";
-
 export type UseToggleOptions = {
+  glossy?: ToggleProps["glossy"];
+  inverted?: ToggleProps["inverted"];
   label?: ToggleProps["label"];
   onClick?: ToggleProps["onClick"];
   onToggle?: ToggleProps["onToggle"];
@@ -25,6 +26,8 @@ export type UseToggleOptions = {
 };
 
 export const useToggle = ({
+  glossy,
+  inverted,
   label,
   onClick,
   onToggle,
@@ -42,13 +45,21 @@ export const useToggle = ({
 
   const [pressedState, setPressedState] = useState<boolean>(isPressed ?? false);
 
-  const currentLabel: string | undefined = useMemo(() => {
+  const currentLabel: ButtonProps["label"] | undefined = useMemo(() => {
     return Array.isArray(label) ? label[pressedState ? 1 : 0] : label;
   }, [label, pressedState]);
 
-  const currentVariant: Variant | undefined = useMemo(() => {
+  const currentVariant: ButtonProps["variant"] | undefined = useMemo(() => {
     return Array.isArray(variant) ? variant[pressedState ? 1 : 0] : variant;
   }, [variant, pressedState]);
+
+  const currentInverted: ButtonProps["inverted"] | undefined = useMemo(() => {
+    return Array.isArray(inverted) ? inverted[pressedState ? 1 : 0] : inverted;
+  }, [inverted, pressedState]);
+
+  const currentGlossy: ButtonProps["glossy"] | undefined = useMemo(() => {
+    return Array.isArray(glossy) ? glossy[pressedState ? 1 : 0] : glossy;
+  }, [glossy, pressedState]);
 
   const handleToggle = useCallback(
     (
@@ -113,6 +124,8 @@ export const useToggle = ({
 
   return {
     buttonRef,
+    currentGlossy,
+    currentInverted,
     currentLabel,
     currentVariant,
     handleClickEvent,

@@ -8,6 +8,8 @@ import { View } from "../View";
 
 export type DividerProps = {
   dense?: boolean;
+  glossy?: boolean;
+  inverted?: boolean;
   label?: string;
   margin?: {
     end?: number;
