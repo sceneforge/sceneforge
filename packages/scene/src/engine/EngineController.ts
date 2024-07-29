@@ -30,7 +30,7 @@ export class EngineController {
       this._camera = camera;
       this._light = light;
 
-      this._camera.attachControl(this._canvas, true);
+      this._camera.attachControl(this.canvas, true);
     }
 
     this._resizeObserver = new ResizeObserver(() => {
@@ -39,17 +39,21 @@ export class EngineController {
   }
 
   public pause(): void {
-    this._resizeObserver.unobserve(this._canvas);
-    this._engine.stopRenderLoop();
-    this._state = EngineState.Paused;
+    if (this.canvas.parentElement) {
+      this._resizeObserver.unobserve(this.canvas.parentElement);
+      this._engine.stopRenderLoop();
+      this._state = EngineState.Paused;
+    }
   }
 
   public start(): void {
-    this._resizeObserver.observe(this._canvas, { box: "border-box" });
-    this._engine.runRenderLoop(() => {
-      this._scene.render();
-    });
-    this._state = EngineState.Running;
+    if (this.canvas.parentElement) {
+      this._resizeObserver.observe(this.canvas.parentElement, { box: "border-box" });
+      this._engine.runRenderLoop(() => {
+        this._scene.render();
+      });
+      this._state = EngineState.Running;
+    }
   }
 
   public stop(): void {

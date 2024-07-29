@@ -9,12 +9,13 @@ import { MeshSelectorControl } from "./MeshSelectorControl";
 export class MeshParentSelectorControl {
   private _depth: number = 1;
   private _direction: "down" | "up" = "up";
-  private _mesh: AbstractMesh | null | undefined;
+  private _mesh: Nullable<AbstractMesh>;
   private _name: string;
   private _selectedLayer: MeshSelectorControl;
 
   constructor(name: string, scene?: Scene) {
     this._name = name;
+    this._mesh = null;
     this._selectedLayer = new MeshSelectorControl(this._name, scene, {
       outlineColor: Color3.Blue(),
     });
@@ -28,7 +29,7 @@ export class MeshParentSelectorControl {
   }
 
   private static getParent(
-    mesh: AbstractMesh | Node | null | undefined,
+    mesh: Nullable<AbstractMesh> | Nullable<Node>,
     depth: number = 1,
     currentDepth: number = 0
   ): Nullable<Node> {
@@ -82,11 +83,11 @@ export class MeshParentSelectorControl {
     this._direction = value;
   }
 
-  public get mesh(): AbstractMesh | null | undefined {
-    return this._mesh;
+  public get mesh(): Nullable<AbstractMesh> {
+    return this._mesh ?? null;
   }
 
-  public set mesh(value: AbstractMesh | null | undefined) {
+  public set mesh(value: Nullable<AbstractMesh>) {
     this.clear();
     if (this._mesh === value) {
       if (this._direction === "up") this.depthUp();
@@ -97,5 +98,9 @@ export class MeshParentSelectorControl {
       this._mesh = value;
     }
     if (this._selectedLayer.state === "idle") this.highlight();
+  }
+
+  public get selected(): boolean {
+    return this._selectedLayer.selected;
   }
 }

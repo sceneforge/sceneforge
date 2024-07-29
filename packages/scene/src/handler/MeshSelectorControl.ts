@@ -1,3 +1,5 @@
+import type { Nullable } from "@babylonjs/core/types";
+
 import { HighlightLayer } from "@babylonjs/core/Layers/highlightLayer";
 import { Color3 } from "@babylonjs/core/Maths/math.color";
 import { type AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
@@ -10,7 +12,7 @@ export interface MeshSelectorControlOptions {
 
 export class MeshSelectorControl {
   private _highlightLayer: HighlightLayer | undefined;
-  private _meshes: (AbstractMesh | null | undefined)[] = [];
+  private _meshes: Nullable<AbstractMesh>[] = [];
   private _name: string;
   private _outlineColor: Color3 = Color3.White();
   private _scene: Scene | undefined;
@@ -40,7 +42,7 @@ export class MeshSelectorControl {
     }
   }
 
-  public addMesh(mesh: AbstractMesh | null | undefined): void {
+  public addMesh(mesh: Nullable<AbstractMesh>): void {
     if (!mesh) return;
     this._meshes.push(mesh);
     this.refresh();
@@ -56,7 +58,7 @@ export class MeshSelectorControl {
     this._highlightLayer?.dispose();
   }
 
-  public hasMesh(mesh: AbstractMesh | null | undefined): boolean {
+  public hasMesh(mesh: Nullable<AbstractMesh>): boolean {
     if (!mesh) return false;
     return this._meshes.includes(mesh);
   }
@@ -86,7 +88,7 @@ export class MeshSelectorControl {
     this.refresh();
   }
 
-  public removeMesh(mesh: AbstractMesh | null | undefined): void {
+  public removeMesh(mesh: Nullable<AbstractMesh>): void {
     if (!mesh) return;
     this._meshes = this._meshes.filter(m => m !== mesh);
     this.refresh();
@@ -94,6 +96,14 @@ export class MeshSelectorControl {
 
   public get length(): number {
     return this._meshes.length;
+  }
+
+  public get meshes(): Nullable<AbstractMesh>[] {
+    return this._meshes ?? [];
+  }
+
+  public get selected(): boolean {
+    return this._state === "selected";
   }
 
   public get state(): "idle" | "selected" {

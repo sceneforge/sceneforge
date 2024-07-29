@@ -1,6 +1,6 @@
 export * from "./engine";
 export type * from "./engine";
-export * from "./handlers";
-export type * from "./handlers";
+export * from "./handler";
+export type * from "./handler";
 export * from "./object";
 export type * from "./object";

@@ -11,11 +11,11 @@ export class KeyboardControl {
   private _controlPressed: boolean = false;
   private _escapePressed: boolean = false;
   private _observable: Nullable<Observer<KeyboardInfo>> = null;
-  private _onKeyboardObservable = ({ event, type }: KeyboardInfo) => {
+  private _onKeyboardObservable = ({ event, type, ...info }: KeyboardInfo) => {
     switch (event.key) {
       case "Escape":
         this._escapePressed = type === KeyboardEventTypes.KEYDOWN;
-        if (this._escapePressed) this._onScapePressed();
+        if (this._escapePressed) this._onScapePressed({ event, type, ...info });
         break;
       case "Alt":
         this._altPressed = type === KeyboardEventTypes.KEYDOWN;
@@ -31,7 +31,10 @@ export class KeyboardControl {
     }
   };
 
-  private _onScapePressed: () => void = () => {};
+  private _onScapePressed: (event: KeyboardInfo) => void = () => {
+    return;
+  };
+
   private _scene: Scene;
 
   private _shiftPressed: boolean = false;
@@ -50,7 +53,7 @@ export class KeyboardControl {
     }
   }
 
-  public onEscapePressed(callback: () => void): void {
+  public onEscapePressed(callback: (event: KeyboardInfo) => void): void {
     this._onScapePressed = callback;
   }
 
