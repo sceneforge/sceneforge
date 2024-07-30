@@ -8,19 +8,81 @@ const meta: Meta<typeof View> = {
   argTypes: {
     children: {
       control: "text",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+    },
+    hidden: {
+      control: "boolean",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    inverted: {
+      control: "boolean",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     margin: {
       control: "number",
+      table: {
+        type: {
+          summary: "SpacerStyleProps",
+        },
+      },
     },
     padding: {
       control: "number",
+      table: {
+        type: {
+          summary: "SpacerStyleProps",
+        },
+      },
+    },
+    ref: {
+      table: {
+        type: {
+          summary: "Ref<HTMLDivElement>",
+        },
+      },
     },
     scrollable: {
       control: "inline-radio",
       options: [true, false, "inline", "block"],
+      table: {
+        type: {
+          summary: "boolean | \"block\" | \"inline\"",
+        },
+      },
     },
-    ...shapeArgTypes("shape"),
-    ...variantArgTypes("variant"),
+    style: {
+      table: {
+        type: {
+          summary: "StyleXStyles",
+        },
+      },
+    },
+    ...shapeArgTypes("shape", {
+      table: {
+        type: {
+          summary: "Shape",
+        },
+      },
+    }),
+    ...variantArgTypes("variant", {
+      table: {
+        type: {
+          summary: "Variant",
+        },
+      },
+    }),
   },
   component: View,
   title: "@sceneforge|ui/Components/View",

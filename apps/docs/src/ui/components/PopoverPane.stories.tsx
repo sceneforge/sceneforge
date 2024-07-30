@@ -1,12 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Button, PopoverPane, type PopoverRef } from "@sceneforge/ui";
 import { useRef } from "react";
 
-import type { PopoverRef } from "../Popover";
-
 import { alignArgTypes, variantArgTypes } from "../../storiesHelpers";
-import Button from "../Button/Button";
-import PopoverPane from "./PopoverPane";
 
 const meta: Meta<typeof PopoverPane> = {
   argTypes: {
@@ -292,6 +289,7 @@ const meta: Meta<typeof PopoverPane> = {
         </Button>
         <PopoverPane
           {...props}
+          aria-labelledby="open-popover-pane"
           ref={ref}
         />
       </>

@@ -57,4 +57,4 @@ export const Default: Story = {
     kind: "button",
     label: "Action Text Content",
   },
-};
+} as Story;

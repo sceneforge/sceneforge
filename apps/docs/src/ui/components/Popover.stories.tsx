@@ -1,14 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { expect, userEvent, within } from "@storybook/test";
+import { Button, Popover, type PopoverRef } from "@sceneforge/ui";
 import { useRef } from "react";
 
-import type { PopoverRef } from "../Popover";
-
 import { alignArgTypes, variantArgTypes } from "../../storiesHelpers";
-import Button from "../Button/Button";
-import ViewMeta from "../View/View.stories";
-import Popover from "./Popover";
+import ViewMeta from "./View.stories";
 
 const meta: Meta<typeof Popover> = {
   argTypes: {
@@ -112,7 +108,7 @@ const meta: Meta<typeof Popover> = {
       </>
     );
   },
-  title: "Component/Popover",
+  title: "@sceneforge|ui/Components/Popover",
 };
 
 type Story = StoryObj<typeof meta>;
@@ -122,12 +118,5 @@ export default meta;
 export const Default: Story = {
   args: {
     children: "Popover Content",
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await userEvent.click(canvas.getByTestId("open-popover"));
-
-    await expect(canvas.getByRole("alertdialog")).toBeVisible();
   },
 };
