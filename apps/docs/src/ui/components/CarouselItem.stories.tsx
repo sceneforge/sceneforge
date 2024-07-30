@@ -45,13 +45,12 @@ const meta: Meta<typeof CarouselItem> = {
         category: "Icon",
       },
     },
-    icon: {
-      ...iconArgTypes("icon")["icon"],
+    ...iconArgTypes("icon", {
       if: { arg: "kind", eq: "icon" },
       table: {
         category: "Icon",
       },
-    },
+    }),
     size: {
       control: {
         max: 100,

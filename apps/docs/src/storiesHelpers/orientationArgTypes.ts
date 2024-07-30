@@ -1,6 +1,15 @@
+import type { ArgTypes, Args } from "@storybook/react";
+
 import { Orientation } from "@sceneforge/ui";
 
-export const orientationArgTypes = (property: string) => ({
+export const orientationArgTypes = <
+  TArgs = Args,
+  Arg extends keyof TArgs = keyof TArgs,
+  InputType extends ArgTypes<TArgs>[Arg] = ArgTypes<TArgs>[Arg],
+>(
+  property: Arg,
+  input?: Omit<InputType, "control" | "options">
+) => ({
   [property]: {
     control: {
       labels: {
@@ -16,4 +25,5 @@ export const orientationArgTypes = (property: string) => ({
       Orientation.Vertical,
     ],
   },
+  ...input,
 });

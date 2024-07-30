@@ -1,6 +1,15 @@
+import type { ArgTypes, Args } from "@storybook/react";
+
 import { Position } from "../types";
 
-export const positionArgTypes = (property: string) => ({
+export const positionArgTypes = <
+  TArgs = Args,
+  Arg extends keyof TArgs = keyof TArgs,
+  InputType extends ArgTypes<TArgs>[Arg] = ArgTypes<TArgs>[Arg],
+>(
+  property: Arg,
+  input?: Omit<InputType, "control" | "options">
+) => ({
   [property]: {
     control: {
       labels: {
@@ -16,4 +25,5 @@ export const positionArgTypes = (property: string) => ({
       Position.End,
     ],
   },
+  ...input,
 });

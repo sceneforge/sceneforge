@@ -1,6 +1,15 @@
+import type { ArgTypes, Args } from "@storybook/react";
+
 import { Shape } from "../types";
 
-export const shapeArgTypes = (property: string) => ({
+export const shapeArgTypes = <
+  TArgs = Args,
+  Arg extends keyof TArgs = keyof TArgs,
+  InputType extends ArgTypes<TArgs>[Arg] = ArgTypes<TArgs>[Arg],
+>(
+  property: Arg,
+  input?: Omit<InputType, "control" | "options">
+) => ({
   [property]: {
     control: {
       labels: {
@@ -22,4 +31,5 @@ export const shapeArgTypes = (property: string) => ({
       Shape.Squircle,
     ],
   },
+  ...input,
 });

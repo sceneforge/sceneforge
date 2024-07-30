@@ -1,6 +1,15 @@
+import type { ArgTypes, Args } from "@storybook/react";
+
 import { Variant } from "@sceneforge/ui";
 
-export const variantArgTypes = (property: string) => ({
+export const variantArgTypes = <
+  TArgs = Args,
+  Arg extends keyof TArgs = keyof TArgs,
+  InputType extends ArgTypes<TArgs>[Arg] = ArgTypes<TArgs>[Arg],
+>(
+  property: Arg,
+  input?: Omit<InputType, "control" | "options">
+) => ({
   [property]: {
     control: {
       labels: {
@@ -23,5 +32,6 @@ export const variantArgTypes = (property: string) => ({
       Variant.Success,
       Variant.Warning,
     ],
+    ...input,
   },
 });

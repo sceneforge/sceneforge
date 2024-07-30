@@ -1,6 +1,15 @@
+import type { ArgTypes, Args } from "@storybook/react";
+
 import { IconEnum } from "../types";
 
-export const iconArgTypes = (property: string) => ({
+export const iconArgTypes = <
+  TArgs = Args,
+  Arg extends keyof TArgs = keyof TArgs,
+  InputType extends ArgTypes<TArgs>[Arg] = ArgTypes<TArgs>[Arg],
+>(
+  property: Arg,
+  input?: Omit<InputType, "control" | "options">
+) => ({
   [property]: {
     control: {
       labels: Object.keys(IconEnum).map(key => ({
@@ -19,4 +28,5 @@ export const iconArgTypes = (property: string) => ({
       ...Object.values(IconEnum),
     ],
   },
+  ...input,
 });
