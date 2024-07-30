@@ -21,13 +21,6 @@ const meta: Meta<typeof Section> = {
     title: { control: "text" },
   },
   component: Section,
-  render: (args) => {
-    return (
-      <div className="bg-primary:45 h-full w-full p-2xl">
-        <Section {...args} />
-      </div>
-    );
-  },
   title: "@sceneforge|ui/Components/Section",
 };
 
