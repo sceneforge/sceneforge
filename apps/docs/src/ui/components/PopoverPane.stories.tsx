@@ -295,7 +295,7 @@ const meta: Meta<typeof PopoverPane> = {
       </>
     );
   },
-  title: "Component/PopoverPane",
+  title: "@sceneforge|ui/Components/PopoverPane",
 };
 
 type Story = StoryObj<typeof meta>;
