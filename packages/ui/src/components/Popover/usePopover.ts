@@ -1,4 +1,4 @@
-import { type Ref, useImperativeHandle, useRef, useState } from "react";
+import { type MouseEvent as ReactMouseEvent, type Ref, useImperativeHandle, useRef, useState } from "react";
 
 import { useCurrentId } from "../../hooks";
 
@@ -7,6 +7,9 @@ export interface PopoverRef {
   hide: () => void;
   position: (x: number, y: number) => void;
   show: () => void;
+  showPosition: (
+    event: PointerEvent | ReactMouseEvent<HTMLElement, MouseEvent>
+  ) => void;
 }
 
 export type UsePopoverProps = {
@@ -45,11 +48,22 @@ export const usePopover = ({
       }
     }
 
+    showPosition(
+      event: PointerEvent | ReactMouseEvent<HTMLElement, MouseEvent>
+    ) {
+      if (viewRef.current) {
+        const { clientX: x, clientY: y } = event;
+
+        this.position(x, y);
+        this.show();
+      }
+    }
+
     get element() {
       if (viewRef.current) {
         return viewRef.current;
       }
-    }
+    };
   })(), [viewRef]);
 
   return {

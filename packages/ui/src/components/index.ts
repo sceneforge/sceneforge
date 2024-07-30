@@ -66,6 +66,8 @@ export * from "./Pane";
 export type * from "./Pane";
 export * from "./Popover";
 export type * from "./Popover";
+export * from "./PopoverPane";
+export type * from "./PopoverPane";
 export * from "./Section";
 export type * from "./Section";
 export * from "./Select";
