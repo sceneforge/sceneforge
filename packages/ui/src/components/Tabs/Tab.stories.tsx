@@ -6,6 +6,7 @@ import {
   positionArgTypes,
   variantArgTypes,
 } from "../../storiesHelpers";
+import { IconEnum } from "../../types";
 import Tab from "./Tab";
 
 const meta: Meta<typeof Tab> = {
@@ -42,4 +43,12 @@ export const Default: Story = {
     id: "tab-1",
     label: "Tab Label",
   },
-} as Story;
+};
+
+export const TabWithIcon: Story = {
+  args: {
+    icon: IconEnum.Globe,
+    id: "tab-2",
+    label: "Icon Tab Label",
+  },
+};

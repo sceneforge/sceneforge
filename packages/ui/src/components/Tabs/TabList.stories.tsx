@@ -35,4 +35,4 @@ export const Default: Story = {
       { icon: IconEnum.Lightbulb, id: "tab-3", label: "Tab 3" },
     ],
   },
-} as Story;
+};
