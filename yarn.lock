@@ -2732,7 +2732,7 @@ __metadata:
     i18next-browser-languagedetector: "npm:^8.0.0"
     jest: "npm:^29.7.0"
     react: "npm:^19.0.0-beta"
-    react-compiler-healthcheck: "npm:0.0.0-experimental-b130d5f-20240625"
+    react-compiler-healthcheck: "npm:0.0.0"
     react-dom: "npm:^19.0.0-beta"
     react-i18next: "npm:^14.1.2"
     terser: "npm:^5.31.0"
@@ -11227,7 +11227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ora@npm:5.4.1, ora@npm:^5.4.1":
+"ora@npm:^5.4.1":
   version: 5.4.1
   resolution: "ora@npm:5.4.1"
   dependencies:
@@ -11811,21 +11811,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-compiler-healthcheck@npm:0.0.0-experimental-b130d5f-20240625":
-  version: 0.0.0-experimental-b130d5f-20240625
-  resolution: "react-compiler-healthcheck@npm:0.0.0-experimental-b130d5f-20240625"
-  dependencies:
-    "@babel/core": "npm:^7.24.4"
-    "@babel/parser": "npm:^7.24.4"
-    chalk: "npm:4"
-    fast-glob: "npm:^3.3.2"
-    ora: "npm:5.4.1"
-    yargs: "npm:^17.7.2"
-    zod: "npm:^3.22.4"
-    zod-validation-error: "npm:^3.0.3"
-  bin:
-    react-compiler-healthcheck: dist/index.js
-  checksum: 10c0/1c8982c5d8254d6b40c9eeb48572c104ad38e6c13e3de6ea77697a21d95a77ca0eabcf967db1151deb26e786bb3345ff959a617be49021e506136b4bfa1c12a2
+"react-compiler-healthcheck@npm:0.0.0":
+  version: 0.0.0
+  resolution: "react-compiler-healthcheck@npm:0.0.0"
+  checksum: 10c0/20c203f7055f9d26a082143324ecfdbe81700b764c99f0cbb66cbae535ff1ded21c5b1090a4561472a493cfa77847f5adf7b1276616dba9937993eb578ccb3e7
   languageName: node
   linkType: hard
 
