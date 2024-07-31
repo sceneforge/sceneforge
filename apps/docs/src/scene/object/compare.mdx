@@ -1,0 +1,41 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Object/compare" />
+
+# `compare` Function
+
+The `compare` function is a utility function that compares two `Scene` nodes
+objects and returns one the values `-1`, `0` or `1` based on the comparison
+result.
+
+## Parameters
+
+- `a` - The first `Scene` node object to compare.
+- `b` - The second `Scene` node object to compare.
+
+The `Scene` node could be any object, it does not have to implement any type
+of the Babylon.js Scene object types.
+
+## Usage
+
+```typescript
+import { Mesh, Camera } from "@babylonjs/core";
+import { compare } from '@sceneforge/scene';
+
+const a = new Camera("a");
+const b = new Mesh("b");
+const c = new Mesh("c");
+
+c.setParent(b, true, true);
+
+const nodeArray = [a, b];
+
+nodeArray.sort(compare);
+// returns: [b, a]
+```
+
+The reason why `b` comes before `a` is because `b` has a child node `c` and
+`a` does not have any child nodes.
+
+The logic behind the comparison is that if nodes with children come before
+nodes without children, and then, it compares the nodes based on the name.

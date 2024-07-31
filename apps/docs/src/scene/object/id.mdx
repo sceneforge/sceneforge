@@ -1,0 +1,38 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Object/id" />
+
+# `id` Function
+
+The `id` function is a utility function that returns the id of the provided
+`Scene` node object.
+
+## Parameters
+
+- `node` - The `Scene` node object.
+
+The `Scene` node could be any object, it does not have to implement any type
+of the Babylon.js Scene object types.
+
+## Usage
+
+```typescript
+import { Mesh, TransformNode } from "@babylonjs/core";
+import { id } from '@sceneforge/scene';
+
+const transformNode = new TransformNode("transformNodeId");
+const mesh = new Mesh("meshId");
+
+console.log("TransformNode id:", id(transformNode));
+// TransformNode id: transformNodeId
+
+console.log("Mesh id:", id(mesh));
+// Mesh id: meshId
+
+console.log("Unknown id:", id({}));
+// Unknown id: Unknown Node Object
+```
+
+The `id` function checks if the given `Scene` node object has an `id` property
+and returns it. If the `id` property is not present, the function returns the string
+`"Unknown Node Object"`.

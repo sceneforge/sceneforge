@@ -1,0 +1,48 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Object/name" />
+
+# `name` Function
+
+The `name` function is a utility function that returns the name of the provided
+`Scene` node object.
+
+## Parameters
+
+- `node` - The `Scene` node object.
+
+The `Scene` node could be any object, it does not have to implement any type
+of the Babylon.js Scene object types.
+
+## Usage
+
+```typescript
+import { Mesh, TransformNode } from "@babylonjs/core";
+import { name } from '@sceneforge/scene';
+
+const transformNode = new TransformNode("transformNodeId");
+const mesh = new Mesh("meshId");
+const unknownNode = null;
+
+transformNode.name = "The Transform Node Name";
+
+console.log("TransformNode name:", name(transformNode));
+// TransformNode name: The Transform Node Name
+
+console.log("Mesh name:", name(mesh));
+// Mesh name: meshId
+
+console.log("Unknown name:", name(unknownNode));
+// Unknown name: Unknown Node Object
+```
+
+The `name` function checks if the given `Scene` node object is an object and
+not null, later it checks if the given node has the `name` property and
+returns its value. Otherwise, it looks for the `id` property and returns its
+value.
+
+If the `name` or `id` properties are not found in the object, it returns the
+constructor name of the object.
+
+If the given node object is not an object or is null, the function returns the
+string `"Unknown Node Object"`.

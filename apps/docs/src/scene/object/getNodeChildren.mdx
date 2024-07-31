@@ -1,0 +1,36 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Object/getNodeChildren" />
+
+# `getNodeChildren` Function
+
+The `getNodeChildren` function is a utility function that returns an array
+of objects that are children of the provided `Scene` node object.
+
+## Parameters
+
+- `node` - The `Scene` node object.
+
+The `Scene` node could be any object, it does not have to implement any type
+of the Babylon.js Scene object types.
+
+## Usage
+
+```typescript
+import { Mesh, TransformNode } from "@babylonjs/core";
+import { getNodeChildren } from '@sceneforge/scene';
+
+const a = new TransformNode("a");
+const b = new Mesh("b");
+const c = new Mesh("c");
+const d = new Mesh("d");
+
+c.setParent(b, true, true);
+d.setParent(a, true, true);
+
+const meshChildren = getNodeChildren(b);
+const transformNodeChildren = getNodeChildren(a);
+```
+
+The `meshChildren` is an array with the object `c` and the
+`transformNodeChildren` is an array with the object `d`.

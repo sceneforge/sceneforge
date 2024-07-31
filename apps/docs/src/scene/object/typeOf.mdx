@@ -1,0 +1,42 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Object/typeOf" />
+
+# `typeOf` Function
+
+The `typeOf` function is an utility that tries to identify the type of the
+given `Scene` object node based on one of the predefined options in the
+[SceneObjectType Enum](?path=/docs/sceneforge-scene-types-sceneobjecttype--documentation).
+
+## Parameters
+
+- `node` - The `Scene` node object.
+
+The `Scene` node could be any object, it does not have to implement any type
+of the Babylon.js Scene object types.
+
+## Usage
+
+```typescript
+import { HemisphericLight, Mesh, TransformNode } from "@babylonjs/core";
+import { typeOf } from '@sceneforge/scene';
+
+const mesh = new Mesh("mesh");
+const light = new HemisphericLight("light");
+const transformNode = new TransformNode("transformNode");
+
+console.log("Type of 'mesh':", typeOf(mesh));
+// Type of 'mesh': Mesh
+
+console.log("Type of 'light':", typeOf(light));
+// Type of 'light': HemisphericLight
+
+console.log("Type of 'transformNode':", typeOf(transformNode));
+// Type of 'transformNode': TransformNode
+
+console.log("Type of unknown object:", typeOf({}));
+// Type of unknown object: Unknown
+```
+
+Check the [SceneObjectType Enum](?path=/docs/sceneforge-scene-types-sceneobjecttype--documentation)
+for the list of available object types that the `typeOf` function can identify.

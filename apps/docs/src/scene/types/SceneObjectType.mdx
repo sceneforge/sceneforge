@@ -1,0 +1,37 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Types/SceneObjectType" />
+
+# Scene Object Type
+
+`SceneObjectType` is an enum with the following options:
+
+<table>
+  <thead>
+    <tr><th> Key              </th><th> Value              </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> AbstractMesh     </td><td> `AbstractMesh`     </td></tr>
+    <tr><td> ArcRotateCamera  </td><td> `ArcRotateCamera`  </td></tr>
+    <tr><td> Camera           </td><td> `Camera`           </td></tr>
+    <tr><td> HemisphericLight </td><td> `HemisphericLight` </td></tr>
+    <tr><td> Light            </td><td> `Light`            </td></tr>
+    <tr><td> Mesh             </td><td> `Mesh`             </td></tr>
+    <tr><td> TransformNode    </td><td> `TransformNode`    </td></tr>
+    <tr><td> Unknown          </td><td> `Unknown`          </td></tr>
+  </tbody>
+</table>
+
+## Import
+
+```ts
+import { SceneObjectType } from "@sceneforge/scene";
+```
+
+## Usage
+
+```ts
+import { SceneObjectType } from "@sceneforge/scene";
+
+const meshType = SceneObjectType.Mesh;
+```

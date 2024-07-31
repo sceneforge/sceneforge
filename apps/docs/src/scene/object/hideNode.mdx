@@ -1,0 +1,39 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Object/hideNode" />
+
+# `hideNode` Function
+
+The `hideNode` function is an utility to change the visibility of the given
+`Scene` node object to be invisible. Depending on the type of the given node,
+the function performs the necessary operations to hide the node in the Scene.
+
+## Parameters
+
+- `node` - The `Scene` node object.
+
+The `Scene` node could be any object, it does not have to implement any type
+of the Babylon.js Scene object types.
+
+## Usage
+
+```typescript
+import { HemisphericLight, Mesh, TransformNode } from "@babylonjs/core";
+import { hideNode } from '@sceneforge/scene';
+
+const transformNode = new TransformNode("transformNode");
+const mesh = new Mesh("mesh");
+const light = new HemisphericLight("light");
+
+console.log("Hidden 'transformNode':", hideNode(transformNode));
+// Hidden 'transformNode': false
+
+console.log("Hidden 'mesh':", hideNode(mesh));
+// Hidden 'mesh': true
+
+console.log("Hidden 'light':", hideNode(light));
+// Hidden 'light': true
+```
+
+The `hideNode` function returns `true` if the node was successfully hidden,
+otherwise it returns `false`.

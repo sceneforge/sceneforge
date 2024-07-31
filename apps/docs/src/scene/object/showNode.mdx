@@ -1,0 +1,42 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Object/showNode" />
+
+# `showNode` Function
+
+The `showNode` function is an utility to change the visibility of the given
+`Scene` node object to be visible. Depending on the type of the given node,
+the function performs the necessary operations to show the node in the Scene.
+
+## Parameters
+
+- `node` - The `Scene` node object.
+
+The `Scene` node could be any object, it does not have to implement any type
+of the Babylon.js Scene object types.
+
+## Usage
+
+```typescript
+import { HemisphericLight, Mesh, TransformNode } from "@babylonjs/core";
+import { hideNode, showNode } from '@sceneforge/scene';
+
+const mesh = new Mesh("mesh");
+const light = new HemisphericLight("light");
+const transformNode = new TransformNode("transformNode");
+
+hideNode(mesh);
+hideNode(light);
+
+console.log("Visible 'mesh':", showNode(mesh));
+// Visible 'mesh': true
+
+console.log("Visible 'light':", showNode(light));
+// Visible 'light': true
+
+console.log("Visible 'transformNode':", showNode(transformNode));
+// Visible 'transformNode': false
+```
+
+The `showNode` function returns `true` if the node was successfully shown,
+otherwise it returns `false`.

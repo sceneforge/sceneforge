@@ -1,0 +1,32 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Types/EngineState" />
+
+# Engine State Type
+
+`EngineState` is an enum with the following options:
+
+<table>
+  <thead>
+    <tr><th> Key     </th><th> Value    </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> Paused  </td><td> `paused`  </td></tr>
+    <tr><td> Running </td><td> `running` </td></tr>
+    <tr><td> Stopped </td><td> `stopped` </td></tr>
+  </tbody>
+</table>
+
+## Import
+
+```ts
+import { EngineState } from "@sceneforge/scene";
+```
+
+## Usage
+
+```ts
+import { EngineState } from "@sceneforge/scene";
+
+const running = EngineState.Running;
+```

@@ -1,0 +1,55 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Engine" />
+
+## Overview
+
+For the 3D rendering on Web, the core setup starts with the `Engine`.
+For Babylon.js, the `Engine` is the main class that handles the rendering loop
+into the HTML Canvas element.
+
+Some configuration options are available to customise the rendering look, and
+in order to improve the performance, the initilisation of the `Engine` should
+also be considered, as it can be a heavy operation.
+
+## Engine Controller
+
+The `EngineController` is a class that wraps the Babylon.js Engine instance.
+It provides a set of methods to control the rendering loop and the basic Scene
+setup with a camera and a light.
+
+### Usage
+
+```typescript
+import { EngineController } from '@sceneforge/scene';
+
+const canvas = document.getElementById('renderCanvas') as HTMLCanvasElement;
+
+const controller = new EngineController(canvas, true);
+
+controller.start();
+```
+
+The `EngineController` constructor takes two arguments:
+- `canvas`: the HTML Canvas element to render the scene
+- `commonNodes` (optional): a flag to enable the common nodes setup (camera
+  and light)
+
+The `start` method is used to start the rendering loop.
+
+### Attributes
+
+- `canvas`: the HTML Canvas element
+- `engine`: the Babylon.js Engine instance
+- `scene`: the Babylon.js Scene instance
+- `camera`: the Babylon.js Camera instance
+- `light`: the Babylon.js Light instance
+- `state`: the current [Engine State](?path=/docs/sceneforge-scene-types-enginestate--documentation)
+  of the rendering loop
+
+### Methods
+
+- `start()`: start the rendering loop
+- `stop()`: stop the rendering loop and dispose the Babylon.js Scene and
+  Engine instances
+- `pause()`: pause the rendering loop

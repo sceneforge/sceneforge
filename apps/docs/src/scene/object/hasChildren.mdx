@@ -1,0 +1,41 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Object/hasChildren" />
+
+# `hasChildren` Function
+
+The `hasChildren` function is a utility function that returns true or false
+when the given `Scene` object node passed as an argument has any child node.
+
+## Parameters
+
+- `node` - The `Scene` node object.
+
+The `Scene` node could be any object, it does not have to implement any type
+of the Babylon.js Scene object types.
+
+## Usage
+
+```typescript
+import { Mesh, TransformNode } from "@babylonjs/core";
+import { hasChildren } from '@sceneforge/scene';
+
+const transformNode = new TransformNode("transformNode");
+const mesh = new Mesh("mesh");
+
+mesh.setParent(transformNode, true, true);
+
+console.log("'transformNode' has children:", hasChildren(transformNode));
+// 'transformNode' has children: true
+
+console.log("'mesh' has children:", hasChildren(mesh));
+// 'mesh' has children: false
+```
+
+The `hasChildren` function returns `true` because the `transformNode` has a
+child node as the `mesh` object.
+
+The logic behind the function is that it checks if the `node` object has any
+children nodes based on the result of the methods `getChildMeshes` or `getChildren`,
+depending on the type of the `node` object. Also, it checks if the result of the
+methods call is an array with at least one element.

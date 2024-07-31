@@ -1,0 +1,43 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Object/isVisible" />
+
+# `isVisible` Function
+
+The `isVisible` function is a utility that returns true or false when
+the given `Scene` object node passed as an argument is visible in Scene.
+
+## Parameters
+
+- `node` - The `Scene` node object.
+
+The `Scene` node could be any object, it does not have to implement any type
+of the Babylon.js Scene object types.
+
+## Usage
+
+```typescript
+import { HemisphericLight, Mesh } from "@babylonjs/core";
+import { hideNode, isVisible } from '@sceneforge/scene';
+
+const light = new HemisphericLight("light");
+const mesh = new Mesh("mesh");
+
+hideNode(light);
+
+console.log("'light' is visible:", isVisible(light));
+// 'light' is visible: false
+
+console.log("'mesh' is visible:", isVisible(mesh));
+// 'mesh' is visible: true
+
+console.log("'unknown' is visible:", isVisible({}));
+// 'unknown' is visible: undefined
+```
+
+The `isVisible` function returns `true` if the node is visible in the Scene,
+based on the type of the node object it uses different methods to check the
+visibility, it also checks if the given node object is enabled. If the given
+node object does not have a visibility property, the function returns
+`undefined` instead of `false`.
+

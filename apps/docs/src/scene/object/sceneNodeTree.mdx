@@ -1,0 +1,56 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+
+<Meta title="@sceneforge|scene/Object/sceneNodeTree" />
+
+# `sceneNodeTree` Function
+
+The `sceneNodeTree` function is a utility that returns a structured object
+containing all nodes of the given Babylon.js Scene.
+
+## Parameters
+
+- `scene` - The Babylon.js Scene object.
+
+## Usage
+
+```typescript
+import { Engine, Mesh, TransformNode, Scene } from "@babylonjs/core";
+import { getNodeChildren } from '@sceneforge/scene';
+
+const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
+
+const engine = new Engine(canvas);
+const scene = new Scene(engine);
+
+const transformNode = new TransformNode("transformNode", scene);
+
+transformNode.name = "__root__";
+
+const mesh = new Mesh("mesh", scene);
+
+mesh.setParent(transformNode, true, true);
+
+const sceneTree = sceneNodeTree(scene);
+
+console.log(sceneTree);
+// [
+//   {
+//     "id": "transformNode",
+//     "label": "__root__",
+//     "nodes": function () { return ... }
+//   }
+// ]
+
+console.log(sceneTree[0].nodes);
+// [
+//   {
+//     "id": "mesh",
+//     "label": "mesh",
+//     "nodes": undefined
+//   }
+// ]
+```
+
+The `sceneNodeTree` returned array contains the object with the properties
+`id` and `label`, and the `nodes` property that is a function that returns
+the children nodes using the same structured object.
