@@ -27,8 +27,8 @@ jobs:
       - name: Install Dependencies
         run: yarn install --immutable
       
-      - name: Lint
-        run: yarn lint
+      - name: Lint all Packages
+        run: yarn lint:all
       
       - name: Build
         run: yarn build
