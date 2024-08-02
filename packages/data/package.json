@@ -15,7 +15,7 @@
     "url": "https://phinpho.github.io"
   },
   "dependencies": {
-    "dexie": "^4.0.7",
+    "dexie": "^4.0.8",
     "dexie-react-hooks": "^1.1.7"
   },
   "peerDependencies": {
@@ -26,10 +26,10 @@
     "@sceneforge/eslint": "workspace:*",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react@rc",
-    "eslint": "^9.6.0",
+    "eslint": "^9.8.0",
     "react": "^19.0.0-beta",
     "react-dom": "^19.0.0-beta",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
