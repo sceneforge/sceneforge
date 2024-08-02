@@ -25,15 +25,18 @@ jobs:
       - name: Install Dependencies
         run: yarn install --immutable
       
-      - name: Lint
-        run: yarn lint
+      - name: Lint all Packages
+        run: yarn lint:all
       
       - name: Build
         run: yarn build
       
       - name: Compress App Artifact
-        run: tar -cvzf sceneforge.tar.gz apps/sceneforge/dist
+        run: tar -C apps/sceneforge/dist -cvzf sceneforge.tar.gz .
       
+      - name: Compress Docs Artifact
+        run: tar -C apps/docs/dist -cvzf docs.tar.gz .
+
       - name: 'Create Release'
         uses: softprops/action-gh-release@v2
         with:
@@ -41,3 +44,4 @@ jobs:
           generate_release_notes: true
           files: |
             sceneforge.tar.gz
+            docs.tar.gz
