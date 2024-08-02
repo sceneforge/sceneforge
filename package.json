@@ -16,6 +16,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:all": "yarn workspaces foreach -Api run lint",
+    "lint:all:fix": "yarn workspaces foreach -Api run lint --fix",
     "dev": "yarn workspace @sceneforge/app dev",
     "build": "yarn build:packages && yarn build:apps && yarn build:finish",
     "build:apps": "yarn workspace @sceneforge/docs build && yarn workspace @sceneforge/app build",
@@ -37,30 +38,30 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/format": "^19.3.0",
     "@sceneforge/eslint": "workspace:*",
-    "@types/node": "^20.14.9",
+    "@types/node": "^22.0.2",
     "concurrently": "^8.2.2",
     "conventional-changelog-angular": "^8.0.0",
     "conventional-changelog-cli": "^5.0.0",
-    "eslint": "^9.6.1",
+    "eslint": "^9.8.0",
     "husky": "^9.0.11",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "resolutions": {
     "@types/react-dom": "npm:types-react-dom@rc",
     "@types/react": "npm:types-react@rc",
-    "eslint": "^9.6.0",
+    "eslint": "^9.8.0",
     "react-dom": "^19.0.0-beta",
     "react": "^19.0.0-beta",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "engines": {
-    "node": ">=22.4.0 < 23",
-    "yarn": ">=4.3.0 < 5"
+    "node": ">=22.5.1 < 23",
+    "yarn": ">=4.3.1 < 5"
   },
   "packageManager": "yarn@4.3.1"
 }

@@ -5,13 +5,15 @@ Scene Forge project, which contains the main packages for the
 project ecosystem.
 
 - Applications:
+  - [Development Documentation](apps/docs/README.md)
   - [Scene Forge](apps/sceneforge/README.md)
 - Packages:
   - [@sceneforge/core](packages/core/README.md)
   - [@sceneforge/data](packages/data/README.md)
+  - [@sceneforge/eslint](packages/eslint/README.md)
+  - [@sceneforge/platform](packages/platform/README.md)
   - [@sceneforge/scene](packages/scene/README.md)
   - [@sceneforge/ui](packages/ui/README.md)
-  - [@sceneforge/eslint](packages/eslint/README.md)
 
 ## Development
 
