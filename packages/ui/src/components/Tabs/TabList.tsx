@@ -29,9 +29,9 @@ const styles = stylex.create({
   container: {
     flexShrink: 1,
     height: null,
-    scrollBehavior: "smooth",
     scrollbarColor: `${currentColor.alpha20} ${currentColor.alpha05}`,
     scrollbarWidth: "thin",
+    scrollBehavior: "smooth",
     width: null,
   },
   containerCenter: {

@@ -1,5 +1,5 @@
 import { gridStyleHelper } from "../../grid.stylex";
-import { type FromMediaValue, breakpointValue, fromMediaValueArgToValue2Arg } from "../../helpers";
+import { breakpointValue, type FromMediaValue, fromMediaValueArgToValue2Arg } from "../../helpers";
 import { View, type ViewProps } from "../View";
 
 export type GridProps = {

@@ -4,8 +4,8 @@ import {
   Form,
   Section,
   type TabComponentProps,
-  type Variant,
   useCurrentId,
+  type Variant,
 } from "@sceneforge/ui";
 
 export type FormViewTabProps = TabComponentProps<{

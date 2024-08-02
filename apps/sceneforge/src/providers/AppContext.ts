@@ -1,6 +1,6 @@
 import type { TabsHandler } from "@sceneforge/ui";
 
-import { type Dispatch, type RefObject, type SetStateAction, createContext } from "react";
+import { createContext, type Dispatch, type RefObject, type SetStateAction } from "react";
 
 export type AppContextType = {
   author?: string;
@@ -13,7 +13,7 @@ export type AppContextType = {
   overlayVisible: boolean;
   repository?: string;
   setOverlayVisible: Dispatch<SetStateAction<boolean>>;
-  tabsHandlerRef?: RefObject<TabsHandler | null>;
+  tabsHandlerRef?: RefObject<null | TabsHandler>;
   version?: string;
 };
 

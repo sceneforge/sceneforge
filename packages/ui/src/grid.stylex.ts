@@ -2,7 +2,7 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 
 import * as stylex from "@stylexjs/stylex";
 
-import { type FromMediaValue2Arg, type FromMediaValueArg, fromMedia } from "./helpers";
+import { fromMedia, type FromMediaValue2Arg, type FromMediaValueArg } from "./helpers";
 
 export const gridStyles = stylex.create({
   autoColumns: (size: number) => ({

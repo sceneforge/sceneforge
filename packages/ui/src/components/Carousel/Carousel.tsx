@@ -4,8 +4,8 @@ import { useCurrentId } from "../../hooks";
 import { Orientation, Variant } from "../../types";
 import { CarouselItem, type CarouselItemProps } from "../CarouselItem";
 import { Section, type SectionProps } from "../Section";
-import { Unlisted, type UnlistedProps } from "../Unlisted";
 import { type SpacerStyleProps } from "../tokens.stylex";
+import { Unlisted, type UnlistedProps } from "../Unlisted";
 
 export type CarouselProps = {
   gap?: number;
@@ -30,9 +30,6 @@ const styles = stylex.create({
       "default": value > 0 ? `calc(50% - calc(${value}rem * 1.5))` : "50%",
     },
   }),
-  scrollPaddingInline: (value: number) => ({
-    scrollPaddingInline: value > 0 ? `${value}rem` : null,
-  }),
   scroller: {
     gridAutoColumns: "50%",
     height: null,
@@ -42,6 +39,9 @@ const styles = stylex.create({
     touchAction: "pan-x",
     whiteSpace: "nowrap",
   },
+  scrollPaddingInline: (value: number) => ({
+    scrollPaddingInline: value > 0 ? `${value}rem` : null,
+  }),
 });
 
 const Carousel = ({

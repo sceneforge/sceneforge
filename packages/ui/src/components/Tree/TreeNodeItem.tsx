@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { MouseEventHandler, lazy } from "react";
+import { lazy, MouseEventHandler } from "react";
 
 import { roundedStyles } from "../../borders.stylex";
 import { backgroundColor } from "../../colors.stylex";

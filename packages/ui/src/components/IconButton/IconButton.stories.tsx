@@ -5,6 +5,9 @@ import { IconEnum } from "../../types";
 import IconButton from "./IconButton";
 
 const meta: Meta<typeof IconButton> = {
+  args: {
+    size: 4,
+  },
   argTypes: {
     dense: {
       control: "boolean",
@@ -44,9 +47,6 @@ const meta: Meta<typeof IconButton> = {
     ...iconArgTypes("icon"),
     ...shapeArgTypes("shape"),
     ...variantArgumentTypes("variant"),
-  },
-  args: {
-    size: 4,
   },
   component: IconButton,
   decorators: [

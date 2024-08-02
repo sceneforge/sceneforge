@@ -4,11 +4,10 @@ import { type MarkdownProps } from "@simplecomponent/markdown";
 import { wrapper } from "./wrapper";
 
 export const markdownComponents: MarkdownProps["components"] = {
-  FigureButtonDialog: wrapper(FigureButtonDialog),
-  Grid: wrapper(Grid),
-  Section: wrapper(Section),
   a: wrapper(Link, { rel: "nofollow", target: "_blank" }),
   blockquote: wrapper(Blockquote),
+  FigureButtonDialog: wrapper(FigureButtonDialog),
+  Grid: wrapper(Grid),
   h1: wrapper(Heading, { level: 1 }),
   h2: wrapper(Heading, { level: 2 }),
   h3: wrapper(Heading, { level: 3 }),
@@ -16,4 +15,5 @@ export const markdownComponents: MarkdownProps["components"] = {
   h5: wrapper(Heading, { level: 5 }),
   h6: wrapper(Heading, { level: 6 }),
   img: wrapper(Image),
+  Section: wrapper(Section),
 };

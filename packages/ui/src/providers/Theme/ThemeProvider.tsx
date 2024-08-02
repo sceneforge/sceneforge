@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { type PropsWithChildren, createContext } from "react";
+import { createContext, type PropsWithChildren } from "react";
 
 import type { ThemeType } from "../../schemas";
 

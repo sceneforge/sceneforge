@@ -1,4 +1,4 @@
-import type { TFunction, i18n } from "i18next";
+import type { i18n, TFunction } from "i18next";
 
 import { IconEnum } from "@sceneforge/ui";
 import { useCallback, useMemo } from "react";
@@ -121,9 +121,8 @@ export const useShortcuts = () => {
         return openHome();
       case ShortcutName.Settings:
         return openSettings();
-      default:
-        throw new Error(`Unknown shortcut: ${name}`);
     }
+    throw new Error(`Unknown shortcut: ${name}`);
   }, [
     openAbout,
     openHome,

@@ -12,7 +12,7 @@ export const webManifest = ({
   isDev?: boolean;
   isProd?: boolean;
   name: string;
-}): Partial<ManifestOptions> | false => {
+}): false | Partial<ManifestOptions> => {
   {
     return {
       background_color: "#86159d",

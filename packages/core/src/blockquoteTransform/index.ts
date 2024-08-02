@@ -1,10 +1,10 @@
 import type { Element } from "hast";
 
 import { customBlockquote } from "./customBlockquote";
-import { type GalleryParameters, gallery } from "./gallery";
+import { gallery, type GalleryParameters } from "./gallery";
 
 export type BlockquoteTransformConfig = {
-  gallery?: GalleryParameters | boolean;
+  gallery?: boolean | GalleryParameters;
 };
 
 export const blockquoteTransform = (

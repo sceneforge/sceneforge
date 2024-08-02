@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { type MouseEventHandler, lazy } from "react";
+import { lazy, type MouseEventHandler } from "react";
 
 import type { ActionListProps } from "../ActionList";
 

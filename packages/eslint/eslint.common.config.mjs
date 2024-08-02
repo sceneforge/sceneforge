@@ -1,6 +1,6 @@
 import eslint from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
-import perfectionistNatural from "eslint-plugin-perfectionist/configs/recommended-natural";
+import perfectionist from "eslint-plugin-perfectionist";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
 
@@ -126,5 +126,11 @@ export default (project = true) => tseslint.config(
       "unicorn/switch-case-braces": ["error", "avoid"],
     },
   },
-  perfectionistNatural
+  perfectionist.configs['recommended-natural'],
+  {
+    rules: {
+      // Disable the `perfectionist/sort-switch-case` rule because it is not working correctly.
+      "perfectionist/sort-switch-case": "off",
+    },
+  }
 );

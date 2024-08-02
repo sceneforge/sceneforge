@@ -1,4 +1,4 @@
-import { type Ref, lazy } from "react";
+import { lazy, type Ref } from "react";
 
 import type { TabContent } from "./Tabs";
 

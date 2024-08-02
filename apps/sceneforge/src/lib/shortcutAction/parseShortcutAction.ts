@@ -1,6 +1,6 @@
 import {
-  type ShortcutActionType,
   isShortcutActionType,
+  type ShortcutActionType,
 } from "./isShortcutActionType";
 
 export const parseShortcutAction = (

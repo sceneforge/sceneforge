@@ -28,12 +28,6 @@ export type ActionProps = {
 
 const Action = ({ kind, listOrientation, ...props }: ActionProps) => {
   switch (kind) {
-    case "dropdown":
-      return (<Dropdown {...props as DropdownProps} />);
-    case "icon":
-      return (<IconButton {...props as IconButtonProps} />);
-    case "toggle":
-      return (<Toggle {...props as ToggleProps} />);
     case "divider":
       return (
         <Divider
@@ -45,6 +39,12 @@ const Action = ({ kind, listOrientation, ...props }: ActionProps) => {
           {...props as Omit<DividerProps, "orientation">}
         />
       );
+    case "dropdown":
+      return (<Dropdown {...props as DropdownProps} />);
+    case "icon":
+      return (<IconButton {...props as IconButtonProps} />);
+    case "toggle":
+      return (<Toggle {...props as ToggleProps} />);
     default:
       return (<Button {...props as ButtonProps} />);
   };

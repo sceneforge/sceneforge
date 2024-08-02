@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type RefObject, lazy, useRef } from "react";
+import { lazy, type PropsWithChildren, type RefObject, useRef } from "react";
 
 import { Orientation, Position, Variant } from "../../types";
 import { type ResizableHandler, useDrawer } from "./useDrawer";

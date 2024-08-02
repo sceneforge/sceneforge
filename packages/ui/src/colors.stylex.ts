@@ -8,74 +8,74 @@ export const MEDIA_LIGHT = "@media (prefers-color-scheme: light)";
 
 export const colorVariables = stylex.defineVars({
   "--theme-color-background-accent": {
+    default: "#00a98f",
     [MEDIA_DARK]: "#006e50",
     [MEDIA_LIGHT]: "#00a98f",
-    default: "#00a98f",
   },
   "--theme-color-background-danger": {
+    default: "#aa2244",
     [MEDIA_DARK]: "#cc2244",
     [MEDIA_LIGHT]: "#aa2244",
-    default: "#aa2244",
   },
   "--theme-color-background-default": {
+    default: "#ffffff",
     [MEDIA_DARK]: "#000000",
     [MEDIA_LIGHT]: "#ffffff",
-    default: "#ffffff",
   },
   "--theme-color-background-info": {
+    default: "#0066cc",
     [MEDIA_DARK]: "#0044cc",
     [MEDIA_LIGHT]: "#0066cc",
-    default: "#0066cc",
   },
   "--theme-color-background-primary": {
+    default: "#86159d",
     [MEDIA_DARK]: "#75048c",
     [MEDIA_LIGHT]: "#86159d",
-    default: "#86159d",
   },
   "--theme-color-background-success": {
+    default: "#009f00",
     [MEDIA_DARK]: "#007f00",
     [MEDIA_LIGHT]: "#009f00",
-    default: "#009f00",
   },
   "--theme-color-background-warning": {
+    default: "#ff9f00",
     [MEDIA_DARK]: "#ff8c00",
     [MEDIA_LIGHT]: "#ff9f00",
-    default: "#ff9f00",
   },
   "--theme-color-foreground-accent": {
+    default: "#ffffff",
     [MEDIA_DARK]: "#ffffff",
     [MEDIA_LIGHT]: "#ffffff",
-    default: "#ffffff",
   },
   "--theme-color-foreground-danger": {
+    default: "#ffffff",
     [MEDIA_DARK]: "#ffffff",
     [MEDIA_LIGHT]: "#ffffff",
-    default: "#ffffff",
   },
   "--theme-color-foreground-default": {
+    default: "#000000",
     [MEDIA_DARK]: "#ffffff",
     [MEDIA_LIGHT]: "#000000",
-    default: "#000000",
   },
   "--theme-color-foreground-info": {
+    default: "#ffffff",
     [MEDIA_DARK]: "#ffffff",
     [MEDIA_LIGHT]: "#ffffff",
-    default: "#ffffff",
   },
   "--theme-color-foreground-primary": {
+    default: "#ffffff",
     [MEDIA_DARK]: "#ffffff",
     [MEDIA_LIGHT]: "#ffffff",
-    default: "#ffffff",
   },
   "--theme-color-foreground-success": {
+    default: "#ffffff",
     [MEDIA_DARK]: "#ffffff",
     [MEDIA_LIGHT]: "#ffffff",
-    default: "#ffffff",
   },
   "--theme-color-foreground-warning": {
+    default: "#000000",
     [MEDIA_DARK]: "#000000",
     [MEDIA_LIGHT]: "#000000",
-    default: "#000000",
   },
 } as const);
 
@@ -174,74 +174,74 @@ export const foregroundBackgroundColor = stylex.defineVars({
 export const themeColors = stylex.create({
   setColorAccent: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-accent": {
+      default: color.background?.light,
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
-      default: color.background?.light,
     },
     "--theme-color-foreground-accent": {
+      default: color.foreground?.light,
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
-      default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
   setColorDanger: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-danger": {
+      default: color.background?.light,
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
-      default: color.background?.light,
     },
     "--theme-color-foreground-danger": {
+      default: color.foreground?.light,
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
-      default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
   setColorInfo: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-info": {
+      default: color.background?.light,
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
-      default: color.background?.light,
     },
     "--theme-color-foreground-info": {
+      default: color.foreground?.light,
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
-      default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
   setColorPrimary: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-primary": {
+      default: color.background?.light,
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
-      default: color.background?.light,
     },
     "--theme-color-foreground-primary": {
+      default: color.foreground?.light,
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
-      default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
   setColorSuccess: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-success": {
+      default: color.background?.light,
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
-      default: color.background?.light,
     },
     "--theme-color-foreground-success": {
+      default: color.foreground?.light,
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
-      default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
   setColorWarning: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-warning": {
+      default: color.background?.light,
       [MEDIA_DARK]: color.background?.dark,
       [MEDIA_LIGHT]: color.background?.light,
-      default: color.background?.light,
     },
     "--theme-color-foreground-warning": {
+      default: color.foreground?.light,
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
-      default: color.foreground?.light,
     },
   } as Record<string, Record<string, string>>),
 });

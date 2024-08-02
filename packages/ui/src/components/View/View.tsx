@@ -7,7 +7,7 @@ import { roundedStyles } from "../../borders.stylex";
 import { colorStyles, currentColor } from "../../colors.stylex";
 import { scrollShadowsStyles } from "../../scrollShadows.stylex";
 import { Shape, Variant } from "../../types";
-import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
+import { marginStyle, paddingStyle, type SpacerStyleProps } from "../tokens.stylex";
 
 export type ViewProps = {
   hidden?: boolean;

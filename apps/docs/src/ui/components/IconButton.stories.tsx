@@ -5,6 +5,9 @@ import { IconButton, IconEnum } from "@sceneforge/ui";
 import { iconArgTypes, shapeArgTypes, variantArgTypes } from "../../storiesHelpers";
 
 const meta: Meta<typeof IconButton> = {
+  args: {
+    size: 4,
+  },
   argTypes: {
     dense: {
       control: "boolean",
@@ -44,9 +47,6 @@ const meta: Meta<typeof IconButton> = {
     ...shapeArgTypes("shape"),
     ...variantArgTypes("variant"),
     ...iconArgTypes("icon"),
-  },
-  args: {
-    size: 4,
   },
   component: IconButton,
   decorators: [

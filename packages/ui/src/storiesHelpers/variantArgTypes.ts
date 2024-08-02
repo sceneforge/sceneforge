@@ -1,4 +1,4 @@
-import type { ArgTypes, Args } from "@storybook/react";
+import type { Args, ArgTypes } from "@storybook/react";
 
 import { Variant } from "../types";
 

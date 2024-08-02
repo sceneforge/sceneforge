@@ -45,6 +45,10 @@ const styles = stylex.create({
   info: {
     gridColumn: "1 / -1",
   },
+  sliders: {
+    overflowX: null,
+    overflowY: null,
+  },
   sliderValue: {
     fontSize: "0.75rem",
     overflow: "hidden",
@@ -52,10 +56,6 @@ const styles = stylex.create({
     textOverflow: "ellipsis",
     userSelect: "none",
     width: "3.5rem",
-  },
-  sliders: {
-    overflowX: null,
-    overflowY: null,
   },
 });
 

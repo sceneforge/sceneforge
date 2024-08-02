@@ -7,7 +7,7 @@ export const breakpointValue = <V = unknown>(
   lg?: V,
   xl?: V,
   xxl?: V
-): FromMediaValue<V> | V | undefined => {
+): FromMediaValue<V> | undefined | V => {
   if (value !== undefined) {
     return value;
   }

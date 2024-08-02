@@ -6,8 +6,8 @@ import { useCurrentId } from "../../hooks";
 import { Orientation, Variant } from "../../types";
 import { ActionList, ActionListProps } from "../ActionList";
 import { Heading } from "../Heading";
-import { View } from "../View";
 import { titleBar } from "../tokens.stylex";
+import { View } from "../View";
 
 export type TopbarProps = {
   actionsEnd?: ActionListProps["actions"];

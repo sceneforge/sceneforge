@@ -3,9 +3,9 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren } from "react";
 
+import { titleBar } from "../tokens.stylex";
 import { Topbar, type TopbarProps } from "../Topbar";
 import { View } from "../View";
-import { titleBar } from "../tokens.stylex";
 
 const styles = stylex.create({
   colorScheme: (colorScheme: "dark" | "light dark" | "light") => ({

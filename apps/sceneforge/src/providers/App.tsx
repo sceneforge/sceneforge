@@ -29,7 +29,7 @@ const AppProvider = ({
   children,
   theme,
 }: AppProviderProps) => {
-  const tabsHandlerRef = useRef<TabsHandler | null>(null);
+  const tabsHandlerRef = useRef<null | TabsHandler>(null);
 
   const name = import.meta.env.VITE_APP_NAME ?? "";
   const description = import.meta.env.VITE_APP_DESCRIPTION ?? "";

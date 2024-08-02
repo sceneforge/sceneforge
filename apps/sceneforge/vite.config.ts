@@ -1,5 +1,5 @@
 import React from "@vitejs/plugin-react";
-import { type UserConfig, defineConfig } from "vite";
+import { defineConfig, type UserConfig } from "vite";
 import VitePluginBrowserSync from "vite-plugin-browser-sync";
 import i18nextLoader from "vite-plugin-i18next-loader";
 import VitePluginMetaEnv from "vite-plugin-meta-env";

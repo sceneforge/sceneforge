@@ -7,7 +7,7 @@ import { currentColor } from "../../colors.stylex";
 import { useCurrentId } from "../../hooks";
 import { scrollShadowsStyles } from "../../scrollShadows.stylex";
 import { Orientation } from "../../types";
-import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
+import { marginStyle, paddingStyle, type SpacerStyleProps } from "../tokens.stylex";
 
 export type UnlistedProps = {
   gap?: number;

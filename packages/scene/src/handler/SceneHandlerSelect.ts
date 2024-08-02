@@ -97,6 +97,11 @@ export class SceneHandlerSelect extends SceneHandlerEventsHandler {
     this._hoverLayer = undefined;
   }
 
+  private _disposekeyboardControl(): void {
+    this._keyboardControl?.dispose();
+    this._keyboardControl = undefined;
+  }
+
   private _disposeParentSelectedLayer(): void {
     this._parentSelectedLayer?.dispose();
     this._parentSelectedLayer = undefined;
@@ -105,11 +110,6 @@ export class SceneHandlerSelect extends SceneHandlerEventsHandler {
   private _disposeSelectedLayer(): void {
     this._selectedLayer?.dispose();
     this._selectedLayer = undefined;
-  }
-
-  private _disposekeyboardControl(): void {
-    this._keyboardControl?.dispose();
-    this._keyboardControl = undefined;
   }
 
   private static _getActionEventAdditionalData(

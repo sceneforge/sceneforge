@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { type PropsWithChildren, lazy } from "react";
+import { lazy, type PropsWithChildren } from "react";
 
 import type { PaneBodyProps } from "./PaneBody";
 import type { PaneHeaderProps } from "./PaneHeader";

@@ -1,7 +1,7 @@
 import type { StyleXStyles } from "@stylexjs/stylex";
 
 import * as stylex from "@stylexjs/stylex";
-import { type AllHTMLAttributes, type Ref, lazy } from "react";
+import { type AllHTMLAttributes, lazy, type Ref } from "react";
 
 import type { OptionProps } from "./Option";
 

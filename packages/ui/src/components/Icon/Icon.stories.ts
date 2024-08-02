@@ -5,6 +5,9 @@ import { IconEnum } from "../../types";
 import Icon from "./Icon";
 
 const meta: Meta<typeof Icon> = {
+  args: {
+    size: 4,
+  },
   argTypes: {
     size: {
       control: {
@@ -27,9 +30,6 @@ const meta: Meta<typeof Icon> = {
         disable: true,
       },
     },
-  },
-  args: {
-    size: 4,
   },
   component: Icon,
   title: "Component/Icon",

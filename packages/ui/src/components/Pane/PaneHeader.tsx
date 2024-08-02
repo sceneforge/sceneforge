@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { type MouseEventHandler, type Ref, lazy } from "react";
+import { lazy, type MouseEventHandler, type Ref } from "react";
 
 import { backgroundColor } from "../../colors.stylex";
 import { useCurrentId } from "../../hooks";

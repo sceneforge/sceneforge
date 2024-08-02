@@ -4,8 +4,8 @@ import type { Light } from "@babylonjs/core/Lights/light";
 import { Engine } from "@babylonjs/core/Engines/engine";
 import { Scene } from "@babylonjs/core/scene";
 
-import { EngineState } from "./EngineState";
 import { buildCommonNodes } from "./buildCommonNodes";
+import { EngineState } from "./EngineState";
 
 export class EngineController {
   private _camera?: Camera;

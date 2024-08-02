@@ -1,10 +1,10 @@
 import * as stylex from "@stylexjs/stylex";
-import { type HTMLAttributes, type Ref, createElement } from "react";
+import { createElement, type HTMLAttributes, type Ref } from "react";
 
 import type { Variant } from "../../types";
 
 import { textColorStyles, textShadowStyles } from "../../colors.stylex";
-import { type SpacerStyleProps, marginStyle, paddingStyle } from "../tokens.stylex";
+import { marginStyle, paddingStyle, type SpacerStyleProps } from "../tokens.stylex";
 
 export type HeadingProps = {
   hidden?: boolean;

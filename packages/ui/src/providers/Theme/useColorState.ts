@@ -7,7 +7,7 @@ import { getColorObject } from "../../helpers";
 export type SetColorStateType = (
   value?: (
     (previous: ThemeColorPlacementType) => ThemeColorPlacementType
-  ) | (ThemeColorPlacementType | ThemeColorType | string)
+  ) | (string | ThemeColorPlacementType | ThemeColorType)
 ) => void;
 
 export type ColorStateType = [
@@ -16,7 +16,7 @@ export type ColorStateType = [
 ];
 
 export const useColorState = (
-  value?: ThemeColorPlacementType | ThemeColorType | string
+  value?: string | ThemeColorPlacementType | ThemeColorType
 ): ColorStateType => {
   const [
     colorBackgroundDark,
@@ -52,7 +52,7 @@ export const useColorState = (
   ]);
 
   const updateColor = useCallback((
-    value?: ThemeColorPlacementType | ThemeColorType | string
+    value?: string | ThemeColorPlacementType | ThemeColorType
   ) => {
     const colorObject = getColorObject(value);
     setColorBackgroundDark(colorObject?.background?.dark);

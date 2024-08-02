@@ -33,20 +33,20 @@ export const typography = stylex.defineVars({
 
 export const titleBar = stylex.defineVars({
   appTitleBarHeight: {
-    [MEDIA_CONTROL_OVERLAY]: "env(title-bar-height)",
     default: "2.5rem",
+    [MEDIA_CONTROL_OVERLAY]: "env(title-bar-height)",
   },
   appTitleBarInsetBlockStart: {
-    [MEDIA_CONTROL_OVERLAY]: "env(titlebar-area-y)",
     default: 0,
+    [MEDIA_CONTROL_OVERLAY]: "env(titlebar-area-y)",
   },
   appTitleBarInsetInlineStart: {
-    [MEDIA_CONTROL_OVERLAY]: "env(titlebar-area-x)",
     default: 0,
+    [MEDIA_CONTROL_OVERLAY]: "env(titlebar-area-x)",
   },
   appTitleBarWidth: {
-    [MEDIA_CONTROL_OVERLAY]: "env(title-bar-width)",
     default: "100%",
+    [MEDIA_CONTROL_OVERLAY]: "env(title-bar-width)",
   },
 });
 

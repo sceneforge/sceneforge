@@ -1,6 +1,6 @@
 import { ThemeColorPlacementType, ThemeColorType } from "../schemas";
 
-const colorScheme = (value?: ThemeColorType | string) => {
+const colorScheme = (value?: string | ThemeColorType) => {
   let result: ThemeColorType = {
     dark: undefined,
     light: undefined,
@@ -32,14 +32,14 @@ const colorScheme = (value?: ThemeColorType | string) => {
 };
 
 const colorPlacement = (
-  value?: ThemeColorType | string
+  value?: string | ThemeColorType
 ): ThemeColorPlacementType => ({
   background: colorScheme(value),
   foreground: colorScheme(value),
 });
 
 export const getColorObject = (
-  value?: ThemeColorPlacementType | ThemeColorType | string
+  value?: string | ThemeColorPlacementType | ThemeColorType
 ): ThemeColorPlacementType => {
   if (typeof value === "string") {
     return colorPlacement(value);

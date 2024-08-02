@@ -16,24 +16,24 @@
     "./serviceworker": "./eslint.serviceworker.config.mjs"
   },
   "peerDependencies": {
-    "eslint": "^9.6.0"
+    "eslint": "^9.8.0"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.1.0",
-    "@eslint/js": "^9.6.0",
-    "@stylistic/eslint-plugin": "^2.3.0",
-    "eslint": "^9.6.0",
-    "eslint-plugin-perfectionist": "^2.11.0",
-    "eslint-plugin-react": "^7.34.3",
-    "eslint-plugin-react-compiler": "0.0.0-experimental-0998c1e-20240625",
+    "@eslint/compat": "^1.1.1",
+    "@eslint/js": "^9.8.0",
+    "@stylistic/eslint-plugin": "^2.6.1",
+    "eslint": "^9.8.0",
+    "eslint-plugin-perfectionist": "^3.0.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-9ed098e-20240725",
     "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-unicorn": "^54.0.0",
-    "globals": "^15.8.0",
-    "typescript": "^5.5.3",
-    "typescript-eslint": "^7.15.0"
+    "eslint-plugin-unicorn": "^55.0.0",
+    "globals": "^15.9.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.0"
   },
   "engines": {
-    "node": ">=22.4.0 < 23",
+    "node": ">=22.5.1 < 23",
     "yarn": ">=4.3.1 < 5"
   }
 }
