@@ -1,0 +1,62 @@
+name: Staging Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  basic:
+    name: 'Lint, Test and Build'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          cache: 'yarn'
+      
+      - name: Install Dependencies
+        run: yarn install --immutable
+      
+      - name: Lint
+        run: yarn lint
+      
+      - name: Build
+        run: yarn build
+      
+      - name: Upload App Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          retention-days: 1
+          name: sceneforge-staging-app
+          path: ./apps/sceneforge/dist
+
+  staging:
+    name: 'Staging Deployment'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: basic
+    steps:
+      - name: Download App Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: sceneforge-staging-app
+          path: ${{ github.workspace }}/dist
+        
+      - name: Configure Environment
+        uses: actions/configure-pages@v5
+
+      - name: Upload App Artifact to Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ github.workspace }}/dist
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
