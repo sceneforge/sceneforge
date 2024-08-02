@@ -1,0 +1,36 @@
+{
+  "name": "@sceneforge/platform",
+  "version": "0.0.1",
+  "description": "Web Application Platform utilities",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sceneforge/sceneforge",
+    "directory": "packages/platform"
+  },
+  "author": {
+    "name": "Rodolfo Pereira",
+    "email": "phinpho@gmail.com",
+    "url": "https://phinpho.github.io"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "prepack": "yarn build"
+  },
+  "devDependencies": {
+    "@sceneforge/eslint": "workspace:*",
+    "eslint": "^9.8.0",
+    "hast": "^1.0.0",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=22.5.1 < 23",
+    "yarn": ">=4.3.1 < 5"
+  }
+}

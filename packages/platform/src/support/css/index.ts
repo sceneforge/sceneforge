@@ -1,0 +1,1 @@
+export { supportCSSAnchorName } from "./anchorName";
