@@ -1,9 +1,12 @@
 name: Production Workflow
 
 on:
-  release:
-    types:
-      - published
+  push:
+    tags:
+      - v*
+
+permissions:
+  contents: write
 
 jobs:
   basic:
@@ -28,9 +31,10 @@ jobs:
       - name: Build
         run: yarn build
       
-      - name: Upload App Artifact
-        uses: actions/upload-artifact@v4
+      - name: 'Create Release'
+        uses: softprops/action-gh-release@v2
         with:
-          retention-days: 1
-          name: sceneforge-production-app
-          path: ./apps/sceneforge/dist
+          fail_on_unmatched_files: true
+          generate_release_notes: true
+          files: |
+            apps/sceneforge/dist/*
