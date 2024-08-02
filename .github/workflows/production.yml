@@ -31,10 +31,13 @@ jobs:
       - name: Build
         run: yarn build
       
+      - name: Compress App Artifact
+        run: tar -cvzf sceneforge.tar.gz apps/sceneforge/dist
+      
       - name: 'Create Release'
         uses: softprops/action-gh-release@v2
         with:
           fail_on_unmatched_files: true
           generate_release_notes: true
           files: |
-            apps/sceneforge/dist/*
+            sceneforge.tar.gz
