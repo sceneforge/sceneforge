@@ -7,6 +7,7 @@ import { fromMedia, type FromMediaValue2Arg, type FromMediaValueArg } from "./he
 export const gridStyles = stylex.create({
   autoColumns: (size: number) => ({
     gridAutoColumns: `${size}rem`,
+    gridAutoFlow: "column",
   }),
   autoColumnsFromLg: (
     lg: number,
@@ -18,6 +19,7 @@ export const gridStyles = stylex.create({
       "@media only screen and (min-width: 1400px)": xxl ? `${xxl}rem` : null,
       "default": `${lg}rem`,
     },
+    gridAutoFlow: "column",
   }),
   autoColumnsFromMd: (
     md: number,
@@ -31,6 +33,7 @@ export const gridStyles = stylex.create({
       "@media only screen and (min-width: 1400px)": xxl ? `${xxl}rem` : null,
       "default": `${md}rem`,
     },
+    gridAutoFlow: "column",
   }),
   autoColumnsFromSm: (
     sm: number,
@@ -46,6 +49,7 @@ export const gridStyles = stylex.create({
       "@media only screen and (min-width: 1400px)": xxl ? `${xxl}rem` : null,
       "default": `${sm}rem`,
     },
+    gridAutoFlow: "column",
   }),
   autoColumnsFromXl: (
     xl: number,
@@ -55,8 +59,10 @@ export const gridStyles = stylex.create({
       "@media only screen and (min-width: 1400px)": xxl ? `${xxl}rem` : null,
       "default": `${xl}rem`,
     },
+    gridAutoFlow: "column",
   }),
   autoRows: (size: number) => ({
+    gridAutoFlow: "row",
     gridAutoRows: `${size}rem`,
   }),
   autoRowsFromLg: (
@@ -64,6 +70,7 @@ export const gridStyles = stylex.create({
     xl?: number,
     xxl?: number
   ) => ({
+    gridAutoFlow: "row",
     gridAutoRows: {
       "@media only screen and (min-width: 1200px)": xl ? `${xl}rem` : null,
       "@media only screen and (min-width: 1400px)": xxl ? `${xxl}rem` : null,
@@ -76,6 +83,7 @@ export const gridStyles = stylex.create({
     xl?: number,
     xxl?: number
   ) => ({
+    gridAutoFlow: "row",
     gridAutoRows: {
       "@media only screen and (min-width: 992px)": lg ? `${lg}rem` : null,
       "@media only screen and (min-width: 1200px)": xl ? `${xl}rem` : null,
@@ -90,6 +98,7 @@ export const gridStyles = stylex.create({
     xl?: number,
     xxl?: number
   ) => ({
+    gridAutoFlow: "row",
     gridAutoRows: {
       "@media only screen and (min-width: 768px)": md ? `${md}rem` : null,
       "@media only screen and (min-width: 992px)": lg ? `${lg}rem` : null,
@@ -102,6 +111,7 @@ export const gridStyles = stylex.create({
     xl: number,
     xxl?: number
   ) => ({
+    gridAutoFlow: "row",
     gridAutoRows: {
       "@media only screen and (min-width: 1400px)": xxl ? `${xxl}rem` : null,
       "default": `${xl}rem`,

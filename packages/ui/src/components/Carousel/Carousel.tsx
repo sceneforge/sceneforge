@@ -1,11 +1,11 @@
 import * as stylex from "@stylexjs/stylex";
 
 import { useCurrentId } from "../../hooks";
-import { Orientation, Variant } from "../../types";
+import { Variant } from "../../types";
 import { CarouselItem, type CarouselItemProps } from "../CarouselItem";
+import { Grid, type GridProps } from "../Grid";
 import { Section, type SectionProps } from "../Section";
 import { type SpacerStyleProps } from "../tokens.stylex";
-import { Unlisted, type UnlistedProps } from "../Unlisted";
 
 export type CarouselProps = {
   gap?: number;
@@ -15,23 +15,13 @@ export type CarouselProps = {
   level?: SectionProps["level"];
   padding?: SpacerStyleProps;
   shadow?: boolean;
-  style?: UnlistedProps["style"];
+  style?: GridProps["style"];
   title?: SectionProps["title"];
   variant?: Variant;
 };
 
 const styles = stylex.create({
-  gap: (value: number) => ({
-    gap: value > 0 ? `${value}rem` : 0,
-    gridAutoColumns: {
-      "@media (min-width: 768px)": value > 0 ? `calc(25% - calc(${value}rem * 1.65))` : "25%",
-      "@media (min-width: 992px)": value > 0 ? `calc(20% - calc(${value}rem * 1.75))` : "20%",
-      "@media (min-width: 1200px)": value > 0 ? `calc(15% - calc(${value}rem * 2.5))` : "15%",
-      "default": value > 0 ? `calc(50% - calc(${value}rem * 1.5))` : "50%",
-    },
-  }),
   scroller: {
-    gridAutoColumns: "50%",
     height: null,
     isolation: "isolate",
     scrollBehavior: "smooth",
@@ -45,7 +35,7 @@ const styles = stylex.create({
 });
 
 const Carousel = ({
-  gap = 1,
+  gap = 3,
   id,
   items,
   itemsVariant,
@@ -73,9 +63,9 @@ const Carousel = ({
       title={title}
       variant={variant}
     >
-      <Unlisted
+      <Grid
+        columnsSize={15}
         gap={gap}
-        orientation={Orientation.Horizontal}
         padding={padding}
         scrollable
         style={[
@@ -92,7 +82,7 @@ const Carousel = ({
             {...child}
           />
         ))}
-      </Unlisted>
+      </Grid>
     </Section>
   );
 };

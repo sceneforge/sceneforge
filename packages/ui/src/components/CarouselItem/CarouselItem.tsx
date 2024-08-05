@@ -1,11 +1,9 @@
 import * as stylex from "@stylexjs/stylex";
 
-import { Shape } from "../../types";
 import { Card, type CardProps } from "../Card";
 import { CardButton, type CardButtonProps } from "../CardButton";
 import { IconButton, type IconButtonProps } from "../IconButton";
-import { UnlistedItem, type UnlistedItemProps } from "../Unlisted";
-import { View } from "../View";
+import { View, type ViewProps } from "../View";
 
 type CarouselItemCardButtonProps = {
   dense?: never;
@@ -43,7 +41,7 @@ type CarouselAllItemsProps =
   | CarouselItemIconButtonProps;
 
 export type CarouselItemProps = {
-  hidden?: UnlistedItemProps["hidden"];
+  hidden?: ViewProps["hidden"];
 } & Omit<CarouselAllItemsProps, "hidden">;
 
 const styles = stylex.create({
@@ -66,13 +64,12 @@ const CarouselItem = ({
   ...props
 }: CarouselItemProps) => {
   return (
-    <UnlistedItem
+    <View
       hidden={hidden}
       style={styles.container}
     >
       {kind === "icon" && (
         <IconButton
-          shape={Shape.Squircle}
           {...props as IconButtonProps}
         />
       )}
@@ -94,7 +91,7 @@ const CarouselItem = ({
           )}
         </Card>
       )}
-    </UnlistedItem>
+    </View>
   );
 };
 
