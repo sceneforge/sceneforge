@@ -6830,8 +6830,8 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-perfectionist@npm:^3.0.0":
-  version: 3.1.1
-  resolution: "eslint-plugin-perfectionist@npm:3.1.1"
+  version: 3.1.2
+  resolution: "eslint-plugin-perfectionist@npm:3.1.2"
   dependencies:
     "@typescript-eslint/types": "npm:^8.0.0"
     "@typescript-eslint/utils": "npm:^8.0.0"
@@ -6852,7 +6852,7 @@ __metadata:
       optional: true
     vue-eslint-parser:
       optional: true
-  checksum: 10c0/3345904900a02ec75cd9cce3efc4c53b0a5fe7f5cb1c0a11cd26f0e1a43dd3f6430edfc91ea5d1b79e9793e5e3b1c3b5c887fbc842d18300ea79ad05b352851f
+  checksum: 10c0/2b1ab09fb727707886d1e42c280f54b86527cdec2caa81951226ec34150eab1dbb5e5a9b1c666d09d766491fea3871a82a85b208d0c0da7be94656cfe071fbd7
   languageName: node
   linkType: hard
 
