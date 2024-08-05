@@ -3,7 +3,7 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 import * as stylex from "@stylexjs/stylex";
 import { type PropsWithChildren } from "react";
 
-import { titleBar } from "../tokens.stylex";
+import { titleBar } from "../../titleBar.stylex";
 import { Topbar, type TopbarProps } from "../Topbar";
 import { View } from "../View";
 

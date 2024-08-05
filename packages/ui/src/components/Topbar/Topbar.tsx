@@ -3,10 +3,10 @@ import * as stylex from "@stylexjs/stylex";
 import { borderStyles } from "../../borders.stylex";
 import { foregroundColor } from "../../colors.stylex";
 import { useCurrentId } from "../../hooks";
+import { appRegionStyles, titleBar } from "../../titleBar.stylex";
 import { Orientation, Variant } from "../../types";
 import { ActionList, ActionListProps } from "../ActionList";
 import { Heading } from "../Heading";
-import { titleBar } from "../tokens.stylex";
 import { View } from "../View";
 
 export type TopbarProps = {
@@ -96,6 +96,7 @@ const Topbar = ({
         inverted={inverted}
         style={[
           styles.content,
+          appRegionStyles.drag,
           actionsStart && actionsEnd && styles.contentActions,
           actionsStart && !actionsEnd && styles.contentActionsOnlyStart,
           !actionsStart && actionsEnd && styles.contentActionsOnlyEnd,
@@ -115,6 +116,7 @@ const Topbar = ({
           actions={actionsStart}
           actionsDense={actionsStartDense}
           actionsScale={actionsStartScale}
+          actionsStyle={appRegionStyles.noDrag}
           gap={actionsStartGap}
           orientation={Orientation.Horizontal}
         />
@@ -123,6 +125,7 @@ const Topbar = ({
           actions={actionsEnd}
           actionsDense={actionsEndDense}
           actionsScale={actionsEndScale}
+          actionsStyle={appRegionStyles.noDrag}
           gap={actionsEndGap}
           orientation={Orientation.Horizontal}
         />

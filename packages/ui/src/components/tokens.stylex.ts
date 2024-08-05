@@ -3,7 +3,6 @@ import * as stylex from "@stylexjs/stylex";
 import { IconEnum } from "../types";
 
 export const MEDIA_DARK = "@media (prefers-color-scheme: dark)";
-export const MEDIA_CONTROL_OVERLAY = "@media (display-mode: window-controls-overlay)";
 export const FROM_SM = "@media only screen and (min-width: 576px)";
 export const FROM_MD = "@media only screen and (min-width: 768px)";
 export const FROM_LG = "@media only screen and (min-width: 992px)";
@@ -29,25 +28,6 @@ export const FROM_LG_TO_XXL = "@media only screen and (min-width: 992px) and (ma
 export const typography = stylex.defineVars({
   fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
   fontSizeDefault: "1rem",
-});
-
-export const titleBar = stylex.defineVars({
-  appTitleBarHeight: {
-    default: "2.5rem",
-    [MEDIA_CONTROL_OVERLAY]: "env(title-bar-height)",
-  },
-  appTitleBarInsetBlockStart: {
-    default: 0,
-    [MEDIA_CONTROL_OVERLAY]: "env(titlebar-area-y)",
-  },
-  appTitleBarInsetInlineStart: {
-    default: 0,
-    [MEDIA_CONTROL_OVERLAY]: "env(titlebar-area-x)",
-  },
-  appTitleBarWidth: {
-    default: "100%",
-    [MEDIA_CONTROL_OVERLAY]: "env(title-bar-width)",
-  },
 });
 
 export const icons = stylex.defineVars({
