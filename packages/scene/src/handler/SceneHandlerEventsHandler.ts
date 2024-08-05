@@ -30,18 +30,6 @@ export class SceneHandlerEventsHandler {
     this._eventListeners = new Map();
   }
 
-  public addEventListeners<
-    E extends SceneHandlerEventName = SceneHandlerEventName,
-  >(eventName: E, callback: SceneHandlerEventHandler<E>): void {
-    if (!this._eventListeners.has(eventName)) {
-      this._eventListeners.set(eventName, new Set());
-    }
-
-    this._eventListeners.get(eventName)?.add(
-      callback as SceneHandlerEventHandler
-    );
-  }
-
   protected dispatchEvent<
     E extends SceneHandlerEventName = SceneHandlerEventName,
   >(event: SceneHandlerEvent<E>): void {
@@ -53,6 +41,18 @@ export class SceneHandlerEventsHandler {
         sourceEvent: event.actionEvent?.sourceEvent as PointerEvent,
       });
     }
+  }
+
+  public addEventListeners<
+    E extends SceneHandlerEventName = SceneHandlerEventName,
+  >(eventName: E, callback: SceneHandlerEventHandler<E>): void {
+    if (!this._eventListeners.has(eventName)) {
+      this._eventListeners.set(eventName, new Set());
+    }
+
+    this._eventListeners.get(eventName)?.add(
+      callback as SceneHandlerEventHandler
+    );
   }
 
   public removeEventListeners<
