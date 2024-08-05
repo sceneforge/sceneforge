@@ -1519,11 +1519,11 @@ __metadata:
   linkType: hard
 
 "@babylonjs/materials@npm:^7.18.0":
-  version: 7.19.0
-  resolution: "@babylonjs/materials@npm:7.19.0"
+  version: 7.19.1
+  resolution: "@babylonjs/materials@npm:7.19.1"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
-  checksum: 10c0/e810974588e0dbda6e553caaa04e5c84c83bd94a8a7b71cd94226b69dfd456ec274315de0df75ee0da2fb98a6248b3ad2957fea396910ced3d0da821c64e6117
+  checksum: 10c0/33c2a11af9a90e78f3cb3ed0e694ae41628549c1f9552baf298b432bd327234613504f2302d441e2b8d2d85c6094dd0c866c382f791e7534abbe4ac6e9c30700
   languageName: node
   linkType: hard
 
