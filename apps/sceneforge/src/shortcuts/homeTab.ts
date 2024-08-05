@@ -1,5 +1,5 @@
 import { database } from "@sceneforge/data";
-import { type CarouselItemProps, IconEnum, Variant } from "@sceneforge/ui";
+import { type CarouselItemProps, IconEnum, Shape, Variant } from "@sceneforge/ui";
 
 import type { ShortcutProps } from "../hooks";
 import type { DashboardViewTab } from "../templates";
@@ -47,7 +47,6 @@ export const homeTab: ShortcutProps<typeof DashboardViewTab> = async ({
 
   return {
     carousel: {
-      division: 5,
       items: [
         ...items,
         {
@@ -59,6 +58,7 @@ export const homeTab: ShortcutProps<typeof DashboardViewTab> = async ({
           onClick: () => {
             void createNewScene();
           },
+          shape: Shape.Squircle,
           size: 20,
         },
       ],

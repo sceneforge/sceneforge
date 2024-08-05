@@ -107,7 +107,7 @@ export const useShortcuts = () => {
     aboutTab,
     MarkdownViewTab,
     {
-      icon: IconEnum.QuestionMark,
+      icon: IconEnum.Info,
       id: "about-tab",
       label: t("AboutTab.title"),
     }
