@@ -43,8 +43,8 @@ const styles = stylex.create({
   containerHorizontal: {
     maxWidth: null,
     minHeight: "min-content",
-    paddingBlockEnd: "0.5rem",
-    paddingInlineEnd: null,
+    paddingBlockEnd: null,
+    paddingInlineEnd: "0.5rem",
     scrollPaddingBlockEnd: "0.5rem",
     scrollPaddingInlineEnd: null,
     scrollSnapType: "x mandatory",
@@ -69,8 +69,10 @@ const styles = stylex.create({
   containerVertical: {
     maxHeight: null,
     minWidth: "min-content",
-    paddingBlockEnd: null,
+    paddingBlockEnd: "0.5rem",
+    paddingInlineEnd: null,
     scrollPaddingBlockEnd: null,
+    scrollPaddingInlineEnd: "0.5rem",
     scrollSnapType: "y mandatory",
     touchAction: "pan-y",
   },
