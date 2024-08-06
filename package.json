@@ -17,7 +17,7 @@
     "lint": "eslint .",
     "lint:all": "yarn workspaces foreach -Api run lint",
     "lint:all:fix": "yarn workspaces foreach -Api run lint --fix",
-    "dev": "yarn workspace @sceneforge/app dev",
+    "dev": "yarn ts-node ./scripts/development.ts",
     "build": "yarn build:packages && yarn build:apps && yarn build:finish",
     "build:apps": "yarn workspace @sceneforge/docs build && yarn workspace @sceneforge/app build",
     "build:packages": "yarn workspaces foreach --from @sceneforge/app -Rt --exclude @sceneforge/app run build",
@@ -27,7 +27,8 @@
     "storybook": "yarn workspace @sceneforge/ui storybook",
     "storybook:docs": "yarn workspace @sceneforge/ui storybook:docs",
     "storybook:build": "yarn workspace @sceneforge/ui storybook:build",
-    "build:finish": "yarn ts-node ./scripts/buildFinish.ts"
+    "build:finish": "yarn ts-node ./scripts/buildFinish.ts",
+    "watch:packages": "yarn ts-node ./scripts/watchPackages.ts"
   },
   "dependencies": {
     "@sceneforge/app": "workspace:*",
@@ -39,6 +40,7 @@
     "@commitlint/format": "^19.3.0",
     "@sceneforge/eslint": "workspace:*",
     "@types/node": "^22.0.2",
+    "chokidar": "^3.6.0",
     "concurrently": "^8.2.2",
     "conventional-changelog-angular": "^8.0.0",
     "conventional-changelog-cli": "^5.0.0",

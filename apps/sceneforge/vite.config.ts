@@ -1,5 +1,5 @@
 import React from "@vitejs/plugin-react";
-import { defineConfig, type UserConfig } from "vite";
+import { defineConfig, searchForWorkspaceRoot, type UserConfig } from "vite";
 import VitePluginBrowserSync from "vite-plugin-browser-sync";
 import i18nextLoader from "vite-plugin-i18next-loader";
 import VitePluginMetaEnv from "vite-plugin-meta-env";
@@ -63,14 +63,6 @@ export default defineConfig(async ({ command, isPreview, mode }) => {
         keep_classnames: false,
       },
     },
-    optimizeDeps: {
-      include: [
-        "@sceneforge/core",
-        "@sceneforge/data",
-        "@sceneforge/scene",
-        "@sceneforge/ui",
-      ],
-    },
     plugins: [
       i18nextLoader({
         namespaceResolution: "basename",
@@ -117,6 +109,12 @@ export default defineConfig(async ({ command, isPreview, mode }) => {
       }),
     ],
     server: {
+      fs: {
+        allow: [
+          searchForWorkspaceRoot(process.cwd()),
+          ".",
+        ],
+      },
       port: DEFAULT_DEV_PORT,
     },
   } as UserConfig;
