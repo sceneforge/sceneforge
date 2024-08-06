@@ -5,7 +5,9 @@ import { ThemeContext } from "./ThemeProvider";
 
 export const useTheme = () => {
   const {
+    bodyBackground,
     colors,
+    setBodyBackground,
     setColors: {
       [Variant.Accent]: setColorAccent,
       [Variant.Danger]: setColorDanger,
@@ -26,12 +28,14 @@ export const useTheme = () => {
   } = colors ?? {};
 
   return {
+    bodyBackground,
     colorAccent,
     colorDanger,
     colorInfo,
     colorPrimary,
     colorSuccess,
     colorWarning,
+    setBodyBackground,
     setColorAccent,
     setColorDanger,
     setColorInfo,

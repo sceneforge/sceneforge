@@ -1,5 +1,13 @@
 import * as stylex from "@stylexjs/stylex";
-import { createContext, type PropsWithChildren } from "react";
+import {
+  createContext,
+  type Dispatch,
+  type PropsWithChildren,
+  type SetStateAction,
+  useCallback,
+  useLayoutEffect,
+  useState,
+} from "react";
 
 import type { ThemeType } from "../../schemas";
 
@@ -9,6 +17,7 @@ import { Variant } from "../../types";
 import { type SetColorStateType, useColorState } from "./useColorState";
 
 export type ThemeContextType = {
+  setBodyBackground: Dispatch<SetStateAction<Variant>>;
   setColors: { [key in Variant]: SetColorStateType };
 } & ThemeType;
 
@@ -21,6 +30,7 @@ export const ThemeContext = createContext<ThemeContextType>({
     [Variant.Success]: getColorObject(),
     [Variant.Warning]: getColorObject(),
   },
+  setBodyBackground: () => void 0,
   setColors: {
     [Variant.Accent]: () => void 0,
     [Variant.Danger]: () => void 0,
@@ -32,10 +42,20 @@ export const ThemeContext = createContext<ThemeContextType>({
 });
 
 export type ThemeProviderProps = PropsWithChildren<{
+  bodyBackground?: ThemeContextType["bodyBackground"];
   colors?: ThemeContextType["colors"];
 }>;
 
-const ThemeProvider = ({ children, colors }: ThemeProviderProps) => {
+const ThemeProvider = ({
+  bodyBackground = Variant.Primary,
+  children,
+  colors,
+}: ThemeProviderProps) => {
+  const [
+    currentBodyBackground,
+    setCurrentBodyBackground,
+  ] = useState(bodyBackground);
+
   const [colorAccent, setColorAccent] = useColorState(
     colors?.[Variant.Accent] ?? {
       background: {
@@ -114,8 +134,54 @@ const ThemeProvider = ({ children, colors }: ThemeProviderProps) => {
     }
   );
 
+  const handleMatchMediaChange = useCallback(() => {
+    if (
+      currentBodyBackground
+      && globalThis instanceof Window
+      && "document" in globalThis
+      && "getComputedStyle" in globalThis
+      && globalThis.document instanceof Document
+      && "body" in globalThis.document
+      && globalThis.document.body instanceof HTMLBodyElement
+      && typeof globalThis.getComputedStyle === "function"
+    ) {
+      const computedStyle = globalThis.getComputedStyle(
+        globalThis.document.body
+      );
+
+      const metaThemeColor = globalThis.document.querySelector("html > head > meta[name=\"theme-color\"]");
+
+      if (computedStyle && metaThemeColor) {
+        const parsedBackgroundColor = computedStyle.getPropertyValue(`--theme-color-background-${currentBodyBackground}`);
+
+        if (parsedBackgroundColor) {
+          globalThis
+            .document.body.style.backgroundColor = parsedBackgroundColor;
+
+          metaThemeColor.setAttribute("content", parsedBackgroundColor);
+        }
+      }
+    }
+  }, [currentBodyBackground]);
+
+  useLayoutEffect(() => {
+    if (
+      currentBodyBackground
+      && "matchMedia" in globalThis
+      && typeof globalThis.matchMedia === "function"
+    ) {
+      handleMatchMediaChange();
+      globalThis.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", handleMatchMediaChange);
+
+      return () => {
+        globalThis.matchMedia("(prefers-color-scheme: dark)").removeEventListener("change", handleMatchMediaChange);
+      };
+    }
+  }, [currentBodyBackground, handleMatchMediaChange]);
+
   return (
     <ThemeContext.Provider value={{
+      bodyBackground: currentBodyBackground,
       colors: {
         [Variant.Accent]: colorAccent,
         [Variant.Danger]: colorDanger,
@@ -124,6 +190,7 @@ const ThemeProvider = ({ children, colors }: ThemeProviderProps) => {
         [Variant.Success]: colorSuccess,
         [Variant.Warning]: colorWarning,
       },
+      setBodyBackground: setCurrentBodyBackground,
       setColors: {
         [Variant.Accent]: setColorAccent,
         [Variant.Danger]: setColorDanger,
