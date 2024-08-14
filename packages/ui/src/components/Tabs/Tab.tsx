@@ -103,11 +103,12 @@ const Tab = ({
   variant,
 }: TabProps) => {
   const {
-    handleTabChange,
+    buttonRef,
     handleTabClose,
   } = useTab({
     afterClose,
     beforeClose,
+    closeable,
     id,
     onTabChange,
     onTabClose,
@@ -137,11 +138,11 @@ const Tab = ({
         aria-controls={`${id}-panel`}
         aria-selected={active ? "true" : "false"}
         id={id}
-        onClick={handleTabChange}
         padding={{
           block: 0.5,
           inline: 1,
         }}
+        ref={buttonRef}
         role="tab"
         style={styles.button}
         tabIndex={active ? 0 : -1}
