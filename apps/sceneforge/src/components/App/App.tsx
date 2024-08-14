@@ -6,7 +6,7 @@ import {
 import { lazy } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ShortcutName, useApp, useAppContext, useShortcuts } from "../hooks";
+import { ShortcutName, useApp, useAppContext, useShortcuts } from "../../hooks";
 
 const Tabs = lazy(() => import("./Tabs"));
 

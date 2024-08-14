@@ -1,9 +1,11 @@
-import { lazy } from "react";
+export * from "./App";
+export type * from "./App";
 
-export const App = lazy(() => import("./App"));
+export * from "./HotspotPopover";
+export type * from "./HotspotPopover";
 
-export const AppInstall = lazy(() => import("./AppInstall"));
+export * from "./HotspotsPane";
+export type * from "./HotspotsPane";
 
-export const ReloadPrompt = lazy(() => import("./ReloadPrompt"));
-
-export const Tabs = lazy(() => import("./Tabs"));
+export * from "./SceneDrawer";
+export type * from "./SceneDrawer";

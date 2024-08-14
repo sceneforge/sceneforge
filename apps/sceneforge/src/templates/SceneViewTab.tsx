@@ -1,18 +1,20 @@
 import {
   Canvas,
-  DrawerController,
+  CollapsibleList,
+  IconEnum,
   Orientation,
   Pane,
-  Popover,
-  Position,
   SplitPaneController,
   type TabComponentProps,
-  TabsController,
   Tree,
   Variant,
   View,
 } from "@sceneforge/ui";
 
+import {
+  HotspotPopover,
+  SceneDrawer,
+} from "../components";
 import { useScene } from "../hooks";
 
 export type SceneViewTabProps = TabComponentProps<{
@@ -35,9 +37,12 @@ const SceneViewTab = ({
     openFileClickHandler,
     removeScene,
     sceneNodes,
+    sidebarRef,
+    sidebarResizable,
     toggleSceneEditMode,
     toggleSceneMaterialMode,
     toggleSceneViewMode,
+    toggleSiderbar,
     viewToggleRef,
   } = useScene(id, hidden, registerBeforeClose);
 
@@ -45,150 +50,64 @@ const SceneViewTab = ({
     <SplitPaneController
       initialSize={[15, 85]}
       orientation={Orientation.Horizontal}
-      resizable
+      ref={sidebarRef}
+      resizable={sidebarResizable}
       variant={Variant.Primary}
     >
-      <Pane outer title="Scene">
-        <Tree id={`scene-${id}-tree`} nodes={sceneNodes} />
-      </Pane>
-      <TabsController
-        initialContent={[
-          {
-            panel: {
-              component: () => (
-                <View>
-                  <Canvas id={`scene-${id}-canvas`} ref={canvasRef} />
-                  <Popover ref={hotspotPopoverRef}>
-                    Hotspot
-                  </Popover>
-                  <DrawerController
-                    initialSize={48}
-                    orientation={Orientation.Horizontal}
-                    position={Position.End}
-                    resizable
-                    variant={Variant.Accent}
-                  >
-                    <Pane
-                      actions={[
-                        {
-                          actions: [
-                            {
-                              kind: "button",
-                              label: "Import...",
-                              onClick: openFileClickHandler,
-                            },
-                            {
-                              kind: "divider",
-                              spacing: 1,
-                            },
-                            {
-                              glossy: true,
-                              inverted: true,
-                              kind: "button",
-                              label: "Delete",
-                              onClick: () => void removeScene(),
-                              variant: Variant.Danger,
-                            },
-                          ],
-                          glossy: true,
-                          kind: "dropdown",
-                          label: "Scene",
-                          variant: Variant.Accent,
-                        },
-                        {
-                          actions: [
-                            {
-                              glossy: [false, true],
-                              inverted: [false, true],
-                              kind: "toggle",
-                              label: "View",
-                              onToggle: toggleSceneViewMode,
-                              pressed: true,
-                              ref: viewToggleRef,
-                              variant: Variant.Accent,
-                            },
-                            {
-                              glossy: [false, true],
-                              inverted: [false, true],
-                              kind: "toggle",
-                              label: "Edit",
-                              onToggle: toggleSceneEditMode,
-                              ref: editToggleRef,
-                              variant: Variant.Accent,
-                            },
-                            {
-                              glossy: [false, true],
-                              inverted: [false, true],
-                              kind: "toggle",
-                              label: "Material",
-                              onToggle: toggleSceneMaterialMode,
-                              ref: materialToggleRef,
-                              variant: Variant.Accent,
-                            },
-                          ],
-                          glossy: true,
-                          kind: "dropdown",
-                          label: "Mode",
-                          variant: Variant.Accent,
-                        },
-                      ]}
-                      onTitleChange={changeSceneTitle}
-                      outer
-                      title={title}
-                      titleEditable
-                    >
-                      <SplitPaneController
-                        orientation={Orientation.Horizontal}
-                        resizable
-                      >
-                        <View padding={0.25}>
-                          <Pane
-                            level={3}
-                            paneActions={[
-                              {
-                                kind: "button",
-                                label: "Action 1",
-                                onClick: () => console.log("Action 1"),
-                                variant: Variant.Accent,
-                              },
-                            ]}
-                            title="Left pane"
-                          >
-                            Left content
-                          </Pane>
-                        </View>
-                        <View padding={0.25}>
-                          <Pane level={3} title="Right pane">
-                            Right content
-                          </Pane>
-                        </View>
-                      </SplitPaneController>
-                    </Pane>
-                  </DrawerController>
-                </View>
-              ),
-              props: {},
-            },
-            tab: {
-              id: `scene-${id}-canvas`,
-              label: "Canvas",
-            },
-          },
-          {
-            panel: {
-              component: () => (<div>Settings</div>),
-              props: {},
-            },
-            tab: {
-              id: `scene-${id}-settings`,
-              label: "Settings",
-            },
-          },
-        ]}
-        orientation={Orientation.Horizontal}
-        position={Position.End}
-        variant={Variant.Primary}
-      />
+      <View>
+        <Pane
+          actions={[{
+            icon: sidebarResizable
+              ? IconEnum.LeftPanelClose
+              : IconEnum.LeftPanelOpen,
+            kind: "icon",
+            label: sidebarResizable ? "Hide Sidebar" : "Show Sidebar",
+            onClick: toggleSiderbar,
+          }]}
+          actionsPadding={sidebarResizable ? undefined : 0.25}
+          level={3}
+          outer
+          title={sidebarResizable ? "Scene" : undefined}
+        >
+          {sidebarResizable && (
+            <CollapsibleList
+              items={[
+                {
+                  children: (
+                    <View scrollable>
+                      <Tree id={`scene-${id}-tree`} nodes={sceneNodes} />
+                    </View>
+                  ),
+                  open: true,
+                  title: "Scene Nodes",
+                },
+              ]}
+              variant={Variant.Primary}
+            />
+          )}
+        </Pane>
+      </View>
+      <View>
+        <Canvas id={`scene-${id}-canvas`} ref={canvasRef} />
+        <HotspotPopover
+          id={`scene-${id}-canvas-hotspot`}
+          ref={hotspotPopoverRef}
+          variant={Variant.Primary}
+        />
+        <SceneDrawer
+          changeSceneTitle={changeSceneTitle}
+          editToggleRef={editToggleRef}
+          id={`scene-${id}-drawer`}
+          materialToggleRef={materialToggleRef}
+          openFileClickHandler={openFileClickHandler}
+          removeScene={removeScene}
+          title={title}
+          toggleSceneEditMode={toggleSceneEditMode}
+          toggleSceneMaterialMode={toggleSceneMaterialMode}
+          toggleSceneViewMode={toggleSceneViewMode}
+          viewToggleRef={viewToggleRef}
+        />
+      </View>
     </SplitPaneController>
   );
 };

@@ -1,7 +1,7 @@
 import { Dialog, Variant } from "@sceneforge/ui";
 import { useTranslation } from "react-i18next";
 
-import { useAppInstall } from "../hooks";
+import { useAppInstall } from "../../hooks";
 
 const AppInstall = () => {
   const { t } = useTranslation("AppInstall");

@@ -1,4 +1,4 @@
-import type { PopoverRef, ToggleComponentRef, ToggleEvent } from "@sceneforge/ui";
+import type { PopoverRef, SplitPaneComponentRef, ToggleComponentRef, ToggleEvent } from "@sceneforge/ui";
 
 import { openSceneFile } from "@sceneforge/core";
 import { database } from "@sceneforge/data";
@@ -26,15 +26,16 @@ export const useScene = (
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const engineController = useRef<EngineController>(null);
   const sceneHandler = useRef<SceneHandler>(null);
-
   const viewToggleRef = useRef<ToggleComponentRef>(null);
   const editToggleRef = useRef<ToggleComponentRef>(null);
   const materialToggleRef = useRef<ToggleComponentRef>(null);
-
   const hotspotPopoverRef = useRef<PopoverRef>(null);
+  const sidebarRef = useRef<SplitPaneComponentRef>(null);
 
   const [isImporting, setIsImporting] = useState(false);
   const [sceneState, setSceneState] = useState(SceneState.View);
+  const [sidebarResizable, setSidebarResizable] = useState(true);
+  const [sidebarSize, setSidebarSize] = useState<string | undefined>();
 
   const { removeTab } = useTabs();
 
@@ -240,6 +241,23 @@ export const useScene = (
     editToggleRef,
   ]);
 
+  const toggleSiderbar = useCallback(() => {
+    const splitPane = sidebarRef.current;
+
+    setSidebarResizable((previous) => {
+      if (splitPane && previous) {
+        setSidebarSize(
+          splitPane.childSize(0)
+        );
+        splitPane.resizeChild(0, "2rem");
+      }
+      else if (splitPane && !previous && sidebarSize) {
+        splitPane.resizeChild(0, sidebarSize);
+      }
+      return !previous;
+    });
+  }, [sidebarRef, sidebarSize]);
+
   return {
     canvasRef,
     changeSceneTitle,
@@ -253,9 +271,12 @@ export const useScene = (
     sceneHandlerSelectStop,
     sceneNodes,
     sceneState,
+    sidebarRef,
+    sidebarResizable,
     toggleSceneEditMode,
     toggleSceneMaterialMode,
     toggleSceneViewMode,
+    toggleSiderbar,
     viewToggleRef,
   };
 };

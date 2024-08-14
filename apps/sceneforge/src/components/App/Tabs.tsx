@@ -2,7 +2,7 @@ import { useSettings } from "@sceneforge/data";
 import { Position, TabsController, Variant } from "@sceneforge/ui";
 import { useEffect } from "react";
 
-import { useAppContext, useShortcuts, useTabs } from "../hooks";
+import { useAppContext, useShortcuts, useTabs } from "../../hooks";
 
 const Tabs = () => {
   const { tabsHandlerRef } = useAppContext();
