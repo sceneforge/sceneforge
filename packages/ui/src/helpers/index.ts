@@ -21,9 +21,11 @@ export {
   isInlineEnd,
   isInlineStart,
 } from "./getPosition";
+export { getResizableElements } from "./getResizableElements";
 export { hexToRgb } from "./hexToRgb";
 export { hslToRgb } from "./hslToRgb";
 export { rgbToHex } from "./rgbToHex";
 export { rgbToHsl } from "./rgbToHsl";
+export { updateElementsSize } from "./updateElementsSize";
 export { updateElementsSizeByMovement } from "./updateElementsSizeByMovement";
 export { updatePointerEventStyle } from "./updatePointerEventStyle";

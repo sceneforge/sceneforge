@@ -1,26 +1,44 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import {
+  type Ref,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from "react";
 
 import {
   forEachChildren,
+  getResizableElements,
+  updateElementsSize,
   updateElementsSizeByMovement,
   updatePointerEventStyle,
 } from "../../helpers";
 import { swapOrientation } from "../../helpers/swapOrientation";
 import { Orientation } from "../../types";
 
+export interface SplitPaneComponentRef {
+  childSize(index: number): string | undefined;
+  resizeChild(index: number, value: number | string): void;
+}
+
 export type UseSplitPaneProps = {
   orientation?: Orientation;
+  ref?: Ref<SplitPaneComponentRef>;
   resizable?: boolean;
 };
 
 export const useSplitPane = ({
   orientation,
+  ref,
   resizable,
 }: UseSplitPaneProps) => {
   const splitPaneRef = useRef<HTMLDivElement>(null);
   const resizeElementStart = useRef<HTMLDivElement | null>(null);
   const resizeElementEnd = useRef<HTMLDivElement | null>(null);
   const property = useMemo(() => orientation === Orientation.Horizontal ? "width" : "height", [orientation]);
+  const movement = useMemo(() => orientation === Orientation.Horizontal ? "movementX" : "movementY", [orientation]);
+  const position = useMemo(() => orientation === Orientation.Horizontal ? "left" : "top", [orientation]);
 
   const prepareResizableElementsStyle = useCallback((pointerStyle: "" | "none" = "") => {
     updatePointerEventStyle(resizeElementStart.current, pointerStyle);
@@ -37,7 +55,7 @@ export const useSplitPane = ({
       forEachChildren(splitPaneRef.current, (child) => {
         const childSize = child.getBoundingClientRect()[property];
         const childSizePercent = (childSize / size) * 100;
-        child.style[property] = `${childSizePercent}%`;
+        child.style.setProperty(`--${property}`, `${childSizePercent}%`);
       }, (child) => {
         return child instanceof HTMLDivElement
           && child.dataset.resizeIdStart === undefined
@@ -49,19 +67,14 @@ export const useSplitPane = ({
   }, [property, splitPaneRef, resizeElementStart, resizeElementEnd]);
 
   const extractResizableElements = useCallback((target: HTMLElement) => {
-    if (
-      splitPaneRef.current
-      && target.dataset.resizeIdStart !== undefined
-      && target.dataset.resizeIdEnd !== undefined
-    ) {
-      forEachChildren<HTMLDivElement>(splitPaneRef.current, (child) => {
-        if (child.id === target.dataset.resizeIdStart) {
-          resizeElementStart.current = child;
-        }
-        else if (child.id === target.dataset.resizeIdEnd) {
-          resizeElementEnd.current = child;
-        }
-      }, child => child instanceof HTMLDivElement && child.hasAttribute("id"));
+    if (splitPaneRef.current && target instanceof HTMLElement) {
+      const { end, start } = getResizableElements(target);
+      if (start && start instanceof HTMLDivElement) {
+        resizeElementStart.current = start;
+      }
+      if (end && end instanceof HTMLDivElement) {
+        resizeElementEnd.current = end;
+      }
     }
   }, [splitPaneRef, resizeElementStart, resizeElementEnd]);
 
@@ -81,7 +94,6 @@ export const useSplitPane = ({
 
   const updateGuttersAriaValueNow = useCallback(() => {
     if (splitPaneRef.current) {
-      const position = property === "width" ? "left" : "top";
       const {
         [position]: parentPosition,
         [property]: size,
@@ -89,7 +101,7 @@ export const useSplitPane = ({
       forEachChildren(
         splitPaneRef.current,
         (child) => {
-          const childPosition = child.getBoundingClientRect()[position];
+          const { [position]: childPosition } = child.getBoundingClientRect();
           child.ariaValueNow = `${((childPosition - parentPosition) / size) * 100}`;
         },
         (child) => {
@@ -101,7 +113,7 @@ export const useSplitPane = ({
         }
       );
     }
-  }, [splitPaneRef, property]);
+  }, [position, property]);
 
   const handlePointerDown = useCallback((event: PointerEvent) => {
     if (event.target instanceof HTMLElement && isGutterElement(event.target)) {
@@ -133,13 +145,13 @@ export const useSplitPane = ({
     ) {
       updateElementsSizeByMovement(
         property,
-        property === "width" ? event.movementX : event.movementY,
+        event[movement],
         splitPaneRef.current,
         resizeElementStart.current,
         resizeElementEnd.current
       );
     }
-  }, [property, resizeElementStart, resizeElementEnd, splitPaneRef, resizable]);
+  }, [resizable, property, movement]);
 
   const swapChildrenOrientation = useCallback((
     withOrientation = Orientation.Horizontal
@@ -158,6 +170,76 @@ export const useSplitPane = ({
       );
     }
   }, [resizable, splitPaneRef]);
+
+  useImperativeHandle(ref, () => {
+    return new (class implements SplitPaneComponentRef {
+      childSize(index: number) {
+        const splitPane = splitPaneRef.current;
+        if (splitPane) {
+          const children = splitPane.querySelectorAll("&>:not([role=\"separator\"])");
+          if (children.length > index) {
+            const child = children[index];
+            if (child instanceof HTMLElement) {
+              return child.style.getPropertyValue(`--${property}`);
+            }
+          }
+        }
+        return;
+      }
+
+      resizeChild(index: number, value: number | string): void {
+        const splitPane = splitPaneRef.current;
+
+        if (splitPane && resizable) {
+          const children = splitPane.querySelectorAll("&>:not([role=separator])");
+          if (
+            children.length > index
+            && index in children
+            && children[index] instanceof HTMLElement
+          ) {
+            const next = children[index].nextElementSibling;
+            if (
+              next instanceof HTMLElement
+              && next.dataset.resizeIdStart === children[index].id
+            ) {
+              const target = next;
+              extractResizableElements(target);
+
+              updateElementsSize(
+                property,
+                value,
+                splitPaneRef.current,
+                resizeElementStart.current,
+                resizeElementEnd.current
+              );
+              resizeElementEnd.current = null;
+              resizeElementStart.current = null;
+            }
+          }
+        }
+        else if (splitPane && !resizable) {
+          const children = splitPane.querySelectorAll("&>:not([role=separator])");
+          if (children.length > index) {
+            const [childStart, childEnd] = children.length === index + 1
+              ? [children[index - 1], children[index]]
+              : [children[index], children[index + 1]];
+            if (
+              childStart instanceof HTMLElement
+              && childEnd instanceof HTMLElement
+            ) {
+              updateElementsSize(
+                property,
+                value,
+                splitPane,
+                childStart,
+                childEnd
+              );
+            }
+          }
+        }
+      }
+    })();
+  }, [property, resizable, extractResizableElements]);
 
   useEffect(() => {
     if (resizable && splitPaneRef.current) {

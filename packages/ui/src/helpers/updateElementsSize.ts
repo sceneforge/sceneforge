@@ -1,8 +1,8 @@
 import { getNumber } from "./getNumber";
 
-export const updateElementsSizeByMovement = (
+export const updateElementsSize = (
   property: "height" | "width",
-  movement: number,
+  newSize: number | string,
   element?: HTMLElement | null,
   startElement?: HTMLElement | null,
   endElement?: HTMLElement | null
@@ -16,12 +16,11 @@ export const updateElementsSizeByMovement = (
   const startSize = startElement.getBoundingClientRect()[property];
   const endSize = endElement.getBoundingClientRect()[property];
 
-  const newStartSize = startSize + movement;
-  const newEndSize = endSize - movement;
+  const newEndSize = (endSize + startSize);
+  const newEndSizePercent = ((newEndSize / size) * 100);
 
-  const newStartSizePercent = (newStartSize / size) * 100;
-  const newEndSizePercent = (newEndSize / size) * 100;
+  const newSizeValue = (typeof newSize === "number") ? `${getNumber(newSize)}%` : newSize;
 
-  startElement.style.setProperty(`--${property}`, `${getNumber(newStartSizePercent)}%`);
-  endElement.style.setProperty(`--${property}`, `${getNumber(newEndSizePercent)}%`);
+  startElement.style.setProperty(`--${property}`, newSizeValue);
+  endElement.style.setProperty(`--${property}`, `calc(${getNumber(newEndSizePercent)}% - ${newSizeValue})`);
 };
