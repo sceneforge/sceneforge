@@ -1,6 +1,6 @@
 {
   "name": "@sceneforge/scene",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Scene Node Object Handlers",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -1,7 +1,7 @@
 {
   "name": "@sceneforge/eslint",
   "description": "ESLint configuration for SceneForge projects in the MonoRepo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./eslint.common.config.mjs",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@sceneforge/docs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Development Documentation for the Scene Forge",
   "type": "module",
   "repository": {

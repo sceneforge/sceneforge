@@ -1,7 +1,7 @@
 {
   "name": "@sceneforge/ui",
   "description": "Scene Forge themed UI components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
