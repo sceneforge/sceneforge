@@ -105,33 +105,35 @@ const PaneHeader = ({
         !outer && styles.inner,
       ]}
     >
-      <span {...stylex.props(styles.headingWrapper)}>
-        <Heading
-          hidden={titleEditable && titleEditing}
-          id={`${currentId}-heading`}
-          level={level}
-          margin={0}
-          padding={headingPadding}
-          ref={ref}
-          style={[
-            styles.heading,
-            headingStyle,
-          ]}
-        >
-          {title}
-        </Heading>
-        {titleEditable && (
-          <PaneHeaderInput
-            defaultValue={title}
-            editing={titleEditing}
-            id={`${currentId}-heading-input`}
-            onEditClick={onTitleEditClick}
-            onSaveClick={onTitleSaveClick}
-            ref={inputRef}
-            style={styles.heading}
-          />
-        )}
-      </span>
+      {title && (
+        <span {...stylex.props(styles.headingWrapper)}>
+          <Heading
+            hidden={titleEditable && titleEditing}
+            id={`${currentId}-heading`}
+            level={level}
+            margin={0}
+            padding={headingPadding}
+            ref={ref}
+            style={[
+              styles.heading,
+              headingStyle,
+            ]}
+          >
+            {title}
+          </Heading>
+          {titleEditable && (
+            <PaneHeaderInput
+              defaultValue={title}
+              editing={titleEditing}
+              id={`${currentId}-heading-input`}
+              onEditClick={onTitleEditClick}
+              onSaveClick={onTitleSaveClick}
+              ref={inputRef}
+              style={styles.heading}
+            />
+          )}
+        </span>
+      )}
       <ActionList
         actions={actions}
         actionsDense={actionsDense}

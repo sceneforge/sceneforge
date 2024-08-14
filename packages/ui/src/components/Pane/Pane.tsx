@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { lazy, type PropsWithChildren } from "react";
+import { lazy, type PropsWithChildren, type Ref } from "react";
 
 import type { PaneBodyProps } from "./PaneBody";
 import type { PaneHeaderProps } from "./PaneHeader";
@@ -32,6 +32,7 @@ export type PaneProps = Omit<
   paneActionsPadding?: PaneBodyProps["actionsPadding"];
   paneActionsScale?: PaneBodyProps["actionsScale"];
   paneActionsStyle?: PaneBodyProps["actionsStyle"];
+  ref?: Ref<HTMLDivElement>;
 }>;
 
 const styles = stylex.create({
@@ -53,6 +54,7 @@ const styles = stylex.create({
 });
 
 const Pane = ({
+  actions,
   children,
   image,
   imageAlt,
@@ -68,7 +70,9 @@ const Pane = ({
   paneActionsPadding,
   paneActionsScale,
   paneActionsStyle,
+  ref,
   title,
+  titleEditable,
   ...props
 }: PaneProps) => {
   const {
@@ -89,16 +93,18 @@ const Pane = ({
         styles.container,
         !outer && styles.inner
       )}
+      ref={ref}
     >
-      {title
+      {title || actions
         ? (
           <>
             <PaneHeader
+              actions={actions}
               level={level}
               onTitleEditClick={handleTitleEditClick}
               onTitleSaveClick={handleTitleSaveClick}
               outer={outer}
-              title={currentTitle}
+              title={titleEditable ? currentTitle : title}
               titleEditing={currentTitleEditing}
               {...props}
               inputRef={inputRef}
