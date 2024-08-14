@@ -2,6 +2,8 @@ export type IconType =
   | "add"
   | "addCircle"
   | "arrowSelectorTool"
+  | "bottomPanelClose"
+  | "bottomPanelOpen"
   | "camera"
   | "cameraSwitch"
   | "close"
@@ -20,6 +22,8 @@ export type IconType =
   | "info"
   | "landscape"
   | "landscape2"
+  | "leftPanelClose"
+  | "leftPanelOpen"
   | "lightbulb"
   | "lightbulbOutline"
   | "menu"
@@ -27,6 +31,8 @@ export type IconType =
   | "moreVert"
   | "moveSelectionUp"
   | "questionMark"
+  | "rightPanelClose"
+  | "rightPanelOpen"
   | "scene"
   | "select"
   | "settings"
@@ -35,6 +41,8 @@ export type IconType =
   | "squareOutlineRounded"
   | "squareRounded"
   | "sunny"
+  | "topPanelClose"
+  | "topPanelOpen"
   | "transform"
   | "uploadFile"
   | "videoStable"
@@ -45,6 +53,8 @@ export enum IconEnum {
   Add = "add",
   AddCircle = "addCircle",
   ArrowSelectorTool = "arrowSelectorTool",
+  BottomPanelClose = "bottomPanelClose",
+  BottomPanelOpen = "bottomPanelOpen",
   Camera = "camera",
   CameraSwitch = "cameraSwitch",
   Close = "close",
@@ -63,6 +73,8 @@ export enum IconEnum {
   Info = "info",
   Landscape = "landscape",
   Landscape2 = "landscape2",
+  LeftPanelClose = "leftPanelClose",
+  LeftPanelOpen = "leftPanelOpen",
   Lightbulb = "lightbulb",
   LightbulbOutline = "lightbulbOutline",
   Menu = "menu",
@@ -70,6 +82,8 @@ export enum IconEnum {
   MoreVert = "moreVert",
   MoveSelectionUp = "moveSelectionUp",
   QuestionMark = "questionMark",
+  RightPanelClose = "rightPanelClose",
+  RightPanelOpen = "rightPanelOpen",
   Scene = "scene",
   Select = "select",
   Settings = "settings",
@@ -78,6 +92,8 @@ export enum IconEnum {
   SquareOutlineRounded = "squareOutlineRounded",
   SquareRounded = "squareRounded",
   Sunny = "sunny",
+  TopPanelClose = "topPanelClose",
+  TopPanelOpen = "topPanelOpen",
   Transform = "transform",
   UploadFile = "uploadFile",
   VideoStable = "videoStable",
