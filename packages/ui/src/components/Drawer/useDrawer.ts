@@ -1,12 +1,12 @@
-import { type RefObject, useCallback, useEffect, useImperativeHandle, useState } from "react";
+import { type Ref, type RefObject, useCallback, useEffect, useImperativeHandle, useMemo, useState } from "react";
 
 import { getNumber } from "../../helpers";
 import { useCurrentId } from "../../hooks";
 import { Orientation, Position } from "../../types";
 
 export interface ResizableHandler {
-  get size(): number;
-  set size(size: number);
+  get size(): number | string;
+  set size(size: number | string);
 };
 
 export type UseDrawerProps = {
@@ -15,7 +15,7 @@ export type UseDrawerProps = {
   initialSize?: number;
   orientation?: Orientation;
   position?: Position;
-  ref?: RefObject<ResizableHandler>;
+  ref?: Ref<ResizableHandler>;
   resizable?: boolean;
 };
 
@@ -31,76 +31,118 @@ export const useDrawer = ({
   const currentId = useCurrentId(id);
 
   const [size, setSize] = useState<number>(initialSize);
+  const sizeProperty = useMemo(() => orientation === Orientation.Horizontal ? "height" : "width", [orientation]);
+  const offsetProperty = useMemo(() => orientation === Orientation.Horizontal ? "offsetY" : "offsetX", [orientation]);
+  const cursorProperty = useMemo(() => orientation === Orientation.Horizontal ? "ns-resize" : "ew-resize", [orientation]);
+
+  const getCurrentSize = useCallback(() => {
+    if (
+      drawerRef?.current instanceof HTMLDivElement
+      && drawerRef.current.childElementCount === 1
+    ) {
+      const drawer = drawerRef.current.childNodes.item(0);
+      if (drawer instanceof HTMLDivElement) {
+        const {
+          [sizeProperty]: size,
+        } = drawer.getBoundingClientRect();
+        const {
+          [sizeProperty]: parentSize,
+        } = drawerRef.current.getBoundingClientRect();
+        return (size / parentSize) * 100;
+      }
+    }
+    return;
+  }, [drawerRef, sizeProperty]);
+
+  const setDrawerSize = useCallback((value: number | string) => {
+    const element = drawerRef?.current as HTMLDivElement | undefined;
+    if (element?.childNodes.item(0)) {
+      const drawer = element.childNodes.item(0) as HTMLDivElement;
+      if (typeof value === "number" && !Number.isNaN(value)) {
+        drawer.style.setProperty(`--${sizeProperty}`, `${value}%`);
+        setSize(value);
+      }
+      else if (typeof value === "string" && value) {
+        drawer.style.setProperty(`--${sizeProperty}`, value);
+        const currentSize = getCurrentSize();
+        if (currentSize) {
+          setSize(currentSize);
+        }
+      }
+    }
+  }, [
+    drawerRef,
+    getCurrentSize,
+    sizeProperty,
+  ]);
 
   useImperativeHandle(ref, () => new (class implements ResizableHandler {
     get size() {
       return size;
     }
 
-    set size(size: number) {
-      setSize(size);
+    set size(value: number | string) {
+      setDrawerSize(value);
     }
-  })(), [size]);
+  })(), [setDrawerSize, size]);
 
   const handlePointerDown = useCallback((event: PointerEvent) => {
-    const element = drawerRef?.current as HTMLDivElement | undefined;
+    const element = drawerRef?.current;
+
     if (
-      event.target instanceof HTMLDivElement
+      element
+      && event.target instanceof HTMLDivElement
       && element?.childNodes.item(0) === event.target
     ) {
-      const rect = event.target.getBoundingClientRect();
-      const [property, offset]: ["height" | "width", "offsetX" | "offsetY"] = orientation === Orientation.Horizontal ? ["height", "offsetY"] : ["width", "offsetX"];
-      const gutterSize = getNumber(window.getComputedStyle(event.target, ":after")[property], 4);
+      const { [sizeProperty]: areaSize } = event.target.getBoundingClientRect();
+      const gutterSize = getNumber(window.getComputedStyle(event.target, ":after")[sizeProperty], 4);
       const gutterOffset = gutterSize - (
         position === Position.End
-          ? event[offset]
-          : rect[property] - event[offset]
+          ? event[offsetProperty]
+          : areaSize - event[offsetProperty]
       );
 
       if (gutterOffset >= -0.5 && gutterOffset <= (gutterSize + 0.5)) {
         element.style.pointerEvents = "auto";
-        element.style.cursor = orientation === Orientation.Horizontal ? "ns-resize" : "ew-resize";
+        element.style.cursor = cursorProperty;
         event.target.style.pointerEvents = "none";
       }
     }
-  }, [orientation, position, drawerRef]);
+  }, [position, drawerRef, offsetProperty, sizeProperty, cursorProperty]);
 
   const handlePointerUp = useCallback(() => {
-    const element = drawerRef?.current as HTMLDivElement | undefined;
-    if (element) {
-      const [property]: ["height" | "width"] = orientation === Orientation.Horizontal ? ["height"] : ["width"];
+    const element = drawerRef?.current;
+    if (element && element instanceof HTMLDivElement) {
       element.style.cursor = "auto";
       element.style.pointerEvents = "none";
       for (const child of element.childNodes) {
         if (child instanceof HTMLDivElement) {
           child.style.pointerEvents = "auto";
-          const newSize = getNumber(child.style[property]);
-          if (newSize > 0) {
-            setSize(newSize);
-          }
         }
       }
     }
-  }, [drawerRef, orientation]);
+    const currentSize = getCurrentSize();
+    if (currentSize) {
+      setSize(currentSize);
+    }
+  }, [drawerRef, getCurrentSize]);
 
   const handlePointerMove = useCallback((event: PointerEvent) => {
-    const element = drawerRef?.current as HTMLDivElement | undefined;
-    if (element && element.style.pointerEvents === "auto") {
-      const drawer = element.childNodes.item(0) as HTMLDivElement | undefined;
-      if (drawer) {
-        const [property, offset]: ["height" | "width", "offsetX" | "offsetY"] = orientation === Orientation.Horizontal ? ["height", "offsetY"] : ["width", "offsetX"];
-        const rect = element.getBoundingClientRect();
-        const areaSize = rect[property];
+    const element = drawerRef?.current;
+    if (element && element instanceof HTMLDivElement && element.style.pointerEvents === "auto") {
+      const drawer = element.childNodes.item(0);
+      if (drawer instanceof HTMLDivElement) {
+        const { [sizeProperty]: areaSize } = element.getBoundingClientRect();
         const size = (
           position === Position.End
-            ? rect[property] - event[offset]
-            : event[offset]
+            ? areaSize - event[offsetProperty]
+            : event[offsetProperty]
         );
         const percentualSize = (size / areaSize) * 100;
-        drawer.style[property] = `${percentualSize}%`;
+        drawer.style.setProperty(`--${sizeProperty}`, `${percentualSize}%`);
       }
     }
-  }, [drawerRef, orientation, position]);
+  }, [drawerRef, offsetProperty, position, sizeProperty]);
 
   useEffect(() => {
     if (resizable && drawerRef && drawerRef.current) {
@@ -114,9 +156,7 @@ export const useDrawer = ({
       return () => {
         for (const child of element.childNodes) {
           if (child instanceof HTMLDivElement) {
-            child.style.width = "";
-            child.style.height = "";
-            child.style.pointerEvents = "";
+            child.style.setProperty("pointerEvents", null);
           }
         }
 

@@ -46,8 +46,7 @@ const styles = stylex.create({
   },
   resizableGutterDynamic: (
     orientation: Orientation,
-    position: Position,
-    size: number
+    position: Position
   ) => ({
     "::after": {
       cursor: orientation === Orientation.Horizontal ? "row-resize" : "col-resize",
@@ -90,12 +89,22 @@ const styles = stylex.create({
       ),
       width: orientation === Orientation.Horizontal ? "100%" : "0.25rem",
     },
-    "height": orientation === Orientation.Vertical ? "100%" : `${size}%`,
-    "insetBlockEnd": orientation === Orientation.Horizontal ? (position === Position.End ? 0 : null) : null,
-    "insetBlockStart": orientation === Orientation.Horizontal ? (position === Position.Start ? 0 : null) : 0,
-    "insetInlineEnd": orientation === Orientation.Vertical ? (position === Position.End ? 0 : null) : null,
-    "insetInlineStart": orientation === Orientation.Vertical ? (position === Position.Start ? 0 : null) : 0,
-    "width": orientation === Orientation.Horizontal ? "100%" : `${size}%`,
+  }),
+  size: (orientation: Orientation, position: Position, value: number) => ({
+    height: orientation === Orientation.Vertical ? "100%" : `${value}%`,
+    insetBlockEnd: orientation === Orientation.Horizontal
+      ? (position === Position.End ? 0 : null)
+      : null,
+    insetBlockStart: orientation === Orientation.Horizontal
+      ? (position === Position.Start ? 0 : null)
+      : 0,
+    insetInlineEnd: orientation === Orientation.Vertical
+      ? (position === Position.End ? 0 : null)
+      : null,
+    insetInlineStart: orientation === Orientation.Vertical
+      ? (position === Position.Start ? 0 : null)
+      : 0,
+    width: orientation === Orientation.Horizontal ? "100%" : `${value}%`,
   }),
 });
 
@@ -131,8 +140,9 @@ const Drawer = ({
           styles.innerContainer,
           resizable && [
             styles.resizableGutter,
-            styles.resizableGutterDynamic(orientation, position, size),
+            styles.resizableGutterDynamic(orientation, position),
           ],
+          styles.size(orientation, position, size),
           !variant && styles.noVariantInnerContainer,
         ]}
         variant={variant}

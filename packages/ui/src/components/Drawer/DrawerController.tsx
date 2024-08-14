@@ -1,4 +1,4 @@
-import { lazy, type PropsWithChildren, type RefObject, useRef } from "react";
+import { lazy, type PropsWithChildren, type Ref, useRef } from "react";
 
 import { Orientation, Position, Variant } from "../../types";
 import { type ResizableHandler, useDrawer } from "./useDrawer";
@@ -11,7 +11,7 @@ export type DrawerControllerProps = PropsWithChildren<{
   label?: string;
   orientation?: Orientation;
   position?: Position;
-  ref?: RefObject<ResizableHandler>;
+  ref?: Ref<ResizableHandler>;
   resizable?: boolean;
   variant?: Variant;
 }>;
