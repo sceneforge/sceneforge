@@ -13,6 +13,7 @@
   //   "javascript",
   //   "typescript",
   // ],
+  "eslint.useFlatConfig": true,
   "search.exclude": {
     "**/.yarn": true
   },
