@@ -1,12 +1,10 @@
-import {
-  AbstractMesh,
-  ArcRotateCamera,
-  Camera,
-  HemisphericLight,
-  Light,
-  Mesh,
-  TransformNode,
-} from "@babylonjs/core";
+import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera";
+import { Camera } from "@babylonjs/core/Cameras/camera";
+import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
+import { Light } from "@babylonjs/core/Lights/light";
+import { AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh";
+import { Mesh } from "@babylonjs/core/Meshes/mesh";
+import { TransformNode } from "@babylonjs/core/Meshes/transformNode";
 
 export enum SceneObjectType {
   AbstractMesh = "AbstractMesh",

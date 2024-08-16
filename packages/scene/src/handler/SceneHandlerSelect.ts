@@ -49,6 +49,19 @@ export class SceneHandlerSelect extends SceneHandlerEventsHandler {
     this._config(config);
   }
 
+  private static _getActionEventAdditionalData(
+    event: ActionEvent
+  ): AdditionalData {
+    if (
+      "additionalData" in event
+      && typeof event.additionalData === "object"
+      && event.additionalData !== null
+    ) {
+      return event.additionalData as AdditionalData;
+    }
+    return {};
+  }
+
   private _config({
     hotspotHoverName,
     hoverLayerName,
@@ -110,19 +123,6 @@ export class SceneHandlerSelect extends SceneHandlerEventsHandler {
   private _disposeSelectedLayer(): void {
     this._selectedLayer?.dispose();
     this._selectedLayer = undefined;
-  }
-
-  private static _getActionEventAdditionalData(
-    event: ActionEvent
-  ): AdditionalData {
-    if (
-      "additionalData" in event
-      && typeof event.additionalData === "object"
-      && event.additionalData !== null
-    ) {
-      return event.additionalData as AdditionalData;
-    }
-    return {};
   }
 
   private _highlight(): void {

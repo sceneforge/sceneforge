@@ -21,13 +21,6 @@ export class MeshParentSelectorControl {
     });
   }
 
-  private _parentChildren() {
-    if (!this._mesh) return [];
-    const parent = MeshParentSelectorControl.getParent(this._mesh, this._depth);
-    if (!parent) return [];
-    return parent.getChildMeshes();
-  }
-
   private static getParent(
     mesh: Nullable<AbstractMesh> | Nullable<Node>,
     depth: number = 1,
@@ -38,6 +31,13 @@ export class MeshParentSelectorControl {
     if (!parent) return mesh;
     if (depth === currentDepth) return parent;
     return MeshParentSelectorControl.getParent(parent, depth, currentDepth + 1);
+  }
+
+  private _parentChildren() {
+    if (!this._mesh) return [];
+    const parent = MeshParentSelectorControl.getParent(this._mesh, this._depth);
+    if (!parent) return [];
+    return parent.getChildMeshes();
   }
 
   public clear(): void {

@@ -28,12 +28,10 @@
     "@sceneforge/eslint": "workspace:*",
     "@types/react": "npm:types-react@rc",
     "eslint": "^9.8.0",
-    "react": "^19.0.0-beta",
     "typescript": "^5.5.4"
   },
   "peerDependencies": {
-    "@babylonjs/core": "^7.18.0",
-    "react": "^19.0.0-beta"
+    "@babylonjs/core": "^7.18.0"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
