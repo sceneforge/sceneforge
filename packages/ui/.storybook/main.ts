@@ -32,11 +32,6 @@ const config: StorybookConfig = {
     const { default: styleX } = await import("vite-plugin-stylex");
 
     return mergeConfig(config, {
-      optimizeDeps: {
-        include: [
-          "@stylexjs/stylex",
-        ],
-      },
       plugins: [
         styleX(),
       ],

@@ -105,6 +105,7 @@ const Pane = ({
               onTitleSaveClick={handleTitleSaveClick}
               outer={outer}
               title={titleEditable ? currentTitle : title}
+              titleEditable={titleEditable}
               titleEditing={currentTitleEditing}
               {...props}
               inputRef={inputRef}
