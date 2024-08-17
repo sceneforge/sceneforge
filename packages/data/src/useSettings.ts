@@ -1,11 +1,8 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { useCallback, useEffect, useState } from "react";
 
+import { type SettingsValue, SettingsValueSchema } from "./database";
 import { useDatabase } from "./useDatabase";
-
-export type SettingsValue =
-  | (boolean | number | string)[]
-  | boolean | number | string;
 
 export type UseSettingsResult<T extends SettingsValue = SettingsValue> = [
   T | undefined,
@@ -37,14 +34,27 @@ export const useSettings = <T extends SettingsValue = SettingsValue>(
     if (!isPending) {
       setIsUpdating(true);
     }
-    db?.settings.put({ key, value: currentValue })
+
+    SettingsValueSchema.parseAsync(currentValue)
+      .then(async (parsedValue) => {
+        if (
+          parsedValue
+          || (Array.isArray(parsedValue) && parsedValue.length > 0)
+        ) {
+          return await db?.settings.put({ key, value: parsedValue });
+        }
+        return await db?.settings.delete(key);
+      })
       .then(() => {
-        if (!isPending) {
-          setIsUpdating(false);
+        if (isPending) {
+          setIsPending(false);
         }
       })
-      .catch(() => {
-        if (!isPending) {
+      .catch((error) => {
+        console.error("Failed to save settings", error);
+      })
+      .finally(() => {
+        if (isPending) {
           setIsUpdating(false);
         }
       });

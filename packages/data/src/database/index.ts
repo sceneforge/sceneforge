@@ -13,5 +13,5 @@ export { SceneDataSchema } from "./Scene";
 export type { SceneBlobData } from "./SceneBlob";
 export { SceneBlobDataSchema } from "./SceneBlob";
 
-export type { SettingsData } from "./Settings";
-export { SettingsDataSchema } from "./Settings";
+export type { SettingsData, SettingsValue } from "./Settings";
+export { SettingsDataSchema, SettingsValueSchema } from "./Settings";
