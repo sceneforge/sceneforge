@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "dexie": "^4.0.8",
-    "dexie-react-hooks": "^1.1.7"
+    "dexie-react-hooks": "^1.1.7",
+    "zod": "^3.23.8"
   },
   "peerDependencies": {
     "react": "^19.0.0-beta",

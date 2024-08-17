@@ -1,8 +1,12 @@
-export interface SceneBlobData {
-  blob?: Blob;
-  createdAt: Date;
-  id: number;
-  name: string;
-  sceneId: number;
-  updatedAt: Date;
-};
+import { z } from "zod";
+
+export const SceneBlobDataSchema = z.object({
+  blob: z.instanceof(Blob).optional(),
+  createdAt: z.date(),
+  id: z.number(),
+  name: z.string(),
+  sceneId: z.number(),
+  updatedAt: z.date(),
+});
+
+export type SceneBlobData = z.infer<typeof SceneBlobDataSchema>;
