@@ -24,7 +24,11 @@ export class MeshSelectorControl {
     options?: MeshSelectorControlOptions
   ) {
     this._name = name;
-    if (scene) this._scene = scene;
+
+    if (scene) {
+      this._scene = scene;
+    }
+
     this._highlightLayer = new HighlightLayer(this._name, this._scene, {
       isStroke: true,
       mainTextureRatio: 4,
