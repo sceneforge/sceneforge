@@ -1509,12 +1509,12 @@ __metadata:
   linkType: hard
 
 "@babylonjs/loaders@npm:^7.18.0":
-  version: 7.21.1
-  resolution: "@babylonjs/loaders@npm:7.21.1"
+  version: 7.21.4
+  resolution: "@babylonjs/loaders@npm:7.21.4"
   peerDependencies:
     "@babylonjs/core": ^7.0.0
     babylonjs-gltf2interface: ^7.0.0
-  checksum: 10c0/4d0f496e1db8a9e1493bf9c8c3f5802e548a9021e7659d20549a59d3f8b2956a30e21a9fb9303e0ab87e434ef100ba8a32742dcb59a5a0023ff6d1e8d4d91333
+  checksum: 10c0/73da40fd2c4caebd424f08e49b4d22eee2f258f8c86d05b2b1dba96e123172bdb34d8f768d8f00bb31fea2fb2e1bba491fd324c316a7b4ee2879e988c91e2dec
   languageName: node
   linkType: hard
 
@@ -2784,6 +2784,7 @@ __metadata:
     react: "npm:^19.0.0-beta"
     react-dom: "npm:^19.0.0-beta"
     typescript: "npm:^5.5.4"
+    zod: "npm:^3.23.8"
   peerDependencies:
     react: ^19.0.0-beta
     react-dom: ^19.0.0-beta
