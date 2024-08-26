@@ -2784,6 +2784,7 @@ __metadata:
     react: "npm:^19.0.0-beta"
     react-dom: "npm:^19.0.0-beta"
     typescript: "npm:^5.5.4"
+    zod: "npm:^3.23.8"
   peerDependencies:
     react: ^19.0.0-beta
     react-dom: ^19.0.0-beta
@@ -3555,21 +3556,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.51.21":
-  version: 5.51.21
-  resolution: "@tanstack/query-core@npm:5.51.21"
-  checksum: 10c0/bb9e03391facd21c431d6571f3e088f47dc996b42a10ef636d3fd4444a483019d0e9bd4eb971d554bb4317ac3ee3ab23d5ce9221345753b792fb6fae030d1ad7
+"@tanstack/query-core@npm:5.52.0":
+  version: 5.52.0
+  resolution: "@tanstack/query-core@npm:5.52.0"
+  checksum: 10c0/6f2309294d23721e4508241a4e109d6134bd125b732271217181ae99cc7994ec02ff964397e08bc5e9af5302e3838a3f3259d6e49fdf6fc8aaf324bc4fde4939
   languageName: node
   linkType: hard
 
 "@tanstack/react-query@npm:^5.51.8":
-  version: 5.51.23
-  resolution: "@tanstack/react-query@npm:5.51.23"
+  version: 5.52.1
+  resolution: "@tanstack/react-query@npm:5.52.1"
   dependencies:
-    "@tanstack/query-core": "npm:5.51.21"
+    "@tanstack/query-core": "npm:5.52.0"
   peerDependencies:
-    react: ^18.0.0
-  checksum: 10c0/913566a6778197b0b6dd04416e7ccb2fc766b4c0d04b0dc7f0e10f2bb5dee5663688369e363ae129ccbc1844578f57c81ee7599fac7f3b90ab9611bc52a35e69
+    react: ^18 || ^19
+  checksum: 10c0/a07697446311e908173bcce25ccbf019d7ffde19a7607b6791195414f1b337754f48d3d40b8100283e0fea556295240ecf9fe7bb39b3c1f3040d1ac38da03485
   languageName: node
   linkType: hard
 
