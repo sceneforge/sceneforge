@@ -75,9 +75,5 @@
     "vite-plugin-pwa": "^0.20.1",
     "workbox-precaching": "^7.1.0",
     "workbox-window": "^7.1.0"
-  },
-  "engines": {
-    "node": ">=22.5.1 < 23",
-    "yarn": ">=4.3.1 < 5"
   }
 }

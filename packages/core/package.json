@@ -39,9 +39,5 @@
   },
   "peerDependencies": {
     "react": "^19.0.0-beta"
-  },
-  "engines": {
-    "node": ">=22.5.1 < 23",
-    "yarn": ">=4.3.1 < 5"
   }
 }
