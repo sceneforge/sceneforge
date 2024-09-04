@@ -4944,9 +4944,9 @@ __metadata:
   linkType: hard
 
 "babylonjs-gltf2interface@npm:^7.18.0":
-  version: 7.21.1
-  resolution: "babylonjs-gltf2interface@npm:7.21.1"
-  checksum: 10c0/56feff78d474bb4515cf368cc157d5a9ce640996c56527ca1c340a3e756e853cbcbcdc64f78519d10bb92b123ce41023439607bef999846a41077856171547b6
+  version: 7.23.0
+  resolution: "babylonjs-gltf2interface@npm:7.23.0"
+  checksum: 10c0/a3361926addbe7f482be92a920978317ab7d199332aef95b04f6c0b03b213f9869ac3f0eacf98bf998c65d41c14ef174dd51adda591065533569cee73e4436cb
   languageName: node
   linkType: hard
 
