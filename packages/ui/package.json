@@ -76,9 +76,5 @@
     "typescript": "^5.5.4",
     "vite": "^5.3.5",
     "vite-plugin-stylex": "^0.10.1"
-  },
-  "engines": {
-    "node": ">=22.5.1 < 23",
-    "yarn": ">=4.3.1 < 5"
   }
 }
