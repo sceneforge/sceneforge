@@ -7,9 +7,9 @@ import { ActionManager } from "@babylonjs/core/Actions/actionManager";
 import { ExecuteCodeAction } from "@babylonjs/core/Actions/directActions";
 import { Color3 } from "@babylonjs/core/Maths/math.color";
 import { Vector3 } from "@babylonjs/core/Maths/math.vector";
-import { CreateDisc } from "@babylonjs/core/Meshes/Builders/discBuilder";
 import { Mesh } from "@babylonjs/core/Meshes/mesh";
 
+import { addHotspot } from "./addHotspot";
 import { KeyboardControl } from "./KeyboardControl";
 import { MeshParentSelectorControl } from "./MeshParentSelectorControl";
 import { MeshSelectorControl } from "./MeshSelectorControl";
@@ -86,18 +86,11 @@ export class SceneHandlerSelect extends SceneHandlerEventsHandler {
   }
 
   private _createHotspotHover(): void {
-    this._hotspotHover = CreateDisc(
-      this.hotspotHoverName,
-      {
-        radius: 0.025,
-        sideOrientation: Mesh.DOUBLESIDE,
-        tessellation: 32,
-      },
-      this.scene
-    );
-    this._hotspotHover.isVisible = false;
-    this._hotspotHover.isPickable = false;
-    this._hotspotHover.billboardMode = 7;
+    if (!this.scene) return;
+    this._hotspotHover = addHotspot(this.scene, {
+      id: this.hotspotHoverName,
+      name: this.hotspotHoverName,
+    });
   }
 
   private _disposeHotspotHover(): void {
