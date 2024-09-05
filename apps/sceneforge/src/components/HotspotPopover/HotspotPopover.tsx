@@ -1,15 +1,15 @@
+import type { EngineController } from "@sceneforge/scene";
+
 import {
   CollapsibleList,
-  Form,
   IconEnum,
-  PopoverPane,
-  PopoverRef,
+  PopoverFormPane,
   Shape,
   Variant,
 } from "@sceneforge/ui";
-import { lazy, type Ref } from "react";
+import { lazy, type Ref, type RefObject } from "react";
 
-import { useHotspotPopover } from "./useHotspotPopover";
+import { type HotspotPopoverRef, useHotspotPopover } from "./useHotspotPopover";
 
 const PaneGeneral = lazy(() => import("./PaneGeneral"));
 const PaneHotspotPoint = lazy(() => import("./PaneHotspotPoint"));
@@ -20,8 +20,10 @@ export type HotspotPopoverProps = {
   defaultDistance?: number;
   defaultLabel?: string;
   defaultUrl?: string;
+  engineControllerRef?: RefObject<EngineController | null>;
   id?: string;
-  ref: Ref<PopoverRef>;
+  ref: Ref<HotspotPopoverRef>;
+  sceneId: number;
   variant?: Variant;
 };
 
@@ -30,8 +32,10 @@ const HotspotPopover = ({
   defaultDistance,
   defaultLabel,
   defaultUrl,
+  engineControllerRef,
   id,
   ref,
+  sceneId,
   variant,
 }: HotspotPopoverProps) => {
   const {
@@ -40,17 +44,23 @@ const HotspotPopover = ({
     currentSubmitLabel,
     currentTitle,
     handleFormAction,
+    popoverFormPaneRef,
   } = useHotspotPopover({
     defaultDescription,
     defaultDistance,
     defaultLabel,
     defaultUrl,
+    engineControllerRef,
     id,
+    ref,
+    sceneId,
   });
 
   return (
-    <PopoverPane
+    <PopoverFormPane
+      action={handleFormAction}
       id={currentId}
+      outer
       paneActions={[
         {
           form: currentFormId,
@@ -70,55 +80,50 @@ const HotspotPopover = ({
           variant: Variant.Danger,
         },
       ]}
-      ref={ref}
+      ref={popoverFormPaneRef}
       title={currentTitle}
       variant={variant}
     >
-      <Form
-        action={handleFormAction}
-        id={currentFormId}
-      >
-        <CollapsibleList
-          items={[
-            {
-              children: (
-                <PaneGeneral
-                  defaultDescription={defaultDescription}
-                  defaultLabel={defaultLabel}
-                  id={`${currentId}-pane-general`}
-                  variant={variant}
-                />
-              ),
-              icon: IconEnum.Info,
-              open: true,
-              title: "General",
-            },
-            {
-              children: (
-                <PaneLink
-                  defaultUrl={defaultUrl}
-                  id={`${currentId}-pane-link`}
-                  variant={variant}
-                />
-              ),
-              icon: IconEnum.Globe,
-              title: "Link",
-            },
-            {
-              children: (
-                <PaneHotspotPoint
-                  defaultDistance={defaultDistance}
-                  id={`${currentId}-pane-hotspot-point`}
-                  variant={variant}
-                />
-              ),
-              icon: IconEnum.Edit,
-              title: "Point",
-            },
-          ]}
-        />
-      </Form>
-    </PopoverPane>
+      <CollapsibleList
+        items={[
+          {
+            children: (
+              <PaneGeneral
+                defaultDescription={defaultDescription}
+                defaultLabel={defaultLabel}
+                id={`${currentId}-pane-general`}
+                variant={variant}
+              />
+            ),
+            icon: IconEnum.Info,
+            open: true,
+            title: "General",
+          },
+          {
+            children: (
+              <PaneLink
+                defaultUrl={defaultUrl}
+                id={`${currentId}-pane-link`}
+                variant={variant}
+              />
+            ),
+            icon: IconEnum.Globe,
+            title: "Link",
+          },
+          {
+            children: (
+              <PaneHotspotPoint
+                defaultDistance={defaultDistance}
+                id={`${currentId}-pane-hotspot-point`}
+                variant={variant}
+              />
+            ),
+            icon: IconEnum.Edit,
+            title: "Point",
+          },
+        ]}
+      />
+    </PopoverFormPane>
   );
 };
 

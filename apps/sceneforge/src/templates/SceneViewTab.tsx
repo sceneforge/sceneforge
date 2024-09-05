@@ -32,10 +32,12 @@ const SceneViewTab = ({
     canvasRef,
     changeSceneTitle,
     editToggleRef,
+    engineController,
     hotspotPopoverRef,
     materialToggleRef,
     openFileClickHandler,
     removeScene,
+    sceneId,
     sceneNodes,
     sidebarRef,
     sidebarResizable,
@@ -46,6 +48,8 @@ const SceneViewTab = ({
     viewToggleRef,
   } = useScene(id, hidden, registerBeforeClose);
 
+  if (!sceneId) return null;
+
   return (
     <SplitPaneController
       initialSize={[15, 85]}
@@ -54,6 +58,7 @@ const SceneViewTab = ({
       resizable={sidebarResizable}
       variant={Variant.Primary}
     >
+
       <View>
         <Pane
           actions={[{
@@ -75,7 +80,7 @@ const SceneViewTab = ({
                 {
                   children: (
                     <View scrollable>
-                      <Tree id={`scene-${id}-tree`} nodes={sceneNodes} />
+                      <Tree id={`scene-${sceneId}-tree`} nodes={sceneNodes} />
                     </View>
                   ),
                   open: true,
@@ -88,19 +93,23 @@ const SceneViewTab = ({
         </Pane>
       </View>
       <View>
-        <Canvas id={`scene-${id}-canvas`} ref={canvasRef} />
+        <Canvas id={`scene-${sceneId}-canvas`} ref={canvasRef} />
         <HotspotPopover
-          id={`scene-${id}-canvas-hotspot`}
+          engineControllerRef={engineController}
+          id={`scene-${sceneId}-canvas-hotspot`}
           ref={hotspotPopoverRef}
+          sceneId={sceneId}
           variant={Variant.Primary}
         />
         <SceneDrawer
           changeSceneTitle={changeSceneTitle}
           editToggleRef={editToggleRef}
-          id={`scene-${id}-drawer`}
+          hotspotPopoverRef={hotspotPopoverRef}
+          id={`scene-${sceneId}-drawer`}
           materialToggleRef={materialToggleRef}
           openFileClickHandler={openFileClickHandler}
           removeScene={removeScene}
+          sceneId={sceneId}
           title={title}
           toggleSceneEditMode={toggleSceneEditMode}
           toggleSceneMaterialMode={toggleSceneMaterialMode}

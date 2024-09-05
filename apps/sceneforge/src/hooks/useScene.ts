@@ -1,16 +1,18 @@
-import type { PopoverRef, SplitPaneComponentRef, ToggleComponentRef, ToggleEvent } from "@sceneforge/ui";
+import type { SplitPaneComponentRef, ToggleComponentRef, ToggleEvent } from "@sceneforge/ui";
 
 import { openSceneFile } from "@sceneforge/core";
-import { database } from "@sceneforge/data";
+import { database, useDatabase } from "@sceneforge/data";
 import {
   EngineController,
   EngineState,
+  id as getId,
   SceneHandler,
   sceneLoader,
   sceneNodeTree,
 } from "@sceneforge/scene";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { type HotspotPopoverRef } from "../components";
 import { useTabs } from "./useTabs";
 
 export enum SceneState {
@@ -23,13 +25,15 @@ export const useScene = (
   hidden?: boolean,
   registerBeforeClose?: (callback?: () => Promise<void> | void) => void
 ) => {
+  const db = useDatabase();
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const engineController = useRef<EngineController>(null);
   const sceneHandler = useRef<SceneHandler>(null);
   const viewToggleRef = useRef<ToggleComponentRef>(null);
   const editToggleRef = useRef<ToggleComponentRef>(null);
   const materialToggleRef = useRef<ToggleComponentRef>(null);
-  const hotspotPopoverRef = useRef<PopoverRef>(null);
+  const hotspotPopoverRef = useRef<HotspotPopoverRef>(null);
   const sidebarRef = useRef<SplitPaneComponentRef>(null);
 
   const [isImporting, setIsImporting] = useState(false);
@@ -37,57 +41,77 @@ export const useScene = (
   const [sidebarResizable, setSidebarResizable] = useState(true);
   const [sidebarSize, setSidebarSize] = useState<string | undefined>();
 
+  const sceneId = useMemo(() => {
+    if (!id) return;
+    const parsedId = Number.parseInt(id);
+
+    if (Number.isNaN(parsedId)) return;
+    if (parsedId < 0) return;
+    return parsedId;
+  }, [id]);
+
   const { removeTab } = useTabs();
 
   const currentScene = useMemo(() => {
-    if (!id) return;
-    if (Number.isNaN(Number.parseInt(id))) return;
+    if (!sceneId) return;
 
-    return database.scene.get(Number.parseInt(id));
-  }, [id]);
+    return database.scene.get(sceneId);
+  }, [sceneId]);
 
   const removeScene = useCallback(async () => {
-    if (!id) return;
-    if (Number.isNaN(Number.parseInt(id))) return;
+    if (!sceneId) return;
 
-    await database.scene.delete(Number.parseInt(id));
-    removeTab(`scene-${id}`);
-  }, [id, removeTab]);
+    await database.scene.delete(sceneId);
+    removeTab(`scene-${sceneId}`);
+  }, [sceneId, removeTab]);
 
   const changeSceneTitle = useCallback((name?: string) => {
-    if (!id) return;
-    if (Number.isNaN(Number.parseInt(id))) return;
+    if (!sceneId) return;
 
     if (name) {
-      void database.scene.update(Number.parseInt(id), {
+      void database.scene.update(sceneId, {
         name,
         updatedAt: new Date(),
       });
     }
-  }, [id]);
+  }, [sceneId]);
+
+  const loadBlob = useCallback(async (blob?: Blob) => {
+    if (
+      blob
+      && engineController.current
+      && engineController.current.state === EngineState.Running
+    ) {
+      try {
+        await sceneLoader(engineController.current.scene, blob);
+      }
+      catch (error: unknown) {
+        console.error(error);
+      }
+      setIsImporting(false);
+    }
+  }, [engineController]);
 
   const openFileClickHandler = useCallback(() => {
-    if (!id) return;
-    if (Number.isNaN(Number.parseInt(id))) return;
+    if (!sceneId) return;
+
     setIsImporting(true);
 
-    openSceneFile("Import Scene").then((blob) => {
-      if (
-        blob
-        && engineController.current
-        && engineController.current.state === EngineState.Running
-      ) {
-        sceneLoader(engineController.current.scene, blob).then((result) => {
-          setIsImporting(false);
-          return result;
-        })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
-    })
+    openSceneFile("Import Scene")
+      .then((blob) => {
+        const now = new Date();
+        if (!db) return;
+
+        return db.sceneBlob.put({
+          blob,
+          createdAt: now,
+          name: "Imported Scene",
+          sceneId,
+          updatedAt: now,
+        }).then(() => loadBlob(blob));
+      })
       .catch(error => console.error(error));
-  }, [engineController, id]);
+  }, [sceneId, loadBlob, db]);
 
   useEffect(() => {
     if (canvasRef.current && canvasRef.current instanceof HTMLCanvasElement) {
@@ -146,16 +170,29 @@ export const useScene = (
 
         selectHandler.addEventListeners("hotspotSelect", (event) => {
           if (hotspotPopoverRef.current) {
+            hotspotPopoverRef.current.reset();
             const pointerEvent = event.sourceEvent;
 
             if (!pointerEvent) return;
 
             const { clientX: x, clientY: y } = pointerEvent;
 
+            const mesh = event.target;
+            if (event.extra && "hotspot" in event.extra) {
+              hotspotPopoverRef.current.hotspotMesh = getId(
+                event.extra.hotspot
+              );
+            }
+
+            if (mesh && !Array.isArray(mesh)) {
+              hotspotPopoverRef.current.mesh = mesh.id;
+            }
+
             hotspotPopoverRef.current.position(x, y);
             hotspotPopoverRef.current.show();
           }
         });
+
         selectHandler.start();
         setSceneState(SceneState.Edit);
       }
@@ -258,17 +295,41 @@ export const useScene = (
     });
   }, [sidebarRef, sidebarSize]);
 
+  useEffect(() => {
+    if (
+      canvasRef.current instanceof HTMLCanvasElement
+      && hidden === false
+      && db
+      && sceneId
+    ) {
+      const imported = db.sceneBlob.where("sceneId").equals(sceneId);
+
+      imported.count().then((count) => {
+        if (count > 0) {
+          imported.each((sceneBlob) => {
+            if ("blob" in sceneBlob && sceneBlob.blob instanceof Blob) {
+              return loadBlob(sceneBlob.blob);
+            }
+          }).catch(error => console.error(error));
+        }
+      })
+        .catch(error => console.error(error));
+    }
+  }, [canvasRef, db, hidden, sceneId, loadBlob]);
+
   return {
     canvasRef,
     changeSceneTitle,
     currentScene,
     editToggleRef,
+    engineController,
     hotspotPopoverRef,
     materialToggleRef,
     openFileClickHandler,
     removeScene,
     sceneHandlerSelectStart,
     sceneHandlerSelectStop,
+    sceneId,
     sceneNodes,
     sceneState,
     sidebarRef,

@@ -13,35 +13,40 @@ import {
   Variant,
 } from "@sceneforge/ui";
 import {
-  type Ref,
+  type RefObject,
   useCallback,
   useRef,
   useState,
 } from "react";
 
+import { type HotspotPopoverRef } from "../HotspotPopover";
 import { HotspotsPane } from "../HotspotsPane";
 
 export type SceneDrawerProps = {
   changeSceneTitle: PaneProps["onTitleChange"];
-  editToggleRef: Ref<ToggleComponentRef>;
+  editToggleRef?: RefObject<null | ToggleComponentRef>;
+  hotspotPopoverRef?: RefObject<HotspotPopoverRef | null>;
   id?: string;
-  materialToggleRef: Ref<ToggleComponentRef>;
+  materialToggleRef?: RefObject<null | ToggleComponentRef>;
   openFileClickHandler: () => void;
   removeScene: () => (Promise<void> | void);
+  sceneId: number;
   title: PaneProps["title"];
   toggleSceneEditMode: ToggleProps["onToggle"];
   toggleSceneMaterialMode: ToggleProps["onToggle"];
   toggleSceneViewMode: ToggleProps["onToggle"];
-  viewToggleRef: Ref<ToggleComponentRef>;
+  viewToggleRef?: RefObject<null | ToggleComponentRef>;
 };
 
 const SceneDrawer = ({
   changeSceneTitle,
   editToggleRef,
+  hotspotPopoverRef,
   id,
   materialToggleRef,
   openFileClickHandler,
   removeScene,
+  sceneId,
   title,
   toggleSceneEditMode,
   toggleSceneMaterialMode,
@@ -196,7 +201,11 @@ const SceneDrawer = ({
           orientation={Orientation.Horizontal}
           resizable
         >
-          <HotspotsPane id={`${currentId}-scene-hotspots`} />
+          <HotspotsPane
+            hotspotPopoverRef={hotspotPopoverRef}
+            id={`${currentId}-scene-hotspots`}
+            sceneId={sceneId}
+          />
         </SplitPaneController>
       </Pane>
     </DrawerController>

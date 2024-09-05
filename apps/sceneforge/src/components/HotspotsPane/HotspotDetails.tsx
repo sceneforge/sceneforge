@@ -1,67 +1,36 @@
 import type { HotspotData } from "@sceneforge/data";
 
-export type HotspotDetailsProps = HotspotData;
+import { ListCard, Shape } from "@sceneforge/ui";
+import { type RefObject, useCallback } from "react";
+
+import { type HotspotPopoverRef } from "../HotspotPopover";
+
+export type HotspotDetailsProps = {
+  hotspotPopoverRef?: RefObject<HotspotPopoverRef | null>;
+} & HotspotData;
 
 const HotspotDetails = ({
-  createdAt,
   description,
-  distance,
+  hotspotPopoverRef,
+  id,
   label,
-  updatedAt,
-  url,
 }: HotspotDetailsProps) => {
+  const handleClick = useCallback(() => {
+    if (hotspotPopoverRef && hotspotPopoverRef.current) {
+      const hotspotPopover = hotspotPopoverRef.current;
+      console.log("DEBUG: load hotspot with id", id);
+      hotspotPopover.show();
+    }
+  }, [hotspotPopoverRef, id]);
+
   return (
-    <>
-      <ul>
-        <li>
-          <p>
-            <strong>Label: </strong>
-            {label}
-          </p>
-        </li>
-        {description && (
-          <li>
-            <p>
-              <strong>Description: </strong>
-              {description}
-            </p>
-          </li>
-        )}
-        {url && typeof url === "string" && (
-          <li>
-            <p>
-              <strong>URL: </strong>
-              <a href={url} rel="external" target="_blank">{url}</a>
-            </p>
-          </li>
-        )}
-        {distance && (
-          <li>
-            <p>
-              <strong>Distance: </strong>
-              {distance}
-            </p>
-          </li>
-        )}
-        {createdAt && createdAt instanceof Date && (
-          <li>
-            <p>
-              <strong>Created At: </strong>
-              {createdAt.toISOString()}
-            </p>
-          </li>
-        )}
-        {updatedAt && updatedAt instanceof Date && (
-          <li>
-            <p>
-              <strong>Updated At: </strong>
-              {updatedAt.toISOString()}
-            </p>
-          </li>
-        )}
-      </ul>
-      <hr />
-    </>
+    <ListCard
+      description={description}
+      imageShape={Shape.Squircle}
+      imageSrc="https://via.placeholder.com/48"
+      onClick={handleClick}
+      title={label}
+    />
   );
 };
 
