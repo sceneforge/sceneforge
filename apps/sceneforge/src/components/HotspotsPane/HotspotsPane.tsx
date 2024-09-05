@@ -1,33 +1,47 @@
-import { HotspotData } from "@sceneforge/data";
+import { useLiveQuery } from "@sceneforge/data";
 import {
+  List,
   Pane,
   useCurrentId,
   View,
 } from "@sceneforge/ui";
-import { lazy } from "react";
+import { lazy, type RefObject } from "react";
+
+import { type HotspotPopoverRef } from "../HotspotPopover";
 
 export type HotspotsPaneProps = {
-  hotspots?: HotspotData[];
+  hotspotPopoverRef?: RefObject<HotspotPopoverRef | null>;
   id?: string;
+  sceneId: number;
 };
 
 const HotspotDetails = lazy(() => import("./HotspotDetails"));
 
 const HotspotsPane = ({
-  hotspots,
+  hotspotPopoverRef,
   id,
+  sceneId,
 }: HotspotsPaneProps) => {
   const currentId = useCurrentId(id);
+
+  const hotspots = useLiveQuery(
+    db => db.hotspot.where("sceneId").equals(sceneId)
+      .toArray(),
+    [sceneId]
+  );
 
   return (
     <View id={currentId} padding={0.25}>
       <Pane level={3} title="Hotspots">
-        {hotspots?.map((hotspot, index) => (
-          <HotspotDetails
-            key={`${currentId}-hotspot-${index}`}
-            {...hotspot}
-          />
-        ))}
+        <List>
+          {hotspots?.map((hotspot, index) => (
+            <HotspotDetails
+              hotspotPopoverRef={hotspotPopoverRef}
+              key={`${currentId}-hotspot-${index}`}
+              {...hotspot}
+            />
+          ))}
+        </List>
       </Pane>
     </View>
   );
