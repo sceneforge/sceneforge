@@ -1,5 +1,8 @@
 import { isValidElement, type ReactNode } from "react";
 
+/**
+ * Type representing an unordered list element.
+ */
 export type UnorderedList = {
   [key: string]: unknown;
   props: {
@@ -9,6 +12,12 @@ export type UnorderedList = {
   type: "ul";
 };
 
+/**
+ * Type guard for checking if a given node is an unordered list element.
+ *
+ * @param node A node object with unknown type
+ * @returns True if the node is an unordered list element, false otherwise.
+ */
 export const isUnorderedList = (node: unknown): node is UnorderedList => {
   if (
     node

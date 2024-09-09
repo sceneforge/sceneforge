@@ -4,6 +4,21 @@ export interface BlockquoteElement extends Element {
   tagName: "blockquote";
 };
 
+/**
+ * Check if the given node is a custom blockquote based on the given parameter
+ *
+ * @remarks
+ *
+ * First, it checks if the given node is a blockquote element, and them, by
+ * checking its children, it verifys if the first child is a paragraph element
+ * containing the expected text template based on the parameter or if the
+ * second child is a paragraph element containing the expected text template
+ * when the first child is a text element containing a line break only.
+ *
+ * @param node The node, or element content, to check for
+ * @param parameter The expected parameter to check for the custom blockquote
+ * @returns True if the given node is a custom blockquote, false otherwise
+ */
 export const isCustomBlockquote = (
   node: ElementContent,
   parameter: string

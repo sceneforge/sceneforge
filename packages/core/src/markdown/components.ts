@@ -3,6 +3,9 @@ import { type MarkdownProps } from "@simplecomponent/markdown";
 
 import { wrapper } from "./wrapper";
 
+/**
+ * Predefined components to be used in the markdown renderer.
+ */
 export const markdownComponents: MarkdownProps["components"] = {
   a: wrapper(Link, { rel: "nofollow", target: "_blank" }),
   blockquote: wrapper(Blockquote),

@@ -100,6 +100,13 @@ const getGrids = (node: BlockquoteElement, parameters?: GalleryParameters) => {
   return grids;
 };
 
+/**
+ * The custom blockquote to gallery transformation function
+ *
+ * @param node The blockquote element to transform
+ * @param parameters The gallery parameters
+ * @returns The new element structured for the gallery component
+ */
 export const gallery: BlockquoteFunction<GalleryParameters> = (
   node,
   parameters

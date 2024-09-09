@@ -1,3 +1,6 @@
+/**
+ * Image element type guard
+ */
 export type ImageChildren = {
   props: {
     alt?: string;
@@ -9,6 +12,13 @@ export type ImageChildren = {
   };
 };
 
+/**
+ * Type guard for checking if a given children is an image element.
+ *
+ * @param children A children object with unknown type
+ * @param href The href value to compare with the image `src` property.
+ * @returns True if the given children is an image element, false otherwise.
+ */
 export const isImageLink = (
   children: unknown,
   href?: string
