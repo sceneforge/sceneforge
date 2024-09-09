@@ -1,22 +1,24 @@
+import { $ } from "bun";
 import { watch } from "chokidar";
-import { execSync } from "node:child_process";
 
-let rebuildTimeout: NodeJS.Timeout | null = null;
+let rebuildTimeout: null | Timer = null;
 let rebuildPackages: string[] = [];
 
-const rebuild = (packageName: string) => {
+const rebuild = async (packageName: string) => {
   console.log(`Rebuilding ${packageName}`);
   // Run the build command for the package
-  execSync(`yarn workspace ${packageName} build`, {
-    stdio: "inherit",
-  });
+  return await $`bun run --filter '${packageName}' build`.text();
 };
 
 const includePackage = (packageName: string) => {
   if (rebuildTimeout === null) {
     rebuildTimeout = setTimeout(() => {
       for (const name of rebuildPackages) {
-        rebuild(name);
+        rebuild(name).catch((error: unknown) => {
+          throw new Error("Something went wrong while rebuilding the package", {
+            cause: error,
+          });
+        });
       }
       rebuildPackages = [];
       rebuildTimeout = null;
