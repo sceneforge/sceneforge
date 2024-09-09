@@ -19,10 +19,8 @@
     "url": "https://phinpho.github.io"
   },
   "scripts": {
-    "preinstall": "bun run --filter '@sceneforge/ui' build",
     "build": "bun run --bun tsc -p tsconfig.json",
-    "lint": "bun run --bun --smol eslint .",
-    "prepack": "bun run build"
+    "lint": "bun run --bun --smol eslint ."
   },
   "dependencies": {
     "@sceneforge/ui": "workspace:*",

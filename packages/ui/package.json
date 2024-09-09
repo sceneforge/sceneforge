@@ -30,7 +30,6 @@
   "scripts": {
     "build": "NODE_ENV=production bun run --bun tsc -p tsconfig.build.json && NODE_ENV=production bun ./scripts/build.ts",
     "lint": "bun run --bun --smol eslint .",
-    "prepack": "bun run build",
     "storybook:build": "bun run --bun storybook build",
     "storybook:docs": "bun run --bun storybook dev --docs",
     "storybook": "bun run --bun storybook dev -p 6006"

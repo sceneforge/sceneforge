@@ -16,11 +16,16 @@
   "scripts": {
     "lint": "bun run --bun eslint .",
     "lint:all": "bun run --filter '@sceneforge/*' lint",
-    "lint:all:fix": "bun run --filter '@sceneforge/* lint --fix",
+    "lint:all:fix": "bun run --filter '@sceneforge/* lint - run-fix",
     "dev": "bun run --filter '@sceneforge/app' dev",
     "build": "bun run build:packages && bun run build:apps && bun run build:finish",
     "build:apps": "bun run --filter '@sceneforge/app' build",
-    "build:packages": "bun run --filter './packages/*' build",
+    "build:packages": "bun run build:package:ui && bun run build:package:data && bun run build:package:core && bun run build:package:scene && bun run build:package:platform",
+    "build:package:core": "bun run --filter '@sceneforge/core' build",
+    "build:package:data": "bun run --filter '@sceneforge/data' build",
+    "build:package:platform": "bun run --filter '@sceneforge/platform' build",
+    "build:package:scene": "bun run --filter '@sceneforge/scene' build",
+    "build:package:ui": "bun run --filter '@sceneforge/ui' build",
     "postinstall": "bun run --bun husky",
     "docs:dev": "bun run --filter '@sceneforge/docs' dev",
     "docs:build": "bun run --filter '@sceneforge/docs' build",
@@ -55,6 +60,15 @@
     "react": "^19.0.0-beta",
     "typescript": "^5.5.4"
   },
+  "trustedDependencies": [
+    "@sceneforge/app",
+    "@sceneforge/core",
+    "@sceneforge/data",
+    "@sceneforge/docs",
+    "@sceneforge/platform",
+    "@sceneforge/scene",
+    "@sceneforge/ui"
+  ],
   "workspaces": [
     "apps/*",
     "packages/*"
