@@ -1,20 +1,20 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 
-import path from "node:path";
+// import path from "node:path";
 /**
  * This function is used to resolve the absolute path of a package.
  * It is needed in projects that use Yarn PnP or are set up within a monorepo.
  */
-function getAbsolutePath(value: string) {
-  // eslint-disable-next-line unicorn/prefer-module
-  return path.dirname(require.resolve(path.join(value, "package.json")));
-}
+// function getAbsolutePath(value: string) {
+//   // eslint-disable-next-line unicorn/prefer-module
+//   return path.dirname(require.resolve(path.join(value, "package.json")));
+// }
 
 const config: StorybookConfig = {
   addons: [
-    getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@storybook/addon-interactions"),
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
   ],
   core: {
     builder: "@storybook/builder-vite",
@@ -25,7 +25,7 @@ const config: StorybookConfig = {
     defaultName: "Documentation",
   },
   framework: {
-    name: getAbsolutePath("@storybook/react-vite") as StorybookConfig["framework"] extends { name: infer T } ? T : never,
+    name: "@storybook/react-vite",
     options: {},
   },
   staticDirs: [
