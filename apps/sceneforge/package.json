@@ -24,13 +24,13 @@
   "license": "CC0",
   "private": true,
   "scripts": {
-    "postinstall": "yarn workspaces foreach --from . -Rt --exclude @sceneforge/app run prepack",
-    "dev": "vite",
-    "build": "tsc && vite build --mode production",
+    "preinstall": "bun run --filter '@sceneforge/{core,data,scene,platform,ui}' build",
+    "dev": "bun run --bun vite",
+    "build": "bun run --bun vite build --mode production",
     "test": "jest",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+    "lint": "bun run --bun --smol eslint .",
+    "preview": "bun run --bun vite preview",
+    "version": "bun run --bun conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "dependencies": {
     "@babylonjs/core": "^7.18.0",
@@ -39,7 +39,6 @@
     "@sceneforge/data": "workspace:*",
     "@sceneforge/scene": "workspace:*",
     "@sceneforge/ui": "workspace:*",
-    "@simplecomponent/markdown": "^0.0.2",
     "@tanstack/react-query": "^5.51.8",
     "browser-fs-access": "^0.35.0",
     "i18next": "^23.12.2",
@@ -52,9 +51,7 @@
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@sceneforge/eslint": "workspace:*",
-    "@types/hast": "^3.0.4",
     "@types/jest": "^29.5.12",
-    "@types/node": "^22.0.2",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",
     "@types/uuid": "^10.0.0",
@@ -66,13 +63,12 @@
     "react-compiler-healthcheck": "0.0.0-experimental-ab3118d-20240725",
     "terser": "^5.31.0",
     "ts-jest": "^29.1.5",
-    "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "vite": "^5.3.5",
     "vite-plugin-browser-sync": "^3.0.3",
     "vite-plugin-i18next-loader": "^2.0.12",
     "vite-plugin-meta-env": "^1.0.2",
-    "vite-plugin-pwa": "^0.20.1",
+    "vite-plugin-pwa": "^0.20.5",
     "workbox-precaching": "^7.1.0",
     "workbox-window": "^7.1.0"
   }

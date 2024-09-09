@@ -16,9 +16,9 @@
   "license": "CC0",
   "private": true,
   "scripts": {
-    "build": "storybook build -o dist/",
-    "lint": "eslint .",
-    "dev": "storybook dev -p 6006"
+    "build": "bun run --bun storybook build -o dist/",
+    "lint": "bun run --bun --smol eslint .",
+    "dev": "bun run --bun storybook dev -p 6006"
   },
   "dependencies": {
     "@sceneforge/ui": "workspace:*"
@@ -35,14 +35,12 @@
     "@storybook/react-vite": "^8.2.7",
     "@storybook/test": "^8.2.7",
     "@storybook/theming": "^8.2.7",
-    "@types/node": "^22.0.2",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",
     "eslint": "^9.8.0",
     "react": "^19.0.0-beta",
     "react-dom": "^19.0.0-beta",
     "storybook": "^8.2.7",
-    "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "vite": "^5.3.5"
   }

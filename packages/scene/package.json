@@ -34,8 +34,9 @@
     "@babylonjs/core": "^7.18.0"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "lint": "eslint .",
-    "prepack": "yarn build"
+    "preinstall": "bun run --filter '@sceneforge/core' build",
+    "build": "bun run --bun tsc -p tsconfig.json",
+    "lint": "bun run --bun --smol eslint .",
+    "prepack": "bun run build"
   }
 }
