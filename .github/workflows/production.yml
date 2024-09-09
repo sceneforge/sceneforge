@@ -23,12 +23,12 @@ jobs:
       
       - name: Install Dependencies
         run: bun install --frozen-lockfile
+            
+      - name: Build
+        run: bun run build
       
       - name: Lint all Packages
         run: bun run lint:all
-      
-      - name: Build
-        run: bun run build
       
       - name: Compress App Artifact
         run: tar -C apps/sceneforge/dist -cvzf sceneforge.tar.gz .
