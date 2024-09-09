@@ -1,4 +1,4 @@
-import Dexie, { EntityTable } from "dexie";
+import Dexie, { type EntityTable } from "dexie";
 
 import type { HotspotData } from "./Hotspot";
 import type { ModelData } from "./Model";
