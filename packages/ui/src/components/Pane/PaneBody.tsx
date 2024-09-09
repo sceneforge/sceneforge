@@ -4,7 +4,7 @@ import * as stylex from "@stylexjs/stylex";
 
 import { backgroundColor } from "../../colors.stylex";
 import { Orientation } from "../../types";
-import { ActionList, ActionListProps } from "../ActionList";
+import { ActionList, type ActionListProps } from "../ActionList";
 import { View, type ViewProps } from "../View";
 
 export type PaneBodyProps = PropsWithChildren<{

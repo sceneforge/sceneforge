@@ -1,3 +1,5 @@
+import type { StyleXStyles } from "@stylexjs/stylex";
+
 import * as stylex from "@stylexjs/stylex";
 
 import { ActionList, type ActionListProps } from "../ActionList";
@@ -17,7 +19,7 @@ const styles = stylex.create({
   },
   container: (id: string) => ({
     anchorName: `--dropdown-anchor-${id.replaceAll(":", "-")}`,
-  } as Record<string, string>),
+  }),
   noVariantPopover: {
     backgroundColor: "ButtonFace",
     color: "ButtonText",
@@ -35,7 +37,7 @@ const styles = stylex.create({
     positionAnchor: `--dropdown-anchor-${id.replaceAll(":", "-")}`,
     right: "anchor(right)",
     top: "anchor(bottom)",
-  } as Record<string, string>),
+  }),
 });
 
 const Dropdown = ({
@@ -75,7 +77,7 @@ const Dropdown = ({
         popoverTarget={currentListId}
         popoverTargetAction={currentState === "closed" ? "hide" : "show"}
         style={[
-          styles.container(currentId),
+          styles.container(currentId) as StyleXStyles,
           style,
         ]}
         variant={currentVariant}
@@ -91,7 +93,7 @@ const Dropdown = ({
         popover="auto"
         ref={actionListRef}
         style={[
-          styles.popover as Record<string, string>,
+          styles.popover,
           !currentActionListVariant && styles.noVariantPopover,
           styles.popoverAnchor(currentId),
         ]}

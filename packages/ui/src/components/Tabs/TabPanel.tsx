@@ -1,5 +1,6 @@
+import type { ComponentType, JSX } from "react";
+
 import * as stylex from "@stylexjs/stylex";
-import { type ComponentType } from "react";
 
 import { View } from "../View";
 
@@ -35,13 +36,17 @@ const styles = stylex.create({
   },
 });
 
-const TabPanel = <Props = Record<string, unknown>>({
+export type TabPanelComponent<
+  Props = Record<string, unknown>,
+> = (props: TabPanelProps<Props>) => JSX.Element;
+
+const TabPanel: TabPanelComponent = ({
   component: TabComponent,
   hidden,
   props,
   registerBeforeClose,
   tabId,
-}: TabPanelProps<Props>) => {
+}) => {
   return (
     <View
       aria-labelledby={tabId}

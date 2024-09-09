@@ -3,7 +3,7 @@ import { lazy, type Ref } from "react";
 import type { SplitPaneProps } from "./SplitPane";
 
 import { Orientation } from "../../types";
-import { SplitPaneComponentRef, useSplitPane } from "./useSplitPane";
+import { type SplitPaneComponentRef, useSplitPane } from "./useSplitPane";
 
 const SplitPane = lazy(() => import("./SplitPane"));
 

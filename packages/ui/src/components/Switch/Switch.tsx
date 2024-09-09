@@ -1,9 +1,10 @@
+import type { InputHTMLAttributes, Ref } from "react";
+
 import * as stylex from "@stylexjs/stylex";
-import { type InputHTMLAttributes, type Ref } from "react";
 
 import { borderStyles, roundedStyles } from "../../borders.stylex";
 import { backgroundStyles, colorVariables } from "../../colors.stylex";
-import { Variant, VariantType } from "../../types";
+import { Variant, type VariantType } from "../../types";
 
 export type SwitchProps = {
   ref?: Ref<HTMLInputElement | null>;

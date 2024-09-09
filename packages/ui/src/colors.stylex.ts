@@ -183,7 +183,7 @@ export const themeColors = stylex.create({
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
     },
-  } as Record<string, Record<string, string>>),
+  }),
   setColorDanger: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-danger": {
       default: color.background?.light,
@@ -195,7 +195,7 @@ export const themeColors = stylex.create({
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
     },
-  } as Record<string, Record<string, string>>),
+  }),
   setColorInfo: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-info": {
       default: color.background?.light,
@@ -207,7 +207,7 @@ export const themeColors = stylex.create({
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
     },
-  } as Record<string, Record<string, string>>),
+  }),
   setColorPrimary: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-primary": {
       default: color.background?.light,
@@ -219,7 +219,7 @@ export const themeColors = stylex.create({
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
     },
-  } as Record<string, Record<string, string>>),
+  }),
   setColorSuccess: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-success": {
       default: color.background?.light,
@@ -231,7 +231,7 @@ export const themeColors = stylex.create({
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
     },
-  } as Record<string, Record<string, string>>),
+  }),
   setColorWarning: (color: ThemeColorPlacementType) => ({
     "--theme-color-background-warning": {
       default: color.background?.light,
@@ -243,7 +243,7 @@ export const themeColors = stylex.create({
       [MEDIA_DARK]: color.foreground?.dark,
       [MEDIA_LIGHT]: color.foreground?.light,
     },
-  } as Record<string, Record<string, string>>),
+  }),
 });
 
 export const backgroundStyles = stylex.create({

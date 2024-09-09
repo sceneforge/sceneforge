@@ -1,6 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 
-import { Image, ImageProps } from "../Image";
+import { Image, type ImageProps } from "../Image";
 
 export type PaneImageProps = ImageProps;
 

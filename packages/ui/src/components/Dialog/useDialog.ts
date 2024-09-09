@@ -1,4 +1,4 @@
-import { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
+import { type Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 
 import { useCurrentId } from "../../hooks";
 

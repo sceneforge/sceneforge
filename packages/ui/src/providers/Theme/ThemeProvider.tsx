@@ -1,45 +1,15 @@
 import * as stylex from "@stylexjs/stylex";
 import {
-  createContext,
-  type Dispatch,
   type PropsWithChildren,
-  type SetStateAction,
   useCallback,
   useLayoutEffect,
   useState,
 } from "react";
 
-import type { ThemeType } from "../../schemas";
-
 import { themeColors } from "../../colors.stylex";
-import { getColorObject } from "../../helpers";
 import { Variant } from "../../types";
-import { type SetColorStateType, useColorState } from "./useColorState";
-
-export type ThemeContextType = {
-  setBodyBackground: Dispatch<SetStateAction<Variant>>;
-  setColors: { [key in Variant]: SetColorStateType };
-} & ThemeType;
-
-export const ThemeContext = createContext<ThemeContextType>({
-  colors: {
-    [Variant.Accent]: getColorObject(),
-    [Variant.Danger]: getColorObject(),
-    [Variant.Info]: getColorObject(),
-    [Variant.Primary]: getColorObject(),
-    [Variant.Success]: getColorObject(),
-    [Variant.Warning]: getColorObject(),
-  },
-  setBodyBackground: () => void 0,
-  setColors: {
-    [Variant.Accent]: () => void 0,
-    [Variant.Danger]: () => void 0,
-    [Variant.Info]: () => void 0,
-    [Variant.Primary]: () => void 0,
-    [Variant.Success]: () => void 0,
-    [Variant.Warning]: () => void 0,
-  },
-});
+import { ThemeContext, type ThemeContextType } from "./ThemeContext";
+import { useColorState } from "./useColorState";
 
 export type ThemeProviderProps = PropsWithChildren<{
   bodyBackground?: ThemeContextType["bodyBackground"];

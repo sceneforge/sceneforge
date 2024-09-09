@@ -1,10 +1,11 @@
+import type { MouseEventHandler } from "react";
+
 import * as stylex from "@stylexjs/stylex";
-import { MouseEventHandler } from "react";
 
 import { IconEnum } from "../../types";
-import { Button, ButtonProps } from "../Button";
+import { Button, type ButtonProps } from "../Button";
 import { Icon } from "../Icon";
-import { View, ViewProps } from "../View";
+import { View, type ViewProps } from "../View";
 
 export type TreeNodeLabelProps = {
   hasNodes?: boolean;

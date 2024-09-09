@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { Variant } from "../../types";
-import { ThemeContext } from "./ThemeProvider";
+import { ThemeContext } from "./ThemeContext";
 
 export const useTheme = () => {
   const {
