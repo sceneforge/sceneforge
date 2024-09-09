@@ -1,0 +1,7 @@
+telemetry = false
+
+[install.lockfile]
+save = true
+
+[run]
+bun = true

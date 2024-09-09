@@ -1,1 +1,1 @@
-yarn lint:all
+bun run lint:all
