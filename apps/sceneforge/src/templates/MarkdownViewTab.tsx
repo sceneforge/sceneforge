@@ -1,6 +1,4 @@
-import { blockquoteTransform, markdownComponents } from "@sceneforge/core";
-import { Container, type TabComponentProps, Variant, View } from "@sceneforge/ui";
-import { Markdown as SimpleMarkdown } from "@simplecomponent/markdown";
+import { Container, type TabComponentProps, View } from "@sceneforge/ui";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -47,20 +45,7 @@ const MarkdownViewTab = ({
         {
           isPending
             ? (<p>Loading...</p>)
-            : (
-              <SimpleMarkdown
-                components={markdownComponents}
-                key={i18nHref}
-                rehypePlugins={[
-                  blockquoteTransform({
-                    gallery: {
-                      variant: Variant.Accent,
-                    },
-                  }),
-                ]}
-                value={data}
-              />
-            )
+            : (<pre>{data}</pre>)
         }
       </Container>
     </View>
