@@ -24,24 +24,24 @@
     "@sceneforge/ui": "workspace:*"
   },
   "devDependencies": {
-    "@storybook/addon-docs": "^8.2.7",
-    "@storybook/addon-essentials": "^8.2.7",
-    "@storybook/addon-interactions": "^8.2.7",
-    "@storybook/addon-links": "^8.2.7",
-    "@storybook/blocks": "^8.2.7",
-    "@storybook/builder-vite": "^8.2.7",
-    "@storybook/manager-api": "^8.2.2",
-    "@storybook/react": "^8.2.7",
-    "@storybook/react-vite": "^8.2.7",
-    "@storybook/test": "^8.2.7",
-    "@storybook/theming": "^8.2.7",
+    "@storybook/addon-docs": "^8.3.0",
+    "@storybook/addon-essentials": "^8.3.0",
+    "@storybook/addon-interactions": "^8.3.0",
+    "@storybook/addon-links": "^8.3.0",
+    "@storybook/blocks": "^8.3.0",
+    "@storybook/builder-vite": "^8.3.0",
+    "@storybook/manager-api": "^8.3.0",
+    "@storybook/react": "^8.3.0",
+    "@storybook/react-vite": "^8.3.0",
+    "@storybook/test": "^8.3.0",
+    "@storybook/theming": "^8.3.0",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",
     "eslint": "^9.8.0",
     "react": "^19.0.0-beta",
     "react-dom": "^19.0.0-beta",
-    "storybook": "^8.2.7",
+    "storybook": "^8.3.0",
     "typescript": "^5.5.4",
-    "vite": "^5.3.5"
+    "vite": "^5.4.4"
   }
 }
