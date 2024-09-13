@@ -11,6 +11,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "declaration": true,
+    "declarationMap": true,
     "outDir": "./dist",
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -23,9 +24,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
-    "types": [
-      "node"
-    ]
+    "verbatimModuleSyntax": true
   },
   "include": [
     "./src/**/*",

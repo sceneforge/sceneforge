@@ -14,40 +14,46 @@
   "license": "CC0",
   "private": true,
   "scripts": {
-    "lint": "eslint .",
-    "lint:all": "yarn workspaces foreach -Api run lint",
-    "lint:all:fix": "yarn workspaces foreach -Api run lint --fix",
-    "dev": "yarn ts-node ./scripts/development.ts",
-    "build": "yarn build:packages && yarn build:apps && yarn build:finish",
-    "build:apps": "yarn workspace @sceneforge/docs build && yarn workspace @sceneforge/app build",
-    "build:packages": "yarn workspaces foreach --from @sceneforge/app -Rt --exclude @sceneforge/app run build",
-    "postinstall": "husky",
-    "docs:dev": "yarn workspace @sceneforge/docs dev",
-    "docs:build": "yarn workspace @sceneforge/docs build",
-    "storybook": "yarn workspace @sceneforge/ui storybook",
-    "storybook:docs": "yarn workspace @sceneforge/ui storybook:docs",
-    "storybook:build": "yarn workspace @sceneforge/ui storybook:build",
-    "build:finish": "yarn ts-node ./scripts/buildFinish.ts",
-    "watch:packages": "yarn ts-node ./scripts/watchPackages.ts"
+    "lint": "bun run --bun eslint .",
+    "lint:all": "bun run --filter '@sceneforge/*' lint",
+    "lint:all:fix": "bun run --filter '@sceneforge/* lint - run-fix",
+    "dev": "bun run --filter '@sceneforge/app' dev",
+    "build": "bun run build:packages && bun run build:apps && bun run build:finish",
+    "build:apps": "bun run --filter '@sceneforge/app' build",
+    "build:packages": "bun run build:package:ui && bun run build:package:data && bun run build:package:core && bun run build:package:scene && bun run build:package:platform",
+    "build:package:core": "bun run --filter '@sceneforge/core' build",
+    "build:package:data": "bun run --filter '@sceneforge/data' build",
+    "build:package:platform": "bun run --filter '@sceneforge/platform' build",
+    "build:package:scene": "bun run --filter '@sceneforge/scene' build",
+    "build:package:ui": "bun run --filter '@sceneforge/ui' build",
+    "postinstall": "bun run --bun husky",
+    "docs:dev": "bun run --filter '@sceneforge/docs' dev",
+    "docs:build": "bun run --filter '@sceneforge/docs' build",
+    "storybook": "bun run --filter '@sceneforge/ui' storybook",
+    "storybook:docs": "bun run --filter '@sceneforge/ui' storybook:docs",
+    "storybook:build": "bun run --filter '@sceneforge/ui' storybook:build",
+    "build:finish": "bun run ./scripts/buildFinish.ts",
+    "watch:packages": "bun run ./scripts/watchPackages.ts"
   },
   "dependencies": {
     "@sceneforge/app": "workspace:*",
-    "@sceneforge/docs": "workspace:*"
+    "@sceneforge/docs": "workspace:*",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-b6997ec-20240909",
+    "i18next": "^23.15.1",
+    "terser": "^5.32.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@commitlint/format": "^19.3.0",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/format": "^19.5.0",
     "@sceneforge/eslint": "workspace:*",
     "@types/node": "^22.0.2",
     "chokidar": "^3.6.0",
-    "concurrently": "^8.2.2",
     "conventional-changelog-angular": "^8.0.0",
     "conventional-changelog-cli": "^5.0.0",
     "eslint": "^9.8.0",
-    "husky": "^9.0.11",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "husky": "^9.1.6",
+    "typescript": "^5.6.2"
   },
   "resolutions": {
     "@types/react-dom": "npm:types-react-dom@rc",
@@ -57,12 +63,17 @@
     "react": "^19.0.0-beta",
     "typescript": "^5.5.4"
   },
+  "trustedDependencies": [
+    "@sceneforge/app",
+    "@sceneforge/core",
+    "@sceneforge/data",
+    "@sceneforge/docs",
+    "@sceneforge/platform",
+    "@sceneforge/scene",
+    "@sceneforge/ui"
+  ],
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "engines": {
-    "node": ">=22.5.1 < 23"
-  },
-  "packageManager": "yarn@4.4.1"
+  ]
 }

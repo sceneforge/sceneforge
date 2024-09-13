@@ -20,24 +20,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version-file: 'package.json'
-          cache: 'yarn'
+          bun-version-file: ".bun-version"
       
-      - name: Install dependencies
-        run: yarn install --immutable
-      
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
       - name: Build
-        run: yarn build
+        run: bun run build
             
-      - name: Upload Docs Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          retention-days: 1
-          name: sceneforge-docs
-          path: ./apps/docs/dist
+      # - name: Upload Docs Artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     retention-days: 1
+      #     name: sceneforge-docs
+      #     path: ./apps/docs/dist
 
       - name: Upload App Artifact
         uses: actions/upload-artifact@v4

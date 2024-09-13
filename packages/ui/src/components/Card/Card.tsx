@@ -5,7 +5,7 @@ import { type PropsWithChildren } from "react";
 
 import { Shape, Variant } from "../../types";
 import { Pane, type PaneProps } from "../Pane";
-import { View, ViewProps } from "../View";
+import { View, type ViewProps } from "../View";
 
 export type CardProps = PropsWithChildren<{
   actions?: PaneProps["paneActions"];

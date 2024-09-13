@@ -1,4 +1,4 @@
-import { MouseEventHandler, useCallback, useMemo, useState } from "react";
+import { type MouseEventHandler, useCallback, useMemo, useState } from "react";
 
 import type { TreeNodeProps } from "./TreeNode";
 

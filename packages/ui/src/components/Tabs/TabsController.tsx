@@ -37,6 +37,7 @@ const TabsController = ({
     handleTabChange,
     handleTabClose,
     registerBeforeClose,
+    // eslint-disable-next-line react-compiler/react-compiler
   } = useTabs({ id, initialContent, onTabClose, ref });
 
   return (

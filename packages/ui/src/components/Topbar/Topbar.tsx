@@ -5,7 +5,7 @@ import { foregroundColor } from "../../colors.stylex";
 import { useCurrentId } from "../../hooks";
 import { appRegionStyles, titleBar } from "../../titleBar.stylex";
 import { Orientation, Variant } from "../../types";
-import { ActionList, ActionListProps } from "../ActionList";
+import { ActionList, type ActionListProps } from "../ActionList";
 import { Heading } from "../Heading";
 import { View } from "../View";
 

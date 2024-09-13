@@ -21,7 +21,7 @@ const ColorConfig = lazy(() => import("./ColorConfig"));
 const styles = stylex.create({
   anchor: (id: string) => ({
     anchorName: `--color-picker-anchor-${id.replaceAll(":", "-")}`,
-  } as Record<string, string>),
+  }),
   background: (hue: number, saturation: number, lightness: number) => ({
     backgroundColor: `hsl(${hue}deg ${saturation}% ${lightness}%)`,
   }),
@@ -41,7 +41,7 @@ const styles = stylex.create({
   },
   popover: (id: string) => ({
     positionAnchor: `--color-picker-anchor-${id.replaceAll(":", "-")}`,
-  } as Record<string, string>),
+  }),
   view: {
     display: null,
     height: null,
@@ -94,7 +94,7 @@ const ColorPicker = ({
         popoverTargetAction="toggle"
         {...props}
         style={[
-          styles.anchor(currentId),
+          styles.anchor(currentId) as StyleXStyles,
           styles.button,
           style,
         ]}
@@ -125,7 +125,7 @@ const ColorPicker = ({
           !variant && borderStyles.borderDefault(50),
           borderStyles.borderSize(1),
           styles.view,
-          styles.popover(currentId),
+          styles.popover(currentId) as StyleXStyles,
           elevationStyles.default(3),
         ]}
       >

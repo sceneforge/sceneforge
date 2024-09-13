@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import type { ActionProps } from "../Action";
 import type { ToggleComponentRef, ToggleEvent } from "../Toggle";
 import type { DropdownProps } from "./Dropdown";
 
 import { useCurrentId } from "../../hooks";
-import { ActionProps } from "../Action";
 
 type UseDropdownProps = {
   actionListVariant?: DropdownProps["actionListVariant"];

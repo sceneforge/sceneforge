@@ -7,7 +7,7 @@ import { useCurrentId } from "../../hooks";
 import { Orientation, Variant } from "../../types";
 import { Action, type ActionProps } from "../Action";
 import { Unlisted, UnlistedItem } from "../Unlisted";
-import { View, ViewProps } from "../View";
+import { View, type ViewProps } from "../View";
 
 export type ActionListProps = {
   actions?: ActionProps[];

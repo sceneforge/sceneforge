@@ -2,7 +2,7 @@ import * as stylex from "@stylexjs/stylex";
 
 import { Shape } from "../../types";
 import { Button, type ButtonProps } from "../Button";
-import { Icon, IconProps } from "../Icon";
+import { Icon, type IconProps } from "../Icon";
 
 export type IconButtonProps = {
   icon: IconProps["icon"];

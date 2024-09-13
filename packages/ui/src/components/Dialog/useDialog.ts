@@ -1,4 +1,4 @@
-import { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
+import { type Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 
 import { useCurrentId } from "../../hooks";
 
@@ -15,6 +15,7 @@ export const useDialog = ({ id, open, ref }: UseDialogProps) => {
   const headId = useMemo(() => `${currentId}-dialog-head`, [currentId]);
   const descriptionId = useMemo(() => `${currentId}-dialog-description`, [currentId]);
 
+  // eslint-disable-next-line react-compiler/react-compiler
   useImperativeHandle(ref, () => dialogRef.current as HTMLDialogElement, [
     dialogRef,
   ]);

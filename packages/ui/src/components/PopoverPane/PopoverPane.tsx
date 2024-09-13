@@ -51,6 +51,7 @@ const PopoverPane = ({
   const {
     closePopoverPane,
     popoverRef,
+    // eslint-disable-next-line react-compiler/react-compiler
   } = usePopoverPane({ ref });
 
   return (

@@ -1,5 +1,3 @@
-import { writeFile } from "node:fs/promises";
-
 const SITEMAP_DIST_PATH = "apps/sceneforge/dist/sitemap.xml";
 
 type XmlAttributes = {
@@ -102,7 +100,7 @@ const buildUrl = ({
 };
 
 export const buildAppSitemap = async () => {
-  return await writeFile(
+  return await Bun.write(
     SITEMAP_DIST_PATH,
     xml(tag("urlset", {
       xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9",
@@ -111,7 +109,6 @@ export const buildAppSitemap = async () => {
         lastModified: Date.now(),
         location: "https://app.sceneforge.com/",
       }),
-    ])),
-    { encoding: "utf8" }
+    ]))
   );
 };

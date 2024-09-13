@@ -82,6 +82,7 @@ const Popover = ({
     viewRef,
     x,
     y,
+    // eslint-disable-next-line react-compiler/react-compiler
   } = usePopover({ defaultX, defaultY, id, ref });
 
   return (

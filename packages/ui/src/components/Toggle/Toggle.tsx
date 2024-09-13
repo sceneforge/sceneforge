@@ -60,6 +60,7 @@ const Toggle = ({
     currentVariant,
     handleClickEvent,
     isPressed,
+    // eslint-disable-next-line react-compiler/react-compiler
   } = useToggle({
     glossy,
     inverted,

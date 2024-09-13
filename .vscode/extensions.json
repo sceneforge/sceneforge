@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "astro-build.astro-vscode"
+    "astro-build.astro-vscode",
+    "oven.bun-vscode"
   ]
 }

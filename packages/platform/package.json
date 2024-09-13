@@ -19,9 +19,8 @@
     "url": "https://phinpho.github.io"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "lint": "eslint .",
-    "prepack": "yarn build"
+    "build": "bun run --bun tsc -p tsconfig.json",
+    "lint": "bun run --bun --smol eslint ."
   },
   "devDependencies": {
     "@sceneforge/eslint": "workspace:*",

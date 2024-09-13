@@ -9,7 +9,7 @@ import {
 
 import { colorStyles } from "../../colors.stylex";
 import { Variant } from "../../types";
-import { Heading, HeadingProps } from "../Heading";
+import { Heading, type HeadingProps } from "../Heading";
 import { marginStyle, paddingStyle, type SpacerStyleProps } from "../tokens.stylex";
 
 const styles = stylex.create({

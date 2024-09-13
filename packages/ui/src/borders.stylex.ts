@@ -1,7 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 
+import type { VariantType } from "./types";
+
 import { colorVariables } from "./colors.stylex";
-import { VariantType } from "./types";
 
 export const borderStyles = stylex.create({
   border: {

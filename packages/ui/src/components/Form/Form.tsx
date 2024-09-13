@@ -5,7 +5,7 @@ import * as stylex from "@stylexjs/stylex";
 
 import { useCurrentId } from "../../hooks";
 import { Variant } from "../../types";
-import { Button, ButtonProps } from "../Button";
+import { Button, type ButtonProps } from "../Button";
 import { Fieldset, type FieldsetProps } from "../Fieldset";
 import { View } from "../View";
 

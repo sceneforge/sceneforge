@@ -84,6 +84,7 @@ const Dialog = ({
     dialogRef,
     handleCloseClick,
     headId,
+    // eslint-disable-next-line react-compiler/react-compiler
   } = useDialog({ open, ref });
 
   return (

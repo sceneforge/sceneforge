@@ -19,12 +19,12 @@
     "url": "https://phinpho.github.io"
   },
   "dependencies": {
-    "@babylonjs/loaders": "^7.18.0",
+    "@babylonjs/loaders": "^7.25.0",
     "@sceneforge/core": "workspace:*",
-    "babylonjs-gltf2interface": "^7.18.0"
+    "babylonjs-gltf2interface": "^7.25.0"
   },
   "devDependencies": {
-    "@babylonjs/core": "^7.18.0",
+    "@babylonjs/core": "^7.25.0",
     "@sceneforge/eslint": "workspace:*",
     "@types/react": "npm:types-react@rc",
     "eslint": "^9.8.0",
@@ -34,8 +34,7 @@
     "@babylonjs/core": "^7.18.0"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "lint": "eslint .",
-    "prepack": "yarn build"
+    "build": "bun run --bun tsc -p tsconfig.json",
+    "lint": "bun run --bun --smol eslint ."
   }
 }

@@ -1,4 +1,4 @@
-import { ThemeColorPlacementType, ThemeColorType } from "../schemas";
+import type { ThemeColorPlacementType, ThemeColorType } from "../schemas";
 
 const colorScheme = (value?: string | ThemeColorType) => {
   let result: ThemeColorType = {

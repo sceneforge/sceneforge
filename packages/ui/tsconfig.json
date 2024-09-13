@@ -12,6 +12,8 @@
     "skipLibCheck": true,
     "inlineSourceMap": true,
     "declaration": true,
+    "declarationMap": true,
+    "noEmit": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -21,13 +23,17 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": [
-      "node"
-    ]
+    "verbatimModuleSyntax": true,
   },
   "include": [
     "./src/**/*",
+    "./scripts/**/*",
     ".storybook/**/*",
-    "*.config.ts",
+    "*.config.ts"
   ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ]
 }

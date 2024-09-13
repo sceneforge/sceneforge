@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir } from "node:fs/promises";
 import path from "node:path";
 
 export const cleanupCss = async () => {
@@ -7,9 +7,8 @@ export const cleanupCss = async () => {
   const cssFiles = files.filter(name => name.endsWith(".css")).map(name => path.join(distributionAssets, name));
 
   for (const cssFile of cssFiles) {
-    const css = await readFile(cssFile, { encoding: "utf8" });
-    const newCSS = css.replaceAll(String.raw`:not(#\#)`, "");
-    await writeFile(cssFile, newCSS, { encoding: "utf8" });
+    const css = await Bun.file(cssFile).text();
+    await Bun.write(cssFile, css.replaceAll(String.raw`:not(#\#)`, ""));
     console.log("Cleaned up CSS file:", cssFile);
   }
 };

@@ -32,7 +32,7 @@ export type SelectProps = {
 const styles = stylex.create({
   anchor: (id: string) => ({
     anchorName: `--select-anchor-${id.replaceAll(":", "-")}`,
-  } as Record<string, string>),
+  }),
   container: {
     alignItems: "center",
     display: "flex",
@@ -57,7 +57,7 @@ const styles = stylex.create({
   },
   popover: (id: string) => ({
     positionAnchor: `--select-anchor-${id.replaceAll(":", "-")}`,
-  } as Record<string, string>),
+  }),
   select: {
     display: "none",
   },
@@ -102,7 +102,7 @@ const Select = ({
         shape={Shape.Rounded}
         style={[
           styles.container,
-          styles.anchor(currentId),
+          styles.anchor(currentId) as StyleXStyles,
           style,
         ]}
         variant={variant}
@@ -115,7 +115,7 @@ const Select = ({
         popover="auto"
         style={[
           styles.list,
-          styles.popover(currentId),
+          styles.popover(currentId) as StyleXStyles,
           colorStyles.default,
           roundedStyles.rounded(2),
           borderStyles.border,

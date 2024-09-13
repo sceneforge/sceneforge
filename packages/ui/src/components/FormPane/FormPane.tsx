@@ -49,6 +49,7 @@ const FormPane = ({
     currentId,
     formRef,
     paneRef,
+    // eslint-disable-next-line react-compiler/react-compiler
   } = useFormPane({ id, ref });
 
   return (

@@ -3,7 +3,7 @@ import { lazy, type Ref } from "react";
 import type { SplitPaneProps } from "./SplitPane";
 
 import { Orientation } from "../../types";
-import { SplitPaneComponentRef, useSplitPane } from "./useSplitPane";
+import { type SplitPaneComponentRef, useSplitPane } from "./useSplitPane";
 
 const SplitPane = lazy(() => import("./SplitPane"));
 
@@ -18,6 +18,7 @@ const SplitPaneController = ({
   resizable = false,
   ...props
 }: SplitPaneControllerProps) => {
+  // eslint-disable-next-line react-compiler/react-compiler
   const { splitPaneRef } = useSplitPane({
     orientation,
     ref,
