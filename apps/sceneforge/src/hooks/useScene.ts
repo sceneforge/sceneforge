@@ -144,7 +144,9 @@ export const useScene = (
   }, [canvasRef, engineController, hidden, registerBeforeClose]);
 
   const sceneNodes = useMemo(() => {
+    // eslint-disable-next-line react-compiler/react-compiler
     if (!isImporting && engineController.current) {
+      // eslint-disable-next-line react-compiler/react-compiler
       return sceneNodeTree(engineController.current.scene);
     }
     else if (isImporting) {

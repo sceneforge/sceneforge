@@ -45,6 +45,7 @@ const HotspotPopover = ({
     currentTitle,
     handleFormAction,
     popoverFormPaneRef,
+    // eslint-disable-next-line react-compiler/react-compiler
   } = useHotspotPopover({
     defaultDescription,
     defaultDistance,

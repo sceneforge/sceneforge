@@ -30,6 +30,7 @@ const PopoverFormPane = ({
     currentId,
     formPaneRef,
     popoverRef,
+    // eslint-disable-next-line react-compiler/react-compiler
   } = usePopoverFormPane({
     id,
     ref,

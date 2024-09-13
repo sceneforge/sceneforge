@@ -28,6 +28,7 @@ const DrawerController = ({
   variant,
 }: DrawerControllerProps) => {
   const drawerRef = useRef<HTMLDivElement | null>(null);
+  // eslint-disable-next-line react-compiler/react-compiler
   const { currentId, size } = useDrawer({
     drawerRef,
     id,

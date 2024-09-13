@@ -18,6 +18,7 @@ const SplitPaneController = ({
   resizable = false,
   ...props
 }: SplitPaneControllerProps) => {
+  // eslint-disable-next-line react-compiler/react-compiler
   const { splitPaneRef } = useSplitPane({
     orientation,
     ref,
