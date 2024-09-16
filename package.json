@@ -38,7 +38,7 @@
   "dependencies": {
     "@sceneforge/app": "workspace:*",
     "@sceneforge/docs": "workspace:*",
-    "eslint-plugin-react-compiler": "0.0.0-experimental-b6997ec-20240909",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-1e9896a-20240916",
     "i18next": "^23.15.1",
     "terser": "^5.32.0"
   },
