@@ -48,7 +48,7 @@
     "@commitlint/format": "^19.5.0",
     "@sceneforge/eslint": "workspace:*",
     "@types/node": "^22.0.2",
-    "chokidar": "^3.6.0",
+    "chokidar": "^4.0.0",
     "conventional-changelog-angular": "^8.0.0",
     "conventional-changelog-cli": "^5.0.0",
     "eslint": "^9.8.0",
