@@ -55,7 +55,7 @@
     "@types/react-dom": "npm:types-react-dom@rc",
     "@types/uuid": "^10.0.0",
     "@vitejs/plugin-react": "^4.3.1",
-    "babel-plugin-react-compiler": "0.0.0-experimental-fe484b5-20240911",
+    "babel-plugin-react-compiler": "0.0.0-experimental-23b8160-20240916",
     "browser-sync": "^3.0.2",
     "eslint": "^9.8.0",
     "jest": "^29.7.0",
